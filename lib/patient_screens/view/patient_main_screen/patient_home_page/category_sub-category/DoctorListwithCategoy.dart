@@ -335,7 +335,7 @@ class _DoctorListState extends State<DoctorList> {
                                           children: [
                                             const Icon(Icons.monetization_on,
                                                 size: 18),
-                                            SizedBox(width: 3,),
+                                            const SizedBox(width: 3,),
                                             customView.text(
                                                 list[index].fees.toString(),
                                                 12,
@@ -350,19 +350,7 @@ class _DoctorListState extends State<DoctorList> {
                                                 12,
                                                 FontWeight.w500,
                                                 MyColor.black)),
-                                     /*   Row(
-                                          children: [
-                                            const Icon(Icons.star,
-                                                color: MyColor.primary,
-                                                size: 18),
-                                            SizedBox(width: 3,),
-                                            customView.text(
-                                                list[index].rating.toString(),
-                                                12,
-                                                FontWeight.normal,
-                                                MyColor.grey),
-                                          ],
-                                        ),*/
+
                                         // RatingBar(
                                         //   // ignoreGestures: true,
                                         //   itemSize: 17,
