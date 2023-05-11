@@ -22,7 +22,7 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
     DoctorHomeScreen(),
     DoctorBookingScreen(),
     DoctorChatListScreen(),
-    DoctorMorePage()
+    DoctorMorePage(),
   ];
 
   void _onItemTapped(int index) {
