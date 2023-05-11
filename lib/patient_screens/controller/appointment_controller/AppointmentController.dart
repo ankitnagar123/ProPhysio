@@ -1,0 +1,146 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:medica/helper/CustomView/CustomView.dart';
+
+import '../../../../../Network/ApiService.dart';
+import '../../../../../Network/Apis.dart';
+import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../model/CalenderDateShowModel.dart';
+import '../../model/DoctorPatinetTimeModel.dart';
+import '../../model/VisitChargeModel.dart';
+
+class AppointmentController extends GetxController {
+
+  ApiService apiService = ApiService();
+  var loadingFetch = false.obs;
+  var loadingFetchTime = false.obs;
+  var loadingFetchDate = false.obs;
+
+  var loadingAdd = false.obs;
+
+  var visitCharge = <VisitChargeModel>[].obs;
+  var timeList = <DoctorTimeListModelpatinet>[].obs;
+  var dateList = <CalenderDateShowModel>[].obs;
+
+  var seletedtime = "".obs;
+
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
+  CustomView custom = CustomView();
+
+  /*------------------Doctor date show on calender  list Fetch Api----------------*/
+  Future<void> dateCalender(String id) async {
+    final Map<String, dynamic> paremert = {
+      "doctor_id": id,
+    };
+    try {
+      loadingFetchDate.value = true;
+
+      final response = await apiService.postData(MyAPI.pCalenderDate, paremert);
+      log("calendar list of date's.....${response.body}");
+      if (response.statusCode == 200) {
+        loadingFetchDate.value = false;
+        dateList.value = calenderDateShowModelFromJson(response.body);
+        log("date list$dateList");
+      } else {
+        loadingFetchDate.value = false;
+        log("backend error");
+      }
+    } catch (e) {
+      log("exception$e");
+    }
+  }
+
+  /*------------------Doctor visit charge list Fetch Api----------------*/
+  Future<void> doctorVisitChargefetch(String id) async {
+    final Map<String, dynamic> Peramert = {"doctor_id": id};
+    try {
+      loadingFetch.value = true;
+      final response =
+          await apiService.postData(MyAPI.pDoctorVisitCharge, Peramert);
+      print("doctor visit charge list=============${response.body}");
+      if (response.statusCode == 200) {
+        loadingFetch.value = false;
+        visitCharge.value = visitChargeModelFromJson(response.body);
+        // // return doctorList.ma
+        print(visitCharge.toString());
+      } else {
+        loadingFetch.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingFetch.value = false;
+      print("exception$e");
+    }
+  }
+
+  /*------------------Doctor time slots list Fetch Api----------------*/
+  Future<void> doctorTimeSlotsFetch(String id, String date) async {
+    loadingFetchTime.value = true;
+    final Map<String, dynamic> Peramert = {
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      "doctor_id": id,
+      "date": date,
+    };
+    try {
+      final response =
+          await apiService.postData(MyAPI.pDoctorTimeSlot, Peramert);
+      print(Peramert);
+      print("doctor time list=============${response.body}");
+      if (response.statusCode == 200) {
+        loadingFetchTime.value = false;
+        List<DoctorTimeListModelpatinet> list = jsonDecode(response.body)
+            .map((item) => DoctorTimeListModelpatinet.fromJson(item))
+            .toList()
+            .cast<DoctorTimeListModelpatinet>();
+        timeList.clear();
+        timeList.addAll(list);
+        print(timeList);
+        print(timeList.toString());
+      } else {
+        loadingFetchTime.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingFetchTime.value = false;
+      print("exception$e");
+    }
+  }
+
+  /*-------------Appointment booking  API--------------*/
+  Future bookingAppointment(BuildContext context, String reciver, String cardId,
+      String time, String price, String date, VoidCallback callback) async {
+    loadingAdd.value = true;
+    final Map<String, dynamic> Peramert = {
+      "sender_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      "reciver_id": reciver,
+      "card_id": cardId,
+      "time_id": time,
+      "price": price,
+      "date": date,
+    };
+    print("card Parameter$Peramert");
+    final response =
+        await apiService.postData(MyAPI.pBookingAppointment, Peramert);
+    try {
+      log("response of Booking Appointment  :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse['result'].toString();
+      if (result == "success") {
+        loadingAdd.value = false;
+        print("my Appointment $result");
+        custom.massenger(context, "Booking Success");
+        print(result.toString());
+        callback();
+      } else {
+        loadingAdd.value = false;
+        custom.massenger(context, result.toString());
+      }
+    } catch (e) {
+      loadingAdd.value = false;
+      log("exception$e");
+    }
+  }
+}
