@@ -20,6 +20,10 @@ class SharedPreferenceProvider{
 String DOCTOR_LOGIN_KEY = 'DOCTOR_LOGIN_KEY';
 String DOCTOR_ID_KEY = 'DOCTOR_ID_KEY';
 
+  /*--------Medical Center side------*/
+  String CENTER_LOGIN_KEY = 'CENTER_LOGIN_KEY';
+  String CENTER_ID_KEY = 'CENTER_ID_KEY';
+
 /*for filter location store*/
   String FILTER_LABLE = 'FILTER_LABLE';
   String FILTER_LOCATION = 'FILTER_LOCATION';

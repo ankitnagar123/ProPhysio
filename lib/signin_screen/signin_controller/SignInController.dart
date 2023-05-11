@@ -75,7 +75,13 @@ class LoginCtr extends GetxController {
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
             print(" Patient login ID${id.toString()}");
             Get.offAndToNamed(RouteHelper.getBottomNavigation());
-          } else {
+          } else if (usertype == "Medical") {
+            loading.value = false;
+            sp.setStringValue(sp.CENTER_ID_KEY, id);
+            sp.setBoolValue(sp.CENTER_LOGIN_KEY, true);
+            print(" MEDICAL CENTER login ID${id.toString()}");
+            Get.offAndToNamed(RouteHelper.CBottomNavigation());
+          }else {
             loading.value = false;
             custom.massenger(context, result);
           }

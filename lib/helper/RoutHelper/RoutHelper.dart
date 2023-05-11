@@ -30,6 +30,7 @@ import 'package:medica/singup_screen/patient_pages/PatinetSignUpOtp.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
+import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
 import '../../patient_screens/view/doctor_detail_screen/ReviewsScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ViewCertificateScreen.dart';
@@ -45,6 +46,7 @@ import '../../patient_screens/view/patient_main_screen/more_page/patient_setting
 import '../../patient_screens/view/patient_main_screen/more_page/patient_support_screen/PatientSupportScreen.dart';
 import '../../patient_screens/view/patient_payment_screen/PatientPaymentScreen.dart';
 import '../../singup_screen/doctor_signup_page/DoctorSelectAddress.dart';
+import '../../singup_screen/medical_center_signup/MedicalCenterOtp.dart';
 import '../../splash_screen/SplaceScreen.dart';
 
 class RouteHelper {
@@ -113,8 +115,9 @@ class RouteHelper {
   static const String dAbout = '/dAbout';
   static const String dSupport = '/dSupport';
 
-/// /
 
+
+/*||||||||||||||||||||||||||||||||||||||||||||||||||||*/
   // static const String SearchScreen = '/searchScreen';
   //
   // static const String PDrListCatWise = '/ListCatWise';
@@ -163,6 +166,16 @@ class RouteHelper {
   static const String DContactuUs = '/dcontactus';
   static const String DDeleteAc = '/ddeleteac';
   static const String DAbout = '/dabout';
+
+
+
+
+  /*----------Medical center Side Screen's-------------------*/
+  static const String cSignUpOtp = '/cSignUpOtp';
+  static const String cHomeScreen = '/chomeScreen';
+  static const String cBottomNavigation = '/cBottomNavigation';
+
+
 
   /*-------------------- Functions ---------------*/
   static String getInitialRoute() => initial;
@@ -253,6 +266,9 @@ class RouteHelper {
   static String DAboutScreen() => dAbout;
   static String DSupportScreen() => dSupport;
 
+/*------------Medical Center Screen------------------*/
+  static String CSignUpOtp() => cSignUpOtp;
+  static String CBottomNavigation() => cBottomNavigation;
 
 
 
@@ -320,6 +336,9 @@ class RouteHelper {
 
 
 
+/*--------Medical center side Side--------*/
+    GetPage(name: cSignUpOtp, page: () => const MedicalCenterOtp()),
+    GetPage(name: cBottomNavigation, page: () => const CenterMainScreen()),
 
 
 

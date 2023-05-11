@@ -38,15 +38,19 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
 
   @override
   void initState() {
-    catId = widget.catId;
-    subCatId = widget.subCatId;
-    print("category${catId}");
-    print(subCatId);
-    doctorListCtr.doctorlistfetch(context, catId.toString(), subCatId.toString(),'','','','','','');
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      catId = widget.catId;
+      subCatId = widget.subCatId;
+      print("category${catId}");
+      print(subCatId);
+      doctorListCtr.doctorlistfetch(context, catId.toString(), subCatId.toString(),'','','','','','');
+    });
+
     tabController = TabController(vsync: this, length: 2);
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     // });
-    super.initState();
+
   }
 
   @override
@@ -165,12 +169,12 @@ class _DoctorListState extends State<DoctorList> {
         .toList();
   }
 
-  @override
+  /*@override
   void initState() {
     super.initState();
     doctorListCtr.doctorlistfetch(context, widget.cat.toString(), widget.subcat.toString(),'','','','','','');
     doctorListCtr.catSubCatList();
-  }
+  }*/
   @override
   Widget build(BuildContext context) {
       final list = _getFilteredList();

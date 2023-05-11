@@ -4,6 +4,8 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import '../../medica_center/center_controller/AuthController.dart';
+import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 
 class MedicalCenterSignUp extends StatefulWidget {
@@ -15,25 +17,15 @@ class MedicalCenterSignUp extends StatefulWidget {
 
 class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
   /*-----------Getx Controller initialize----------------*/
-  PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
+  CenterAuthCtr centerAuthCtr = CenterAuthCtr();
 
   //*************Controllers*************//
   TextEditingController nameCtr = TextEditingController();
-  TextEditingController surnameCtr = TextEditingController();
-
-  TextEditingController usernameCtr = TextEditingController();
   TextEditingController emailCtr = TextEditingController();
   TextEditingController phoneCtr = TextEditingController();
-  TextEditingController healthCardCtr = TextEditingController();
-
-  TextEditingController weightCtr = TextEditingController();
-  TextEditingController ageCtr = TextEditingController();
-  TextEditingController heightCtr = TextEditingController();
-  TextEditingController taxCtr = TextEditingController();
-  TextEditingController birthPlaceCtr = TextEditingController();
+  TextEditingController addressCtr = TextEditingController();
 
   TextEditingController passwordCtr = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
 
   bool _isHidden = true;
 
@@ -74,7 +66,10 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                   customView.text(
                       "Do you have an account?", 11, FontWeight.normal,
                       MyColor.primary1),
-                  const Text("Sign-in",style:TextStyle(color: MyColor.primary1,fontWeight: FontWeight.w700,decoration: TextDecoration.underline) ,)
+                  const Text("Sign-in", style: TextStyle(
+                      color: MyColor.primary1,
+                      fontWeight: FontWeight.w700,
+                      decoration: TextDecoration.underline),)
 
                 ],
               ),
@@ -91,16 +86,19 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                   .of(context)
                   .size
                   .shortestSide / 15,
-            ), Align(
+            ),
+            Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Enter your Medical center name", 12.0, FontWeight.w600, MyColor.primary1),
+                  "Enter your Medical center name", 12.0, FontWeight.w600,
+                  MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(
-                context, nameCtr, "Your Medical center name", TextInputType.text),
+                context, nameCtr, "Your Medical center name",
+                TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
@@ -114,7 +112,21 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
               height: 3.0,
             ),
             customView.myField(
-                context, surnameCtr, "Your surname", TextInputType.text),
+                context, emailCtr, "Your email", TextInputType.text),
+            const SizedBox(
+              height: 17.0,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: customView.text(
+                  "Enter password", 12.0, FontWeight.w600,
+                  MyColor.primary1),
+            ),
+            const SizedBox(
+              height: 3.0,
+            ),
+            customView.myField(
+                context, passwordCtr, "Your password", TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
@@ -124,7 +136,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
               height: 3.0,
             ),
             customView.myField(
-                context, emailCtr, "Your email address", TextInputType.text),
+                context, addressCtr, "Your address", TextInputType.text),
 
             // customView.myField(context, usernameCtr,
             //     "Your address", TextInputType.text),
@@ -347,8 +359,8 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Obx(() {
-                if (patientSignUpCtr.loadingotp.value) {
-                  return Center(child: customView.MyIndicator());
+                if(centerAuthCtr.loadingotp.value){
+                  return customView.MyIndicator();
                 }
                 return customView.MyButton(
                   context,
@@ -356,31 +368,20 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                       () {
                     var data = {
                       'name': nameCtr.text,
-                      'surname': surnameCtr.text,
-                      'username': usernameCtr.text,
-                      'phone': phoneCtr.text,
-                      'healthcard': healthCardCtr.text,
                       'email': emailCtr.text,
                       'password': passwordCtr.text,
-                      'code': code,
-                      'weight':weightCtr.text,
-                      'height':heightCtr.text,
-                      'tax':taxCtr.text,
-                      'birthPlace':birthPlaceCtr.text,
-                      'age':ageCtr.text,
-                      'gender':_selectedGender,
+                      'address': addressCtr.text,
                     };
-                    // if (_sendDataToVerificationScrn(context)) {
-                    //   patientSignUpCtr.PatientSignupOtp(context, emailCtr.text)
-                    //       .then((value) {
-                    //     if (value != "") {
-                    //       Get.toNamed(
-                    //           RouteHelper.getSingUpOtpScreen(),
-                    //           parameters: data, arguments: value);
-                    //     } else {}
-                    //   });
-                    // }
-                    _sendDataToVerificationScrn(context);
+                    if (_sendDataToVerificationScrn(context)) {
+                      centerAuthCtr.CenterSignupOtp(context, emailCtr.text)
+                          .then((value) {
+                        if (value != "") {
+                          Get.toNamed(
+                              RouteHelper.CSignUpOtp(),
+                              parameters: data, arguments: value);
+                        } else {}
+                      });
+                    }
                   },
                   MyColor.primary,
                   const TextStyle(fontWeight: FontWeight.bold,
@@ -426,16 +427,25 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
     if (nameCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Name is required");
-    }else if (surnameCtr.text
+      customView.MySnackBar(context, "Medical name is required");
+    } else if (emailCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Surname is required");
-    }else if (usernameCtr.text
+      customView.MySnackBar(context, "Email is required");
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
+      customView.MySnackBar(context, "Enter valid email");
+    } else if (passwordCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Username is required");
-    }/*else if (!RegExp('.*[a-z].*').hasMatch(usernameCtr.text.toString())) {
+      customView.MySnackBar(context, "Password is required");
+    } else if (passwordCtr.text
+        .toString()
+        .length < 6) {
+      customView.MySnackBar(context, "Password should be 6 digit");
+    } else if (addressCtr.text.isEmpty) {
+      customView.MySnackBar(context, "Address required");
+    }
+    /*else if (!RegExp('.*[a-z].*').hasMatch(usernameCtr.text.toString())) {
       customView.MySnackBar(context, "Username should contain a lowercase letter a-z or number.");
     } else if (emailCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Email ID is required");
@@ -477,7 +487,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
       customView.MySnackBar(context, "Password is required");
     }else if (passwordCtr.text.toString().length < 6) {
       customView.MySnackBar(context, "Password should be 6 digit");
-    }*/else {
+    }*/ else {
       return true;
     }
     return false;

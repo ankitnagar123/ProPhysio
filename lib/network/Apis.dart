@@ -114,9 +114,10 @@ static const String dAddPrescription= "prescription";
 
 static const String updateToken = "android_update_userdevice_id";
 
+/*-------------Medical Center side api---------------------*/
 
-
-
-
+  static const String CSignUpOtp = "medical_otp_signup";
+  static const String CSignUp = "medical_signup";
+  static const String cAllDoctorList = "medical_center_doctor_list";
 
 }

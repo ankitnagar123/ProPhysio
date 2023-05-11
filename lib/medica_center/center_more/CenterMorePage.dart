@@ -8,29 +8,26 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
-import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 
-class DoctorMorePage extends StatefulWidget {
-  const DoctorMorePage({Key? key}) : super(key: key);
+class CenterMorePage extends StatefulWidget {
+  const CenterMorePage({Key? key}) : super(key: key);
 
   @override
-  State<DoctorMorePage> createState() => _DoctorMorePageState();
+  State<CenterMorePage> createState() => _CenterMorePageState();
 }
 
-class _DoctorMorePageState extends State<DoctorMorePage> {
-  DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
+class _CenterMorePageState extends State<CenterMorePage> {
   CustomView customView = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   @override
   void initState() {
-    doctorProfileCtr.doctorProfile(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
@@ -44,7 +41,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
             const SizedBox(
               height: 10.0,
             ),
-            customView.text("Hi @${doctorProfileCtr.name.value}", 17.0,
+            customView.text("Hi @", 17.0,
                 FontWeight.w500, Colors.black),
             const SizedBox(
               height: 30.0,
@@ -99,8 +96,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(RouteHelper.DEarningCalculate());
-                      // Get.toNamed(RouteHelper.getPatientPaymentScreen());
+                      // Get.toNamed(RouteHelper.DEarningCalculate());
                     },
                     child: Container(
                       height: MediaQuery
@@ -144,7 +140,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
             ),
             ListTile(
               onTap: () {
-                Get.toNamed(RouteHelper.DSettingScreen());
+                // Get.toNamed(RouteHelper.DSettingScreen());
               },
               leading: const Icon(
                 Icons.settings,
@@ -158,51 +154,48 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 size: 20.0,
               ),
             ),
+            /* ListTile(
+                  onTap: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const MyAvailability()));
+                    // Get.toNamed(RouteHelper.DSettingScreen());
+                  },
+                  leading: const Icon(
+                    Icons.event_available,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      "Add Availability", 14.0, FontWeight.w500, Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (
+                                context) => const CompleteAppointPrescription()));
+                    // Get.toNamed(RouteHelper.DSettingScreen());
+                  },
+                  leading: const Icon(
+                    Icons.medical_information,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      "Past Appointment Prescription", 13.0, FontWeight.w500,
+                      Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),*/
             ListTile(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MyAvailability()));
-                // Get.toNamed(RouteHelper.DSettingScreen());
-              },
-              leading: const Icon(
-                Icons.event_available,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Add Availability", 14.0, FontWeight.w500, Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (
-                            context) => const CompleteAppointPrescription()));
-                // Get.toNamed(RouteHelper.DSettingScreen());
-              },
-              leading: const Icon(
-                Icons.medical_information,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Past Appointment Prescription", 13.0, FontWeight.w500,
-                  Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed(RouteHelper.DTandCScreen());
+                // Get.toNamed(RouteHelper.DTandCScreen());
               },
               leading: const Icon(
                 Icons.note_alt,
@@ -219,7 +212,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
             ),
             ListTile(
               onTap: () {
-                Get.toNamed(RouteHelper.DAboutScreen());
+                // Get.toNamed(RouteHelper.DAboutScreen());
               },
               leading: const Icon(
                 Icons.search,
@@ -235,7 +228,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
             ),
             ListTile(
               onTap: () {
-                Get.toNamed(RouteHelper.DSupportScreen());
+                // Get.toNamed(RouteHelper.DSupportScreen());
               },
               leading: const Icon(
                 Icons.person_outline,
@@ -340,12 +333,10 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                   context,
                                   "Logout",
                                       () async {
-                                    SharedPreferences preferences = await SharedPreferences
-                                        .getInstance();
-                                    preferences.remove("DOCTOR_LOGIN_KEY");
-                                    print(
-                                        preferences.remove("DOCTOR_LOGIN_KEY"));
-                                    sp.setBoolValue(sp.ON_BOARDING_KEY, true);
+                                    SharedPreferences preferences = await SharedPreferences.getInstance();
+                                    // preferences.remove("DOCTOR_LOGIN_KEY");
+                                        // preferences.remove("DOCTOR_LOGIN_KEY"));
+                                    // sp.setBoolValue(sp.ON_BOARDING_KEY, true);
 
                                     Get.offAllNamed(
                                         RouteHelper.getLoginScreen());
