@@ -30,6 +30,7 @@ import 'package:medica/singup_screen/patient_pages/PatinetSignUpOtp.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
+import '../../medica_center/add_ward/EditWardPage.dart';
 import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
 import '../../patient_screens/view/doctor_detail_screen/ReviewsScreen.dart';
@@ -174,6 +175,7 @@ class RouteHelper {
   static const String cSignUpOtp = '/cSignUpOtp';
   static const String cHomeScreen = '/chomeScreen';
   static const String cBottomNavigation = '/cBottomNavigation';
+  static const String cEditWard = '/cEditWard';
 
 
 
@@ -269,6 +271,7 @@ class RouteHelper {
 /*------------Medical Center Screen------------------*/
   static String CSignUpOtp() => cSignUpOtp;
   static String CBottomNavigation() => cBottomNavigation;
+  static String CEditWard() => cEditWard;
 
 
 
@@ -339,6 +342,7 @@ class RouteHelper {
 /*--------Medical center side Side--------*/
     GetPage(name: cSignUpOtp, page: () => const MedicalCenterOtp()),
     GetPage(name: cBottomNavigation, page: () => const CenterMainScreen()),
+    GetPage(name: cEditWard, page: () => const CenterEditWardScreen()),
 
 
 

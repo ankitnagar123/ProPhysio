@@ -119,5 +119,7 @@ static const String updateToken = "android_update_userdevice_id";
   static const String CSignUpOtp = "medical_otp_signup";
   static const String CSignUp = "medical_signup";
   static const String cAllDoctorList = "medical_center_doctor_list";
+  static const String cAddDoctor = "add_medical_center_doctor";
+  static const String cSelectedDoctor = "fetch_medical_center_doctor";
 
 }
