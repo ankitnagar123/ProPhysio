@@ -83,7 +83,9 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                   } else if (drIdMainArray.length == 0) {
                     custom.MySnackBar(context, "Select doctor");
                   } else {
-                    centerHomeCtr.addDoctors(context, nameCtr.text, drIdMainArray.join(','));
+                    centerHomeCtr.addDoctors(context, nameCtr.text, drIdMainArray.join(','),(){
+                      Get.toNamed(RouteHelper.CBottomNavigation());
+                    });
                     print("object");
                   }
                   // Get.back();

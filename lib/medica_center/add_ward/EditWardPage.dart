@@ -23,6 +23,9 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
+  String? cancelReason = '';
+String doctorId = "";
+String wardId = "";
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
   String? id;
   String? userTyp;
@@ -40,10 +43,12 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
   @override
   void initState() {
     super.initState();
+    wardId = Get.parameters["wardId"].toString();
+    print("ward Id${wardId}");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      centerHomeCtr.centerDoctorListFetch(context);
-      nameCtr.text = centerHomeCtr.medicalCenterName.value;
+       centerHomeCtr.centerSelectedDrList(context,wardId);
     });
+    nameCtr.text = centerHomeCtr.medicalCenterName.value;
   }
 
 /*
@@ -77,21 +82,11 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
           child: custom.MyButton(context, "Save ward", () {
             if (nameCtr.text.isEmpty) {
               custom.MySnackBar(context, "Enter ward name");
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             HealthCardScreen(
-              //               timeid: time.toString(),
-              //               price: fee.toString(),
-              //               date: appointmentController.seletedtime.value
-              //                   .toString(),
-              //             )));
             } else if (drIdMainArray.length == 0) {
               custom.MySnackBar(context, "Select doctor");
             } else {
-              centerHomeCtr.addDoctors(
-                  context, nameCtr.text, drIdMainArray.join(','));
+             /* centerHomeCtr.addDoctors(
+                  context, nameCtr.text, drIdMainArray.join(','));*/
               print("object");
             }
             // Get.back();
@@ -100,164 +95,167 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: height * 0.06,
+          child: Column(
+            children: [
+              SizedBox(
+                height: height * 0.06,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: const Icon(Icons.arrow_back_ios_new_outlined,
+                            size: 20)),
+                    custom.text(
+                        "Edit ward", 17, FontWeight.w500, MyColor.black),
+                    const Text("")
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: const Icon(Icons.arrow_back_ios_new_outlined,
-                              size: 20)),
-                      custom.text(
-                          "Edit ward", 17, FontWeight.w500, MyColor.black),
-                      const Text("")
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.04,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text("Enter ward name", 12.0, FontWeight.w600,
-                      MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myField(context, nameCtr, "name", TextInputType.text),
-                SizedBox(
-                  height: height * 0.03,
-                ),
-                const Divider(thickness: 1.5, color: MyColor.midgray),
-                SizedBox(
-                  height: height * 0.03,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(
-                      "Add doctors", 17.0, FontWeight.w600, MyColor.black),
-                ),
-                SizedBox(
-                  width: widht,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      setState(() {
-                        // drIdArray.clear();
-                        _keyword = value;
-                      });
-                      print(value);
-                    },
-                    cursorWidth: 0.0,
-                    cursorHeight: 0.0,
-                    onTap: () {},
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    cursorColor: Colors.black,
-                    controller: searchCtr,
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      prefixIconColor: MyColor.primary1,
-                      suffixIconColor: MyColor.primary1,
-                      contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "Search Doctor",
-                      hintStyle:
-                      TextStyle(fontSize: 12, color: MyColor.primary1),
-                      fillColor: MyColor.lightcolor,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+              ),
+              SizedBox(
+                height: height * 0.04,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: custom.text("Ward name", 12.0, FontWeight.w600,
+                    MyColor.primary1),
+              ),
+              const SizedBox(
+                height: 3.0,
+              ),
+
+              custom.myField(context, nameCtr, "name", TextInputType.text),
+              SizedBox(
+                height: height * 0.03,
+              ),
+              const Divider(thickness: 1.5, color: MyColor.midgray),
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: custom.text(
+                    "Edit doctors", 17.0, FontWeight.w600, MyColor.black),
+              ),
+              SizedBox(
+                width: widht,
+                child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      // drIdArray.clear();
+                      _keyword = value;
+                    });
+                    print(value);
+                  },
+                  cursorWidth: 0.0,
+                  cursorHeight: 0.0,
+                  onTap: () {},
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.name,
+                  cursorColor: Colors.black,
+                  controller: searchCtr,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    prefixIconColor: MyColor.primary1,
+                    suffixIconColor: MyColor.primary1,
+                    contentPadding: EdgeInsets.only(top: 3, left: 20),
+                    hintText: "Search Doctor",
+                    hintStyle:
+                    TextStyle(fontSize: 12, color: MyColor.primary1),
+                    fillColor: MyColor.lightcolor,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                  SizedBox(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.08,
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: centerHomeCtr.selectedDoctorList.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Center(
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              centerHomeCtr.loadingFetchS.value?categoryShimmerEffect(context):  Expanded(
+                child: GridView.count(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  crossAxisCount: 4,
+                  children: List.generate(
+                      centerHomeCtr.selectedDoctorList.length, (index) {
+                    return GestureDetector(
+                      onTap: () {
+                      /*  categoryId =
+                            doctorSignUpCtr.category[index].categoryId;
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                PDrSubCategory(categoryId: categoryId!,)));*/
+                      },
+                      child: Stack(
+                        children: [
+                          Card(
+                            margin: const EdgeInsets.only(
+                                left: 6, right: 6, bottom: 3, top: 4),
+                            elevation: 3,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                          clipBehavior: Clip.antiAlias,
-                                          borderRadius:
-                                          BorderRadius.circular(13.0),
-                                          child: FadeInImage.assetNetwork(
-                                            imageErrorBuilder: (c, o, s) =>
-                                                Image.asset(
-                                                    color: MyColor.midgray,
-                                                    "assets/images/noimage.png",
-                                                    width: 50,
-                                                    height: 50,
-                                                    fit: BoxFit.cover),
-                                            width: 50,
-                                            height: 50,
-                                            fit: BoxFit.cover,
-                                            placeholder:
-                                            "assets/images/loading.gif",
-                                            image: "${centerHomeCtr
-                                                .selectedDoctorList[index]["Doctor_profile"]}",
-                                            placeholderFit: BoxFit.cover,
-                                          )),
-                                      Positioned(
-                                          left: 0,
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  drIdMainArrayimg.remove(
-                                                      drIdMainArrayimg[index]);
-                                                  /*drIdArray.remove(index);
-                                         drIdMainArrayimg.clear();*/
-                                                  // drIdMainArrayimg.remove(drIdMainArray.remove(list[index].doctorId));
-                                                });
-                                              },
-                                              child: const Icon(
-                                                  Icons.close_outlined)))
-                                    ],
-                                  ),
-                                ],
+                              padding: const EdgeInsets.only(left: 6.0, top: 5),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                        clipBehavior: Clip.antiAlias,
+                                        borderRadius: BorderRadius.circular(13.0),
+                                        child: FadeInImage.assetNetwork(
+                                          imageErrorBuilder: (c, o, s) =>
+                                              Image.asset(
+                                                  color: MyColor.midgray,
+                                                  "assets/images/noimage.png",
+                                                  width: 50,
+                                                  height: 50,
+                                                  fit: BoxFit.cover),
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                          placeholder:
+                                          "assets/images/loading.gif",
+                                          image: centerHomeCtr.selectedDoctorList[index].doctorProfile,
+                                          placeholderFit: BoxFit.cover,
+                                        )),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          centerHomeCtr.selectedDoctorList[index].name,
+                                          style: const TextStyle(fontSize: 11),
+                                          softWrap: false,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ),
-              ],
-            ),
+                           Positioned(
+                              child: GestureDetector(
+                                  onTap: () {
+                                      doctorId = centerHomeCtr.selectedDoctorList[index].doctorId;
+                                    removeDoctor(context,doctorId);
+                                  },child: const Icon(Icons.close_outlined,size: 18,))),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -272,4 +270,126 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
 
     // loginCtr.updateToken(context, id!, "Doctor", deviceId!, deviceTyp!);
   }
+
+  void removeDoctor(BuildContext context,String id) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text("Remove doctor", 17,
+                                FontWeight.w500, Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text(
+                                "Are you sure you want to remove the doctor from your ward? Please select a reason.",
+                                12,
+                                FontWeight.w400,
+                                Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 5,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  visualDensity: const VisualDensity(
+                                      horizontal: 0, vertical: -2),
+                                  leading: Text("Wrong doctor"),
+                                  trailing: Radio<String>(
+                                    value: index.toString(),
+                                    groupValue: cancelReason,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        cancelReason = value!;
+                                        print("....$cancelReason");
+                                      /*  cancelId = bookingController
+                                            .cancelReason[index].id;*/
+                                        // print('cardId----------$cancelId');
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: custom.text("Dismiss", 14.0,
+                                        FontWeight.w400, MyColor.grey),
+                                  )),
+                              Expanded(
+                                child:/* bookingController.loadingCancel.value
+                                    ? custom.MyIndicator()
+                                    :*/ custom.mysButton(
+                                  context,
+                                  "Remove doctor",
+                                      () {
+                                   /* bookingController
+                                        .bookingAppointmentCancel(
+                                        context, id,cancelId!, () {
+                                      Get.offNamed(RouteHelper
+                                          .DCancelAppointSucces());*/
+                                    // });
+                                  },
+                                  Colors.red,
+                                  const TextStyle(
+                                    fontSize: 13.0,
+                                    color: MyColor.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
+
 }

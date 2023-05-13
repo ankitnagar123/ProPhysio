@@ -4,35 +4,11 @@
 
 import 'dart:convert';
 
-CenterSelectedDListModel centerSelectedDListModelFromJson(String str) => CenterSelectedDListModel.fromJson(json.decode(str));
+List<CenterSelectedDListModel> centerSelectedDListModelFromJson(String str) => List<CenterSelectedDListModel>.from(json.decode(str).map((x) => CenterSelectedDListModel.fromJson(x)));
 
-String centerSelectedDListModelToJson(CenterSelectedDListModel data) => json.encode(data.toJson());
+String centerSelectedDListModelToJson(List<CenterSelectedDListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CenterSelectedDListModel {
-  String result;
-  String medicalCenterName;
-  List<DoctorList> doctorList;
-
-  CenterSelectedDListModel({
-    required this.result,
-    required this.medicalCenterName,
-    required this.doctorList,
-  });
-
-  factory CenterSelectedDListModel.fromJson(Map<String, dynamic> json) => CenterSelectedDListModel(
-    result: json["result"],
-    medicalCenterName: json["medical_center_name"],
-    doctorList: List<DoctorList>.from(json["doctor_list"].map((x) => DoctorList.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "result": result,
-    "medical_center_name": medicalCenterName,
-    "doctor_list": List<dynamic>.from(doctorList.map((x) => x.toJson())),
-  };
-}
-
-class DoctorList {
   String doctorId;
   String name;
   String surname;
@@ -57,7 +33,7 @@ class DoctorList {
   String doctorDocument;
   List<Cat> cat;
 
-  DoctorList({
+  CenterSelectedDListModel({
     required this.doctorId,
     required this.name,
     required this.surname,
@@ -83,7 +59,7 @@ class DoctorList {
     required this.cat,
   });
 
-  factory DoctorList.fromJson(Map<String, dynamic> json) => DoctorList(
+  factory CenterSelectedDListModel.fromJson(Map<String, dynamic> json) => CenterSelectedDListModel(
     doctorId: json["doctor_id"],
     name: json["name"],
     surname: json["surname"],

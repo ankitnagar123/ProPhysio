@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:medica/medica_center/center_models/CenterSelectedWardModel.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
@@ -19,13 +20,18 @@ class CenterHomeCtr extends GetxController {
   ApiService apiService = ApiService();
   var loadingFetch = false.obs;
   var loadingAdd = false.obs;
+  var loadingFetchS = false.obs;
+  var loadingFetchW = false.obs;
 
 
 
 
   var doctorList = <CenterDoctorListModel>[].obs;
 
-  var selectedDoctorList = <Map<String,dynamic>>[].obs;
+  var selectedWardList = <CenterSelectedDWardModel>[].obs;
+
+
+  var selectedDoctorList = <CenterSelectedDListModel>[].obs;
 
 
  var medicalCenterName = "".obs;
@@ -101,6 +107,7 @@ class CenterHomeCtr extends GetxController {
       BuildContext context,
       String wardName,
       String drList,
+      VoidCallback callback,
       ) async {
     final Map<String, dynamic>Perameter = {
       "name":wardName,
@@ -117,6 +124,7 @@ class CenterHomeCtr extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       print(jsonResponse);
       if (response.statusCode == 200) {
+        callback();
         loadingAdd.value = false;
         custom.massenger(context, "Doctor Add Succesfully");
       } else {
@@ -130,37 +138,73 @@ class CenterHomeCtr extends GetxController {
     }
   }
 
-  /*----------------- Selected Doctor list  Fetch Api----------------*/
-  Future<void> centerSelectedDrList(BuildContext context,) async {
+
+  /*----------------- Selected Doctor Ward Name list  Fetch Api----------------*/
+  Future<void> centerSelectedWardList(BuildContext context,) async {
     final Map<String, dynamic>Perameter = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
     if(connection){
       try {
-        loadingFetch.value = true;
-        final response = await apiService.postData(MyAPI.cSelectedDoctor,Perameter);
+        loadingFetchW.value = true;
+        final response = await apiService.postData(MyAPI.cSelectedDoctorWard,Perameter);
         print("doctor list=====${response.body}");
         if (response.statusCode == 200) {
-          loadingFetch.value = false;
-          var jsonResponse = jsonDecode(response.body);
-
-   medicalCenterName.value = jsonResponse["medical_center_name"];
-   selectedDoctorList.value = List<Map<String,dynamic>>.from(jsonResponse["doctor_list"]);
+          loadingFetchS.value = false;
+          selectedWardList.value = centerSelectedDWardModelFromJson(response.body.toString());
+          log(selectedWardList.toString());
         }
         else {
-          loadingFetch.value = false;
+          loadingFetchW.value = false;
           print("error");
         }
       }catch (e) {
-        loadingFetch.value = false;
+        loadingFetchW.value = false;
         print("exception$e");
       }
     }else{
-      loadingFetch.value = false;
+      loadingFetchW.value = false;
       print("no internet");
     }
 
   }
+
+
+  /*----------------- Selected Doctor list  Fetch Api----------------*/
+  Future<void> centerSelectedDrList(BuildContext context,String wardId) async {
+    final Map<String, dynamic>Perameter = {
+      "ward_id":wardId
+    };
+    bool connection = await  checkInternetConnection();
+    if(connection){
+      try {
+        loadingFetchS.value = true;
+        final response = await apiService.postData(MyAPI.cSelectedDoctor,Perameter);
+        print("doctor list=====${response.body}");
+        if (response.statusCode == 200) {
+          loadingFetchS.value = false;
+          selectedDoctorList.value =  centerSelectedDListModelFromJson(response.body);
+          log(selectedDoctorList.toString());
+
+        }
+        else {
+          loadingFetchS.value = false;
+          print("error");
+        }
+      }catch (e) {
+        loadingFetchS.value = false;
+        print("exception$e");
+      }
+    }else{
+      loadingFetchS.value = false;
+      custom.MySnackBar(context, "no internet");
+      print("no internet");
+    }
+
+  }
+
+
+
 
 }

@@ -22,7 +22,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
-
+String wardId = "";
 
   String? id;
   String? userTyp;
@@ -33,7 +33,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      centerHomeCtr.centerSelectedDrList(context);
+      centerHomeCtr.centerSelectedWardList(context);
     });
   }
 
@@ -76,7 +76,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                     TextInputType.text,
                     const Text(""),
                     const Icon(Icons.search_rounded), () {
-                  Get.toNamed(RouteHelper.DSearchAppointment());
+                  // Get.toNamed(RouteHelper.DSearchAppointment());
                 }, () {}),
                 SizedBox(
                   height: height * 0.04,
@@ -168,34 +168,40 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                Ink(
-                  color: MyColor.midgray,
-                  child: ListTile(
-                    focusColor: Colors.yellow,
-                    visualDensity: VisualDensity.compact,
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (
-                                  context) => const CenterDoctorViewScreen()));
-                      // Get.toNamed(RouteHelper.getPatientSettingsScreen());
-                    },
-                    title: custom.text(
-                        centerHomeCtr.medicalCenterName.value, 14.0,
-                        FontWeight.w500, Colors.black),
-                    subtitle: Row(
-                      children: [
-                        const Icon(Icons.person_outline_outlined,
-                            size: 17, color: Colors.black),
-                        const SizedBox(
-                          width: 4.0,
-                        ),
-                        custom.text(
-                            "${centerHomeCtr.selectedDoctorList.length} doctors", 11.0, FontWeight.normal, Colors.black),
-                      ],
-                    ),
-                  ),
+
+                ListView.builder(
+                  itemCount: centerHomeCtr.selectedWardList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      hoverColor: Colors.grey,
+                      textColor: Colors.tealAccent,
+                      focusColor: Colors.yellow,
+                      visualDensity: VisualDensity.compact,
+                      onTap: () {
+                        wardId = centerHomeCtr.selectedWardList[index].wardId;
+                        var data ={
+                          "wardId":wardId,
+                        };
+                       Get.toNamed(RouteHelper.CCenterDoctorViewScreen(),parameters: data);
+                        // Get.toNamed(RouteHelper.getPatientSettingsScreen());
+                      },
+                      title: custom.text(
+                          centerHomeCtr.selectedWardList[index].name, 14.0,
+                          FontWeight.w500, Colors.black),
+                      subtitle: Row(
+                        children: [
+                          const Icon(Icons.person_outline_outlined,
+                              size: 17, color: Colors.black),
+                          const SizedBox(
+                            width: 4.0,
+                          ),
+                          custom.text(
+                              "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 11.0, FontWeight.normal, Colors.black),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

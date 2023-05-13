@@ -21,7 +21,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
-
+String wardId = "";
   String? id;
   String? userTyp;
   String? deviceId;
@@ -30,8 +30,10 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
   @override
   void initState() {
     super.initState();
+    wardId = Get.parameters["wardId"].toString();
+    print("ward id $wardId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      centerHomeCtr.centerSelectedDrList(context);
+      centerHomeCtr.centerSelectedDrList(context,wardId);
     });
   }
 
@@ -65,7 +67,10 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                           FontWeight.w500, MyColor.black),
                       GestureDetector(
                           onTap: () {
-                            Get.toNamed(RouteHelper.CEditWard());
+                            var data = {
+                              "wardId":wardId,
+                            };
+                            Get.toNamed(RouteHelper.CEditWard(),parameters: data);
                           },
                           child: const Icon(Icons.more_outlined, size: 20)),
                     ],
@@ -78,7 +83,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                     TextInputType.text,
                     const Text(""),
                     const Icon(Icons.search_rounded), () {
-                  Get.toNamed(RouteHelper.DSearchAppointment());
+                  // Get.toNamed(RouteHelper.DSearchAppointment());
                 }, () {}),
                 SizedBox(
                   height: height * 0.04,
@@ -169,7 +174,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                     ),
                   ],
                 ),
-                centerHomeCtr.selectedDoctorList.length == 0
+                centerHomeCtr.loadingFetchS.value
                     ? categorysubShimmerEffect(context)
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
@@ -203,7 +208,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                                                 alignment: Alignment.center,
                                                 image: centerHomeCtr
                                                         .selectedDoctorList[
-                                                    index]["Doctor_profile"],
+                                                    index].doctorProfile,
                                                 fit: BoxFit.fitWidth,
                                                 width: double.infinity,
                                                 imageErrorBuilder: (context,
@@ -222,7 +227,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               custom.text(
-                                                  "${centerHomeCtr.selectedDoctorList[index]["name"]} ${centerHomeCtr.selectedDoctorList[index]["surname"]}",
+                                                  "${centerHomeCtr.selectedDoctorList[index].name} ${centerHomeCtr.selectedDoctorList[index].surname}",
                                                   13,
                                                   FontWeight.w600,
                                                   MyColor.black),
@@ -240,7 +245,7 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                                                     child: custom.text(
                                                         centerHomeCtr
                                                                 .selectedDoctorList[
-                                                            index]["location"],
+                                                            index].location,
                                                         12,
                                                         FontWeight.normal,
                                                         MyColor.grey),
@@ -265,13 +270,13 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
                                               //         MyColor.grey),
                                               //   ],
                                               // ),
-                                              /*SizedBox(
-                                    width: widht * 0.50,
-                                    child: custom.text(
-                                        centerHomeCtr.selectedDoctorList[index]["Doctor_profile"],
-                                        12,
-                                        FontWeight.w500,
-                                        MyColor.black)),*/
+                // SizedBox(
+                //                     width: widht * 0.50,
+                //                     child: custom.text(
+                //                         centerHomeCtr.selectedDoctorList[index]["Doctor_profile"],
+                //                         12,
+                //                         FontWeight.w500,
+                //                         MyColor.black)),
 
                                               // RatingBar(
                                               //   // ignoreGestures: true,

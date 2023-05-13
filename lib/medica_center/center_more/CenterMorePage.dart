@@ -52,7 +52,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(RouteHelper.DPersonalData());
+                      Get.toNamed(RouteHelper.CProfile());
                     },
                     child: Container(
                       height: MediaQuery
@@ -96,7 +96,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {
-                      // Get.toNamed(RouteHelper.DEarningCalculate());
+                      Get.toNamed(RouteHelper.cEarningCal());
                     },
                     child: Container(
                       height: MediaQuery
@@ -140,7 +140,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
             ),
             ListTile(
               onTap: () {
-                // Get.toNamed(RouteHelper.DSettingScreen());
+                Get.toNamed(RouteHelper.cSettings());
               },
               leading: const Icon(
                 Icons.settings,
@@ -195,7 +195,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                 ),*/
             ListTile(
               onTap: () {
-                // Get.toNamed(RouteHelper.DTandCScreen());
+                Get.toNamed(RouteHelper.DTandCScreen());
               },
               leading: const Icon(
                 Icons.note_alt,
@@ -212,7 +212,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
             ),
             ListTile(
               onTap: () {
-                // Get.toNamed(RouteHelper.DAboutScreen());
+                Get.toNamed(RouteHelper.DAboutScreen());
               },
               leading: const Icon(
                 Icons.search,

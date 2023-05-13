@@ -32,6 +32,12 @@ import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoie
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
 import '../../medica_center/add_ward/EditWardPage.dart';
 import '../../medica_center/center_home/CenterBottomNavigate.dart';
+import '../../medica_center/center_home/CenterDoctorView.dart';
+import '../../medica_center/center_more/center_earning/CenterEarning.dart';
+import '../../medica_center/center_more/center_earning/CenterEarningList.dart';
+import '../../medica_center/center_more/center_profile/CenterProfile.dart';
+import '../../medica_center/center_more/center_setting/CenterChangePass.dart';
+import '../../medica_center/center_more/center_setting/CenterSetting.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
 import '../../patient_screens/view/doctor_detail_screen/ReviewsScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ViewCertificateScreen.dart';
@@ -174,8 +180,18 @@ class RouteHelper {
   /*----------Medical center Side Screen's-------------------*/
   static const String cSignUpOtp = '/cSignUpOtp';
   static const String cHomeScreen = '/chomeScreen';
+  static const String cCenterDoctorViewScreen = '/cCenterDoctorViewScreen';
+
   static const String cBottomNavigation = '/cBottomNavigation';
   static const String cEditWard = '/cEditWard';
+  static const String cProfile = '/cProfile';
+  static const String cEarningCalculate = '/cEarningCalculate';
+  static const String cEarningList = '/cEarningList';
+  static const String cSetting = '/cSetting';
+  static const String cChangePassword = '/cChangePassword';
+  static const String cTandC = '/cTandC';
+  static const String cAbout = '/cAbout';
+  static const String cSupport = '/cSupport';
 
 
 
@@ -270,8 +286,17 @@ class RouteHelper {
 
 /*------------Medical Center Screen------------------*/
   static String CSignUpOtp() => cSignUpOtp;
+  static String CCenterDoctorViewScreen() => cCenterDoctorViewScreen;
   static String CBottomNavigation() => cBottomNavigation;
   static String CEditWard() => cEditWard;
+  static String CProfile() => cProfile;
+  static String cEarningCal() => cEarningCalculate;
+  static String cEarningLists() => cEarningList;
+  static String cSettings() => cSetting;
+  static String cChangePass() => cChangePassword;
+  static String cTermCondition() => cTandC;
+  static String cAbouts() => cAbout;
+  static String cSupports() => cSupport;
 
 
 
@@ -341,8 +366,16 @@ class RouteHelper {
 
 /*--------Medical center side Side--------*/
     GetPage(name: cSignUpOtp, page: () => const MedicalCenterOtp()),
+    GetPage(name: cCenterDoctorViewScreen, page: () => const CenterDoctorViewScreen()),
+
     GetPage(name: cBottomNavigation, page: () => const CenterMainScreen()),
     GetPage(name: cEditWard, page: () => const CenterEditWardScreen()),
+    GetPage(name: cProfile, page: () => const CenterProfile()),
+
+    GetPage(name: cEarningCalculate, page: () => const CenterEarningCalculate()),
+    GetPage(name: cEarningList, page: () => const CenterEarningList()),
+    GetPage(name: cSetting, page: () => const CenterSettingsScreen()),
+    GetPage(name: cChangePassword, page: () => const CenterChangePasswordScreen()),
 
 
 

@@ -1,4 +1,3 @@
-/*
 import 'dart:async';
 import 'dart:developer';
 
@@ -261,4 +260,3 @@ class _MapViewScreenState extends State<MapViewScreen> {
     });
   }
 }
-*/

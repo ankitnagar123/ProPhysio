@@ -233,7 +233,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                     : Align(
                                         alignment: Alignment.topLeft,
                                         child: SizedBox(
-                                          height: MediaQuery.of(context).size.height*0.14,
+                                          height: MediaQuery.of(context).size.height*0.15,
                                           child: ListView.builder(
                                             shrinkWrap: true,
                                             scrollDirection: Axis.horizontal,
