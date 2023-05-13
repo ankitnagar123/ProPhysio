@@ -228,7 +228,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
             ),
             ListTile(
               onTap: () {
-                // Get.toNamed(RouteHelper.DSupportScreen());
+                Get.toNamed(RouteHelper.cSupports());
               },
               leading: const Icon(
                 Icons.person_outline,

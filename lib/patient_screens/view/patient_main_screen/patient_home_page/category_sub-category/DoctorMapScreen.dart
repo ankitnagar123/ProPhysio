@@ -148,7 +148,10 @@ class _MapViewScreenState extends State<MapViewScreen> {
 
   @override
   void initState() {
-    doctorListCtr.doctorlistfetch(context, widget.catId, widget.subCatID,"", "", "", "", "", "");
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      doctorListCtr.doctorlistfetch(context, widget.catId, widget.subCatID,"", "", "", "", "", "");
+    });
+
     super.initState();
   }
 

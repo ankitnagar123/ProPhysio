@@ -120,9 +120,9 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
                     index: _selectedIndex,
                     children: [
                        DoctorList(cat: widget.catId,subcat: widget.subCatId),
-                      /*MapViewScreen(
+                      MapViewScreen(
                           catId: widget.catId.toString(),
-                          subCatID: widget.subCatId.toString()),*/
+                          subCatID: widget.subCatId.toString()),
                       /* MapView(
                           catId: widget.catId.toString(),
                           subCatID: widget.subCatId.toString()),*/

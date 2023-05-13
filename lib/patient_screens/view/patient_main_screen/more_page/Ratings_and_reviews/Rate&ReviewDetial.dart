@@ -193,28 +193,31 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                     text: 'Submit',
                     color: MyColor.primary,
                     pressEvent: () {
-                      patientRatingCtr.ratingAdd(
-                          context, doctorId!, rating.toString(), reviewCtr.text,
-                          () {
-                        AwesomeDialog(
-                          context: context,
-                          animType: AnimType.leftSlide,
-                          headerAnimationLoop: false,
-                          dialogType: DialogType.success,
-                          showCloseIcon: true,
-                          title: 'Success',
-                          desc: 'Rating Successfully',
-                          btnOkOnPress: () {
-                            Get.back();
-                            debugPrint('OnClcik');
-                          },
-                          btnOkIcon: Icons.check_circle,
-                          onDismissCallback: (type) {
-                            debugPrint('Dialog Dissmiss from callback $type');
-                          },
-                        ).show();
-                        // Get.back();
-                      });
+                      if(validation()){
+                        patientRatingCtr.ratingAdd(
+                            context, doctorId!, rating.toString(), reviewCtr.text,
+                                () {
+                              AwesomeDialog(
+                                context: context,
+                                animType: AnimType.leftSlide,
+                                headerAnimationLoop: false,
+                                dialogType: DialogType.success,
+                                showCloseIcon: true,
+                                title: 'Success',
+                                desc: 'Rating Successfully',
+                                btnOkOnPress: () {
+                                  Get.back();
+                                  debugPrint('OnClcik');
+                                },
+                                btnOkIcon: Icons.check_circle,
+                                onDismissCallback: (type) {
+                                  debugPrint('Dialog Dissmiss from callback $type');
+                                },
+                              ).show();
+                              // Get.back();
+                            });
+                      }
+
                     },
                   ),
                 ),
@@ -224,5 +227,14 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
         ),
       ),
     );
+  }
+  //******************RATING VALIDATION (IF/ELSE CONDITIONS.)*****************//
+  bool validation() {
+    if (rating == 0.0) {
+      custom.MySnackBar(context, "Select rating range");
+    } else {
+      return true;
+    }
+    return false;
   }
 }

@@ -26,6 +26,8 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
   String? cancelReason = '';
 String doctorId = "";
 String wardId = "";
+  String wardName = "";
+
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
   String? id;
   String? userTyp;
@@ -44,11 +46,15 @@ String wardId = "";
   void initState() {
     super.initState();
     wardId = Get.parameters["wardId"].toString();
+    wardName = Get.parameters["wardName"].toString();
+
     print("ward Id${wardId}");
+    print("ward Name${wardName}");
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
        centerHomeCtr.centerSelectedDrList(context,wardId);
     });
-    nameCtr.text = centerHomeCtr.medicalCenterName.value;
+    nameCtr.text = wardName;
   }
 
 /*
@@ -255,6 +261,12 @@ String wardId = "";
                   }),
                 ),
               ),
+              Align(alignment: Alignment.topLeft,child: GestureDetector(
+                  onTap: () {
+                    deleteWardPopUp(context);
+                  },
+                  child: custom.text("Delete ward", 13, FontWeight.w500, Colors.red))),
+              SizedBox(height: 65,)
             ],
           ),
         ),
@@ -392,4 +404,127 @@ String wardId = "";
         });
   }
 
+  void deleteWardPopUp(BuildContext context) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text("Delete ward", 17,
+                                FontWeight.w500, Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text(
+                                "Are you sure you want to delete the ward? Please select a reason.",
+                                12,
+                                FontWeight.w400,
+                                Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                      ListTile(
+                        visualDensity: const VisualDensity(
+                            horizontal: 0, vertical: -2),
+                        leading: Text("Wrongly added"),
+                        trailing: Radio<String>(
+                          value: "cancelReason",
+                          groupValue: cancelReason,
+                          onChanged: (value) {
+                            setState(() {
+                              cancelReason = value!;
+                              print("....$cancelReason");
+                              /*  cancelId = bookingController
+                                            .cancelReason[index].id;*/
+                              // print('cardId----------$cancelId');
+                            });
+                          },
+                        ),
+                      ),
+                          ListTile(
+                            visualDensity: const VisualDensity(
+                                horizontal: 0, vertical: -2),
+                            leading: Text("Doctors dont’ work with us anymore"),
+                            trailing: Radio<String>(
+                              value: "cancelReasofn",
+                              groupValue: cancelReason,
+                              onChanged: (value) {
+                                setState(() {
+                                  cancelReason = value!;
+                                  print("....$cancelReason");
+                                  /*  cancelId = bookingController
+                                            .cancelReason[index].id;*/
+                                  // print('cardId----------$cancelId');
+                                });
+                              },
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: custom.text(
+                                    "Dismiss", 14.0, FontWeight.w500,
+                                    MyColor.grey),
+                              ),
+                              // Obx(() {
+                              //   if (changePassCtr.loadingd.value){
+                              //     return customView.MyIndicator();
+                              //   }
+                              //   return customView.mysButton(
+                              //     context,
+                              //     "Delete profile",
+                              //         () {
+                              //       changePassCtr.deleteAccount(context, passwordCtr.text, () {
+                              //         Get.offAllNamed(RouteHelper.getLoginScreen());
+                              //       });
+                              //     },
+                              //     Colors.red,
+                              //     const TextStyle(
+                              //       color: MyColor.white,
+                              //     ),
+                              //   );
+                              // }),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
 }

@@ -376,6 +376,7 @@ class RouteHelper {
     GetPage(name: cEarningList, page: () => const CenterEarningList()),
     GetPage(name: cSetting, page: () => const CenterSettingsScreen()),
     GetPage(name: cChangePassword, page: () => const CenterChangePasswordScreen()),
+    GetPage(name: cSupport, page: () => const DoctorSupportScreen()),
 
 
 

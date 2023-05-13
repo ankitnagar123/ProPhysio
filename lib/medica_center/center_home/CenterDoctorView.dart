@@ -22,6 +22,8 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
 String wardId = "";
+  String wardName = "";
+
   String? id;
   String? userTyp;
   String? deviceId;
@@ -31,6 +33,7 @@ String wardId = "";
   void initState() {
     super.initState();
     wardId = Get.parameters["wardId"].toString();
+    wardName = Get.parameters["wardName"].toString();
     print("ward id $wardId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerSelectedDrList(context,wardId);
@@ -63,12 +66,13 @@ String wardId = "";
                           },
                           child: const Icon(Icons.arrow_back_ios_new_outlined,
                               size: 20)),
-                      custom.text(centerHomeCtr.medicalCenterName.value, 17,
+                      custom.text(wardName, 17,
                           FontWeight.w500, MyColor.black),
                       GestureDetector(
                           onTap: () {
                             var data = {
                               "wardId":wardId,
+                              "wardName":wardName,
                             };
                             Get.toNamed(RouteHelper.CEditWard(),parameters: data);
                           },

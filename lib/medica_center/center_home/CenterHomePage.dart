@@ -23,6 +23,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
 String wardId = "";
+  String wardName = "";
 
   String? id;
   String? userTyp;
@@ -169,7 +170,12 @@ String wardId = "";
                   height: height * 0.02,
                 ),
 
-                ListView.builder(
+              /* centerHomeCtr.loadingFetchW.value?custom.MyIndicator(): */centerHomeCtr.selectedWardList.length == 0? Center(
+                  heightFactor: 13,
+                  child: custom.text(
+                      "You don’t have any ward.Create your first one now.", 11.0, FontWeight.normal, Colors.black),
+                ):
+              ListView.builder(
                   itemCount: centerHomeCtr.selectedWardList.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -180,8 +186,11 @@ String wardId = "";
                       visualDensity: VisualDensity.compact,
                       onTap: () {
                         wardId = centerHomeCtr.selectedWardList[index].wardId;
+                        wardName = centerHomeCtr.selectedWardList[index].name;
+
                         var data ={
                           "wardId":wardId,
+                          "wardName":wardName,
                         };
                        Get.toNamed(RouteHelper.CCenterDoctorViewScreen(),parameters: data);
                         // Get.toNamed(RouteHelper.getPatientSettingsScreen());

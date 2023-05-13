@@ -43,7 +43,7 @@ class PatientRatingCtr extends GetxController {
       if (result == "success") {
         loadingAdd.value = false;
         print("my patient review $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context, "Rating successfully");
         print(result.toString());
         callback();
       } else {

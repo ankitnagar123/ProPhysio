@@ -32,7 +32,7 @@ class CenterHomeCtr extends GetxController {
 
 
   var selectedDoctorList = <CenterSelectedDListModel>[].obs;
-
+var wardName = "".obs;
 
  var medicalCenterName = "".obs;
 
@@ -141,17 +141,17 @@ class CenterHomeCtr extends GetxController {
 
   /*----------------- Selected Doctor Ward Name list  Fetch Api----------------*/
   Future<void> centerSelectedWardList(BuildContext context,) async {
+    loadingFetchW.value = true;
     final Map<String, dynamic>Perameter = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
     if(connection){
       try {
-        loadingFetchW.value = true;
         final response = await apiService.postData(MyAPI.cSelectedDoctorWard,Perameter);
         print("doctor list=====${response.body}");
         if (response.statusCode == 200) {
-          loadingFetchS.value = false;
+          loadingFetchW.value = false;
           selectedWardList.value = centerSelectedDWardModelFromJson(response.body.toString());
           log(selectedWardList.toString());
         }

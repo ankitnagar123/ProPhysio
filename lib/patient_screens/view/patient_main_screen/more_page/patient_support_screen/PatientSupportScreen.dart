@@ -116,8 +116,11 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                               context,
                               "Send message",
                                   () {
-                                patientSupportCtr.supportApi(context, subjectCtrl.text,
-                                    emailCtrl.text, msgCtrl.text, () {});
+                                if(validation()){
+                                  patientSupportCtr.supportApi(context, subjectCtrl.text,
+                                      emailCtrl.text, msgCtrl.text, () {});
+                                }
+
                               },
                               MyColor.primary,
                               const TextStyle(
@@ -129,5 +132,17 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                 ],
               ),
             )));
+  }
+  bool validation() {
+    if (subjectCtrl.text.isEmpty) {
+      customView.MySnackBar(context, "Enter subject");
+    } else if (emailCtrl.text.isEmpty) {
+      customView.MySnackBar(context, "Enter email");
+    }  else if (msgCtrl.text.isEmpty) {
+      customView.MySnackBar(context, "Enter massage");
+    }else {
+      return true;
+    }
+    return false;
   }
 }
