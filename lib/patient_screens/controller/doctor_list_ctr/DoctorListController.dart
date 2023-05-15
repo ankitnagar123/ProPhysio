@@ -192,6 +192,8 @@ print(doctorList);
  var drContact = "".obs;
  var biography ="".obs;
   var fee ="".obs;
+  var latitude = "".obs;
+  var longitude= "".obs;
 
 
   void doctorDetialsfetch(String id) async {
@@ -221,6 +223,9 @@ print(doctorList);
         image.value = jsonResponse["Doctor_profile"].toString();
         doc.value = jsonResponse["Doctor_document"].toString();
         doctorid.value = jsonResponse["doctor_id"].toString();
+        latitude.value = jsonResponse["latitude"].toString();
+        longitude.value = jsonResponse["longitude"].toString();
+
        /* image.value = img;
         // category.value = jsonResponse["category"].toString();
         address.value = jsonResponse["location"].toString();

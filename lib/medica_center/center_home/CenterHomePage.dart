@@ -170,44 +170,43 @@ String wardId = "";
                   height: height * 0.02,
                 ),
 
-              /* centerHomeCtr.loadingFetchW.value?custom.MyIndicator(): */centerHomeCtr.selectedWardList.length == 0? Center(
+               /*centerHomeCtr.selectedWardList.length == 0? Center(
                   heightFactor: 13,
                   child: custom.text(
                       "You don’t have any ward.Create your first one now.", 11.0, FontWeight.normal, Colors.black),
-                ):
-              ListView.builder(
+                ):*/
+                centerHomeCtr.loadingFetchW.value?custom.MyIndicator(): ListView.builder(
                   itemCount: centerHomeCtr.selectedWardList.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      hoverColor: Colors.grey,
-                      textColor: Colors.tealAccent,
-                      focusColor: Colors.yellow,
-                      visualDensity: VisualDensity.compact,
-                      onTap: () {
-                        wardId = centerHomeCtr.selectedWardList[index].wardId;
-                        wardName = centerHomeCtr.selectedWardList[index].name;
+                    return Card(
+                      color: MyColor.midgray,
+                      child: ListTile(
+                        onTap: () {
+                          wardId = centerHomeCtr.selectedWardList[index].wardId;
+                          wardName = centerHomeCtr.selectedWardList[index].name;
 
-                        var data ={
-                          "wardId":wardId,
-                          "wardName":wardName,
-                        };
-                       Get.toNamed(RouteHelper.CCenterDoctorViewScreen(),parameters: data);
-                        // Get.toNamed(RouteHelper.getPatientSettingsScreen());
-                      },
-                      title: custom.text(
-                          centerHomeCtr.selectedWardList[index].name, 14.0,
-                          FontWeight.w500, Colors.black),
-                      subtitle: Row(
-                        children: [
-                          const Icon(Icons.person_outline_outlined,
-                              size: 17, color: Colors.black),
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-                          custom.text(
-                              "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 11.0, FontWeight.normal, Colors.black),
-                        ],
+                          var data ={
+                            "wardId":wardId,
+                            "wardName":wardName,
+                          };
+                         Get.toNamed(RouteHelper.CCenterDoctorViewScreen(),parameters: data);
+                          // Get.toNamed(RouteHelper.getPatientSettingsScreen());
+                        },
+                        title: custom.text(
+                            centerHomeCtr.selectedWardList[index].name, 14.0,
+                            FontWeight.w500, Colors.black),
+                        subtitle: Row(
+                          children: [
+                            const Icon(Icons.person_outline_outlined,
+                                size: 17, color: Colors.black),
+                            const SizedBox(
+                              width: 4.0,
+                            ),
+                            custom.text(
+                                "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 11.0, FontWeight.normal, Colors.black),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -220,7 +219,7 @@ String wardId = "";
     });
   }
 
-  void getValuee() async {
+  void getValue() async {
     id = await sp.getStringValue(sp.DOCTOR_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);

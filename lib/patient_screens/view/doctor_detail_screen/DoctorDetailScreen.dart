@@ -35,7 +35,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   String fee = "";
   String cat = "";
   String doc = "";
-
+String latitude = "";
+String longitude = "";
   @override
   void initState() {
     doctorId = widget.id.toString();
@@ -52,7 +53,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     doc = doctorListCtr.doc.value.toString();
     print("doctor =img${doctorListCtr.image.value.toString()}");
     print("doctor =doc${doctorListCtr.doc.value.toString()}");
-
+latitude = doctorListCtr.latitude.value.toString();
+longitude = doctorListCtr.longitude.value.toString();
     address = doctorListCtr.address.value;
     // fee = doctorListCtr.fee.value;
     // cat = doctorListCtr.category.value;
@@ -167,16 +169,26 @@ floatHeaderSlivers: false,
                             Wrap(
                               spacing: 10.0,
                               children: [
-                                Container(
-                                  height: 45,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: MyColor.primary, width: 2),
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: const Center(
-                                    child: Icon(Icons.navigation_outlined,
-                                        color: MyColor.primary),
+                                GestureDetector(
+                                  onTap: () {
+                                    var latlong = {
+                                    "lat":latitude,
+                                      "long":longitude,
+                                    };
+                                    print(latlong);
+                                    Get.toNamed(RouteHelper.getNavigateDoctor(),parameters: latlong);
+                                  },
+                                  child: Container(
+                                    height: 45,
+                                    width: 45,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: MyColor.primary, width: 2),
+                                        borderRadius: BorderRadius.circular(30)),
+                                    child: const Center(
+                                      child: Icon(Icons.navigation_outlined,
+                                          color: MyColor.primary),
+                                    ),
                                   ),
                                 ),
                                 GestureDetector(

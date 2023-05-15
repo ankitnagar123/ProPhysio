@@ -140,7 +140,7 @@ var wardName = "".obs;
 
 
   /*----------------- Selected Doctor Ward Name list  Fetch Api----------------*/
-  Future<void> centerSelectedWardList(BuildContext context,) async {
+Future<void> centerSelectedWardList(BuildContext context,) async {
     loadingFetchW.value = true;
     final Map<String, dynamic>Perameter = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),

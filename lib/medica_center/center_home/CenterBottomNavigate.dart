@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/more_page/MorePage.dart';
 import 'package:get/get.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/DoctorListSearch.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
 import '../center_more/CenterMorePage.dart';
 import 'CenterHomePage.dart';
@@ -25,17 +19,11 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
   MyRoute myRoute = Get.put(MyRoute());
   CustomView view = CustomView();
   @override
-  int _selectedIndex = 0;
   List screens =  [
      CenterHomeScreen(),
     CenterMorePage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +121,7 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
                   children: [
                     SizedBox(height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==1?  Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/BookingIcon.png",height: 20,width: 20,color:MyColor.grey,)),
+                        child:myRoute.pageIndex.value ==1?  Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color:MyColor.grey,)),
                     view.text("More", 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
 
                   ],
@@ -144,36 +132,3 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
     );
   }
 }
-/* BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person_rounded),
-                    label: 'Doctors',
-                    tooltip: 'Doctors'),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(
-                      AssetImage("assets/images/dIcon.png"), size: 20.0),
-                  label: 'Booking',
-                  tooltip: 'Booking',
-                ),
-                BottomNavigationBarItem(
-                    icon: ImageIcon(
-                        AssetImage("assets/images/ChatIcon.png"), size: 20.0),
-                    label: 'Chat',
-                    tooltip: 'Chat'),
-                BottomNavigationBarItem(
-                    icon: ImageIcon(
-                        AssetImage("assets/images/moreIcon.png"), size: 20),
-                    label: 'More', tooltip: 'More'),
-              ],
-              type: BottomNavigationBarType.shifting,
-              currentIndex: myRoute.pageIndex.value,
-              selectedItemColor: MyColor.iconColor,
-              unselectedItemColor: MyColor.black,
-              selectedFontSize: 12,
-              selectedLabelStyle: const TextStyle(fontSize: 12),
-              showUnselectedLabels: true,
-              unselectedLabelStyle: const TextStyle(color: Colors.black38),
-              iconSize: 25,
-              onTap: _onItemTapped,
-              elevation: 5),*/

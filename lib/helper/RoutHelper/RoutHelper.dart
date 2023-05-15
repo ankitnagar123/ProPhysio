@@ -39,6 +39,7 @@ import '../../medica_center/center_more/center_profile/CenterProfile.dart';
 import '../../medica_center/center_more/center_setting/CenterChangePass.dart';
 import '../../medica_center/center_more/center_setting/CenterSetting.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
+import '../../patient_screens/view/doctor_detail_screen/PNavigateDrScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ReviewsScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ViewCertificateScreen.dart';
 import '../../patient_screens/view/patient_filters_sceen/PatinetPriceRangeFilter.dart';
@@ -91,6 +92,8 @@ class RouteHelper {
   static const String patientAddNewCardScreen = '/patientAddNewCardScreen';
   static const String viewCertificateScreen = '/viewCertificateScreen';
   static const String reviewsScreen = '/reviewsScreen';
+  static const String pNavigateDrScreen = '/pNavigateDrScreen';
+
   static const String doctorDetailScreen = '/doctorDetailScreen';
   static const String patientSettingsScreen = '/patientSettingsScreen';
   static const String patientChangePasswordScreen = '/patientChangePasswordScreen';
@@ -246,6 +249,8 @@ class RouteHelper {
 
   static String getReviewsScreen() => reviewsScreen;
 
+  static String getNavigateDoctor() => pNavigateDrScreen;
+
   static String getDoctorDetailScreenMap() => doctorDetailScreen;
 
   static String getPatientSettingsScreen() => patientSettingsScreen;
@@ -329,6 +334,8 @@ class RouteHelper {
     GetPage(name: patientAddNewCardScreen, page: () => const PatientAddNewCardScreen()),
     GetPage(name: viewCertificateScreen, page: () => const ViewCertificateScreen()),
     GetPage(name: reviewsScreen, page: () => const ReviewsScreen()),
+    GetPage(name: pNavigateDrScreen, page: () =>  NavigateMapViewScreen()),
+
     // GetPage(name: doctorDetailScreen, page: () => const DoctorDetailScreen()),
     GetPage(name: pChatScreen, page: () =>  PatientChatScreen()),
     GetPage(name: patientSettingsScreen, page: () => const PatientSettingsScreen()),
