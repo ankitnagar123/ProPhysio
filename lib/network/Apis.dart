@@ -124,5 +124,9 @@ static const String updateToken = "android_update_userdevice_id";
   static const String cSelectedDoctorWard = "center_ward_name_list";
 
   static const String cSelectedDoctor = "fetch_medical_center_doctor";
+  static const String cWardRemoveReason = "cancle_ward_reason";
+  static const String cDoctorRemoveReason = "cancle_ward_doctor_reason";
+  static const String cEditWard = "edit_ward";
+  static const String cDeleteWard = "delete_ward";
 
 }

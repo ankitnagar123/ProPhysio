@@ -30,7 +30,7 @@ import 'package:medica/singup_screen/patient_pages/PatinetSignUpOtp.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
-import '../../medica_center/add_ward/EditWardPage.dart';
+import '../../medica_center/add_ward/EditWard/EditWardPage.dart';
 import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../medica_center/center_home/CenterDoctorView.dart';
 import '../../medica_center/center_more/center_earning/CenterEarning.dart';

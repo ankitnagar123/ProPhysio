@@ -18,6 +18,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   ForgotPassCtr forgotPassCtr = ForgotPassCtr();
   CustomView custom = CustomView();
 
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

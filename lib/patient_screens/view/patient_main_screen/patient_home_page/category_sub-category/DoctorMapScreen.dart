@@ -198,6 +198,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
             customInfoWindowController.googleMapController = controllers;
             controller = controllers;
 
+
             for (var marker in markers.values) {
               controller.showMarkerInfoWindow(marker.markerId);
             }

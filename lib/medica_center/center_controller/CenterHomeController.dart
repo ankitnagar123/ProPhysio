@@ -12,6 +12,8 @@ import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
+import '../center_models/CencelModels/WardDeleteReasonModel.dart';
+import '../center_models/CencelModels/WardRemoveDoctorReason.dart';
 import '../center_models/CenterAllDrModel.dart';
 import '../center_models/CenterSelectedDrModel.dart';
 
@@ -23,6 +25,9 @@ class CenterHomeCtr extends GetxController {
   var loadingFetchS = false.obs;
   var loadingFetchW = false.obs;
 
+  var loadingCancelW = false.obs;
+  var loadingCancelD = false.obs;
+  var loadingEdit = false.obs;
 
 
 
@@ -30,11 +35,10 @@ class CenterHomeCtr extends GetxController {
 
   var selectedWardList = <CenterSelectedDWardModel>[].obs;
 
-
   var selectedDoctorList = <CenterSelectedDListModel>[].obs;
-var wardName = "".obs;
 
- var medicalCenterName = "".obs;
+  var wardRemoveReason = <WardDeleteReasonModel>[].obs;
+  var doctorRemoveReason = <WardRemoveDoctorReason>[].obs;
 
   static int lengthTry = -1;
 
@@ -102,7 +106,7 @@ var wardName = "".obs;
 
   }
 
-  /*----------Update Device  API-----------*/
+  /*----------Add Doctor from list API-----------*/
   void addDoctors(
       BuildContext context,
       String wardName,
@@ -205,6 +209,124 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
   }
 
 
+  /*----------------- Selected Doctor Ward Remove Cancel Reason list  Api----------------*/
+  Future<void> wardDrRemoveReason(BuildContext context,) async {
+    loadingCancelD.value = true;
+      try {
+        final response = await apiService.getData(MyAPI.cDoctorRemoveReason);
+        print("Cancel reason remove doctor list=====${response.body}");
+        if (response.statusCode == 200) {
+          loadingCancelD.value = false;
+          doctorRemoveReason.value = wardRemoveDoctorReasonFromJson(response.body.toString());
+          log(doctorRemoveReason.toString());
+        }
+        else {
+          loadingCancelD.value = false;
+          print("error");
+        }
+      }catch (e) {
+        loadingCancelD.value = false;
+        print("exception$e");
+      }
+  }
+
+  /*----------------- Ward   Delete Cancel Reason list  Api----------------*/
+  Future<void> wardDeleteReason(BuildContext context,) async {
+    loadingCancelW.value = true;
+    try {
+      final response = await apiService.getData(MyAPI.cWardRemoveReason);
+      print("doctor list=====${response.body}");
+      if (response.statusCode == 200) {
+        loadingCancelW.value = false;
+        wardRemoveReason.value = wardDeleteReasonModelFromJson(response.body.toString());
+        log(wardRemoveReason.toString());
+      }
+      else {
+        loadingCancelW.value = false;
+        print("error");
+      }
+    }catch (e) {
+      loadingCancelW.value = false;
+      print("exception$e");
+    }
+  }
 
 
+
+  /*----------Edit Ward Doctor  API-----------*/
+  void editWard(
+      BuildContext context,
+      String wardName,
+      String drId,
+      String cancelId,
+      String wardId,
+      VoidCallback callback,
+      ) async {
+    final Map<String, dynamic>Perameter = {
+      "name":wardName,
+      "doctor_id":drId,
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "cancel_id":cancelId,
+      "ward_id":wardId,
+    };
+    loadingEdit.value = true;
+    log(" Edit Ward Doctor Parameter$Perameter");
+
+    final response = await apiService.postData(MyAPI.cEditWard,Perameter);
+    try {
+
+      log("Edit Ward Doctor :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+      if (response.statusCode == 200) {
+        callback();
+        loadingEdit.value = false;
+        custom.massenger(context, "Ward edit successfully");
+      } else {
+        custom.massenger(context, "something went wrong");
+        loadingEdit.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingEdit.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*----------Edit Ward Doctor  API-----------*/
+  void deleteWard(
+      BuildContext context,
+      String cancelId,
+      String wardId,
+      VoidCallback callback,
+      ) async {
+    final Map<String, dynamic>Perameter = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "cancel_id":cancelId,
+      "ward_id":wardId,
+    };
+    loadingEdit.value = true;
+    log("Edit Ward Doctor Parameter$Perameter");
+
+    final response = await apiService.postData(MyAPI.cDeleteWard,Perameter);
+    try {
+
+      log("Delete Ward Doctor :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+      if (response.statusCode == 200) {
+        callback();
+        loadingEdit.value = false;
+        custom.massenger(context, "Delete ward successfully");
+      } else {
+        custom.massenger(context, "Something went wrong");
+        loadingEdit.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingEdit.value = false;
+      log("exception$e");
+    }
+  }
 }

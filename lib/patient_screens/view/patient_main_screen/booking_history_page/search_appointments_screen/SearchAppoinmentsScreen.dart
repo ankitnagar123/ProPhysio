@@ -184,7 +184,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
     return Obx(() {
       if (patientBookingController.loading.value) {
         return Center(heightFactor: 10, child: customView.MyIndicator());
-      } else if (patientBookingController.booking.isEmpty) {
+      } else if (list.isEmpty) {
         return const Center(heightFactor: 5.0,
           child: Text(
               "You don’t have any  appointment right now. Book an appointment if needed."),

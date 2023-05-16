@@ -4,11 +4,11 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 
-import '../../../../helper/CustomView/CustomView.dart';
-import '../../helper/Shimmer/ChatShimmer.dart';
-import '../../helper/mycolor/mycolor.dart';
-import '../center_controller/CenterHomeController.dart';
-import '../center_models/CenterAllDrModel.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../helper/mycolor/mycolor.dart';
+import '../../center_controller/CenterHomeController.dart';
+import '../../center_models/CenterAllDrModel.dart';
 
 class CenterEditWardScreen extends StatefulWidget {
   const CenterEditWardScreen({Key? key}) : super(key: key);
@@ -22,11 +22,19 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
-  int selectedCard = -1;
+
   String? cancelReason = '';
-String doctorId = "";
+  String? cancelReason1 = '';
+
+  String doctorId = "";
 String wardId = "";
   String wardName = "";
+
+  String drCancelId = "";
+  String wardCancelId = "";
+
+  var drIdArray = [];
+  var drCancelIdArray = [];
 
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
   String? id;
@@ -34,11 +42,6 @@ String wardId = "";
   String? deviceId;
   String? deviceTyp;
 
-  String _keyword = '';
-
-  var drIdArray = [];
-  var drIdMainArray = [];
-  var drIdMainArrayimg = [];
 
   bool isSelected = false;
 
@@ -48,12 +51,14 @@ String wardId = "";
     wardId = Get.parameters["wardId"].toString();
     wardName = Get.parameters["wardName"].toString();
 
-    print("ward Id${wardId}");
-    print("ward Name${wardName}");
+    print("ward Id$wardId");
+    print("ward Name$wardName");
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
        centerHomeCtr.centerSelectedDrList(context,wardId);
     });
+    centerHomeCtr.wardDrRemoveReason(context);
+    centerHomeCtr.wardDeleteReason(context);
     nameCtr.text = wardName;
   }
 
@@ -83,22 +88,22 @@ String wardId = "";
     return Obx(() {
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: custom.MyButton(context, "Save ward", () {
-            if (nameCtr.text.isEmpty) {
-              custom.MySnackBar(context, "Enter ward name");
-            } else if (drIdMainArray.length == 0) {
-              custom.MySnackBar(context, "Select doctor");
-            } else {
-             /* centerHomeCtr.addDoctors(
-                  context, nameCtr.text, drIdMainArray.join(','));*/
-              print("object");
-            }
-            // Get.back();
-          }, MyColor.primary,
-              const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
-        ),
+        // floatingActionButton: Padding(
+        //   padding: const EdgeInsets.only(bottom: 10),
+        //   child: custom.MyButton(context, "Save ward", () {
+        //     if (nameCtr.text.isEmpty) {
+        //       custom.MySnackBar(context, "Enter ward name");
+        //     } else if (drIdMainArray.length == 0) {
+        //       custom.MySnackBar(context, "Select doctor");
+        //     } else {
+        //      /* centerHomeCtr.addDoctors(
+        //           context, nameCtr.text, drIdMainArray.join(','));*/
+        //       print("object");
+        //     }
+        //     // Get.back();
+        //   }, MyColor.primary,
+        //       const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
+        // ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
@@ -151,8 +156,6 @@ String wardId = "";
                 child: TextFormField(
                   onChanged: (value) {
                     setState(() {
-                      // drIdArray.clear();
-                      _keyword = value;
                     });
                     print(value);
                   },
@@ -252,8 +255,12 @@ String wardId = "";
                            Positioned(
                               child: GestureDetector(
                                   onTap: () {
-                                      doctorId = centerHomeCtr.selectedDoctorList[index].doctorId;
-                                    removeDoctor(context,doctorId);
+                                  /*  centerHomeCtr.selectedDoctorList.remove(index);
+                                    centerHomeCtr.selectedDoctorList.removeWhere((element){
+                                      return element.doctorId = index;
+                                    });*/
+                                    doctorId = centerHomeCtr.selectedDoctorList[index].doctorId;
+                                    removeDoctor(context,doctorId,index);
                                   },child: const Icon(Icons.close_outlined,size: 18,))),
                         ],
                       ),
@@ -283,7 +290,7 @@ String wardId = "";
     // loginCtr.updateToken(context, id!, "Doctor", deviceId!, deviceTyp!);
   }
 
-  void removeDoctor(BuildContext context,String id) {
+  void removeDoctor(BuildContext context,String id,indexs) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
@@ -335,12 +342,12 @@ String wardId = "";
                           SingleChildScrollView(
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 5,
+                              itemCount: centerHomeCtr.doctorRemoveReason.length,
                               itemBuilder: (context, index) {
                                 return ListTile(
                                   visualDensity: const VisualDensity(
                                       horizontal: 0, vertical: -2),
-                                  leading: Text("Wrong doctor"),
+                                  leading:  Text(centerHomeCtr.doctorRemoveReason[index].reason.toString()),
                                   trailing: Radio<String>(
                                     value: index.toString(),
                                     groupValue: cancelReason,
@@ -348,9 +355,8 @@ String wardId = "";
                                       setState(() {
                                         cancelReason = value!;
                                         print("....$cancelReason");
-                                      /*  cancelId = bookingController
-                                            .cancelReason[index].id;*/
-                                        // print('cardId----------$cancelId');
+                                        drCancelId=centerHomeCtr.doctorRemoveReason[index].id;
+                                        print('Doctor Cancel id$drCancelId');
                                       });
                                     },
                                   ),
@@ -377,6 +383,10 @@ String wardId = "";
                                   context,
                                   "Remove doctor",
                                       () {
+                                    centerHomeCtr.editWard(context, wardName, doctorId, drCancelId, wardId, () {
+                                      centerHomeCtr.centerSelectedDrList(context,wardId);
+                                      Get.back();
+                                    });
                                    /* bookingController
                                         .bookingAppointmentCancel(
                                         context, id,cancelId!, () {
@@ -450,39 +460,28 @@ String wardId = "";
                           const SizedBox(
                             height: 13.0,
                           ),
-                      ListTile(
-                        visualDensity: const VisualDensity(
-                            horizontal: 0, vertical: -2),
-                        leading: Text("Wrongly added"),
-                        trailing: Radio<String>(
-                          value: "cancelReason",
-                          groupValue: cancelReason,
-                          onChanged: (value) {
-                            setState(() {
-                              cancelReason = value!;
-                              print("....$cancelReason");
-                              /*  cancelId = bookingController
-                                            .cancelReason[index].id;*/
-                              // print('cardId----------$cancelId');
-                            });
-                          },
-                        ),
-                      ),
-                          ListTile(
-                            visualDensity: const VisualDensity(
-                                horizontal: 0, vertical: -2),
-                            leading: Text("Doctors dont’ work with us anymore"),
-                            trailing: Radio<String>(
-                              value: "cancelReasofn",
-                              groupValue: cancelReason,
-                              onChanged: (value) {
-                                setState(() {
-                                  cancelReason = value!;
-                                  print("....$cancelReason");
-                                  /*  cancelId = bookingController
-                                            .cancelReason[index].id;*/
-                                  // print('cardId----------$cancelId');
-                                });
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: centerHomeCtr.wardRemoveReason.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  visualDensity: const VisualDensity(
+                                      horizontal: 0, vertical: -2),
+                                  leading:  Text(centerHomeCtr.wardRemoveReason[index].reason.toString()),
+                                  trailing: Radio<String>(
+                                    value: index.toString(),
+                                    groupValue: cancelReason1,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        cancelReason1 = value!;
+                                        print("....$cancelReason1");
+                                        wardCancelId=centerHomeCtr.doctorRemoveReason[index].id;
+                                        print('Ward Cancel id$wardCancelId');
+                                      });
+                                    },
+                                  ),
+                                );
                               },
                             ),
                           ),
@@ -497,24 +496,19 @@ String wardId = "";
                                     "Dismiss", 14.0, FontWeight.w500,
                                     MyColor.grey),
                               ),
-                              // Obx(() {
-                              //   if (changePassCtr.loadingd.value){
-                              //     return customView.MyIndicator();
-                              //   }
-                              //   return customView.mysButton(
-                              //     context,
-                              //     "Delete profile",
-                              //         () {
-                              //       changePassCtr.deleteAccount(context, passwordCtr.text, () {
-                              //         Get.offAllNamed(RouteHelper.getLoginScreen());
-                              //       });
-                              //     },
-                              //     Colors.red,
-                              //     const TextStyle(
-                              //       color: MyColor.white,
-                              //     ),
-                              //   );
-                              // }),
+                    custom.mysButton(
+                      context,
+                      "Delete profile",
+                          () {
+                        centerHomeCtr.deleteWard(context, wardCancelId, wardId, () {
+                          Get.toNamed(RouteHelper.CBottomNavigation());
+                        });
+                      },
+                      Colors.red,
+                      const TextStyle(
+                        color: MyColor.white,
+                      ),
+                    ),
                             ],
                           )
                         ],

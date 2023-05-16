@@ -158,7 +158,7 @@ class DoctorSignUpCtr extends GetxController {
         custom.massenger(context, result);
       }
     } catch (e) {
-      log("excaption$e");
+      log("exception$e");
     }
   }
 }

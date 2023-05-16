@@ -58,14 +58,14 @@ class ForgotPassCtr extends GetxController {
   Future setPassword(BuildContext context, String id, String newpassword,
       String confimpass, VoidCallback callback) async {
     loadingset.value = true;
-    final Map<String, dynamic> psetpass = {
+    final Map<String, dynamic> pSetPass = {
       "id": id,
       "newpassword": newpassword,
       "confirmpassword":confimpass,
     };
-    print("Set new password Parameter$psetpass");
+    print("Set new password Parameter$pSetPass");
 
-    final response = await apiService.postData(MyAPI.setNewPassword, psetpass);
+    final response = await apiService.postData(MyAPI.setNewPassword,pSetPass);
     try {
       log("response of Patient new set password :-${response.body}");
       var jsonResponse = jsonDecode(response.body);

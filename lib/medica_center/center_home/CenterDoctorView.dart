@@ -38,6 +38,8 @@ String wardId = "";
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerSelectedDrList(context,wardId);
     });
+    centerHomeCtr.wardDeleteReason(context);
+
   }
 
   @override
