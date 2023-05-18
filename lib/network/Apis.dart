@@ -128,5 +128,8 @@ static const String updateToken = "android_update_userdevice_id";
   static const String cDoctorRemoveReason = "cancle_ward_doctor_reason";
   static const String cEditWard = "edit_ward";
   static const String cDeleteWard = "delete_ward";
+  static const String cAddMoreDr = "add_ward_doctor";
+  static const String cChangePassword = "medical_center_change_pass";
+  static const String cCenterProfile = "medical_center_profile";
 
 }

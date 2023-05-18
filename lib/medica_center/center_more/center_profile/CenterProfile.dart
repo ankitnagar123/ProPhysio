@@ -1,13 +1,13 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medica/doctor_screens/controller/DoctorProfileController.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
+import 'package:medica/medica_center/center_controller/AuthController.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 
@@ -19,7 +19,6 @@ class CenterProfile extends StatefulWidget {
 }
 
 class _CenterProfileState extends State<CenterProfile> {
-
   CustomView customView = CustomView();
 
   TextEditingController userNameCtrl = TextEditingController();
@@ -27,9 +26,10 @@ class _CenterProfileState extends State<CenterProfile> {
   TextEditingController name = TextEditingController();
   TextEditingController surename = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
-  TextEditingController phoneNumberCtrl = TextEditingController();
-  TextEditingController genderCtrl = TextEditingController();
+  TextEditingController addressCtrl = TextEditingController();
 
+  TextEditingController phoneNumberCtrl = TextEditingController();
+  CenterAuthCtr centerAuthCtr = CenterAuthCtr();
   String files = "";
   String code = '';
 
@@ -58,6 +58,18 @@ class _CenterProfileState extends State<CenterProfile> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      centerAuthCtr.centerProfile(context);
+      userNameCtrl.text = centerAuthCtr.name.value;
+      bioCtrl.text = centerAuthCtr.name.value;
+      emailCtrl.text = centerAuthCtr.Email.value;
+      addressCtrl.text = centerAuthCtr.location.value;
+      files = centerAuthCtr.image.value.toString();
+      log(files);
+      log(centerAuthCtr.name.value);
+    });
+    log(centerAuthCtr.name.value);
+
   }
 
   @override
@@ -67,33 +79,18 @@ class _CenterProfileState extends State<CenterProfile> {
         .size
         .height;
     return SafeArea(
-
       child: Scaffold(
           bottomNavigationBar: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             child: customView.MyButton(
               context,
               "Save profile",
-              (){},
+                  () {},
               MyColor.primary,
               const TextStyle(fontFamily: "Poppins", color: Colors.white),
             ),
           ),
           appBar: AppBar(
-            actions: [
-              InkWell(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.DProfile());
-                  },
-                  child: const Icon(
-                    color: MyColor.black,
-                    Icons.edit,
-                    size: 19.0,
-                  )),
-              const SizedBox(
-                width: 10,
-              ),
-            ],
             leading: IconButton(
               onPressed: () {
                 Get.back();
@@ -103,15 +100,20 @@ class _CenterProfileState extends State<CenterProfile> {
                 color: Colors.black,
               ),
             ),
-            title: customView.text(
-                "Profile", 15.0, FontWeight.w500, Colors.black),
+            title:
+            customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
             centerTitle: true,
             elevation: 0.0,
             backgroundColor: Colors.white24,
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
+            child: Obx(() {
+              if(centerAuthCtr.loadingP.value){
+                return Center(
+                    heightFactor: 13.0,child: customView.MyIndicator());
+              }
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -222,13 +224,13 @@ class _CenterProfileState extends State<CenterProfile> {
                   SizedBox(
                     height: height * 0.04,
                   ),
-                  customView.text(
-                      "Your medical center name", 11.0, FontWeight.w600, MyColor.primary1),
+                  customView.text("Your medical center name", 11.0,
+                      FontWeight.w600, MyColor.primary1),
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  customView.myField(context, userNameCtrl, "Enter User Name",
-                      TextInputType.text),
+                  customView.myField(context, userNameCtrl,
+                      "Enter medical center name", TextInputType.text),
                   SizedBox(
                     height: height * 0.03,
                   ),
@@ -243,13 +245,13 @@ class _CenterProfileState extends State<CenterProfile> {
                     height: height * 0.03,
                   ),
                   customView.text(
-                      "Your username / email", 11.0, FontWeight.w600, MyColor.primary1),
+                      "Your username / email", 11.0, FontWeight.w600,
+                      MyColor.primary1),
                   SizedBox(
                     height: height * 0.01,
                   ),
                   customView.myField(
                       context, emailCtrl, "Enter Email", TextInputType.text),
-
                   SizedBox(
                     height: height * 0.03,
                   ),
@@ -260,14 +262,15 @@ class _CenterProfileState extends State<CenterProfile> {
                     height: height * 0.01,
                   ),
                   customView.myField(
-                      context, genderCtrl, "Enter address", TextInputType.text),
+                      context, addressCtrl, "Enter address",
+                      TextInputType.text),
                   SizedBox(
                     height: height * 0.03,
                   ),
                 ],
-              ),
+              );
+            }),
           )),
     );
   }
-
 }

@@ -146,12 +146,33 @@ String wardId = "";
               ),
               const Divider(thickness: 1.5, color: MyColor.midgray),
 
-              Align(
-                alignment: Alignment.topLeft,
-                child: custom.text(
-                    "Edit doctors", 17.0, FontWeight.w600, MyColor.black),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text(
+                        "Edit doctors", 17.0, FontWeight.w600, MyColor.black),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      var data = {
+                        "wardId":wardId,
+                      };
+                      Get.toNamed(RouteHelper.cAddMoreDrs(),parameters: data);
+                    },
+                    child: Card(
+                      color: MyColor.midgray,
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: custom.text(
+                            "Add more doctors", 14.0, FontWeight.w400, MyColor.black),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
+           /*   SizedBox(
                 width: widht,
                 child: TextFormField(
                   onChanged: (value) {
@@ -184,10 +205,10 @@ String wardId = "";
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
+              ),*/
+           /*   const SizedBox(
                 height: 5,
-              ),
+              ),*/
               centerHomeCtr.loadingFetchS.value?categoryShimmerEffect(context):  Expanded(
                 child: GridView.count(
                   shrinkWrap: true,
@@ -385,7 +406,7 @@ String wardId = "";
                                       () {
                                     centerHomeCtr.editWard(context, wardName, doctorId, drCancelId, wardId, () {
                                       centerHomeCtr.centerSelectedDrList(context,wardId);
-                                      Get.back();
+                                      // Get.back();
                                     });
                                    /* bookingController
                                         .bookingAppointmentCancel(

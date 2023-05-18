@@ -30,6 +30,7 @@ import 'package:medica/singup_screen/patient_pages/PatinetSignUpOtp.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
+import '../../medica_center/add_ward/EditWard/AddMoreDrWard.dart';
 import '../../medica_center/add_ward/EditWard/EditWardPage.dart';
 import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../medica_center/center_home/CenterDoctorView.dart';
@@ -195,6 +196,7 @@ class RouteHelper {
   static const String cTandC = '/cTandC';
   static const String cAbout = '/cAbout';
   static const String cSupport = '/cSupport';
+  static const String cAddMoreDr = '/cAddMoreDr';
 
 
 
@@ -302,6 +304,7 @@ class RouteHelper {
   static String cTermCondition() => cTandC;
   static String cAbouts() => cAbout;
   static String cSupports() => cSupport;
+  static String cAddMoreDrs() => cAddMoreDr;
 
 
 
@@ -384,6 +387,7 @@ class RouteHelper {
     GetPage(name: cSetting, page: () => const CenterSettingsScreen()),
     GetPage(name: cChangePassword, page: () => const CenterChangePasswordScreen()),
     GetPage(name: cSupport, page: () => const DoctorSupportScreen()),
+    GetPage(name: cAddMoreDr, page: () => const WardAddMoreDoctor()),
 
 
 

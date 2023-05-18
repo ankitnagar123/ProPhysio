@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:medica/medica_center/center_controller/AuthController.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 
@@ -16,7 +17,7 @@ class _CenterChangePasswordScreenState
     extends State<CenterChangePasswordScreen> {
   CustomView customView = CustomView();
   bool _isHidden = true;
-
+  CenterAuthCtr centerAuthCtr = CenterAuthCtr();
   TextEditingController oldPasswordCtrl = TextEditingController();
   TextEditingController newPasswordCtrl = TextEditingController();
   TextEditingController confirmPasswordCtrl = TextEditingController();
@@ -147,31 +148,31 @@ class _CenterChangePasswordScreenState
               SizedBox(
                 height: height*0.5,
               ),
-              // Align(
-              //   alignment: Alignment.center,
-              //   child: Obx(() {
-              //     if (changePassCtr.loadingset.value) {
-              //       return customView.MyIndicator();
-              //     }
-              //     return customView.MyButton(
-              //       context,
-              //       "Save Password",
-              //           () {
-              //         if (validation()) {
-              //           changePassCtr.ChangePasswordApi(
-              //               context,
-              //               oldPasswordCtrl.text,
-              //               newPasswordCtrl.text,
-              //               confirmPasswordCtrl.text, () {
-              //             Get.back();
-              //           });
-              //         }
-              //       },
-              //       MyColor.primary,
-              //       const TextStyle(fontFamily: "Poppins", color: Colors.white),
-              //     );
-              //   }),
-              // )
+              Align(
+                alignment: Alignment.center,
+                child: Obx(() {
+                  if (centerAuthCtr.loadingPass.value) {
+                    return customView.MyIndicator();
+                  }
+                  return customView.MyButton(
+                    context,
+                    "Save Password",
+                        () {
+                      if (validation()) {
+                        centerAuthCtr.centerPasswordChange(
+                            context,
+                            oldPasswordCtrl.text,
+                            newPasswordCtrl.text,
+                            confirmPasswordCtrl.text, () {
+                          Get.back();
+                        });
+                      }
+                    },
+                    MyColor.primary,
+                    const TextStyle(fontFamily: "Poppins", color: Colors.white),
+                  );
+                }),
+              )
             ],
           ),
         ),

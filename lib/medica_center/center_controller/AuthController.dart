@@ -15,6 +15,17 @@ class CenterAuthCtr extends GetxController {
   var loadingotp = false.obs;
   var otp = ''.obs;
   var result = ''.obs;
+  var loadingP = false.obs;
+  var loadingPass = false.obs;
+
+
+  var name = "".obs;
+  var location = "".obs;
+  var Email = "".obs;
+  var bio = "".obs;
+  var password = "".obs;
+  var image = "".obs;
+
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
 
@@ -90,6 +101,78 @@ class CenterAuthCtr extends GetxController {
       }
     } catch (e) {
       log("excaption$e");
+    }
+  }
+
+
+/*----------Fetch Doctor Profile Data API-----------*/
+  void centerProfile(BuildContext context) async {
+    loadingP.value = true;
+    final Map<String, dynamic> ProfilePerameter = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+    };
+    print("Doctor Profile Parameter$ProfilePerameter");
+
+    final response = await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
+    try {
+      log("response of Doctor Profile :-${response.body}");
+      log("my id $ProfilePerameter");
+
+      loadingP.value = false;
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        String result = jsonResponse['result'];
+        String biography = jsonResponse['biography'];
+        var bios = biography.toString();
+        bio.value = bios;
+        print("bio======>$bios");
+        print("my doctor profile====${result.toString()}");
+        name.value = jsonResponse["name"];
+        Email.value = jsonResponse["email"];
+        password.value = jsonResponse['password'];
+        location.value = jsonResponse["address"];
+        image.value = jsonResponse["image"];
+
+      } else {
+        loadingP.value = false;
+        custom.massenger(context, "Something went wrong");
+      }
+    } catch (e) {
+      loadingP.value = false;
+      log("exception$e");
+    }
+  }
+
+
+/*-------------Center Change Password--------------*/
+  Future centerPasswordChange(BuildContext context, String oldpass,
+      String newpass, String confirmpass, VoidCallback callback) async {
+    loadingPass.value = true;
+    final Map<String, dynamic> psetpass = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "old_pass": oldpass,
+      "new_pass": newpass,
+      "confirm_pass": confirmpass
+    };
+    print("Change new password Parameter$psetpass");
+    final response = await apiService.postData(MyAPI.cChangePassword, psetpass);
+    try {
+      log("response of Center new Change password :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse['result'].toString();
+      loadingPass.value = false;
+      if (result == "Changed Successfull") {
+        loadingPass.value = false;
+        print("my Doctor set pass$result");
+        custom.massenger(context, result.toString());
+        print(result.toString());
+        callback();
+      } else {
+        custom.massenger(context, "Password doesn't match");
+      }
+    } catch (e) {
+      loadingPass.value = false;
+      log("exception$e");
     }
   }
 }

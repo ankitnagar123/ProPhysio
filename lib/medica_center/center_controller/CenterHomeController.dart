@@ -28,6 +28,7 @@ class CenterHomeCtr extends GetxController {
   var loadingCancelW = false.obs;
   var loadingCancelD = false.obs;
   var loadingEdit = false.obs;
+  var loadingMoreAdd = false.obs;
 
 
 
@@ -54,7 +55,7 @@ class CenterHomeCtr extends GetxController {
   CustomView custom = CustomView();
 
 
-  /*-----------------Doctor list  Fetch Api----------------*/
+  /*-----------------Doctor All list  Fetch Api----------------*/
   Future<void> centerDoctorListFetch(BuildContext context) async {
     bool connection = await  checkInternetConnection();
     if(connection){
@@ -106,7 +107,7 @@ class CenterHomeCtr extends GetxController {
 
   }
 
-  /*----------Add Doctor from list API-----------*/
+  /*----------Add Doctor from all dr list API-----------*/
   void addDoctors(
       BuildContext context,
       String wardName,
@@ -230,7 +231,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       }
   }
 
-  /*----------------- Ward   Delete Cancel Reason list  Api----------------*/
+  /*----------------- Ward Delete Cancel Reason list  Api----------------*/
   Future<void> wardDeleteReason(BuildContext context,) async {
     loadingCancelW.value = true;
     try {
@@ -326,6 +327,42 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       }
     } catch (e) {
       loadingEdit.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*----------Add More Dr in Ward Doctor  API-----------*/
+  void addMoreDr(
+      BuildContext context,
+      String drId,
+      String wardId,
+      VoidCallback callback,
+      ) async {
+    final Map<String, dynamic>Perameter = {
+      "doctor_id":drId,
+      "ward_id":wardId,
+    };
+    loadingMoreAdd.value = true;
+    log("Add More Doctor Parameter$Perameter");
+
+    final response = await apiService.postData(MyAPI.cAddMoreDr,Perameter);
+    try {
+
+      log("Add More Ward Doctor :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+      if (response.statusCode == 200) {
+        callback();
+        loadingMoreAdd.value = false;
+        custom.massenger(context, "Add doctor successfully");
+      } else {
+        custom.massenger(context, "Something went wrong");
+        loadingMoreAdd.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingMoreAdd.value = false;
       log("exception$e");
     }
   }
