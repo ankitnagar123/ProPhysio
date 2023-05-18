@@ -17,6 +17,8 @@ class CenterAuthCtr extends GetxController {
   var result = ''.obs;
   var loadingP = false.obs;
   var loadingPass = false.obs;
+  var loadingDelete = false.obs;
+  var loadingSupport = false.obs;
 
 
   var name = "".obs;
@@ -172,6 +174,69 @@ class CenterAuthCtr extends GetxController {
       }
     } catch (e) {
       loadingPass.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*-------------Center Change Password--------------*/
+  Future centerDeleteAc(BuildContext context, String password,
+     VoidCallback callback) async {
+    loadingDelete.value = true;
+    final Map<String, dynamic> psetpass = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "password": password,
+    };
+    print("Center delete Parameter$psetpass");
+    final response = await apiService.postData(MyAPI.cCenterDeleteAc, psetpass);
+    try {
+      log("response of Center delete:-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse['result'].toString();
+      loadingDelete.value = false;
+      if (result == "success") {
+        callback();
+        loadingDelete.value = false;
+        print("Center delete$result");
+        custom.massenger(context, "Account delete successfully");
+        print(result.toString());
+      } else {
+        custom.massenger(context, "Something went wrong");
+      }
+    } catch (e) {
+      loadingDelete.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*-------------Center Change Password--------------*/
+  Future centerSupport(BuildContext context, String subject,String email,String msg,
+      VoidCallback callback) async {
+    loadingSupport.value = true;
+    final Map<String, dynamic> psetpass = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "subject": subject,
+      "email":email,
+      "message":msg,
+    };
+    print("Center support Parameter$psetpass");
+    final response = await apiService.postData(MyAPI.cCenterSupport, psetpass);
+    try {
+      log("response of Center Support:-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse['result'].toString();
+      if (result == "success") {
+        callback();
+        loadingSupport.value = false;
+        print("Support delete$result");
+        custom.massenger(context, "Successfully send message");
+        print(result.toString());
+      } else {
+        custom.massenger(context, "Something went wrong");
+      }
+    } catch (e) {
+      loadingSupport.value = false;
       log("exception$e");
     }
   }

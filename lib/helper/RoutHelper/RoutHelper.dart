@@ -16,6 +16,7 @@ import 'package:medica/forgot_password/ForgotPasswordScreen.dart';
 import 'package:medica/forgot_password/OtpVerificationScreen.dart';
 import 'package:medica/forgot_password/SetNewPassword.dart';
 import 'package:medica/forgot_password/SetPasswordSuccess.dart';
+import 'package:medica/medica_center/center_more/center_setting/CenterSupport.dart';
 import 'package:medica/onboarding_screen/onBoardingScreen.dart';
 import 'package:medica/patient_screens/view/doctor_detail_screen/SpecializationDetailScreen.dart';
 import 'package:medica/patient_screens/view/patient_filters_sceen/FilterScreen.dart';
@@ -386,7 +387,7 @@ class RouteHelper {
     GetPage(name: cEarningList, page: () => const CenterEarningList()),
     GetPage(name: cSetting, page: () => const CenterSettingsScreen()),
     GetPage(name: cChangePassword, page: () => const CenterChangePasswordScreen()),
-    GetPage(name: cSupport, page: () => const DoctorSupportScreen()),
+    GetPage(name: cSupport, page: () => const CenterSupportScreen()),
     GetPage(name: cAddMoreDr, page: () => const WardAddMoreDoctor()),
 
 

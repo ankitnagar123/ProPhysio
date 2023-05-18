@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:get/get.dart';
+import 'package:medica/medica_center/center_controller/AuthController.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
@@ -16,6 +17,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
   CustomView customView = CustomView();
   TextEditingController passwordCtr = TextEditingController();
   bool _isHidden = true;
+  CenterAuthCtr centerAuthCtr  = CenterAuthCtr();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -159,24 +161,27 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                                     "Dismiss", 14.0, FontWeight.w500,
                                     MyColor.grey),
                               ),
-                              // Obx(() {
-                              //   if (changePassCtr.loadingd.value){
-                              //     return customView.MyIndicator();
-                              //   }
-                              //   return customView.mysButton(
-                              //     context,
-                              //     "Delete profile",
-                              //         () {
-                              //       changePassCtr.deleteAccount(context, passwordCtr.text, () {
-                              //         Get.offAllNamed(RouteHelper.getLoginScreen());
-                              //       });
-                              //     },
-                              //     Colors.red,
-                              //     const TextStyle(
-                              //       color: MyColor.white,
-                              //     ),
-                              //   );
-                              // }),
+                              Obx(() {
+                                if (centerAuthCtr.loadingDelete.value){
+                                  return customView.MyIndicator();
+                                }
+                                return customView.mysButton(
+                                  context,
+                                  "Delete profile",
+                                      () {
+                                    if(validation()){
+                                      centerAuthCtr.centerDeleteAc(context, passwordCtr.text, () {
+                                        Get.offAllNamed(RouteHelper.getLoginScreen());
+                                      });
+                                    }
+
+                                  },
+                                  Colors.red,
+                                  const TextStyle(
+                                    color: MyColor.white,
+                                  ),
+                                );
+                              }),
                             ],
                           )
                         ],
