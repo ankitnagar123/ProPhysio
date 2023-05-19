@@ -135,4 +135,7 @@ static const String updateToken = "android_update_userdevice_id";
   static const String cCenterDeleteAc = "delete_medical_center_account";
   static const String cCenterSupport = "medical_center_support";
 
+  /*User Side*/
+  static const String cCenterList = "medical_center_list";
+
 }

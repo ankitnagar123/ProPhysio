@@ -16,6 +16,8 @@ class CenterAuthCtr extends GetxController {
   var otp = ''.obs;
   var result = ''.obs;
   var loadingP = false.obs;
+  var loadingDetails = false.obs;
+
   var loadingPass = false.obs;
   var loadingDelete = false.obs;
   var loadingSupport = false.obs;
@@ -145,6 +147,42 @@ class CenterAuthCtr extends GetxController {
     }
   }
 
+  void centerDetails(BuildContext context,String id) async {
+    loadingDetails.value = true;
+    final Map<String, dynamic> ProfilePerameter = {
+      "center_id": id,
+    };
+    print("Doctor Profile Parameter$ProfilePerameter");
+
+    final response = await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
+    try {
+      log("response of Doctor Profile :-${response.body}");
+      log("my id $ProfilePerameter");
+
+      loadingDetails.value = false;
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        String result = jsonResponse['result'];
+        String biography = jsonResponse['biography'];
+        var bios = biography.toString();
+        bio.value = bios;
+        print("bio======>$bios");
+        print("my doctor profile====${result.toString()}");
+        name.value = jsonResponse["name"];
+        Email.value = jsonResponse["email"];
+        password.value = jsonResponse['password'];
+        location.value = jsonResponse["address"];
+        image.value = jsonResponse["image"];
+
+      } else {
+        loadingDetails.value = false;
+        custom.massenger(context, "Something went wrong");
+      }
+    } catch (e) {
+      loadingDetails.value = false;
+      log("exception$e");
+    }
+  }
 
 /*-------------Center Change Password--------------*/
   Future centerPasswordChange(BuildContext context, String oldpass,

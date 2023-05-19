@@ -18,10 +18,14 @@ class _CenterSupportScreenState extends State<CenterSupportScreen> {
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController msgCtrl = TextEditingController();
-CenterAuthCtr centerAuthCtr = CenterAuthCtr();
+  CenterAuthCtr centerAuthCtr = CenterAuthCtr();
+
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -63,7 +67,7 @@ CenterAuthCtr centerAuthCtr = CenterAuthCtr();
               height: width * 0.02,
             ),
             customView.myField(
-                context, emailCtrl, "Your Email", TextInputType.text),
+                context, emailCtrl, "Your email", TextInputType.text),
             SizedBox(
               height: width * 0.05,
             ),
@@ -133,11 +137,17 @@ CenterAuthCtr centerAuthCtr = CenterAuthCtr();
 
   // ******************Support Input filed VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
-    if (subjectCtrl.text.toString().isEmpty) {
+    if (subjectCtrl.text
+        .toString()
+        .isEmpty) {
       customView.MySnackBar(context, "Enter subject");
-    } else if (emailCtrl.text.toString().isEmpty) {
+    } else if (emailCtrl.text
+        .toString()
+        .isEmpty) {
       customView.MySnackBar(context, "Enter email id");
-    } else if (msgCtrl.text.toString().isEmpty) {
+    } else if (msgCtrl.text
+        .toString()
+        .isEmpty) {
       customView.MySnackBar(context, "Enter massage");
     } else {
       return true;

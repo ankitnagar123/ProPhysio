@@ -6,6 +6,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 
+import 'CenterSide/CenterHomePage.dart';
 import 'PDoctorTab.dart';
 
 class PatientHomePage extends StatefulWidget {
@@ -102,9 +103,7 @@ class _PatientHomePageState extends State<PatientHomePage>
                 child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),controller: tabController, children: const [
                   HomeView(),
-                  Center(
-                      heightFactor: 15,
-                      child: Icon(Icons.medical_information_outlined,size: 30,color: MyColor.primary1,)),
+                  PCenterHomeScreen()
                 ]),
               ),
             ])));
