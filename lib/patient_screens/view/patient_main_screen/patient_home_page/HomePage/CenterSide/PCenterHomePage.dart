@@ -4,7 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
 
-import 'CenterDetailsPage.dart';
+import 'PCenterDetailsPage.dart';
 
 class PCenterHomeScreen extends StatefulWidget {
   const PCenterHomeScreen({Key? key}) : super(key: key);

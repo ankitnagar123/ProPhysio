@@ -48,6 +48,7 @@ import '../../patient_screens/view/patient_filters_sceen/PatinetPriceRangeFilter
 import '../../patient_screens/view/patient_main_screen/booking_history_page/PatientBookingCancelSuccess.dart';
 import '../../patient_screens/view/patient_main_screen/booking_history_page/past_appointments/PastAppointmentsScreen.dart';
 import '../../patient_screens/view/patient_main_screen/booking_history_page/search_appointments_screen/SearchAppoinmentsScreen.dart';
+import '../../patient_screens/view/patient_main_screen/patient_home_page/HomePage/CenterSide/PWardDrList.dart';
 import '../../patient_screens/view/patient_payment_screen/PatientAddNewCardScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/MorePage.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_profile_screen/PatientProfileScreen.dart';
@@ -103,6 +104,7 @@ class RouteHelper {
   static const String pChatScreen = '/ChatScreen';
   static const String pBookingReqSuccess = '/BookingReqSuccess';
   static const String pCancelAppointSucces = '/pCancelAppointSucces';
+  static const String pCenterWardDrList = '/pCenterWardDrList';
 
 
   /*----------Doctor Side Screen's-------------------*/
@@ -268,6 +270,7 @@ class RouteHelper {
 
   static String getBookingSuccess() => pBookingReqSuccess;
  static String getCancelBookingScreen() => pCancelAppointSucces;
+  static String getCenterWardDrList() => pCenterWardDrList;
 
 /*------------Doctor Screen------------------*/
   static String DSignUpOtp() => dSignUpOtp;
@@ -348,6 +351,7 @@ class RouteHelper {
     GetPage(name: specializationDetailsScreen, page: () => const SpecializationScreen()),
     GetPage(name: pBookingReqSuccess, page: () => const AppointmentBookedSucces()),
     GetPage(name: pCancelAppointSucces, page: () => const PatientBookingCancelSuccess()),
+    GetPage(name: pCenterWardDrList, page: () => const PWardDrListScreen()),
 
 
 /*--------Doctor Side--------*/

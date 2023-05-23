@@ -371,6 +371,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                       'email': emailCtr.text,
                       'password': passwordCtr.text,
                       'address': addressCtr.text,
+
                     };
                     if (_sendDataToVerificationScrn(context)) {
                       centerAuthCtr.CenterSignupOtp(context, emailCtr.text)

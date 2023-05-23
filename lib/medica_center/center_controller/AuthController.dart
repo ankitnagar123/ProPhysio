@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
@@ -22,7 +24,6 @@ class CenterAuthCtr extends GetxController {
   var loadingDelete = false.obs;
   var loadingSupport = false.obs;
 
-
   var name = "".obs;
   var location = "".obs;
   var Email = "".obs;
@@ -32,13 +33,12 @@ class CenterAuthCtr extends GetxController {
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
-
 /*-----------Patient SignUp Otp Api----------*/
   Future<String> CenterSignupOtp(
-      BuildContext context,
-      String email,
-      // VoidCallback callback,
-      ) async {
+    BuildContext context,
+    String email,
+    // VoidCallback callback,
+  ) async {
     loadingotp.value = true;
     final Map<String, dynamic> signupPerameter = {
       "email": email,
@@ -46,7 +46,7 @@ class CenterAuthCtr extends GetxController {
     print("SignupPerameter$signupPerameter");
 
     final response =
-    await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
+        await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
     try {
       log("response of Medical Center Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -62,7 +62,7 @@ class CenterAuthCtr extends GetxController {
 
         print(result.toString());
         return jsonResponse['otp'].toString();
-      } else{
+      } else {
         custom.massenger(context, result.toString());
       }
     } catch (e) {
@@ -77,14 +77,18 @@ class CenterAuthCtr extends GetxController {
       String name,
       String email,
       String password,
-    String address,
+      String address,
+      String lat,
+      String long,
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
-      "name":name,
+      "name": name,
       "email": email,
       "address": address,
-      "password":password,
+      "password": password,
+      "lat": lat,
+      "long": long
     };
     print("SignupPerameter for medical center$signupPerameter");
 
@@ -100,14 +104,13 @@ class CenterAuthCtr extends GetxController {
         // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
         // Get.toNamed(RouteHelper.getVerification());
         custom.massenger(context, result);
-      }else{
+      } else {
         custom.massenger(context, result);
       }
     } catch (e) {
       log("excaption$e");
     }
   }
-
 
 /*----------Fetch Doctor Profile Data API-----------*/
   void centerProfile(BuildContext context) async {
@@ -117,7 +120,8 @@ class CenterAuthCtr extends GetxController {
     };
     print("Doctor Profile Parameter$ProfilePerameter");
 
-    final response = await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
+    final response =
+        await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
     try {
       log("response of Doctor Profile :-${response.body}");
       log("my id $ProfilePerameter");
@@ -136,7 +140,6 @@ class CenterAuthCtr extends GetxController {
         password.value = jsonResponse['password'];
         location.value = jsonResponse["address"];
         image.value = jsonResponse["image"];
-
       } else {
         loadingP.value = false;
         custom.massenger(context, "Something went wrong");
@@ -147,14 +150,15 @@ class CenterAuthCtr extends GetxController {
     }
   }
 
-  void centerDetails(BuildContext context,String id) async {
+  void centerDetails(BuildContext context, String id) async {
     loadingDetails.value = true;
     final Map<String, dynamic> ProfilePerameter = {
       "center_id": id,
     };
     print("Doctor Profile Parameter$ProfilePerameter");
 
-    final response = await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
+    final response =
+        await apiService.postData(MyAPI.cCenterProfile, ProfilePerameter);
     try {
       log("response of Doctor Profile :-${response.body}");
       log("my id $ProfilePerameter");
@@ -173,7 +177,6 @@ class CenterAuthCtr extends GetxController {
         password.value = jsonResponse['password'];
         location.value = jsonResponse["address"];
         image.value = jsonResponse["image"];
-
       } else {
         loadingDetails.value = false;
         custom.massenger(context, "Something went wrong");
@@ -216,10 +219,9 @@ class CenterAuthCtr extends GetxController {
     }
   }
 
-
   /*-------------Center Change Password--------------*/
-  Future centerDeleteAc(BuildContext context, String password,
-     VoidCallback callback) async {
+  Future centerDeleteAc(
+      BuildContext context, String password, VoidCallback callback) async {
     loadingDelete.value = true;
     final Map<String, dynamic> psetpass = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
@@ -247,16 +249,15 @@ class CenterAuthCtr extends GetxController {
     }
   }
 
-
   /*-------------Center Change Password--------------*/
-  Future centerSupport(BuildContext context, String subject,String email,String msg,
-      VoidCallback callback) async {
+  Future centerSupport(BuildContext context, String subject, String email,
+      String msg, VoidCallback callback) async {
     loadingSupport.value = true;
     final Map<String, dynamic> psetpass = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
       "subject": subject,
-      "email":email,
-      "message":msg,
+      "email": email,
+      "message": msg,
     };
     print("Center support Parameter$psetpass");
     final response = await apiService.postData(MyAPI.cCenterSupport, psetpass);

@@ -176,6 +176,41 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
   }
 
 
+
+  /*----------------- Selected Doctor Ward  list for user side  Fetch Api----------------*/
+  Future<void> centerWardListPatient(BuildContext context,String id ) async {
+    loadingFetchW.value = true;
+    final Map<String, dynamic>Perameter = {
+      "center_id": id,
+    };
+    bool connection = await  checkInternetConnection();
+    if(connection){
+      try {
+        final response = await apiService.postData(MyAPI.cSelectedDoctorWard,Perameter);
+        print("doctor list=====${response.body}");
+        if (response.statusCode == 200) {
+          loadingFetchW.value = false;
+          selectedWardList.value = centerSelectedDWardModelFromJson(response.body.toString());
+          log(selectedWardList.toString());
+        }
+        else {
+          loadingFetchW.value = false;
+          print("error");
+        }
+      }catch (e) {
+        loadingFetchW.value = false;
+        print("exception$e");
+      }
+    }else{
+      loadingFetchW.value = false;
+      print("no internet");
+    }
+
+  }
+
+
+
+
   /*----------------- Selected Doctor list  Fetch Api----------------*/
   Future<void> centerSelectedDrList(BuildContext context,String wardId) async {
     final Map<String, dynamic>Perameter = {

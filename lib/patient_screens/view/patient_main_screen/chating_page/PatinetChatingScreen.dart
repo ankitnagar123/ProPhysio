@@ -37,9 +37,9 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
   @override
   void initState() {
     doctorId = Get.arguments["doctorId"];
+    doctorListCtr.doctorDetialsfetch(doctorId.toString());
     print("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      doctorListCtr.doctorDetialsfetch(doctorId.toString());
 
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 2), (timer) {

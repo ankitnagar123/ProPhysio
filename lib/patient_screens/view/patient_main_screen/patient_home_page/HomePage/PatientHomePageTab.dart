@@ -6,7 +6,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 
-import 'CenterSide/CenterHomePage.dart';
+import 'CenterSide/PCenterHomePage.dart';
 import 'PDoctorTab.dart';
 
 class PatientHomePage extends StatefulWidget {

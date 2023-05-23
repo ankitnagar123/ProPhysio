@@ -114,25 +114,25 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, "Verificate", () {
-                    if (validationotp()) {
-                      centerAuthCtr.centerSignup(
-                          context,
-                          name,
-                          email,
-                          password,
-                          address,
-                          () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignInScreen()));
-                      });
-                      /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignInScreen()));
-                      });*/
-                    }
+                    // if (validationotp()) {
+                    //   centerAuthCtr.centerSignup(
+                    //       context,
+                    //       name,
+                    //       email,
+                    //       password,
+                    //       address,
+                    //       () {
+                    //     Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const SignInScreen()));
+                    //   });
+                    //   /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
+                    //     Navigator.push(context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const SignInScreen()));
+                    //   });*/
+                    // }
                     // Get.toNamed(RouteHelper.getSetPassword());
                   },
                       MyColor.primary,
