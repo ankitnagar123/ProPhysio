@@ -48,7 +48,7 @@ class _calenderState extends State<calender> {
         height: 50.0,
         width: 50.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
           color: percent < 50
               ? Color(0xffC4DEF2)
               : percent == 100

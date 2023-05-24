@@ -2,29 +2,25 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
-import 'MedicalTestAddList.dart';
-import 'PrescriptionAddandList.dart';
+import 'DoctorAddAvailability.dart';
 
-class PrescriptionMedicalTab extends StatefulWidget {
-  String patientId;
 
-  PrescriptionMedicalTab({
+class AddAvailabilityTab extends StatefulWidget {
+
+  const AddAvailabilityTab({
     Key? key,
-    required this.patientId,
   }) : super(key: key);
 
   @override
-  State<PrescriptionMedicalTab> createState() => _PrescriptionMedicalTabState();
+  State<AddAvailabilityTab> createState() => _AddAvailabilityTabState();
 }
 
-class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
+class _AddAvailabilityTabState extends State<AddAvailabilityTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
-  String pId = "";
 
   @override
   void initState() {
-    pId = widget.patientId;
     // TODO: implement initState
     super.initState();
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
@@ -49,12 +45,12 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
           tabs: [
             Tab(
               child: custom.text(
-                  "Prescription", 14, FontWeight.w500, MyColor.black),
+                  "Self", 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
                 child: custom.text(
-                    "Medical Test", 14, FontWeight.w500, MyColor.black),
+                    "Medical center", 14, FontWeight.w500, MyColor.black),
               ),
             ),
           ],
@@ -64,8 +60,8 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
           child: Stack(children: [
             TabBarView(controller: tabController, children: [
-              PrescriptionAddAndList(patientId: pId),
-              MedicalAddAndList(patientId: pId),
+              MyAvailability(),
+              Text("no data"),
             ]),
           ])),
     );

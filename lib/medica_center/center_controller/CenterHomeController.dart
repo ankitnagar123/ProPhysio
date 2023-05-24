@@ -28,6 +28,8 @@ class CenterHomeCtr extends GetxController {
   var loadingCancelW = false.obs;
   var loadingCancelD = false.obs;
   var loadingEdit = false.obs;
+  var loadingDelete = false.obs;
+
   var loadingMoreAdd = false.obs;
 
 
@@ -298,6 +300,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       String wardId,
       VoidCallback callback,
       ) async {
+    loadingEdit.value = true;
     final Map<String, dynamic>Perameter = {
       "name":wardName,
       "doctor_id":drId,
@@ -305,7 +308,6 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       "cancel_id":cancelId,
       "ward_id":wardId,
     };
-    loadingEdit.value = true;
     log(" Edit Ward Doctor Parameter$Perameter");
 
     final response = await apiService.postData(MyAPI.cEditWard,Perameter);
@@ -342,7 +344,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       "cancel_id":cancelId,
       "ward_id":wardId,
     };
-    loadingEdit.value = true;
+    loadingDelete.value = true;
     log("Edit Ward Doctor Parameter$Perameter");
 
     final response = await apiService.postData(MyAPI.cDeleteWard,Perameter);
@@ -353,15 +355,15 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       print(jsonResponse);
       if (response.statusCode == 200) {
         callback();
-        loadingEdit.value = false;
+        loadingDelete.value = false;
         custom.massenger(context, "Delete ward successfully");
       } else {
         custom.massenger(context, "Something went wrong");
-        loadingEdit.value = false;
+        loadingDelete.value = false;
         print("error");
       }
     } catch (e) {
-      loadingEdit.value = false;
+      loadingDelete.value = false;
       log("exception$e");
     }
   }

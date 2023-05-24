@@ -19,6 +19,7 @@ class CenterAuthCtr extends GetxController {
   var result = ''.obs;
   var loadingP = false.obs;
   var loadingDetails = false.obs;
+  var resultVar = RxnInt(0);
 
   var loadingPass = false.obs;
   var loadingDelete = false.obs;
@@ -115,6 +116,7 @@ class CenterAuthCtr extends GetxController {
 /*----------Fetch Doctor Profile Data API-----------*/
   void centerProfile(BuildContext context) async {
     loadingP.value = true;
+    resultVar.value = 0;
     final Map<String, dynamic> ProfilePerameter = {
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
     };
@@ -140,12 +142,15 @@ class CenterAuthCtr extends GetxController {
         password.value = jsonResponse['password'];
         location.value = jsonResponse["address"];
         image.value = jsonResponse["image"];
+        resultVar.value = 1;
       } else {
         loadingP.value = false;
         custom.massenger(context, "Something went wrong");
+        resultVar.value = 2;
       }
     } catch (e) {
       loadingP.value = false;
+      resultVar.value = 2;
       log("exception$e");
     }
   }

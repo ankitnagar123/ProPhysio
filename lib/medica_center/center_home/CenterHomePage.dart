@@ -44,14 +44,10 @@ String wardId = "";
         .of(context)
         .size
         .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
     return Obx(() {
       return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 13),
+          padding: const EdgeInsets.symmetric(horizontal: 11),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -65,8 +61,7 @@ String wardId = "";
                     alignment: Alignment.topRight,
                     child: GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => CenterAddWardScreen()));
+                          Get.toNamed(RouteHelper.CCenterAddWardScreen());
                         }, child: Icon(Icons.add, size: 20)),
                   ),
                 ),
@@ -77,7 +72,6 @@ String wardId = "";
                     TextInputType.text,
                     const Text(""),
                     const Icon(Icons.search_rounded), () {
-                  // Get.toNamed(RouteHelper.DSearchAppointment());
                 }, () {}),
                 SizedBox(
                   height: height * 0.04,
@@ -170,12 +164,9 @@ String wardId = "";
                   height: height * 0.02,
                 ),
 
-               /*centerHomeCtr.selectedWardList.length == 0? Center(
-                  heightFactor: 13,
-                  child: custom.text(
-                      "You don’t have any ward.Create your first one now.", 11.0, FontWeight.normal, Colors.black),
-                ):*/
-                centerHomeCtr.loadingFetchW.value?custom.MyIndicator(): ListView.builder(
+                centerHomeCtr.loadingFetchW.value?Center(heightFactor: 10,child: custom.MyIndicator()):centerHomeCtr.selectedWardList.isEmpty?const
+                Center(child: Text("You don’t have any ward.Create your first one now")):
+                ListView.builder(
                   itemCount: centerHomeCtr.selectedWardList.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -194,17 +185,17 @@ String wardId = "";
                           // Get.toNamed(RouteHelper.getPatientSettingsScreen());
                         },
                         title: custom.text(
-                            centerHomeCtr.selectedWardList[index].name, 14.0,
-                            FontWeight.w500, Colors.black),
+                            centerHomeCtr.selectedWardList[index].name, 16.0,
+                            FontWeight.w500, MyColor.primary1),
                         subtitle: Row(
                           children: [
                             const Icon(Icons.person_outline_outlined,
-                                size: 17, color: Colors.black),
+                                size: 18, color: MyColor.primary1),
                             const SizedBox(
                               width: 4.0,
                             ),
                             custom.text(
-                                "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 11.0, FontWeight.normal, Colors.black),
+                                "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 13.0, FontWeight.normal, Colors.black),
                           ],
                         ),
                       ),

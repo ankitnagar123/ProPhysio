@@ -46,7 +46,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
               const SizedBox(
                 height: 10.0,
               ),
-              customView.text("Hi @${centerAuthCtr.name.value}", 17.0,
+              customView.text("Hi @ ${centerAuthCtr.name.value}", 17.0,
                   FontWeight.w500, Colors.black),
               const SizedBox(
                 height: 30.0,

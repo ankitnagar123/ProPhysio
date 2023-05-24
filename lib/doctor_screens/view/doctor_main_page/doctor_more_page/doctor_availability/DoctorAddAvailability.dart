@@ -47,7 +47,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
         .size
         .width;
     return Scaffold(
-      appBar: AppBar(
+   /*   appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -62,7 +62,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white24,
-      ),
+      ),*/
       // appBar: MyAppBar(context, "My Availability"),
       body: Center(
           child: Obx(() {
@@ -234,7 +234,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                 ),
               ),
               // const Expanded(child: SizedBox()),
-              addAvailabilityCtr.loadingd.value
+             addAvailabilityCtr.loadingd.value
                   ? custom.MyIndicator()
                   : custom.acceptRejectButton(context, "select Time", () {
                     if(timeIdArray.isNotEmpty){

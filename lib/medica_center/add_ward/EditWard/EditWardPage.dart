@@ -87,6 +87,18 @@ String wardId = "";
         .width;
     return Obx(() {
       return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white24,
+          leading: InkWell(
+              onTap: () {
+                centerHomeCtr.centerSelectedDrList(context,wardId);
+                Get.back();
+              },
+              child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
+          elevation: 0,
+          centerTitle: true,
+          title: custom.text("Edit ward", 17, FontWeight.w500, MyColor.black),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButton: Padding(
         //   padding: const EdgeInsets.only(bottom: 10),
@@ -109,35 +121,15 @@ String wardId = "";
           child: Column(
             children: [
               SizedBox(
-                height: height * 0.06,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(Icons.arrow_back_ios_new_outlined,
-                            size: 20)),
-                    custom.text(
-                        "Edit ward", 17, FontWeight.w500, MyColor.black),
-                    const Text("")
-                  ],
-                ),
-              ),
-              SizedBox(
                 height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: custom.text("Ward name", 12.0, FontWeight.w600,
+                child: custom.text("Ward name", 13.0, FontWeight.w600,
                     MyColor.primary1),
               ),
               const SizedBox(
-                height: 3.0,
+                height: 4.0,
               ),
 
               custom.myField(context, nameCtr, "name", TextInputType.text),
@@ -397,16 +389,16 @@ String wardId = "";
                                     child: custom.text("Dismiss", 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
-                              Expanded(
-                                child:/* bookingController.loadingCancel.value
-                                    ? custom.MyIndicator()
-                                    :*/ custom.mysButton(
+                              centerHomeCtr.loadingEdit.value
+                                  ? custom.MyIndicator()
+                                  : Expanded(
+                                child: custom.mysButton(
                                   context,
                                   "Remove doctor",
                                       () {
                                     centerHomeCtr.editWard(context, wardName, doctorId, drCancelId, wardId, () {
                                       centerHomeCtr.centerSelectedDrList(context,wardId);
-                                      // Get.back();
+                                       Get.back();
                                     });
                                    /* bookingController
                                         .bookingAppointmentCancel(
@@ -517,7 +509,9 @@ String wardId = "";
                                     "Dismiss", 14.0, FontWeight.w500,
                                     MyColor.grey),
                               ),
-                    custom.mysButton(
+                              centerHomeCtr.loadingDelete.value
+                                  ? custom.MyIndicator()
+                                  :  custom.mysButton(
                       context,
                       "Delete profile",
                           () {

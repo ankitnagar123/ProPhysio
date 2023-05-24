@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
+import 'doctor_availability/AddAvailabilityTab.dart';
 
 class DoctorMorePage extends StatefulWidget {
   const DoctorMorePage({Key? key}) : super(key: key);
@@ -163,7 +164,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const MyAvailability()));
+                        builder: (context) => const AddAvailabilityTab()));
                 // Get.toNamed(RouteHelper.DSettingScreen());
               },
               leading: const Icon(

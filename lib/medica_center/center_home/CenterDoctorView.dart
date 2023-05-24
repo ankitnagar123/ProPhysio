@@ -305,6 +305,20 @@ String wardId = "";
                                               //     print(rating);
                                               //   },
                                               // ),
+                                           /*   ListView.builder(
+                                                itemCount: centerHomeCtr.selectedDoctorList[index].cat.length,
+                                                itemBuilder:  (context, indx) {
+                                                  SizedBox(
+                                                      width: widht * 0.50,
+                                                      child: custom.text(
+                                                          centerHomeCtr.selectedDoctorList[index]
+                                                              .cat[indx].categoryName
+                                                              .toString(),
+                                                          12,
+                                                          FontWeight.w500,
+                                                          MyColor.black));
+                                                },
+                                              ),*/
                                             ],
                                           )
                                         ],
