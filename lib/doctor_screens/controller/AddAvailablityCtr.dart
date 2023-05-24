@@ -25,12 +25,13 @@ class AddAvailabilityCtr extends GetxController {
 
 /*-------------Doctor Add Date start and End select--------------*/
   Future addAvailability(BuildContext context, String startDate,
-      String endDate, VoidCallback callback) async {
+      String endDate,String typ VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> psetpass = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "from_date": startDate,
       "to_date": endDate,
+      "type":typ,
     };
     log("support parameter Parameter$psetpass");
     final response = await apiService.postData(MyAPI.dAddAvailibitly, psetpass);

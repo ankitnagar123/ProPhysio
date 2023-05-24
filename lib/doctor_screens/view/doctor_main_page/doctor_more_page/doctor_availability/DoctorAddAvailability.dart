@@ -166,7 +166,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                       custom.MySnackBar(context, "Enter Dates");
                     }else{
                       addAvailabilityCtr.addAvailability(context,
-                          startDateController.text, endDateController.text, () {});
+                          startDateController.text, endDateController.text,"", () {});
                     }
 
                 // Get.offNamed(RouteHelper.DLoginScreen());
