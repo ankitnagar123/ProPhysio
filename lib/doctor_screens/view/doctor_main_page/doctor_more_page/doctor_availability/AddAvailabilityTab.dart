@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
-import 'DoctorAddAvailability.dart';
+import '../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import 'DoctorCenterAddAvailability.dart';
+import 'DoctorSelfAddAvailability.dart';
 
 
 class AddAvailabilityTab extends StatefulWidget {
@@ -18,15 +20,14 @@ class AddAvailabilityTab extends StatefulWidget {
 class _AddAvailabilityTabState extends State<AddAvailabilityTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
+  PCenterCtr pCenterCtr = PCenterCtr();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
-  TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
 
   @override
@@ -61,7 +62,7 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
           child: Stack(children: [
             TabBarView(controller: tabController, children: const [
               MyAvailability(),
-              Text("no data"),
+              DoctorCenterAddAvailability(),
             ]),
           ])),
     );

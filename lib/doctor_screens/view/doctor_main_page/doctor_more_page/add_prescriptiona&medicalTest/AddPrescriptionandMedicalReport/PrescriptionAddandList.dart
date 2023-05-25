@@ -121,6 +121,13 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
           doctorPrescriptionCtr.loadingAdd.value == true
               ? custom.MyIndicator()
               : custom.mysButton(context, "Submit", () {
+                if(titleCtr.text.isEmpty){
+                  custom.MySnackBar(context, "Enter title");
+                }else if(discCtr.text.isEmpty){
+                  custom.MySnackBar(context, "Enter description");
+                }else if(filename.isEmpty){
+                  custom.MySnackBar(context, "Enter upload");
+                }
                   doctorPrescriptionCtr.addPrescription(
                     context,
                     widget.patientId,

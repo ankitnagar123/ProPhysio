@@ -5,27 +5,38 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
 import '../../../../controller/AddAvailablityCtr.dart';
 
-class MyAvailability extends StatefulWidget {
-  const MyAvailability({Key? key}) : super(key: key);
+class DoctorCenterAddAvailability extends StatefulWidget {
+  const DoctorCenterAddAvailability({Key? key}) : super(key: key);
 
   @override
-  State<MyAvailability> createState() => _MyAvailabilityState();
+  State<DoctorCenterAddAvailability> createState() =>
+      _DoctorCenterAddAvailabilityState();
 }
 
-class _MyAvailabilityState extends State<MyAvailability> {
+class _DoctorCenterAddAvailabilityState
+    extends State<DoctorCenterAddAvailability> {
   AddAvailabilityCtr addAvailabilityCtr = Get.put(AddAvailabilityCtr());
+  PCenterCtr pCenterCtr = PCenterCtr();
+
   CustomView custom = CustomView();
+
   //select date's
   var selectedIndexes = [];
   var timeIdArray = [];
 
+  String? selectedCenter;
+
   @override
   void initState() {
-    addAvailabilityCtr.doctorTimeList.clear();
-    // addAvailabilityCtr.doctorFetchTimeList();
     super.initState();
+
+    addAvailabilityCtr.doctorTimeList.clear();
+    pCenterCtr.centerListApi();
+    // addAvailabilityCtr.doctorFetchTimeList();
+
   }
 
   DateTime? startDate, endDate;
@@ -36,7 +47,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
     if (date != null) {
       return date.toString().split(' ')[0];
     } else {
-      return 'Choose The Date';
+      return '';
     }
   }
 
@@ -46,50 +57,48 @@ class _MyAvailabilityState extends State<MyAvailability> {
         .of(context)
         .size
         .width;
-    return Scaffold(
-   /*   appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-        ),
-        title: custom.text(
-            "Add Availability", 15.0, FontWeight.w500, Colors.black),
-        centerTitle: true,
-        elevation: 0.0,
-        backgroundColor: Colors.white24,
-      ),*/
-      // appBar: MyAppBar(context, "My Availability"),
-      body: Center(
-          child: Obx(() {
-            if(addAvailabilityCtr.loadingf.value){
-              return custom.MyIndicator();
-            }
-            return Column(children: [
+    return Obx(() {
+      if(pCenterCtr.loadingFetch.value){
+        return custom.MyIndicator();
+      }else{
+        return Scaffold(
+
+          body: Center(
+            child: Column(children: [
               const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 16.0),
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Start Date", 15, FontWeight.w500, MyColor.black)),
+                        "Select medical center", 14, FontWeight.w500,
+                        MyColor.black)),
+              ),
+              centerList(),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text(
+                        "Start Date", 14, FontWeight.w500, MyColor.black)),
               ),
               Container(
+
                   height: 40,
                   width: widht * 0.90,
                   padding: const EdgeInsets.only(left: 7.0, bottom: 2.5),
                   margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
                   decoration: BoxDecoration(boxShadow: const [
                     BoxShadow(
+
                         color: Colors.black26,
-                        blurRadius: 1.5,
-                        spreadRadius: 1.5),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0),
                   ],
                       color: MyColor.white,
                       borderRadius: BorderRadius.circular(10)),
@@ -98,7 +107,6 @@ class _MyAvailabilityState extends State<MyAvailability> {
                       startDate = await pickDate();
                       startDateController.text = _displayText(startDate);
                       print(startDateController.text.toString());
-
                       setState(() {});
                     },
                     readOnly: true,
@@ -114,15 +122,15 @@ class _MyAvailabilityState extends State<MyAvailability> {
                     ),
                   )),
               const SizedBox(
-                height: 10.0,
+                height: 8.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 16.0),
                 child: Align(
                     alignment: Alignment.topLeft,
                     child:
                     custom.text(
-                        "End Date", 15, FontWeight.w500, MyColor.black)),
+                        "End Date ", 14, FontWeight.w500, MyColor.black)),
               ),
               Container(
                   height: 40,
@@ -132,8 +140,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
                   decoration: BoxDecoration(boxShadow: const [
                     BoxShadow(
                         color: Colors.black26,
-                        blurRadius: 1.5,
-                        spreadRadius: 1.5),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0),
                   ],
                       color: MyColor.white,
                       borderRadius: BorderRadius.circular(10)),
@@ -159,15 +167,18 @@ class _MyAvailabilityState extends State<MyAvailability> {
               const SizedBox(
                 height: 30.0,
               ),
+              Obx(() =>
               addAvailabilityCtr.loading.value
                   ? custom.MyIndicator()
                   : custom.MyButton(context, "Submit", () {
-                    if(startDateController.text.isEmpty||endDateController.text.isEmpty){
-                      custom.MySnackBar(context, "Enter Dates");
-                    }else{
-                      addAvailabilityCtr.addAvailability(context,
-                          startDateController.text, endDateController.text,"", () {});
-                    }
+                if (startDateController.text.isEmpty ||
+                    endDateController.text.isEmpty) {
+                  custom.MySnackBar(context, "Enter Dates");
+                } else {
+                  addAvailabilityCtr.addCenterAvailability(context,
+                      startDateController.text, endDateController.text,
+                      selectedCenter.toString(), () {});
+                }
 
                 // Get.offNamed(RouteHelper.DLoginScreen());
               },
@@ -176,7 +187,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                       color: MyColor.white,
                       fontSize: 16,
                       fontFamily: 'Heebo',
-                      letterSpacing: 0.8)),
+                      letterSpacing: 0.8)),),
 
               const Divider(),
               Padding(
@@ -184,13 +195,15 @@ class _MyAvailabilityState extends State<MyAvailability> {
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Your Time Slot's according select date", 13, FontWeight.w500,
+                        "Your Time Slot's according select date", 13,
+                        FontWeight.w500,
                         MyColor.black)),
               ),
               addAvailabilityCtr.loadingf.value == true ?
-              custom.MyIndicator() : Expanded(
+              custom.MyIndicator()
+                  : Expanded(
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: addAvailabilityCtr.doctorTimeList.length,
@@ -207,17 +220,24 @@ class _MyAvailabilityState extends State<MyAvailability> {
                             child: CheckboxListTile(
                               activeColor: MyColor.primary,
                               dense: true,
-                              title: Text("${addAvailabilityCtr.doctorTimeList[index].from} To ${addAvailabilityCtr.doctorTimeList[index].to}"),
+                              title: Text(
+                                  "${addAvailabilityCtr.doctorTimeList[index]
+                                      .from} To ${addAvailabilityCtr
+                                      .doctorTimeList[index].to}"),
                               value: selectedIndexes.contains(index),
                               onChanged: (vale) {
                                 setState(() {
                                   if (selectedIndexes.contains(index)) {
                                     selectedIndexes.remove(index);
-                                    timeIdArray.remove(addAvailabilityCtr.doctorTimeList[index].id);
+                                    timeIdArray.remove(
+                                        addAvailabilityCtr.doctorTimeList[index]
+                                            .id);
                                     // unselect
                                   } else {
-                                    selectedIndexes.add(index);// select
-                                    timeIdArray.add(addAvailabilityCtr.doctorTimeList[index].id);
+                                    selectedIndexes.add(index); // select
+                                    timeIdArray.add(
+                                        addAvailabilityCtr.doctorTimeList[index]
+                                            .id);
                                   }
                                 });
                                 print(selectedIndexes);
@@ -234,24 +254,27 @@ class _MyAvailabilityState extends State<MyAvailability> {
                 ),
               ),
               // const Expanded(child: SizedBox()),
-             addAvailabilityCtr.loadingd.value
+              addAvailabilityCtr.loadingd.value
                   ? custom.MyIndicator()
                   : custom.acceptRejectButton(context, "select Time", () {
-                    if(timeIdArray.isNotEmpty){
-                      addAvailabilityCtr.addTime(context, timeIdArray.join(","),addAvailabilityCtr.dateId.value, () {
+                if (timeIdArray.isNotEmpty) {
+                  addAvailabilityCtr.addTime(context, timeIdArray.join(","),
+                      addAvailabilityCtr.dateId.value, () {
                         Get.back();
                       });
-                    }else{
-                      log("empty");
-                    }
-
+                } else {
+                  log("empty");
+                }
               }, MyColor.primary, const TextStyle(color: MyColor.white)),
               const SizedBox(
                 height: 15,
               ),
-            ]);
-          })),
-    );
+            ]),
+          ),
+        );
+
+      }
+    });
   }
 
   //*******date strt end************//
@@ -278,6 +301,69 @@ class _MyAvailabilityState extends State<MyAvailability> {
           child: child!,
         );
       },
+    );
+  }
+
+  /*---------SELECT MULTIPLE CATEGORY-----*/
+  Widget centerList() {
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final widht = MediaQuery
+        .of(context)
+        .size
+        .width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) =>
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: Center(
+              child: Container(
+                height: 40,
+                width: widht * 0.90,
+                padding: const EdgeInsets.only(left: 7.0, bottom: 2.5),
+                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                decoration: BoxDecoration(boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 1.0,
+                      spreadRadius: 1.0),
+                ],
+                    color: MyColor.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    menuMaxHeight: MediaQuery
+                        .of(context)
+                        .size
+                        .height / 3,
+                    // Initial Value
+                    value: selectedCenter,
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down,
+                        color: MyColor.primary),
+                    // Array list of items
+                    items: pCenterCtr.centerList.map((items) {
+                      return DropdownMenuItem(
+                        value: items.centerId,
+                        child: Text(items.name),
+                      );
+                    }).toList(),
+                    hint: const Text("Select center"),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (newValue) {
+                      stateSetter(() {
+                        selectedCenter = newValue;
+                        log('MY CENTER Select>>>$selectedCenter');
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
     );
   }
 }

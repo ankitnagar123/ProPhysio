@@ -30,9 +30,11 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
 
   @override
   void initState() {
+
+    super.initState();
     doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
     // TODO: implement initState
-    super.initState();
+
   }
 
   @override
@@ -106,12 +108,12 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                 "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
-            height: height * 0.01,
+            height: height  * 0.01,
           ),
           custom.HField(
             context,
             discCtr,
-            "Enter Description...",
+            "Enter description...",
             TextInputType.text,
           ),
           SizedBox(

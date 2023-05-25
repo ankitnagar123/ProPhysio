@@ -64,7 +64,7 @@ String day = "";
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(
-          id.toString(), appointmentController.seletedtime.value.toString());
+          id.toString(), appointmentController.seletedtime.value.toString(),"");
       appointmentController.doctorVisitChargefetch(id.toString());
     });
 
@@ -152,7 +152,7 @@ String day = "";
                         appointmentController.doctorTimeSlotsFetch(
                             id.toString(),
                             appointmentController.seletedtime.value
-                                .toString());
+                                .toString(),"");
                       });
                     },
                   ),

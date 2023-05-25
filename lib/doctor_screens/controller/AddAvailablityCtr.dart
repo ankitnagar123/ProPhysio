@@ -14,6 +14,7 @@ import '../model/DoctorTimeListModel.dart';
 class AddAvailabilityCtr extends GetxController {
   ApiService apiService = ApiService();
   var loading = false.obs;
+  var loadingC = false.obs;
   var loadingf = false.obs;
   var loadingd = false.obs;
 
@@ -25,15 +26,14 @@ class AddAvailabilityCtr extends GetxController {
 
 /*-------------Doctor Add Date start and End select--------------*/
   Future addAvailability(BuildContext context, String startDate,
-      String endDate,String typ VoidCallback callback) async {
+      String endDate ,VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> psetpass = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "from_date": startDate,
       "to_date": endDate,
-      "type":typ,
     };
-    log("support parameter Parameter$psetpass");
+    log(" support parameter Parameter $psetpass");
     final response = await apiService.postData(MyAPI.dAddAvailibitly, psetpass);
     try {
       log("response of Doctor Add Availability :-${response.body}");
@@ -49,6 +49,7 @@ class AddAvailabilityCtr extends GetxController {
         log(result.toString());
         callback();
       } else {
+        loading.value = false;
         custom.massenger(context, result.toString());
       }
     } catch (e) {
@@ -56,6 +57,42 @@ class AddAvailabilityCtr extends GetxController {
       log("exception$e");
     }
   }
+
+/*-------------Doctor Add Date start and End select--------------*/
+  Future addCenterAvailability(BuildContext context, String startDate,
+      String endDate,String centerId ,VoidCallback callback) async {
+    loadingC.value = true;
+    final Map<String, dynamic> psetpass = {
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "from_date": startDate,
+      "to_date": endDate,
+      "center_id":centerId,
+    };
+    log(" support parameter Parameter $psetpass");
+    final response = await apiService.postData(MyAPI.dAddAvailibitly, psetpass);
+    try {
+      log("response of Doctor Add Availability :-${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse['result'].toString();
+      if (result == "success") {
+        loadingC.value = false;
+        dateId.value = jsonResponse["date_id"].toString();
+        log("Date id.......$dateId");
+        log("my Doctor Add Availability $result");
+        custom.massenger(context, result.toString());
+        doctorFetchTimeList();
+        log(result.toString());
+        callback();
+      } else {
+        loadingC.value = false;
+        custom.massenger(context, result.toString());
+      }
+    } catch (e) {
+      loadingC.value = false;
+      log("exception$e");
+    }
+  }
+
 
 
   /*-----------------Doctor Fetch Time list------------------------------*/

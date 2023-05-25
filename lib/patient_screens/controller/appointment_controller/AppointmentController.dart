@@ -77,12 +77,13 @@ class AppointmentController extends GetxController {
   }
 
   /*------------------Doctor time slots list Fetch Api----------------*/
-  Future<void> doctorTimeSlotsFetch(String id, String date) async {
+  Future<void> doctorTimeSlotsFetch(String id, String date,centerId) async {
     loadingFetchTime.value = true;
     final Map<String, dynamic> Peramert = {
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "doctor_id": id,
       "date": date,
+      "center_id":centerId,
     };
     try {
       final response =

@@ -31,9 +31,6 @@ class PCenterCtr extends GetxController {
   CustomView custom = CustomView();
 
 
-
-
-
   /*-------------Center List Api--------------------*/
   Future<void> centerListApi() async {
 
