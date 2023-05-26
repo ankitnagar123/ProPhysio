@@ -22,6 +22,12 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
 
+/*------VARIABLES------*/
+  String? cancelId = '';
+  String? cancelReason = '';
+  String _keyword = '';
+  int selectedCard = -1;
+
 
   /*----For SEARCH BOOKING LIST-------*/
   List<bookingList> _getFilteredList() {
@@ -41,11 +47,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
     super.initState();
   }
 
-/*------VARIABLES------*/
-  String? cancelId = '';
-  String? cancelReason = '';
-  String _keyword = '';
-  int selectedCard = -1;
+
 
   @override
   Widget build(BuildContext context) {

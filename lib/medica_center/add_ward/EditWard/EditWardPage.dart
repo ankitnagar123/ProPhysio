@@ -42,7 +42,6 @@ String wardId = "";
   String? deviceId;
   String? deviceTyp;
 
-
   bool isSelected = false;
 
   @override
@@ -536,4 +535,5 @@ String wardId = "";
           );
         });
   }
+
 }

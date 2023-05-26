@@ -4,7 +4,7 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import '../../medica_center/center_controller/AuthController.dart';
+import '../../medica_center/center_controller/CenterAuthController.dart';
 import '../../medica_center/center_home/CenterBottomNavigate.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 
@@ -356,39 +356,40 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
             // const SizedBox(
             //   height: 17.0,
             // ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Obx(() {
-                if(centerAuthCtr.loadingotp.value){
-                  return customView.MyIndicator();
-                }
-                return customView.MyButton(
-                  context,
-                  "Sign up",
-                      () {
-                    var data = {
-                      'name': nameCtr.text,
-                      'email': emailCtr.text,
-                      'password': passwordCtr.text,
-                      'address': addressCtr.text,
-
-                    };
-                    if (_sendDataToVerificationScrn(context)) {
-                      centerAuthCtr.CenterSignupOtp(context, emailCtr.text)
-                          .then((value) {
-                        if (value != "") {
-                          Get.toNamed(
-                              RouteHelper.CSignUpOtp(),
-                              parameters: data, arguments: value);
-                        } else {}
-                      });
-                    }
-                  },
-                  MyColor.primary,
-                  const TextStyle(fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontFamily: "Poppins"),);
-              }),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Obx(() {
+                  if(centerAuthCtr.loadingotp.value){
+                    return customView.MyIndicator();
+                  }
+                  return customView.MyButton(
+                    context,
+                    "Sign up",
+                        () {
+                      var data = {
+                        'name': nameCtr.text,
+                        'email': emailCtr.text,
+                        'password': passwordCtr.text,
+                        'address': addressCtr.text,
+                      };
+                      if (_sendDataToVerificationScrn(context)) {
+                        centerAuthCtr.CenterSignupOtp(context, emailCtr.text)
+                            .then((value) {
+                          if (value != "") {
+                            Get.toNamed(
+                                RouteHelper.CSignUpOtp(),
+                                parameters: data, arguments: value);
+                          } else {}
+                        });
+                      }
+                    },
+                    MyColor.primary,
+                    const TextStyle(fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: "Poppins"),);
+                }),
+              ),
             ),
           ],
         ),
@@ -428,7 +429,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
     if (nameCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Medical name is required");
+      customView.MySnackBar(context, "Medical center name is required");
     } else if (emailCtr.text
         .toString()
         .isEmpty) {
@@ -444,7 +445,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
         .length < 6) {
       customView.MySnackBar(context, "Password should be 6 digit");
     } else if (addressCtr.text.isEmpty) {
-      customView.MySnackBar(context, "Address required");
+      customView.MySnackBar(context, "Address is required");
     }
     /*else if (!RegExp('.*[a-z].*').hasMatch(usernameCtr.text.toString())) {
       customView.MySnackBar(context, "Username should contain a lowercase letter a-z or number.");

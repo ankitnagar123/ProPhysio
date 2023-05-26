@@ -15,7 +15,9 @@ import '../../../helper/mycolor/mycolor.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class calender extends StatefulWidget {
-  const calender({Key? key}) : super(key: key);
+  String centerId;
+   calender({Key? key,
+   required this.centerId}) : super(key: key);
 
   @override
   State<calender> createState() => _calenderState();
@@ -33,13 +35,16 @@ class _calenderState extends State<calender> {
   late CalendarCarousel _calendarCarouselNoHeader;
 
   String doctorId = "";
+  String centerId = "";
 
   @override
   void initState() {
+    centerId = widget.centerId;
+    print("center id ${centerId}");
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorId = doctorListCtr.doctorid.value;
-      appointmentController.dateCalender(doctorId);
+      appointmentController.dateCalender(doctorId,centerId);
     });
   }
 
@@ -107,6 +112,7 @@ class _calenderState extends State<calender> {
                         day: day,
                         month: month,
                         year: year,
+                    centerId: centerId,
                       )));
           // focusedDay = event;
         });

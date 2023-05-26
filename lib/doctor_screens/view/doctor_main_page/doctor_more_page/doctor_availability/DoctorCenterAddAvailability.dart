@@ -130,7 +130,7 @@ class _DoctorCenterAddAvailabilityState
                     alignment: Alignment.topLeft,
                     child:
                     custom.text(
-                        "End Date ", 14, FontWeight.w500, MyColor.black)),
+                        "End Date", 14, FontWeight.w500, MyColor.black)),
               ),
               Container(
                   height: 40,

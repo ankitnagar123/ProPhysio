@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/medica_center/center_controller/AuthController.dart';
+import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 

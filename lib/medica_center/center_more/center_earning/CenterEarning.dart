@@ -81,7 +81,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                       FontWeight.normal,
                       MyColor.black),*/
                 SizedBox(width: 3,),
-                custom.text("€ }",
+                custom.text("€",
                     14, FontWeight.w500, MyColor.lightblue),
               ],
             ),

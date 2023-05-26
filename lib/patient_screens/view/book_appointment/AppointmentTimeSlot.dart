@@ -13,13 +13,14 @@ import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'HealthCardScreen.dart';
 
 class AppointmentTimeSlot extends StatefulWidget {
-  String date, day, month, year;
+  String date, day, month, year,centerId;
 
   AppointmentTimeSlot({Key? key,
     required this.date,
     required this.day,
     required this.month,
     required this.year,
+    required this.centerId,
   }) : super(key: key);
 
   @override
@@ -35,6 +36,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   CustomView custom = CustomView();
   DateTime _selectedValue = DateTime.now();
   String? id;
+  String centerId = "";
   String? time;
   String? price;
   String? fee;
@@ -55,16 +57,19 @@ String day = "";
       print("day...................${widget.day}");
       print("moth...................${widget.month}");
       print("year...................${widget.year}");
+      print("CENTER ID...................${widget.centerId}");
+
       day = widget.day;
       appointmentController.seletedtime.value = widget.date;
       profileCtr.patientProfile(context);
-
+     centerId = widget.centerId;
+     print("center id $centerId");
       id = doctorListCtr.doctorid.value;
       print("doctor id$id");
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(
-          id.toString(), appointmentController.seletedtime.value.toString(),"");
+          id.toString(), appointmentController.seletedtime.value.toString(),centerId);
       appointmentController.doctorVisitChargefetch(id.toString());
     });
 
@@ -99,7 +104,7 @@ String day = "";
                             timeid: time.toString(),
                             price: fee.toString(),
                             date: appointmentController.seletedtime.value
-                                .toString(),
+                                .toString(), centerId: centerId,
                           )));
             }
 
@@ -152,7 +157,7 @@ String day = "";
                         appointmentController.doctorTimeSlotsFetch(
                             id.toString(),
                             appointmentController.seletedtime.value
-                                .toString(),"");
+                                .toString(),centerId);
                       });
                     },
                   ),

@@ -18,6 +18,7 @@ class CenterAuthCtr extends GetxController {
   var otp = ''.obs;
   var result = ''.obs;
   var loadingP = false.obs;
+  var loadingUpdateP = false.obs;
   var loadingDetails = false.obs;
   var resultVar = RxnInt(0);
 
@@ -95,7 +96,7 @@ class CenterAuthCtr extends GetxController {
 
     final response = await apiService.postData(MyAPI.CSignUp, signupPerameter);
     try {
-      log("response of Paitent Signup :-${response.body}");
+      log("response of Patient Signup :-${response.body}");
       loading.value = false;
       var jsonResponse = jsonDecode(response.body);
       String result = jsonResponse['result'];
@@ -104,12 +105,12 @@ class CenterAuthCtr extends GetxController {
         loading.value = false;
         // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
         // Get.toNamed(RouteHelper.getVerification());
-        custom.massenger(context, result);
+        custom.massenger(context, "Sign up successfully");
       } else {
         custom.massenger(context, result);
       }
     } catch (e) {
-      log("excaption$e");
+      log("exception$e");
     }
   }
 
@@ -154,6 +155,52 @@ class CenterAuthCtr extends GetxController {
       log("exception$e");
     }
   }
+
+
+/*----------Update CENTER Profile API-----------*/
+  void centerProfileUpdate(BuildContext context,
+      String name,
+      String bio,
+      String email,
+      String address,
+      String lat,
+      String long,
+      String image,
+      String baseImage,
+      ) async {
+    loadingUpdateP.value = true;
+    final Map<String, dynamic> profileUpdatePerameter = {
+      "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
+      "name": name,
+      "email": email,
+      "biography":bio,
+      "address":address,
+      "latitude":lat,
+      "longitude":long,
+      "image":image,
+      "img_str":baseImage,
+    };
+    print("Center Profile Update Parameter$profileUpdatePerameter");
+
+    final response = await apiService.postData(MyAPI.cCenterProfileUpdate, profileUpdatePerameter);
+    try {
+      log("response of Center Profile Update :-${response.body}");
+      loadingUpdateP.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      String result = jsonResponse['result'];
+      if (result == 'Success') {
+        centerProfile(context);
+        custom.massenger(context, "Profile update successfully");
+      } else {
+        loadingUpdateP.value = false;
+        custom.massenger(context, "Invalid inputs");
+      }
+    } catch (e) {
+      loadingUpdateP.value = false;
+      log("exception$e");
+    }
+  }
+
 
   void centerDetails(BuildContext context, String id) async {
     loadingDetails.value = true;

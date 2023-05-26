@@ -31,9 +31,10 @@ class AppointmentController extends GetxController {
   CustomView custom = CustomView();
 
   /*------------------Doctor date show on calender  list Fetch Api----------------*/
-  Future<void> dateCalender(String id) async {
+  Future<void> dateCalender(String id,String centerId) async {
     final Map<String, dynamic> paremert = {
       "doctor_id": id,
+      "center_id":centerId,
     };
     try {
       loadingFetchDate.value = true;
@@ -112,7 +113,7 @@ class AppointmentController extends GetxController {
 
   /*-------------Appointment booking  API--------------*/
   Future bookingAppointment(BuildContext context, String reciver, String cardId,
-      String time, String price, String date, VoidCallback callback) async {
+      String time, String price, String date,String centerId, VoidCallback callback) async {
     loadingAdd.value = true;
     final Map<String, dynamic> Peramert = {
       "sender_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
@@ -121,6 +122,7 @@ class AppointmentController extends GetxController {
       "time_id": time,
       "price": price,
       "date": date,
+      "center_id":centerId,
     };
     print("card Parameter$Peramert");
     final response =

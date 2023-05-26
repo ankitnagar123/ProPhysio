@@ -7,6 +7,7 @@ import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
+import '../../../../doctor_detail_screen/DoctorDetailScreen.dart';
 
 class PWardDrListScreen extends StatefulWidget {
   const PWardDrListScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _PWardDrListScreenState extends State<PWardDrListScreen> {
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
   String wardId = "";
   String wardName = "";
-
+String centerId = "";
   String? id;
   String? userTyp;
   String? deviceId;
@@ -32,6 +33,7 @@ class _PWardDrListScreenState extends State<PWardDrListScreen> {
   @override
   void initState() {
     super.initState();
+    centerId = Get.parameters["centerId"].toString();
     wardId = Get.parameters["wardId"].toString();
     wardName = Get.parameters["wardName"].toString();
     print("ward id $wardId");
@@ -96,7 +98,15 @@ class _PWardDrListScreenState extends State<PWardDrListScreen> {
                     centerHomeCtr.selectedDoctorList.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DoctorDetailScreen(
+                                        id:   centerHomeCtr.selectedDoctorList[index].doctorId, centerId:centerId,
+                                      )));
+                        },
                         child: Card(
                           margin: const EdgeInsets.symmetric(
                               horizontal: 7, vertical: 6.0),

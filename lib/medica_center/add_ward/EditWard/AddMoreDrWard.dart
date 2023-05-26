@@ -69,7 +69,8 @@ String wardId = "";
                         custom.MySnackBar(context, "Select doctor");
                       } else {
                         centerHomeCtr.addMoreDr(context, drIdMainArray.join(','), wardId, () {
-                          Get.toNamed(RouteHelper.CBottomNavigation());
+                         Get.back();
+                         Get.back();
 
                         });
                         /*centerHomeCtr.addDoctors(

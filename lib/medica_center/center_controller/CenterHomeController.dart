@@ -228,7 +228,6 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
           loadingFetchS.value = false;
           selectedDoctorList.value =  centerSelectedDListModelFromJson(response.body);
           log(selectedDoctorList.toString());
-
         }
         else {
           loadingFetchS.value = false;

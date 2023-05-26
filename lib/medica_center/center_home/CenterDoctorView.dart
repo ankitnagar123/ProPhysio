@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
@@ -7,6 +9,8 @@ import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
 import '../center_controller/CenterHomeController.dart';
+import '../center_models/CenterSelectedDrModel.dart';
+import '../center_models/CenterSelectedWardModel.dart';
 
 class CenterDoctorViewScreen extends StatefulWidget {
   const CenterDoctorViewScreen({Key? key}) : super(key: key);
@@ -28,7 +32,7 @@ String wardId = "";
   String? userTyp;
   String? deviceId;
   String? deviceTyp;
-
+String keyword = "";
   @override
   void initState() {
     super.initState();
@@ -39,11 +43,22 @@ String wardId = "";
       centerHomeCtr.centerSelectedDrList(context,wardId);
     });
     centerHomeCtr.wardDeleteReason(context);
-
   }
+
+  List<CenterSelectedDListModel> _getFilteredList() {
+    if (keyword.isEmpty) {
+      return centerHomeCtr.selectedDoctorList;
+    }
+    return  centerHomeCtr.selectedDoctorList
+        .where(
+            (user) => user.name.toLowerCase().contains(keyword.toLowerCase())||user.surname.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
+
 
   @override
   Widget build(BuildContext context) {
+  final  drList =  _getFilteredList();
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return Obx(() {
@@ -82,15 +97,40 @@ String wardId = "";
                     ],
                   ),
                 ),
-                custom.searchField(
-                    context,
-                    searchCtr,
-                    "Search doctors by name, surname",
-                    TextInputType.text,
-                    const Text(""),
-                    const Icon(Icons.search_rounded), () {
-                  // Get.toNamed(RouteHelper.DSearchAppointment());
-                }, () {}),
+                SizedBox(
+                  width: widht,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        keyword = value;
+                      });
+                      log(value);
+                    },
+                    cursorWidth: 0.0,
+                    cursorHeight: 0.0,
+                    onTap: () {},
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    cursorColor: Colors.black,
+                    controller: searchCtr,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      prefixIconColor: MyColor.primary1,
+                      contentPadding: EdgeInsets.only(top: 3, left: 20),
+                      hintText: "search doctor by name,surname",
+                      hintStyle: TextStyle(
+                          fontSize: 12, color: MyColor.primary1),
+                      fillColor: MyColor.lightcolor,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: height * 0.04,
                 ),
@@ -184,7 +224,7 @@ String wardId = "";
                     ? categorysubShimmerEffect(context)
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
-                        child: centerHomeCtr.selectedDoctorList.length == 0
+                        child: drList.length == 0
                             ? const Center(
                                 heightFactor: 10,
                                 child:
@@ -193,7 +233,7 @@ String wardId = "";
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount:
-                                    centerHomeCtr.selectedDoctorList.length,
+                                    drList.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {},
@@ -212,8 +252,7 @@ String wardId = "";
                                                 placeholder:
                                                     "assets/images/YlWC.gif",
                                                 alignment: Alignment.center,
-                                                image: centerHomeCtr
-                                                        .selectedDoctorList[
+                                                image: drList[
                                                     index].doctorProfile,
                                                 fit: BoxFit.fitWidth,
                                                 width: double.infinity,
@@ -233,7 +272,7 @@ String wardId = "";
                                                 CrossAxisAlignment.start,
                                             children: [
                                               custom.text(
-                                                  "${centerHomeCtr.selectedDoctorList[index].name} ${centerHomeCtr.selectedDoctorList[index].surname}",
+                                                  "${drList[index].name} ${drList[index].surname}",
                                                   13,
                                                   FontWeight.w600,
                                                   MyColor.black),
@@ -249,8 +288,7 @@ String wardId = "";
                                                   SizedBox(
                                                     width: 150,
                                                     child: custom.text(
-                                                        centerHomeCtr
-                                                                .selectedDoctorList[
+                                                        drList[
                                                             index].location,
                                                         12,
                                                         FontWeight.normal,

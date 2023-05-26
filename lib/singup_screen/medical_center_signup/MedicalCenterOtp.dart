@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../helper/CustomView/CustomView.dart';
-import '../../medica_center/center_controller/AuthController.dart';
+import '../../medica_center/center_controller/CenterAuthController.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 import '../../signin_screen/SignInScreen.dart';
 
@@ -33,7 +33,7 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
   void initState() {
     super.initState();
     apiotp = Get.arguments;
-    log(apiotp);
+    log("api otp$apiotp");
     print(email);
     print(password);
     name = Get.parameters['name']!;
@@ -54,9 +54,14 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
             child: Column(
               children: [
                 SizedBox(height: height * 0.09),
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: Icon(Icons.arrow_back_ios),
+                InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Align(
+                    alignment: Alignment.topLeft,
+                    child: Icon(Icons.arrow_back_ios),
+                  ),
                 ),
                 SizedBox(
                   height: height * 0.02,
@@ -114,26 +119,26 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, "Verificate", () {
-                    // if (validationotp()) {
-                    //   centerAuthCtr.centerSignup(
-                    //       context,
-                    //       name,
-                    //       email,
-                    //       password,
-                    //       address,
-                    //       () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const SignInScreen()));
-                    //   });
-                    //   /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
-                    //     Navigator.push(context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const SignInScreen()));
-                    //   });*/
-                    // }
-                    // Get.toNamed(RouteHelper.getSetPassword());
+                    if (validationotp()) {
+                      centerAuthCtr.centerSignup(
+                          context,
+                          name,
+                          email,
+                          password,
+                          address,
+                          "",
+                          "",
+                          () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInScreen()));
+                      });
+                      /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
+
+                      });*/
+                    }
+
                   },
                       MyColor.primary,
                       const TextStyle(

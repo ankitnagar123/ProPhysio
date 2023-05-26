@@ -10,13 +10,15 @@ import "../../controller/auth_controllers/card_controller's/PatientCardControlle
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class PatientCheckOutCard extends StatefulWidget {
-  String price, time, healthCard, date;
+  String price, time, healthCard, date, centerId;
 
-  PatientCheckOutCard({Key? key,
-    required this.price,
-    required this.time,
-    required this.healthCard,
-    required this.date})
+  PatientCheckOutCard(
+      {Key? key,
+      required this.price,
+      required this.time,
+      required this.healthCard,
+      required this.date,
+      required this.centerId})
       : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
   String? healthCard;
   String? doctorid;
   String? date;
+  String centerId = "";
 
   @override
   void initState() {
@@ -42,6 +45,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
       time = widget.time;
       healthCard = widget.healthCard;
       date = widget.date;
+      centerId = widget.centerId;
+      print("center id$centerId");
       print(healthCard);
       print(time);
       print(price);
@@ -49,19 +54,15 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
     });
     super.initState();
   }
+
   String? payment = '';
   String? cardid = '';
   CustomView custom = CustomView();
+
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Obx(() {
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -70,21 +71,16 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
           child: appointmentController.loadingAdd.value
               ? custom.MyIndicator()
               : custom.MyButton(context, "Confirm appointment", () {
-            if (cardid == "") {
-              custom.MySnackBar(context, "Select card");
-            } else {
-              appointmentController.bookingAppointment(
-                  context,
-                  doctorid!,
-                  cardid!,
-                  time!,
-                  price!,
-                  date!, () {
-                Get.offNamed(RouteHelper.getBookingSuccess());
-              });
-            }
-          }, MyColor.primary,
-              const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
+                  if (cardid == "") {
+                    custom.MySnackBar(context, "Select card");
+                  } else {
+                    appointmentController.bookingAppointment(context, doctorid!,
+                        cardid!, time!, price!, date!, centerId, () {
+                      Get.offNamed(RouteHelper.getBookingSuccess());
+                    });
+                  }
+                }, MyColor.primary,
+                  const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
         appBar: AppBar(
           backgroundColor: Colors.white24,
@@ -99,58 +95,61 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: cardCtr.loadingFetch.value? cardLoadingShimmer(width):Column(
-              children: [
-                const Divider(),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                custom.text(
-                    "Please select a payment method you already entered or add a new card.",
-                    13,
-                    FontWeight.normal,
-                    MyColor.black),
-                SizedBox(
-                  height: height * 0.03,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
-                    // Get.toNamed(RouteHelper.getViewCertificateScreen());
-                  },
-                  child: Container(
-                      height: 50.0,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 2.0),
-                      decoration: BoxDecoration(
-                        color: MyColor.midgray,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            custom.text("Add new card", 14.0, FontWeight.w500,
-                                MyColor.black),
-                            const Icon(
-                              Icons.arrow_forward,
-                              size: 20.0,
-                              color: MyColor.black,
+          child: cardCtr.loadingFetch.value
+              ? cardLoadingShimmer(width)
+              : Column(
+                  children: [
+                    const Divider(),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    custom.text(
+                        "Please select a payment method you already entered or add a new card.",
+                        13,
+                        FontWeight.normal,
+                        MyColor.black),
+                    SizedBox(
+                      height: height * 0.03,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                        // Get.toNamed(RouteHelper.getViewCertificateScreen());
+                      },
+                      child: Container(
+                          height: 50.0,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 2.0),
+                          decoration: BoxDecoration(
+                            color: MyColor.midgray,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 13.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                custom.text("Add new card", 14.0,
+                                    FontWeight.w500, MyColor.black),
+                                const Icon(
+                                  Icons.arrow_forward,
+                                  size: 20.0,
+                                  color: MyColor.black,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )),
+                          )),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Expanded(child: showCardList(width)),
+                    SizedBox(
+                      height: height * 0.1,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                Expanded(child: showCardList(width)),
-                SizedBox(
-                  height: height * 0.1,
-                ),
-              ],
-            ),
         ),
       );
     });
@@ -212,9 +211,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                             custom.text(
                                 "Expires", 12.0, FontWeight.w400, Colors.black),
                             custom.text(
-                                "${cardCtr.cardList[index]
-                                    .expiryMonth}/${cardCtr.cardList[index]
-                                    .expiryYear}",
+                                "${cardCtr.cardList[index].expiryMonth}/${cardCtr.cardList[index].expiryYear}",
                                 13.0,
                                 FontWeight.w400,
                                 Colors.black),

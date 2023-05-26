@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/medica_center/center_controller/AuthController.dart';
+import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
 import '../../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
@@ -75,7 +75,10 @@ centerAuthCtr.centerDetails(context, centerId.toString());
           floatHeaderSlivers: false,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
-              leading: const Icon(Icons.arrow_back_ios,color: MyColor.black),
+              leading: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },child: const Icon(Icons.arrow_back_ios,color: MyColor.black)),
               backgroundColor: MyColor.midgray,
               elevation: 0.0,
               expandedHeight: 320.0,
@@ -165,7 +168,7 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      Row(
+                   /*   Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Wrap(
@@ -196,8 +199,8 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                               GestureDetector(
                                 onTap: () {
                                   // var data = {"doctorId": doctorId};
-                                 /* Get.toNamed(RouteHelper.getChatScreen(),
-                                      arguments: data);*/
+                                 *//* Get.toNamed(RouteHelper.getChatScreen(),
+                                      arguments: data);*//*
                                 },
                                 child: Container(
                                   height: 45,
@@ -214,21 +217,21 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                               ),
                             ],
                           ),
-                          custom.mysButton(context, "Book Appointment", () {
+                      *//*    custom.mysButton(context, "Book Appointment", () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const calender()));
+                                MaterialPageRoute(builder: (context) =>  calender(centerId: centerId,)));
                           },
                               MyColor.primary,
                               const TextStyle(
                                   fontSize: 14,
                                   color: MyColor.white,
-                                  fontFamily: "Poppins")),
+                                  fontFamily: "Poppins")),*//*
                         ],
                       ),
                       SizedBox(
                         height: height * 0.02,
-                      ),
+                      ),*/
                       const Divider(),
                       SizedBox(
                         height: height * 0.01,
@@ -373,6 +376,7 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                                 var data ={
                                   "wardId":wardId,
                                   "wardName":wardName,
+                                  "centerId":centerId
                                 };
                                 Get.toNamed(RouteHelper.getCenterWardDrList(),parameters: data);
                                 // Get.toNamed(RouteHelper.getPatientSettingsScreen());

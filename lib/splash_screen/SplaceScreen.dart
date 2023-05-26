@@ -21,6 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
   bool onBoarding = false;
   bool patinetLogin = false;
   bool doctorLogin = false;
+  bool centerLogin = false;
+
   String token = "";
   @override
   void initState() {
@@ -89,10 +91,12 @@ class _SplashScreenState extends State<SplashScreen> {
    onBoarding = await sp.getBoolValue(sp.ON_BOARDING_KEY) ?? false;
    patinetLogin = await sp.getBoolValue(sp.PATIENT_LOGIN_KEY) ?? false;
    doctorLogin = await sp.getBoolValue(sp.DOCTOR_LOGIN_KEY) ?? false;
+   centerLogin = await sp.getBoolValue(sp.CENTER_LOGIN_KEY) ?? false;
 
    print("OnBoarding Key = $onBoarding");
    print("patinetLogin Key = $patinetLogin");
    print("doctorLogin Key = $doctorLogin");
+   print("CenterLogin Key = $centerLogin");
 
    Timer(const Duration(seconds: 3), () {
      Get.offNamed(RouteHelper.getOnBoardingScreen());
@@ -101,6 +105,8 @@ class _SplashScreenState extends State<SplashScreen> {
          Get.offNamed(RouteHelper.getBottomNavigation());
        } else if (doctorLogin == true) {
          Get.offNamed(RouteHelper.DHomePage());
+       } else if (centerLogin == true) {
+         Get.offNamed(RouteHelper.CBottomNavigation());
        } else {
          Get.offNamed(RouteHelper.getLoginScreen());
        }

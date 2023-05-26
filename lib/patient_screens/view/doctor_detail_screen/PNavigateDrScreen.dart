@@ -66,7 +66,7 @@ String long = "";
                         MaterialPageRoute(
                             builder: (context) =>
                                 DoctorDetailScreen(
-                                    id:  doctorListCtr.doctorList[i].doctorId.toString()
+                                    id:  doctorListCtr.doctorList[i].doctorId.toString(), centerId: '',
                                 )));
                   },
                   child: Card(

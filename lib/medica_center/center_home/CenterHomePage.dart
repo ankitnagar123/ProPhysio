@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
@@ -5,9 +7,8 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
-import '../add_ward/CenterAddNewWard.dart';
 import '../center_controller/CenterHomeController.dart';
-import 'CenterDoctorView.dart';
+import '../center_models/CenterSelectedWardModel.dart';
 
 class CenterHomeScreen extends StatefulWidget {
   const CenterHomeScreen({Key? key}) : super(key: key);
@@ -22,13 +23,14 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
-String wardId = "";
+  String wardId = "";
   String wardName = "";
 
   String? id;
   String? userTyp;
   String? deviceId;
   String? deviceTyp;
+  String keyword = '';
 
   @override
   void initState() {
@@ -38,18 +40,27 @@ String wardId = "";
     });
   }
 
+  /*----For SEARCH WARD LIST-------*/
+  List<CenterSelectedDWardModel> _getFilteredList() {
+    if (keyword.isEmpty) {
+      return centerHomeCtr.selectedWardList;
+    }
+    return centerHomeCtr.selectedWardList
+        .where(
+            (user) => user.name.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final list = _getFilteredList();
+    final widht = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Obx(() {
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(
@@ -62,17 +73,44 @@ String wardId = "";
                     child: GestureDetector(
                         onTap: () {
                           Get.toNamed(RouteHelper.CCenterAddWardScreen());
-                        }, child: Icon(Icons.add, size: 20)),
+                        },
+                        child: Icon(Icons.add, size: 20)),
                   ),
                 ),
-                custom.searchField(
-                    context,
-                    searchCtr,
-                    "Search wards, doctors",
-                    TextInputType.text,
-                    const Text(""),
-                    const Icon(Icons.search_rounded), () {
-                }, () {}),
+                SizedBox(
+                  width: widht,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        keyword = value;
+                      });
+                      log(value);
+                    },
+                    cursorWidth: 0.0,
+                    cursorHeight: 0.0,
+                    onTap: () {},
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    cursorColor: Colors.black,
+                    controller: searchCtr,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      prefixIconColor: MyColor.primary1,
+                      contentPadding: EdgeInsets.only(top: 3, left: 20),
+                      hintText: "search ward",
+                      hintStyle: TextStyle(
+                          fontSize: 12, color: MyColor.primary1),
+                      fillColor: MyColor.lightcolor,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: height * 0.04,
                 ),
@@ -118,7 +156,7 @@ String wardId = "";
                                             FontWeight.normal, MyColor.black),
                                         trailing: selectedCard == 0
                                             ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
+                                                color: MyColor.lightblue)
                                             : const Text("")),
                                     const Divider(
                                       thickness: 1.5,
@@ -133,11 +171,13 @@ String wardId = "";
                                           Get.back();
                                         },
                                         leading: custom.text(
-                                            "Date: reverse", 15,
-                                            FontWeight.normal, MyColor.black),
+                                            "Date: reverse",
+                                            15,
+                                            FontWeight.normal,
+                                            MyColor.black),
                                         trailing: selectedCard == 1
                                             ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
+                                                color: MyColor.lightblue)
                                             : const Text("")),
                                   ],
                                 ),
@@ -160,48 +200,56 @@ String wardId = "";
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
+                centerHomeCtr.loadingFetchW.value
+                    ? Center(heightFactor: 10, child: custom.MyIndicator())
+                    : list.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: custom.text("No ward found", 14,
+                                FontWeight.normal, MyColor.black))
+                        : SingleChildScrollView(
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                              itemCount: list.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  color: MyColor.midgray,
+                                  child: ListTile(
+                                    onTap: () {
+                                      wardId = list[index].wardId;
+                                      wardName = list[index].name;
 
-                centerHomeCtr.loadingFetchW.value?Center(heightFactor: 10,child: custom.MyIndicator()):centerHomeCtr.selectedWardList.isEmpty?const
-                Center(child: Text("You don’t have any ward.Create your first one now")):
-                ListView.builder(
-                  itemCount: centerHomeCtr.selectedWardList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: MyColor.midgray,
-                      child: ListTile(
-                        onTap: () {
-                          wardId = centerHomeCtr.selectedWardList[index].wardId;
-                          wardName = centerHomeCtr.selectedWardList[index].name;
-
-                          var data ={
-                            "wardId":wardId,
-                            "wardName":wardName,
-                          };
-                         Get.toNamed(RouteHelper.CCenterDoctorViewScreen(),parameters: data);
-                          // Get.toNamed(RouteHelper.getPatientSettingsScreen());
-                        },
-                        title: custom.text(
-                            centerHomeCtr.selectedWardList[index].name, 16.0,
-                            FontWeight.w500, MyColor.primary1),
-                        subtitle: Row(
-                          children: [
-                            const Icon(Icons.person_outline_outlined,
-                                size: 18, color: MyColor.primary1),
-                            const SizedBox(
-                              width: 4.0,
+                                      var data = {
+                                        "wardId": wardId,
+                                        "wardName": wardName,
+                                      };
+                                      Get.toNamed(
+                                          RouteHelper.CCenterDoctorViewScreen(),
+                                          parameters: data);
+                                      // Get.toNamed(RouteHelper.getPatientSettingsScreen());
+                                    },
+                                    title: custom.text(list[index].name, 16.0,
+                                        FontWeight.w500, MyColor.primary1),
+                                    subtitle: Row(
+                                      children: [
+                                        const Icon(Icons.person_outline_outlined,
+                                            size: 18, color: MyColor.primary1),
+                                        const SizedBox(
+                                          width: 4.0,
+                                        ),
+                                        custom.text(
+                                            "${list[index].totalDoctor} doctors",
+                                            13.0,
+                                            FontWeight.normal,
+                                            Colors.black),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            custom.text(
-                                "${centerHomeCtr.selectedWardList[index].totalDoctor} doctors", 13.0, FontWeight.normal, Colors.black),
-                          ],
                         ),
-                      ),
-                    );
-                  },
-                ),
               ],
             ),
           ),

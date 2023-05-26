@@ -8,10 +8,10 @@ import '../../controller/auth_controllers/PatientProfileController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 
 class HealthCardScreen extends StatefulWidget {
-  String timeid, price, date;
+  String timeid, price, date,centerId;
 
   HealthCardScreen(
-      {Key? key, required this.timeid, required this.price, required this.date})
+      {Key? key, required this.timeid, required this.price, required this.date,required this.centerId})
       : super(key: key);
 
   @override
@@ -26,6 +26,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
   String? price;
   String? time;
   String? date;
+  String centerId = "";
   CustomView custom = CustomView();
 
   @override
@@ -35,7 +36,10 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
     price = widget.price;
     time = widget.timeid;
     date = widget.date;
-    print("date${date}");
+    centerId = widget.centerId;
+
+    print("center id $centerId");
+    print("date$date");
     print("price${price}");
     print("time slot$time");
     healthcodeCtr.text = profileCtr.healthCard.value;
@@ -63,7 +67,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   price: price.toString(),
                   time: time.toString(),
                   healthCard: healthcodeCtr.text.toString(),
-                  date: date.toString(),
+                  date: date.toString(), centerId: centerId,
                 ),
               ),
             );

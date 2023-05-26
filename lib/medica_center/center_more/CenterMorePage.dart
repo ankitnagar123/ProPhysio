@@ -5,7 +5,7 @@ import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/doc
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:medica/medica_center/center_controller/AuthController.dart';
+import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
@@ -341,9 +341,8 @@ class _CenterMorePageState extends State<CenterMorePage> {
                                       () async {
                                     SharedPreferences preferences = await SharedPreferences
                                         .getInstance();
-                                    // preferences.remove("DOCTOR_LOGIN_KEY");
-                                    // preferences.remove("DOCTOR_LOGIN_KEY"));
-                                    // sp.setBoolValue(sp.ON_BOARDING_KEY, true);
+                                     preferences.remove("CENTER_LOGIN_KEY");
+                                     sp.setBoolValue(sp.ON_BOARDING_KEY, true);
 
                                     Get.offAllNamed(
                                         RouteHelper.getLoginScreen());
