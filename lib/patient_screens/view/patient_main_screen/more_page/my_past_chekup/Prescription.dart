@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
-import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class PatientPrescription extends StatefulWidget {
   const PatientPrescription({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class PatientPrescription extends StatefulWidget {
 }
 
 class _PatientPrescriptionState extends State<PatientPrescription> {
+  MobileScannerController mobileScannerController = MobileScannerController();
 
   TextEditingController titleCtr = TextEditingController();
   TextEditingController discCtr = TextEditingController();
@@ -25,14 +26,14 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
   DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(
       DoctorPrescriptionCtr());
 
+
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorPrescriptionCtr.fetchPatientPrescription("prescription");
     });
 
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -48,6 +49,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             SizedBox(
               height: height * 0.02,
             ),
+
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
@@ -117,7 +119,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             custom.HField(
               context,
               discCtr,
-              "Enter Description...",
+              "Enter description...",
               TextInputType.text,
             ),
             SizedBox(
@@ -139,6 +141,12 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                     });
                   }
             }, MyColor.primary, const TextStyle(color: MyColor.white)),
+              Center(
+                  child: Image.asset(
+                    'assets/qrFrame.png',
+                    scale: 0.25,
+                    color: Colors.red,
+                  )),
             const Divider(
               height: 50,
               thickness: 2,

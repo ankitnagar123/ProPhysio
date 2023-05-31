@@ -34,9 +34,9 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.white24,
@@ -45,7 +45,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
             statusBarColor: MyColor.primary.withOpacity(0.60)),
         elevation: 0,
         leading: const Icon(Icons.arrow_right_alt_rounded),
-        toolbarHeight: 15,
+        toolbarHeight: 40,
         bottom: TabBar(
           controller: tabController,
           indicatorColor: MyColor.primary,

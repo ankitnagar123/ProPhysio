@@ -8,6 +8,9 @@ import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorP
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+
+import '../QRScannerPage.dart';
 
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
@@ -27,6 +30,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
   CustomView custom = CustomView();
   DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(DoctorPrescriptionCtr());
   String image = "";
+  MobileScannerController mobileScannerController = MobileScannerController();
 
 
   @override
@@ -46,6 +50,14 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
               heightFactor: 12,child: custom.MyIndicator());
         }
         return Column(children: [
+          SizedBox(
+            height: height * 0.02,
+          ),
+          GestureDetector(
+            onTap: (){
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>const QRScannerDoctor()));
+            },
+              child: const Icon(Icons.qr_code_scanner,size: 40,)),
           SizedBox(
             height: height * 0.02,
           ),
@@ -141,7 +153,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                           widget.patientId, "prescription");
                     },
                   );
-                }, MyColor.primary, TextStyle(color: MyColor.white)),
+                }, MyColor.primary, const TextStyle(color: MyColor.white)),
           const Divider(
             height: 50,
             thickness: 2,
@@ -157,7 +169,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             child: Text("No Past Prescription at the moment!"),
           )
               :  ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: doctorPrescriptionCtr.prescriptionList.length,
             itemBuilder: (context, index) {
@@ -183,7 +195,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       custom.text(
                           "consult with Dr.${doctorPrescriptionCtr.prescriptionList[index].doctorName}",
                           12,
@@ -272,7 +284,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                           InteractiveViewer(
                             panEnabled: false,
                             // Set it to false
-                            boundaryMargin: EdgeInsets.all(100),
+                            boundaryMargin: const EdgeInsets.all(100),
                             minScale: 0.5,
                             maxScale: 2,
                             child: ClipRRect(

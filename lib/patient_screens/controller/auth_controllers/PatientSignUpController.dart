@@ -93,7 +93,7 @@ class PatientSignUpCtr extends GetxController {
     };
     print("SignupPerameter$signupPerameter");
 
-    final response = await apiService.postData(MyAPI.PSignUp, signupPerameter);
+    final response = await apiService.postData("https://cisswork.com/Android/Medica/Apis/a.php", signupPerameter);
     try {
       log("response of Paitent Signup :-${response.body}");
       loading.value = false;
