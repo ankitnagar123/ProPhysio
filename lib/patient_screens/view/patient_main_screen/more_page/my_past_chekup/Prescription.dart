@@ -141,12 +141,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                     });
                   }
             }, MyColor.primary, const TextStyle(color: MyColor.white)),
-              Center(
-                  child: Image.asset(
-                    'assets/qrFrame.png',
-                    scale: 0.25,
-                    color: Colors.red,
-                  )),
+
             const Divider(
               height: 50,
               thickness: 2,
@@ -170,7 +165,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                     return Card(
                       color: MyColor.midgray,
                       child: ListTile(
-                        contentPadding: EdgeInsets.all(10),
+                        contentPadding: const EdgeInsets.all(10),
                         title: custom.text(
                             doctorPrescriptionCtr.patientPrescriptionList[index]
                                 .title,
@@ -324,6 +319,11 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                               borderRadius:
                               BorderRadius.circular(8.0),
                               child: FadeInImage.assetNetwork(
+                                imageErrorBuilder: (context, error,
+                                    stackTrace) => const Center(
+                                      child: Image(image: AssetImage(
+                                      "assets/images/noimage.png"),height: 60,width: 60),
+                                    ),
                                 width: MediaQuery
                                     .of(context)
                                     .size

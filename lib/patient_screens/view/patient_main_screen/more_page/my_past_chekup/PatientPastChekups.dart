@@ -44,9 +44,14 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: MyColor.primary.withOpacity(0.60)),
         elevation: 0,
-        leading: const Icon(Icons.arrow_right_alt_rounded),
+        leading: InkWell(
+            onTap: () {
+              Get.back();
+            },child: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black,size: 18)),
         toolbarHeight: 40,
-        bottom: TabBar(
+actions: [
+  Icon(Icons.qr_code_2)
+],        bottom: TabBar(
           controller: tabController,
           indicatorColor: MyColor.primary,
           indicatorWeight: 2,

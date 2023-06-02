@@ -60,37 +60,40 @@ class _BookingPageState extends State<BookingPage> {
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: InkWell(
-            onTap: () {
-              patientBookingController.bookingAppointment("Complete");
-              print("on-tap");
-              Get.toNamed(RouteHelper.getPastAppointmentsScreen());
-            },
-            child: Container(
-                height: 50.0,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-                decoration: BoxDecoration(
-                  color: MyColor.lightcolor,
-                  borderRadius: BorderRadius.circular(0.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      customView.text("Past appointments", 14.0,
-                          FontWeight.w500, MyColor.primary1),
-                      const Icon(
-                        Icons.arrow_forward,
-                        size: 20.0,
-                        color: MyColor.primary1,
-                      ),
-                    ],
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: InkWell(
+              onTap: () {
+                patientBookingController.bookingAppointment("Complete");
+                print("on-tap");
+                Get.toNamed(RouteHelper.getPastAppointmentsScreen());
+              },
+              child: Container(
+                  height: 50.0,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+                  decoration: BoxDecoration(
+                    color: MyColor.lightcolor,
+                    borderRadius: BorderRadius.circular(0.0),
                   ),
-                )),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        customView.text("Past appointments", 14.0,
+                            FontWeight.w500, MyColor.primary1),
+                        const Icon(
+                          Icons.arrow_forward,
+                          size: 20.0,
+                          color: MyColor.primary1,
+                        ),
+                      ],
+                    ),
+                  )),
+            ),
           ),
         ),
       ]),

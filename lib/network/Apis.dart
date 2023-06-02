@@ -107,6 +107,9 @@ class MyAPI{
 static const String dAddPrescription= "prescription";
   static const String fetchPrescription= "fetch_prescription";
 
+  static const String fetchQrPrescription= "fetch_qr_code_prescription";
+
+
   /*Chat list Dr*/
   static const String dChatListFetch = "doctor_msg_list";
   static const String dChatListDelete = "delete_user_msg_list";

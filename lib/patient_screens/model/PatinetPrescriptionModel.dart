@@ -31,6 +31,7 @@ class PatinetPrescriptionModel {
   String description;
   String image;
 
+
   factory PatinetPrescriptionModel.fromJson(Map<String, dynamic> json) => PatinetPrescriptionModel(
     result: json["result"],
     userId: json["user_id"],

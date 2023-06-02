@@ -36,6 +36,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   TextEditingController birthPlaceCtr = TextEditingController();
   TextEditingController genderCtr = TextEditingController();
 
+
+  String qRCode = "";
   String files = "";
   String code = '';
 
@@ -73,6 +75,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     phoneNumberCtrl.text = profileCtr.phone.value;
     addressCtrl.text = profileCtr.address.value;
     files = profileCtr.image.value;
+    qRCode = profileCtr.qrCode.value;
+
     code = profileCtr.code.value;
 
     /*--new filed added--*/

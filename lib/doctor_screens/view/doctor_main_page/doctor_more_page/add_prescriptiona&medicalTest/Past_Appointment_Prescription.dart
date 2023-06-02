@@ -5,6 +5,7 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import 'AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
+import 'QRScannerReports/QRScannerPage.dart';
 
 class CompleteAppointPrescription extends StatefulWidget {
   const CompleteAppointPrescription({Key? key}) : super(key: key);
@@ -40,26 +41,65 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
         centerTitle: true,
         title: customView.text("Past Appointment", 17, FontWeight.w500, MyColor.black),
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Obx(() {
-          if(bookingController.loading.value){
-            return Center(
-                heightFactor: 12,child: customView.MyIndicator());
-          }
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 15,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Obx(() {
+              if(bookingController.loading.value){
+                return Center(
+                    heightFactor: 12,child: customView.MyIndicator());
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    showList(),
+                  ],
                 ),
-                showList(),
-              ],
+              );
+            }),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const QRScannerDoctor()));
+                print("on-tap");
+              },
+              child: Container(
+                  height: 50.0,
+                  margin:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+                  decoration: BoxDecoration(
+                    color: MyColor.lightcolor,
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.qr_code_scanner_sharp,
+                          size: 25.0,
+                          color: MyColor.primary1,
+                        ),
+                        const SizedBox(width: 40.00,),
+                        customView.text("Scan and check reports", 15.0,
+                            FontWeight.w500, MyColor.primary1),
+
+                      ],
+                    ),
+                  )),
             ),
-          );
-        }),
+          ),
+        ],
+
       ),
+
     );
   }
 

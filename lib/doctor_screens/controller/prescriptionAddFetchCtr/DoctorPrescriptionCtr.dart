@@ -10,6 +10,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../patient_screens/model/PatinetPrescriptionModel.dart';
+import '../../model/QrPresciptionList.dart';
 
 class DoctorPrescriptionCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -22,12 +23,18 @@ class DoctorPrescriptionCtr extends GetxController {
   var loadingFetch = false.obs;
   var loadingPFetch = false.obs;
 
+  var loadingFetchQR = false.obs;
+
 /*---------for doctor*---------*/
   var prescriptionList = <DPrescriptionListModel>[].obs;
+  /*---------for doctor QR scanning*---------*/
+  var prescriptionReportQrList = <PrescriptionReportQrModel>[].obs;
 
 
   /*------for patient---------*/
   var patientPrescriptionList = <PatinetPrescriptionModel>[].obs;
+
+
 
 
 /*---------for doctor*---------*/
@@ -119,6 +126,31 @@ class DoctorPrescriptionCtr extends GetxController {
       }
     }catch(e){
       loadingFetch.value = true;
+      log('Kuch to dikkat hai?$e');
+    }
+  }
+
+
+  /*---------for doctor*---------*/
+  Future<void>fetchQrPrescription(String patientId,String type)async{
+    loadingFetchQR.value = true;
+    Map<String,dynamic> data = {
+      "patient_id":patientId,
+      "type":type,
+    };
+    final response = await apiService.postData(MyAPI.fetchQrPrescription, data);
+    log("Qr scanner parameter $response");
+    try{
+      if(response.statusCode == 200){
+        loadingFetchQR.value = false;
+
+        prescriptionReportQrList.value =  prescriptionReportQrModelFromJson(response.body);
+        log(prescriptionReportQrList.toString());
+      }else{
+        loadingFetchQR.value = false;
+      }
+    }catch(e){
+      loadingFetchQR.value = true;
       log('Kuch to dikkat hai?$e');
     }
   }

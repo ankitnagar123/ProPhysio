@@ -10,7 +10,7 @@ import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../QRScannerPage.dart';
+import '../QRScannerReports/QRScannerPage.dart';
 
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
@@ -53,11 +53,6 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
           SizedBox(
             height: height * 0.02,
           ),
-          GestureDetector(
-            onTap: (){
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>const QRScannerDoctor()));
-            },
-              child: const Icon(Icons.qr_code_scanner,size: 40,)),
           SizedBox(
             height: height * 0.02,
           ),

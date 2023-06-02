@@ -36,7 +36,7 @@ class PatientProfileCtr extends GetxController {
   var taxCode = "".obs;
   var birthplace = "".obs;
   var gender = "".obs;
-
+  var qrCode =  "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -64,6 +64,8 @@ class PatientProfileCtr extends GetxController {
         username.value = jsonResponse["username"];
         healthCard.value = jsonResponse["health_card"];
         image.value = jsonResponse["user_profile"];
+        qrCode.value = jsonResponse["QR_Code"];
+
 
         log(healthCard.value);
         Email.value = jsonResponse["email"];
