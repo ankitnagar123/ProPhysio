@@ -5,6 +5,7 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import 'AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
+import 'QRScannerReports/QRResultScreen.dart';
 import 'QRScannerReports/QRScannerPage.dart';
 
 class CompleteAppointPrescription extends StatefulWidget {
@@ -34,7 +35,8 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
         backgroundColor: Colors.white24,
         leading: InkWell(
             onTap: () {
-              Get.back();
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>QRResult()));
+              // Get.back();
             },
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
