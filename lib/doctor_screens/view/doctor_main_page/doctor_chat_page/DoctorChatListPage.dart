@@ -229,6 +229,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                               onTap: () {
                                 var patientId = {
                                   "ID": list[index].userId,
+                                  "name":  list[index].username,
+                                  "pic":list[index].userProfile,
                                 };
                                 Get.toNamed(RouteHelper.DChatScreen(),
                                     arguments: patientId);

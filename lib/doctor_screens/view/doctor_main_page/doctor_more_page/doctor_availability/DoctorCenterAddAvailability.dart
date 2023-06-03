@@ -32,11 +32,10 @@ class _DoctorCenterAddAvailabilityState
   @override
   void initState() {
     super.initState();
-
-    addAvailabilityCtr.doctorTimeList.clear();
-    pCenterCtr.centerListApi();
-    // addAvailabilityCtr.doctorFetchTimeList();
-
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      addAvailabilityCtr.doctorTimeList.clear();
+      pCenterCtr.centerListApi();
+    });
   }
 
   DateTime? startDate, endDate;
@@ -58,11 +57,7 @@ class _DoctorCenterAddAvailabilityState
         .size
         .width;
     return Obx(() {
-      if(pCenterCtr.loadingFetch.value){
-        return custom.MyIndicator();
-      }else{
-        return Scaffold(
-
+      return Scaffold(
           body: Center(
             child: Column(children: [
               const SizedBox(
@@ -88,14 +83,12 @@ class _DoctorCenterAddAvailabilityState
                         "Start Date", 14, FontWeight.w500, MyColor.black)),
               ),
               Container(
-
                   height: 40,
                   width: widht * 0.90,
                   padding: const EdgeInsets.only(left: 7.0, bottom: 2.5),
                   margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
                   decoration: BoxDecoration(boxShadow: const [
                     BoxShadow(
-
                         color: Colors.black26,
                         blurRadius: 1.0,
                         spreadRadius: 1.0),
@@ -107,7 +100,6 @@ class _DoctorCenterAddAvailabilityState
                       startDate = await pickDate();
                       startDateController.text = _displayText(startDate);
                       print(startDateController.text.toString());
-                      setState(() {});
                     },
                     readOnly: true,
                     controller: startDateController,
@@ -128,8 +120,7 @@ class _DoctorCenterAddAvailabilityState
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Align(
                     alignment: Alignment.topLeft,
-                    child:
-                    custom.text(
+                    child: custom.text(
                         "End Date", 14, FontWeight.w500, MyColor.black)),
               ),
               Container(
@@ -150,7 +141,6 @@ class _DoctorCenterAddAvailabilityState
                       endDate = await pickDate();
                       endDateController.text = _displayText(endDate);
                       print(endDateController.text.toString());
-                      setState(() {});
                     },
                     readOnly: true,
                     controller: endDateController,
@@ -167,17 +157,20 @@ class _DoctorCenterAddAvailabilityState
               const SizedBox(
                 height: 30.0,
               ),
-              Obx(() =>
-              addAvailabilityCtr.loading.value
+             Obx(() =>  addAvailabilityCtr.loading.value
                   ? custom.MyIndicator()
                   : custom.MyButton(context, "Submit", () {
                 if (startDateController.text.isEmpty ||
-                    endDateController.text.isEmpty) {
-                  custom.MySnackBar(context, "Enter Dates");
+                    endDateController.text.isEmpty ||
+                    selectedCenter == null) {
+                  custom.MySnackBar(context, "Fill all data");
                 } else {
-                  addAvailabilityCtr.addCenterAvailability(context,
-                      startDateController.text, endDateController.text,
-                      selectedCenter.toString(), () {});
+                  addAvailabilityCtr.addCenterAvailability(
+                      context,
+                      startDateController.text,
+                      endDateController.text,
+                      selectedCenter.toString(),
+                          () {});
                 }
 
                 // Get.offNamed(RouteHelper.DLoginScreen());
@@ -196,62 +189,61 @@ class _DoctorCenterAddAvailabilityState
                     alignment: Alignment.topLeft,
                     child: custom.text(
                         "Your Time Slot's according select date", 13,
-                        FontWeight.w500,
-                        MyColor.black)),
+                        FontWeight.w500, MyColor.black)),
               ),
-              addAvailabilityCtr.loadingf.value == true ?
-              custom.MyIndicator()
+              addAvailabilityCtr.loadingf.value == true
+                  ? custom.MyIndicator()
                   : Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: addAvailabilityCtr.doctorTimeList.length,
-                  itemBuilder: (context, index) {
-                    // var id = addAvailabilityCtr.doctorTimeList[index].id;
-                    // print(id);
-                    return SizedBox(
-                      width: 120,
-                      height: 50,
-                      child: StatefulBuilder(
-                        builder: (context, StateSetter setState) {
-                          return Card(
-                            elevation: 0.8,
-                            child: CheckboxListTile(
-                              activeColor: MyColor.primary,
-                              dense: true,
-                              title: Text(
-                                  "${addAvailabilityCtr.doctorTimeList[index]
-                                      .from} To ${addAvailabilityCtr
-                                      .doctorTimeList[index].to}"),
-                              value: selectedIndexes.contains(index),
-                              onChanged: (vale) {
-                                setState(() {
-                                  if (selectedIndexes.contains(index)) {
-                                    selectedIndexes.remove(index);
-                                    timeIdArray.remove(
-                                        addAvailabilityCtr.doctorTimeList[index]
-                                            .id);
-                                    // unselect
-                                  } else {
-                                    selectedIndexes.add(index); // select
-                                    timeIdArray.add(
-                                        addAvailabilityCtr.doctorTimeList[index]
-                                            .id);
-                                  }
-                                });
-                                print(selectedIndexes);
-                                print(timeIdArray);
-                              },
-                              controlAffinity: ListTileControlAffinity.trailing,
-                            ),
-                          );
-                        },
-
-                      ),
-                    );
-                  },
-                ),
+                child: Obx(() {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: addAvailabilityCtr.doctorTimeList.length,
+                    itemBuilder: (context, index) {
+                      // var id = addAvailabilityCtr.doctorTimeList[index].id;
+                      // print(id);
+                      return SizedBox(
+                        width: 120,
+                        height: 50,
+                        child: StatefulBuilder(
+                          builder: (context, StateSetter setState) {
+                            return Card(
+                              elevation: 0.8,
+                              child: CheckboxListTile(
+                                activeColor: MyColor.primary,
+                                dense: true,
+                                title: Text(
+                                    "${addAvailabilityCtr.doctorTimeList[index]
+                                        .from} To ${addAvailabilityCtr
+                                        .doctorTimeList[index].to}"),
+                                value: selectedIndexes.contains(index),
+                                onChanged: (vale) {
+                                  setState(() {
+                                    if (selectedIndexes.contains(index)) {
+                                      selectedIndexes.remove(index);
+                                      timeIdArray.remove(addAvailabilityCtr
+                                          .doctorTimeList[index].id);
+                                      // unselect
+                                    } else {
+                                      selectedIndexes.add(index); // select
+                                      timeIdArray.add(addAvailabilityCtr
+                                          .doctorTimeList[index].id);
+                                    }
+                                  });
+                                  print(selectedIndexes);
+                                  print(timeIdArray);
+                                },
+                                controlAffinity:
+                                ListTileControlAffinity.trailing,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
+                }),
               ),
               // const Expanded(child: SizedBox()),
               addAvailabilityCtr.loadingd.value
@@ -270,10 +262,7 @@ class _DoctorCenterAddAvailabilityState
                 height: 15,
               ),
             ]),
-          ),
-        );
-
-      }
+          ));
     });
   }
 
@@ -306,10 +295,6 @@ class _DoctorCenterAddAvailabilityState
 
   /*---------SELECT MULTIPLE CATEGORY-----*/
   Widget centerList() {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
     final widht = MediaQuery
         .of(context)
         .size
@@ -333,33 +318,38 @@ class _DoctorCenterAddAvailabilityState
                     color: MyColor.white,
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    menuMaxHeight: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 3,
-                    // Initial Value
-                    value: selectedCenter,
-                    // Down Arrow Icon
-                    icon: const Icon(Icons.keyboard_arrow_down,
-                        color: MyColor.primary),
-                    // Array list of items
-                    items: pCenterCtr.centerList.map((items) {
-                      return DropdownMenuItem(
-                        value: items.centerId,
-                        child: Text(items.name),
-                      );
-                    }).toList(),
-                    hint: const Text("Select center"),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (newValue) {
-                      stateSetter(() {
-                        selectedCenter = newValue;
-                        log('MY CENTER Select>>>$selectedCenter');
-                      });
-                    },
-                  ),
+                  child: Obx(() {
+                    if (pCenterCtr.loadingFetch.value) {
+                      return Center(child: custom.MyIndicator());
+                    }
+                    return DropdownButton(
+                      menuMaxHeight: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 3,
+                      // Initial Value
+                      value: selectedCenter,
+                      // Down Arrow Icon
+                      icon: const Icon(Icons.keyboard_arrow_down,
+                          color: MyColor.primary),
+                      // Array list of items
+                      items: pCenterCtr.centerList.map((items) {
+                        return DropdownMenuItem(
+                          value: items.centerId,
+                          child: Text(items.name),
+                        );
+                      }).toList(),
+                      hint: const Text("Select center"),
+                      // After selecting the desired option,it will
+                      // change button value to selected value
+                      onChanged: (newValue) {
+                        stateSetter(() {
+                          selectedCenter = newValue;
+                          log('MY CENTER Select>>>$selectedCenter');
+                        });
+                      },
+                    );
+                  }),
                 ),
               ),
             ),

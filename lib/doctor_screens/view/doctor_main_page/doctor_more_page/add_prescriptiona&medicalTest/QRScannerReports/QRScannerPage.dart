@@ -23,7 +23,7 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
 
 
 
-  void _onQRViewCreated(MobileScannerController controller) {
+/*  void _onQRViewCreated(MobileScannerController controller) {
     setState(() {
       this.controller = controller;
     });
@@ -34,7 +34,7 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
         print(qrId);
       });
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

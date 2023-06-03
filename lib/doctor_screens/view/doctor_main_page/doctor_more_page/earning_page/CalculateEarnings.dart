@@ -28,7 +28,7 @@ class _CalculateEarningState extends State<CalculateEarning> {
     if (date != null) {
       return date.toString().split(' ')[0];
     } else {
-      return 'Choose The Date';
+      return '';
     }
   }
 
@@ -40,10 +40,6 @@ class _CalculateEarningState extends State<CalculateEarning> {
         .of(context)
         .size
         .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -73,16 +69,6 @@ class _CalculateEarningState extends State<CalculateEarning> {
                 children: [
                   custom.text(
                       "Total earning", 14, FontWeight.w500, MyColor.black),
-                  /*custom.text(
-                      "${doctorEarningCtr.earning.value.startDate.month}/"
-                          "${doctorEarningCtr.earning.value.startDate.day}/"
-                          "${doctorEarningCtr.earning.value.startDate.year}-"
-                          "${doctorEarningCtr.earning.value.endDate.month}/"
-                          "${doctorEarningCtr.earning.value.endDate.day}/"
-                          "${doctorEarningCtr.earning.value.endDate.year}",
-                      13,
-                      FontWeight.normal,
-                      MyColor.black),*/
                   SizedBox(width: 3,),
                   custom.text("€ ${doctorEarningCtr.earning.value.totalAmount}",
                       14, FontWeight.w500, MyColor.lightblue),
@@ -165,7 +151,6 @@ class _CalculateEarningState extends State<CalculateEarning> {
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
-                        // labelText: 'Passward',
                         hintText: "select date",
                         suffixIcon: Icon(
                           Icons.calendar_month,

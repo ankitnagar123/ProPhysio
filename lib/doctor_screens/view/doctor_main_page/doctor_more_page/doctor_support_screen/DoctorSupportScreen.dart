@@ -106,30 +106,6 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   margin:
-      //       const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      //   child: Obx(() {
-      //     if (supportCtr.loading.value) {
-      //       return customView.MyIndicator();
-      //     }
-      //     return customView.MyButton(
-      //       context,
-      //       "Send message",
-      //       () {
-      //         if(validation()){
-      //           supportCtr.supportApi(context, subjectCtrl.text,
-      //               emailCtrl.text, msgCtrl.text, () {
-      //
-      //               });
-      //         }
-      //
-      //       },
-      //       MyColor.primary,
-      //       const TextStyle(fontFamily: "Poppins", color: Colors.white),
-      //     );
-      //   }),
-      // )),
     ));
   }
 

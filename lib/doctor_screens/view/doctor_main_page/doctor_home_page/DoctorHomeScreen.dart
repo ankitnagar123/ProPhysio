@@ -40,6 +40,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
   void initState() {
     chatController.doctorReceivedMsgListFetch(context, bookingController.userId.value);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      bookingController.appointmentCancelReason();
       getValuee();
       bookingController.bookingAppointment(context,"","");
     });
@@ -144,7 +145,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
             return InkWell(
               onTap: () {
                 bookingController.bookingAppointmentDetails(
-                    context, id, bookingController.booking[index].status!, () { showBottomSheet(id,userid,status);});
+                    context, id, bookingController.booking[index].status.toString(), () { showBottomSheet(id,userid,status);});
 
               },
               child: Card(
@@ -167,7 +168,8 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                     bookingController.booking[index].status ==
                                             "Pending"
                                         ? MyColor.statusYellow
-                                        : Colors.green,
+                                        : bookingController.booking[index].status ==
+                                        "Cancel"? Colors.red:Colors.green,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),

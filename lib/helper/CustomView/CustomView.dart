@@ -290,34 +290,6 @@ class CustomView {
     );
   }
 
-  Widget Field(BuildContext context, TextEditingController controller,
-      String hintText, TextInputType inputType,) {
-    final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
-    return  SizedBox(
-      height: 45,
-      width: widht * 0.82,
-      child: TextFormField(
-        textInputAction: TextInputAction.next,
-        keyboardType: inputType,
-        cursorColor: Colors.black,
-        controller: controller,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(top: 3, left: 20),
-          hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 12),
-          filled: true,
-          fillColor: MyColor.white,
-          border: const OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.all(
-              Radius.circular(30),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget searchField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType, Widget icon, Widget icon1,VoidCallback newScreen,VoidCallback search,) {

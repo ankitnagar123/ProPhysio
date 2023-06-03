@@ -16,7 +16,17 @@ class DoctorChatProfile extends StatefulWidget {
 class _DoctorChatProfileState extends State<DoctorChatProfile> {
   CustomView customView = CustomView();
   BookingController bookingController = Get.put(BookingController());
+  String patientId = "";
+  String patientName = "";
+  String patientPic = "";
 
+  @override
+  void initState() {
+    super.initState();
+    patientId = Get.arguments["ID"];
+    patientName = Get.arguments["name"];
+    patientPic = Get.arguments["pic"];
+  }
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -60,7 +70,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
           elevation: 0,
           backgroundColor: Colors.white24,
           title: customView.text(
-              "@${bookingController.name.value}", 17, FontWeight.bold,
+              "@${patientName}", 17, FontWeight.bold,
               MyColor.black),
           leading: IconButton(
             onPressed: () {
@@ -76,9 +86,23 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
             children: [
               const Divider(),
               const SizedBox(height: 20,),
-              const CircleAvatar(
-                radius: 62.0,
-                backgroundImage: AssetImage("assets/images/doctorimg.png"),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(120.0),
+                child: FadeInImage.assetNetwork(
+                  imageErrorBuilder: (context, error, stackTrace) {
+                    return const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Image(
+                          image: AssetImage("assets/images/dummyprofile.jpg")),
+                    );
+                  },
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  placeholder: "assets/images/loading.gif",
+                  image: patientPic,
+                  placeholderFit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 10.0,),
 

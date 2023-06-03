@@ -6,9 +6,7 @@ import '../../../../../patient_screens/controller/patinet_center_controller/PCen
 import 'DoctorCenterAddAvailability.dart';
 import 'DoctorSelfAddAvailability.dart';
 
-
 class AddAvailabilityTab extends StatefulWidget {
-
   const AddAvailabilityTab({
     Key? key,
   }) : super(key: key);
@@ -32,8 +30,6 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -45,8 +41,7 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
           indicatorWeight: 2,
           tabs: [
             Tab(
-              child: custom.text(
-                  "Self", 14, FontWeight.w500, MyColor.black),
+              child: custom.text("Self", 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
