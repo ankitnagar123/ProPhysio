@@ -52,131 +52,332 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
             heightFactor: 12,
             child: custom.MyIndicator(),
           );
-        }
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 15.0,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: custom.mysButton(
-                        context,
-                        "Prescription",
-                        () {
-                          setState(() {
-                            selectedCard = 0;
-                          });
-                          doctorPrescriptionCtr.fetchQrPrescription(
-                              widget.patientId, "prescription");
-                        },
-                        selectedCard == 0 ? MyColor.primary : MyColor.white,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: MyColor.primary1),
+        }else{
+          var details = doctorPrescriptionCtr.prescriptionReportQrList.value;
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: custom.mysButton(
+                          context,
+                          "Prescription",
+                              () {
+                            setState(() {
+                              selectedCard = 0;
+                            });
+                            doctorPrescriptionCtr.fetchQrPrescription(
+                                widget.patientId, "prescription");
+                          },
+                          selectedCard == 0 ? MyColor.primary : MyColor.white,
+                          const TextStyle(
+                              fontFamily: "Poppins", color: MyColor.primary1),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: custom.mysButton(
-                        context,
-                        "Medical reports",
-                        () {
-                          setState(() {
-                            selectedCard = 1;
-                          });
-                          doctorPrescriptionCtr.fetchQrPrescription(
-                              widget.patientId, "medical");
-                        },
-                        selectedCard == 1 ? MyColor.primary : MyColor.white,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: MyColor.primary1),
+                      Expanded(
+                        flex: 1,
+                        child: custom.mysButton(
+                          context,
+                          "Medical reports",
+                              () {
+                            setState(() {
+                              selectedCard = 1;
+                            });
+                            doctorPrescriptionCtr.fetchQrPrescription(
+                                widget.patientId, "medical");
+                          },
+                          selectedCard == 1 ? MyColor.primary : MyColor.white,
+                          const TextStyle(
+                              fontFamily: "Poppins", color: MyColor.primary1),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                doctorPrescriptionCtr.prescriptionReportQrList.isEmpty
-                    ? const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text("No reports at the moment!"),
-                      )
-                    : ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount:
-                            doctorPrescriptionCtr.prescriptionReportQrList.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            color: MyColor.midgray,
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.all(12),
-                              title: custom.text(
-                                  doctorPrescriptionCtr
-                                      .prescriptionReportQrList[index].title,
-                                  16,
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                /*  Align(
+                    alignment: Alignment.topRight,
+                    child: custom.text(
+                        "12/12/22",
+                        14,
+                        FontWeight.w400,
+                        MyColor.black),
+                  ),*/
+                  const SizedBox(height: 10,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text(
+                        "Patient Medical Record",
+                        20,
+                        FontWeight.w500,
+                        MyColor.primary1),
+                  ),
+                  const SizedBox(height: 10,),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Text(
+                              "Patient Information",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 15.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text("${details!.name}${details.surname}",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            const Text(
+                              "Birth place",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 15.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                              "${details.birthPlace}",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    thickness: 1.0,
+                    height: 20.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Text(
+                              "Contact",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 15.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                                details.contact,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Text(
+                              "Weight",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 15.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                                "${details.surname}",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    height: 20.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:  [
+                            Text(
+                              "Address",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 15.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                                details.location,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Height",
+                              style: TextStyle(
+                                  color: MyColor.primary1,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                                "80CM",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    height: 40.0,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text(
+                        "General Medical History",
+                        18,
+                        FontWeight.w500,
+                        MyColor.primary1),
+                  ),
+                  const Divider(
+                    color: MyColor.primary1,
+                    thickness: 1,
+                    height: 20.0,
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  doctorPrescriptionCtr.prescriptionReportQrList.value!.details.length == 0
+                      ? const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text("No reports at the moment!"),
+                  )
+                      : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount:
+                    doctorPrescriptionCtr.prescriptionReportQrList.value!.details.length,
+                    itemBuilder: (context, index) {
+                      var list =  doctorPrescriptionCtr.prescriptionReportQrList.value!.details[index];
+                      return Card(
+                        color: MyColor.midgray,
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.all(12),
+                          title: custom.text(
+                              list.title,
+                              16,
+                              FontWeight.w400,
+                              MyColor.primary1),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: "Poppins",
+                                ),
+                                list.description,
+                                maxLines: 4,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              custom.text(
+                                  "consult with Dr.${list.doctorName}",
+                                  12,
                                   FontWeight.w400,
                                   MyColor.primary1),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: "Poppins",
-                                    ),
-                                    doctorPrescriptionCtr
-                                        .prescriptionReportQrList[index]
-                                        .description,
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  custom.text(
-                                      "consult with Dr.${doctorPrescriptionCtr.prescriptionReportQrList[index].doctorName}",
-                                      12,
-                                      FontWeight.w400,
-                                      MyColor.primary1),
-                                ],
-                              ),
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  image = doctorPrescriptionCtr
-                                      .prescriptionReportQrList[index].image;
-                                  imagePopUp(context, image);
+                            ],
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              image = list.image;
+                              imagePopUp(context, image);
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: FadeInImage.assetNetwork(
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return Image(image: AssetImage("assets/images/noimage.png"));
                                 },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: FadeInImage.assetNetwork(
-                                    imageErrorBuilder: (context, error, stackTrace) {
-                                      return Image(image: AssetImage("assets/images/noimage.png"));
-                                    },
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                    placeholder: "assets/images/loading.gif",
-                                    image: doctorPrescriptionCtr
-                                        .prescriptionReportQrList[index].image,
-                                    placeholderFit: BoxFit.cover,
-                                  ),
-                                ),
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                placeholder: "assets/images/loading.gif",
+                                image: list.image,
+                                placeholderFit: BoxFit.cover,
                               ),
                             ),
-                          );
-                        },
-                      )
-              ],
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
-          ),
-        );
+          );
+        }
+
       }),
     );
   }

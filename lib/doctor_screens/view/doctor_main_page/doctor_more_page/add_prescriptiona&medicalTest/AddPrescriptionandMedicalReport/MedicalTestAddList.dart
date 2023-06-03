@@ -47,20 +47,18 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           return Center(heightFactor: 13,child: custom.MyIndicator());
         }
         return Column(children: [
-          SizedBox(
-            height: height * 0.02,
-          ),
+
           Align(
             alignment: Alignment.topLeft,
             child: custom.text("Title", 13, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
-            height: height * 0.01,
+            height: height * 0.005,
           ),
           custom.myField(
               context, titleCtr, "Enter Title", TextInputType.emailAddress),
           SizedBox(
-            height: height * 0.03,
+            height: height * 0.02,
           ),
           Align(
             alignment: Alignment.topLeft,
@@ -68,7 +66,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                 MyColor.primary1),
           ),
           SizedBox(
-            height: height * 0.01,
+            height: height * 0.005,
           ),
           InkWell(
             child: Container(
@@ -100,7 +98,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
             },
           ),
           SizedBox(
-            height: height * 0.03,
+            height: height * 0.02,
           ),
           Align(
             alignment: Alignment.topLeft,
@@ -108,7 +106,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                 "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
-            height: height  * 0.01,
+            height: height  * 0.005,
           ),
           custom.HField(
             context,
@@ -117,22 +115,31 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
             TextInputType.text,
           ),
           SizedBox(
-            height: height * 0.02,
+            height: height * 0.01,
           ),
           doctorPrescriptionCtr.loadingAdd.value == true
               ? custom.MyIndicator()
               : custom.mysButton(context, "Submit", () {
-                  doctorPrescriptionCtr.addPrescription(
-                      context,
-                      widget.patientId,
-                      'medical',
-                      titleCtr.text,
-                      discCtr.text,
-                      filename,
-                      baseimage,() {
-                    doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
-                  },);
-                }, MyColor.primary, TextStyle(color: MyColor.white)),
+            if(titleCtr.text.isEmpty){
+              custom.MySnackBar(context, "Enter title");
+            }else if(discCtr.text.isEmpty){
+              custom.MySnackBar(context, "Enter description");
+            }else if(filename.isEmpty){
+              custom.MySnackBar(context, "Upload prescription");
+            }else{
+              doctorPrescriptionCtr.addPrescription(
+                context,
+                widget.patientId,
+                'medical',
+                titleCtr.text,
+                discCtr.text,
+                filename,
+                baseimage,() {
+                doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
+              },);
+            }
+
+                }, MyColor.primary, const TextStyle(color: MyColor.white)),
           const Divider(
             height: 50,
             thickness: 2,
@@ -142,67 +149,72 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
             child: custom.text("Patient past Medical report's", 15.0,
                 FontWeight.w500, MyColor.primary1),
           ),
-          doctorPrescriptionCtr.prescriptionList.isEmpty
-              ? const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Text("No Past Medical Report's"),
-              )
-              : ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: doctorPrescriptionCtr.prescriptionList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: MyColor.midgray,
-                      child: ListTile(
-                        contentPadding: EdgeInsets.all(10),
-                        title: custom.text(
-                            doctorPrescriptionCtr.prescriptionList[index].title,
-                            16,
-                            FontWeight.w400,
-                            MyColor.primary1),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontFamily: "Poppins",
-                              ),
-                              doctorPrescriptionCtr
-                                  .prescriptionList[index].description,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            custom.text("consult with Dr.${doctorPrescriptionCtr.prescriptionList[index].doctorName}",
-                                12,
-                                FontWeight.w400,
-                                MyColor.primary1),
-                          ],
+          doctorPrescriptionCtr.prescriptionList.value!.details.length == 0
+              ?  const Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Text("No Past Prescription at the moment!"),
+          )
+              :  ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: doctorPrescriptionCtr.prescriptionList.value!.details.length,
+            itemBuilder: (context, index) {
+              var list = doctorPrescriptionCtr.prescriptionList.value!.details[index];
+              return Card(
+                color: MyColor.midgray,
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(12),
+                  title: custom.text(
+                      list.title,
+                      16,
+                      FontWeight.w400,
+                      MyColor.primary1),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Poppins",
                         ),
-                        trailing: GestureDetector(
-                          onTap: () {
-                            image = doctorPrescriptionCtr
-                                .prescriptionList[index].image;
-                            imagePopUp(context, image);
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: FadeInImage.assetNetwork(
-                              width: 80,
-                              height: 100,
-                              fit: BoxFit.cover,
-                              placeholder: "assets/images/loading.gif",
-                              image: doctorPrescriptionCtr
-                                  .prescriptionList[index].image,
-                              placeholderFit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                        list.description,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    );
-                  },
-                )
+                      const SizedBox(height: 5,),
+                      custom.text(
+                          "consult with Dr.${list.doctorName}",
+                          12,
+                          FontWeight.w400,
+                          MyColor.primary1),
+                    ],
+                  ),
+                  trailing: GestureDetector(
+                    onTap: () {
+                      image =
+                          list.image;
+                      imagePopUp(context, image);
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: FadeInImage.assetNetwork(
+                        imageErrorBuilder: (context, error, stackTrace) {
+                          return Image(image: AssetImage("assets/images/noimage.png"));
+                        },
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                        placeholder: "assets/images/loading.gif",
+                        image:
+                        list.image,
+                        placeholderFit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          )
         ]);
       }),
     );
@@ -267,6 +279,9 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: FadeInImage.assetNetwork(
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return const Image(image: AssetImage("assets/images/noimage.png"));
+                                },
                                 width: MediaQuery.of(context).size.width,
                                 height:
                                     MediaQuery.of(context).size.height * 0.5,

@@ -51,7 +51,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                     custom.text(
                         "Total earning", 14, FontWeight.w500, MyColor.black),
                     custom.text(
-                        "${doctorEarningCtr.earning.value.startDate.month}/"
+                         "${doctorEarningCtr.earning.value.startDate.month}/"
                             "${doctorEarningCtr.earning.value.startDate.day}/"
                             "${doctorEarningCtr.earning.value.startDate.year}-"
                             "${doctorEarningCtr.earning.value.endDate.month}/"
@@ -88,6 +88,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
             itemCount: doctorEarningCtr.earning.value.list.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
+              var list  = doctorEarningCtr.earning.value.list[index];
               return Card(
                 color: MyColor.midgray,
                 child: Padding(
@@ -101,8 +102,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                           Expanded(
                             flex: 5,
                             child: custom.text(
-                                doctorEarningCtr
-                                    .earning.value.list[index].bookId,
+                                list.bookId,
                                 14.0,
                                 FontWeight.w500,
                                 Colors.black),
@@ -141,7 +141,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                    "${doctorEarningCtr.earning.value.list[index].date.month.toString()}/${doctorEarningCtr.earning.value.list[index].date.day.toString()}/${doctorEarningCtr.earning.value.list[index].date.year.toString()}",
+                                    "${list.date.month.toString()}/${list.date.day.toString()}/${list.date.year.toString()}",
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 12.0,
@@ -165,8 +165,8 @@ class _DoctorEarningState extends State<DoctorEarning> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  "${doctorEarningCtr.earning.value.list[index].from.toString()} To "
-                                  "${doctorEarningCtr.earning.value.list[index].to.toString()}",
+                                  "${list.from.toString()} To "
+                                  "${list.to.toString()}",
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 12.0,
@@ -194,8 +194,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  doctorEarningCtr
-                                      .earning.value.list[index].price,
+                                  list.price,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black,

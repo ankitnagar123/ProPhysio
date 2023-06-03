@@ -40,7 +40,7 @@ class _QRResultState extends State<QRResult> {
                    FontWeight.w400,
                    MyColor.black),
              ),
-             SizedBox(height: 10,),
+             const SizedBox(height: 10,),
              Align(
                alignment: Alignment.topLeft,
                child: custom.text(
@@ -49,7 +49,7 @@ class _QRResultState extends State<QRResult> {
                    FontWeight.w500,
                    MyColor.primary1),
              ),
-             SizedBox(height: 10,),
+             const SizedBox(height: 10,),
              Row(
                children: [
                  Expanded(
@@ -61,7 +61,7 @@ class _QRResultState extends State<QRResult> {
                          "Patient Information",
                          style: TextStyle(
                              color: MyColor.primary1,
-                             fontSize: 14.0,
+                             fontSize: 15.0,
                              fontFamily: "Poppins"),
                        ),
                        SizedBox(
@@ -70,7 +70,7 @@ class _QRResultState extends State<QRResult> {
                        Text("json sen",
                            style: TextStyle(
                                color: Colors.black,
-                               fontSize: 15.0,
+                               fontSize: 14.0,
                                fontFamily: "Poppins")),
                      ],
                    ),
@@ -84,7 +84,7 @@ class _QRResultState extends State<QRResult> {
                          "Birth Date",
                          style: TextStyle(
                              color: MyColor.primary1,
-                             fontSize: 14.0,
+                             fontSize: 15.0,
                              fontFamily: "Poppins"),
                        ),
                        SizedBox(
@@ -94,7 +94,7 @@ class _QRResultState extends State<QRResult> {
                          "12-12-22",
                          style: TextStyle(
                              color: Colors.black,
-                             fontSize: 15.0,
+                             fontSize: 14.0,
                              fontFamily: "Poppins"),
                        ),
                      ],
@@ -117,7 +117,7 @@ class _QRResultState extends State<QRResult> {
                          "Contact",
                          style: TextStyle(
                              color: MyColor.primary1,
-                             fontSize: 14.0,
+                             fontSize: 15.0,
                              fontFamily: "Poppins"),
                        ),
                        SizedBox(
@@ -127,7 +127,7 @@ class _QRResultState extends State<QRResult> {
                            "${"+61545445488487"}",
                            style: TextStyle(
                                color: Colors.black,
-                               fontSize: 15.0,
+                               fontSize: 14.0,
                                fontFamily: "Poppins")),
                      ],
                    ),
@@ -151,7 +151,7 @@ class _QRResultState extends State<QRResult> {
                            "56kg",
                            style: TextStyle(
                                color: Colors.black,
-                               fontSize: 15.0,
+                               fontSize: 14.0,
                                fontFamily: "Poppins")),
                      ],
                    ),
@@ -173,7 +173,7 @@ class _QRResultState extends State<QRResult> {
                          "Address",
                          style: TextStyle(
                              color: MyColor.primary1,
-                             fontSize: 14.0,
+                             fontSize: 15.0,
                              fontFamily: "Poppins"),
                        ),
                        SizedBox(
@@ -183,7 +183,7 @@ class _QRResultState extends State<QRResult> {
                            "04 Rajiv Gandhi Sq Indore MP",
                            style: TextStyle(
                                color: Colors.black,
-                               fontSize: 15.0,
+                               fontSize: 14.0,
                                fontFamily: "Poppins")),
                      ],
                    ),

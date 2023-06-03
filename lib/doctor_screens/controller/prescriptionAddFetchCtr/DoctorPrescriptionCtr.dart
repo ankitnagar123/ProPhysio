@@ -26,9 +26,9 @@ class DoctorPrescriptionCtr extends GetxController {
   var loadingFetchQR = false.obs;
 
 /*---------for doctor*---------*/
-  var prescriptionList = <DPrescriptionListModel>[].obs;
+  var prescriptionList = Rxn<DPrescriptionListModel>();
   /*---------for doctor QR scanning*---------*/
-  var prescriptionReportQrList = <PrescriptionReportQrModel>[].obs;
+  var prescriptionReportQrList = Rxn<PrescriptionReportQrModel>();
 
 
   /*------for patient---------*/
@@ -66,6 +66,7 @@ class DoctorPrescriptionCtr extends GetxController {
         print("Backend Error");
       }
     } catch (e) {
+      loadingAdd.value = false;
       log("Exception$e");
     }
   }
@@ -109,17 +110,17 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void>fetchPrescription(String patientId,String type)async{
     loadingFetch.value = true;
     Map<String,dynamic> data = {
-    "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-    "user_id":patientId,
-    "type":type,
+    // "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+    "user_id":"53",
+    "type":"prescription",
     };
     final response = await apiService.postData(MyAPI.fetchPrescription, data);
-    log("parameter $response");
+    log("parameter ${response.body}");
     try{
       if(response.statusCode == 200){
         loadingFetch.value = false;
 
-        prescriptionList.value =  dPrescriptionListModelFromJson(response.body);
+        prescriptionList.value = dPrescriptionListModelFromJson(response.body);
         log(prescriptionList.toString());
       }else{
         loadingFetch.value = false;
@@ -131,7 +132,7 @@ class DoctorPrescriptionCtr extends GetxController {
   }
 
 
-  /*---------for doctor*---------*/
+  /*---------for doctor qr*---------*/
   Future<void>fetchQrPrescription(String patientId,String type)async{
     loadingFetchQR.value = true;
     Map<String,dynamic> data = {
@@ -139,7 +140,7 @@ class DoctorPrescriptionCtr extends GetxController {
       "type":type,
     };
     final response = await apiService.postData(MyAPI.fetchQrPrescription, data);
-    log("Qr scanner parameter $response");
+    log("Qr scanner parameter ${response.body}");
     try{
       if(response.statusCode == 200){
         loadingFetchQR.value = false;
