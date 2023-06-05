@@ -65,7 +65,6 @@ class CardCtr extends GetxController {
   Future<void> cardFetch() async {
     final Map<String, dynamic> cardPeramert = {
     "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
-
   };
     try {
     loadingFetch.value = true;
@@ -82,7 +81,7 @@ class CardCtr extends GetxController {
     } catch (e) {
     loadingFetch.value = false;
 
-    print("excaption$e");
+    print("exception$e");
     }
   }
 

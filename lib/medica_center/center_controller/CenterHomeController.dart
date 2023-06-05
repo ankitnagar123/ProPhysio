@@ -68,15 +68,8 @@ class CenterHomeCtr extends GetxController {
         if (response.statusCode == 200) {
           loadingFetch.value = false;
           var jsonString = response.body;
-          print(jsonString);
-          List<CenterDoctorListModel> listdoctor = jsonDecode(response.body)
-              .map((item) => CenterDoctorListModel.fromJson(item))
-              .toList()
-              .cast<CenterDoctorListModel>();
-          doctorList.clear();
-          doctorList.addAll(listdoctor);
-          print(doctorList);
-          print(listdoctor);
+          doctorList.value = centerDoctorListModelFromJson(response.body);
+          print(doctorList.length);
         }
         else {
           loadingFetch.value = false;

@@ -56,6 +56,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         List<int> imageBytes = file!.readAsBytesSync();
         baseimage = base64Encode(imageBytes);
         imagename = 'image_${DateTime.now().millisecondsSinceEpoch}_.jpg';
+        Get.back();
       } else {
         print('No image selected.');
       }
@@ -407,8 +408,8 @@ genderCtr.text = profileCtr.gender.value;
         }),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: AnimatedButton(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+        child:  AnimatedButton(
           // width: MediaQuery.of(context).size.width * 0.8,
           text: 'Save Profile',
           color: MyColor.primary,

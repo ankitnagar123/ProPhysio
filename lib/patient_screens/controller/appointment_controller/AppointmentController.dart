@@ -65,7 +65,6 @@ class AppointmentController extends GetxController {
       if (response.statusCode == 200) {
         loadingFetch.value = false;
         visitCharge.value = visitChargeModelFromJson(response.body);
-        // // return doctorList.ma
         print(visitCharge.toString());
       } else {
         loadingFetch.value = false;
@@ -99,7 +98,6 @@ class AppointmentController extends GetxController {
             .cast<DoctorTimeListModelpatinet>();
         timeList.clear();
         timeList.addAll(list);
-        print(timeList);
         print(timeList.toString());
       } else {
         loadingFetchTime.value = false;

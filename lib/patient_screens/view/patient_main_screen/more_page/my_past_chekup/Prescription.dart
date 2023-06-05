@@ -23,8 +23,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
   TextEditingController discCtr = TextEditingController();
   CustomView custom = CustomView();
   String image = "";
-  DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(
-      DoctorPrescriptionCtr());
+  DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(DoctorPrescriptionCtr());
 
 
   @override
@@ -137,6 +136,11 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                         discCtr.text,
                         filename,
                         baseimage, () {
+                          titleCtr.clear();
+                          discCtr.clear();
+                          filename = "";
+                          baseimage = "";
+                          degreefilePath = null;
                       doctorPrescriptionCtr.fetchPatientPrescription("prescription");
                     });
                   }
@@ -262,7 +266,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
   void _chooseDegree() async {
     final pickedFile = await degreepicker.getImage(
         source: ImageSource.gallery,
-        imageQuality: 50,
+        imageQuality: 100,
         maxHeight: 200,
         maxWidth: 200);
     setState(() {

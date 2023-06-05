@@ -134,6 +134,11 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                         discCtr.text,
                         filename,
                         baseimage, () {
+                      titleCtr.clear();
+                      discCtr.clear();
+                      filename = "";
+                      baseimage = "";
+                      degreefilePath = null;
                       doctorPrescriptionCtr.fetchPatientPrescription("medical");
                     });
                   }

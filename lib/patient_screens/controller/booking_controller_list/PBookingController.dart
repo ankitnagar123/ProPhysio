@@ -133,6 +133,7 @@ class PatientBookingController extends GetxController {
       print(" appointment Cancel Reason =============${response.body}");
       if (response.statusCode == 200) {
         loadingCancelList.value = false;
+
         List<PatientBookingCancelModel> listReason = jsonDecode(response.body)
             .map((item) => PatientBookingCancelModel.fromJson(item))
             .toList()

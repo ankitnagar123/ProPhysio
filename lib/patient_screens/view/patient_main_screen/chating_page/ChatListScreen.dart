@@ -31,6 +31,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
   var selectedItem = [];
 
   bool isMultiSelectionEnabled = false;
+
   /*-----SEARCH CHAT LIST--------z---*/
   String _keyword = '';
   List<PatinetChatModel> _getFilteredList() {
@@ -45,10 +46,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.msgListFetch(context);
     });
-    super.initState();
   }
 
 
@@ -131,7 +132,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     setState(() {
                       _keyword = value;
                     });
-                    print(value);
+                    log(value);
                   },
                   cursorWidth: 0.0,
                   cursorHeight: 0.0,
@@ -199,7 +200,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                    doMultiSelection(list[index]);*/
                                    var doctorId = list[index].doctorId;
                                    var data ={
-                                     "doctorId":doctorId
+                                     "doctorId":doctorId,
+                                     "drName":list[index].name,
+                                     "drSurname":list[index].surname,
+                                     "drImg": list[index].userProfile,
                                    };
                                    log("$data");
                                     Get.toNamed(RouteHelper.getChatScreen(),arguments:data);

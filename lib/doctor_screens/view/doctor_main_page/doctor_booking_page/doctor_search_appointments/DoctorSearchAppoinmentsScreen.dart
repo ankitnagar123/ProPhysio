@@ -55,7 +55,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
     return WillPopScope(
       onWillPop: ()async {
         Get.back();
-        // await  bookingController.bookingAppointment(context,"", "");
+         await  bookingController.bookingAppointment(context,"Pending", "");
         return true;
       },
       child: Scaffold(
@@ -68,7 +68,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
           leading: IconButton(
             onPressed: () {
               Get.back();
-              bookingController.bookingAppointment(context,"", "");
+              bookingController.bookingAppointment(context,"Pending", "");
             },
             icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
           ),
@@ -223,7 +223,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                 width: 10.0,
                                 decoration: BoxDecoration(
                                   color: list[index].status == "Pending"
-                                      ? MyColor.statusYellow
+                                      ? MyColor.statusYellow:list[index].status == "Cancel"
+                                      ?Colors.red
                                       : list[index].status == "Complete"? MyColor.primary1:Colors.green,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -488,8 +489,9 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                           width: 10.0,
                           decoration: BoxDecoration(
                             color: status == "Pending"
-                                ? MyColor.statusYellow
-                                : Colors.green,
+                                ? MyColor.statusYellow:status == "Cancel"
+                                ?Colors.red
+                                :status == "Complete"? MyColor.primary1:Colors.green,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),

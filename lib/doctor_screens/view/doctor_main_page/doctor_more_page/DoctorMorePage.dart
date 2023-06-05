@@ -31,242 +31,244 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 10.0,
-            ),
-            customView.text("Hi @${doctorProfileCtr.name.value}", 17.0,
-                FontWeight.w500, Colors.black),
-            const SizedBox(
-              height: 30.0,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.DPersonalData());
-                    },
-                    child: Container(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .shortestSide / 3.2,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [MyColor.primary, MyColor.secondary],
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                            height:
-                            MediaQuery
-                                .of(context)
-                                .size
-                                .shortestSide / 8,
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: MyColor.midgray,
-                              borderRadius: BorderRadius.vertical(
-                                bottom: Radius.circular(10.0),
-                              ),
-                            ),
-                            child: Center(
-                                child: customView.text("Profile settings",
-                                    12.0, FontWeight.w400, Colors.black)),
-                          )),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7.0,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.DEarningCalculate());
-                      // Get.toNamed(RouteHelper.getPatientPaymentScreen());
-                    },
-                    child: Container(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .shortestSide / 3.2,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [MyColor.primary, MyColor.secondary],
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                            height:
-                            MediaQuery
-                                .of(context)
-                                .size
-                                .shortestSide / 8,
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: MyColor.midgray,
-                              borderRadius: BorderRadius.vertical(
-                                bottom: Radius.circular(10.0),
-                              ),
-                            ),
-                            child: Center(
-                                child: customView.text("Earnings", 12.0,
-                                    FontWeight.w400, Colors.black)),
-                          )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(
-              height: 30.0,
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed(RouteHelper.DSettingScreen());
-              },
-              leading: const Icon(
-                Icons.settings,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Settings", 14.0, FontWeight.w500, Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddAvailabilityTab()));
-                // Get.toNamed(RouteHelper.DSettingScreen());
-              },
-              leading: const Icon(
-                Icons.event_available,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Add Availability", 14.0, FontWeight.w500, Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (
-                            context) => const CompleteAppointPrescription()));
-                // Get.toNamed(RouteHelper.DSettingScreen());
-              },
-              leading: const Icon(
-                Icons.medical_information,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Past Appointment Prescription", 13.0, FontWeight.w500,
-                  Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed(RouteHelper.DTandCScreen());
-              },
-              leading: const Icon(
-                Icons.note_alt,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Terms & conditions", 14.0, FontWeight.w500,
-                  Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed(RouteHelper.DAboutScreen());
-              },
-              leading: const Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "About", 14.0, FontWeight.w500, Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Get.toNamed(RouteHelper.DSupportScreen());
-              },
-              leading: const Icon(
-                Icons.person_outline,
-                color: Colors.black,
-              ),
-              title: customView.text(
-                  "Support", 14.0, FontWeight.w500, Colors.black),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-                size: 20.0,
-              ),
-            ),
-            const Divider(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  deletePopUp(context);
-                },
-                child: customView.text(
-                    "Logout", 15.0, FontWeight.w500, Colors.red),
-              ),
-            ),
-          ],
+    return Obx(() {
+      return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0.0,
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 10.0,
+              ),
+              customView.text("Hi @${doctorProfileCtr.name.value}", 17.0,
+                  FontWeight.w500, Colors.black),
+              const SizedBox(
+                height: 30.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.DPersonalData());
+                      },
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .shortestSide / 3.2,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [MyColor.primary, MyColor.secondary],
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              height:
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .shortestSide / 8,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: MyColor.midgray,
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(10.0),
+                                ),
+                              ),
+                              child: Center(
+                                  child: customView.text("Profile settings",
+                                      12.0, FontWeight.w400, Colors.black)),
+                            )),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 7.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.DEarningCalculate());
+                        // Get.toNamed(RouteHelper.getPatientPaymentScreen());
+                      },
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .shortestSide / 3.2,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [MyColor.primary, MyColor.secondary],
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              height:
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .shortestSide / 8,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: MyColor.midgray,
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(10.0),
+                                ),
+                              ),
+                              child: Center(
+                                  child: customView.text("Earnings", 12.0,
+                                      FontWeight.w400, Colors.black)),
+                            )),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(
+                height: 30.0,
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Settings", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddAvailabilityTab()));
+                  // Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.event_available,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Add Availability", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (
+                              context) => const CompleteAppointPrescription()));
+                  // Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.medical_information,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Past Appointment Prescription", 13.0, FontWeight.w500,
+                    Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DTandCScreen());
+                },
+                leading: const Icon(
+                  Icons.note_alt,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Terms & conditions", 14.0, FontWeight.w500,
+                    Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DAboutScreen());
+                },
+                leading: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "About", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DSupportScreen());
+                },
+                leading: const Icon(
+                  Icons.person_outline,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Support", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              const Divider(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {
+                    deletePopUp(context);
+                  },
+                  child: customView.text(
+                      "Logout", 15.0, FontWeight.w500, Colors.red),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   void deletePopUp(BuildContext context) {

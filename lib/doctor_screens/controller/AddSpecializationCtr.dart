@@ -89,7 +89,7 @@ class AddSpecializationCtr extends GetxController {
       "name": visitName,
       "price": fee,
     };
-    print("addSpecialization and Fee  Parameter$perameter");
+    print("addSpecialization and Fee Parameter$perameter");
     final response = await apiService.postData(MyAPI.DAddSpecializationFee, perameter);
     try {
       log("response of Doctor add Specialization Fee Api :-${response.body}");

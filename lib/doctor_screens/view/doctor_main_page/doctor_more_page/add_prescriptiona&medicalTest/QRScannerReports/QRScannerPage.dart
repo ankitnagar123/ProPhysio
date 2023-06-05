@@ -21,21 +21,6 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
   CustomView custom = CustomView();
   String qrId = "";
 
-
-
-/*  void _onQRViewCreated(MobileScannerController controller) {
-    setState(() {
-      this.controller = controller;
-    });
-
-    controller.barcodes.listen((mobileScanner) {
-      setState(() {
-        qrId = mobileScanner.toString();
-        print(qrId);
-      });
-    });
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +33,7 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         centerTitle: true,
         title: custom.text(
-            "Scan and check reports", 17, FontWeight.w500, MyColor.black),
+            "Scan and check reports", 16, FontWeight.w500, MyColor.black),
         actions: [
           IconButton(
             color: Colors.white,
@@ -57,9 +42,9 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
               builder: (context, state, child) {
                 switch (state) {
                   case TorchState.off:
-                    return const Icon(Icons.flash_off, color: Colors.grey);
+                    return const Icon(Icons.flash_off, color: Colors.grey,size: 17,);
                   case TorchState.on:
-                    return const Icon(Icons.flash_on, color: MyColor.primary1);
+                    return const Icon(Icons.flash_on, color: MyColor.primary1,size: 17,);
                 }
               },
             ),
@@ -87,6 +72,7 @@ class _QRScannerDoctorState extends State<QRScannerDoctor> {
       body: Stack(
         children: [
           MobileScanner(
+            startDelay: true,
               controller: controller,
               onDetect: (qrcode) {
                 final List<Barcode> barcodes = qrcode.barcodes;

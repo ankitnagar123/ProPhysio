@@ -60,7 +60,7 @@ class _MorePageState extends State<MorePage> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                cardCtr.cardList.length == 0
+                cardCtr.cardList.isEmpty
                     ? Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: MyColor.primary),

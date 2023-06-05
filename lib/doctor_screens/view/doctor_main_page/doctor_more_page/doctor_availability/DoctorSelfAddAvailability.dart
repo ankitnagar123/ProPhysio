@@ -176,7 +176,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                       scrollDirection: Axis.vertical,
                       itemCount: addAvailabilityCtr.doctorTimeList.length,
                       itemBuilder: (context, index) {
-                        // var id = addAvailabilityCtr.doctorTimeList[index].id;
+                        var list = addAvailabilityCtr.doctorTimeList[index];
                         // print(id);
                         return SizedBox(
                           width: 120,
@@ -189,19 +189,17 @@ class _MyAvailabilityState extends State<MyAvailability> {
                                   activeColor: MyColor.primary,
                                   dense: true,
                                   title: Text(
-                                      "${addAvailabilityCtr.doctorTimeList[index].from} To ${addAvailabilityCtr.doctorTimeList[index].to}"),
+                                      "${list.from} To ${list.to}"),
                                   value: selectedIndexes.contains(index),
                                   onChanged: (vale) {
                                     setState(() {
                                       if (selectedIndexes.contains(index)) {
                                         selectedIndexes.remove(index);
-                                        timeIdArray.remove(addAvailabilityCtr
-                                            .doctorTimeList[index].id);
+                                        timeIdArray.remove(list.id);
                                         // unselect
                                       } else {
                                         selectedIndexes.add(index); // select
-                                        timeIdArray.add(addAvailabilityCtr
-                                            .doctorTimeList[index].id);
+                                        timeIdArray.add(list.id);
                                       }
                                     });
                                     print(selectedIndexes);

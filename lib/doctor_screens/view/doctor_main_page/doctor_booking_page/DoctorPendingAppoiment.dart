@@ -149,6 +149,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             var id = bookingController.booking[index].Id.toString();
+            var pendingList = bookingController.booking[index];
             return InkWell(
               onTap: () {
                 bookingController.bookingAppointmentDetails(
@@ -173,10 +174,6 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                               width: 10.0,
                               decoration: BoxDecoration(
                                 color:
-                                /*bookingController.booking[index].status ==
-                                            "Pending"
-                                        ? MyColor.statusYellow
-                                        :*/
                                 MyColor.statusYellow,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -188,7 +185,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           Expanded(
                             flex: 1,
                             child: custom.text(
-                                bookingController.booking[index].status
+                                pendingList.status
                                     .toString(),
                                 11.0,
                                 FontWeight.w400,
@@ -211,7 +208,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         height: 8.0,
                       ),
                       custom.text(
-                          bookingController.booking[index].name.toString(),
+                          pendingList.name.toString(),
                           14.0,
                           FontWeight.w500,
                           Colors.black),
@@ -236,8 +233,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                    bookingController
-                                        .booking[index].bookingDate
+                                    pendingList.bookingDate
                                         .toString(),
                                     style: const TextStyle(
                                         color: Colors.black,
@@ -262,7 +258,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].time
+                                  pendingList.time
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -288,7 +284,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].bookID
+                                  pendingList.bookID
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,

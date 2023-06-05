@@ -60,7 +60,6 @@ class DoctorChangePassCtr extends GetxController {
     final Map<String, dynamic> parameter = {
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "password": pass,
-      // "confirmpassword": cnfimpass,
     };
     print("response of Doctor Delete Account $parameter");
     final response = await apiService.postData(MyAPI.DDeleteAccount, parameter);

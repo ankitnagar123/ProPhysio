@@ -102,14 +102,12 @@ class PatientSignUpCtr extends GetxController {
       if (result == "Success") {
         callback();
         loading.value = false;
-        // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-        // Get.toNamed(RouteHelper.getVerification());
         custom.massenger(context, result);
       }else{
         custom.massenger(context, result);
       }
     } catch (e) {
-      log("excaption$e");
+      log("exception$e");
     }
   }
 

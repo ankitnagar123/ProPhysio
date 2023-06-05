@@ -22,7 +22,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
-  CenterHomeCtr centerHomeCtr = CenterHomeCtr();
+  CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
   String wardId = "";
   String wardName = "";
 

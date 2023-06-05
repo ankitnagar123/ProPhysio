@@ -77,9 +77,11 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
             child: Column(
               children: [
                 SizedBox(height: height * 0.09),
-                const Align(
+                 Align(
                   alignment: Alignment.topLeft,
-                  child: Icon(Icons.arrow_back_ios),
+                  child: InkWell(onTap: () {
+                    Get.back();
+                  },child: Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
                   height: height * 0.02,
@@ -154,6 +156,7 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
                           heightp,
                           taxCode,
                           gender, () {
+                        custom.massenger(context, "SignUp Successfully");
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -191,7 +194,6 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
       custom.massenger(context, "Please enter OTP");
     } else if (apiotp == optctr.text) {
       print("Correct OTP");
-      custom.massenger(context, "SignUp Successfully");
       return true;
     } else {
       custom.massenger(context, "invalid otp");

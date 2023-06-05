@@ -21,8 +21,6 @@ class PPrescriptionMedicalTab extends StatefulWidget {
 class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
-  DoctorPrescriptionCtr doctorPrescriptionCtr =
-      Get.put(DoctorPrescriptionCtr());
 
   @override
   void initState() {

@@ -59,7 +59,6 @@ class PatientChangePassCtr extends GetxController {
     final Map<String, dynamic> psetpass = {
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "password": pass,
-      // "confirmpassword": cnfimpass,
     };
     print("response of Patient Delete Accoun$psetpass");
     final response = await apiService.postData(MyAPI.PDeleteAccount, psetpass);

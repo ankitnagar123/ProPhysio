@@ -101,6 +101,7 @@ class DoctorPrescriptionCtr extends GetxController {
         print("Backend Error");
       }
     } catch (e) {
+      loadingAddP.value = false;
       log("Exception$e");
     }
   }
@@ -110,9 +111,8 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void>fetchPrescription(String patientId,String type)async{
     loadingFetch.value = true;
     Map<String,dynamic> data = {
-    // "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-    "user_id":"53",
-    "type":"prescription",
+    "user_id":patientId,
+    "type":type,
     };
     final response = await apiService.postData(MyAPI.fetchPrescription, data);
     log("parameter ${response.body}");
@@ -123,6 +123,7 @@ class DoctorPrescriptionCtr extends GetxController {
         prescriptionList.value = dPrescriptionListModelFromJson(response.body);
         log(prescriptionList.toString());
       }else{
+        log("error");
         loadingFetch.value = false;
       }
     }catch(e){
@@ -144,8 +145,7 @@ class DoctorPrescriptionCtr extends GetxController {
     try{
       if(response.statusCode == 200){
         loadingFetchQR.value = false;
-
-        prescriptionReportQrList.value =  prescriptionReportQrModelFromJson(response.body);
+        prescriptionReportQrList.value = prescriptionReportQrModelFromJson(response.body);
         log(prescriptionReportQrList.toString());
       }else{
         loadingFetchQR.value = false;
@@ -165,13 +165,14 @@ class DoctorPrescriptionCtr extends GetxController {
       "type":type,
     };
     final response = await apiService.postData(MyAPI.pFetchPrescription, data);
-    log("parameter $response");
+    log("parameter ${response.body}");
     try{
       if(response.statusCode == 200){
         loadingPFetch.value = false;
         patientPrescriptionList.value =  patinetPrescriptionModelFromJson(response.body);
         log(patientPrescriptionList.toString());
       }else{
+
         loadingPFetch.value = false;
       }
     }catch(e){
@@ -179,5 +180,4 @@ class DoctorPrescriptionCtr extends GetxController {
       log('Kuch to dikkat hai?$e');
     }
   }
-
 }

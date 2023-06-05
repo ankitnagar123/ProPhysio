@@ -264,14 +264,8 @@ var patientProfile = "".obs;
       print(" appointment Cancel Reason =============${response.body}");
       if (response.statusCode == 200) {
         loadingCancelList.value = false;
-        List<DoctorBookingCancelModel> listReason = jsonDecode(response.body)
-            .map((item) => DoctorBookingCancelModel.fromJson(item))
-            .toList()
-            .cast<DoctorBookingCancelModel>();
-        cancelReason.clear();
-        cancelReason.addAll(listReason);
-        print("appointment Cancel Reason$listReason");
-        print("appointment Cancel Reason$cancelReason");
+        cancelReason.value = doctorBookingCancelModelFromJson(response.body);
+        print("appointment Cancel Reason${cancelReason.length}");
       } else {
         loadingCancelList.value = false;
         print("error");
@@ -287,7 +281,6 @@ var patientProfile = "".obs;
   void bookingAppointmentCancel(
       BuildContext context,
       String bookingId,
-      // String userId,
       String cancelId,
       VoidCallback callback,
       ) async {
@@ -295,7 +288,6 @@ var patientProfile = "".obs;
     final Map<String, dynamic> Perameter = {
       "user_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "booking_id": bookingId,
-      // "user_id":userId,
       "cancle_id":cancelId,
     };
     print("booking Appointment Cancel Parameter$Perameter");

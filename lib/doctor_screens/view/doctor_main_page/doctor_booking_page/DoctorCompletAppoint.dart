@@ -140,6 +140,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             var id = bookingController.booking[index].Id.toString();
+            var  completeList = bookingController.booking[index];
             return InkWell(
               onTap: () {
                 bookingController.bookingAppointmentDetails(context, id, "Complete", () {
@@ -155,7 +156,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       customView.text(
-                          bookingController.booking[index].name.toString(),
+                          completeList.name.toString(),
                           14.0,
                           FontWeight.w500,
                           Colors.black),
@@ -180,7 +181,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                    bookingController.booking[index].bookingDate
+                                    completeList.bookingDate
                                         .toString(),
                                     style: const TextStyle(
                                         color: Colors.black,
@@ -205,7 +206,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].time
+                                  completeList.time
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -231,7 +232,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].bookID
+                                  completeList.bookID
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,

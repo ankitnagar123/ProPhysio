@@ -31,7 +31,6 @@ class CenterSelectedDListModel {
   String password;
   String doctorProfile;
   String doctorDocument;
-  List<Cat> cat;
 
   CenterSelectedDListModel({
     required this.doctorId,
@@ -56,7 +55,6 @@ class CenterSelectedDListModel {
     required this.password,
     required this.doctorProfile,
     required this.doctorDocument,
-    required this.cat,
   });
 
   factory CenterSelectedDListModel.fromJson(Map<String, dynamic> json) => CenterSelectedDListModel(
@@ -82,7 +80,6 @@ class CenterSelectedDListModel {
     password: json["password"],
     doctorProfile: json["Doctor_profile"],
     doctorDocument: json["Doctor_document"],
-    cat: List<Cat>.from(json["cat"].map((x) => Cat.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -108,30 +105,5 @@ class CenterSelectedDListModel {
     "password": password,
     "Doctor_profile": doctorProfile,
     "Doctor_document": doctorDocument,
-    "cat": List<dynamic>.from(cat.map((x) => x.toJson())),
-  };
-}
-
-class Cat {
-  String categoryId;
-  String categoryName;
-  String subcategoryName;
-
-  Cat({
-    required this.categoryId,
-    required this.categoryName,
-    required this.subcategoryName,
-  });
-
-  factory Cat.fromJson(Map<String, dynamic> json) => Cat(
-    categoryId: json["category_id"],
-    categoryName: json["category_name"],
-    subcategoryName: json["subcategory_name"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "category_id": categoryId,
-    "category_name": categoryName,
-    "subcategory_name": subcategoryName,
   };
 }

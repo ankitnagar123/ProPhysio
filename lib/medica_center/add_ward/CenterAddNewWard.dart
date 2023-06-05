@@ -88,16 +88,6 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
               .MyButton(context, "Add ward", () {
             if (nameCtr.text.isEmpty) {
               custom.MySnackBar(context, "Enter ward name");
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             HealthCardScreen(
-              //               timeid: time.toString(),
-              //               price: fee.toString(),
-              //               date: appointmentController.seletedtime.value
-              //                   .toString(),
-              //             )));
             } else if (drIdMainArray.length == 0) {
               custom.MySnackBar(context, "Select doctor");
             } else {
@@ -107,7 +97,6 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
               });
               print("object");
             }
-            // Get.back();
           }, MyColor.primary,
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
@@ -187,80 +176,6 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                         "Select doctor ${drIdArray.length}", 15, FontWeight.w400, MyColor.black),
                   ),
                 ),
-                /*  const SizedBox(
-                  height: 5,
-                ),
-                if (drIdMainArrayimg.isEmpty)
-                  const Text("")
-                else
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: drIdMainArrayimg.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                          clipBehavior: Clip.antiAlias,
-                                          borderRadius:
-                                              BorderRadius.circular(13.0),
-                                          child: FadeInImage.assetNetwork(
-                                            imageErrorBuilder: (c, o, s) =>
-                                                Image.asset(
-                                                    color: MyColor.midgray,
-                                                    "assets/images/noimage.png",
-                                                    width: 50,
-                                                    height: 50,
-                                                    fit: BoxFit.cover),
-                                            width: 50,
-                                            height: 50,
-                                            fit: BoxFit.cover,
-                                            placeholder:
-                                                "assets/images/loading.gif",
-                                            image: "${drIdMainArrayimg[index]}",
-                                            placeholderFit: BoxFit.cover,
-                                          )),
-                                      Positioned(
-                                          left: 0,
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  drIdMainArrayimg.remove(
-                                                      drIdMainArrayimg[index]);
-                                                  */
-
-                /*drIdArray.remove(index);
-                                         drIdMainArrayimg.clear();*/
-                /*
-                                                  // drIdMainArrayimg.remove(drIdMainArray.remove(list[index].doctorId));
-                                                });
-                                              },
-                                              child: const Icon(
-                                                  Icons.close_outlined)))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),*/
                 centerHomeCtr.loadingFetch.value
                     ? Padding(
                   padding: const EdgeInsets.symmetric(
@@ -306,17 +221,6 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                           print(drIdArray);
                           print(drIdMainArray);
                           print(drIdMainArrayimg);
-
-                          /*   Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoctorDetailScreen(
-                                          id: list[index]
-                                              .doctorId
-                                              .toString(),
-                                        )));*/
-                          // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                         },
                         child: Card(
                           margin: const EdgeInsets.symmetric(
@@ -410,28 +314,6 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
-
-                                  // RatingBar(
-                                  //   // ignoreGestures: true,
-                                  //   itemSize: 17,
-                                  //   initialRating: double.parse(list[index].rating),
-                                  //   direction: Axis.horizontal,
-                                  //   allowHalfRating: true,
-                                  //   itemCount: 5,
-                                  //   ratingWidget: RatingWidget(
-                                  //       full:
-                                  //       const Icon(Icons.star, color: MyColor.primary),
-                                  //       half: const Icon(Icons.star_half,
-                                  //           color: MyColor.primary),
-                                  //       empty: const Icon(
-                                  //           Icons.star_border_purple500_outlined,
-                                  //           color: MyColor.primary)),
-                                  //   itemPadding:
-                                  //   const EdgeInsets.symmetric(horizontal: 2.0),
-                                  //   onRatingUpdate: (rating) {
-                                  //     print(rating);
-                                  //   },
-                                  // ),
                                 ],
                               )
                             ],

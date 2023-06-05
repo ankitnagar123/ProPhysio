@@ -35,7 +35,8 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
   String patientId = "";
   String patientName = "";
   String patientPic = "";
-
+  String patientSurname = "";
+  String patientUsername = "";
   String? doctorId;
 
   @override
@@ -43,6 +44,9 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
     patientId = Get.arguments["ID"];
     patientName = Get.arguments["name"];
     patientPic = Get.arguments["pic"];
+    patientSurname = Get.arguments["surname"];
+    patientUsername = Get.arguments["username"];
+
     print("doctor Id==>>>>$patientId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
@@ -79,7 +83,9 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                     var patientInfo = {
                       "ID": patientId,
                       "name": patientName,
-                      "pic":patientPic
+                      "pic":patientPic,
+                      "surname":patientName,
+                      "username":patientUsername,
                     };
                     Get.toNamed(RouteHelper.DChatProfile(),arguments: patientInfo);
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientChatProfile()));
@@ -131,8 +137,8 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 Column(
                   children: [
                     Text(
-                      patientName,
-                      style: const TextStyle(fontFamily: "Poppins", fontSize: 18),
+                      "$patientName $patientSurname",
+                      style: const TextStyle(fontFamily: "Poppins", fontSize: 17),
                     ),
                    /* const Text(
                       "online",

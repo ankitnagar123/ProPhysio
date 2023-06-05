@@ -45,7 +45,7 @@ class CenterAuthCtr extends GetxController {
     final Map<String, dynamic> signupPerameter = {
       "email": email,
     };
-    print("SignupPerameter$signupPerameter");
+    print("Signup Parameter$signupPerameter");
 
     final response =
         await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
@@ -54,10 +54,7 @@ class CenterAuthCtr extends GetxController {
       loadingotp.value = false;
       var jsonResponse = jsonDecode(response.body);
       otp.value = jsonResponse['otp'].toString();
-
-      // var result = jsonResponse['result'].toString();
       if (response.statusCode == 200) {
-        // callback();
         print("my otp ctr${otp.toString()}");
         custom.massenger(context, otp.toString());
         loadingotp.value = false;

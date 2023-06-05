@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,10 +43,11 @@ String latitude = "";
 String longitude = "";
   @override
   void initState() {
+    super.initState();
     doctorId = widget.id.toString();
     CenterId = widget.centerId.toString();
-    print("doctor my  id$doctorId");
-print("center id ${widget.centerId} ==$CenterId");
+    log("doctor my  id$doctorId");
+    log("center id ${widget.centerId} ==$CenterId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       patientRatingCtr.fetchRating(doctorId);
       doctorListCtr.doctorDetialsfetch(doctorId);
@@ -53,16 +56,11 @@ print("center id ${widget.centerId} ==$CenterId");
     });
     img = doctorListCtr.image.value.toString();
     doc = doctorListCtr.doc.value.toString();
-    print("doctor =img${doctorListCtr.image.value.toString()}");
-    print("doctor =doc${doctorListCtr.doc.value.toString()}");
+    log("doctor =img${doctorListCtr.image.value.toString()}");
+    log("doctor =doc${doctorListCtr.doc.value.toString()}");
 latitude = doctorListCtr.latitude.value.toString();
 longitude = doctorListCtr.longitude.value.toString();
     address = doctorListCtr.address.value;
-    // fee = doctorListCtr.fee.value;
-    // cat = doctorListCtr.category.value;
-
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -105,33 +103,6 @@ floatHeaderSlivers: false,
           body: SingleChildScrollView(
             child: Column(
               children: [
-                // Stack(
-                //   children: [
-                //     FadeInImage.assetNetwork(
-                //         placeholder: 'assets/images/loading.gif',
-                //         alignment: Alignment.center,
-                //         image: doctorListCtr.image.value,
-                //         fit: BoxFit.fitWidth,
-                //         width: double.infinity,
-                //         imageErrorBuilder: (context, error, stackTrace) {
-                //           return Image.asset(
-                //             'assets/images/MEDICAlogo.png',
-                //             fit: BoxFit.cover,
-                //           );
-                //         }),
-                //     Positioned(
-                //         top: 40.0,
-                //         left: 30,
-                //         child: InkWell(
-                //             onTap: () {
-                //               Get.back();
-                //             },
-                //             child: const Icon(
-                //               Icons.arrow_back_ios,
-                //               color: MyColor.black,
-                //             )))
-                //   ],
-                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
@@ -194,7 +165,14 @@ floatHeaderSlivers: false,
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  var data = {"doctorId": doctorId};
+                                  var data = {
+                                    "doctorId": doctorId,
+                                    "drName":doctorListCtr.doctorname.value,
+                                    "drSurname":doctorListCtr.drSurname.value,
+                                    "drImg": doctorListCtr.image.value,
+                                    "drAddress":doctorListCtr.address.value,
+                                    "contact":doctorListCtr.drContact.value,
+                                  };
                                   Get.toNamed(RouteHelper.getChatScreen(),
                                       arguments: data);
                                 },
@@ -313,14 +291,14 @@ floatHeaderSlivers: false,
                         ),
                       ),
                       SizedBox(
-                        height: height * 0.02,
+                        height: height * 0.01,
                       ),
                       GestureDetector(
                         onTap: () {
                           Get.toNamed(RouteHelper.getViewCertificateScreen());
                         },
                         child: Container(
-                            height: 50.0,
+                            height: 45.0,
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 10.0, vertical: 2.0),
                             decoration: BoxDecoration(
@@ -346,7 +324,7 @@ floatHeaderSlivers: false,
                             )),
                       ),
                       SizedBox(
-                        height: height * 0.03,
+                        height: height * 0.02,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -358,7 +336,7 @@ floatHeaderSlivers: false,
                           // Get.toNamed(RouteHelper.getViewCertificateScreen());
                         },
                         child: Container(
-                            height: 50.0,
+                            height: 45.0,
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 10.0, vertical: 2.0),
                             decoration: BoxDecoration(
@@ -384,7 +362,7 @@ floatHeaderSlivers: false,
                             )),
                       ),
                       SizedBox(
-                        height: height * 0.03,
+                        height: height * 0.02,
                       ),
                       Align(
                         alignment: Alignment.topLeft,
@@ -409,10 +387,10 @@ floatHeaderSlivers: false,
                               itemCount:
                                   doctorSpecializationCtr.category.length,
                               itemBuilder: (context, index) {
+                                var list = doctorSpecializationCtr.category[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    var categoryId = doctorSpecializationCtr
-                                        .category[index].categoryId;
+                                    var categoryId = list.categoryId;
                                     var data = {
                                       "doctorId": doctorId,
                                       "catId": categoryId,
@@ -439,9 +417,7 @@ floatHeaderSlivers: false,
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             custom.text(
-                                                doctorSpecializationCtr
-                                                    .category[index]
-                                                    .categoryName,
+                                                list.categoryName,
                                                 14.0,
                                                 FontWeight.w500,
                                                 MyColor.primary1),

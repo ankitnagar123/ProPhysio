@@ -21,7 +21,6 @@ class PatientChatScreen extends StatefulWidget {
 }
 
 class _PatientChatScreenState extends State<PatientChatScreen> {
-
   TextEditingController messageCtr = TextEditingController();
 
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
@@ -33,14 +32,23 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
   late Timer _timer;
   String patientId = "";
   String doctorId = "";
+  String doctorName = "";
+  String doctorAddress = "";
+  String doctorImg = "";
+  String doctorSurname = "";
+  String doctorContact = "";
 
   @override
   void initState() {
     doctorId = Get.arguments["doctorId"];
-    doctorListCtr.doctorDetialsfetch(doctorId.toString());
+    doctorName = Get.arguments["drName"];
+    doctorAddress = Get.arguments["drAddress"];
+    doctorImg = Get.arguments["drImg"];
+    doctorSurname = Get.arguments["drSurname"];
+    doctorContact = Get.arguments["contact"];
+
     print("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);
@@ -75,7 +83,13 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PatientChatProfile()));
+                            builder: (context) => PatientChatProfile(
+                                  name: doctorName,
+                                  surname: doctorSurname,
+                                  address: doctorAddress,
+                                  img: doctorImg,
+                                  contact: doctorContact,
+                                )));
                   },
                   child: const Icon(Icons.more_vert)),
               const SizedBox(
@@ -83,7 +97,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
               )
             ],
             systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: MyColor.primary),
+                const SystemUiOverlayStyle(statusBarColor: MyColor.primary),
             leading: InkWell(
                 onTap: () {
                   if (_timer != null) {
@@ -103,18 +117,15 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(120.0),
                   child: FadeInImage.assetNetwork(
-                    imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                      "assets/images/dummyprofile.jpg",
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover),
+                    imageErrorBuilder: (context, error, stackTrace) =>
+                        Image.asset("assets/images/dummyprofile.jpg",
+                            width: 50, height: 50, fit: BoxFit.cover),
                     width: 56,
                     height: 56,
                     fit: BoxFit.cover,
                     placeholder: "assets/images/loading.gif",
-                    image: doctorListCtr.image.value,
+                    image: doctorImg,
                     placeholderFit: BoxFit.cover,
-
                   ),
                 ),
                 const SizedBox(
@@ -123,14 +134,14 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                 Column(
                   children: [
                     Text(
-                      doctorListCtr.doctorname.toString(),
-                      style: const TextStyle(
-                          fontFamily: "Poppins", fontSize: 18),
+                      "$doctorName $doctorSurname",
+                      style:
+                          const TextStyle(fontFamily: "Poppins", fontSize: 18),
                     ),
-                    const Text(
+                    /* const Text(
                       "online",
                       style: TextStyle(fontFamily: "Poppins", fontSize: 12),
-                    )
+                    )*/
                   ],
                 ),
               ],
@@ -145,79 +156,77 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
           children: [
             Expanded(
                 child: SizedBox(
-                  height: 300,
-                  child: chatController.receivedMsgList.isEmpty
-                      ? const SizedBox()
-                      : ilaod == true
+              height: 300,
+              child: chatController.receivedMsgList.isEmpty
+                  ? const SizedBox()
+                  : ilaod == true
                       ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                          child: CircularProgressIndicator(),
+                        )
                       : ListView.builder(
-                    reverse: true,
-                    itemCount: chatController.receivedMsgList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var reversedList =
-                      chatController.receivedMsgList.reversed.toList();
-                      return Row(
-                        mainAxisAlignment:
-                        patientId == reversedList[index].id
-                            ? MainAxisAlignment.start
-                            : MainAxisAlignment.end,
-                        children: [
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth:
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width - 45,
-                            ),
-                            child: Card(
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              color: patientId == reversedList[index].id
-                                  ? MyColor.chatColor
-                                  : MyColor.white,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10,
-                                      right: 30,
-                                      top: 5,
-                                      bottom: 20,
+                          reverse: true,
+                          itemCount: chatController.receivedMsgList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var reversedList = chatController
+                                .receivedMsgList.reversed
+                                .toList();
+                            return Row(
+                              mainAxisAlignment:
+                                  patientId == reversedList[index].id
+                                      ? MainAxisAlignment.start
+                                      : MainAxisAlignment.end,
+                              children: [
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width - 45,
+                                  ),
+                                  child: Card(
+                                    elevation: 1,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)),
+                                    color: patientId == reversedList[index].id
+                                        ? MyColor.chatColor
+                                        : MyColor.white,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 5),
+                                    child: Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 10,
+                                            right: 30,
+                                            top: 5,
+                                            bottom: 20,
+                                          ),
+                                          child: view.text(
+                                              reversedList[index]
+                                                  .message
+                                                  .toString(),
+                                              15,
+                                              FontWeight.w400,
+                                              MyColor.black),
+                                        ),
+                                        Positioned(
+                                          bottom: 2,
+                                          right: 3,
+                                          child: view.text(
+                                              reversedList[index]
+                                                  .sentat
+                                                  .toString(),
+                                              8,
+                                              FontWeight.w400,
+                                              MyColor.grey),
+                                        ),
+                                      ],
                                     ),
-                                    child: view.text(
-                                        reversedList[index]
-                                            .message
-                                            .toString(),
-                                        15,
-                                        FontWeight.w400,
-                                        MyColor.black),
                                   ),
-                                  Positioned(
-                                    bottom: 2,
-                                    right: 3,
-                                    child: view.text(
-                                        reversedList[index]
-                                            .sentat
-                                            .toString(),
-                                        8,
-                                        FontWeight.w400,
-                                        MyColor.grey),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                )),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+            )),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
@@ -256,12 +265,9 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                           ),
                           minimumSize: const Size(55, 55)),
                       onPressed: () {
-                        if (messageCtr.text
-                            .trim()
-                            .isNotEmpty) {
-                          chatController.sendingMsgApi(
-                              context, doctorId!, "Text", messageCtr
-                              .text, () {});
+                        if (messageCtr.text.trim().isNotEmpty) {
+                          chatController.sendingMsgApi(context, doctorId!,
+                              "Text", messageCtr.text, () {});
                         } else {
                           print('filed');
                         }

@@ -5,7 +5,6 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import 'AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
-import 'QRScannerReports/QRResultScreen.dart';
 import 'QRScannerReports/QRScannerPage.dart';
 
 class CompleteAppointPrescription extends StatefulWidget {
@@ -23,9 +22,10 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
 
   @override
   void initState() {
-    bookingController.bookingAppointment(context,"Complete","");
-    // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      bookingController.bookingAppointment(context,"Complete","");
+    });
   }
 
   @override
@@ -35,8 +35,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
         backgroundColor: Colors.white24,
         leading: InkWell(
             onTap: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context)=>QRResult()));
-              // Get.back();
+               Get.back();
             },
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
@@ -114,6 +113,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             var id = bookingController.booking[index].Id.toString();
+            var list = bookingController.booking[index];
             return InkWell(
               onTap: () {
                 print(id);
@@ -128,7 +128,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       customView.text(
-                          bookingController.booking[index].name.toString(),
+                          list.name.toString(),
                           14.0,
                           FontWeight.w500,
                           Colors.black),
@@ -153,7 +153,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                                   height: 2.0,
                                 ),
                                 Text(
-                                    bookingController.booking[index].bookingDate
+                                    list.bookingDate
                                         .toString(),
                                     style: const TextStyle(
                                         color: Colors.black,
@@ -178,7 +178,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].time
+                                  list.time
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -204,7 +204,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                                   height: 2.0,
                                 ),
                                 Text(
-                                  bookingController.booking[index].bookID
+                                  list.bookID
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,

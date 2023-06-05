@@ -55,10 +55,10 @@ class _calenderState extends State<calender> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: percent < 50
-              ? Color(0xffC4DEF2)
+              ? const Color(0xffC4DEF2)
               : percent == 100
                   ? Colors.red
-                  : Color(0xffDAA558),
+                  : const Color(0xffDAA558),
         ),
         child: Center(
           child: Text(
@@ -88,7 +88,6 @@ class _calenderState extends State<calender> {
           Event(
             location: "available",
             date: DateTime(year, month, day),
-            // title: 'Event ${appointmentController.dateList[i].percent}',
             icon: _presentIcon(appointmentController.dateList[i].day,
                 int.parse(appointmentController.dateList[i].percent)),
           ));
@@ -146,11 +145,6 @@ class _calenderState extends State<calender> {
       },
     );
     return Obx(() {
-      /* if(appointmentController.loadingFetchDate.value){
-        return custom.MyIndicator();
-      }else if(appointmentController.dateList.isEmpty){
-        return Text("no daat");
-      }*/
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white24,

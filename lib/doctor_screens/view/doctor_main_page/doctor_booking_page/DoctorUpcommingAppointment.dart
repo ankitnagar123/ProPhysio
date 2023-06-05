@@ -156,10 +156,10 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 var id = bookingController.booking[index].Id.toString();
-
+var upcomingList = bookingController.booking[index];
                 return InkWell(
                   onTap: () {
-                    var userid = bookingController.booking[index].id.toString();
+                    var userid = upcomingList.id.toString();
                     print(id);
                     print(userid);
                     log("user id $userid");
@@ -195,7 +195,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
-                                    bookingController.booking[index].status
+                                    upcomingList.status
                                         .toString(),
                                     11.0,
                                     FontWeight.w400,
@@ -218,7 +218,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                             height: 8.0,
                           ),
                           custom.text(
-                              bookingController.booking[index].name.toString(),
+                              upcomingList.name.toString(),
                               14.0,
                               FontWeight.w500,
                               Colors.black),
@@ -243,8 +243,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                        bookingController
-                                            .booking[index].bookingDate
+                                        upcomingList.bookingDate
                                             .toString(),
                                         style: const TextStyle(
                                             color: Colors.black,
@@ -269,7 +268,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                      bookingController.booking[index].time
+                                      upcomingList.time
                                           .toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
@@ -295,7 +294,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                      bookingController.booking[index].bookID
+                                      upcomingList.bookID
                                           .toString(),
                                       style: const TextStyle(
                                           color: Colors.black,

@@ -263,7 +263,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children:  [
                             Text(
                               "Height",
                               style: TextStyle(
@@ -275,7 +275,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                "80CM",
+                                "${details.height}",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15.0,

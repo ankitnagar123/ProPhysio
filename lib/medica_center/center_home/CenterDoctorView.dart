@@ -10,7 +10,6 @@ import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterSelectedDrModel.dart';
-import '../center_models/CenterSelectedWardModel.dart';
 
 class CenterDoctorViewScreen extends StatefulWidget {
   const CenterDoctorViewScreen({Key? key}) : super(key: key);
@@ -23,15 +22,11 @@ class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
+
   int selectedCard = -1;
-  CenterHomeCtr centerHomeCtr = CenterHomeCtr();
 String wardId = "";
   String wardName = "";
-
-  String? id;
-  String? userTyp;
-  String? deviceId;
-  String? deviceTyp;
 String keyword = "";
   @override
   void initState() {
@@ -372,14 +367,5 @@ String keyword = "";
         ),
       );
     });
-  }
-
-  void getValuee() async {
-    id = await sp.getStringValue(sp.DOCTOR_ID_KEY);
-    deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-    deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
-    // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-
-    // loginCtr.updateToken(context, id!, "Doctor", deviceId!, deviceTyp!);
   }
 }
