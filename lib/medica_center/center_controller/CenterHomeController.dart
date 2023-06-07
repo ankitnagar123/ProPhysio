@@ -14,6 +14,7 @@ import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import '../center_models/CencelModels/WardDeleteReasonModel.dart';
 import '../center_models/CencelModels/WardRemoveDoctorReason.dart';
+import '../center_models/CenterAddMoreDr.dart';
 import '../center_models/CenterAllDrModel.dart';
 import '../center_models/CenterSelectedDrModel.dart';
 
@@ -24,6 +25,7 @@ class CenterHomeCtr extends GetxController {
   var loadingAdd = false.obs;
   var loadingFetchS = false.obs;
   var loadingFetchW = false.obs;
+  var loadingFetchNew = false.obs;
 
   var loadingCancelW = false.obs;
   var loadingCancelD = false.obs;
@@ -37,6 +39,7 @@ class CenterHomeCtr extends GetxController {
   var doctorList = <CenterDoctorListModel>[].obs;
 
   var selectedWardList = <CenterSelectedDWardModel>[].obs;
+  var centerAddMoreDrList = <CenterAddMoreDrModel>[].obs;
 
   var selectedDoctorList = <CenterSelectedDListModel>[].obs;
 
@@ -360,6 +363,38 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
     }
   }
 
+
+
+
+  /*----------Add More Dr in Ward Doctor list  API-----------*/
+  Future<void> centerAddMoreDrListApi(BuildContext context,String wardId) async {
+    loadingFetchNew.value = true;
+    final Map<String, dynamic>Perameter = {
+      "ward_id": wardId,
+    };
+    bool connection = await  checkInternetConnection();
+    if(connection){
+      try {
+        final response = await apiService.postData(MyAPI.centerAddMoreDrList,Perameter);
+        print("doctor list=====${response.body}");
+        if (response.statusCode == 200) {
+          loadingFetchNew.value = false;
+          centerAddMoreDrList.value = centerAddMoreDrModelFromJson(response.body.toString());
+          log(centerAddMoreDrList.toString());
+        }
+        else {
+          loadingFetchNew.value = false;
+          print("error");
+        }
+      }catch (e) {
+        loadingFetchNew.value = false;
+        print("exception$e");
+      }
+    }else{
+      loadingFetchNew.value = false;
+      print("no internet");
+    }
+  }
 
   /*----------Add More Dr in Ward Doctor  API-----------*/
   void addMoreDr(

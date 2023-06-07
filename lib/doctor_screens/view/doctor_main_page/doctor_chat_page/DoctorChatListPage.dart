@@ -233,6 +233,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                   "surname":list[index].surname,
                                   "username":list[index].username,
                                   "pic":list[index].userProfile,
+                                  "screenType":"ChatList"
                                 };
                                 Get.toNamed(RouteHelper.DChatScreen(),
                                     arguments: patientId);

@@ -23,11 +23,11 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
   CustomView custom = CustomView();
 
   @override
+
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this, initialIndex: 0);
   }
-
 
 
   @override

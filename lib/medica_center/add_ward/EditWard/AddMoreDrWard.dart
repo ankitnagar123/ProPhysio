@@ -7,6 +7,7 @@ import '../../../../helper/CustomView/CustomView.dart';
 import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../center_controller/CenterHomeController.dart';
+import '../../center_models/CenterAddMoreDr.dart';
 import '../../center_models/CenterAllDrModel.dart';
 
 class WardAddMoreDoctor extends StatefulWidget {
@@ -22,7 +23,7 @@ class _WardAddMoreDoctorState extends State<WardAddMoreDoctor> {
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
-  CenterHomeCtr centerHomeCtr = CenterHomeCtr();
+  CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
 
   String _keyword = '';
 
@@ -36,15 +37,15 @@ String wardId = "";
     super.initState();
     wardId = Get.parameters["wardId"].toString();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      centerHomeCtr.centerDoctorListFetch(context);
+      centerHomeCtr.centerAddMoreDrListApi(context, wardId);
     });
   }
 
-  List<CenterDoctorListModel> _getFilteredList() {
+  List<CenterAddMoreDrModel> _getFilteredList() {
     if (_keyword.isEmpty) {
-      return centerHomeCtr.doctorList;
+      return centerHomeCtr.centerAddMoreDrList;
     }
-    return centerHomeCtr.doctorList
+    return centerHomeCtr.centerAddMoreDrList
         .where(
             (user) => user.name.toLowerCase().contains(_keyword.toLowerCase()))
         .toList();
@@ -223,8 +224,10 @@ String wardId = "";
                                                 setState(() {
                                                   drIdMainArrayimg.remove(
                                                       drIdMainArrayimg[index]);
-                                                  */ /*drIdArray.remove(index);
-                                         drIdMainArrayimg.clear();*/ /*
+                                                  */
+                /*drIdArray.remove(index);
+                                         drIdMainArrayimg.clear();*/
+                /*
                                                   // drIdMainArrayimg.remove(drIdMainArray.remove(list[index].doctorId));
                                                 });
                                               },
@@ -240,7 +243,7 @@ String wardId = "";
                       },
                     ),
                   ),*/
-                centerHomeCtr.loadingFetch.value
+                centerHomeCtr.loadingFetchNew.value
                     ? Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5.0, vertical: 8),
@@ -252,7 +255,7 @@ String wardId = "";
                       )
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
-                        child: centerHomeCtr.doctorList.length == 0
+                        child: centerHomeCtr.selectedDoctorList.length == 0
                             ? const Center(
                                 heightFactor: 10,
                                 child:

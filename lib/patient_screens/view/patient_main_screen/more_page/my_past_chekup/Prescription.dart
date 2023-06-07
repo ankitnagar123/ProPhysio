@@ -267,8 +267,8 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
     final pickedFile = await degreepicker.getImage(
         source: ImageSource.gallery,
         imageQuality: 100,
-        maxHeight: 200,
-        maxWidth: 200);
+        maxHeight: 500,
+        maxWidth: 500);
     setState(() {
       if (pickedFile != null) {
         degreefilePath = File(pickedFile.path);
