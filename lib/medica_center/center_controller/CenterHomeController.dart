@@ -105,6 +105,7 @@ class CenterHomeCtr extends GetxController {
 
   }
 
+
   /*----------Add Doctor from all dr list API-----------*/
   void addDoctors(
       BuildContext context,

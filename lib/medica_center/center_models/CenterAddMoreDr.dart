@@ -17,7 +17,7 @@ class CenterAddMoreDrModel {
   String surname;
   String username;
   String email;
-  Code code;
+  String code;
   String contact;
   String location;
   String latitude;
@@ -58,7 +58,7 @@ class CenterAddMoreDrModel {
     surname: json["surname"],
     username: json["username"],
     email: json["email"],
-    code: codeValues.map[json["code"]]!,
+    code: json["code"],
     contact: json["contact"],
     location: json["location"],
     latitude: json["latitude"],
@@ -79,7 +79,7 @@ class CenterAddMoreDrModel {
     "surname": surname,
     "username": username,
     "email": email,
-    "code": codeValues.reverse[code],
+    "code": code,
     "contact": contact,
     "location": location,
     "latitude": latitude,
@@ -92,18 +92,10 @@ class CenterAddMoreDrModel {
   };
 }
 
-enum Category { MEDICINA_LEGALE }
+enum Category { DENTIST }
 
 final categoryValues = EnumValues({
-  "Medicina Legale": Category.MEDICINA_LEGALE
-});
-
-enum Code { THE_91, EMPTY, THE_39 }
-
-final codeValues = EnumValues({
-  "": Code.EMPTY,
-  "+39": Code.THE_39,
-  "+91": Code.THE_91
+  "Dentist": Category.DENTIST
 });
 
 enum Result { SUCCESS }
@@ -112,10 +104,10 @@ final resultValues = EnumValues({
   "Success": Result.SUCCESS
 });
 
-enum Subcategory { VML_EUROP_ASSISTANCE }
+enum Subcategory { CHILD_DENTIST }
 
 final subcategoryValues = EnumValues({
-  "VML Europ Assistance ": Subcategory.VML_EUROP_ASSISTANCE
+  "Child Dentist": Subcategory.CHILD_DENTIST
 });
 
 class EnumValues<T> {

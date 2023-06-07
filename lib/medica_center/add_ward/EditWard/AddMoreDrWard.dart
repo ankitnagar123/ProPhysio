@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
@@ -144,7 +146,7 @@ String wardId = "";
                         // drIdArray.clear();
                         _keyword = value;
                       });
-                      print(value);
+                      log(value);
                     },
                     cursorWidth: 0.0,
                     cursorHeight: 0.0,
@@ -255,7 +257,7 @@ String wardId = "";
                       )
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
-                        child: centerHomeCtr.selectedDoctorList.length == 0
+                        child: list.isEmpty
                             ? const Center(
                                 heightFactor: 10,
                                 child:
@@ -410,7 +412,7 @@ String wardId = "";
                                               //   },
                                               // ),
                                             ],
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
