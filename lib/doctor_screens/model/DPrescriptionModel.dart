@@ -85,70 +85,45 @@ class DPrescriptionListModel {
 }
 
 class Detail {
-  Result result;
-  String doctorId;
-  String doctorName;
-  String doctorSurname;
+  String result;
   String title;
-  Type type;
+  String type;
   String description;
   String image;
+  String? doctorId;
+  String? doctorName;
+  String? doctorSurname;
 
   Detail({
     required this.result,
-    required this.doctorId,
-    required this.doctorName,
-    required this.doctorSurname,
     required this.title,
     required this.type,
     required this.description,
     required this.image,
+    this.doctorId,
+    this.doctorName,
+    this.doctorSurname,
   });
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-    result: resultValues.map[json["result"]]!,
+    result: json["result"],
+    title: json["title"],
+    type: json["type"],
+    description: json["description"],
+    image: json["image"],
     doctorId: json["doctor_id"],
     doctorName: json["doctor_name"],
     doctorSurname: json["doctor_surname"],
-    title: json["title"],
-    type: typeValues.map[json["type"]]!,
-    description: json["description"],
-    image: json["image"],
   );
 
   Map<String, dynamic> toJson() => {
-    "result": resultValues.reverse[result],
+    "result": result,
+    "title": title,
+    "type": type,
+    "description": description,
+    "image": image,
     "doctor_id": doctorId,
     "doctor_name": doctorName,
     "doctor_surname": doctorSurname,
-    "title": title,
-    "type": typeValues.reverse[type],
-    "description": description,
-    "image": image,
   };
-}
-
-enum Result { SUBMITTED_BY_SELF, SUBMITTED_BY_DOCTOR }
-
-final resultValues = EnumValues({
-  "Submitted by Doctor": Result.SUBMITTED_BY_DOCTOR,
-  "Submitted by self": Result.SUBMITTED_BY_SELF
-});
-
-enum Type { PRESCRIPTION }
-
-final typeValues = EnumValues({
-  "prescription": Type.PRESCRIPTION
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

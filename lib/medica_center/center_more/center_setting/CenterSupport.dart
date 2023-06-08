@@ -27,6 +27,29 @@ class _CenterSupportScreenState extends State<CenterSupportScreen> {
         .size
         .width;
     return Scaffold(
+      floatingActionButton:  Container(
+        margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 14),
+        child: Obx(() {
+          if (centerAuthCtr.loadingSupport.value) {
+            return customView.MyIndicator();
+          }
+          return customView.MyButton(
+            context,
+            "Send message",
+                () {
+              if (validation()) {
+                centerAuthCtr.centerSupport(context, subjectCtrl.text,
+                    emailCtrl.text, msgCtrl.text, () {
+                      Get.back();
+                    });
+              }
+            },
+            MyColor.primary,
+            const TextStyle(fontFamily: "Poppins", color: Colors.white),
+          );
+        }),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -80,58 +103,11 @@ class _CenterSupportScreenState extends State<CenterSupportScreen> {
             SizedBox(
               height: width * 0.6,
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Obx(() {
-                  if (centerAuthCtr.loadingSupport.value) {
-                    return customView.MyIndicator();
-                  }
-                  return customView.MyButton(
-                    context,
-                    "Send message",
-                        () {
-                      if (validation()) {
-                        centerAuthCtr.centerSupport(context, subjectCtrl.text,
-                            emailCtrl.text, msgCtrl.text, () {
-                              Get.back();
-                            });
-                      }
-                    },
-                    MyColor.primary,
-                    const TextStyle(fontFamily: "Poppins", color: Colors.white),
-                  );
-                }),
-              ),
-            )
+
           ],
         ),
       ),
-      // bottomNavigatonBar: Container(
-      //   margin:
-      //       const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      //   child: Obx(() {
-      //     if (supportCtr.loading.value) {
-      //       return customView.MyIndicator();
-      //     }
-      //     return customView.MyButton(
-      //       context,
-      //       "Send message",
-      //       () {
-      //         if(validation()){
-      //           supportCtr.supportApi(context, subjectCtrl.text,
-      //               emailCtrl.text, msgCtrl.text, () {
-      //
-      //               });
-      //         }
-      //
-      //       },
-      //       MyColor.primary,
-      //       const TextStyle(fontFamily: "Poppins", color: Colors.white),
-      //     );
-      //   }),
-      // )),
+
     );
   }
 

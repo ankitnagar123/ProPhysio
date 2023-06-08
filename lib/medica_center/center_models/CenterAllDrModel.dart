@@ -17,14 +17,14 @@ class CenterDoctorListModel {
   String surname;
   String username;
   String email;
-  Code code;
+  String code;
   String contact;
   String location;
   String latitude;
   String longitude;
   String password;
   List<String> category;
-  List<String> subcategory;
+  dynamic subcategory;
   String doctorProfile;
   String doctorDocument;
 
@@ -58,14 +58,14 @@ class CenterDoctorListModel {
     surname: json["surname"],
     username: json["username"],
     email: json["email"],
-    code: codeValues.map[json["code"]]!,
+    code: json["code"],
     contact: json["contact"],
     location: json["location"],
     latitude: json["latitude"],
     longitude: json["longitude"],
     password: json["password"],
     category: List<String>.from(json["category"].map((x) => x)),
-    subcategory: List<String>.from(json["subcategory"].map((x) => x)),
+    subcategory: json["subcategory"],
     doctorProfile: json["Doctor_profile"],
     doctorDocument: json["Doctor_document"],
   );
@@ -86,13 +86,13 @@ class CenterDoctorListModel {
     "longitude": longitude,
     "password": password,
     "category": List<dynamic>.from(category.map((x) => x)),
-    "subcategory": List<dynamic>.from(subcategory.map((x) => x)),
+    "subcategory": subcategory,
     "Doctor_profile": doctorProfile,
     "Doctor_document": doctorDocument,
   };
 }
 
-enum Code { THE_91, EMPTY, THE_39 }
+enum Code { THE_91, THE_39, EMPTY }
 
 final codeValues = EnumValues({
   "": Code.EMPTY,

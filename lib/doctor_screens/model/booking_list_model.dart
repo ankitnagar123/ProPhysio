@@ -21,7 +21,7 @@ class bookingList {
 
   bookingList.fromJson(Map<String, dynamic> json) {
     Id = json['Id'];
-    id = json['id'];
+    id = json['user_id'];
     bookID = json['book_ID'];
     name = json['name'];
     bookingDate = json['booking_date'];
@@ -33,7 +33,7 @@ class bookingList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['Id'] = Id;
-    data['id'] = id;
+    data['user_id'] = id;
     data['book_ID'] = bookID;
     data['name'] = name;
     data['booking_date'] = bookingDate;

@@ -25,6 +25,7 @@ class DoctorSignUpScreen extends StatefulWidget {
 }
 
 class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
+
   /*---------TEXT-FIELD CONTROLLER'S----------*/
   TextEditingController nameCtr = TextEditingController();
   TextEditingController surnameCtr = TextEditingController();
@@ -53,7 +54,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   String code = '';
   bool _isHidden = true;
-  int _curr = 1;
+  int _curr = 0;
   final int _numpage = 2;
 
   String? slectedCategory;
@@ -125,6 +126,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               onPageChanged: (value) {
                 setState(() {
                   _curr = value;
+                  print("page index${value}");
+                  print("curr index${_curr}");
+
                 });
               },
               controller: controller,
@@ -884,6 +888,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     }
     return false;
   }
+
 
 /*---------SELECT MULTIPLE CATEGORY-----*/
   Widget category() {

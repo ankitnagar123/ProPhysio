@@ -40,12 +40,22 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
 
   @override
   void initState() {
-    doctorId = Get.arguments["doctorId"];
-    doctorName = Get.arguments["drName"];
-    doctorAddress = Get.arguments["drAddress"];
-    doctorImg = Get.arguments["drImg"];
-    doctorSurname = Get.arguments["drSurname"];
-    doctorContact = Get.arguments["contact"];
+    if(Get.arguments["chatList"] =="listData"){
+      doctorId = Get.arguments["doctorId"];
+      doctorName = Get.arguments["drName"];
+      // doctorAddress = Get.arguments["drAddress"];
+      doctorImg = Get.arguments["drImg"];
+      doctorSurname = Get.arguments["drSurname"];
+      // doctorContact = Get.arguments["contact"];
+    }else /*if(Get.arguments["doctorList"] =="drListData")*/{
+      doctorId = Get.arguments["doctorId"];
+      doctorName = Get.arguments["drName"];
+      doctorAddress = Get.arguments["drAddress"];
+      doctorImg = Get.arguments["drImg"];
+      doctorSurname = Get.arguments["drSurname"];
+      doctorContact = Get.arguments["contact"];
+    }
+
 
     print("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {

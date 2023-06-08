@@ -204,6 +204,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                      "drName":list[index].name,
                                      "drSurname":list[index].surname,
                                      "drImg": list[index].userProfile,
+                                     "chatList":"listData",
                                    };
                                    log("$data");
                                     Get.toNamed(RouteHelper.getChatScreen(),arguments:data);

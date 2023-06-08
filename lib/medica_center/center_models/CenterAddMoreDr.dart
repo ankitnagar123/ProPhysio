@@ -23,8 +23,8 @@ class CenterAddMoreDrModel {
   String latitude;
   String longitude;
   String password;
-  List<Category> category;
-  List<Subcategory> subcategory;
+  List<String> category;
+  List<String> subcategory;
   String doctorProfile;
   String doctorDocument;
 
@@ -64,8 +64,8 @@ class CenterAddMoreDrModel {
     latitude: json["latitude"],
     longitude: json["longitude"],
     password: json["password"],
-    category: List<Category>.from(json["category"].map((x) => categoryValues.map[x]!)),
-    subcategory: List<Subcategory>.from(json["subcategory"].map((x) => subcategoryValues.map[x]!)),
+    category: List<String>.from(json["category"].map((x) => x)),
+    subcategory: List<String>.from(json["subcategory"].map((x) => x)),
     doctorProfile: json["Doctor_profile"],
     doctorDocument: json["Doctor_document"],
   );
@@ -85,29 +85,17 @@ class CenterAddMoreDrModel {
     "latitude": latitude,
     "longitude": longitude,
     "password": password,
-    "category": List<dynamic>.from(category.map((x) => categoryValues.reverse[x])),
-    "subcategory": List<dynamic>.from(subcategory.map((x) => subcategoryValues.reverse[x])),
+    "category": List<dynamic>.from(category.map((x) => x)),
+    "subcategory": List<dynamic>.from(subcategory.map((x) => x)),
     "Doctor_profile": doctorProfile,
     "Doctor_document": doctorDocument,
   };
 }
 
-enum Category { DENTIST }
-
-final categoryValues = EnumValues({
-  "Dentist": Category.DENTIST
-});
-
 enum Result { SUCCESS }
 
 final resultValues = EnumValues({
   "Success": Result.SUCCESS
-});
-
-enum Subcategory { CHILD_DENTIST }
-
-final subcategoryValues = EnumValues({
-  "Child Dentist": Subcategory.CHILD_DENTIST
 });
 
 class EnumValues<T> {

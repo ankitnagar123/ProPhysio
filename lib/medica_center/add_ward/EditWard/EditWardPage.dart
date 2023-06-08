@@ -80,10 +80,6 @@ String wardId = "";
         .of(context)
         .size
         .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
     return Obx(() {
       return Scaffold(
         appBar: AppBar(
@@ -143,7 +139,7 @@ String wardId = "";
                   Align(
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Edit doctors", 17.0, FontWeight.w600, MyColor.black),
+                        "Edit doctors", 16.0, FontWeight.w500, MyColor.black),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -153,6 +149,7 @@ String wardId = "";
                       Get.toNamed(RouteHelper.cAddMoreDrs(),parameters: data);
                     },
                     child: Card(
+                      elevation: 2,
                       color: MyColor.midgray,
                       child: Align(
                         alignment: Alignment.topLeft,
@@ -163,43 +160,7 @@ String wardId = "";
                   ),
                 ],
               ),
-           /*   SizedBox(
-                width: widht,
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                    });
-                    print(value);
-                  },
-                  cursorWidth: 0.0,
-                  cursorHeight: 0.0,
-                  onTap: () {},
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.name,
-                  cursorColor: Colors.black,
-                  controller: searchCtr,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: MyColor.primary1,
-                    suffixIconColor: MyColor.primary1,
-                    contentPadding: EdgeInsets.only(top: 3, left: 20),
-                    hintText: "Search Doctor",
-                    hintStyle:
-                    TextStyle(fontSize: 12, color: MyColor.primary1),
-                    fillColor: MyColor.lightcolor,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
-           /*   const SizedBox(
-                height: 5,
-              ),*/
+              SizedBox(height: height*0.02,),
               centerHomeCtr.loadingFetchS.value?categoryShimmerEffect(context):  Expanded(
                 child: GridView.count(
                   shrinkWrap: true,
@@ -265,6 +226,9 @@ String wardId = "";
                             ),
                           ),
                            Positioned(
+                             top: 0,
+                             right: 0,
+
                               child: GestureDetector(
                                   onTap: () {
                                   /*  centerHomeCtr.selectedDoctorList.remove(index);
@@ -273,7 +237,7 @@ String wardId = "";
                                     });*/
                                     doctorId = centerHomeCtr.selectedDoctorList[index].doctorId;
                                     removeDoctor(context,doctorId,index);
-                                  },child: const Icon(Icons.close_outlined,size: 18,))),
+                                  },child: const Icon(Icons.close_outlined,size: 18,color: MyColor.primary1,))),
                         ],
                       ),
                     );
@@ -348,9 +312,7 @@ String wardId = "";
                                 FontWeight.w400,
                                 Colors.black),
                           ),
-                          const SizedBox(
-                            height: 13.0,
-                          ),
+
                           SingleChildScrollView(
                             child: ListView.builder(
                               shrinkWrap: true,

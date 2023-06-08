@@ -31,6 +31,32 @@ class _CenterChangePasswordScreenState
 
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14,vertical: 10),
+          child: Obx(() {
+            if (centerAuthCtr.loadingPass.value) {
+              return customView.MyIndicator();
+            }
+            return customView.MyButton(
+              context,
+              "Save Password",
+                  () {
+                if (validation()) {
+                  centerAuthCtr.centerPasswordChange(
+                      context,
+                      oldPasswordCtrl.text,
+                      newPasswordCtrl.text,
+                      confirmPasswordCtrl.text, () {
+                    Get.back();
+                  });
+                }
+              },
+              MyColor.primary,
+              const TextStyle(fontFamily: "Poppins", color: Colors.white),
+            );
+          }),
+        ),
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -148,31 +174,7 @@ class _CenterChangePasswordScreenState
               SizedBox(
                 height: height*0.5,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Obx(() {
-                  if (centerAuthCtr.loadingPass.value) {
-                    return customView.MyIndicator();
-                  }
-                  return customView.MyButton(
-                    context,
-                    "Save Password",
-                        () {
-                      if (validation()) {
-                        centerAuthCtr.centerPasswordChange(
-                            context,
-                            oldPasswordCtrl.text,
-                            newPasswordCtrl.text,
-                            confirmPasswordCtrl.text, () {
-                          Get.back();
-                        });
-                      }
-                    },
-                    MyColor.primary,
-                    const TextStyle(fontFamily: "Poppins", color: Colors.white),
-                  );
-                }),
-              )
+
             ],
           ),
         ),

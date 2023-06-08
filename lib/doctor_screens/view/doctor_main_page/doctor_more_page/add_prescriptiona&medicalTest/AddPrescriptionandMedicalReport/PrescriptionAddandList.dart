@@ -11,6 +11,7 @@ import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../QRScannerReports/QRScannerPage.dart';
+import 'AddMedicines/AddMedicinesTab.dart';
 
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
@@ -53,7 +54,16 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
         }else{
           var details = doctorPrescriptionCtr.prescriptionList.value;
           return Column(children: [
-
+            Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                 onTap: () {
+                   Navigator.push(context,MaterialPageRoute(builder: (context)=>AddMedicinesTab(patientId: widget.patientId,)));
+                 },
+                child: Card(
+                    elevation: 2,child: custom.text("Add Medicine", 13, FontWeight.w500, MyColor.primary1)),
+              ),
+            ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text("Title", 13, FontWeight.w500, MyColor.primary1),

@@ -109,6 +109,9 @@ static const String dAddPrescription= "prescription";
 
   static const String fetchQrPrescription= "fetch_qr_code_prescription";
 
+  static const String allMedicineList = "fetch_medicine_list";
+
+  static const String addMedicineList = "add_medicine";
 
   /*Chat list Dr*/
   static const String dChatListFetch = "doctor_msg_list";

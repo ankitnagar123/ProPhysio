@@ -172,6 +172,7 @@ floatHeaderSlivers: false,
                                     "drImg": doctorListCtr.image.value,
                                     "drAddress":doctorListCtr.address.value,
                                     "contact":doctorListCtr.drContact.value,
+                                    "doctorList":"drListData",
                                   };
                                   Get.toNamed(RouteHelper.getChatScreen(),
                                       arguments: data);

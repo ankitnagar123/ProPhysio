@@ -81,9 +81,9 @@ class _CenterProfileState extends State<CenterProfile> {
       return Obx(() {
         return SafeArea(
           child: Scaffold(
-              bottomNavigationBar: Container(
-                margin:
-                const EdgeInsets.symmetric(horizontal: 17.0, vertical: 10.0),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+              floatingActionButton: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 child: centerAuthCtr.loadingUpdateP.value ? customView
                     .MyIndicator() : customView.MyButton(
                   context,
@@ -104,6 +104,28 @@ class _CenterProfileState extends State<CenterProfile> {
                   const TextStyle(fontFamily: "Poppins", color: Colors.white),
                 ),
               ),
+              // bottomNavigationBar: Container(
+              //   margin: const EdgeInsets.symmetric(horizontal: 17.0, vertical: 10.0),
+              //   child: centerAuthCtr.loadingUpdateP.value ? customView
+              //       .MyIndicator() : customView.MyButton(
+              //     context,
+              //     "Save profile",
+              //         () {
+              //       centerAuthCtr.centerProfileUpdate(
+              //           context,
+              //           userNameCtrl.text,
+              //           bioCtrl.text,
+              //           emailCtrl.text,
+              //           addressCtrl.text,
+              //           "",
+              //           "",
+              //           imagename,
+              //           baseimage);
+              //     },
+              //     MyColor.primary,
+              //     const TextStyle(fontFamily: "Poppins", color: Colors.white),
+              //   ),
+              // ),
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
