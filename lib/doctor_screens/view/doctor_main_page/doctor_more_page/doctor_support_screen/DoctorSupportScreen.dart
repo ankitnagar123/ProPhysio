@@ -25,6 +25,34 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
+          bottomNavigationBar:   Container(
+            height: 57.0,
+            margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 14),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Obx(() {
+                if (supportCtr.loading.value) {
+                  return Center(child: customView.MyIndicator());
+                }
+                return customView.MyButton(
+                  context,
+                  "Send message",
+                      () {
+                    if (validation()) {
+                      supportCtr.supportApi(context, subjectCtrl.text,
+                          emailCtrl.text, msgCtrl.text, () {
+                        subjectCtrl.clear();
+                        emailCtrl.clear();
+                        msgCtrl.clear();
+                          });
+                    }
+                  },
+                  MyColor.primary,
+                  const TextStyle(fontFamily: "Poppins", color: Colors.white),
+                );
+              }),
+            ),
+          ),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -78,31 +106,6 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
             SizedBox(
               height: width * 0.6,
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Obx(() {
-                  if (supportCtr.loading.value) {
-                    return customView.MyIndicator();
-                  }
-                  return customView.MyButton(
-                    context,
-                    "Send message",
-                    () {
-                      if (validation()) {
-                        supportCtr.supportApi(context, subjectCtrl.text,
-                            emailCtrl.text, msgCtrl.text, () {
-                          Get.back();
-                            });
-                      }
-                    },
-                    MyColor.primary,
-                    const TextStyle(fontFamily: "Poppins", color: Colors.white),
-                  );
-                }),
-              ),
-            )
           ],
         ),
       ),

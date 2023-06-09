@@ -113,6 +113,9 @@ static const String dAddPrescription= "prescription";
 
   static const String addMedicineList = "add_medicine";
 
+  static const String addFetchMedicineList = "fetch_doctor_medicine";
+
+
   /*Chat list Dr*/
   static const String dChatListFetch = "doctor_msg_list";
   static const String dChatListDelete = "delete_user_msg_list";

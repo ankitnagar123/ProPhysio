@@ -24,28 +24,37 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-            // floatingActionButtonLocation:
-            //     FloatingActionButtonLocation.centerDocked,
-            // floatingActionButton: Padding(
-            //     padding: const EdgeInsets.only(bottom: 12),
-            //     child: Obx(
-            //       () {
-            //         if (patientSupportCtr.loading.value) {
-            //           return customView.MyIndicator();
-            //         }
-            //         return customView.MyButton(
-            //           context,
-            //           "Send message",
-            //           () {
-            //             patientSupportCtr.supportApi(context, subjectCtrl.text,
-            //                 emailCtrl.text, msgCtrl.text, () {});
-            //           },
-            //           MyColor.primary,
-            //           const TextStyle(
-            //               fontFamily: "Poppins", color: Colors.white),
-            //         );
-            //       },
-            //     )),
+          bottomNavigationBar:  Container(
+            margin: const EdgeInsets.symmetric(vertical: 10,horizontal:  15),
+            height: 58,
+            child: Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Obx(
+                      () {
+                    if (patientSupportCtr.loading.value) {
+                      return Center(child: customView.MyIndicator());
+                    }
+                    return customView.MyButton(
+                      context,
+                      "Send message",
+                          () {
+                        if(validation()){
+                          patientSupportCtr.supportApi(context, subjectCtrl.text,
+                              emailCtrl.text, msgCtrl.text, () {
+                                subjectCtrl.clear();
+                                emailCtrl.clear();
+                                msgCtrl.clear();
+                              });
+                        }
+
+                      },
+                      MyColor.primary,
+                      const TextStyle(
+                          fontFamily: "Poppins", color: Colors.white),
+                    );
+                  },
+                )),
+          ) ,
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () {
@@ -102,32 +111,6 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                       context, msgCtrl, "Your Message", TextInputType.text),
                   SizedBox(
                     height: width * 0.6,
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Obx(
-                              () {
-                            if (patientSupportCtr.loading.value) {
-                              return customView.MyIndicator();
-                            }
-                            return customView.MyButton(
-                              context,
-                              "Send message",
-                                  () {
-                                if(validation()){
-                                  patientSupportCtr.supportApi(context, subjectCtrl.text,
-                                      emailCtrl.text, msgCtrl.text, () {});
-                                }
-
-                              },
-                              MyColor.primary,
-                              const TextStyle(
-                                  fontFamily: "Poppins", color: Colors.white),
-                            );
-                          },
-                        )),
                   ),
                 ],
               ),

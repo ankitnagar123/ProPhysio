@@ -10,6 +10,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../patient_screens/model/PatinetPrescriptionModel.dart';
+import '../../model/MedicineModel/AddFetchMedicneList.dart';
 import '../../model/MedicineModel/MedicineAllListModel.dart';
 import '../../model/QrPresciptionList.dart';
 
@@ -30,6 +31,8 @@ class DoctorPrescriptionCtr extends GetxController {
 
   var loadingMedicine = false.obs;
 
+  var loadingMedicineFetch = false.obs;
+
 /*---------for doctor*---------*/
   var prescriptionList = Rxn<DPrescriptionListModel>();
 
@@ -39,8 +42,11 @@ class DoctorPrescriptionCtr extends GetxController {
   /*------for patient---------*/
   var patientPrescriptionList = <PatinetPrescriptionModel>[].obs;
 
-  /*For Medicine List*/
+  /*For Medicine all List*/
   var allMedicineList = <MedicineAllListModel>[].obs;
+
+  /*For Medicine add wali List*/
+  var fetchMedicineList = <AddFetchMedicineListModel>[].obs;
 
 /*---------for doctor*---------*/
   void addPrescription(
@@ -215,6 +221,7 @@ class DoctorPrescriptionCtr extends GetxController {
       log('Kuch to dikkat hai?$e');
     }
   }
+
   /*---------for medicins add*---------*/
 /*---------for doctor*---------*/
   void medicinesAdd(
@@ -257,4 +264,28 @@ class DoctorPrescriptionCtr extends GetxController {
     }
   }
 
+  /*---------for Doctor add Medicine add Wali List *---------*/
+  Future<void> AddFetchmedicineListAll(String userId) async {
+    loadingMedicineFetch.value = true;
+    Map<String, dynamic> data = {
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "user_id": userId,
+    };
+    final response =
+        await apiService.postData(MyAPI.addFetchMedicineList, data);
+    log("parameter medicine all list ${response.body}");
+    try {
+      if (response.statusCode == 200) {
+        loadingMedicineFetch.value = false;
+        fetchMedicineList.value =
+            addFetchMedicineListModelFromJson(response.body);
+        log(fetchMedicineList.toString());
+      } else {
+        loadingMedicineFetch.value = false;
+      }
+    } catch (e) {
+      loadingMedicineFetch.value = false;
+      log('Kuch to dikkat hai?$e');
+    }
+  }
 }

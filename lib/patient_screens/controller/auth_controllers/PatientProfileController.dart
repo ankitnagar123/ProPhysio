@@ -101,7 +101,7 @@ class PatientProfileCtr extends GetxController {
       String helathcard,
       String address,
       String phone, String code,String image,
-      String baseimage,String gender,
+      String baseimage,String gender,String lat,String long,
       VoidCallback callback) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
@@ -118,6 +118,8 @@ class PatientProfileCtr extends GetxController {
       "image": image,
       "img_str": baseimage,
       "gender":gender,
+      "latitude":lat,
+      "longitude":long,
     };
     print("Patient Profile Update Parameter$profileUpdatePerameter");
 

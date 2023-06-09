@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   TextEditingController birthPlaceCtr = TextEditingController();
   TextEditingController genderCtr = TextEditingController();
 
-
   String qRCode = "";
   String files = "";
   String code = '';
@@ -46,6 +47,11 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   final picker = ImagePicker();
   String baseimage = "";
   String imagename = "";
+  String latitude = "";
+  String longitude = "";
+  late Position currentPostion;
+
+
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.pickImage(
@@ -66,6 +72,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
+    _getUserLocation();
+    print(" latitude ${latitude}");
     profileCtr.patientProfile(context);
     nameCtrl.text = profileCtr.name.value;
     print("my name${profileCtr.name.value}");
@@ -86,7 +94,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     weightCtr.text = profileCtr.weight.value;
     taxCtr.text = profileCtr.taxCode.value;
     birthPlaceCtr.text = profileCtr.birthplace.value;
-genderCtr.text = profileCtr.gender.value;
+    genderCtr.text = profileCtr.gender.value;
     super.initState();
   }
 
@@ -104,8 +112,7 @@ genderCtr.text = profileCtr.gender.value;
             color: Colors.black,
           ),
         ),
-        title:
-            customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
+        title: customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -231,8 +238,8 @@ genderCtr.text = profileCtr.gender.value;
               SizedBox(
                 height: height * 0.01,
               ),
-              customView.myField(context, userNameCtrl, "Enter User Name",
-                  TextInputType.text),
+              customView.myField(
+                  context, userNameCtrl, "Enter User Name", TextInputType.text),
               const Divider(
                 thickness: 2.0,
                 height: 50.0,
@@ -244,8 +251,8 @@ genderCtr.text = profileCtr.gender.value;
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Your name", 10.0, FontWeight.w600,
-                            MyColor.black),
+                        customView.text(
+                            "Your name", 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
@@ -353,13 +360,12 @@ genderCtr.text = profileCtr.gender.value;
               SizedBox(
                 height: height * 0.01,
               ),
-              customView.myField(context, genderCtr, "Enter Your gender",
-                  TextInputType.text),
+              customView.myField(
+                  context, genderCtr, "Enter Your gender", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
-              customView.text(
-                  "Your Age", 10.0, FontWeight.w600, MyColor.black),
+              customView.text("Your Age", 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
@@ -399,7 +405,8 @@ genderCtr.text = profileCtr.gender.value;
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(context, birthPlaceCtr, "birth-place", TextInputType.text),
+              myField(
+                  context, birthPlaceCtr, "birth-place", TextInputType.text),
               SizedBox(
                 height: height * 0.04,
               ),
@@ -408,12 +415,14 @@ genderCtr.text = profileCtr.gender.value;
         }),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-        child:  AnimatedButton(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+        child: AnimatedButton(
           // width: MediaQuery.of(context).size.width * 0.8,
           text: 'Save Profile',
           color: MyColor.primary,
           pressEvent: () {
+            _getUserLocation();
+            getLatLong();
             profileCtr.patientProfileUpdate(
                 context,
                 nameCtrl.text,
@@ -427,7 +436,8 @@ genderCtr.text = profileCtr.gender.value;
                 imagename,
                 baseimage,
                 genderCtr.text,
-                    () {
+                latitude,
+                longitude, () {
               AwesomeDialog(
                 context: context,
                 animType: AnimType.leftSlide,
@@ -473,5 +483,53 @@ genderCtr.text = profileCtr.gender.value;
         ),
       ),
     );
+  }
+//*********Get user latitude and longitude*********//
+  void _getUserLocation() async {
+    LocationPermission permission;
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+        forceAndroidLocationManager: true
+    ).then((Position position){
+      setState(() {
+        currentPostion = position;
+
+        print("...........$position");
+
+        print(">>>>>>>   ${position.latitude}");
+        print(position.longitude);
+      });
+    }).catchError((e){
+      print("Error>>>>>>>>>>>>>>> :--- "+e);
+    });
+  }
+
+  Future<void> getLatLong()async{
+    List<Location> locations = await locationFromAddress(addressCtrl.text.toString());
+    setState(() {
+      longitude=locations.last.longitude.toString();
+      latitude=locations.last.latitude.toString();
+      print('input address longitude---->${longitude}');
+      print('input address latitude---->${latitude}');
+    });
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
@@ -29,53 +27,48 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      doctorPrescriptionCtr.AddFetchmedicineListAll(widget.patientId);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Card(
-                color: MyColor.midgray,
-                child: ListTile(
-                    contentPadding: const EdgeInsets.all(12),
-                    title: Row(
-                      children: [
-                        custom.text(
-                            "Medicines", 16, FontWeight.w400, MyColor.primary1),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        custom.text(
-                            "100 mg", 13, FontWeight.normal, MyColor.primary1),
-                      ],
-                    ),
-                    subtitle: const Text(
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: "Poppins",
-                      ),
-                      "list.description hi how are you on the, sutbrt, t iuog giviuerg ",
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: Text("data")),
-              );
-            },
-          )
-        ],
-      )),
-    );
+    return Obx(() {
+      return Scaffold(
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            doctorPrescriptionCtr.loadingMedicineFetch.value
+                ? Center(heightFactor: 13, child: custom.MyIndicator())
+                : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: doctorPrescriptionCtr.fetchMedicineList.length,
+                    itemBuilder: (context, index) {
+                      var list = doctorPrescriptionCtr.fetchMedicineList[index];
+                      return Card(
+                        color: MyColor.midgray,
+                        child: ListTile(
+                            contentPadding: const EdgeInsets.all(12),
+                            title: custom.text(list.medicineName, 16,
+                                FontWeight.w400, MyColor.primary1),
+                            subtitle: Text(
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontFamily: "Poppins",
+                              ),
+                              list.description,
+                              maxLines: 4,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: Text(list.medicineSlot)),
+                      );
+                    },
+                  )
+          ],
+        )),
+      );
+    });
   }
-
-
 }
