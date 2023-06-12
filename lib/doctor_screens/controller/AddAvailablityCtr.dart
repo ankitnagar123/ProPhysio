@@ -138,18 +138,16 @@ class AddAvailabilityCtr extends GetxController {
       if (result == "Success") {
         loadingd.value = false;
         log("my Doctor Add  add Time $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context, result);
         print(result.toString());
         callback();
       } else {
         loadingd.value = false;
-        custom.massenger(context, result.toString());
+        custom.massenger(context, result);
       }
     } catch (e) {
       loadingd.value = false;
       log("exception$e");
     }
   }
-
-
 }

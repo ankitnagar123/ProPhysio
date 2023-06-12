@@ -48,6 +48,16 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   String baseimage = "";
   String imagename = "";
 
+  DateTime? startDate;
+  String _displayText(DateTime? date) {
+    if (date != null) {
+      return date.toString().split(' ')[0];
+    } else {
+      return '';
+    }
+  }
+
+
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
         source: source, imageQuality: 50, maxHeight: 500, maxWidth: 500);
@@ -97,6 +107,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             doctorProfileCtr.registerOfBelonging.value;
         dateOfQualification.text = doctorProfileCtr.dateOfQualification.value;
         dateOfGraduation.text = doctorProfileCtr.dateOfGraduation.value;
+        print("date  q======${doctorProfileCtr.dateOfQualification.value}");
 
         print("date of birth======${doctorProfileCtr.dateOfBirth.value}");
       }
@@ -188,8 +199,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                                       _choose(
                                                           ImageSource.gallery);
                                                     },
-                                                    child: Row(
-                                                      children: const [
+                                                    child: const Row(
+                                                      children: [
                                                         Icon(Icons.image,
                                                             size: 20),
                                                         SizedBox(
@@ -214,8 +225,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                                       _choose(
                                                           ImageSource.camera);
                                                     },
-                                                    child: Row(
-                                                      children: const [
+                                                    child: const Row(
+                                                      children: [
                                                         Icon(Icons.camera_alt),
                                                         SizedBox(
                                                           width: 10,
@@ -275,6 +286,33 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         ),
                         customView.text("Personal data", 14.0, FontWeight.w500,
                             MyColor.black),
+                        Container(
+                            height: 45.0,
+                            width: MediaQuery.of(context).size.width / 2.3,
+                            padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                            margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(7)),
+                            child: TextFormField(
+                              onTap: () async { 
+                                startDate = await pickDate();
+                                birthDateController.text = _displayText(startDate);
+                                setState(() {});
+                              },
+                              readOnly: true,
+                              controller: birthDateController,
+                              decoration: const InputDecoration(
+                                hintText: "Select Date",
+                                hintStyle: TextStyle(fontSize: 11),
+                                suffixIcon:
+                                Icon(Icons.calendar_month, color: MyColor.primary),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                              ),
+                            )),
                         SizedBox(
                           height: height * 0.03,
                         ),
@@ -503,5 +541,33 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             ));
       });
     });
+  }
+
+  //*******date strt end************//
+  Future<DateTime?> pickDate() async {
+    return await showDatePicker(
+      keyboardType: TextInputType.numberWithOptions(),
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2999),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: MyColor.primary, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.brown, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: MyColor.primary, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
   }
 }

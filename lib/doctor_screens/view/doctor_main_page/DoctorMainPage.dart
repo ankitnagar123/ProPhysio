@@ -15,10 +15,9 @@ class DoctorMainScreen extends StatefulWidget {
 }
 
 class _DoctorMainScreenState extends State<DoctorMainScreen> {
-  TextEditingController optctr = TextEditingController();
   CustomView custom = CustomView();
   int _selectedIndex = 0;
-  static const List<Widget> Screens = [
+  static const List<Widget> screens = [
     DoctorHomeScreen(),
     DoctorBookingScreen(),
     DoctorChatListScreen(),
@@ -70,7 +69,7 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
             iconSize: 25,
             onTap: _onItemTapped,
             elevation: 5),
-        body: Screens.elementAt(_selectedIndex),
+        body: screens.elementAt(_selectedIndex),
       ),
     );
   }

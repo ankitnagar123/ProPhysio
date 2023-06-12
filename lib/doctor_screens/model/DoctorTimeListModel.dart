@@ -9,24 +9,24 @@ List<DoctorTimeListModel> doctorTimeListModelFromJson(String str) => List<Doctor
 String doctorTimeListModelToJson(List<DoctorTimeListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DoctorTimeListModel {
+  String timeId;
+  String from;
+  String to;
+
   DoctorTimeListModel({
-    required this.id,
+    required this.timeId,
     required this.from,
     required this.to,
   });
 
-  String id;
-  String from;
-  String to;
-
   factory DoctorTimeListModel.fromJson(Map<String, dynamic> json) => DoctorTimeListModel(
-    id: json["Id"],
+    timeId: json["time_id"],
     from: json["From"],
     to: json["To"],
   );
 
   Map<String, dynamic> toJson() => {
-    "Id": id,
+    "time_id": timeId,
     "From": from,
     "To": to,
   };

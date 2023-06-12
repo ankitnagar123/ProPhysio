@@ -67,7 +67,7 @@ class _CenterProfileState extends State<CenterProfile> {
         .height;
     return Obx(() {
       if (centerAuthCtr.resultVar.value == 1) {
-        centerAuthCtr.resultVar.value = 0;
+             centerAuthCtr.resultVar.value = 0;
         bioCtrl.text = centerAuthCtr.bio.value;
         emailCtrl.text = centerAuthCtr.Email.value;
         addressCtrl.text = centerAuthCtr.location.value;

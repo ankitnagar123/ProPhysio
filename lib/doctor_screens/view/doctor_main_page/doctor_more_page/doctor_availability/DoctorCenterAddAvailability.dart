@@ -219,11 +219,11 @@ class _DoctorCenterAddAvailabilityState
                                 setState(() {
                                   if (selectedIndexes.contains(index)) {
                                     selectedIndexes.remove(index);
-                                    timeIdArray.remove(list.id);
+                                    timeIdArray.remove(list.timeId);
                                     // unselect
                                   } else {
                                     selectedIndexes.add(index); // select
-                                    timeIdArray.add(list.id);
+                                    timeIdArray.add(list.timeId);
                                   }
                                 });
                                 print(selectedIndexes);
@@ -242,7 +242,7 @@ class _DoctorCenterAddAvailabilityState
             ),
             addAvailabilityCtr.loadingd.value
                 ? custom.MyIndicator()
-                : custom.acceptRejectButton(context, "select Time", () {
+                : custom.acceptRejectButton(context, "Select time", () {
               if (timeIdArray.isNotEmpty) {
                 addAvailabilityCtr.addTime(context, timeIdArray.join(","),
                     addAvailabilityCtr.dateId.value, () {

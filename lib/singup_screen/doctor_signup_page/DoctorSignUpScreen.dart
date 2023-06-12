@@ -349,7 +349,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     if (date != null) {
       return date.toString().split(' ')[0];
     } else {
-      return 'Choose The Date';
+      return '';
     }
   }
 

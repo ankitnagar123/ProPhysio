@@ -215,7 +215,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                   child: ListTile(
                     horizontalTitleGap: 5,
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity: const VisualDensity(horizontal: -4.0, vertical: -4.0),
                     leading: Radio<String>(
                       value: 'After Meal',
                       groupValue: _selectedGender,

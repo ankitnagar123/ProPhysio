@@ -195,11 +195,11 @@ class _MyAvailabilityState extends State<MyAvailability> {
                                     setState(() {
                                       if (selectedIndexes.contains(index)) {
                                         selectedIndexes.remove(index);
-                                        timeIdArray.remove(list.id);
+                                        timeIdArray.remove(list.timeId);
                                         // unselect
                                       } else {
                                         selectedIndexes.add(index); // select
-                                        timeIdArray.add(list.id);
+                                        timeIdArray.add(list.timeId);
                                       }
                                     });
                                     print(selectedIndexes);
