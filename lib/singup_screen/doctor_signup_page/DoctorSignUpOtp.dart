@@ -189,7 +189,6 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
       custom.massenger(context, "plz filled all fild");
     } else if (apiotp == optctr.text) {
       print("Correct OTP");
-      // custom.massenger(context, "SignUp Successfully");
       return true;
     } else {
       custom.massenger(context, "invalid otp");

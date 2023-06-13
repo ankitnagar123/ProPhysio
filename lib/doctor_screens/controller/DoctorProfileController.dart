@@ -85,13 +85,13 @@ class DoctorProfileCtr extends GetxController {
         lang.value = jsonResponse["longitude"].toString();
         degree.value = jsonResponse["Doctor_document"].toString();
         /*-new-*/
-      /*  dateOfBirth.value = jsonResponse["birth_date"];
+        dateOfBirth.value = jsonResponse["birth_date"];
         placeOfBirth.value = jsonResponse["birth_place"];
         universityAttended.value = jsonResponse["university_attended"];
         dateOfEnrollment.value = jsonResponse["enrollment_date"];
         registerOfBelonging.value = jsonResponse["register_of_belonging"];
         dateOfGraduation.value = jsonResponse["graduation_date"];
-        dateOfQualification.value = jsonResponse["qualification_date"];*/
+        dateOfQualification.value = jsonResponse["qualification_date"];
         resultVar.value = 1;
 
         // Massenger(context, 'My Profile');

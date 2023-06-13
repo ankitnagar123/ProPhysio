@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
-import 'package:flutter/cupertino.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -32,8 +31,8 @@ class BookingController extends GetxController {
   var loadingCancelList = false.obs;
   var loadingCancel = false.obs;
 
-
   var username = "".obs;
+  var userPic = "".obs;
   var paymentTyp = "".obs;
   var price = "".obs;
   var bookingDate = "".obs;
@@ -45,21 +44,23 @@ class BookingController extends GetxController {
   var name = "".obs;
   var bookingId = "".obs;
   var contact = "".obs;
-var userId = "".obs;
-var patientProfile = "".obs;
+  var userId = "".obs;
+  var patientProfile = "".obs;
 
   /*---------booking Appointment List with Status type--------*/
-  Future<void> bookingAppointment(BuildContext context,String statusType,String dateFilter) async {
-    bool connection = await  checkInternetConnection();
+  Future<void> bookingAppointment(
+      BuildContext context, String statusType, String dateFilter) async {
+    bool connection = await checkInternetConnection();
     final Map<String, dynamic> perameter = {
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "status": statusType,
-      "type":dateFilter,
+      "type": dateFilter,
     };
-    if(connection){
+    if (connection) {
       try {
         loading.value = true;
-        final response = await apiService.postData(MyAPI.dBookingAppointmentList, perameter);
+        final response =
+            await apiService.postData(MyAPI.dBookingAppointmentList, perameter);
         print(" Category =============${response.body}");
         if (response.statusCode == 200) {
           loading.value = false;
@@ -75,11 +76,11 @@ var patientProfile = "".obs;
           loading.value = false;
           print("error");
         }
-      }catch (e) {
+      } catch (e) {
         loading.value = false;
         print("exception$e");
       }
-    }else{
+    } else {
       loading.value = false;
       AwesomeDialog(
         context: context,
@@ -99,7 +100,6 @@ var patientProfile = "".obs;
       ).show();
       print("no internet");
     }
-
   }
 
 /*----------booking Appointment details API-----------*/
@@ -111,8 +111,8 @@ var patientProfile = "".obs;
   ) async {
     loadingd.value = true;
     final Map<String, dynamic> Perameter = {
-      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "booking_id": id,
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "status": statusType,
     };
     print("Doctor booking Appointment details Parameter$Perameter");
@@ -129,7 +129,7 @@ var patientProfile = "".obs;
         // String result = jsonResponse['result'];
         // print("my doctor profile====${result.toString()}");
         patientProfile.value = jsonResponse["user_profile"].toString();
-
+   userPic.value = jsonResponse["user_profile"].toString();
         userId.value = jsonResponse["user_id"].toString();
         paymentTyp.value = jsonResponse["payment_type"].toString();
         price.value = jsonResponse["price"].toString();
@@ -172,7 +172,7 @@ var patientProfile = "".obs;
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context,"pending","");
+        bookingAppointment(context, "pending", "");
         loadingAccept.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -186,13 +186,12 @@ var patientProfile = "".obs;
     }
   }
 
-
 /*----------booking Appointment Reject API-----------*/
   void bookingAppointmentReject(
-      BuildContext context,
-      String id,
-      VoidCallback callback,
-      ) async {
+    BuildContext context,
+    String id,
+    VoidCallback callback,
+  ) async {
     loadingReject.value = true;
     final Map<String, dynamic> Perameter = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
@@ -200,13 +199,13 @@ var patientProfile = "".obs;
     };
     print("booking Appointment Reject Parameter$Perameter");
     final response =
-    await apiService.postData(MyAPI.dBookingAppointmentReject, Perameter);
+        await apiService.postData(MyAPI.dBookingAppointmentReject, Perameter);
     try {
       log("booking Appointment Reject:-${response.body}");
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context,"pending","");
+        bookingAppointment(context, "pending", "");
         loadingReject.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -220,13 +219,12 @@ var patientProfile = "".obs;
     }
   }
 
-
   /*----------booking Appointment Done API-----------*/
   void bookingAppointmentDone(
-      BuildContext context,
-      String id,
-      VoidCallback callback,
-      ) async {
+    BuildContext context,
+    String id,
+    VoidCallback callback,
+  ) async {
     loadingDone.value = true;
     final Map<String, dynamic> Perameter = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
@@ -234,13 +232,13 @@ var patientProfile = "".obs;
     };
     print("booking Appointment DONE Parameter$Perameter");
     final response =
-    await apiService.postData(MyAPI.dBookingAppointmentDone, Perameter);
+        await apiService.postData(MyAPI.dBookingAppointmentDone, Perameter);
     try {
       log("booking Appointment DONE :-${response.body}");
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context,"pending","");
+        bookingAppointment(context, "pending", "");
         loadingDone.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -254,13 +252,11 @@ var patientProfile = "".obs;
     }
   }
 
-
   /*---------booking Appointment Cancel Reason's List--------*/
   Future<void> appointmentCancelReason() async {
     try {
       loadingCancelList.value = true;
-      final response =
-      await apiService.getData(MyAPI.dAppointmentCancelList);
+      final response = await apiService.getData(MyAPI.dAppointmentCancelList);
       print(" appointment Cancel Reason =============${response.body}");
       if (response.statusCode == 200) {
         loadingCancelList.value = false;
@@ -276,29 +272,28 @@ var patientProfile = "".obs;
     }
   }
 
-
   /*----------booking Appointment Cancel with reason API-----------*/
   void bookingAppointmentCancel(
-      BuildContext context,
-      String bookingId,
-      String cancelId,
-      VoidCallback callback,
-      ) async {
+    BuildContext context,
+    String bookingId,
+    String cancelId,
+    VoidCallback callback,
+  ) async {
     loadingCancel.value = true;
     final Map<String, dynamic> Perameter = {
       "user_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "booking_id": bookingId,
-      "cancle_id":cancelId,
+      "cancle_id": cancelId,
     };
     print("booking Appointment Cancel Parameter$Perameter");
     final response =
-    await apiService.postData(MyAPI.dBookingAppointmentCancel, Perameter);
+        await apiService.postData(MyAPI.dBookingAppointmentCancel, Perameter);
     try {
       log("booking Appointment Cancel :-${response.body}");
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context,"pending","");
+        bookingAppointment(context, "pending", "");
         loadingCancel.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -311,5 +306,4 @@ var patientProfile = "".obs;
       log("exception$e");
     }
   }
-
 }

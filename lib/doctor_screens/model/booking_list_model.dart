@@ -1,6 +1,7 @@
 
 class bookingList {
-  String? Id;
+
+  String? bookingId;
   String? id;
   String? bookID;
   String? name;
@@ -10,7 +11,8 @@ class bookingList {
   String? time;
 
   bookingList(
-      {this.Id,
+      {
+        this.bookingId,
         this.id,
         this.bookID,
         this.name,
@@ -20,7 +22,7 @@ class bookingList {
         this.time});
 
   bookingList.fromJson(Map<String, dynamic> json) {
-    Id = json['Id'];
+    bookingId = json['booking_id'];
     id = json['user_id'];
     bookID = json['book_ID'];
     name = json['name'];
@@ -32,7 +34,7 @@ class bookingList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Id'] = Id;
+    data["booking_id"] = bookingId;
     data['user_id'] = id;
     data['book_ID'] = bookID;
     data['name'] = name;

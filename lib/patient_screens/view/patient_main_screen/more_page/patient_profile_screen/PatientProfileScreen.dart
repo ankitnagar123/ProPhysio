@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -51,11 +51,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   String longitude = "";
   late Position currentPostion;
 
-
-
   void _choose(ImageSource source) async {
     final pickedFile = await picker.pickImage(
-        source: source, imageQuality: 100, maxHeight: 500, maxWidth: 500);
+        source: source, imageQuality: 60,);
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
@@ -369,7 +367,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(context, ageCtr, "age", TextInputType.text),
+              customView.myField(
+                  context, ageCtr, "Enter your age", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -378,7 +377,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(context, heightCtr, "height", TextInputType.text),
+              customView.myField(
+                  context, heightCtr, "Enter your height", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -387,7 +387,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(context, weightCtr, "weight", TextInputType.text),
+              customView.myField(
+                  context, weightCtr, "Enter your weight", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -396,7 +397,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(context, taxCtr, "tax code", TextInputType.text),
+              customView.myField(
+                  context, taxCtr, "Enter your tax code", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -405,8 +407,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.01,
               ),
-              myField(
-                  context, birthPlaceCtr, "birth-place", TextInputType.text),
+              customView.myField(context, birthPlaceCtr,
+                  "Enter your birth-place", TextInputType.text),
               SizedBox(
                 height: height * 0.04,
               ),
@@ -437,7 +439,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 baseimage,
                 genderCtr.text,
                 latitude,
-                longitude, () {
+                longitude,
+                ageCtr.text,
+                weightCtr.text,
+                heightCtr.text,
+                birthPlaceCtr.text,
+                taxCtr.text, () {
               AwesomeDialog(
                 context: context,
                 animType: AnimType.leftSlide,
@@ -484,6 +491,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       ),
     );
   }
+
 //*********Get user latitude and longitude*********//
   void _getUserLocation() async {
     LocationPermission permission;
@@ -507,9 +515,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
     Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-        forceAndroidLocationManager: true
-    ).then((Position position){
+            desiredAccuracy: LocationAccuracy.high,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
       setState(() {
         currentPostion = position;
 
@@ -518,16 +526,17 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         print(">>>>>>>   ${position.latitude}");
         print(position.longitude);
       });
-    }).catchError((e){
-      print("Error>>>>>>>>>>>>>>> :--- "+e);
+    }).catchError((e) {
+      print("Error>>>>>>>>>>>>>>> :--- " + e);
     });
   }
 
-  Future<void> getLatLong()async{
-    List<Location> locations = await locationFromAddress(addressCtrl.text.toString());
+  Future<void> getLatLong() async {
+    List<Location> locations =
+        await locationFromAddress(addressCtrl.text.toString());
     setState(() {
-      longitude=locations.last.longitude.toString();
-      latitude=locations.last.latitude.toString();
+      longitude = locations.last.longitude.toString();
+      latitude = locations.last.latitude.toString();
       print('input address longitude---->${longitude}');
       print('input address latitude---->${latitude}');
     });

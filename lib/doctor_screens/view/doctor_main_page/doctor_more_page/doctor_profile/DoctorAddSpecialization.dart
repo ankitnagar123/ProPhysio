@@ -1,10 +1,10 @@
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../../controller/AddSpecializationCtr.dart';
@@ -28,7 +28,6 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
   AddSpecializationCtr addSpecializationCtr = Get.put(AddSpecializationCtr());
   String? slectedCategory;
   String? slectedsubCategory;
-
 
   @override
   TextEditingController discriptionCtr = TextEditingController();
@@ -61,10 +60,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -86,15 +82,12 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Divider(
               thickness: 1.5,
             ),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .shortestSide / 15,
+              height: MediaQuery.of(context).size.shortestSide / 15,
             ),
             customView.text("Category", 10.0, FontWeight.w600, MyColor.black),
             SizedBox(
@@ -104,7 +97,8 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             SizedBox(
               height: height * 0.02,
             ),
-            customView.text("Sub-category", 10.0, FontWeight.w600, MyColor.black),
+            customView.text(
+                "Sub-category", 10.0, FontWeight.w600, MyColor.black),
             subcategory(),
             const Divider(
               thickness: 1.5,
@@ -137,8 +131,8 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             SizedBox(
               height: height * 0.01,
             ),
-            customView.myField(
-                context, discriptionCtr, "Your description", TextInputType.text),
+            customView.myField(context, discriptionCtr, "Your description",
+                TextInputType.text),
             SizedBox(
               height: height * 0.05,
             ),
@@ -147,7 +141,6 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
               child: customView.text(
                   "Services price", 14.0, FontWeight.w600, Colors.black),
             ),
-
             GestureDetector(
               onTap: () {
                 visitPopUp(context);
@@ -197,9 +190,8 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              customView.text(
-                                  visitNames[index], 14.0, FontWeight.w500,
-                                  MyColor.black),
+                              customView.text(visitNames[index], 14.0,
+                                  FontWeight.w500, MyColor.black),
                               const Icon(
                                 Icons.arrow_forward,
                                 size: 20.0,
@@ -208,52 +200,52 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                             ],
                           ),
                         ));
-                  }
-              ),
+                  }),
             ),
             Align(
               alignment: Alignment.center,
-              child:
-              addSpecializationCtr.loading.value
+              child: addSpecializationCtr.loading.value
                   ? Center(
-                child: customView.MyIndicator(),
-              ) :
-              AnimatedButton(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.9,
-                text: 'Add specialization',
-                color: MyColor.primary,
-                pressEvent: () {
-                  if(validation()){
-                    addSpecializationCtr.addSpecializationFee(
-                        context, slectedCategory.toString(),slectedsubCategory.toString(),discriptionCtr.text,
-                        visitList!, feeList!, () {
-                          () {
-                        AwesomeDialog(
-                          context: context,
-                          animType: AnimType.leftSlide,
-                          headerAnimationLoop: false,
-                          dialogType: DialogType.success,
-                          showCloseIcon: true,
-                          title: 'Success',
-                          desc: 'Add Successfully',
-                          btnOkOnPress: () {
-                            debugPrint('OnClcik');
-                          },
-                          btnOkIcon: Icons.check_circle,
-                          onDismissCallback: (type) {
-                            debugPrint('Dialog Dissmiss from callback $type');
-                          },
-                        ).show();
-                        // Get.back();
-                      };
-                    });
-                  }
-
-                },
-              ),
+                      child: customView.MyIndicator(),
+                    )
+                  : AnimatedButton(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      text: 'Add specialization',
+                      color: MyColor.primary,
+                      pressEvent: () {
+                        if (validation()) {
+                          addSpecializationCtr.addSpecializationFee(
+                              context,
+                              slectedCategory.toString(),
+                              slectedsubCategory.toString(),
+                              discriptionCtr.text,
+                              visitList!,
+                              feeList!, () {
+                           Get.back();
+                            () {
+                              AwesomeDialog(
+                                context: context,
+                                animType: AnimType.leftSlide,
+                                headerAnimationLoop: false,
+                                dialogType: DialogType.success,
+                                showCloseIcon: true,
+                                title: 'Success',
+                                desc: 'Add Successfully',
+                                btnOkOnPress: () {
+                                  debugPrint('OnClcik');
+                                },
+                                btnOkIcon: Icons.check_circle,
+                                onDismissCallback: (type) {
+                                  debugPrint(
+                                      'Dialog Dissmiss from callback $type');
+                                },
+                              ).show();
+                              // Get.back();
+                            };
+                          });
+                        }
+                      },
+                    ),
             ),
           ]),
         ),
@@ -284,17 +276,12 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Card(
@@ -314,7 +301,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text("Add service", 17,
                                 FontWeight.w500, Colors.black),
                           ),
@@ -323,7 +310,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
                                 "Please enter the service name and the price.",
                                 12,
@@ -397,11 +384,11 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
   }
 
   bool validation() {
-    if(slectedCategory == null){
+    if (slectedCategory == null) {
       customView.MySnackBar(context, "Select category");
     } else if (slectedsubCategory == null) {
       customView.MySnackBar(context, "Select sub-category");
-    }else if (discriptionCtr.text.isEmpty) {
+    } else if (discriptionCtr.text.isEmpty) {
       customView.MySnackBar(context, "Enter description");
     } else if (visitNames.isEmpty) {
       customView.MySnackBar(context, "Enter visit name with charges");
@@ -414,141 +401,121 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
   }
 
   bool validationVisit() {
-   if (visitnameCtr.text.isEmpty) {
+    if (visitnameCtr.text.isEmpty) {
       customView.MySnackBar(context, "Enter visit name");
     } else if (feeCtr.text.isEmpty) {
-     customView.MySnackBar(context, "Enter visit charge");
-   } else {
+      customView.MySnackBar(context, "Enter visit charge");
+    } else {
       return true;
     }
     return false;
   }
 
-
   Widget category() {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
     return StatefulBuilder(
-      builder: (context, StateSetter stateSetter) =>
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Center(
-              child: Obx(() {
-if(addSpecializationCtr.categoryloding.value){
-  return customView.MyIndicator();
-}
-                return Container(
-                  height: height * 0.06,
-                  width: widht * 0.9,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-                  decoration: BoxDecoration(
-                      color: MyColor.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(color: MyColor.grey)),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      menuMaxHeight: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 3,
-                      // Initial Value
-                      value: slectedCategory,
-                      // Down Arrow Icon
-                      icon: const Icon(Icons.keyboard_arrow_down,
-                          color: MyColor.primary),
-                      // Array list of items
-                      items: addSpecializationCtr.selectedCategory.map((items) {
-                        return DropdownMenuItem(
-                          value: items.categoryId,
-                          child: Text(items.categoryName),
-                        );
-                      }).toList(),
-                      hint: Text("Select Category"),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (newValue) {
-                        stateSetter(() {
-                          slectedCategory = newValue;
-                          log('$slectedCategory');
-                        });
-                        addSpecializationCtr.doctorSelectedSubCategory(slectedCategory.toString());
-                      },
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-    );
-  }
-  Widget subcategory() {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
-    return StatefulBuilder(
-      builder: (context, StateSetter stateSetter) =>
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Center(
-              child: Obx(() {
-                if(addSpecializationCtr.categorySubLoading.value){
-                  return customView.MyIndicator();
-                }
-                return Container(
-                  height: height * 0.06,
-                  width: widht * 0.9,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-                  decoration: BoxDecoration(
-                      color: MyColor.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(color: MyColor.grey)),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      menuMaxHeight: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 3,
-                      // Initial Value
-                      value: slectedsubCategory,
-                      // Down Arrow Icon
-                      icon: const Icon(Icons.keyboard_arrow_down,
-                          color: MyColor.primary),
-                      // Array list of items
-                      items: addSpecializationCtr.selectedSubCategory.map((items) {
-                        return DropdownMenuItem(
-                          value: items.subcatId,
-                          child: Text(items.subcatName),
-                        );
-                      }).toList(),
-                      hint: const Text("Select Sub-Category"),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (newValue) {
-                        stateSetter(() {
-                          slectedsubCategory = newValue;
-                          log('$slectedsubCategory');
-                        });
-                      },
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Obx(() {
+            if (addSpecializationCtr.categoryloding.value) {
+              return customView.MyIndicator();
+            }
+            return Container(
+              height: height * 0.06,
+              width: widht * 0.9,
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+              decoration: BoxDecoration(
+                  color: MyColor.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: MyColor.grey)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                  // Initial Value
+                  value: slectedCategory,
+                  // Down Arrow Icon
+                  icon: const Icon(Icons.keyboard_arrow_down,
+                      color: MyColor.primary),
+                  // Array list of items
+                  items: addSpecializationCtr.selectedCategory.map((items) {
+                    return DropdownMenuItem(
+                      value: items.categoryId,
+                      child: Text(items.categoryName),
+                    );
+                  }).toList(),
+                  hint: Text("Select Category"),
+                  // After selecting the desired option,it will
+                  // change button value to selected value
+                  onChanged: (newValue) {
+                    stateSetter(() {
+                      slectedCategory = newValue;
+                      log('$slectedCategory');
+                    });
+                    addSpecializationCtr
+                        .doctorSelectedSubCategory(slectedCategory.toString());
+                  },
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
     );
   }
 
+  Widget subcategory() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Obx(() {
+            if (addSpecializationCtr.categorySubLoading.value) {
+              return customView.MyIndicator();
+            }
+            return Container(
+              height: height * 0.06,
+              width: widht * 0.9,
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+              decoration: BoxDecoration(
+                  color: MyColor.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: MyColor.grey)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                  // Initial Value
+                  value: slectedsubCategory,
+                  // Down Arrow Icon
+                  icon: const Icon(Icons.keyboard_arrow_down,
+                      color: MyColor.primary),
+                  // Array list of items
+                  items: addSpecializationCtr.selectedSubCategory.map((items) {
+                    return DropdownMenuItem(
+                      value: items.subcatId,
+                      child: Text(items.subcatName),
+                    );
+                  }).toList(),
+                  hint: const Text("Select Sub-Category"),
+                  // After selecting the desired option,it will
+                  // change button value to selected value
+                  onChanged: (newValue) {
+                    stateSetter(() {
+                      slectedsubCategory = newValue;
+                      log('$slectedsubCategory');
+                    });
+                  },
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
 }

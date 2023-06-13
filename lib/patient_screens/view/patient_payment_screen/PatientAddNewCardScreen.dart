@@ -137,6 +137,10 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                           var year = expireDateCtrl.text.split('/').elementAt(1);
                           cardCtr.cardAdd(context, cardHolderNameCtrl.text,
                               cardNumberCtrl.text, month, year, cvcCtrl.text, () {
+                            cardHolderNameCtrl.clear();
+                            cardNumberCtrl.clear();
+                            expireDateCtrl.clear();
+                            cvcCtrl.clear();
                             cardCtr.cardFetch();
                             Get.back();
                            // Get.toNamed(RouteHelper.getPatientPaymentScreen());

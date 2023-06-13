@@ -43,7 +43,6 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   @override
   void initState() {
     bookingController.bookingAppointment(context,"", "");
-    // TODO: implement initState
     super.initState();
   }
 
@@ -196,14 +195,14 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
             itemCount: list.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              var id = list[index].Id.toString();
+              var bookingId = list[index].bookingId.toString();
               var userid = list[index].id.toString();
               var status = list[index].status!;
               return InkWell(
                 onTap: () {
                   bookingController.bookingAppointmentDetails(
-                      context, id, list[index].status!, () {
-                    showBottomSheet(id, userid, status);
+                      context, bookingId, list[index].status!, () {
+                    showBottomSheet(bookingId, userid, status);
                   });
                 },
                 child: Card(
@@ -615,7 +614,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                 MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
                             custom.acceptRejectButton(context, "Accept", () {
-                              acceptPopUp(context);
+                              acceptPopUp(context,id);
                             }, MyColor.primary,
                                 const TextStyle(color: MyColor.white))
                           ],
@@ -796,7 +795,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                         () {
                                           bookingController
                                               .bookingAppointmentCancel(context,
-                                                  id, cancelId!, () {
+                                                  id, cancelId.toString(), () {
                                             Get.offNamed(RouteHelper
                                                 .DCancelAppointSucces());
                                           });
@@ -822,7 +821,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   }
 
   /*------------Booking Accept PopUp--------------*/
-  void acceptPopUp(BuildContext context) {
+  void acceptPopUp(BuildContext context,String bookingId) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
@@ -893,8 +892,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           bookingController
                                               .bookingAppointmentAccept(
                                                   context,
-                                                  bookingController.bookingId
-                                                      .toString(), () {
+                                                  bookingId, () {
                                             Get.back();
                                             Get.back();
                                           });

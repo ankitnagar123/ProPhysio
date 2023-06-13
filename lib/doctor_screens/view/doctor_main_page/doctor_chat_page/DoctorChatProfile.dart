@@ -24,11 +24,16 @@ String patientUsername = "";
   @override
   void initState() {
     super.initState();
-    patientId = Get.arguments["ID"];
-    patientName = Get.arguments["name"];
-    patientPic = Get.arguments["pic"];
-    patientSurname = Get.arguments["surname"];
-    patientUsername = Get.arguments["username"];
+    if(Get.arguments["bookingSide"] == "booking"){
+      patientId = Get.parameters["ID"].toString();
+    }else{
+      patientId = Get.arguments["ID"];
+      patientName = Get.arguments["name"];
+      patientPic = Get.arguments["pic"];
+      patientSurname = Get.arguments["surname"];
+      patientUsername = Get.arguments["username"];
+    }
+
   }
   @override
   Widget build(BuildContext context) {

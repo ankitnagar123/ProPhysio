@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -148,15 +150,18 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               itemCount: bookingController.booking.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
-                var id = bookingController.booking[index].Id.toString();
+                var bookingId = bookingController.booking[index].bookingId.toString();
                 var userid = bookingController.booking[index].id.toString();
+                log("user id$userid");
+                log("booking id$id");
+
                 var list = bookingController.booking[index];
                 var status = bookingController.booking[index].status!;
                 return InkWell(
                   onTap: () {
-                    bookingController.bookingAppointmentDetails(context, id,
+                    bookingController.bookingAppointmentDetails(context, bookingId,
                         bookingController.booking[index].status.toString(), () {
-                      showBottomSheet(id, userid, status);
+                      showBottomSheet(bookingId, userid, status);
                     });
                   },
                   child: Card(
@@ -572,7 +577,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             }, MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
                             custom.acceptRejectButton(context, "Accept", () {
-                              acceptPopUp(context);
+                              acceptPopUp(context,id);
                             }, MyColor.primary,
                                 const TextStyle(color: MyColor.white))
                           ],
@@ -789,7 +794,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   }
 
   /*------------Booking Accept PopUp--------------*/
-  void acceptPopUp(BuildContext context) {
+  void acceptPopUp(BuildContext context,String bookingId) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
@@ -860,7 +865,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                           bookingController
                                               .bookingAppointmentAccept(
                                                   context,
-                                                  bookingController.bookingId
+                                              bookingId
                                                       .toString(), () {
                                             Get.back();
                                             Get.back();

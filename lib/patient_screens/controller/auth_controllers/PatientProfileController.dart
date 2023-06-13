@@ -10,7 +10,7 @@ import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 
 class PatientProfileCtr extends GetxController {
-  CustomView custom =CustomView();
+  CustomView custom = CustomView();
   ApiService apiService = ApiService();
   var loading = false.obs;
   var loadingU = false.obs;
@@ -28,6 +28,7 @@ class PatientProfileCtr extends GetxController {
   var Password = "".obs;
   var address = "".obs;
   var image = "".obs;
+
   /*--new filed added--*/
 
   var age = "".obs;
@@ -36,7 +37,7 @@ class PatientProfileCtr extends GetxController {
   var taxCode = "".obs;
   var birthplace = "".obs;
   var gender = "".obs;
-  var qrCode =  "".obs;
+  var qrCode = "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -49,7 +50,8 @@ class PatientProfileCtr extends GetxController {
     };
     print("Patient Login Parameter$ProfilePerameter");
 
-    final response = await apiService.postData(MyAPI.PFetchProfile, ProfilePerameter);
+    final response = await apiService.postData(
+        MyAPI.PFetchProfile, ProfilePerameter);
     try {
       log("response of Patient Profile :-${response.body}");
       log("my id ${sp.PATIENT_ID_KEY}");
@@ -82,8 +84,6 @@ class PatientProfileCtr extends GetxController {
         taxCode.value = jsonResponse["tax_code"];
 
 
-
-
         // Massenger(context, 'My Profile');
       } else {
         loading.value = false;
@@ -96,34 +96,43 @@ class PatientProfileCtr extends GetxController {
   }
 
 /*----------Update Patient API-----------*/
-  void patientProfileUpdate(BuildContext context, String name,String surname,
+  void patientProfileUpdate(BuildContext context, String name, String surname,
       String username, String email,
       String helathcard,
       String address,
-      String phone, String code,String image,
-      String baseimage,String gender,String lat,String long,
+      String phone, String code, String image,
+      String baseimage, String gender, String lat, String long, String age,
+      String weight, String height, String birthplace, String taxcode,
       VoidCallback callback) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "name": name,
-      "surname":surname,
-      "username":username,
-      "health_card":helathcard,
+      "surname": surname,
+      "username": username,
+      "health_card": helathcard,
       "email": email,
-      "contact":phone,
-      "code":code,
+      "contact": phone,
+      "code": code,
       // "password": password,
-      "location":address,
+      "location": address,
       "image": image,
       "img_str": baseimage,
-      "gender":gender,
-      "latitude":lat,
-      "longitude":long,
+      "gender": gender,
+      "latitude": lat,
+      "longitude": long,
+      "age":age,
+      "weight":weight,
+      "height":height,
+      "birth_place":birthplace,
+      "tax_code":taxcode,
+
+
     };
     print("Patient Profile Update Parameter$profileUpdatePerameter");
 
-    final response = await apiService.postData(MyAPI.PUpdateProfile, profileUpdatePerameter);
+    final response = await apiService.postData(
+        MyAPI.PUpdateProfile, profileUpdatePerameter);
     try {
       log("response of Paitent Profile Update :-${response.body}");
       loadingU.value = false;

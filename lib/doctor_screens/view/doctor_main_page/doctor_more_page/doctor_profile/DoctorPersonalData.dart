@@ -49,6 +49,9 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   String imagename = "";
 
   DateTime? startDate;
+  DateTime? startDate1;
+  DateTime? startDate2;
+
   String _displayText(DateTime? date) {
     if (date != null) {
       return date.toString().split(' ')[0];
@@ -57,6 +60,13 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     }
   }
 
+  String _displayText2(DateTime? date) {
+    if (date != null) {
+      return date.toString().split(' ')[0];
+    } else {
+      return '';
+    }
+  }
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
@@ -146,7 +156,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: doctorProfileCtr.loading.value
-                  ? Center(child: customView.MyIndicator())
+                  ? Center(heightFactor: 13.0, child: customView.MyIndicator())
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -286,33 +296,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         ),
                         customView.text("Personal data", 14.0, FontWeight.w500,
                             MyColor.black),
-                        Container(
-                            height: 45.0,
-                            width: MediaQuery.of(context).size.width / 2.3,
-                            padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                            margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(7)),
-                            child: TextFormField(
-                              onTap: () async { 
-                                startDate = await pickDate();
-                                birthDateController.text = _displayText(startDate);
-                                setState(() {});
-                              },
-                              readOnly: true,
-                              controller: birthDateController,
-                              decoration: const InputDecoration(
-                                hintText: "Select Date",
-                                hintStyle: TextStyle(fontSize: 11),
-                                suffixIcon:
-                                Icon(Icons.calendar_month, color: MyColor.primary),
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                              ),
-                            )),
                         SizedBox(
                           height: height * 0.03,
                         ),
@@ -389,11 +372,40 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
-                                  customView.myField(
-                                      context,
-                                      birthDateController,
-                                      "birth date",
-                                      TextInputType.text),
+                                  Container(
+                                      height: 48.0,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.3,
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 5),
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.grey),
+                                          borderRadius:
+                                              BorderRadius.circular(7)),
+                                      child: TextFormField(
+                                        onTap: () async {
+                                          startDate = await pickDate();
+                                          birthDateController.text =
+                                              _displayText(startDate);
+                                        },
+                                        readOnly: true,
+                                        controller: birthDateController,
+                                        decoration: const InputDecoration(
+                                          contentPadding:
+                                              EdgeInsets.only(top: 8),
+                                          hintText: "Select Date",
+                                          hintStyle: TextStyle(fontSize: 12),
+                                          suffixIcon: Icon(Icons.calendar_month,
+                                              color: MyColor.primary),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                        ),
+                                      )),
                                 ],
                               ),
                             ),
@@ -436,8 +448,41 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
-                                  customView.myField(context, dateOfGraduation,
-                                      "graduation date", TextInputType.text),
+                                  Container(
+                                      height: 48.0,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.3,
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 5),
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.grey),
+                                          borderRadius:
+                                              BorderRadius.circular(7)),
+                                      child: TextFormField(
+                                        onTap: () async {
+                                          startDate = await pickDate();
+                                          dateOfGraduation.text =
+                                              _displayText(startDate);
+                                          print(dateOfGraduation.text);
+                                        },
+                                        readOnly: true,
+                                        controller: dateOfGraduation,
+                                        decoration: const InputDecoration(
+                                          contentPadding:
+                                              EdgeInsets.only(top: 7),
+                                          hintText: "Select Date",
+                                          hintStyle: TextStyle(fontSize: 14),
+                                          suffixIcon: Icon(Icons.calendar_month,
+                                              color: MyColor.primary),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                        ),
+                                      )),
                                 ],
                               ),
                             ),
@@ -454,11 +499,41 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
-                                  customView.myField(
-                                      context,
-                                      dateOfQualification,
-                                      "qualification date",
-                                      TextInputType.text),
+                                  Container(
+                                      height: 48.0,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.3,
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 5),
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.grey),
+                                          borderRadius:
+                                              BorderRadius.circular(7)),
+                                      child: TextFormField(
+                                        onTap: () async {
+                                          startDate = await pickDate();
+                                          dateOfQualification.text =
+                                              _displayText(startDate);
+                                          print(dateOfQualification.text);
+                                        },
+                                        readOnly: true,
+                                        controller: dateOfQualification,
+                                        decoration: const InputDecoration(
+                                          contentPadding:
+                                              EdgeInsets.only(top: 7),
+                                          hintText: "Select Date",
+                                          hintStyle: TextStyle(fontSize: 14),
+                                          suffixIcon: Icon(Icons.calendar_month,
+                                              color: MyColor.primary),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                        ),
+                                      )),
                                 ],
                               ),
                             ),

@@ -403,6 +403,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                       isMultiSelectionEnabled == false;
                                     });*/
                                     chatController.msgListDelete(context, DoctorIDs.join(","),() {
+                                      setState(() {});
                                       isMultiSelectionEnabled = false;
                                       Get.back();
                                       chatController.msgListFetch(context);

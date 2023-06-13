@@ -42,19 +42,17 @@ class _DoctorSelectAddressState extends State<DoctorSelectAddress> {
 
   @override
   void initState() {
+    super.initState();
     doctorSignUpCtr.location.value;
-    print("${doctorSignUpCtr.location.value}");
+    print(doctorSignUpCtr.location.value);
     // print(lat);
     // print(lag);
     print("my loc${destinationController.text.toString()}");
-    print(destinationController.text.toString());
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -131,23 +129,6 @@ class _DoctorSelectAddressState extends State<DoctorSelectAddress> {
                 print("My latitude AppCont : -- ${AppConst.LOCATION}");
 
               }
-              /*  Prediction? p = await showGoogleAutoComplete(context);
-              String selectedPlace = p!.description!;
-              destinationController.text = selectedPlace;
-              print("my loc${destinationController.text.toString()}");
-              print("my location-==${selectedPlace.toString()}");
-              List<geoCoding.Location> locations = await geoCoding.locationFromAddress(selectedPlace);
-              destination = latLng.LatLng(locations.first.latitude, locations.first.longitude);
-              buildLatLngFromAddress(p.description);
-              print("my latlong-==${buildLatLngFromAddress(p.description)}");
-              print("Lat Lng====>${latLng.LatLng(locations.first.latitude, locations.first.longitude)}");
-              lat =  locations.first.latitude;
-              lag = locations.first.longitude;
-              AppConst.LATITUDE = lat.toString();
-              AppConst.LONGITUDE = lag.toString();
-              AppConst.LOCATION = destinationController.text.toString();
-
-              print(buildLatLngFromAddress(selectedPlace));*/
             }, () {}),
             Row(
               children: [
@@ -195,17 +176,9 @@ class _DoctorSelectAddressState extends State<DoctorSelectAddress> {
     return p;
   }
 
-  // late Positioned currentPostion;
   Future<latLng.LatLng> buildLatLngFromAddress(dynamic place) async {
     List<geoCoding.Location> locations =
         await geoCoding.locationFromAddress(place);
     return latLng.LatLng(locations.first.latitude, locations.first.longitude);
   }
 }
-/*
-class DetailsClass {
-  final String address;
-  final double latitude;
-  final double longitude;
-  DetailsClass(this.address, this.latitude,this.longitude);
-}*/

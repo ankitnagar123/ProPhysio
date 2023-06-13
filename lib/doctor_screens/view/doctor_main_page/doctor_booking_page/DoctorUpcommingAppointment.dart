@@ -19,7 +19,6 @@ class DoctorUpcomingAppointment extends StatefulWidget {
 }
 
 class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
-
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
   BookingController bookingController = Get.put(BookingController());
@@ -29,7 +28,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
 
   @override
   void initState() {
-    bookingController.bookingAppointment(context,"Confirmed","");
+    bookingController.bookingAppointment(context, "Confirmed", "");
     bookingController.appointmentCancelReason();
     super.initState();
   }
@@ -80,14 +79,14 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                         selectedCard = 0;
                                       });
                                       bookingController.bookingAppointment(
-                                          context,"Confirmed", "linear");
+                                          context, "Confirmed", "linear");
                                       Get.back();
                                     },
                                     leading: custom.text("Date: linear", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 0
                                         ? const Icon(Icons.check_outlined,
-                                        color: MyColor.lightblue)
+                                            color: MyColor.lightblue)
                                         : const Text("")),
                                 const Divider(
                                   thickness: 1.5,
@@ -100,17 +99,14 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                         selectedCard = 1;
                                       });
                                       bookingController.bookingAppointment(
-                                          context,"Confirmed", "reverse");
+                                          context, "Confirmed", "reverse");
                                       Get.back();
                                     },
-                                    leading: custom.text(
-                                        "Date: reverse",
-                                        15,
-                                        FontWeight.normal,
-                                        MyColor.black),
+                                    leading: custom.text("Date: reverse", 15,
+                                        FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 1
                                         ? const Icon(Icons.check_outlined,
-                                        color: MyColor.lightblue)
+                                            color: MyColor.lightblue)
                                         : const Text("")),
                               ],
                             ),
@@ -155,17 +151,18 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
               itemCount: bookingController.booking.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
-                var id = bookingController.booking[index].Id.toString();
-var upcomingList = bookingController.booking[index];
+                var bookingId =
+                    bookingController.booking[index].bookingId.toString();
+                var upcomingList = bookingController.booking[index];
                 return InkWell(
                   onTap: () {
                     var userid = upcomingList.id.toString();
-                    print(id);
+                    print("booking id$bookingId");
                     print(userid);
                     log("user id $userid");
                     bookingController.bookingAppointmentDetails(
-                        context, id, "Confirmed", () {
-                      showBottomSheet(id, userid);
+                        context, bookingId, "Confirmed", () {
+                      showBottomSheet(bookingId, userid);
                     });
                   },
                   child: Card(
@@ -195,8 +192,7 @@ var upcomingList = bookingController.booking[index];
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
-                                    upcomingList.status
-                                        .toString(),
+                                    upcomingList.status.toString(),
                                     11.0,
                                     FontWeight.w400,
                                     Colors.black),
@@ -217,11 +213,8 @@ var upcomingList = bookingController.booking[index];
                           const SizedBox(
                             height: 8.0,
                           ),
-                          custom.text(
-                              upcomingList.name.toString(),
-                              14.0,
-                              FontWeight.w500,
-                              Colors.black),
+                          custom.text(upcomingList.name.toString(), 14.0,
+                              FontWeight.w500, Colors.black),
                           const SizedBox(
                             height: 10.0,
                           ),
@@ -242,9 +235,7 @@ var upcomingList = bookingController.booking[index];
                                     const SizedBox(
                                       height: 2.0,
                                     ),
-                                    Text(
-                                        upcomingList.bookingDate
-                                            .toString(),
+                                    Text(upcomingList.bookingDate.toString(),
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 12.0,
@@ -268,8 +259,7 @@ var upcomingList = bookingController.booking[index];
                                       height: 2.0,
                                     ),
                                     Text(
-                                      upcomingList.time
-                                          .toString(),
+                                      upcomingList.time.toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
@@ -294,8 +284,7 @@ var upcomingList = bookingController.booking[index];
                                       height: 2.0,
                                     ),
                                     Text(
-                                      upcomingList.bookID
-                                          .toString(),
+                                      upcomingList.bookID.toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
@@ -583,15 +572,20 @@ var upcomingList = bookingController.booking[index];
                             fontSize: 16,
                           ),
                           Icons.call),
-                      custom.callButton(
-                          context,
-                          "Chat",
-                          () {
-                            var patientId ={
-                              "ID": bookingController.userId.value,
-                            };
-                            Get.toNamed(RouteHelper.DChatScreen(),arguments: patientId);
-                          },
+                      custom.callButton(context, "Chat", () {
+                        var patientId = {
+                          "ID": bookingController.userId.value,
+                          "userName":bookingController.username.value,
+                          "userProfile":bookingController.userPic.value,
+                          "userLocation":bookingController.location.value,
+                          "userContact":bookingController.contact.value,
+                          "surName":bookingController.patientId.value,
+                          "bookingSide":"booking",
+                        };
+                        print(patientId);
+                        Get.toNamed(RouteHelper.DChatScreen(),
+                            arguments: patientId);
+                      },
                           MyColor.primary,
                           const TextStyle(
                             color: MyColor.white,
@@ -604,7 +598,8 @@ var upcomingList = bookingController.booking[index];
                 ),
                 custom.callButton(context, "Complete", () {
                   bookingController.bookingAppointmentDone(context, id, () {
-                    bookingController.bookingAppointment(context,"Confirmed","");
+                    bookingController.bookingAppointment(
+                        context, "Confirmed", "");
                     Get.back();
                   });
                 },
@@ -737,7 +732,7 @@ var upcomingList = bookingController.booking[index];
                                         () {
                                           bookingController
                                               .bookingAppointmentCancel(
-                                                  context, id,cancelId!, () {
+                                                  context, id, cancelId!, () {
                                             Get.offNamed(RouteHelper
                                                 .DCancelAppointSucces());
                                           });

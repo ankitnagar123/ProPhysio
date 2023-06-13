@@ -180,7 +180,6 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
 
   Widget showList() {
     final list = _getFilteredList();
-
     return Obx(() {
       if (patientBookingController.loading.value) {
         return Center(heightFactor: 10, child: customView.MyIndicator());
@@ -376,11 +375,11 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Patient",
                             style: TextStyle(
@@ -494,7 +493,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   : patientBookingController.status.value ==
                                   "Confirmed"
                                   ? Colors.green
-                                  : Colors.red,
+                                  : MyColor.primary1,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
@@ -602,7 +601,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                             fontFamily: "Poppins"),
                       ),
                     )
-                        : TextButton(
+                       /* : TextButton(
                         onPressed: () {
                           patientBookingController
                               .cancelAppointmentRemove(context, id, () {
@@ -616,9 +615,9 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 0.9),
-                        )),
-                    const SizedBox(
-                      height: 8.0,
+                        )),*/
+                    : SizedBox(
+                      height: 5.0,
                     )
                   ],
                 )

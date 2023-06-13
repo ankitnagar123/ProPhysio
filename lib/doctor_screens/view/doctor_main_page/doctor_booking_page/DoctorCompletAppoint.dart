@@ -139,12 +139,12 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
           itemCount: bookingController.booking.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            var id = bookingController.booking[index].Id.toString();
+            var bookingId = bookingController.booking[index].bookingId.toString();
             var  completeList = bookingController.booking[index];
             return InkWell(
               onTap: () {
-                bookingController.bookingAppointmentDetails(context, id, "Complete", () {
-                  showBottomSheet(id);
+                bookingController.bookingAppointmentDetails(context, bookingId, "Complete", () {
+                  showBottomSheet(bookingId);
                 });
               },
               child: Card(

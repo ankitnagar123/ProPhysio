@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
 import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
@@ -25,7 +24,6 @@ class DoctorSignUpScreen extends StatefulWidget {
 }
 
 class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
-
   /*---------TEXT-FIELD CONTROLLER'S----------*/
   TextEditingController nameCtr = TextEditingController();
   TextEditingController surnameCtr = TextEditingController();
@@ -74,6 +72,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   var selectedIndexes1 = [];
 
   List subCatIdArray = [];
+  List subCatNameArray = [];
   List subCatIdArrayFinal = [];
 
   @override
@@ -128,7 +127,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   _curr = value;
                   print("page index${value}");
                   print("curr index${_curr}");
-
                 });
               },
               controller: controller,
@@ -622,83 +620,118 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               child: custom.text("Select your sub-specializations", 13.0,
                   FontWeight.w500, MyColor.primary1),
             ),
-            InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: MyColor.white,
-                  borderRadius: BorderRadius.circular(7),
-                  border: Border.all(
-                    color: Colors.black38,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 45,
-                child: Center(
-                  child: Text("select sub-category"),
-                ),
-              ),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: SizedBox(
-                          height: 300,
-                          width: double.maxFinite,
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                InkWell(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: const Icon(Icons.close_outlined)),
-                                Expanded(
-                                    child: ListView.builder(
-                                  itemCount: doctorListCtr.subCategory.length,
-                                  itemBuilder: (context, index) {
-                                    return StatefulBuilder(
-                                      builder: (context, StateSetter setState) {
-                                        return Card(
-                                          elevation: 0.8,
-                                          child: CheckboxListTile(
-                                            tristate: true,
-                                            activeColor: MyColor.primary,
-                                            dense: true,
-                                            title: Text(doctorListCtr
-                                                .subCategory[index].subcatName),
-                                            value:
-                                                selectedIndexes.contains(index),
-                                            onChanged: (vale) {
-                                              setState(() {
-                                                if (selectedIndexes
-                                                    .contains(index)) {
-                                                  selectedIndexes.remove(index);
-                                                  subCatIdArray.remove(doctorListCtr.subCategory[index].subcatId);
-                                                  // unselect
-                                                } else {
-                                                  selectedIndexes.add(index);
-                                                  subCatIdArray.add(doctorListCtr.subCategory[index].subcatId);
-                                                  log(".............$subCatIdArray");
-                                                }
-                                              });
-                                              log("Temp$selectedIndexes");
-                                              log("Temp$subCatIdArray");
-                                            },
-                                            controlAffinity:
-                                                ListTileControlAffinity
-                                                    .trailing,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                ))
-                              ]),
+            doctorListCtr.categoryLoadingSub.value
+                ? custom.MyIndicator()
+                : InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: MyColor.white,
+                        borderRadius: BorderRadius.circular(7),
+                        border: Border.all(
+                          color: Colors.black38,
                         ),
-                      );
-                    });
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: 45,
+                      child: Center(
+                        child: Text("select sub-category"),
+                      ),
+                    ),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: SizedBox(
+                                height: 300,
+                                width: double.maxFinite,
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      InkWell(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: const Align(
+                                              alignment: Alignment.topRight,
+                                              child:
+                                                  Icon(Icons.close_outlined))),
+                                      doctorListCtr.subCategory.isEmpty
+                                          ? const Padding(
+                                              padding: EdgeInsets.all(15.0),
+                                              child: Text("no sub category"),
+                                            )
+                                          : Expanded(
+                                              child: ListView.builder(
+                                              itemCount: doctorListCtr
+                                                  .subCategory.length,
+                                              itemBuilder: (context, index) {
+                                                return StatefulBuilder(
+                                                  builder: (context,
+                                                      StateSetter setState) {
+                                                    return Card(
+                                                      elevation: 0.8,
+                                                      child: CheckboxListTile(
+                                                        tristate: true,
+                                                        activeColor:
+                                                            MyColor.primary,
+                                                        dense: true,
+                                                        title: Text(
+                                                            doctorListCtr
+                                                                .subCategory[
+                                                                    index]
+                                                                .subcatName),
+                                                        value: selectedIndexes
+                                                            .contains(index),
+                                                        onChanged: (vale) {
+                                                          setState(() {
+                                                            if (selectedIndexes
+                                                                .contains(
+                                                                    index)) {
+                                                              selectedIndexes
+                                                                  .remove(
+                                                                      index);
+                                                              subCatIdArray.remove(
+                                                                  doctorListCtr
+                                                                      .subCategory[
+                                                                          index]
+                                                                      .subcatId);
+                                                              // unselect
+                                                            } else {
+                                                              selectedIndexes
+                                                                  .add(index);
+                                                              subCatIdArray.add(
+                                                                  doctorListCtr
+                                                                      .subCategory[
+                                                                          index]
+                                                                      .subcatId);
+                                                              log(".............$subCatIdArray");
+                                                            }
+                                                          });
+                                                          log("Temp$selectedIndexes");
+                                                          log("Temp$subCatIdArray");
+                                                        },
+                                                        controlAffinity:
+                                                            ListTileControlAffinity
+                                                                .trailing,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              shrinkWrap: true,
+                                            ))
+                                    ]),
+                              ),
+                            );
+                          });
+                    },
+                  ),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: subCatIdArray.length,
+              itemBuilder: (context, index) {
+                return Text(subCatIdArray[index]);
               },
             ),
             const SizedBox(
@@ -888,7 +921,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     }
     return false;
   }
-
 
 /*---------SELECT MULTIPLE CATEGORY-----*/
   Widget category() {

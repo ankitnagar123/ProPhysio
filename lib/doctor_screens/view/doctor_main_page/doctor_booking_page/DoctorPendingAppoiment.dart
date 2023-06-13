@@ -148,13 +148,13 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
           itemCount: bookingController.booking.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            var id = bookingController.booking[index].Id.toString();
+            var bookingId = bookingController.booking[index].bookingId.toString();
             var pendingList = bookingController.booking[index];
             return InkWell(
               onTap: () {
                 bookingController.bookingAppointmentDetails(
-                    context, id, "Pending", () {
-                  showBottomSheet(id);
+                    context, bookingId, "Pending", () {
+                  showBottomSheet(bookingId);
                 });
               },
               child: Card(
