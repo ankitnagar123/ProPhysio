@@ -1,5 +1,4 @@
 import 'dart:core';
-
 class MyAPI{
   static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
   /*--------Patient Side API-----------*/

@@ -64,7 +64,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   child: GestureDetector(
                       onTap: () {
                         Get.back();
-                      },child: Icon(Icons.arrow_back_ios)),
+                      },child: const Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
                   height: height * 0.01,

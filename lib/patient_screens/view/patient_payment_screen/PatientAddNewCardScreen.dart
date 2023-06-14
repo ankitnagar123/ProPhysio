@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/RoutHelper/RoutHelper.dart';
 
 import '../../../helper/mycolor/mycolor.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";

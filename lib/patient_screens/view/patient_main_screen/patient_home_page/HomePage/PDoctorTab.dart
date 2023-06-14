@@ -104,7 +104,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                 : SizedBox(
                     height: MediaQuery.of(context).size.height * 0.15,
                     child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: doctorSignUpCtr.category.length,
@@ -165,7 +165,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                         placeholderFit: BoxFit.cover,
                                       )),
                                   const SizedBox(
-                                    height: 5,
+                                    height: 3,
                                   ),
                                   Expanded(
                                     child: Align(
@@ -173,13 +173,14 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                       child: Text(
                                         doctorSignUpCtr
                                             .category[index].categoryName,
-                                        style: TextStyle(fontSize: 12),
+                                        style: const TextStyle(fontSize: 12),
                                         softWrap: false,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   ),
+
                                 ],
                               ),
                             ),
@@ -209,7 +210,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: customView.text(

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/Shimmer/ChatShimmer.dart';
@@ -42,7 +41,7 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       catId = widget.catId;
       subCatId = widget.subCatId;
-      print("category${catId}");
+      print("category$catId");
       print(subCatId);
       doctorListCtr.doctorlistfetch(context, catId.toString(), subCatId.toString(),'','','','','','');
     });
@@ -165,7 +164,7 @@ class _DoctorListState extends State<DoctorList> {
     }
     return doctorListCtr.doctorList
         .where(
-            (user) => user.name!.toLowerCase().contains(_keyword.toLowerCase()))
+            (user) => user.name.toLowerCase().contains(_keyword.toLowerCase()))
         .toList();
   }
 
@@ -248,7 +247,7 @@ class _DoctorListState extends State<DoctorList> {
               } else {
                 return SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  child: doctorListCtr.doctorList.length == 0
+                  child: doctorListCtr.doctorList.isEmpty
                       ? const Center(
                           heightFactor: 10,
                           child: Text("Doctor Not Available at the Moment"))

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
@@ -74,10 +73,10 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
               onTap: () {
                 Get.back();
               },
-              child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
+              child: const Icon(Icons.arrow_back_ios, color: MyColor.black,size: 20,)),
           elevation: 0,
           centerTitle: true,
-          title: custom.text("New ward", 17, FontWeight.w500, MyColor.black),
+          title: custom.text("New ward", 16, FontWeight.w500, MyColor.black),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
@@ -88,7 +87,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
               .MyButton(context, "Add ward", () {
             if (nameCtr.text.isEmpty) {
               custom.MySnackBar(context, "Enter ward name");
-            } else if (drIdMainArray.length == 0) {
+            } else if (drIdMainArray.isEmpty) {
               custom.MySnackBar(context, "Select doctor");
             } else {
               centerHomeCtr.addDoctors(
@@ -129,14 +128,14 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Add doctors", 17.0, FontWeight.w600, MyColor.black),
+                      "Add doctors", 17.0, FontWeight.w500, MyColor.black),
                 ),
+                const SizedBox(height: 3,),
                 SizedBox(
                   width: widht,
                   child: TextFormField(
                     onChanged: (value) {
                       setState(() {
-                        // drIdArray.clear();
                         _keyword = value;
                       });
                       print(value);
@@ -167,13 +166,13 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                     ),
                   ),
                 ),
-                drIdArray.length == 0 ? const Text("") :  Padding(
+                drIdArray.isEmpty ? const Text("") :  Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Align(
                     heightFactor: 0,
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Select doctor ${drIdArray.length}", 15, FontWeight.w400, MyColor.black),
+                        "Selected doctor ${drIdArray.length}", 15, FontWeight.w400, MyColor.black),
                   ),
                 ),
                 centerHomeCtr.loadingFetch.value
@@ -188,7 +187,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                 )
                     : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  child: centerHomeCtr.doctorList.length == 0
+                  child: centerHomeCtr.doctorList.isEmpty
                       ? const Center(
                       heightFactor: 10,
                       child:

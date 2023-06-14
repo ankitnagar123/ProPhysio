@@ -12,7 +12,7 @@ import '../../../controller/patinet_chat_controller/PatinetChatController.dart';
 import 'PatientChatProfile.dart';
 
 class PatientChatScreen extends StatefulWidget {
-  PatientChatScreen({
+  const PatientChatScreen({
     Key? key,
   }) : super(key: key);
 
@@ -43,7 +43,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
     if(Get.arguments["chatList"] =="listData"){
       doctorId = Get.arguments["doctorId"];
       doctorName = Get.arguments["drName"];
-      // doctorAddress = Get.arguments["drAddress"];
+      doctorAddress = Get.arguments["drAddress"];
       doctorImg = Get.arguments["drImg"];
       doctorSurname = Get.arguments["drSurname"];
       // doctorContact = Get.arguments["contact"];
@@ -112,9 +112,10 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                 onTap: () {
                   if (_timer != null) {
                     _timer.cancel();
-                  } else if (_timer != null) {
+                  } else {
                     _timer.isBlank;
                   }
+
                   Navigator.pop(context);
                 },
                 child: const Icon(
@@ -238,7 +239,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                         ),
             )),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   Expanded(
@@ -248,7 +249,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                           border: Border.all(color: Colors.black38),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
-                        style: TextStyle(decorationThickness: 0),
+                        style: const TextStyle(decorationThickness: 0),
                         controller: messageCtr,
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
@@ -276,14 +277,14 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                           minimumSize: const Size(55, 55)),
                       onPressed: () {
                         if (messageCtr.text.trim().isNotEmpty) {
-                          chatController.sendingMsgApi(context, doctorId!,
+                          chatController.sendingMsgApi(context, doctorId,
                               "Text", messageCtr.text, () {});
                         } else {
                           print('filed');
                         }
                         messageCtr.clear();
                       },
-                      child: Icon(Icons.send))
+                      child: const Icon(Icons.send))
                 ],
               ),
             )
@@ -296,5 +297,6 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
   Future<String?> getData() async {
     patientId = (await sp.getStringValue(sp.PATIENT_ID_KEY.toString()))!;
     print("user------------>:${await sp.getStringValue(sp.PATIENT_ID_KEY)}");
+    return null;
   }
 }

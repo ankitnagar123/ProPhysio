@@ -217,11 +217,11 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Patient",
                             style: TextStyle(

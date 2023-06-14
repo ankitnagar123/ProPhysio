@@ -621,7 +621,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   //*******date strt end************//
   Future<DateTime?> pickDate() async {
     return await showDatePicker(
-      keyboardType: TextInputType.numberWithOptions(),
+      keyboardType: const TextInputType.numberWithOptions(),
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),

@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -78,7 +77,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
           Visibility(
               visible: selectedItem.isNotEmpty,
               child: IconButton(
-                icon: Icon(Icons.delete,color: Colors.black,),
+                icon: const Icon(Icons.delete,color: Colors.black,),
                 onPressed: () {
                  /* selectedItem.forEach((nature) {
                     // list.remove(nature);
@@ -204,6 +203,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                      "drName":list[index].name,
                                      "drSurname":list[index].surname,
                                      "drImg": list[index].userProfile,
+                                     "drAddress":list[index].address,
                                      "chatList":"listData",
                                    };
                                    log("$data");

@@ -20,8 +20,8 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
   CustomView view = CustomView();
   @override
   List screens =  [
-     CenterHomeScreen(),
-    CenterMorePage(),
+     const CenterHomeScreen(),
+    const CenterMorePage(),
   ];
 
 

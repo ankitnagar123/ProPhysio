@@ -177,7 +177,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                   return Card(
                     color: MyColor.midgray,
                     child: ListTile(
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                       title: custom.text(
                           doctorPrescriptionCtr
                               .patientPrescriptionList[index].title,
@@ -197,7 +197,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 3,),
+                          const SizedBox(height: 3,),
                           custom.text(
                               "${doctorPrescriptionCtr
                                   .patientPrescriptionList[index].result}${doctorPrescriptionCtr
@@ -320,7 +320,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                           InteractiveViewer(
                             panEnabled: false,
                             // Set it to false
-                            boundaryMargin: EdgeInsets.all(100),
+                            boundaryMargin: const EdgeInsets.all(100),
                             minScale: 0.5,
                             maxScale: 2,
                             child: ClipRRect(

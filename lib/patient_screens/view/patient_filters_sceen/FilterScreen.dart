@@ -6,7 +6,6 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
-import '../patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({Key? key}) : super(key: key);

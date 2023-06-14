@@ -40,7 +40,7 @@ class _calenderState extends State<calender> {
   @override
   void initState() {
     centerId = widget.centerId;
-    print("center id ${centerId}");
+    print("center id $centerId");
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorId = doctorListCtr.doctorid.value;
@@ -102,7 +102,7 @@ class _calenderState extends State<calender> {
           var month = DateFormat("MM").format(selectDay);
           var year = DateFormat("yyyy").format(selectDay);
 
-          print("final date${finalDate}");
+          print("final date$finalDate");
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -181,7 +181,7 @@ class _calenderState extends State<calender> {
                             width: 20.0,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3.0),
-                                color: Color(0xffC4DEF2))),
+                                color: const Color(0xffC4DEF2))),
                         const SizedBox(
                           width: 5,
                         ),

@@ -9,21 +9,23 @@ List<DoctorChatModel> doctorChatModelFromJson(String str) => List<DoctorChatMode
 String doctorChatModelToJson(List<DoctorChatModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DoctorChatModel {
+  String userId;
+  String time;
+  String name;
+  String surname;
+  String username;
+  String address;
+  String userProfile;
+
   DoctorChatModel({
     required this.userId,
     required this.time,
     required this.name,
     required this.surname,
     required this.username,
+    required this.address,
     required this.userProfile,
   });
-
-  String userId;
-  String time;
-  String name;
-  String surname;
-  String username;
-  String userProfile;
 
   factory DoctorChatModel.fromJson(Map<String, dynamic> json) => DoctorChatModel(
     userId: json["user_id"],
@@ -31,6 +33,7 @@ class DoctorChatModel {
     name: json["name"],
     surname: json["surname"],
     username: json["username"],
+    address: json["address"],
     userProfile: json["user_profile"],
   );
 
@@ -40,6 +43,7 @@ class DoctorChatModel {
     "name": name,
     "surname": surname,
     "username": username,
+    "address": address,
     "user_profile": userProfile,
   };
 }

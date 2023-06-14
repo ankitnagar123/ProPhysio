@@ -80,7 +80,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                       13,
                       FontWeight.normal,
                       MyColor.black),*/
-                SizedBox(width: 3,),
+                const SizedBox(width: 3,),
                 custom.text("€",
                     14, FontWeight.w500, MyColor.lightblue),
               ],

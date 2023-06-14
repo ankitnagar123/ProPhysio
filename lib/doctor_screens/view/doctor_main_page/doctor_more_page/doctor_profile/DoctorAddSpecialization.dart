@@ -425,8 +425,8 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             return Container(
               height: height * 0.06,
               width: widht * 0.9,
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
               decoration: BoxDecoration(
                   color: MyColor.white,
                   borderRadius: BorderRadius.circular(8.0),
@@ -446,7 +446,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                       child: Text(items.categoryName),
                     );
                   }).toList(),
-                  hint: Text("Select Category"),
+                  hint: const Text("Select Category"),
                   // After selecting the desired option,it will
                   // change button value to selected value
                   onChanged: (newValue) {
@@ -480,8 +480,8 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             return Container(
               height: height * 0.06,
               width: widht * 0.9,
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
               decoration: BoxDecoration(
                   color: MyColor.white,
                   borderRadius: BorderRadius.circular(8.0),

@@ -36,7 +36,7 @@ class _CenterProfileState extends State<CenterProfile> {
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
-        source: source, imageQuality: 50, maxHeight: 500, maxWidth: 500);
+        source: source, imageQuality: 70,);
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
@@ -45,7 +45,9 @@ class _CenterProfileState extends State<CenterProfile> {
         imagename = 'image_${DateTime
             .now()
             .millisecondsSinceEpoch}_.jpg';
+        Get.back();
       } else {
+        customView.MySnackBar(context, "No image selected");
         print('No image selected.');
       }
     });
@@ -200,8 +202,8 @@ class _CenterProfileState extends State<CenterProfile> {
                                               _choose(
                                                   ImageSource.gallery);
                                             },
-                                            child: Row(
-                                              children: const [
+                                            child: const Row(
+                                              children: [
                                                 Icon(Icons.image,
                                                     size: 20),
                                                 SizedBox(
@@ -226,8 +228,8 @@ class _CenterProfileState extends State<CenterProfile> {
                                               _choose(
                                                   ImageSource.camera);
                                             },
-                                            child: Row(
-                                              children: const [
+                                            child: const Row(
+                                              children: [
                                                 Icon(Icons.camera_alt),
                                                 SizedBox(
                                                   width: 10,

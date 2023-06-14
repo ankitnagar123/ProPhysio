@@ -162,8 +162,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
               child: Align(
                   alignment: Alignment.topLeft,
-                  child: addAvailabilityCtr.doctorTimeList.length == 0
-                      ? Text("")
+                  child: addAvailabilityCtr.doctorTimeList.isEmpty
+                      ? const Text("")
                       : custom.text("Your Time Slot's according select date",
                           13, FontWeight.w500, MyColor.black)),
             ),
@@ -216,7 +216,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                     ),
                   ),
             // const Expanded(child: SizedBox()),
-            addAvailabilityCtr.doctorTimeList.length == 0
+            addAvailabilityCtr.doctorTimeList.isEmpty
                 ? const Text("")
                 : addAvailabilityCtr.loadingd.value
                     ? custom.MyIndicator()

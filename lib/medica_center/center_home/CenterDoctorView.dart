@@ -219,7 +219,7 @@ String keyword = "";
                     ? categorysubShimmerEffect(context)
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
-                        child: drList.length == 0
+                        child: drList.isEmpty
                             ? const Center(
                                 heightFactor: 10,
                                 child:

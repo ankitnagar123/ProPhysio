@@ -40,7 +40,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
 
     print("center id $centerId");
     print("date$date");
-    print("price${price}");
+    print("price$price");
     print("time slot$time");
     healthcodeCtr.text = profileCtr.healthCard.value;
     print("my health Card${healthcodeCtr.text.toString()}");

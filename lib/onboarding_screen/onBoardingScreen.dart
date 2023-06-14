@@ -92,9 +92,9 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                 onTap: () {
                   Get.offNamed(RouteHelper.DTandCScreen());
                 },
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       "Terms and conditions",
                       style: TextStyle(

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -404,16 +403,16 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       String wardId,
       VoidCallback callback,
       ) async {
+    loadingMoreAdd.value = true;
     final Map<String, dynamic>Perameter = {
       "doctor_id":drId,
       "ward_id":wardId,
     };
-    loadingMoreAdd.value = true;
     log("Add More Doctor Parameter$Perameter");
 
     final response = await apiService.postData(MyAPI.cAddMoreDr,Perameter);
+    loadingMoreAdd.value = false;
     try {
-
       log("Add More Ward Doctor :-${response.body}");
       var jsonResponse = jsonDecode(response.body);
       print(jsonResponse);

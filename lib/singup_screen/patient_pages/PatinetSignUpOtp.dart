@@ -81,7 +81,7 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
                   alignment: Alignment.topLeft,
                   child: InkWell(onTap: () {
                     Get.back();
-                  },child: Icon(Icons.arrow_back_ios)),
+                  },child: const Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
                   height: height * 0.02,

@@ -134,9 +134,9 @@ class _DoctorSelectAddressState extends State<DoctorSelectAddress> {
               children: [
                 const Icon(Icons.location_on_outlined),
 
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width*0.8,
-                  child: customView.text("${AppConst.LOCATION}", 12,
+                  child: customView.text(AppConst.LOCATION, 12,
                       FontWeight.normal, MyColor.black),
                 ),
               ],

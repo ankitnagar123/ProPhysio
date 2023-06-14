@@ -6,7 +6,6 @@ import 'package:medica/medica_center/center_controller/CenterAuthController.dart
 
 import '../../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
-import '../../../../book_appointment/AppointmentCalender.dart';
 
 
 class PCenterDetailScreen extends StatefulWidget {

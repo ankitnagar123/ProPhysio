@@ -15,7 +15,7 @@ import 'DoctorDetailScreen.dart';
 
 class NavigateMapViewScreen extends StatefulWidget {
 
-  NavigateMapViewScreen({Key? key,})
+  const NavigateMapViewScreen({Key? key,})
       : super(key: key);
 
   @override

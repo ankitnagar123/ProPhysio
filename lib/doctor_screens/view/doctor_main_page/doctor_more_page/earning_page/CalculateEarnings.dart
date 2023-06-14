@@ -69,7 +69,7 @@ class _CalculateEarningState extends State<CalculateEarning> {
                 children: [
                   custom.text(
                       "Total earning", 14, FontWeight.w500, MyColor.black),
-                  SizedBox(width: 3,),
+                  const SizedBox(width: 3,),
                   custom.text("€ ${doctorEarningCtr.earning.value.totalAmount}",
                       14, FontWeight.w500, MyColor.lightblue),
                 ],

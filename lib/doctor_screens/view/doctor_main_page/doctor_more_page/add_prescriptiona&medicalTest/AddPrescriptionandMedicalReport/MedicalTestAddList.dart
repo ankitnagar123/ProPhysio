@@ -149,7 +149,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
             child: custom.text("Patient past Medical report's", 15.0,
                 FontWeight.w500, MyColor.primary1),
           ),
-          doctorPrescriptionCtr.prescriptionList.value!.details.length == 0
+          doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
               ?  const Padding(
             padding: EdgeInsets.all(12.0),
             child: Text("No Past Prescription at the moment!"),
@@ -199,7 +199,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                       borderRadius: BorderRadius.circular(8.0),
                       child: FadeInImage.assetNetwork(
                         imageErrorBuilder: (context, error, stackTrace) {
-                          return Image(image: AssetImage("assets/images/noimage.png"));
+                          return const Image(image: AssetImage("assets/images/noimage.png"));
                         },
                         width: 80,
                         height: 80,
@@ -273,7 +273,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                           InteractiveViewer(
                             panEnabled: false,
                             // Set it to false
-                            boundaryMargin: EdgeInsets.all(100),
+                            boundaryMargin: const EdgeInsets.all(100),
                             minScale: 0.5,
                             maxScale: 2,
                             child: ClipRRect(

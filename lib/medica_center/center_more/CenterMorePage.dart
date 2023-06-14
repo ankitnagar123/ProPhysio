@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/DoctorProfileController.dart';
-import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/doctor_availability/DoctorSelfAddAvailability.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';

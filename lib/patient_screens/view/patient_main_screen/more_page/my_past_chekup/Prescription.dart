@@ -316,7 +316,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                           InteractiveViewer(
                             panEnabled: false,
                             // Set it to false
-                            boundaryMargin: EdgeInsets.all(100),
+                            boundaryMargin: const EdgeInsets.all(100),
                             minScale: 0.5,
                             maxScale: 2,
                             child: ClipRRect(

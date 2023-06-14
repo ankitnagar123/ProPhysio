@@ -73,8 +73,8 @@ class _MorePageState extends State<MorePage> {
                           },
                           title: customView.text("Add a credit card", 16,
                               FontWeight.w500, MyColor.primary1),
-                          subtitle: Row(
-                            children: const [
+                          subtitle: const Row(
+                            children: [
                               Text("Go to ",
                                   style: TextStyle(color: MyColor.primary1)),
                               Text("Payment ",
@@ -94,7 +94,7 @@ class _MorePageState extends State<MorePage> {
                         ),
                       )
                     : const SizedBox(height: 10),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Row(
                   children: [
                     Expanded(

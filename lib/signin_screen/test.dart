@@ -125,13 +125,13 @@ class _demoState extends State<demo> {
 import 'dart:async';
 import 'dart:convert';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -141,9 +141,9 @@ class _MyAppState extends State<MyApp> {
   final List<Marker> _markers = [];
   final LatLng _center = const LatLng(37.7749, -122.4194);
   final List<LatLng> _locations = [
-    LatLng(37.7749, -122.4194),
-    LatLng(37.7882, -122.4075),
-    LatLng(37.7559, -122.4148),
+    const LatLng(37.7749, -122.4194),
+    const LatLng(37.7882, -122.4075),
+    const LatLng(37.7559, -122.4148),
   ];
 
   Future<Map<String, dynamic>> _getMarkerData(

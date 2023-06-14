@@ -13,6 +13,7 @@ import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 import '../../../../signin_screen/signin_controller/SignInController.dart';
 import '../../../controller/DocotorBookingController.dart';
+import '../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   const DoctorHomeScreen({Key? key}) : super(key: key);
@@ -150,7 +151,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               itemCount: bookingController.booking.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
-                var bookingId = bookingController.booking[index].bookingId.toString();
+                var bookingId =
+                    bookingController.booking[index].bookingId.toString();
                 var userid = bookingController.booking[index].id.toString();
                 log("user id$userid");
                 log("booking id$id");
@@ -159,7 +161,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 var status = bookingController.booking[index].status!;
                 return InkWell(
                   onTap: () {
-                    bookingController.bookingAppointmentDetails(context, bookingId,
+                    bookingController.bookingAppointmentDetails(
+                        context,
+                        bookingId,
                         bookingController.booking[index].status.toString(), () {
                       showBottomSheet(bookingId, userid, status);
                     });
@@ -577,7 +581,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             }, MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
                             custom.acceptRejectButton(context, "Accept", () {
-                              acceptPopUp(context,id);
+                              acceptPopUp(context, id);
                             }, MyColor.primary,
                                 const TextStyle(color: MyColor.white))
                           ],
@@ -607,10 +611,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                     custom.callButton(context, "Chat", () {
                                       var patientId = {
                                         "ID": bookingController.userId.value,
-                                        "name":  bookingController.name.value,
-                                        "surname": bookingController.username.value,
-                                        "username": bookingController.username.value,
-                                        "pic": bookingController.patientProfile.value,
+                                        "name": bookingController.name.value,
+                                        "surname":
+                                            bookingController.username.value,
+                                        "username":
+                                            bookingController.username.value,
+                                        "pic": bookingController
+                                            .patientProfile.value,
                                       };
                                       Get.toNamed(RouteHelper.DChatScreen(),
                                           arguments: patientId);
@@ -628,21 +635,42 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   ],
                                 ),
                               ),
-                              custom.callButton(context, "Complete", () {
-                                bookingController
-                                    .bookingAppointmentDone(context, id, () {
-                                  bookingController.bookingAppointment(
-                                      context, "", "");
-                                  Get.back();
-                                });
-                              },
-                                  MyColor.primary,
-                                  const TextStyle(
-                                    color: MyColor.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
-                                  Icons.done),
+                              Row(
+                                children: [
+                                  custom.callButton(
+                                      context, "Write prescription", () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PrescriptionMedicalTab(
+                                                  patientId: userid,
+                                                )));
+                                  },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                        color: MyColor.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13,
+                                      ),
+                                      Icons.medical_information_outlined),
+                                  custom.callButton(context, "Complete", () {
+                                    bookingController.bookingAppointmentDone(
+                                        context, id, () {
+                                      bookingController.bookingAppointment(
+                                          context, "", "");
+                                      Get.back();
+                                    });
+                                  },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                        color: MyColor.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                      Icons.done),
+                                ],
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -663,7 +691,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               ),
                             ],
                           )
-                        : Text(""),
+                        : const Text(""),
               ],
             ),
           );
@@ -794,7 +822,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   }
 
   /*------------Booking Accept PopUp--------------*/
-  void acceptPopUp(BuildContext context,String bookingId) {
+  void acceptPopUp(BuildContext context, String bookingId) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
@@ -864,9 +892,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                         () {
                                           bookingController
                                               .bookingAppointmentAccept(
-                                                  context,
-                                              bookingId
-                                                      .toString(), () {
+                                                  context, bookingId.toString(),
+                                                  () {
                                             Get.back();
                                             Get.back();
                                           });

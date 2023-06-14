@@ -66,7 +66,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                 Expanded(
                   child: GridView.count(
                     shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     crossAxisCount: 4,
                     children: List.generate(
                         doctorSignUpCtr.category.length, (index) {

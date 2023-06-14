@@ -616,7 +616,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                               fontWeight: FontWeight.w500,
                               letterSpacing: 0.9),
                         )),*/
-                    : SizedBox(
+                    : const SizedBox(
                       height: 5.0,
                     )
                   ],

@@ -10,7 +10,6 @@ import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../QRScannerReports/QRScannerPage.dart';
 import 'AddMedicines/AddMedicinesTab.dart';
 
 class PrescriptionAddAndList extends StatefulWidget {
@@ -243,12 +242,12 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 2.0,
                       ),
                       Text(
-                          details!.contact,
-                          style: TextStyle(
+                          details.contact,
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
                               fontFamily: "Poppins")),
@@ -272,7 +271,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                       ),
                       Text(
                           details.weight,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
                               fontFamily: "Poppins")),
@@ -292,7 +291,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      Text(
+                      const Text(
                         "Address",
                         style: TextStyle(
                             color: MyColor.primary1,
@@ -354,7 +353,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
               thickness: 1,
               height: 20.0,
             ),
-            doctorPrescriptionCtr.prescriptionList.value!.details.length == 0
+            doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
                 ?  const Padding(
               padding: EdgeInsets.all(12.0),
               child: Text("No Past Prescription at the moment!"),
@@ -404,7 +403,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         borderRadius: BorderRadius.circular(8.0),
                         child: FadeInImage.assetNetwork(
                           imageErrorBuilder: (context, error, stackTrace) {
-                            return Image(image: AssetImage("assets/images/noimage.png"));
+                            return const Image(image: AssetImage("assets/images/noimage.png"));
                           },
                           width: 80,
                           height: 80,
@@ -488,7 +487,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: FadeInImage.assetNetwork(
                                 imageErrorBuilder: (context, error, stackTrace) {
-                                  return Image(image: AssetImage("assets/images/noimage.png"));
+                                  return const Image(image: AssetImage("assets/images/noimage.png"));
                                 },
                                 width: MediaQuery.of(context).size.width,
                                 height:

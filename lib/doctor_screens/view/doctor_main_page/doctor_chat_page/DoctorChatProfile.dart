@@ -26,6 +26,10 @@ String patientUsername = "";
     super.initState();
     if(Get.arguments["bookingSide"] == "booking"){
       patientId = Get.parameters["ID"].toString();
+      patientName = Get.arguments["name"];
+      patientPic = Get.arguments["pic"];
+      patientSurname = Get.arguments["surname"];
+      patientUsername = Get.arguments["username"];
     }else{
       patientId = Get.arguments["ID"];
       patientName = Get.arguments["name"];

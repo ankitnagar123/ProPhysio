@@ -9,6 +9,7 @@ import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 import '../../../controller/DocotorBookingController.dart';
+import '../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorUpcomingAppointment extends StatefulWidget {
   const DoctorUpcomingAppointment({Key? key}) : super(key: key);
@@ -575,12 +576,12 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       custom.callButton(context, "Chat", () {
                         var patientId = {
                           "ID": bookingController.userId.value,
-                          "userName":bookingController.username.value,
-                          "userProfile":bookingController.userPic.value,
-                          "userLocation":bookingController.location.value,
-                          "userContact":bookingController.contact.value,
-                          "surName":bookingController.patientId.value,
-                          "bookingSide":"booking",
+                          "userName": bookingController.username.value,
+                          "userProfile": bookingController.userPic.value,
+                          "userLocation": bookingController.location.value,
+                          "userContact": bookingController.contact.value,
+                          "surName": bookingController.patientId.value,
+                          "bookingSide": "booking",
                         };
                         print(patientId);
                         Get.toNamed(RouteHelper.DChatScreen(),
@@ -596,20 +597,40 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     ],
                   ),
                 ),
-                custom.callButton(context, "Complete", () {
-                  bookingController.bookingAppointmentDone(context, id, () {
-                    bookingController.bookingAppointment(
-                        context, "Confirmed", "");
-                    Get.back();
-                  });
-                },
-                    MyColor.primary,
-                    const TextStyle(
-                      color: MyColor.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    Icons.done),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    custom.callButton(context, "Write prescription", () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PrescriptionMedicalTab(
+                                    patientId: userid,
+                                  )));
+                    },
+                        MyColor.primary,
+                        const TextStyle(
+                          color: MyColor.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                        ),
+                        Icons.medical_information_outlined),
+                    custom.callButton(context, "Complete", () {
+                      bookingController.bookingAppointmentDone(context, id, () {
+                        bookingController.bookingAppointment(
+                            context, "Confirmed", "");
+                        Get.back();
+                      });
+                    },
+                        MyColor.primary,
+                        const TextStyle(
+                          color: MyColor.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                        Icons.done),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

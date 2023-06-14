@@ -12,7 +12,7 @@ import '../../../../patient_screens/controller/patinet_chat_controller/PatinetCh
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorChatScreen extends StatefulWidget {
-  DoctorChatScreen({
+  const DoctorChatScreen({
     Key? key,
   }) : super(key: key);
 
@@ -37,15 +37,31 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
   String patientPic = "";
   String patientSurname = "";
   String patientUsername = "";
+  String patientAddress= "";
+  String patientContact= "";
+
   String? doctorId;
 
   @override
   void initState() {
-    patientId = Get.arguments["ID"];
-/*    patientName = Get.arguments["name"];
-    patientPic = Get.arguments["pic"];
-    patientSurname = Get.arguments["surname"];
-    patientUsername = Get.arguments["username"];*/
+    if(Get.arguments["bookingSide"] == "booking"){
+      patientId = Get.arguments["ID"];
+      patientName = Get.arguments["userName"];
+      patientPic = Get.arguments["userProfile"];
+      patientSurname = Get.arguments["surName"];
+      patientUsername = Get.arguments["userName"];
+      patientAddress = Get.arguments["userLocation"];
+      patientContact = Get.arguments["userContact"];
+    }else{
+      patientId = Get.arguments["ID"];
+      patientName = Get.arguments["name"];
+      patientPic = Get.arguments["pic"];
+      patientSurname = Get.arguments["surname"];
+      patientUsername = Get.arguments["username"];
+      patientAddress = Get.arguments["address"];
+      // patientContact = Get.arguments["userContact"];
+    }
+
 
     print("doctor Id==>>>>$patientId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -101,9 +117,10 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 onTap: () {
                   if (_timer != null) {
                     _timer.cancel();
-                  } else if (_timer != null) {
+                  } else {
                     _timer.isBlank;
                   }
+
                   Navigator.pop(context);
                 },
                 child: const Icon(
@@ -281,5 +298,6 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
   Future<String?> getData() async {
     doctorId = (await sp.getStringValue(sp.DOCTOR_ID_KEY.toString()))!;
     print("user------------>:${await sp.getStringValue(sp.DOCTOR_ID_KEY)}");
+    return null;
   }
 }

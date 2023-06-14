@@ -36,7 +36,7 @@ class _BookingPageState extends State<BookingPage> {
     return Scaffold(
       body: Stack(children: [
         SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
@@ -48,7 +48,7 @@ class _BookingPageState extends State<BookingPage> {
                   searchCtr,
                   "Search your appointments",
                   TextInputType.text,
-                  Text(""),
+                  const Text(""),
                   const Icon(Icons.search_rounded), () {
                 Get.toNamed(RouteHelper.getSearchAppointmentScreen());
               }, () {},true),
@@ -450,11 +450,11 @@ class _BookingPageState extends State<BookingPage> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Patient",
                             style: TextStyle(

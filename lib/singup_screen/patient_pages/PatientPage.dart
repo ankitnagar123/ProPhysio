@@ -39,6 +39,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
   CustomView customView = CustomView();
   String code = '';
+  String flag = '';
 
   String _displayText(DateTime? date) {
     if (date != null) {
@@ -206,7 +207,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                flex: 1,
                child: ListTile(
                  contentPadding: EdgeInsets.zero,
-                 visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                 visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                  leading: Radio<String>(
                    value: 'male',
                    groupValue: _selectedGender,
@@ -224,7 +225,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                flex: 1,
                child: ListTile(
                  contentPadding: EdgeInsets.zero,
-                 visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                 visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                  leading: Radio<String>(
                    value: 'female',
                    groupValue: _selectedGender,
@@ -282,7 +283,6 @@ class _PatientSignUpState extends State<PatientSignUp> {
               height: 50,
               width: widht * 1,
               child: IntlPhoneField(
-                initialValue: "IT",
                 controller: phoneCtr,
                 decoration: const InputDecoration(
                   // focusedErrorBorder: InputBorder.none,
@@ -298,19 +298,24 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     ),
                   ),
                 ),
-                initialCountryCode: 'IT',
+                initialCountryCode: flag,
                 onChanged: (phone) {
+                  // var flag = phone.countryISOCode;
+                  flag = phone.countryISOCode;
+                  print(flag);
                   code = phone.countryCode;
                   print(phone.completeNumber);
                 },
                 onCountryChanged: (cod) {
+                  flag = cod.flag;
+                  print(flag);
                   code = cod.dialCode;
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
             ),
             const SizedBox(
-              height: 17.0,
+              height: 15.0,
             ),
             customView.text(
                 "Create a password", 12.0, FontWeight.w600, MyColor.primary1),
@@ -337,7 +342,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                   size: 18,
 
                 )),
-                _isHidden),
+                        _isHidden),
             const SizedBox(
               height: 17.0,
             ),

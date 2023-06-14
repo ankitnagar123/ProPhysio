@@ -125,8 +125,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               onPageChanged: (value) {
                 setState(() {
                   _curr = value;
-                  print("page index${value}");
-                  print("curr index${_curr}");
+                  print("page index$value");
+                  print("curr index$_curr");
                 });
               },
               controller: controller,
@@ -557,7 +557,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   flex: 1,
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
                       value: 'Male',
                       groupValue: _selectedGender,
@@ -575,7 +575,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   flex: 1,
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
                       value: 'Female',
                       groupValue: _selectedGender,
@@ -633,7 +633,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       ),
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: 45,
-                      child: Center(
+                      child: const Center(
                         child: Text("select sub-category"),
                       ),
                     ),
@@ -1051,7 +1051,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   //*******date strt end************//
   Future<DateTime?> pickDate() async {
     return await showDatePicker(
-      keyboardType: TextInputType.numberWithOptions(),
+      keyboardType: const TextInputType.numberWithOptions(),
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),

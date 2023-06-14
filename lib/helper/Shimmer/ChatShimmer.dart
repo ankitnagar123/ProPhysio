@@ -91,7 +91,7 @@ Widget categoryShimmerEffect(BuildContext context) {
           Container(
             width: 80.0,
             height: 85,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.grey,
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
@@ -107,7 +107,7 @@ Widget categoryShimmerEffect(BuildContext context) {
           Container(
             width: 80,
             height: 85.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.grey,
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
@@ -115,7 +115,7 @@ Widget categoryShimmerEffect(BuildContext context) {
           Container(
             width: 80,
             height: 85.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.grey,
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
@@ -141,17 +141,17 @@ Widget categorysubShimmerEffect(BuildContext context) {
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10,bottom: 10),
+                margin: const EdgeInsets.only(top: 10,bottom: 10),
                 height: MediaQuery.of(context).size.height * 0.18,
                 width: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.18,
@@ -160,27 +160,27 @@ Widget categorysubShimmerEffect(BuildContext context) {
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 height: MediaQuery.of(context).size.height * 0.18,
                 width: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 height: MediaQuery.of(context).size.height * 0.18,
                 width: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
               ),
             ],
           )));

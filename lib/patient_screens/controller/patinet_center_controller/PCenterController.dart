@@ -1,20 +1,12 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
-import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import '../../model/CenterSide/pCenterListModel.dart';
-import '../../model/DoctorListModel.dart';
-import '../../model/DoctorSubCateogryList.dart';
-import '../../model/PDoctorCatSucCatModel.dart';
 
 class PCenterCtr extends GetxController {
   ApiService apiService = ApiService();

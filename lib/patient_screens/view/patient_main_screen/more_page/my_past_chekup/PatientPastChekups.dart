@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
-import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import 'MediclaReport.dart';
 import 'Prescription.dart';
 
@@ -47,7 +46,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
               Get.back();
             },child: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black,size: 18)),
         toolbarHeight: 40,
-actions: [
+actions: const [
   Icon(Icons.qr_code_2)
 ],        bottom: TabBar(
           controller: tabController,

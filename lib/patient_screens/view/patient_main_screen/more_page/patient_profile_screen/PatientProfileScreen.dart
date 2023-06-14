@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -71,7 +72,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
     _getUserLocation();
-    print(" latitude ${latitude}");
+    print(" latitude $latitude");
     profileCtr.patientProfile(context);
     nameCtrl.text = profileCtr.name.value;
     print("my name${profileCtr.name.value}");
@@ -171,8 +172,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           onTap: () {
                                             _choose(ImageSource.gallery);
                                           },
-                                          child: Row(
-                                            children: const [
+                                          child: const Row(
+                                            children: [
                                               Icon(Icons.image, size: 20),
                                               SizedBox(
                                                 width: 10,
@@ -194,8 +195,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           onTap: () {
                                             _choose(ImageSource.camera);
                                           },
-                                          child: Row(
-                                            children: const [
+                                          child: const Row(
+                                            children: [
                                               Icon(Icons.camera_alt),
                                               SizedBox(
                                                 width: 10,
@@ -312,9 +313,10 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 height: 50,
                 width: MediaQuery.of(context).size.width * 1,
                 child: IntlPhoneField(
+
                   keyboardType: TextInputType.number,
                   showCountryFlag: false,
-                  initialValue: "$code",
+                  // initialValue: "IN",
                   controller: phoneNumberCtrl,
                   decoration: const InputDecoration(
                     counterText: '',
@@ -331,11 +333,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   ),
                   initialCountryCode: 'IT',
                   onChanged: (phone) {
+                    var flag = phone.countryISOCode;
+                    log(flag);
                     code = phone.countryCode;
                     print(phone.completeNumber);
                   },
                   onCountryChanged: (cod) {
-                    code = cod.dialCode;
+                    code = '+${cod.dialCode}';
                   },
                 ),
               ),
@@ -537,8 +541,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     setState(() {
       longitude = locations.last.longitude.toString();
       latitude = locations.last.latitude.toString();
-      print('input address longitude---->${longitude}');
-      print('input address latitude---->${latitude}');
+      print('input address longitude---->$longitude');
+      print('input address latitude---->$latitude');
     });
   }
 }

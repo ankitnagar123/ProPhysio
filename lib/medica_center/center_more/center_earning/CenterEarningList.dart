@@ -116,13 +116,13 @@ class _CenterEarningListState extends State<CenterEarningList> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Expanded(
                         flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Date",
                               style: TextStyle(
@@ -147,20 +147,20 @@ class _CenterEarningListState extends State<CenterEarningList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Slot",
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10.0,
                                   fontFamily: "Poppins"),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               height: 2.0,
                             ),
                             Text("dummy",
                               /*"${doctorEarningCtr.earning.value.list[index].from.toString()} To "
                                   "${doctorEarningCtr.earning.value.list[index].to.toString()}",*/
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 12.0,
                                   fontFamily: "Poppins"),
@@ -176,20 +176,20 @@ class _CenterEarningListState extends State<CenterEarningList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Fees",
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10.0,
                                   fontFamily: "Poppins"),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               height: 2.0,
                             ),
                             Text("dummy",
                               /*doctorEarningCtr
                                   .earning.value.list[index].price,*/
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: 12.0,

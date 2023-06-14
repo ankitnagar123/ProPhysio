@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import '../Helper/RoutHelper/RoutHelper.dart';
 import '../helper/mycolor/mycolor.dart';
 import '../helper/sharedpreference/SharedPrefrenc.dart';
@@ -31,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       FirebaseMessaging.instance.getToken().then((value) {
         token = value!;
         sp.setStringValue(sp.FIREBASE_TOKEN_KEY, token);
-        print("Firebase Token :-- ${token}");
+        print("Firebase Token :-- $token");
       });
       sp.setStringValue(sp.CURRENT_DEVICE_KEY, "Android");
     }
@@ -41,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       FirebaseMessaging.instance.getToken(vapidKey: "").then((value) {
         token = value!;
         sp.setStringValue(sp.FIREBASE_TOKEN_KEY, token);
-        print("Firebase Token :-- ${token}");
+        print("Firebase Token :-- $token");
       });
     }
     getValue();
@@ -67,11 +66,11 @@ class _SplashScreenState extends State<SplashScreen> {
                     MyColor.primary,
                     MyColor.secondary,
                   ])),
-          child: Center(
+          child: const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
 
                 Image(
                   image: AssetImage("assets/images/MEDICAlogo.png"),

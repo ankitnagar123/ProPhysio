@@ -52,8 +52,8 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
     }
     return doctorPrescriptionCtr.allMedicineList
         .where((user) =>
-            user.medicineName!.toLowerCase().contains(_keyword.toLowerCase()) ||
-            user.medicineId!.toLowerCase().contains(_keyword.toLowerCase()))
+            user.medicineName.toLowerCase().contains(_keyword.toLowerCase()) ||
+            user.medicineId.toLowerCase().contains(_keyword.toLowerCase()))
         .toList();
   }
 
@@ -80,7 +80,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Obx(() {
           if (doctorPrescriptionCtr.loadingAddMedicne.value) {
             return Center(child: custom.MyIndicator());
@@ -100,7 +100,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
               discCtr.clear();
               _selectedGender = "";
             });
-          }, MyColor.primary, TextStyle(fontSize: 17, color: MyColor.white));
+          }, MyColor.primary, const TextStyle(fontSize: 17, color: MyColor.white));
         }),
       ),
       body: SingleChildScrollView(
@@ -195,7 +195,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                   child: ListTile(
                     horizontalTitleGap: 5,
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
                       value: 'Before Meal',
                       groupValue: _selectedGender,
@@ -344,7 +344,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 20.0),
                       child: SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,

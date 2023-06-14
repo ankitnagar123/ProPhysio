@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:http/http.dart' as http;
 

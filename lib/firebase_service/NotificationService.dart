@@ -77,5 +77,5 @@ class NotificationService {
 }
 
 Future<void> BackgroundMessageHandler(RemoteMessage message) async {
-  print("Remote message Handler==>${message}");
+  print("Remote message Handler==>$message");
 }

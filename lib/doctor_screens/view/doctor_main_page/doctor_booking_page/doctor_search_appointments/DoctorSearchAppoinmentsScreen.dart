@@ -7,6 +7,7 @@ import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/booking_list_model.dart';
+import '../../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorSearchAppointments extends StatefulWidget {
   const DoctorSearchAppointments({Key? key}) : super(key: key);
@@ -658,19 +659,40 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               ],
                             ),
                           ),
-                          custom.callButton(context, "Complete", () {
-                            bookingController
-                                .bookingAppointmentDone(context, id, () {
-                              Get.back();
-                            });
-                          },
-                              MyColor.primary,
-                              const TextStyle(
-                                color: MyColor.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                              ),
-                              Icons.done),
+                          Row(
+                            children: [
+                              custom.callButton(
+                                  context, "Write prescription", () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PrescriptionMedicalTab(
+                                              patientId: userid,
+                                            )));
+                              },
+                                  MyColor.primary,
+                                  const TextStyle(
+                                    color: MyColor.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                  ),
+                                  Icons.medical_information_outlined),
+                              custom.callButton(context, "Complete", () {
+                                bookingController
+                                    .bookingAppointmentDone(context, id, () {
+                                  Get.back();
+                                });
+                              },
+                                  MyColor.primary,
+                                  const TextStyle(
+                                    color: MyColor.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                  Icons.done),
+                            ],
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

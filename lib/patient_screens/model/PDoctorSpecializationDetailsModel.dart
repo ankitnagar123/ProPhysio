@@ -38,7 +38,7 @@ class SpecializationDetailsModel {
     if (subcategory != null) {
       data['subcategory'] = subcategory!.map((v) => v.toJson()).toList();
     }
-    if (this.details != null) {
+    if (details != null) {
       data['details'] = details!.map((v) => v.toJson()).toList();
     }
     return data;
@@ -77,8 +77,8 @@ class Details {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = this.name;
-    data['price'] = this.price;
+    data['name'] = name;
+    data['price'] = price;
     return data;
   }
 }

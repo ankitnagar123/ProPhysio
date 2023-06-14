@@ -4,7 +4,6 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/more_page/MorePage.dart';
 import 'package:get/get.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/DoctorListSearch.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
@@ -34,11 +33,11 @@ CustomView view = CustomView();
 
   int _selectedIndex = 0;
   List screens =  [
-    PatientHomePage(),
-    BookingPage(),
-    ChatListScreen(),
-    MorePage(),
-    PDrAllCategory(),
+    const PatientHomePage(),
+    const BookingPage(),
+    const ChatListScreen(),
+    const MorePage(),
+    const PDrAllCategory(),
     PDrSubCategory(categoryId: '',),
     DoctorListWithCategory(catId: '', subCatId: '',)
   ];

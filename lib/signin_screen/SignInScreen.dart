@@ -4,7 +4,6 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:get/get.dart';
 import 'package:medica/signin_screen/signin_controller/SignInController.dart';
-import 'package:medica/signin_screen/test.dart';
 import '../helper/CustomView/CustomView.dart';
 
 class SignInScreen extends StatefulWidget {

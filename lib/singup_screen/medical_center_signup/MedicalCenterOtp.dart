@@ -6,7 +6,6 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../helper/CustomView/CustomView.dart';
 import '../../medica_center/center_controller/CenterAuthController.dart';
-import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 import '../../signin_screen/SignInScreen.dart';
 
 class MedicalCenterOtp extends StatefulWidget {

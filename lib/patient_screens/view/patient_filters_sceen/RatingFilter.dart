@@ -77,11 +77,11 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
                 allowHalfRating: true,
                 itemCount: 5,
                 ratingWidget: RatingWidget(
-                    full: Icon(Icons.star, color: MyColor.primary),
-                    half: Icon(Icons.star_half, color: MyColor.primary),
+                    full: const Icon(Icons.star, color: MyColor.primary),
+                    half: const Icon(Icons.star_half, color: MyColor.primary),
                     empty: const Icon(Icons.star_border_purple500_outlined,
                         color: MyColor.primary)),
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 onRatingUpdate: (rating) {
                //   log(">>>>> $rating");
                  // doctorListCtr.location.value = rating.toString();

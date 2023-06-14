@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../medica_center/center_controller/CenterAuthController.dart';
-import '../../medica_center/center_home/CenterBottomNavigate.dart';
-import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 
 class MedicalCenterSignUp extends StatefulWidget {
   const MedicalCenterSignUp({Key? key}) : super(key: key);
@@ -27,7 +24,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
 
   TextEditingController passwordCtr = TextEditingController();
 
-  bool _isHidden = true;
+  final bool _isHidden = true;
 
   CustomView customView = CustomView();
   String code = '';
@@ -42,7 +39,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
 
   DateTime? startDate, endData;
 
-  String _selectedGender = '';
+  final String _selectedGender = '';
 
   @override
   Widget build(BuildContext context) {

@@ -128,14 +128,14 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            Text(
+                            const Text(
                               "Patient Information",
                               style: TextStyle(
                                   color: MyColor.primary1,
                                   fontSize: 15.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text("${details!.name}${details.surname}",
@@ -158,12 +158,12 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                                   fontSize: 15.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text(
-                              "${details.birthPlace}",
-                              style: TextStyle(
+                              details.birthPlace,
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14.0,
                                   fontFamily: "Poppins"),
@@ -184,19 +184,19 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            Text(
+                            const Text(
                               "Contact",
                               style: TextStyle(
                                   color: MyColor.primary1,
                                   fontSize: 15.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text(
                                 details.contact,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
                                     fontFamily: "Poppins")),
@@ -208,19 +208,19 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            Text(
+                            const Text(
                               "Weight",
                               style: TextStyle(
                                   color: MyColor.primary1,
                                   fontSize: 15.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text(
-                                "${details.surname}",
-                                style: TextStyle(
+                                details.surname,
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
                                     fontFamily: "Poppins")),
@@ -240,14 +240,14 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            Text(
+                            const Text(
                               "Address",
                               style: TextStyle(
                                   color: MyColor.primary1,
                                   fontSize: 15.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text(
@@ -264,19 +264,19 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            Text(
+                            const Text(
                               "Height",
                               style: TextStyle(
                                   color: MyColor.primary1,
                                   fontSize: 14.0,
                                   fontFamily: "Poppins"),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2.0,
                             ),
                             Text(
-                                "${details.height}",
-                                style: TextStyle(
+                                details.height,
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15.0,
                                     fontFamily: "Poppins")),
@@ -305,7 +305,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                   const SizedBox(
                     height: 8.0,
                   ),
-                  doctorPrescriptionCtr.prescriptionReportQrList.value!.details.length == 0
+                  doctorPrescriptionCtr.prescriptionReportQrList.value!.details.isEmpty
                       ? const Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text("No reports at the moment!"),
@@ -357,7 +357,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: FadeInImage.assetNetwork(
                                 imageErrorBuilder: (context, error, stackTrace) {
-                                  return Image(image: AssetImage("assets/images/noimage.png"));
+                                  return const Image(image: AssetImage("assets/images/noimage.png"));
                                 },
                                 width: 80,
                                 height: 80,

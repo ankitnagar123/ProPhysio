@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -46,20 +45,20 @@ class DoctorListCtr extends GetxController {
 
 
   /*------------------Doctor list  Fetch Api----------------*/
-  Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId, String priceRangeStart, String priceRangeEnd, String rating, String filter_latitude, String filter_longitude, String filter_distance,) async {
+  Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId, String priceRangeStart, String priceRangeEnd, String rating, String filterLatitude, String filterLongitude, String filterDistance,) async {
     final Map<String, dynamic> cardPeramert = {
       "cat_id":categoryId,
       "subcat_id":subCatId,
       "price_start":priceRangeStart,
       "price_end":priceRangeEnd,
       "rating":rating,
-      "latitude":filter_latitude,
-      "longitude":filter_longitude,
-      "distance":filter_distance,
+      "latitude":filterLatitude,
+      "longitude":filterLongitude,
+      "distance":filterDistance,
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
 
     };
-    print("doctor list peramiter=============${cardPeramert}");
+    print("doctor list peramiter=============$cardPeramert");
 
     bool connection = await  checkInternetConnection();
   if(connection){

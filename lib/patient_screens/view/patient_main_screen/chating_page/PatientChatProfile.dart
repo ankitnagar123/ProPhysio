@@ -119,7 +119,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width*0.8,
                     child: customView.text(
                         widget.address,

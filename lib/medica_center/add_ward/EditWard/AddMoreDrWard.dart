@@ -10,7 +10,6 @@ import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../center_controller/CenterHomeController.dart';
 import '../../center_models/CenterAddMoreDr.dart';
-import '../../center_models/CenterAllDrModel.dart';
 
 class WardAddMoreDoctor extends StatefulWidget {
   const WardAddMoreDoctor({Key? key}) : super(key: key);
@@ -34,10 +33,14 @@ class _WardAddMoreDoctorState extends State<WardAddMoreDoctor> {
 
   bool isSelected = false;
 String wardId = "";
+  String wardName = "";
+
   @override
   void initState() {
     super.initState();
     wardId = Get.parameters["wardId"].toString();
+    wardName = Get.parameters["wardName"].toString();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerAddMoreDrListApi(context, wardId);
     });
@@ -68,13 +71,17 @@ String wardId = "";
               : centerHomeCtr.loadingMoreAdd.value
                   ? custom.MyIndicator()
                   : custom.MyButton(context, "Add doctor", () {
-                      if (drIdMainArray.length == 0) {
+                      if (drIdMainArray.isEmpty) {
                         custom.MySnackBar(context, "Select doctor");
                       } else {
                         centerHomeCtr.addMoreDr(context, drIdMainArray.join(','), wardId, () {
-                         Get.back();
-                         Get.back();
-
+                          var data = {
+                            "wardId": wardId,
+                            "wardName": wardName,
+                          };
+                          Get.offNamed(
+                              RouteHelper.CCenterDoctorViewScreen(),
+                              parameters: data);
                         });
                         /*centerHomeCtr.addDoctors(
                             context, nameCtr.text, drIdMainArray.join(','), () {

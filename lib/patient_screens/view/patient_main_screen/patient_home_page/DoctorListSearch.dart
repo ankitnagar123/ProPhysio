@@ -35,7 +35,7 @@ class _DoctorSearchListState extends State<DoctorSearchList>
     }
     return doctorListCtr.doctorList
         .where(
-            (user) => user.name!.toLowerCase().contains(_keyword.toLowerCase()))
+            (user) => user.name.toLowerCase().contains(_keyword.toLowerCase()))
         .toList();
   }
 
