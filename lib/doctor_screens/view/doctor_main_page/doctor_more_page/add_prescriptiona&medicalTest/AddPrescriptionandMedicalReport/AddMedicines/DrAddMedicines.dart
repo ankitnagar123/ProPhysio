@@ -27,9 +27,6 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
   TextEditingController searchCtr = TextEditingController();
   DoctorPrescriptionCtr doctorPrescriptionCtr =
       Get.put(DoctorPrescriptionCtr());
-  bool isAppleChecked = false;
-  bool isBananaChecked = false;
-  bool isCherryChecked = false;
   String selectedMedicine = "";
   String MedicineID = "";
   String _selectedGender = '';
@@ -156,27 +153,21 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           ),
           Card(
             color: MyColor.midgray,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child :
-                  ListView(
-                    children: values.keys.map((String key) {
-                      return CheckboxListTile(
-                        title: Text(key),
-                        value: values[key],
-                        activeColor: Colors.pink,
-                        checkColor: Colors.white,
-                        onChanged: ( value) {
-                          setState(() {
-                            values[key] = value!;
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ),]),
+            child: ListView(
+              children: values.keys.map((String key) {
+                return CheckboxListTile(
+                  title: Text(key),
+                  value: values[key],
+                  activeColor: Colors.pink,
+                  checkColor: Colors.white,
+                  onChanged: ( value) {
+                    setState(() {
+                      values[key] = value!;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
           ),
           SizedBox(
             height: height * 0.011,
@@ -193,6 +184,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                 Expanded(
                   flex: 1,
                   child: ListTile(
+
                     horizontalTitleGap: 5,
                     contentPadding: EdgeInsets.zero,
                     visualDensity: const VisualDensity(horizontal: -4, vertical: -4),

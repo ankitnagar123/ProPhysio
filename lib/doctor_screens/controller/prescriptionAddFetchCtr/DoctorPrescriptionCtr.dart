@@ -9,6 +9,7 @@ import 'package:medica/doctor_screens/model/DPrescriptionModel.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
+import '../../../patient_screens/model/MedicinsListModel.dart';
 import '../../../patient_screens/model/PatinetPrescriptionModel.dart';
 import '../../model/MedicineModel/AddFetchMedicneList.dart';
 import '../../model/MedicineModel/MedicineAllListModel.dart';
@@ -32,6 +33,7 @@ class DoctorPrescriptionCtr extends GetxController {
   var loadingMedicine = false.obs;
 
   var loadingMedicineFetch = false.obs;
+  var pLoadingMedicineFetch = false.obs;
 
 /*---------for doctor*---------*/
   var prescriptionList = Rxn<DPrescriptionListModel>();
@@ -47,6 +49,9 @@ class DoctorPrescriptionCtr extends GetxController {
 
   /*For Medicine add wali List*/
   var fetchMedicineList = <AddFetchMedicineListModel>[].obs;
+
+  /*For Patient show Medicine  List*/
+  var patientFetchMedicineList = <PatinetMedicineListModel>[].obs;
 
 /*---------for doctor*---------*/
   void addPrescription(
@@ -285,6 +290,30 @@ class DoctorPrescriptionCtr extends GetxController {
       }
     } catch (e) {
       loadingMedicineFetch.value = false;
+      log('Kuch to dikkat hai?$e');
+    }
+  }
+
+
+  Future<void> patientFetchmedicineList() async {
+    pLoadingMedicineFetch.value = true;
+    Map<String, dynamic> data = {
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+    };
+    final response =
+    await apiService.postData(MyAPI.addFetchMedicineList, data);
+    log("Patient side parameter medicine all list ${response.body}");
+    try {
+      if (response.statusCode == 200) {
+        pLoadingMedicineFetch.value = false;
+        patientFetchMedicineList.value =
+            patinetMedicineListModelFromJson(response.body);
+        log(patientFetchMedicineList.toString());
+      } else {
+        pLoadingMedicineFetch.value = false;
+      }
+    } catch (e) {
+      pLoadingMedicineFetch.value = false;
       log('Kuch to dikkat hai?$e');
     }
   }

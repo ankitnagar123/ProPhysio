@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'MediclaReport.dart';
+import 'PatientViewMedicines.dart';
 import 'Prescription.dart';
 
 class PPrescriptionMedicalTab extends StatefulWidget {
@@ -24,8 +25,9 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
   }
+
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
 
@@ -33,7 +35,6 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.white24,
@@ -44,11 +45,16 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
         leading: InkWell(
             onTap: () {
               Get.back();
-            },child: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black,size: 18)),
+            },
+            child: const Icon(Icons.arrow_back_ios_new_outlined,
+                color: Colors.black, size: 18)),
         toolbarHeight: 40,
-actions: const [
-  Icon(Icons.qr_code_2)
-],        bottom: TabBar(
+        actions: const [Icon(Icons.qr_code_2)],
+        bottom: TabBar(
+          indicator: const BoxDecoration(
+              color: MyColor.primary,
+              // borderRadius: BorderRadius.all(Radius.circular(30))
+    ),
           controller: tabController,
           indicatorColor: MyColor.primary,
           indicatorWeight: 2,
@@ -61,16 +67,24 @@ actions: const [
               child: custom.text(
                   "Medical Test", 14, FontWeight.w500, MyColor.black),
             ),
+            Tab(
+              child:
+                  custom.text("Medicines", 14, FontWeight.w500, MyColor.black),
+            ),
           ],
         ),
       ),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
           child: Stack(children: [
-            TabBarView(controller: tabController, children: const [
-              PatientPrescription(),
-              PatientMedicalReport(),
-            ]),
+            TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: tabController,
+                children: const [
+                  PatientPrescription(),
+                  PatientMedicalReport(),
+                  PatientViewMedicines(),
+                ]),
           ])),
     );
   }

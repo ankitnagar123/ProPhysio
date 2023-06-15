@@ -48,7 +48,7 @@ class _MorePageState extends State<MorePage> {
             elevation: 0.0,
           ),
           body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -58,7 +58,7 @@ class _MorePageState extends State<MorePage> {
                 customView.text("Hi @${patientProfileCtr.name.value}", 17.0,
                     FontWeight.w500, Colors.black),
                 const SizedBox(
-                  height: 20.0,
+                  height: 15.0,
                 ),
                 cardCtr.cardList.isEmpty
                     ? Container(
@@ -180,16 +180,72 @@ class _MorePageState extends State<MorePage> {
                   height: 30.0,
                 ),
                 ListTile(
+                  subtitle: customView.text("Rate those appointment u did",
+                      10.0, FontWeight.w500, Colors.black),
                   visualDensity: VisualDensity.compact,
                   onTap: () {
-                    Get.toNamed(RouteHelper.getPatientSettingsScreen());
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const PastAppointmentsRating()));
+                    // Get.toNamed(RouteHelper.getPatientSupportScreen());
                   },
                   leading: const Icon(
-                    Icons.settings,
+                    Icons.star_border_purple500_sharp,
+                    color: Colors.black,
+                  ),
+                  title: customView.text("Ratings and reviews", 14.0,
+                      FontWeight.w500, Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+                ListTile(
+                  visualDensity: VisualDensity.compact,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const PPrescriptionMedicalTab()));
+                    // Get.toNamed(RouteHelper.getPatientSupportScreen());
+                  },
+                  leading: const Icon(
+                    Icons.content_paste_search_sharp,
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "Settings", 14.0, FontWeight.w500, Colors.black),
+                      "Reports", 14.0, FontWeight.w500, Colors.black),
+                  subtitle: customView.text(
+                      "View your prescription,medical test & medicines",
+                      10.0,
+                      FontWeight.w500,
+                      Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+                ListTile(
+                  visualDensity: VisualDensity.compact,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PatientQRShow()));
+                  },
+                  leading: const Icon(
+                    Icons.qr_code_scanner_sharp,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      "OR code", 14.0, FontWeight.w500, Colors.black),
+                  subtitle: customView.text(
+                      "View your QR code", 10.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -240,77 +296,6 @@ class _MorePageState extends State<MorePage> {
                 ListTile(
                   visualDensity: VisualDensity.compact,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const PastAppointmentsRating()));
-                    // Get.toNamed(RouteHelper.getPatientSupportScreen());
-                  },
-                  leading: const Icon(
-                    Icons.star_border_purple500_sharp,
-                    color: Colors.black,
-                  ),
-                  title: customView.text("Ratings and reviews", 14.0,
-                      FontWeight.w500, Colors.black),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                    size: 20.0,
-                  ),
-                ),
-                ListTile(
-                  visualDensity: VisualDensity.compact,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const PPrescriptionMedicalTab()));
-                    // Get.toNamed(RouteHelper.getPatientSupportScreen());
-                  },
-                  leading: const Icon(
-                    Icons.content_paste_search_sharp,
-                    color: Colors.black,
-                  ),
-                  title: customView.text(
-                      "Reports", 14.0, FontWeight.w500, Colors.black),
-                  subtitle: customView.text(
-                      "View your prescription & medical test",
-                      11.0,
-                      FontWeight.w500,
-                      Colors.black),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                    size: 20.0,
-                  ),
-                ),
-                ListTile(
-                  visualDensity: VisualDensity.compact,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PatientQRShow()));
-                  },
-                  leading: const Icon(
-                    Icons.qr_code_scanner_sharp,
-                    color: Colors.black,
-                  ),
-                  title: customView.text(
-                      "OR code", 14.0, FontWeight.w500, Colors.black),
-                  subtitle: customView.text(
-                      "View your QR code", 11.0, FontWeight.w500, Colors.black),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                    size: 20.0,
-                  ),
-                ),
-                ListTile(
-                  visualDensity: VisualDensity.compact,
-                  onTap: () {
                     Get.toNamed(RouteHelper.getPatientSupportScreen());
                   },
                   leading: const Icon(
@@ -319,6 +304,23 @@ class _MorePageState extends State<MorePage> {
                   ),
                   title: customView.text(
                       "Support", 14.0, FontWeight.w500, Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+                ListTile(
+                  visualDensity: VisualDensity.compact,
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getPatientSettingsScreen());
+                  },
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      "Settings", 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,

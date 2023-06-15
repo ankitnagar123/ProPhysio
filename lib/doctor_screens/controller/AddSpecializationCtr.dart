@@ -18,13 +18,11 @@ class AddSpecializationCtr extends GetxController {
   var categoryloding = false.obs;
   var categorySubLoading = false.obs;
 
-
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView custom = CustomView();
 
   var selectedCategory = <SelectedCategoryModel>[].obs;
   var selectedSubCategory = <SelectedSubCategoryModel>[].obs;
-
 
   /*-------------Doctor fetch selected category --------------*/
   Future<void> doctorSelectedCategory() async {
@@ -33,11 +31,13 @@ class AddSpecializationCtr extends GetxController {
     };
     try {
       categoryloding.value = true;
-      final response = await apiService.postData(MyAPI.dSelectedCategory,perameter);
+      final response =
+          await apiService.postData(MyAPI.dSelectedCategory, perameter);
       print(" selected Category=============${response.body}");
       if (response.statusCode == 200) {
         categoryloding.value = false;
-        selectedCategory.value = selectedCategoryModelFromJson(response.body.toString());
+        selectedCategory.value =
+            selectedCategoryModelFromJson(response.body.toString());
       } else {
         categoryloding.value = false;
         print("error");
@@ -48,20 +48,21 @@ class AddSpecializationCtr extends GetxController {
     }
   }
 
-
   /*-------------Doctor fetch selected sub category --------------*/
   Future<void> doctorSelectedSubCategory(String categoryId) async {
     final Map<String, dynamic> perameter = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "cat_id":categoryId,
+      "cat_id": categoryId,
     };
     try {
       categorySubLoading.value = true;
-      final response = await apiService.postData(MyAPI.dSelectedSubCategory,perameter);
+      final response =
+          await apiService.postData(MyAPI.dSelectedSubCategory, perameter);
       print("Selected sub-Category=============${response.body}");
       if (response.statusCode == 200) {
         categorySubLoading.value = false;
-        selectedSubCategory.value = selectedSubCategoryModelFromJson(response.body.toString());
+        selectedSubCategory.value =
+            selectedSubCategoryModelFromJson(response.body.toString());
       } else {
         categorySubLoading.value = false;
         print("error");
@@ -72,25 +73,28 @@ class AddSpecializationCtr extends GetxController {
     }
   }
 
-
   /*------------Doctor Add Specialization with Fee and Description----------------*/
-  Future addSpecializationFee(BuildContext
-  context,String
-  category,String subCatId,
-      String discrip, String visitName,
-      String fee,VoidCallback callback,
-      ) async {
+  Future<void> addSpecializationFee(
+    BuildContext context,
+    String category,
+    String subCatId,
+    String discrip,
+    String visitName,
+    String fee,
+    VoidCallback callback,
+  ) async {
     loading.value = true;
     final Map<String, dynamic> perameter = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "cat_id":category,
-      "subcat_id":subCatId,
-      "description":discrip,
+      "cat_id": category,
+      "subcat_id": subCatId,
+      "description": discrip,
       "name": visitName,
       "price": fee,
     };
     print("addSpecialization and Fee Parameter$perameter");
-    final response = await apiService.postData(MyAPI.DAddSpecializationFee, perameter);
+    final response =
+        await apiService.postData(MyAPI.DAddSpecializationFee, perameter);
     try {
       log("response of Doctor add Specialization Fee Api :-${response.body}");
       var jsonResponse = jsonDecode(response.body);
@@ -110,6 +114,4 @@ class AddSpecializationCtr extends GetxController {
       log("exception$e");
     }
   }
-
-
 }

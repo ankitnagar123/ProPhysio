@@ -52,7 +52,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
         ),
         body: Obx(() {
           if (doctorListCtr.categoryLoadingSub.value) {
-            return categoryShimmerEffect(context);
+            return  Center(heightFactor: 12,child: customView.MyIndicator());/* categoryShimmerEffect(context);*/
           } else if (doctorListCtr.subCategory.isEmpty) {
             return Center(
               heightFactor: 10.0,
@@ -67,7 +67,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                   child: GridView.count(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
-                    crossAxisCount: 4,
+                    crossAxisCount: 3,
                     children: List.generate(doctorListCtr.subCategory.length,
                         (index) {
                       return GestureDetector(
@@ -99,11 +99,11 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                                         imageErrorBuilder: (c, o, s) =>
                                             Image.asset(
                                                 "assets/images/noimage.png",
-                                                width: 50,
-                                                height: 50,
+                                                width: 70,
+                                                height: 70,
                                                 fit: BoxFit.cover),
-                                        width: 50,
-                                        height: 50,
+                                        width: 80,
+                                        height: 80,
                                         fit: BoxFit.cover,
                                         placeholder:
                                             "assets/images/loading.gif",
@@ -117,7 +117,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                                       child: Text(
                                         doctorListCtr
                                             .subCategory[index].subcatName,
-                                        style: const TextStyle(fontSize: 12),
+                                        style: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
                                         softWrap: false,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,

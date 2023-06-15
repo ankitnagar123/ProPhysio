@@ -62,6 +62,7 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                   itemCount: pCenterCtr.centerList.length,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
+                    var centerList= pCenterCtr.centerList[index];
                     var id = pCenterCtr.centerList[index].centerId;
                     return InkWell(
                       onTap: () {
@@ -81,32 +82,68 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 7.0, vertical: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              customView.text(
-                                  pCenterCtr.centerList[index].name.toString(),
-                                  14.0,
-                                  FontWeight.w500,
-                                  Colors.black),
-                              const SizedBox(
-                                height: 10.0,
+                              SizedBox(
+                                width: 100,
+                                height: 100,
+                                // margin: const EdgeInsets.all(6),
+                                child: Image.network(
+                                  centerList.image,
+                                  fit: BoxFit.cover,
+                                  errorBuilder:
+                                      (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.amber,
+                                      alignment: Alignment.center,
+                                      child: const Text(
+                                        'Whoops!',
+                                        style: TextStyle(fontSize: 30),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                              Row(
+                              const SizedBox(
+                                width: 5.0,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(Icons.location_on_outlined,
-                                      size: 18),
-                                  SizedBox(
-                                    width: 150,
-                                    child: customView.text(
-                                        pCenterCtr.centerList[index].address,
-                                        12,
-                                        FontWeight.normal,
-                                        MyColor.grey),
+                                  customView.text(
+                                      pCenterCtr.centerList[index].name.toString(),
+                                      14.0,
+                                      FontWeight.w500,
+                                      Colors.black),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  customView.text(
+                                      pCenterCtr.centerList[index].biography.toString(),
+                                      12.0,
+                                      FontWeight.w400,
+                                      Colors.black),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.location_on_outlined,
+                                          size: 18),
+                                      SizedBox(
+                                        width: 150,
+                                        child: customView.text(
+                                            pCenterCtr.centerList[index].address,
+                                            12,
+                                            FontWeight.normal,
+                                            MyColor.grey),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ],
+
                           ),
                         ),
                       ),

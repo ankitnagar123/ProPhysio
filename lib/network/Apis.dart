@@ -119,8 +119,12 @@ static const String dAddPrescription= "prescription";
   static const String dChatListFetch = "doctor_msg_list";
   static const String dChatListDelete = "delete_user_msg_list";
 
+  /*Center Request to doctor */
+  static const String dCenterRequest = "ward_doctor_request_list";
+  static const String dCenterRequestAcceptReject = "accept_ward_doctor_request";
 
-static const String updateToken = "android_update_userdevice_id";
+
+  static const String updateToken = "android_update_userdevice_id";
 
 /*-------------Medical Center side api---------------------*/
 

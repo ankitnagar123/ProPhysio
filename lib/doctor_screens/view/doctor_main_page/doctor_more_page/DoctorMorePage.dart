@@ -7,6 +7,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../controller/CenterRequestCtr.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/AddAvailabilityTab.dart';
 
@@ -21,10 +22,12 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
   CustomView customView = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  CenterRequest centerRequest = Get.put(CenterRequest());
 
   @override
   void initState() {
     doctorProfileCtr.doctorProfile(context);
+    centerRequest.CenterRequestListApi(context);
     super.initState();
   }
 
@@ -59,10 +62,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                         Get.toNamed(RouteHelper.DPersonalData());
                       },
                       child: Container(
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .shortestSide / 3.2,
+                        height: MediaQuery.of(context).size.shortestSide / 3.2,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment.topRight,
@@ -75,10 +75,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               height:
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .shortestSide / 8,
+                                  MediaQuery.of(context).size.shortestSide / 8,
                               width: double.infinity,
                               decoration: const BoxDecoration(
                                 color: MyColor.midgray,
@@ -104,10 +101,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                         // Get.toNamed(RouteHelper.getPatientPaymentScreen());
                       },
                       child: Container(
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .shortestSide / 3.2,
+                        height: MediaQuery.of(context).size.shortestSide / 3.2,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment.topRight,
@@ -120,10 +114,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               height:
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .shortestSide / 8,
+                                  MediaQuery.of(context).size.shortestSide / 8,
                               width: double.infinity,
                               decoration: const BoxDecoration(
                                 color: MyColor.midgray,
@@ -144,22 +135,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 height: 30.0,
               ),
               ListTile(
-                onTap: () {
-                  Get.toNamed(RouteHelper.DSettingScreen());
-                },
-                leading: const Icon(
-                  Icons.settings,
-                  color: Colors.black,
-                ),
-                title: customView.text(
-                    "Settings", 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
-              ListTile(
+                subtitle: customView.text("add availability for self & center",
+                    11.0, FontWeight.w400, Colors.black),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -180,12 +157,14 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
               ListTile(
+                subtitle: customView.text("prescription and medical reports",
+                    11.0, FontWeight.w400, Colors.black),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (
-                              context) => const CompleteAppointPrescription()));
+                          builder: (context) =>
+                              const CompleteAppointPrescription()));
                   // Get.toNamed(RouteHelper.DSettingScreen());
                 },
                 leading: const Icon(
@@ -193,8 +172,45 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Past Appointment Prescription", 13.0, FontWeight.w500,
-                    Colors.black),
+                    "Reports", 13.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                subtitle: customView.text("View your medical request ", 11.0,
+                    FontWeight.w400, Colors.black),
+                onTap: () {
+                  Get.toNamed(RouteHelper.DCenterRequest());
+                },
+                leading: Badge(
+                  backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
+                  label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
+                  child: const Icon(
+                    Icons.medical_services_outlined,
+                    color: Colors.black,
+                  ),
+                ),
+                title: customView.text(
+                    "Center request", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Settings", 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -210,8 +226,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Terms & conditions", 14.0, FontWeight.w500,
-                    Colors.black),
+                    "Terms & conditions", 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -275,17 +290,12 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Card(
@@ -305,7 +315,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
                                 "Logout", 17, FontWeight.w500, Colors.black),
                           ),
@@ -314,7 +324,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
                                 "Are you sure you want to log out?",
                                 13,
@@ -341,9 +351,9 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                 child: customView.mysButton(
                                   context,
                                   "Logout",
-                                      () async {
-                                    SharedPreferences preferences = await SharedPreferences
-                                        .getInstance();
+                                  () async {
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
                                     preferences.remove("DOCTOR_LOGIN_KEY");
                                     print(
                                         preferences.remove("DOCTOR_LOGIN_KEY"));

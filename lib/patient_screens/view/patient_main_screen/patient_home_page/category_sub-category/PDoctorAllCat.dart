@@ -67,7 +67,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                   child: GridView.count(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
-                    crossAxisCount: 4,
+                    crossAxisCount: 3,
                     children: List.generate(
                         doctorSignUpCtr.category.length, (index) {
                       return GestureDetector(
@@ -96,11 +96,11 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                             Image.asset(
                                                 color: MyColor.midgray,
                                                 "assets/images/noimage.png",
-                                                width: 50,
-                                                height: 50,
+                                                width: 70,
+                                                height: 70,
                                                 fit: BoxFit.cover),
-                                        width: 50,
-                                        height: 50,
+                                        width: 80,
+                                        height: 80,
                                         fit: BoxFit.cover,
                                         placeholder:
                                         "assets/images/loading.gif",
@@ -114,7 +114,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                       child: Text(
                                         doctorSignUpCtr.category[index]
                                             .categoryName,
-                                        style: const TextStyle(fontSize: 11),
+                                        style: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
                                         softWrap: false,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,

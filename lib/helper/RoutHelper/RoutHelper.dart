@@ -30,6 +30,8 @@ import 'package:medica/singup_screen/doctor_signup_page/DoctorSignUpOtp.dart';
 import 'package:medica/singup_screen/patient_pages/PatinetSignUpOtp.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
+
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/Center_request/DCenterRequest.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
 import '../../medica_center/add_ward/CenterAddNewWard.dart';
 import '../../medica_center/add_ward/EditWard/AddMoreDrWard.dart';
@@ -128,6 +130,8 @@ class RouteHelper {
   static const String dChangePassword = '/dChangePassword';
   static const String dTermCondition = '/dTermCondition';
   static const String dAbout = '/dAbout';
+  static const String dCenterRequest = '/dCenterRequest';
+
   static const String dSupport = '/dSupport';
 
 
@@ -295,6 +299,8 @@ class RouteHelper {
   static String DChangePassScreen() => dChangePassword;
   static String DTandCScreen() => dTermCondition;
   static String DAboutScreen() => dAbout;
+  static String DCenterRequest() => dCenterRequest;
+
   static String DSupportScreen() => dSupport;
 
 /*------------Medical Center Screen------------------*/
@@ -379,6 +385,7 @@ class RouteHelper {
     GetPage(name: dChangePassword, page: () => const DoctorChangePasswordScreen()),
     GetPage(name: dTermCondition, page: () => const DoctorTermCondition()),
     GetPage(name: dAbout, page: () => const DoctorAboutScreen()),
+     GetPage(name: dCenterRequest, page: () => const DCenterRequests()),
     GetPage(name: dSupport, page: () => const DoctorSupportScreen()),
 
 

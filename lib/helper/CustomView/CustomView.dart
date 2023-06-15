@@ -166,8 +166,8 @@ class CustomView {
       onTap: callback,
       child: Container(
         margin: const EdgeInsets.all(5),
-        width: widht * 0.38,
-        height: 40.0,
+        width: widht * 0.35,
+        height: 38.0,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(30),
