@@ -42,6 +42,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   String qRCode = "";
   String files = "";
   String code = '';
+  String flag = '';
+  String _selectedGender = '';
 
   final bool _isHidden = true;
   File? file;
@@ -84,9 +86,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     addressCtrl.text = profileCtr.address.value;
     files = profileCtr.image.value;
     qRCode = profileCtr.qrCode.value;
-
+flag = profileCtr.flag.value;
     code = profileCtr.code.value;
-
+    _selectedGender = profileCtr.gender.value;
     /*--new filed added--*/
     ageCtr.text = profileCtr.age.value;
     heightCtr.text = profileCtr.height.value;
@@ -315,7 +317,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 child: IntlPhoneField(
 
                   keyboardType: TextInputType.number,
-                  showCountryFlag: false,
+                  showCountryFlag: true,
                   // initialValue: "IN",
                   controller: phoneNumberCtrl,
                   decoration: const InputDecoration(
@@ -331,14 +333,16 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       ),
                     ),
                   ),
-                  initialCountryCode: 'IT',
+                  initialCountryCode: flag,
                   onChanged: (phone) {
-                    var flag = phone.countryISOCode;
+                     flag = phone.countryISOCode;
                     log(flag);
                     code = phone.countryCode;
                     print(phone.completeNumber);
                   },
                   onCountryChanged: (cod) {
+                    flag = cod.code;
+                    log(flag);
                     code = '+${cod.dialCode}';
                   },
                 ),
@@ -414,8 +418,52 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               customView.myField(context, birthPlaceCtr,
                   "Enter your birth-place", TextInputType.text),
               SizedBox(
-                height: height * 0.04,
+                height: height * 0.03,
               ),
+              customView.text(
+                  "Your Gender", 10.0, FontWeight.w600, MyColor.black),
+              SizedBox(
+                height: height * 0.01,
+              ),
+              Row(children: [
+                Expanded(
+                  flex: 1,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                    leading: Radio<String>(
+                      value: 'male',
+                      groupValue: _selectedGender,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedGender = value!;
+                          print(_selectedGender);
+                        });
+                      },
+                    ),
+                    title: const Text('Male'),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                    leading: Radio<String>(
+                      value: 'female',
+                      groupValue: _selectedGender,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedGender = value!;
+                          print(_selectedGender);
+
+                        });
+                      },
+                    ),
+                    title: const Text('Female'),
+                  ),
+                ),
+              ],),
             ],
           );
         }),
@@ -439,6 +487,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 addressCtrl.text,
                 phoneNumberCtrl.text,
                 code,
+                flag,
                 imagename,
                 baseimage,
                 genderCtr.text,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
-
-import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:get/get.dart';
+import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
+import 'package:medica/helper/mycolor/mycolor.dart';
+
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
 
@@ -29,17 +29,17 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   var code = "";
   var lat = "";
   var long = "";
-  var subcat ="";
+  var subcat = "";
 
-  var birthDate  = "";
-  var birthPlace  = "";
-  var universityAttended  = "";
-  var dateOfEnrol  = "";
-  var registerOfBelonging  = "";
-  var gender  = "";
-  var graduationDate  = "";
-  var qualificationDate  = "";
-
+  var birthDate = "";
+  var birthPlace = "";
+  var universityAttended = "";
+  var dateOfEnrol = "";
+  var registerOfBelonging = "";
+  var gender = "";
+  var graduationDate = "";
+  var qualificationDate = "";
+  var flag = "";
 
   @override
   void initState() {
@@ -71,13 +71,11 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
 
     graduationDate = Get.parameters["graduationDate"]!;
     qualificationDate = Get.parameters["qualificationDate"]!;
-
-
+    flag = Get.parameters["flag"]!;
 
     // TODO: implement initState
     super.initState();
   }
-
 
   TextEditingController optctr = TextEditingController();
 
@@ -85,36 +83,51 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
     return SafeArea(
-
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10.0),
           child: Obx(() {
-            if(doctorSignUpCtr.loading.value){
+            if (doctorSignUpCtr.loading.value) {
               return custom.MyIndicator();
             }
             return custom.MyButton(context, "Verificate", () {
-              if(validationotp()){
-                doctorSignUpCtr.doctorSignup(context, name, surname, username, email, code, phoneno, password, category, imagename, imagebase,
-                    address, lat, long, subcat,birthDate,birthPlace,
-                    universityAttended,dateOfEnrol,registerOfBelonging,
-                    gender,graduationDate,qualificationDate,() {
+              if (validationotp()) {
+                doctorSignUpCtr.doctorSignup(
+                    context,
+                    name,
+                    surname,
+                    username,
+                    email,
+                    code,
+                    phoneno,
+                    flag,
+                    password,
+                    category,
+                    imagename,
+                    imagebase,
+                    address,
+                    lat,
+                    long,
+                    subcat,
+                    birthDate,
+                    birthPlace,
+                    universityAttended,
+                    dateOfEnrol,
+                    registerOfBelonging,
+                    gender,
+                    graduationDate,
+                    qualificationDate, () {
                   Get.offAllNamed(RouteHelper.getLoginScreen());
                 });
               }
-            }, MyColor.primary, const TextStyle(
-                fontSize: 16, color: MyColor.white, fontFamily: "Poppins")
-            );
+            },
+                MyColor.primary,
+                const TextStyle(
+                    fontSize: 16, color: MyColor.white, fontFamily: "Poppins"));
           }),
         ),
         body: Padding(
@@ -122,9 +135,7 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                    height: height * 0.09
-                ),
+                SizedBox(height: height * 0.09),
                 const Align(
                   alignment: Alignment.topLeft,
                   child: Icon(Icons.arrow_back_ios),
@@ -133,21 +144,17 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                   height: height * 0.02,
                 ),
                 custom.text("Verification", 23, FontWeight.w700, MyColor.black),
-                SizedBox(
-                    height: height * 0.02
-                ),
+                SizedBox(height: height * 0.02),
                 custom.text(
                     "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.",
-                    12, FontWeight.normal, MyColor.primary1),
-
-                SizedBox(
-                    height: height * 0.07
-                ),
-
+                    12,
+                    FontWeight.normal,
+                    MyColor.primary1),
+                SizedBox(height: height * 0.07),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(
-                      "Enter OTP number", 13, FontWeight.w600, MyColor.primary1),
+                  child: custom.text("Enter OTP number", 13, FontWeight.w600,
+                      MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
@@ -157,24 +164,30 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                 SizedBox(
                   height: height * 0.03,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     custom.text("Not received??", 11, FontWeight.w500,
                         MyColor.primary1),
-                    const Text("Send a new OTP number", style: TextStyle(
-                      color: MyColor.primary1,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,),),
-                    SizedBox(height: height * 0.01,),
+                    const Text(
+                      "Send a new OTP number",
+                      style: TextStyle(
+                        color: MyColor.primary1,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
                   ],
                 ),
                 SizedBox(
                   height: height * 0.33,
                 ),
-
-                SizedBox(height: height * 0.03,),
+                SizedBox(
+                  height: height * 0.03,
+                ),
               ],
             ),
           ),
@@ -182,6 +195,7 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
       ),
     );
   }
+
   bool validationotp() {
     print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");

@@ -309,7 +309,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 onCountryChanged: (cod) {
                   flag = cod.flag;
                   print(flag);
-                  code = cod.dialCode;
+                  code = cod.code;
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
@@ -361,6 +361,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       'surname': surnameCtr.text,
                       'username': usernameCtr.text,
                       'phone': phoneCtr.text,
+                      "flag":flag,
                       'healthcard': healthCardCtr.text,
                       'email': emailCtr.text,
                       'password': passwordCtr.text,

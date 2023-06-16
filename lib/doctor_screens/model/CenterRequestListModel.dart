@@ -30,14 +30,14 @@ class CenterRequestListModel {
   });
 
   factory CenterRequestListModel.fromJson(Map<String, dynamic> json) => CenterRequestListModel(
-    wardId: json["ward_id"],
-    wardName: json["ward_name"],
-    centerId: json["center_id"],
-    centerName: json["center_name"],
-    centerEmail: json["center_email"],
-    address: json["address"],
-    biography: json["biography"],
-    image: json["image"],
+    wardId: json["ward_id"].toString(),
+    wardName: json["ward_name"].toString(),
+    centerId: json["center_id"].toString(),
+    centerName: json["center_name"].toString(),
+    centerEmail: json["center_email"].toString(),
+    address: json["address"].toString(),
+    biography: json["biography"].toString(),
+    image: json["image"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

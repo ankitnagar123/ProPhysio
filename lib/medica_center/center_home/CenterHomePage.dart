@@ -47,7 +47,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
     }
     return centerHomeCtr.selectedWardList
         .where(
-            (user) => user.name.toLowerCase().contains(keyword.toLowerCase()))
+            (user) => user.wardName.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
 
@@ -218,7 +218,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                                   child: ListTile(
                                     onTap: () {
                                       wardId = list[index].wardId;
-                                      wardName = list[index].name;
+                                      wardName = list[index].wardName;
 
                                       var data = {
                                         "wardId": wardId,
@@ -229,7 +229,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                                           parameters: data);
                                       // Get.toNamed(RouteHelper.getPatientSettingsScreen());
                                     },
-                                    title: custom.text(list[index].name, 16.0,
+                                    title: custom.text(list[index].wardName, 16.0,
                                         FontWeight.w500, MyColor.primary1),
                                     subtitle: Row(
                                       children: [

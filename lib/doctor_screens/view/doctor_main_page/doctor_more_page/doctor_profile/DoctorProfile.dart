@@ -1,8 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:convert';
-import 'dart:io';
+
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
@@ -17,17 +19,18 @@ class DoctorProfileScreen extends StatefulWidget {
 }
 
 class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
-  TextEditingController searchctr= TextEditingController();
   CustomView customView = CustomView();
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
-String degree = "";
-@override
+  String degree = "";
+
+  @override
   void initState() {
-  degree = doctorProfileCtr.degree.value;
-  print(degree);
-  doctorProfileCtr.doctorProfile(context);
+    degree = doctorProfileCtr.degree.value;
+    print(degree);
+    doctorProfileCtr.doctorProfile(context);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -43,104 +46,108 @@ String degree = "";
             color: Colors.black,
           ),
         ),
-        title: customView.text(
-            "Profile", 15.0, FontWeight.w500, Colors.black),
+        title: customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white24,
       ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.shortestSide / 10,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.shortestSide / 10,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(doctorProfileCtr.image.value),
               ),
-             Align(
-               alignment: Alignment.center,
-               child: CircleAvatar(
-                 radius: 50,
-                 backgroundImage: NetworkImage(doctorProfileCtr.image.value),
-               ),
-             ),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: customView.text(
-                    doctorProfileCtr.name.value, 15.0, FontWeight.w500, MyColor.black),
-              ),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: customView.text(
-                    doctorProfileCtr.Email.value, 11.0, FontWeight.w500, MyColor.grey),
-              ),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              const Divider(
-                thickness: 1.5,
-                height: 50.0,
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: customView.text("Certificates", 13.0,
-                    FontWeight.w500, Colors.black),
-              ),
-              Row(
-                children: [
-                  InkWell(
-                    onTap: (){openImages();},
-                    child: const Card(
-                      child: SizedBox(
-                        height: 90, width:90,
-                        child: Icon(Icons.add, size: 30,color: MyColor.grey),
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      height: 90, width:90,
-                      child: Image(image: NetworkImage(doctorProfileCtr.degree.value),)
-                    ),
-                  ),
-                ],
-              ),
-
-              otherWidgets(),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
-                child: customView.MyButton(
-                  context,
-                  "Save profile",
-                      () {
+            ),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: customView.text(doctorProfileCtr.name.value, 15.0,
+                  FontWeight.w500, MyColor.black),
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: customView.text(doctorProfileCtr.Email.value, 11.0,
+                  FontWeight.w500, MyColor.grey),
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            const Divider(
+              thickness: 1.5,
+              height: 50.0,
+            ),
+            const SizedBox(
+              width: 10.0,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: customView.text(
+                  "Certificates", 13.0, FontWeight.w500, Colors.black),
+            ),
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    openImages();
                   },
-                  MyColor.primary,
-                  const TextStyle(fontFamily: "Poppins", color: Colors.white),
+                  child: const Card(
+                    child: SizedBox(
+                      height: 90,
+                      width: 90,
+                      child: Icon(Icons.add, size: 30, color: MyColor.grey),
+                    ),
+                  ),
                 ),
+                Card(
+                  child: SizedBox(
+                      height: 90,
+                      width: 90,
+                      child: Image(
+                        image: NetworkImage(doctorProfileCtr.degree.value),
+                      )),
+                ),
+              ],
+            ),
+
+            otherWidgets(),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            Container(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              child: customView.MyButton(
+                context,
+                "Save profile",
+                () {},
+                MyColor.primary,
+                const TextStyle(fontFamily: "Poppins", color: Colors.white),
               ),
+            ),
 
-              //open button --------
-              // --------
+            //open button --------
+            // --------
 
-              // otherWidgets(),
-            ],
-          ),
+            // otherWidgets(),
+          ],
         ),
-
+      ),
     );
   }
+
   Widget otherWidgets() {
     return SingleChildScrollView(
       child: Padding(
@@ -152,16 +159,19 @@ String degree = "";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text("Specializations", 13.0,
-                  FontWeight.w500, Colors.black),
+              child: customView.text(
+                  "Specializations", 13.0, FontWeight.w500, Colors.black),
             ),
             const SizedBox(
               height: 5.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text("Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.", 12.0,
-                  FontWeight.normal, Colors.black),
+              child: customView.text(
+                  "Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.",
+                  12.0,
+                  FontWeight.normal,
+                  Colors.black),
             ),
             const SizedBox(
               height: 5.0,
@@ -182,8 +192,7 @@ String degree = "";
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 13.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -203,23 +212,29 @@ String degree = "";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text("Offices and addresses", 13.0,
-                  FontWeight.w500, Colors.black),
+              child: customView.text(
+                  "Offices and addresses", 13.0, FontWeight.w500, Colors.black),
             ),
             const SizedBox(
               height: 5.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text("Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.", 12.0,
-                  FontWeight.normal, Colors.black),
+              child: customView.text(
+                  "Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.",
+                  12.0,
+                  FontWeight.normal,
+                  Colors.black),
             ),
             const SizedBox(
               height: 20,
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const DoctorSelectAddress()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DoctorSelectAddress()));
                 // Get.toNamed(RouteHelper.getViewCertificateScreen());
               },
               child: Container(
@@ -231,13 +246,12 @@ String degree = "";
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 13.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        customView.text("Add address", 14.0,
-                            FontWeight.w500, MyColor.black),
+                        customView.text("Add address", 14.0, FontWeight.w500,
+                            MyColor.black),
                         const Icon(
                           Icons.arrow_forward,
                           size: 20.0,
@@ -264,6 +278,7 @@ String degree = "";
       ),
     );
   }
+
   //  for Aadhar ID //
   File? degreefilePath;
   final degreepicker = ImagePicker();
@@ -317,14 +332,13 @@ String degree = "";
     try {
       var pickedfiles = await imgpicker.pickMultiImage();
       //you can use ImageCourse.camera for Camera capture
-      if(pickedfiles != null){
+      if (pickedfiles != null) {
         imagefiles = pickedfiles;
-        setState(() {
-        });
-      }else{
+        setState(() {});
+      } else {
         print("No image is selected.");
       }
-    }catch (e) {
+    } catch (e) {
       print("error while picking file.");
     }
   }

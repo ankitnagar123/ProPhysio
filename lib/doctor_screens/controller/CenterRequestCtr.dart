@@ -65,14 +65,13 @@ class CenterRequest extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       if (result == "Success") {
+        CenterRequestListApi(context);
         callback();
         loadingAccept.value = false;
         loadingReject.value = false;
-
         log("response of CenterRequest Accept/Reject $result");
         custom.massenger(context, result.toString());
         log(result.toString());
-        callback();
       } else {
         loadingAccept.value = false;
         loadingReject.value = false;

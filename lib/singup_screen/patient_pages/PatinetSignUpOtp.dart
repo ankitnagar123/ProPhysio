@@ -37,7 +37,7 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
   var birthPlace = "";
   var age = "";
   var gender = "";
-
+var flag ="";
   @override
   void initState() {
     super.initState();
@@ -61,6 +61,7 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
     weight = Get.parameters['weight']!;
     taxCode = Get.parameters['tax']!;
     age = Get.parameters['age']!;
+    flag = Get.parameters['flag']!;
 
     birthPlace = Get.parameters['birthPlace']!;
   }
@@ -148,6 +149,7 @@ class _PatientSignUpOtpState extends State<PatientSignUpOtp> {
                           email,
                           code,
                           phone,
+                          flag,
                           password,
                           healthCode,
                           age,

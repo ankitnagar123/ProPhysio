@@ -175,7 +175,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                       appointmentController.timeList.length,
                                   gridDelegate:
                                       const SliverGridDelegateWithMaxCrossAxisExtent(
-                                          maxCrossAxisExtent: 130,
+                                          maxCrossAxisExtent: 150,
                                           // childAspectRatio: 3/ 2,
                                           crossAxisSpacing: 0,
                                           mainAxisSpacing: 0,

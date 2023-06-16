@@ -25,8 +25,8 @@ class _FilterScreenState extends State<FilterScreen> {
   var subCat = "";
   @override
   void initState() {
-   /* cat = Get.parameters['category']!;
-    subCat = Get.parameters['subCat']!;*/
+    cat = Get.parameters['category']!;
+    subCat = Get.parameters['subCat']!;
 print("cat$cat");
      cat = AppConst.cat;
     print("store${AppConst.cat}");

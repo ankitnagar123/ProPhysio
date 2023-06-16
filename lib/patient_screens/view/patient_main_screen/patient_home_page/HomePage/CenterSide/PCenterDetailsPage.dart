@@ -370,7 +370,7 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                             child: ListTile(
                               onTap: () {
                                 wardId = centerHomeCtr.selectedWardList[index].wardId;
-                                wardName = centerHomeCtr.selectedWardList[index].name;
+                                wardName = centerHomeCtr.selectedWardList[index].wardName;
 
                                 var data ={
                                   "wardId":wardId,
@@ -381,7 +381,7 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                                 // Get.toNamed(RouteHelper.getPatientSettingsScreen());
                               },
                               title: custom.text(
-                                  centerHomeCtr.selectedWardList[index].name, 14.0,
+                                  centerHomeCtr.selectedWardList[index].wardName, 14.0,
                                   FontWeight.w500, Colors.black),
                               subtitle: Row(
                                 children: [

@@ -180,7 +180,7 @@ class _MorePageState extends State<MorePage> {
                   height: 30.0,
                 ),
                 ListTile(
-                  subtitle: customView.text("Rate those appointment u did",
+                  subtitle: customView.text("Rate appointment you did",
                       10.0, FontWeight.w500, Colors.black),
                   visualDensity: VisualDensity.compact,
                   onTap: () {
@@ -243,7 +243,7 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "OR code", 14.0, FontWeight.w500, Colors.black),
+                      "QR code", 14.0, FontWeight.w500, Colors.black),
                   subtitle: customView.text(
                       "View your QR code", 10.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(

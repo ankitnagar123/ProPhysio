@@ -10,24 +10,24 @@ String centerSelectedDWardModelToJson(List<CenterSelectedDWardModel> data) => js
 
 class CenterSelectedDWardModel {
   String wardId;
-  String name;
+  String wardName;
   int totalDoctor;
 
   CenterSelectedDWardModel({
     required this.wardId,
-    required this.name,
+    required this.wardName,
     required this.totalDoctor,
   });
 
   factory CenterSelectedDWardModel.fromJson(Map<String, dynamic> json) => CenterSelectedDWardModel(
     wardId: json["ward_id"],
-    name: json["name"],
+    wardName: json["ward_name"],
     totalDoctor: json["total_doctor"],
   );
 
   Map<String, dynamic> toJson() => {
     "ward_id": wardId,
-    "name": name,
+    "ward_name": wardName,
     "total_doctor": totalDoctor,
   };
 }

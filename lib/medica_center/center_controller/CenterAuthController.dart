@@ -33,6 +33,7 @@ class CenterAuthCtr extends GetxController {
   var password = "".obs;
   var image = "".obs;
 
+
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
 /*-----------Patient SignUp Otp Api----------*/

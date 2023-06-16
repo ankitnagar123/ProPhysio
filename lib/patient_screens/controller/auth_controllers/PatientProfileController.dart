@@ -28,6 +28,7 @@ class PatientProfileCtr extends GetxController {
   var Password = "".obs;
   var address = "".obs;
   var image = "".obs;
+  var gender = "".obs;
 
   /*--new filed added--*/
 
@@ -36,8 +37,8 @@ class PatientProfileCtr extends GetxController {
   var weight = "".obs;
   var taxCode = "".obs;
   var birthplace = "".obs;
-  var gender = "".obs;
   var qrCode = "".obs;
+  var flag = "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -67,6 +68,7 @@ class PatientProfileCtr extends GetxController {
         healthCard.value = jsonResponse["health_card"];
         image.value = jsonResponse["user_profile"];
         qrCode.value = jsonResponse["QR_Code"];
+        flag.value = jsonResponse["flag"];
 
 
         log(healthCard.value);
@@ -100,7 +102,7 @@ class PatientProfileCtr extends GetxController {
       String username, String email,
       String helathcard,
       String address,
-      String phone, String code, String image,
+      String phone, String code, String flg,String image,
       String baseimage, String gender, String lat, String long, String age,
       String weight, String height, String birthplace, String taxcode,
       VoidCallback callback) async {
@@ -114,6 +116,7 @@ class PatientProfileCtr extends GetxController {
       "email": email,
       "contact": phone,
       "code": code,
+      "flag":flg,
       // "password": password,
       "location": address,
       "image": image,

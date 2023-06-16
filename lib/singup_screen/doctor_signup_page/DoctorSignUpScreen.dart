@@ -49,7 +49,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   CustomView custom = CustomView();
   PageController controller = PageController();
-
+String flag  = "IT";
   String code = '';
   bool _isHidden = true;
   int _curr = 0;
@@ -175,6 +175,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                             "imagebase": degreebaseimage.toString(),
                             "address": AppConst.LOCATION,
                             "code": code,
+                            "flag":flag,
                             "lat": AppConst.LATITUDE,
                             "longitude": AppConst.LONGITUDE,
                             "subcat": subCatIdArray.join(','),
@@ -276,7 +277,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               height: 50,
               width: MediaQuery.of(context).size.width * 1,
               child: IntlPhoneField(
-                initialValue: "it",
                 controller: phoneCtr,
                 decoration: const InputDecoration(
                   counterText: '',
@@ -295,9 +295,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 onChanged: (phone) {
                   code = phone.countryCode;
                   log(phone.completeNumber);
+                  flag = phone.countryISOCode;
+                  log(flag);
                 },
                 onCountryChanged: (cod) {
                   code = cod.dialCode;
+                  flag = cod.code;
+                  log(flag);
+
                 },
               ),
             ),

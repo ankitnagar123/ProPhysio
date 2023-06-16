@@ -62,7 +62,7 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                   itemCount: pCenterCtr.centerList.length,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    var centerList= pCenterCtr.centerList[index];
+                    var centerList = pCenterCtr.centerList[index];
                     var id = pCenterCtr.centerList[index].centerId;
                     return InkWell(
                       onTap: () {
@@ -91,8 +91,7 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                                 child: Image.network(
                                   centerList.image,
                                   fit: BoxFit.cover,
-                                  errorBuilder:
-                                      (context, error, stackTrace) {
+                                  errorBuilder: (context, error, stackTrace) {
                                     return Container(
                                       color: Colors.amber,
                                       alignment: Alignment.center,
@@ -111,18 +110,24 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   customView.text(
-                                      pCenterCtr.centerList[index].name.toString(),
+                                      pCenterCtr.centerList[index].name
+                                          .toString(),
                                       14.0,
                                       FontWeight.w500,
                                       Colors.black),
                                   const SizedBox(
                                     height: 5.0,
                                   ),
-                                  customView.text(
-                                      pCenterCtr.centerList[index].biography.toString(),
-                                      12.0,
-                                      FontWeight.w400,
-                                      Colors.black),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.8,
+                                    child: customView.text(
+                                        pCenterCtr.centerList[index].biography
+                                            .toString(),
+                                        12.0,
+                                        FontWeight.w400,
+                                        Colors.black),
+                                  ),
                                   const SizedBox(
                                     height: 8.0,
                                   ),
@@ -133,7 +138,8 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                                       SizedBox(
                                         width: 150,
                                         child: customView.text(
-                                            pCenterCtr.centerList[index].address,
+                                            pCenterCtr
+                                                .centerList[index].address,
                                             12,
                                             FontWeight.normal,
                                             MyColor.grey),
@@ -143,7 +149,6 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                                 ],
                               ),
                             ],
-
                           ),
                         ),
                       ),

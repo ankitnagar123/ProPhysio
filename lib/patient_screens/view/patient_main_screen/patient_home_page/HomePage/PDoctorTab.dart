@@ -119,7 +119,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => PDrSubCategory(
-                                          categoryId: categoryId!,
+                                          categoryId: categoryId.toString(),
                                         )));
                           },
                           child: Container(

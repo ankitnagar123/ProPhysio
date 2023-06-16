@@ -7,6 +7,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import 'package:http/http.dart' as http;
 
 class PatientSignUpCtr extends GetxController {
   CustomView custom = CustomView();
@@ -17,13 +18,12 @@ class PatientSignUpCtr extends GetxController {
   var result = ''.obs;
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
-
 /*-----------Patient SignUp Otp Api----------*/
   Future<String> PatientSignupOtp(
-      BuildContext context,
-      String email,
-      // VoidCallback callback,
-      ) async {
+    BuildContext context,
+    String email,
+    // VoidCallback callback,
+  ) async {
     loadingotp.value = true;
     final Map<String, dynamic> signupPerameter = {
       "email": email,
@@ -31,7 +31,7 @@ class PatientSignUpCtr extends GetxController {
     print("SignupPerameter$signupPerameter");
 
     final response =
-    await apiService.postData(MyAPI.PSignUpOtp, signupPerameter);
+        await apiService.postData(MyAPI.PSignUpOtp, signupPerameter);
     try {
       log("response of Paitent Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -47,7 +47,7 @@ class PatientSignUpCtr extends GetxController {
 
         print(result.toString());
         return jsonResponse['otp'].toString();
-      } else{
+      } else {
         custom.massenger(context, result.toString());
       }
     } catch (e) {
@@ -65,6 +65,7 @@ class PatientSignUpCtr extends GetxController {
       String email,
       String countrycode,
       String mobileNo,
+      String flag,
       String password,
       String healthCard,
       String age,
@@ -76,26 +77,31 @@ class PatientSignUpCtr extends GetxController {
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
-      "name":name,
-      "surname":surname,
+      "name": name,
+      "surname": surname,
       "username": username,
       "email": email,
       "code": countrycode,
       "contact": mobileNo,
+      "flag": flag,
       "password": password,
-      "health_card":healthCard,
-      "age":age,
-      "weight":weight,
-      "birth_place":birthplace,
-      "height":height,
-      "tax_code":taxCode,
-      "gender":gender,
+      "health_card": healthCard,
+      "age": age,
+      "weight": weight,
+      "birth_place": birthplace,
+      "height": height,
+      "tax_code": taxCode,
+      "gender": gender,
     };
     print("SignupPerameter$signupPerameter");
-
-    final response = await apiService.postData("https://cisswork.com/Android/Medica/Apis/a.php", signupPerameter);
+    final response = await http.post(
+        Uri.parse(
+          "https://cisswork.com/Android/Medica/Apis/a.php",
+        ),
+        body: signupPerameter);
+    // final response = await apiService.postData("https://cisswork.com/Android/Medica/Apis/a.php", signupPerameter);
     try {
-      log("response of Paitent Signup :-${response.body}");
+      log("response of Patient Signup :-${response.body}");
       loading.value = false;
       var jsonResponse = jsonDecode(response.body);
       String result = jsonResponse['result'];
@@ -103,13 +109,12 @@ class PatientSignUpCtr extends GetxController {
         callback();
         loading.value = false;
         custom.massenger(context, result);
-      }else{
+      } else {
         custom.massenger(context, result);
       }
     } catch (e) {
+      loading.value = false;
       log("exception$e");
     }
   }
-
-
 }

@@ -38,6 +38,7 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   @override
   void initState() {
     super.initState();
+    tabController = TabController(vsync: this, length: 2);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       catId = widget.catId;
       subCatId = widget.subCatId;
@@ -46,7 +47,6 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
       doctorListCtr.doctorlistfetch(context, catId.toString(), subCatId.toString(),'','','','','','');
     });
 
-    tabController = TabController(vsync: this, length: 2);
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     // });
 

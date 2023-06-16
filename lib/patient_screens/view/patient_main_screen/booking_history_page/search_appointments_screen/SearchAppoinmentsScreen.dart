@@ -92,21 +92,15 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
-                      suffixIcon: InkWell(
-                          onTap: () {
-                            Get.toNamed(RouteHelper.getFilterScreen());
-                          },
-                          child: const Icon(Icons.filter_list_alt)),
-                      suffixIconColor: MyColor.primary1,
-                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                      hintText: "search doctor",
-                      hintStyle: const TextStyle(fontSize: 12, color: MyColor.primary1),
+                      contentPadding: EdgeInsets.only(top: 3, left: 20),
+                      hintText: "search your appointment",
+                      hintStyle: TextStyle(fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
                       filled: true,
-                      border: const OutlineInputBorder(
+                      border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
