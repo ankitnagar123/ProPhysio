@@ -616,13 +616,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             custom.callButton(context, "Chat", () {
                               var patientId = {
                                 "ID": bookingController.userId.value,
+                                "userName": bookingController.username.value,
+                                "userProfile": bookingController.userPic.value,
+                                "userLocation": bookingController.location.value,
+                                "userContact": bookingController.contact.value,
+                                 "surName": bookingController.surname.value,
                                 "name": bookingController.name.value,
-                                "surname":
-                                bookingController.username.value,
-                                "username":
-                                bookingController.username.value,
-                                "pic": bookingController
-                                    .patientProfile.value,
+                                "bookingSide": "booking",
                               };
                               Get.toNamed(RouteHelper.DChatScreen(),
                                   arguments: patientId);
@@ -887,48 +887,52 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           const SizedBox(
                             height: 13.0,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  flex: 1,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      // Get.back();
-                                    },
-                                    child: custom.text("Dismiss", 14.0,
-                                        FontWeight.w400, MyColor.grey),
-                                  )),
-                              Expanded(
-                                child: bookingController.loadingAccept.value
-                                    ? custom.MyIndicator()
-                                    : custom.mysButton(
-                                  context,
-                                  "Yes, accept",
-                                      () {
-                                    bookingController
-                                        .bookingAppointmentAccept(
-                                        context, bookingId.toString(),
-                                            () {
-                                          Get.back();
-                                          Get.back();
-                                        });
+                          Obx(() {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: custom.text("Dismiss", 14.0,
+                                          FontWeight.w400, MyColor.grey),
+                                    )),
+                                Expanded(
+                                  child: bookingController.loadingAccept.value
+                                      ? Center(child: custom.MyIndicator())
+                                      : custom.mysButton(
+                                    context,
+                                    "Yes, accept",
+                                        () {
+                                      bookingController
+                                          .bookingAppointmentAccept(
+                                          context, bookingId.toString(),
+                                              () {
+                                                bookingController.bookingAppointment(context, "", "");
+                                                Get.back();
+                                            Get.back();
 
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //         const CancelAppointmentSuccess()));
-                                  },
-                                  MyColor.primary,
-                                  const TextStyle(
-                                    fontSize: 13.0,
-                                    color: MyColor.white,
+                                          });
+
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //         const CancelAppointmentSuccess()));
+                                    },
+                                    MyColor.primary,
+                                    const TextStyle(
+                                      fontSize: 13.0,
+                                      color: MyColor.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
+                              ],
+                            );
+                          })
                         ],
                       ),
                     ),

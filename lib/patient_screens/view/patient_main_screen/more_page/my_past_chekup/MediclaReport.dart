@@ -167,7 +167,10 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             doctorPrescriptionCtr.loadingPFetch.value
                 ? SingleChildScrollView(
                 child: categorysubShimmerEffect(context))
-                : SingleChildScrollView(
+                : doctorPrescriptionCtr.patientPrescriptionList.isEmpty?const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text("No medical report right know"),
+            ):SingleChildScrollView(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,

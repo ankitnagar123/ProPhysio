@@ -26,12 +26,12 @@ class AddFetchMedicineListModel {
   });
 
   factory AddFetchMedicineListModel.fromJson(Map<String, dynamic> json) => AddFetchMedicineListModel(
-    medicineId: json["medicine_id"],
-    madcine: json["madcine"],
-    medicineName: json["medicine_name"],
-    medicineTiming: json["medicine_timing"],
-    medicineSlot: json["medicine_slot"],
-    description: json["description"],
+    medicineId: json["medicine_id"].toString(),
+    madcine: json["madcine"].toString(),
+    medicineName: json["medicine_name"].toString(),
+    medicineTiming: json["medicine_timing"].toString(),
+    medicineSlot: json["medicine_slot"].toString(),
+    description: json["description"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

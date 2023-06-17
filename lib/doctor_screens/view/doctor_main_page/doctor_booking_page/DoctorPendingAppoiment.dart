@@ -148,7 +148,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
           itemCount: bookingController.booking.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            var bookingId = bookingController.booking[index].bookingId.toString();
+            var bookingId = bookingController.booking[index].bookingId
+                .toString();
             var pendingList = bookingController.booking[index];
             return InkWell(
               onTap: () {
@@ -569,8 +570,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        bookingController.loadingReject.value ? custom
-                            .MyIndicator() : custom.acceptRejectButton(
+                        bookingController.loadingReject.value ? Center(
+                          child: custom
+                              .MyIndicator(),
+                        ) : custom.acceptRejectButton(
                             context,
                             "Reject",
                                 () {
@@ -656,50 +659,54 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                             const SizedBox(
                               height: 13.0,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: TextButton(
-                                      onPressed: () {
-                                        // Get.back();
-                                      },
-                                      child: custom.text("Dismiss", 14.0,
-                                          FontWeight.w400, MyColor.grey),
-                                    )),
-                                Expanded(
-                                  child: bookingController.loadingAccept.value
-                                      ? custom.MyIndicator()
-                                      : custom.mysButton(
-                                    context,
-                                    "Yes, accept",
-                                        () {
-                                      bookingController
-                                          .bookingAppointmentAccept(
-                                          context,
-                                          bookingController.bookingId
-                                              .toString(), () {
-                                        bookingController.bookingAppointment(context, "Pending", "");
-                                        Get.back();
-                                        Get.back();
-                                      });
+                            Obx(() {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          // Get.back();
+                                        },
+                                        child: custom.text("Dismiss", 14.0,
+                                            FontWeight.w400, MyColor.grey),
+                                      )),
+                                  Expanded(
+                                    child: bookingController.loadingAccept.value
+                                        ? Center(child: custom.MyIndicator())
+                                        : custom.mysButton(
+                                      context,
+                                      "Yes, accept",
+                                          () {
+                                        bookingController
+                                            .bookingAppointmentAccept(
+                                            context,
+                                            bookingController.bookingId
+                                                .toString(), () {
+                                          bookingController.bookingAppointment(
+                                              context, "Pending", "");
+                                          Get.back();
+                                          Get.back();
+                                        });
 
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //         const CancelAppointmentSuccess()));
-                                    },
-                                    MyColor.primary,
-                                    const TextStyle(
-                                      fontSize: 13.0,
-                                      color: MyColor.white,
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //         const CancelAppointmentSuccess()));
+                                      },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                        fontSize: 13.0,
+                                        color: MyColor.white,
+                                      )
+                                      ,
                                     ),
                                   ),
-                                ),
-                              ],
-                            )
+                                ],
+                              );
+                            })
                           ],
                         ),
                       ),

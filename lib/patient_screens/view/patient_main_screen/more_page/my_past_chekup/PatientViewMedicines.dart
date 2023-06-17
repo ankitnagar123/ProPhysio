@@ -35,14 +35,16 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
         children: [
           doctorPrescriptionCtr.pLoadingMedicineFetch.value
               ? Center(heightFactor: 13, child: custom.MyIndicator())
-              : ListView.builder(
+              : doctorPrescriptionCtr.patientFetchMedicineList.isEmpty?const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Center(heightFactor: 15,child: Text("No Medicines right know")),
+          ): ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount:
                       doctorPrescriptionCtr.patientFetchMedicineList.length,
                   itemBuilder: (context, index) {
-                    var list =
-                        doctorPrescriptionCtr.patientFetchMedicineList[index];
+                    var list = doctorPrescriptionCtr.patientFetchMedicineList[index];
                     return Card(
                       color: MyColor.midgray,
                       child: ListTile(

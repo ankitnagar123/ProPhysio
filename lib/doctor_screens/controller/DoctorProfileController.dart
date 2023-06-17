@@ -24,6 +24,7 @@ class DoctorProfileCtr extends GetxController {
   var location = "".obs;
   var Email = "".obs;
   var phone = "".obs;
+  var code = "".obs;
   var Password = "".obs;
   var address = "".obs;
   var category = "".obs;
@@ -33,7 +34,6 @@ class DoctorProfileCtr extends GetxController {
   var bio = "".obs;
   var image = "".obs;
   var gender = "".obs;
-
   /*new*/
   var dateOfBirth = "".obs;
   var placeOfBirth = "".obs;
@@ -42,6 +42,7 @@ class DoctorProfileCtr extends GetxController {
   var registerOfBelonging = "".obs;
   var dateOfQualification = "".obs;
   var dateOfGraduation = "".obs;
+  var flag ="".obs;
   var resultVar = RxnInt(0);
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -78,6 +79,8 @@ class DoctorProfileCtr extends GetxController {
         location.value = jsonResponse["location"].toString();
         Email.value = jsonResponse["email"].toString();
         phone.value = jsonResponse["contact"].toString();
+        code.value = jsonResponse["code"].toString();
+        flag.value = jsonResponse["flag"].toString();
         Password.value = jsonResponse["password"].toString();
         image.value = jsonResponse["Doctor_profile"].toString();
         category.value = jsonResponse["category"].toString();
@@ -132,6 +135,7 @@ class DoctorProfileCtr extends GetxController {
     String registerOfBelonging,
     String dateOfQualification,
     String dateOfGraduation,
+      String flag,
   ) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
@@ -145,6 +149,7 @@ class DoctorProfileCtr extends GetxController {
       // "location":location,
       "code": code,
       "contact": phone,
+      "flag":flag,
       // "password": password,
       // "doc_pdf": docImg,
       // "docimg_str":docBase,

@@ -307,7 +307,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                   print(phone.completeNumber);
                 },
                 onCountryChanged: (cod) {
-                  flag = cod.flag;
+                  flag = cod.code;
                   print(flag);
                   code = cod.code;
                 },

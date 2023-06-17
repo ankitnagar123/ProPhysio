@@ -6,13 +6,15 @@ import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 
 class PatientChatProfile extends StatefulWidget {
-  String name,surname,address,img,contact;
-   PatientChatProfile({Key? key,
-  required this.name,
+  String name, surname, address, img, contact;
+
+  PatientChatProfile({
+    Key? key,
+    required this.name,
     required this.surname,
     required this.address,
     required this.img,
-     required this.contact,
+    required this.contact,
   }) : super(key: key);
 
   @override
@@ -20,12 +22,11 @@ class PatientChatProfile extends StatefulWidget {
 }
 
 class _PatientChatProfileState extends State<PatientChatProfile> {
-
   CustomView customView = CustomView();
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15),
@@ -33,8 +34,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             customView.callButton(context, "Call", () {
-              UrlLauncher.launchUrl(
-                  Uri.parse('tel:${widget.contact}'));
+              UrlLauncher.launchUrl(Uri.parse('tel:${widget.contact}'));
             },
                 MyColor.primary,
                 const TextStyle(
@@ -61,8 +61,8 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
-        title: customView.text("@${widget.name}", 17,
-            FontWeight.bold, MyColor.black),
+        title: customView.text(
+            "@${widget.name}", 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -82,18 +82,23 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
             const SizedBox(
               height: 20,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(120.0),
-              child: FadeInImage.assetNetwork(
-                imageErrorBuilder: (context, error, stackTrace) =>
-                    Image.asset("assets/images/dummyprofile.jpg",
-                        width: 90, height: 90, fit: BoxFit.cover),
-                width: 100.0,
-                height: 100.0,
-                fit: BoxFit.cover,
-                placeholder: "assets/images/loading.gif",
-                image: widget.img,
-                placeholderFit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                imagePopUp(context, widget.img);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(120.0),
+                child: FadeInImage.assetNetwork(
+                  imageErrorBuilder: (context, error, stackTrace) =>
+                      Image.asset("assets/images/dummyprofile.jpg",
+                          width: 90, height: 90, fit: BoxFit.cover),
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                  placeholder: "assets/images/loading.gif",
+                  image: widget.img,
+                  placeholderFit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(
@@ -101,11 +106,8 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: customView.text(
-                    "${widget.name} ${widget.surname}",
-                    18,
-                    FontWeight.w500,
-                    MyColor.black)),
+                child: customView.text("${widget.name} ${widget.surname}", 18,
+                    FontWeight.w500, MyColor.black)),
             const SizedBox(
               height: 14.0,
             ),
@@ -120,12 +122,9 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                 Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width*0.8,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     child: customView.text(
-                        widget.address,
-                        12,
-                        FontWeight.normal,
-                        MyColor.grey),
+                        widget.address, 12, FontWeight.normal, MyColor.grey),
                   ),
                 ),
               ],
@@ -134,5 +133,79 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         ),
       ),
     );
+  }
+
+  void imagePopUp(BuildContext context, String image) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                              child: InkWell(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: const Icon(
+                                    Icons.close_outlined,
+                                    size: 28,
+                                    semanticLabel: "close",
+                                  ))),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          InteractiveViewer(
+                            panEnabled: false,
+                            // Set it to false
+                            boundaryMargin: const EdgeInsets.all(100),
+                            minScale: 0.5,
+                            maxScale: 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: FadeInImage.assetNetwork(
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) {
+                                  return const Image(
+                                      image: AssetImage(
+                                          "assets/images/noimage.png"));
+                                },
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                fit: BoxFit.cover,
+                                placeholder: "assets/images/loading.gif",
+                                image: image,
+                                placeholderFit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
   }
 }

@@ -42,6 +42,8 @@ class BookingController extends GetxController {
   var patientId = "".obs;
   var location = "".obs;
   var name = "".obs;
+  var surname = "".obs;
+
   var bookingId = "".obs;
   var contact = "".obs;
   var userId = "".obs;
@@ -129,7 +131,7 @@ class BookingController extends GetxController {
         // String result = jsonResponse['result'];
         // print("my doctor profile====${result.toString()}");
         patientProfile.value = jsonResponse["user_profile"].toString();
-   userPic.value = jsonResponse["user_profile"].toString();
+        userPic.value = jsonResponse["user_profile"].toString();
         userId.value = jsonResponse["user_id"].toString();
         paymentTyp.value = jsonResponse["payment_type"].toString();
         price.value = jsonResponse["price"].toString();
@@ -140,6 +142,9 @@ class BookingController extends GetxController {
         patientId.value = jsonResponse["patient_ID"].toString();
         location.value = jsonResponse["location"].toString();
         name.value = jsonResponse["name"].toString();
+        username.value = jsonResponse["username"].toString();
+        surname.value = jsonResponse["surname"].toString();
+
         bookingId.value = jsonResponse["booking_id"].toString();
         contact.value = jsonResponse["contact"].toString();
         loadingd.value = false;
@@ -149,7 +154,7 @@ class BookingController extends GetxController {
       }
     } catch (e) {
       loadingd.value = false;
-      log("excaption$e");
+      log("exception$e");
     }
   }
 

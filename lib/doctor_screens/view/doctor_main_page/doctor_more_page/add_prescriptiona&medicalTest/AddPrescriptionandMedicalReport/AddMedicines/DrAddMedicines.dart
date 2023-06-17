@@ -54,23 +54,9 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
         .toList();
   }
 
-  Map<String, bool> values = {
-    'Morning': false,
-    'Afternoon': false,
-    'Evening': false,
-  };
-  var tmpArray = [];
+  List<String>data= ['Morning','Afternoon','Evening'];
+  List<String> userChecked = [];
 
-  getCheckboxItems() {
-    values.forEach((key, value) {
-      if (value == true) {
-        tmpArray.add(key);
-      }
-      print(tmpArray);
-
-      tmpArray.clear();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +75,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                 selectedMedicine,
                 medicineIdCtr.text,
                 discCtr.text,
-                "",
+                userChecked.join(","),
                 _selectedGender, () {
               selectedMedicine = "";
               medicineIdCtr.clear();
@@ -151,24 +137,23 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                   "Medicine Timing", 13.0, FontWeight.w500, MyColor.primary1),
             ),
           ),
-          Card(
-            color: MyColor.midgray,
-            child: ListView(
-              children: values.keys.map((String key) {
-                return CheckboxListTile(
-                  title: Text(key),
-                  value: values[key],
-                  activeColor: Colors.pink,
-                  checkColor: Colors.white,
-                  onChanged: ( value) {
-                    setState(() {
-                      values[key] = value!;
-                    });
-                  },
+          ListView.builder(
+            shrinkWrap: true,
+              itemCount: data.length,
+              itemBuilder: (context, i) {
+                return ListTile(
+                    title: Text(
+                        data[i]),
+                    trailing:Checkbox(
+                value: userChecked.contains(data[i]),
+                onChanged: (val) {
+                _onSelected(val!, data[i]);
+
+                },
+                )
+                //you can use checkboxlistTile too
                 );
-              }).toList(),
-            ),
-          ),
+              }),
           SizedBox(
             height: height * 0.011,
           ),
@@ -425,4 +410,17 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
       ),
     ));
   }
+  void _onSelected(bool selected, String dataName) {
+    if (selected == true) {
+      setState(() {
+        userChecked.add(dataName);
+        print(userChecked);
+      });
+    } else {
+      setState(() {
+        userChecked.remove(dataName);
+        print(userChecked);
+
+      });
+    }}
 }

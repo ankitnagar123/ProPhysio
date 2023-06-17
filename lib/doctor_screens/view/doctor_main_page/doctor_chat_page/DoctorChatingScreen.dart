@@ -46,7 +46,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
   void initState() {
     if(Get.arguments["bookingSide"] == "booking"){
       patientId = Get.arguments["ID"];
-      patientName = Get.arguments["userName"];
+      patientName = Get.arguments["name"];
       patientPic = Get.arguments["userProfile"];
       patientSurname = Get.arguments["surName"];
       patientUsername = Get.arguments["userName"];

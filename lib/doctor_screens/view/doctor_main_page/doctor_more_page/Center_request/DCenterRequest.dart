@@ -29,10 +29,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -52,9 +49,11 @@ class _DCenterRequestsState extends State<DCenterRequests> {
             child: Obx(() {
               if (centerRequest.loading.value) {
                 return categorysubShimmerEffect(context);
-              }else if(centerRequest.centerRequestList.isEmpty){
-                return const Center(heightFactor: 20,child: Text("No Center request at the moment !"));
-              }else{
+              } else if (centerRequest.centerRequestList.isEmpty) {
+                return const Center(
+                    heightFactor: 20,
+                    child: Text("No Center request at the moment !"));
+              } else {
                 return Column(
                   children: [
                     ListView.builder(
@@ -62,7 +61,8 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                       shrinkWrap: true,
                       itemCount: centerRequest.centerRequestList.length,
                       itemBuilder: (context, index) {
-                        var centerRqList = centerRequest.centerRequestList[index];
+                        var centerRqList =
+                            centerRequest.centerRequestList[index];
                         return Card(
                           margin: const EdgeInsets.all(8),
                           color: MyColor.midgray,
@@ -71,7 +71,8 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   SizedBox(
                                     width: 70,
@@ -80,7 +81,8 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                     child: Image.network(
                                       centerRqList.image.toString(),
                                       fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
                                         return Container(
                                           color: Colors.amber,
                                           alignment: Alignment.center,
@@ -93,7 +95,8 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       custom.text(centerRqList.centerName, 13,
                                           FontWeight.w600, MyColor.black),
@@ -120,7 +123,8 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                       ),
                                       Row(
                                         children: [
-                                          const Icon(Icons.location_on, size: 18),
+                                          const Icon(Icons.location_on,
+                                              size: 18),
                                           const SizedBox(
                                             width: 4,
                                           ),
@@ -142,116 +146,124 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                 height: 3,
                               ),
                               Padding(
-                                padding:
-                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 8.0),
                                 child: Obx(() {
                                   return Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                      if(centerRequest.loadingAccept.value)...[
-                                        selectedIndex == index ? custom
-                                            .MyIndicator() : custom
-                                            .acceptRejectButton(
+                                      if (centerRequest
+                                          .loadingAccept.value) ...[
+                                        selectedIndex == index
+                                            ? custom.MyIndicator()
+                                            : custom.acceptRejectButton(
+                                                context, "Accept", () {
+                                                setState(() {
+                                                  selectedIndex = index;
+                                                });
+                                                wardId = centerRqList.wardId;
+                                                if (selectedIndex == index) {
+                                                  centerRequest
+                                                      .centerRequestAcceptReject(
+                                                          context,
+                                                          wardId,
+                                                          "Confirm", () {
+                                                    centerRequest
+                                                        .CenterRequestListApi(
+                                                            context);
+                                                  });
+                                                }
+                                              },
+                                                MyColor.primary,
+                                                const TextStyle(
+                                                    color: MyColor.white)),
+                                      ] else ...[
+                                        custom.acceptRejectButton(
                                             context, "Accept", () {
                                           setState(() {
                                             selectedIndex = index;
                                           });
                                           wardId = centerRqList.wardId;
-                                          if (selectedIndex == index) {
-                                            centerRequest
-                                                .centerRequestAcceptReject(
-                                                context, wardId, "Confirm", () {
-                                              centerRequest.CenterRequestListApi(context);
+                                          centerRequest
+                                              .centerRequestAcceptReject(
+                                                  context, wardId, "Confirm",
+                                                  () {
+                                            setState(() {
+                                              selectedIndex = index;
                                             });
-                                          }
+                                            if (selectedIndex == index) {
+                                              centerRequest
+                                                  .centerRequestAcceptReject(
+                                                      context,
+                                                      wardId,
+                                                      "Confirm", () {
+                                                centerRequest
+                                                    .CenterRequestListApi(
+                                                        context);
+                                              });
+                                            }
+                                          });
                                         },
                                             MyColor.primary,
                                             const TextStyle(
                                                 color: MyColor.white)),
-                                      ] else
-                                        ...[
-                                          custom.acceptRejectButton(
-                                              context, "Accept", () {
-                                            setState(() {
-                                              selectedIndex = index;
-                                            });
-                                            wardId = centerRqList.wardId;
-                                            centerRequest
-                                                .centerRequestAcceptReject(
-                                                context,
-                                                wardId,
-                                                "Confirm",
-                                                    () {
-                                                  setState(() {
-                                                    selectedIndex = index;
-                                                  });
-                                                  if (selectedIndex == index) {
-                                                    centerRequest
-                                                        .centerRequestAcceptReject(
-                                                        context, wardId,
-                                                        "Confirm", () {
-                                                      centerRequest.CenterRequestListApi(context);
-                                                    });
-                                                  }
+                                      ],
+                                      if (centerRequest
+                                          .loadingReject.value) ...[
+                                        selectedIndex == index
+                                            ? custom.MyIndicator()
+                                            : custom.acceptRejectButton(
+                                                context, "Reject", () {
+                                                setState(() {
+                                                  selectedIndex = index;
                                                 });
-                                          },
-                                              MyColor.primary,
-                                              const TextStyle(
-                                                  color: MyColor.white)),
-                                        ],
-
-                                      if(centerRequest.loadingReject.value)...[
-                                        selectedIndex == index ? custom
-                                            .MyIndicator() : custom
-                                            .acceptRejectButton(
+                                                wardId = centerRqList.wardId;
+                                                if (selectedIndex == index) {
+                                                  centerRequest
+                                                      .centerRequestAcceptReject(
+                                                          context,
+                                                          wardId,
+                                                          "Reject", () {
+                                                    centerRequest
+                                                        .CenterRequestListApi(
+                                                            context);
+                                                  });
+                                                }
+                                              },
+                                                MyColor.white,
+                                                const TextStyle(
+                                                    color: MyColor.primary)),
+                                      ] else ...[
+                                        custom.acceptRejectButton(
                                             context, "Reject", () {
                                           setState(() {
                                             selectedIndex = index;
                                           });
                                           wardId = centerRqList.wardId;
-                                          if (selectedIndex == index) {
-                                            centerRequest
-                                                .centerRequestAcceptReject(
-                                                context, wardId, "Reject", () {
-                                              centerRequest.CenterRequestListApi(context);
-                                            });
-                                          }
-                                        },
-                                            MyColor.primary,
-                                            const TextStyle(
-                                                color: MyColor.white)),
-                                      ] else
-                                        ...[
-                                          custom.acceptRejectButton(
-                                              context, "Reject", () {
+                                          centerRequest
+                                              .centerRequestAcceptReject(
+                                                  context, wardId, "Reject",
+                                                  () {
                                             setState(() {
                                               selectedIndex = index;
                                             });
-                                            wardId = centerRqList.wardId;
-                                            centerRequest
-                                                .centerRequestAcceptReject(
-                                                context,
-                                                wardId,
-                                                "Reject",
-                                                    () {
-                                                  setState(() {
-                                                    selectedIndex = index;
-                                                  });
-                                                  if (selectedIndex == index) {
-                                                    centerRequest
-                                                        .centerRequestAcceptReject(
-                                                        context, wardId,
-                                                        "Reject", () {
-                                                      centerRequest.CenterRequestListApi(context);
-                                                    });
-                                                  }
-                                                });
-                                          },
-                                              MyColor.primary,
-                                              const TextStyle(
-                                                  color: MyColor.white)),
-                                        ],
+                                            if (selectedIndex == index) {
+                                              centerRequest
+                                                  .centerRequestAcceptReject(
+                                                      context, wardId, "Reject",
+                                                      () {
+                                                centerRequest
+                                                    .CenterRequestListApi(
+                                                        context);
+                                              });
+                                            }
+                                          });
+                                        },
+                                            MyColor.white,
+                                            const TextStyle(
+                                                color: MyColor.primary)),
+                                      ],
                                     ],
                                   );
                                 }),
@@ -298,7 +310,6 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                   ],
                 );
               }
-
             }),
           )),
     );

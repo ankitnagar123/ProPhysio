@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
   String files = "";
   String code = '';
+  String flag = '';
 
   File? file;
   final picker = ImagePicker();
@@ -60,13 +62,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     }
   }
 
-  String _displayText2(DateTime? date) {
-    if (date != null) {
-      return date.toString().split(' ')[0];
-    } else {
-      return '';
-    }
-  }
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
@@ -117,6 +112,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             doctorProfileCtr.registerOfBelonging.value;
         dateOfQualification.text = doctorProfileCtr.dateOfQualification.value;
         dateOfGraduation.text = doctorProfileCtr.dateOfGraduation.value;
+        flag = doctorProfileCtr.flag.value;
         print("date  q======${doctorProfileCtr.dateOfQualification.value}");
 
         print("date of birth======${doctorProfileCtr.dateOfBirth.value}");
@@ -551,7 +547,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                           height: 50,
                           width: MediaQuery.of(context).size.width * 1,
                           child: IntlPhoneField(
-                            initialValue: "it",
                             controller: phoneNumberCtrl,
                             decoration: const InputDecoration(
                               counterText: '',
@@ -566,12 +561,16 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                 ),
                               ),
                             ),
-                            initialCountryCode: 'IT',
+                            initialCountryCode: flag,
                             onChanged: (phone) {
+                              flag = phone.countryISOCode;
+                              log(flag);
                               code = phone.countryCode;
                               print(phone.completeNumber);
                             },
                             onCountryChanged: (cod) {
+                              flag = cod.code;
+                              log(flag);
                               code = cod.dialCode;
                             },
                           ),
@@ -598,6 +597,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       code,
                       emailCtrl.text,
                       phoneNumberCtrl.text,
+                      flag,
                       imagename,
                       baseimage,
                       genderCtrl.text,
@@ -625,7 +625,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),
-      lastDate: DateTime(2999),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(

@@ -59,8 +59,15 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                  onTap: () {
                    Navigator.push(context,MaterialPageRoute(builder: (context)=>AddMedicinesTab(patientId: widget.patientId,)));
                  },
-                child: Card(
-                    elevation: 2,child: custom.text("Add Medicine", 13, FontWeight.w500, MyColor.primary1)),
+                child: Container(
+                  height: 32,width: 110,
+                  decoration: BoxDecoration(
+                      color: MyColor.primary1,
+                      borderRadius: BorderRadius.circular(23)
+                  ),
+
+                  child: Center(child: custom.text("Add Medicine", 14, FontWeight.w500, MyColor.white)),
+                ),
               ),
             ),
             Align(

@@ -158,7 +158,10 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             ),
             const SizedBox(height: 5.0,),
               doctorPrescriptionCtr.loadingPFetch.value?SingleChildScrollView(
-                    child: categorysubShimmerEffect(context)):
+                    child: categorysubShimmerEffect(context)):doctorPrescriptionCtr.patientPrescriptionList.isEmpty?const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text("No prescription right know"),
+                    ):
               SingleChildScrollView(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),

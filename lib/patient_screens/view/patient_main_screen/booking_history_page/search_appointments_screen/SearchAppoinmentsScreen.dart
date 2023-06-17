@@ -125,8 +125,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                               .bookingAppointment("Confirmed");
                         },
                         selectedCard == 0 ? MyColor.primary : MyColor.white,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: MyColor.black),
+                         TextStyle(
+                            fontFamily: "Poppins",  color: selectedCard == 0 ? MyColor.white : MyColor.primary1,),
                       ),
                     ),
                     Expanded(
@@ -141,8 +141,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                           patientBookingController.bookingAppointment("Pending");
                         },
                         selectedCard == 1 ? MyColor.primary : MyColor.white,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: MyColor.black),
+                         TextStyle(
+                            fontFamily: "Poppins",  color: selectedCard == 1 ? MyColor.white : MyColor.primary1,),
                       ),
                     ),
                     Expanded(
@@ -157,8 +157,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                           patientBookingController.bookingAppointment("Complete");
                         },
                         selectedCard == 2 ? MyColor.primary : MyColor.white,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: MyColor.black),
+                         TextStyle(
+                            fontFamily: "Poppins", color: selectedCard == 2 ? MyColor.white : MyColor.primary1,),
                       ),
                     ),
                   ],

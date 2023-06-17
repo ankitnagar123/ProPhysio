@@ -64,7 +64,8 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
           child: Stack(children: [
-            TabBarView(controller: tabController, children: [
+            TabBarView(
+                physics: const NeverScrollableScrollPhysics(),controller: tabController, children: [
               DrAddMedicines(patientId: widget.patientId,),
               DrViewMedicines(patientId: widget.patientId,),
             ]),

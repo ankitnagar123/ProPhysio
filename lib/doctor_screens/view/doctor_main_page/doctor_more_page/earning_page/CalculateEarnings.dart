@@ -204,10 +204,11 @@ class _CalculateEarningState extends State<CalculateEarning> {
   //*******date strt end************//
   Future<DateTime?> pickDate() async {
     return await showDatePicker(
+
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1999),
-      lastDate: DateTime(2999),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
