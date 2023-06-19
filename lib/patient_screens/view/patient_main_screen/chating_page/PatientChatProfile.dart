@@ -148,57 +148,31 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
               width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.0),
-                    ),
-                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                              child: InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: const Icon(
-                                    Icons.close_outlined,
-                                    size: 28,
-                                    semanticLabel: "close",
-                                  ))),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          InteractiveViewer(
-                            panEnabled: false,
-                            // Set it to false
-                            boundaryMargin: const EdgeInsets.all(100),
-                            minScale: 0.5,
-                            maxScale: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: FadeInImage.assetNetwork(
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) {
-                                  return const Image(
-                                      image: AssetImage(
-                                          "assets/images/noimage.png"));
-                                },
-                                width: MediaQuery.of(context).size.width,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                                fit: BoxFit.cover,
-                                placeholder: "assets/images/loading.gif",
-                                image: image,
-                                placeholderFit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ],
+                  return  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: InteractiveViewer(
+                      panEnabled: false,
+                      // Set it to false
+                      boundaryMargin: const EdgeInsets.all(100),
+                      minScale: 0.5,
+                      maxScale: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: FadeInImage.assetNetwork(
+                          imageErrorBuilder:
+                              (context, error, stackTrace) {
+                            return const Image(
+                                image: AssetImage(
+                                    "assets/images/noimage.png"));
+                          },
+                          width: MediaQuery.of(context).size.width,
+                          height:
+                          MediaQuery.of(context).size.height * 0.5,
+                          fit: BoxFit.cover,
+                          placeholder: "assets/images/loading.gif",
+                          image: image,
+                          placeholderFit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   );

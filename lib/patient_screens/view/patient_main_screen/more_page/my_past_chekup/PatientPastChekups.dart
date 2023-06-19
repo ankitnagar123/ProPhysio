@@ -33,59 +33,67 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.white24,
-        flexibleSpace: Container(),
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: MyColor.primary.withOpacity(0.60)),
-        elevation: 0,
-        leading: InkWell(
-            onTap: () {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
               Get.back();
             },
-            child: const Icon(Icons.arrow_back_ios_new_outlined,
-                color: Colors.black, size: 18)),
-        toolbarHeight: 40,
-        actions: const [Icon(Icons.qr_code_2)],
-        bottom: TabBar(
-          indicator: const BoxDecoration(
-              color: MyColor.primary,
-              // borderRadius: BorderRadius.all(Radius.circular(30))
-    ),
-          controller: tabController,
-          indicatorColor: MyColor.primary,
-          indicatorWeight: 2,
-          tabs: [
-            Tab(
-              child: custom.text(
-                  "Prescription", 14, FontWeight.w500, MyColor.black),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
             ),
-            Tab(
-              child: custom.text(
-                  "Medical Test", 14, FontWeight.w500, MyColor.black),
+          ),
+          title: custom.text("Your Report", 15.0, FontWeight.w500, Colors.black),
+          centerTitle: true,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+        ),
+        body: Column(
+          children: [
+            Container(
+              color: Colors.grey.shade100,
+              child: TabBar(
+                labelPadding: const EdgeInsets.all(8),
+                indicator: const BoxDecoration(
+                  color: MyColor.primary,
+                ),
+                unselectedLabelColor: MyColor.grey,
+                labelColor: Colors.white,
+                controller: tabController,
+                indicatorWeight: 2,
+                tabs: [
+                  Tab(
+                    child: custom.text(
+                        "Prescription", 14, FontWeight.w500, MyColor.black),
+                  ),
+                  Tab(
+                    child: custom.text(
+                        "Medical Test", 14, FontWeight.w500, MyColor.black),
+                  ),
+                  Tab(
+                    child:
+                    custom.text("Medicines", 14, FontWeight.w500, MyColor.black),
+                  ),
+                ],
+              ),
             ),
-            Tab(
-              child:
-                  custom.text("Medicines", 14, FontWeight.w500, MyColor.black),
-            ),
+            Expanded(child:  Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: tabController,
+                  children: const [
+                    PatientPrescription(),
+                    PatientMedicalReport(),
+                    PatientViewMedicines(),
+                  ]),
+            ),),
+
           ],
         ),
       ),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
-          child: Stack(children: [
-            TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: tabController,
-                children: const [
-                  PatientPrescription(),
-                  PatientMedicalReport(),
-                  PatientViewMedicines(),
-                ]),
-          ])),
     );
   }
 }

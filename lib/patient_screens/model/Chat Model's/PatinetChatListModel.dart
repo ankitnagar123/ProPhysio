@@ -75,13 +75,13 @@ class PatinetChatModel {
   });
 
   factory PatinetChatModel.fromJson(Map<String, dynamic> json) => PatinetChatModel(
-    doctorId: json["doctor_id"],
-    time: json["time"],
-    name: json["name"],
-    surname: json["surname"],
-    username: json["username"],
-    address: json["address"],
-    userProfile: json["user_profile"],
+    doctorId: json["doctor_id"].toString(),
+    time: json["time"].toString(),
+    name: json["name"].toString(),
+    surname: json["surname"].toString(),
+    username: json["username"].toString(),
+    address: json["address"].toString(),
+    userProfile: json["user_profile"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

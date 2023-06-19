@@ -165,21 +165,26 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(120.0),
                                 child: file == null
-                                    ? FadeInImage.assetNetwork(
-                                        imageErrorBuilder: (c, o, s) =>
-                                            Image.asset(
-                                                "assets/images/dummyprofile.jpg",
-                                                width: 120,
-                                                height: 120,
-                                                fit: BoxFit.cover),
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                        placeholder:
-                                            "assets/images/loading.gif",
-                                        image: files,
-                                        placeholderFit: BoxFit.cover,
-                                      )
+                                    ? InkWell(
+                                  onTap: () {
+                                    imagePopUp(context,files);
+                                  },
+                                      child: FadeInImage.assetNetwork(
+                                          imageErrorBuilder: (c, o, s) =>
+                                              Image.asset(
+                                                  "assets/images/dummyprofile.jpg",
+                                                  width: 120,
+                                                  height: 120,
+                                                  fit: BoxFit.cover),
+                                          width: 110,
+                                          height: 110,
+                                          fit: BoxFit.cover,
+                                          placeholder:
+                                              "assets/images/loading.gif",
+                                          image: files,
+                                          placeholderFit: BoxFit.cover,
+                                        ),
+                                    )
                                     : Image.file(file!,
                                         width: 120,
                                         height: 120,
@@ -645,4 +650,52 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       },
     );
   }
+  void imagePopUp(BuildContext context, String image) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: InteractiveViewer(
+                      panEnabled: false,
+                      // Set it to false
+                      boundaryMargin: const EdgeInsets.all(100),
+                      minScale: 0.5,
+                      maxScale: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: FadeInImage.assetNetwork(
+                          imageErrorBuilder:
+                              (context, error, stackTrace) {
+                            return const Image(
+                                image: AssetImage(
+                                    "assets/images/noimage.png"));
+                          },
+                          width: MediaQuery.of(context).size.width,
+                          height:
+                          MediaQuery.of(context).size.height * 0.5,
+                          fit: BoxFit.cover,
+                          placeholder: "assets/images/loading.gif",
+                          image: image,
+                          placeholderFit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
+
 }
