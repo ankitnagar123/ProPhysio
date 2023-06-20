@@ -16,18 +16,17 @@ class AppConst{
   static String cat = "";
   static String subCat = "";
 
-
 // static  String SERVICE_NAME = "";
-  // static  String NO_OF_PROFESSINOAL = "";
-  // static  String TOTAL_NO_HOURS = "";
-  // static  String EXTRA_INSTRUCTION = "";
-  // static  String CLEANING_MATERAIL = "";
-  // static  String LAT = "";
-  // static  String LONG = "";
-  // static  String ADDRESS = "";
-  // static  String TOTAL_PRICE = "";
-  // static  String COMPANY_ID = "";
-  // static  String TIME_SLOTE_ID = "";
-  // static  String TIME_SLOTE_NAME = "";
-  // static  String CARD_ID = "";
+// static  String NO_OF_PROFESSINOAL = "";
+// static  String TOTAL_NO_HOURS = "";
+// static  String EXTRA_INSTRUCTION = "";
+// static  String CLEANING_MATERAIL = "";
+// static  String LAT = "";
+// static  String LONG = "";
+// static  String ADDRESS = "";
+// static  String TOTAL_PRICE = "";
+// static  String COMPANY_ID = "";
+// static  String TIME_SLOTE_ID = "";
+// static  String TIME_SLOTE_NAME = "";
+// static  String CARD_ID = "";
 }

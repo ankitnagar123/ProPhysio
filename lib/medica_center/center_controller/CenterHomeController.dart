@@ -273,6 +273,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
         loadingCancelW.value = false;
         wardRemoveReason.value = wardDeleteReasonModelFromJson(response.body.toString());
         log(wardRemoveReason.toString());
+
       }
       else {
         loadingCancelW.value = false;
