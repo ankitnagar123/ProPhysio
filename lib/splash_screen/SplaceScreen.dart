@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   bool onBoarding = false;
-  bool patinetLogin = false;
+  bool patientLogin = false;
   bool doctorLogin = false;
   bool centerLogin = false;
 
@@ -88,19 +88,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
  getValue() async {
    onBoarding = await sp.getBoolValue(sp.ON_BOARDING_KEY) ?? false;
-   patinetLogin = await sp.getBoolValue(sp.PATIENT_LOGIN_KEY) ?? false;
+   patientLogin = await sp.getBoolValue(sp.PATIENT_LOGIN_KEY) ?? false;
    doctorLogin = await sp.getBoolValue(sp.DOCTOR_LOGIN_KEY) ?? false;
    centerLogin = await sp.getBoolValue(sp.CENTER_LOGIN_KEY) ?? false;
 
    print("OnBoarding Key = $onBoarding");
-   print("patinetLogin Key = $patinetLogin");
+   print("patinetLogin Key = $patientLogin");
    print("doctorLogin Key = $doctorLogin");
    print("CenterLogin Key = $centerLogin");
 
    Timer(const Duration(seconds: 3), () {
      Get.offNamed(RouteHelper.getOnBoardingScreen());
      if (onBoarding == true) {
-       if (patinetLogin == true) {
+       if (patientLogin == true) {
          Get.offNamed(RouteHelper.getBottomNavigation());
        } else if (doctorLogin == true) {
          Get.offNamed(RouteHelper.DHomePage());

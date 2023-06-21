@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
-import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorListwithCategoy.dart';
