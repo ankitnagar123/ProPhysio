@@ -41,6 +41,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
   }
 
   String _keyword = '';
+  List<String> suggestons = ["USA", "UK", "Uganda", "Uruguay", "United Arab Emirates"];
 
   /* ----------For SEARCH Functionality*/
   List<MedicineAllListModel> _getFilteredList() {
@@ -60,6 +61,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
 
   @override
   Widget build(BuildContext context) {
+    var list = _getFilteredList();
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: Container(
@@ -95,6 +97,25 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           ),
           SizedBox(
             height: height * 0.005,
+          ),
+          Autocomplete(
+            optionsBuilder: (TextEditingValue textEditingValue) {
+              if (textEditingValue.text.toString() == '') {
+                return doctorPrescriptionCtr.allMedicineList;
+              }else{
+                // return li
+                return doctorPrescriptionCtr.allMedicineList
+                    .where((user) =>
+                user.medicineName.toLowerCase().contains(textEditingValue.text.toLowerCase()) ||
+                    user.medicineId.toLowerCase().contains(textEditingValue.text.toLowerCase()))
+                    .toList();
+              }
+
+            },
+            onSelected: (selection) {
+
+              print('You just selected $selection');
+            },
           ),
           centerList(),
           /*  Align(

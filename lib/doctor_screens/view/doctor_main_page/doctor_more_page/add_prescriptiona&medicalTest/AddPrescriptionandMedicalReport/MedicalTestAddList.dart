@@ -228,9 +228,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
   void _chooseDegree() async {
     final pickedFile = await degreepicker.getImage(
         source: ImageSource.gallery,
-        imageQuality: 100,
-        maxHeight: 200,
-        maxWidth: 200);
+        imageQuality: 100,);
     setState(() {
       if (pickedFile != null) {
         degreefilePath = File(pickedFile.path);

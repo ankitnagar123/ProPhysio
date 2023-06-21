@@ -13,9 +13,9 @@ class PatinetMedicineListModel {
   String doctorSurname;
   String medicineId;
   String madcine;
-  String medicineName;
+  String? medicineName;
   String medicineTiming;
-  MedicineSlot medicineSlot;
+  String medicineSlot;
   String description;
 
   PatinetMedicineListModel({
@@ -23,7 +23,7 @@ class PatinetMedicineListModel {
     required this.doctorSurname,
     required this.medicineId,
     required this.madcine,
-    required this.medicineName,
+    this.medicineName,
     required this.medicineTiming,
     required this.medicineSlot,
     required this.description,
@@ -36,7 +36,7 @@ class PatinetMedicineListModel {
     madcine: json["madcine"],
     medicineName: json["medicine_name"],
     medicineTiming: json["medicine_timing"],
-    medicineSlot: medicineSlotValues.map[json["medicine_slot"]]!,
+    medicineSlot: json["medicine_slot"],
     description: json["description"],
   );
 
@@ -52,11 +52,13 @@ class PatinetMedicineListModel {
   };
 }
 
-enum MedicineSlot { BEFORE_MEAL, AFTER_MEAL }
+enum MedicineSlot { BEFORE_MEAL, AFTER_MEAL, EMPTY, MEDICINE_SLOT_AFTER_MEAL }
 
 final medicineSlotValues = EnumValues({
   "After Meal": MedicineSlot.AFTER_MEAL,
-  "Before Meal": MedicineSlot.BEFORE_MEAL
+  "Before Meal": MedicineSlot.BEFORE_MEAL,
+  "": MedicineSlot.EMPTY,
+  "after_meal": MedicineSlot.MEDICINE_SLOT_AFTER_MEAL
 });
 
 class EnumValues<T> {

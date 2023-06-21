@@ -129,7 +129,7 @@ class CenterHomeCtr extends GetxController {
       if (response.statusCode == 200) {
         callback();
         loadingAdd.value = false;
-        custom.massenger(context, "Doctor Add Succesfully");
+        custom.massenger(context, "Wait for doctor approval");
       } else {
         custom.massenger(context, "somthing ");
         loadingAdd.value = false;
@@ -420,7 +420,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
       if (response.statusCode == 200) {
         callback();
         loadingMoreAdd.value = false;
-        custom.massenger(context, "Add doctor successfully");
+        custom.massenger(context, "Wait for doctor approval");
       } else {
         custom.massenger(context, "Something went wrong");
         loadingMoreAdd.value = false;
