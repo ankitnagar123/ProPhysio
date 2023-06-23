@@ -106,11 +106,9 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                 // return li
                 return doctorPrescriptionCtr.allMedicineList
                     .where((user) =>
-                user.medicineName.toLowerCase().contains(textEditingValue.text.toLowerCase()) ||
-                    user.medicineId.toLowerCase().contains(textEditingValue.text.toLowerCase()))
+                user.medicineName.toLowerCase().contains(textEditingValue.text.toLowerCase()))
                     .toList();
               }
-
             },
             onSelected: (selection) {
 

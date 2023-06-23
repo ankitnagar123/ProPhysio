@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
-import '../../../../../helper/mycolor/mycolor.dart';
-import '../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
-import '../../../../controller/AddAvailablityCtr.dart';
+import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import '../../../../../controller/AddAvailablityCtr.dart';
 
 class DoctorCenterAddAvailability extends StatefulWidget {
   const DoctorCenterAddAvailability({Key? key}) : super(key: key);

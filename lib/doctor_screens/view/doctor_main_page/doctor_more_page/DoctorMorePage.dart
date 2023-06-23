@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../controller/CenterRequestCtr.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
-import 'doctor_availability/AddAvailabilityTab.dart';
+import 'doctor_availability/AddAvailability/AddAvailabilityTab.dart';
 
 class DoctorMorePage extends StatefulWidget {
   const DoctorMorePage({Key? key}) : super(key: key);

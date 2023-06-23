@@ -66,7 +66,6 @@ class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
                   Get.offAllNamed(RouteHelper.getBottomNavigation());
                 }, MyColor.white,
                     const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
-
               ],
             ),
           ),

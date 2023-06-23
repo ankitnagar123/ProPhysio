@@ -184,8 +184,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                       categorysubShimmerEffect(context),
                     ],
                   ),
-                )
-                    : SingleChildScrollView(
+                ): SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: centerHomeCtr.doctorList.isEmpty
                       ? const Center(
@@ -197,7 +196,8 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                     shrinkWrap: true,
                     itemCount: list.length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
+                      return GestureDetector
+                        (
                         onTap: () {
                           /* var id = {
                               "data": centerHomeCtr.doctorList[index].doctorId
@@ -331,6 +331,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
   }
 
   void getValuee() async {
+
     id = await sp.getStringValue(sp.DOCTOR_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);

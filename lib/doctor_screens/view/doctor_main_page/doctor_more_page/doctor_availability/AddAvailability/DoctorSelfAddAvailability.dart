@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
-import '../../../../../helper/mycolor/mycolor.dart';
-import '../../../../controller/AddAvailablityCtr.dart';
+import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../controller/AddAvailablityCtr.dart';
+import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
 class MyAvailability extends StatefulWidget {
   const MyAvailability({Key? key}) : super(key: key);
@@ -51,6 +52,23 @@ class _MyAvailabilityState extends State<MyAvailability> {
           child: Column(children: [
             const SizedBox(
               height: 20,
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>const DoctorViewCalender()));
+                },
+                child: Container(
+                  height: 32,width: 110,
+                  decoration: BoxDecoration(
+                      color: MyColor.primary1,
+                      borderRadius: BorderRadius.circular(23)
+                  ),
+
+                  child: Center(child: custom.text("Add Medicine", 14, FontWeight.w500, MyColor.white)),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),

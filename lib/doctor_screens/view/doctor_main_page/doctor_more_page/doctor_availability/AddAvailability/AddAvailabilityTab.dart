@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../helper/CustomView/CustomView.dart';
-import '../../../../../../helper/mycolor/mycolor.dart';
-import '../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import '../../../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
 import 'DoctorCenterAddAvailability.dart';
 import 'DoctorSelfAddAvailability.dart';
 
