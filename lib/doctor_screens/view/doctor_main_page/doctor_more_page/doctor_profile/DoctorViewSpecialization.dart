@@ -22,7 +22,6 @@ class _DoctorViewSpecializationState extends State<DoctorViewSpecialization> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
         body: Column(children: [
       SizedBox(
@@ -80,7 +79,7 @@ class _DoctorViewSpecializationState extends State<DoctorViewSpecialization> {
             ),
       SizedBox(
         height: height * 0.01,
-      )
+      ),
     ]));
   }
 }

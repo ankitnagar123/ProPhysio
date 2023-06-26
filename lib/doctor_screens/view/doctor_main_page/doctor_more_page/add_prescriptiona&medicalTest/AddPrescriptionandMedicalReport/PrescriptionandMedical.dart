@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import 'AddMedicines/AddMedicinesTab.dart';
 import 'MedicalTestAddList.dart';
 import 'PrescriptionAddandList.dart';
-
+import 'package:get/get.dart';
 class PrescriptionMedicalTab extends StatefulWidget {
-  String patientId;
+  String patientId,patientName;
 
   PrescriptionMedicalTab({
     Key? key,
     required this.patientId,
+    required this.patientName,
+
   }) : super(key: key);
 
   @override
@@ -27,7 +30,7 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
     pId = widget.patientId;
     // TODO: implement initState
     super.initState();
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
   }
 
   TextEditingController searchCtr = TextEditingController();
@@ -39,35 +42,88 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: MyColor.white,
-        toolbarHeight: 10,
-        bottom: TabBar(
-          controller: tabController,
-          indicatorColor: MyColor.primary,
-          indicatorWeight: 2,
-          tabs: [
-            Tab(
-              child: custom.text(
-                  "Prescription", 14, FontWeight.w500, MyColor.black),
-            ),
-            Tab(
-              child: Tab(
-                child: custom.text(
-                    "Medical Test", 14, FontWeight.w500, MyColor.black),
-              ),
-            ),
-          ],
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
         ),
+        title: custom.text("${widget.patientName} Report", 15.0, FontWeight.w500, Colors.black),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Colors.white,
       ),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
-          child: Stack(children: [
-            TabBarView(controller: tabController, children: [
-              PrescriptionAddAndList(patientId: pId),
-              MedicalAddAndList(patientId: pId),
-            ]),
-          ])),
+
+      // appBar: AppBar(
+      //   elevation: 0.0,
+      //   backgroundColor: MyColor.white,
+      //   toolbarHeight: 10,
+      //   bottom: TabBar(
+      //     controller: tabController,
+      //     indicatorColor: MyColor.primary,
+      //     indicatorWeight: 2,
+      //     tabs: [
+      //       Tab(
+      //         child: custom.text(
+      //             "Prescription", 14, FontWeight.w500, MyColor.black),
+      //       ),
+      //       Tab(
+      //         child: Tab(
+      //           child: custom.text(
+      //               "Medical Test", 14, FontWeight.w500, MyColor.black),
+      //         ),
+      //       ),
+      //       Tab(
+      //         child: custom.text(
+      //             "Medicines", 14, FontWeight.w500, MyColor.black),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.grey.shade100,
+            child:  TabBar(
+                  controller: tabController,
+                  indicatorColor: MyColor.primary,
+                  indicatorWeight: 2,
+                  tabs: [
+                    Tab(
+                      child: custom.text(
+                          "Prescription", 14, FontWeight.w500, MyColor.black),
+                    ),
+                    Tab(
+                      child: Tab(
+                        child: custom.text(
+                            "Medical Test", 14, FontWeight.w500, MyColor.black),
+                      ),
+                    ),
+                    Tab(
+                      child: custom.text(
+                          "Medicines", 14, FontWeight.w500, MyColor.black),
+                    ),
+                  ],
+                ),
+          ),
+          Expanded(
+            child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Stack(children: [
+                  TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: tabController, children: [
+                    PrescriptionAddAndList(patientId: pId),
+                    MedicalAddAndList(patientId: pId),
+                    AddMedicinesTab(patientId: pId,),
+                  ]),
+                ])),
+          ),
+        ],
+      ),
     );
   }
 }

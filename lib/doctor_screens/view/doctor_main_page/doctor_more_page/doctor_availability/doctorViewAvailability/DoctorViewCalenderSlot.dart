@@ -158,7 +158,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
             elevation: 0,
             centerTitle: true,
             title: custom.text(
-                "Appointment with ${doctorListCtr.doctorname.value}",
+                "Appointment date",
                 16,
                 FontWeight.w500,
                 MyColor.black),

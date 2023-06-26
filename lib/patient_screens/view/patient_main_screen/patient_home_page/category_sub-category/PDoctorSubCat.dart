@@ -116,7 +116,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                                       child: Text(
                                         doctorListCtr
                                             .subCategory[index].subcatName,
-                                        style: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
+                                        style: const TextStyle(fontSize: 11,fontWeight: FontWeight.w500),
                                         softWrap: false,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,

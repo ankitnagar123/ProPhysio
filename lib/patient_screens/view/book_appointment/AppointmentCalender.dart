@@ -103,16 +103,21 @@ class _calenderState extends State<calender> {
           var year = DateFormat("yyyy").format(selectDay);
 
           print("final date$finalDate");
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AppointmentTimeSlot(
-                        date: finalDate,
-                        day: day,
-                        month: month,
-                        year: year,
-                    centerId: centerId,
-                      )));
+          if( appointmentController.dateList.isEmpty){
+            return custom.MySnackBar(context, "No time slot on this date");
+          }else{
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AppointmentTimeSlot(
+                      date: finalDate,
+                      day: day,
+                      month: month,
+                      year: year,
+                      centerId: centerId,
+                    )));
+          }
+
           // focusedDay = event;
         });
         print(selectDay);
@@ -233,7 +238,7 @@ class _calenderState extends State<calender> {
                 appointmentController.dateList.isEmpty
                     ? const Center(
                         child: Text("No time slot's available at the moment!"))
-                    : const Text(""),
+                    :Text(""),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: _calendarCarouselNoHeader,

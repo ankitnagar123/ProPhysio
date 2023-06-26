@@ -23,7 +23,7 @@ class CenterDoctorListModel {
   String latitude;
   String longitude;
   String password;
-  List<String> category;
+  dynamic category;
   dynamic subcategory;
   String doctorProfile;
   String doctorDocument;
@@ -64,7 +64,7 @@ class CenterDoctorListModel {
     latitude: json["latitude"],
     longitude: json["longitude"],
     password: json["password"],
-    category: List<String>.from(json["category"].map((x) => x)),
+    category: json["category"],
     subcategory: json["subcategory"],
     doctorProfile: json["Doctor_profile"],
     doctorDocument: json["Doctor_document"],
@@ -79,25 +79,26 @@ class CenterDoctorListModel {
     "surname": surname,
     "username": username,
     "email": email,
-    "code": codeValues.reverse[code],
+    "code": code,
     "contact": contact,
     "location": location,
     "latitude": latitude,
     "longitude": longitude,
     "password": password,
-    "category": List<dynamic>.from(category.map((x) => x)),
+    "category": category,
     "subcategory": subcategory,
     "Doctor_profile": doctorProfile,
     "Doctor_document": doctorDocument,
   };
 }
 
-enum Code { THE_91, THE_39, EMPTY }
+enum Code { THE_91, THE_39, EMPTY, THE_919977112912 }
 
 final codeValues = EnumValues({
   "": Code.EMPTY,
   "+39": Code.THE_39,
-  "+91": Code.THE_91
+  "+91": Code.THE_91,
+  "+919977112912": Code.THE_919977112912
 });
 
 enum Result { SUCCESS }

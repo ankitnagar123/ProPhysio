@@ -114,10 +114,11 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
           itemBuilder: (BuildContext context, int index) {
             var id = bookingController.booking[index].id.toString();
             var list = bookingController.booking[index];
+            var patientName = list.name;
             return InkWell(
               onTap: () {
                 print(id);
-Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedicalTab(patientId: id,)));
+Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedicalTab(patientId: id,patientName: patientName.toString(),)));
               },
               child: Card(
                 color: MyColor.midgray,

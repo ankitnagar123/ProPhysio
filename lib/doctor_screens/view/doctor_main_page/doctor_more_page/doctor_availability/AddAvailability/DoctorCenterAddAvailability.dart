@@ -255,7 +255,7 @@ class _DoctorCenterAddAvailabilityState
     return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(1999),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2999),
       builder: (context, child) {
         return Theme(

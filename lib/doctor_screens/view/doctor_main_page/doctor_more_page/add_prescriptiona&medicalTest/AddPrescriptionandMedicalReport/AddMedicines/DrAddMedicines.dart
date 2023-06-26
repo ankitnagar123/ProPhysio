@@ -98,23 +98,23 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           SizedBox(
             height: height * 0.005,
           ),
-          Autocomplete(
-            optionsBuilder: (TextEditingValue textEditingValue) {
-              if (textEditingValue.text.toString() == '') {
-                return doctorPrescriptionCtr.allMedicineList;
-              }else{
-                // return li
-                return doctorPrescriptionCtr.allMedicineList
-                    .where((user) =>
-                user.medicineName.toLowerCase().contains(textEditingValue.text.toLowerCase()))
-                    .toList();
-              }
-            },
-            onSelected: (selection) {
-
-              print('You just selected $selection');
-            },
-          ),
+          // Autocomplete(
+          //   optionsBuilder: (TextEditingValue textEditingValue) {
+          //     if (textEditingValue.text.toString() == '') {
+          //       return doctorPrescriptionCtr.allMedicineList;
+          //     }else{
+          //       // return li
+          //       return doctorPrescriptionCtr.allMedicineList
+          //           .where((user) =>
+          //       user.medicineName.toLowerCase().contains(textEditingValue.text.toLowerCase()))
+          //           .toList();
+          //     }
+          //   },
+          //   onSelected: (selection) {
+          //
+          //     print('You just selected $selection');
+          //   },
+          // ),
           centerList(),
           /*  Align(
             alignment: Alignment.topLeft,
@@ -157,6 +157,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
             ),
           ),
           ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
               itemCount: data.length,
               itemBuilder: (context, i) {

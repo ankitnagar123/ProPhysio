@@ -50,9 +50,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
       return Scaffold(
         body: Center(
           child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
+
             Align(
               alignment: Alignment.topRight,
               child: InkWell(
@@ -60,13 +58,13 @@ class _MyAvailabilityState extends State<MyAvailability> {
                   Navigator.push(context,MaterialPageRoute(builder: (context)=>const DoctorViewCalender()));
                 },
                 child: Container(
-                  height: 32,width: 110,
+                  height: 32,width: 120,
                   decoration: BoxDecoration(
                       color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(23)
+                      borderRadius: BorderRadius.circular(10)
                   ),
 
-                  child: Center(child: custom.text("Add Medicine", 14, FontWeight.w500, MyColor.white)),
+                  child: Center(child: custom.text("View Availability", 13, FontWeight.w500, MyColor.white)),
                 ),
               ),
             ),
@@ -266,7 +264,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
     return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(1999),
+      firstDate:DateTime.now(),
       lastDate: DateTime(2999),
       builder: (context, child) {
         return Theme(

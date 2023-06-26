@@ -55,7 +55,9 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
           child: Stack(children: [
-            TabBarView(controller: tabController, children: const [
+            TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: tabController, children: const [
               MyAvailability(),
               DoctorCenterAddAvailability(),
             ]),

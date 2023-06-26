@@ -42,7 +42,7 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: MyColor.white,
-        toolbarHeight: 10,
+        toolbarHeight: 0,
         bottom: TabBar(
           controller: tabController,
           indicatorColor: MyColor.primary,
@@ -62,7 +62,7 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
           child: Stack(children: [
             TabBarView(
                 physics: const NeverScrollableScrollPhysics(),controller: tabController, children: [

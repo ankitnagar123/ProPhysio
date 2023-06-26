@@ -371,7 +371,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   customView.text("Your birth of date", 10.0,
                                       FontWeight.w600, MyColor.black),
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.005,
                                   ),
                                   Container(
                                       height: 48.0,

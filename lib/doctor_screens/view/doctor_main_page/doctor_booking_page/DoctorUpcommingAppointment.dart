@@ -602,19 +602,19 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    custom.callButton(context, "Write prescription", () {
+                    custom.callButton(context, "Prescription", () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => PrescriptionMedicalTab(
-                                    patientId: userid,
+                                    patientId: userid, patientName: bookingController.name.value,
                                   )));
                     },
                         MyColor.primary,
                         const TextStyle(
                           color: MyColor.white,
                           fontWeight: FontWeight.w500,
-                          fontSize: 13,
+                          fontSize: 14,
                         ),
                         Icons.medical_information_outlined),
                     custom.callButton(context, "Complete", () {

@@ -52,12 +52,9 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
           child: Obx(() {
             if(doctorSignUpCtr.categoryloding.value){
-              return Column(
-                children: [
-                  categoryShimmerEffect(context),
-                  const SizedBox(height: 5,),
-                  categoryShimmerEffect(context),
-                ],
+              return Center(
+                heightFactor: 16,
+                child: customView.MyIndicator(),
               );
             }
             return Column(
@@ -114,7 +111,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                       child: Text(
                                         doctorSignUpCtr.category[index]
                                             .categoryName,
-                                        style: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
+                                        style: const TextStyle(fontSize: 11,fontWeight: FontWeight.w500),
                                         softWrap: false,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,

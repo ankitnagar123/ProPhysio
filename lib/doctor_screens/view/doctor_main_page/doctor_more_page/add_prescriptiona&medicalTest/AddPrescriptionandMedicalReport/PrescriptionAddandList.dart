@@ -54,23 +54,6 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
           var details = doctorPrescriptionCtr.prescriptionList.value;
           return Column(children: [
             Align(
-              alignment: Alignment.topRight,
-              child: InkWell(
-                 onTap: () {
-                   Navigator.push(context,MaterialPageRoute(builder: (context)=>AddMedicinesTab(patientId: widget.patientId,)));
-                 },
-                child: Container(
-                  height: 32,width: 110,
-                  decoration: BoxDecoration(
-                      color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(23)
-                  ),
-
-                  child: Center(child: custom.text("Add Medicine", 14, FontWeight.w500, MyColor.white)),
-                ),
-              ),
-            ),
-            Align(
               alignment: Alignment.topLeft,
               child: custom.text("Title", 13, FontWeight.w500, MyColor.primary1),
             ),

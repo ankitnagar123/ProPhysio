@@ -400,10 +400,14 @@ class CustomView {
   }
 
   Widget MyIndicator() {
-    return CircularProgressIndicator(
-      strokeWidth: 2.0,
-      backgroundColor: MyColor.primary.withOpacity(0.1),
-      color: MyColor.primary,
+    return SizedBox(
+      height: 28,
+      width: 28,
+      child: CircularProgressIndicator(
+        strokeWidth: 2.0,
+        backgroundColor: MyColor.primary.withOpacity(0.1),
+        color: MyColor.primary,
+      ),
     );
   }
 }

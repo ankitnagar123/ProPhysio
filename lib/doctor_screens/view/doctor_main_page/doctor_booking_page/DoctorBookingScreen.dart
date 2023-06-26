@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
@@ -17,18 +18,15 @@ class DoctorBookingScreen extends StatefulWidget {
 
 class _DoctorBookingScreenState extends State<DoctorBookingScreen>
     with SingleTickerProviderStateMixin {
-
   TabController? tabController;
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
 
   @override
-
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this, initialIndex: 0);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +41,16 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
         elevation: 0,
         title: Center(
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 10.0),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
             child: custom.searchField(
                 context,
                 searchCtr,
                 "Search appointments",
                 TextInputType.text,
                 const Text(""),
-                const Icon(Icons.search_rounded),
-                () {
-                  Get.toNamed(RouteHelper.DSearchAppointment());
-                },(){}),
+                const Icon(Icons.search_rounded), () {
+              Get.toNamed(RouteHelper.DSearchAppointment());
+            }, () {}),
           ),
         ),
         // centerTitle: true,
@@ -81,14 +78,16 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
           child: Stack(children: [
-
-            TabBarView(controller: tabController, children:  const [
-              DoctorPendingAppointment(),
-              DoctorUpcomingAppointment(),
-              DoctorCompleteAppoint(),
-            ]),
+            TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: tabController,
+                children: const [
+                  DoctorPendingAppointment(),
+                  DoctorUpcomingAppointment(),
+                  DoctorCompleteAppoint(),
+                ]),
           ])),
     );
   }
