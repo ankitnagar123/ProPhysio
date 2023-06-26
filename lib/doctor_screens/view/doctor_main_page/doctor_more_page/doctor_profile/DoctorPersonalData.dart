@@ -65,13 +65,14 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
-        source: source, imageQuality: 50, maxHeight: 500, maxWidth: 500);
+        source: source, imageQuality: 100,);
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
         List<int> imageBytes = file!.readAsBytesSync();
         baseimage = base64Encode(imageBytes);
         imagename = 'image_${DateTime.now().millisecondsSinceEpoch}_.jpg';
+        Get.back();
       } else {
         print('No image selected.');
       }
