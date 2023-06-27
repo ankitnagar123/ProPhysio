@@ -54,6 +54,34 @@ class AppointmentController extends GetxController {
     }
   }
 
+
+  /*------------------For Doctor view date show on calender  list Fetch Api----------------*/
+  Future<void> doctorViewDateCalender(String centerId) async {
+    final Map<String, dynamic> paremert = {
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "center_id":centerId,
+    };
+    try {
+      loadingFetchDate.value = true;
+      log("calendar list of date's perameter.....$paremert");
+
+      final response = await apiService.postData(MyAPI.pCalenderDate, paremert);
+      log("calendar list of date's.....${response.body}");
+
+
+      if (response.statusCode == 200) {
+        loadingFetchDate.value = false;
+        dateList.value = calenderDateShowModelFromJson(response.body);
+        log("date list$dateList");
+      } else {
+        loadingFetchDate.value = false;
+        log("backend error");
+      }
+    } catch (e) {
+      log("exception$e");
+    }
+  }
+
   /*------------------Doctor visit charge list Fetch Api----------------*/
   Future<void> doctorVisitChargefetch(String id) async {
     final Map<String, dynamic> Peramert = {"doctor_id": id};
@@ -108,6 +136,41 @@ class AppointmentController extends GetxController {
       print("exception$e");
     }
   }
+
+
+  /*------------------Center Doctor view  time slots list Fetch Api----------------*/
+  Future<void> doctorViewTimeSlotsFetch(String date,centerId) async {
+    loadingFetchTime.value = true;
+    final Map<String, dynamic> Peramert = {
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "date": date,
+      "center_id":centerId,
+    };
+    try {
+      final response =
+      await apiService.postData(MyAPI.pDoctorTimeSlot, Peramert);
+      print(Peramert);
+      print("doctor time list=============${response.body}");
+      if (response.statusCode == 200) {
+        loadingFetchTime.value = false;
+        List<DoctorTimeListModelpatinet> list = jsonDecode(response.body)
+            .map((item) => DoctorTimeListModelpatinet.fromJson(item))
+            .toList()
+            .cast<DoctorTimeListModelpatinet>();
+        timeList.clear();
+        timeList.addAll(list);
+        print(timeList.toString());
+      } else {
+        loadingFetchTime.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingFetchTime.value = false;
+      print("exception$e");
+    }
+  }
+
+
 
   /*-------------Appointment booking  API--------------*/
   Future bookingAppointment(BuildContext context, String reciver, String cardId,

@@ -85,6 +85,8 @@ class MyAPI{
   static const String dAddAvailibitly = "date";
   static const String dAddMultipleTime = "select_time";
   static const String dFetchTime ="Time_lists";
+  static const String dSelectedCenter ="selected_center_list";
+
 
   /*---Booking List{Past,Pending,Upcoming,Cancel,All Details}------*/
   static const String dBookingAppointmentList = "booking_history";

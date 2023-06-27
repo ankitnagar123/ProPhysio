@@ -16,7 +16,8 @@ import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorViewTimeSlots.dart';
 class DoctorViewCalender extends StatefulWidget {
-  const DoctorViewCalender({Key? key}) : super(key: key);
+  final centerId;
+  const DoctorViewCalender({Key? key, this.centerId}) : super(key: key);
 
   @override
   State<DoctorViewCalender> createState() => _DoctorViewCalenderState();
@@ -33,17 +34,17 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
   final EventList<Event> _markedDateMap = EventList<Event>(events: {});
   late CalendarCarousel _calendarCarouselNoHeader;
 
-  String doctorId = "";
+  // String doctorId = "";
   String centerId = "";
 
   @override
   void initState() {
-    // centerId = widget.centerId;
+    centerId = widget.centerId;
     // print("center id $centerId");
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      doctorId = doctorListCtr.doctorid.value;
-      appointmentController.dateCalender(doctorId,centerId);
+      // doctorId = doctorListCtr.doctorid.value;
+      appointmentController.doctorViewDateCalender(centerId);
     });
   }
 
@@ -110,6 +111,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                     day: day,
                     month: month,
                     year: year,
+                    centerId: centerId,
                   )));
           // focusedDay = event;
         });
@@ -231,7 +233,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                 appointmentController.dateList.isEmpty
                     ? const Center(
                     child: Text("No time slot's available at the moment!"))
-                    : const Text(""),
+                    : /*const Text(""),*/
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: _calendarCarouselNoHeader,

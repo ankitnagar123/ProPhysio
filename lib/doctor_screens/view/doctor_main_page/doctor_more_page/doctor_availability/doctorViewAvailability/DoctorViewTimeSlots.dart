@@ -9,7 +9,7 @@ import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListC
 
 
 class DoctorViewTimeSlot extends StatefulWidget {
-  String date, day, month, year;
+  String date, day, month, year,centerId;
 
   DoctorViewTimeSlot({
     Key? key,
@@ -17,6 +17,7 @@ class DoctorViewTimeSlot extends StatefulWidget {
     required this.day,
     required this.month,
     required this.year,
+    required this.centerId,
   }) : super(key: key);
 
   @override
@@ -29,7 +30,6 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
   // PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
 
   CustomView custom = CustomView();
-  String? id;
   String centerId = "";
   String? time;
   String? price;
@@ -50,14 +50,11 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
 
       day = widget.day;
       appointmentController.seletedtime.value = widget.date;
+      centerId = widget.centerId;
       print("center id $centerId");
-      id = doctorListCtr.doctorid.value;
-      print("doctor id$id");
 
       /*-------doctor Time Slots Fetch API Hit-------*/
-      appointmentController.doctorTimeSlotsFetch(id.toString(),
-          appointmentController.seletedtime.value.toString(), centerId);
-      appointmentController.doctorVisitChargefetch(id.toString());
+      appointmentController.doctorViewTimeSlotsFetch(appointmentController.seletedtime.value.toString(), centerId);
     });
   }
 
@@ -123,58 +120,38 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
                         mainAxisExtent: 45),
                     itemBuilder:
                         (BuildContext context, int index) {
-                      var slotList =
-                      appointmentController.timeList[index];
-                      print(
-                          appointmentController.timeList.length);
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            time = slotList.timeId.toString();
-                            log("time id>$time");
-                            selectedCard = index;
-                            // print(selectedCard);
-                          });
-                        },
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              // margin: EdgeInsets.all(10),
-                              height: 35.0,
-                              width: widht * 0.30,
-                              decoration: BoxDecoration(
-                                color: selectedCard == index
-                                    ? MyColor.primary
-                                    : Colors.white,
-                                borderRadius:
-                                BorderRadius.circular(12),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x5b000000),
-                                    offset: Offset(0, 0),
-                                    blurRadius: 2,
-                                    // spreadRadius: 1
-                                  ),
-                                ],
-                              ),
-                              child: Center(
-                                  child: Text(
-                                    '${slotList.from.toString()} - ${slotList.to.toString()}',
-                                    style: TextStyle(
-                                      fontWeight:
-                                      selectedCard == index
-                                          ? FontWeight.bold
-                                          : FontWeight.normal,
-                                      color: selectedCard == index
-                                          ? MyColor.white
-                                          : Colors.black,
-                                    ),
-                                  )),
+                      var slotList = appointmentController.timeList[index];
+                      return Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            // margin: EdgeInsets.all(10),
+                            height: 35.0,
+                            width: widht * 0.30,
+                            decoration: BoxDecoration(
+                              color: MyColor.primary,
+                              borderRadius:
+                              BorderRadius.circular(12),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0x5b000000),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 2,
+                                  // spreadRadius: 1
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                            child: Center(
+                                child: Text(
+                                  '${slotList.from.toString()} - ${slotList.to.toString()}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color:  MyColor.white,
+                                  ),
+                                )),
+                          ),
+                        ],
                       );
                     }),
                 const SizedBox(

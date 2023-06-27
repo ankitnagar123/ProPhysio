@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../model/DoctorSelectedCenter.dart';
 import '../model/DoctorTimeListModel.dart';
 
 class AddAvailabilityCtr extends GetxController {
@@ -17,11 +18,12 @@ class AddAvailabilityCtr extends GetxController {
   var loadingC = false.obs;
   var loadingf = false.obs;
   var loadingd = false.obs;
-
+var loadingCenter = false.obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView custom = CustomView();
   final doctorTimeList = <DoctorTimeListModel>[].obs;
+  final selectedCenterList = <DoctorSelectedCenterModel>[].obs;
    var dateId = "".obs;
 
 /*-------------Doctor Add Date start and End select--------------*/
@@ -120,7 +122,7 @@ class AddAvailabilityCtr extends GetxController {
 
 
 /*-------------Doctor Select Time Slots --------------*/
-  Future addTime(BuildContext context, String timeid,String dateId,
+  void addTime(BuildContext context, String timeid,String dateId,
       VoidCallback callback) async {
     loadingd.value = true;
     final Map<String, dynamic> psetpass = {
@@ -148,6 +150,30 @@ class AddAvailabilityCtr extends GetxController {
     } catch (e) {
       loadingd.value = false;
       log("exception$e");
+    }
+  }
+
+
+  /*-----------------Selected Center List Fetch Time list------------------------------*/
+  Future<void> centerSelectedList() async {
+    loadingCenter.value = true;
+    final Map<String, dynamic> perameter = {
+      "doctor_id":  await sp.getStringValue(sp.DOCTOR_ID_KEY),
+    };
+    try {
+      final response = await apiService.postData(MyAPI.dSelectedCenter, perameter);
+      log(" DoctorFetch Time List =============${response.body}");
+      if (response.statusCode == 200) {
+        loadingCenter.value = false;
+        selectedCenterList.value = doctorSelectedCenterModelFromJson(response.body.toString());
+        log(selectedCenterList.toString());
+      } else {
+        loadingCenter.value = false;
+        log("error");
+      }
+    } catch (e) {
+      loadingCenter.value = false;
+      print("exception$e");
     }
   }
 }

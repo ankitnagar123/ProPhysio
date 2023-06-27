@@ -55,7 +55,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
               alignment: Alignment.topRight,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>const DoctorViewCalender()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>const DoctorViewCalender(centerId: "",)));
                 },
                 child: Container(
                   height: 32,width: 120,

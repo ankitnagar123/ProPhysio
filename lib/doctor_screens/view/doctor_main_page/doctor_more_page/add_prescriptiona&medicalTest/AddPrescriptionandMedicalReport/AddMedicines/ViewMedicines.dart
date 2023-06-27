@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
+import 'package:path/path.dart';
+// import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import 'PDF/medicinePDFVIew.dart';
 
 class DrViewMedicines extends StatefulWidget {
   String patientId;
@@ -54,7 +63,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                    /*   var medicineDrName = list.doctorName;
                       var medicineDrSurname = list.doctorSurname;*/
                       return InkWell(
-                        onTap: () => showBottomSheet(medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
+                        // onTap: () => showBottomSheet(context,medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
                         child: Card(
                           color: MyColor.midgray,
                           child: ListTile(
@@ -70,7 +79,19 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                                 maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              trailing: Text(list.medicineSlot)),
+                              trailing: Column(
+                                children: [
+                                  InkWell(
+                                      onTap: () async {
+                                        const url =
+                                            "https://www.hca.wa.gov/assets/billers-and-providers/13_794.pdf";
+                                        final file = await loadPdfFromNetwork(url);
+                                        openPdf(context, file, url);
+                                      },
+                                      child: const Icon(Icons.download,color: MyColor.primary1,size: 20)),
+                                  Text(list.medicineSlot),
+                                ],
+                              )),
                         ),
                       );
                     },
@@ -80,12 +101,12 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
       );
     });
   }
-  showBottomSheet(String medicneName,String slot,String time,/*String drName,String drSurname,*/String dic ) {
+  showBottomSheet(BuildContext context ,String medicneName,String slot,String time,/*String drName,String drSurname,*/String dic ) {
     showModalBottomSheet(
+      context: context,
         isDismissible: true,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
-        context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -98,58 +119,63 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                 const SizedBox(
                   height: 7.0,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Medicines information",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                              medicneName,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>const PDF()));
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Medicines information",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 11.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            const SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                                medicneName,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Slot",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 11.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            const SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(
+                              slot,
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14.0,
-                                  fontFamily: "Poppins")),
-                        ],
+                                  fontFamily: "Poppins"),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Slot",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            slot,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const Divider(
                   height: 30.0,
@@ -253,5 +279,42 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
           );
         });
   }
+  Future<File?> pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (result == null) return null;
+    return File(result.paths.first ?? '');
+  }
 
+  Future<File> loadPdfFromNetwork(String url) async {
+    final response = await http.get(Uri.parse(url));
+    final bytes = response.bodyBytes;
+    return _storeFile(url, bytes);
+  }
+
+  Future<File> _storeFile(String url, List<int> bytes) async {
+    final filename = basename(url);
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/$filename');
+    await file.writeAsBytes(bytes, flush: true);
+    if (kDebugMode) {
+      print('$file');
+    }
+    return file;
+  }
+
+  //final file = File('example.pdf');
+  //await file.writeAsBytes(await pdf.save());
+
+  void openPdf(BuildContext context, File file, String url) =>
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PdfViewerPage(
+            file: file,
+            url: url,
+          ),
+        ),
+      );
 }
