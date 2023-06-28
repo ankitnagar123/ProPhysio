@@ -62,7 +62,7 @@ class _PDFState extends State<PDF> {
                 ),
                 onPressed: () async {
                   const url =
-                      "https://www.orimi.com/pdf-test.pdf";
+                      "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
                   final file = await loadPdfFromNetwork(url);
                   openPdf(context, file, url);
                 },

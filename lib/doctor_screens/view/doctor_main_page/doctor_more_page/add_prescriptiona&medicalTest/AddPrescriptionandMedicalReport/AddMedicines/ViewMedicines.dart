@@ -48,6 +48,14 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
         body: SingleChildScrollView(
             child: Column(
           children: [
+            InkWell(
+                onTap: () async {
+                  const url =
+                      "https://cisswork.com/Android/Medica/Apis/prescription.php?userid=53&doctor_id=30.pdf";
+                  final file = await loadPdfFromNetwork(url);
+                  openPdf(context, file, url);
+                },
+                child: const Icon(Icons.download,color: MyColor.primary1,size: 20)),
             doctorPrescriptionCtr.loadingMedicineFetch.value
                 ? Center(heightFactor: 13, child: custom.MyIndicator())
                 : ListView.builder(

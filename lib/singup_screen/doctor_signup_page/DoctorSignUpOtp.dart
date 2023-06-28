@@ -43,38 +43,37 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
 
   @override
   void initState() {
+    super.initState();
     apiotp = Get.arguments;
     print(apiotp);
-    gender = Get.parameters["gender"]!;
-    subcat = Get.parameters["subcat"]!;
-    category = Get.parameters["category"]!;
+    gender = Get.parameters["gender"].toString();
+    subcat = Get.parameters["subcat"].toString();
+    category = Get.parameters["category"].toString();
     print("doctor selcet category$category");
-    name = Get.parameters["name"]!;
-    surname = Get.parameters["surmane"]!;
-    username = Get.parameters["username"]!;
-    email = Get.parameters["email"]!;
-    phoneno = Get.parameters["phone"]!;
-    password = Get.parameters["password"]!;
+    name = Get.parameters["name"].toString();
+    surname = Get.parameters["surmane"].toString();
+    username = Get.parameters["username"].toString();
+    email = Get.parameters["email"].toString();
+    phoneno = Get.parameters["phone"].toString();
+    password = Get.parameters["password"].toString();
     // category = Get.parameters["category"]!;
-    imagename = Get.parameters["imagename"]!;
-    imagebase = Get.parameters["imagebase"]!;
-    address = Get.parameters["address"]!;
-    code = Get.parameters["code"]!;
-    lat = Get.parameters["lat"]!;
-    long = Get.parameters["longitude"]!;
+    imagename = Get.parameters["imagename"].toString();
+    imagebase = Get.parameters["imagebase"].toString();
+    address = Get.parameters["address"].toString();
+    code = Get.parameters["code"].toString();
+    lat = Get.parameters["lat"].toString();
+    long = Get.parameters["longitude"].toString();
 
-    birthDate = Get.parameters["birthDate"]!;
-    birthPlace = Get.parameters["birthPlace"]!;
-    universityAttended = Get.parameters["universityAttended"]!;
-    dateOfEnrol = Get.parameters["dateOfEnrol"]!;
-    registerOfBelonging = Get.parameters["registerOfBelonging"]!;
+    birthDate = Get.parameters["birthDate"].toString();
+    birthPlace = Get.parameters["birthPlace"].toString();
+    universityAttended = Get.parameters["universityAttended"].toString();
+    dateOfEnrol = Get.parameters["dateOfEnrol"].toString();
+    registerOfBelonging = Get.parameters["registerOfBelonging"].toString();
 
-    graduationDate = Get.parameters["graduationDate"]!;
-    qualificationDate = Get.parameters["qualificationDate"]!;
-    flag = Get.parameters["flag"]!;
+    graduationDate = Get.parameters["graduationDate"].toString();
+    qualificationDate = Get.parameters["qualificationDate"].toString();
+    flag = Get.parameters["flag"].toString();
 
-    // TODO: implement initState
-    super.initState();
   }
 
   TextEditingController optctr = TextEditingController();

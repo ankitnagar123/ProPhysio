@@ -1,11 +1,16 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:geocoding/geocoding.dart' as geoCoding;
 import 'package:get/get.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:latlong2/latlong.dart' as latLng;
 import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
@@ -43,23 +48,27 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   TextEditingController dateOfQualification = TextEditingController();
   TextEditingController dateOfGraduation = TextEditingController();
 
+  TextEditingController destinationController = TextEditingController();
+  String location = '';
+
+  final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
+
 /*----------API CONTROLLER INITIALIZATION---------*/
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
   CustomView custom = CustomView();
   PageController controller = PageController();
-String flag  = "IT";
+  String flag = "IT";
   String code = '';
   bool _isHidden = true;
-  int _curr = 0;
+  int _curr = 1;
   final int _numpage = 2;
 
   String? slectedCategory;
 
   List<dynamic> slectedCat = [].toList();
   List<dynamic> slectedCatid = [].toList();
-
   List<String> listOFSelectedItem = [];
 
   String selectedText = "";
@@ -71,17 +80,20 @@ String flag  = "IT";
   var selectedIndexes = [];
   var selectedIndexes1 = [];
 
+
+
+  List subDummyCatIdArray = [];
+
   List subCatIdArray = [];
   List subCatNameArray = [];
   List subCatIdArrayFinal = [];
 
   @override
   void initState() {
-    doctorSignUpCtr.DoctorCategory();
-    AppConst.LATITUDE;
-    log("My latitude${AppConst.LATITUDE}");
-    log("My location${AppConst.LOCATION}");
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      doctorSignUpCtr.DoctorCategory();
+    });
   }
 
   @override
@@ -124,7 +136,7 @@ String flag  = "IT";
             child: PageView(
               onPageChanged: (value) {
                 setState(() {
-                  _curr = value;
+                  _curr = 1 + value;
                   print("page index$value");
                   print("curr index$_curr");
                 });
@@ -147,11 +159,14 @@ String flag  = "IT";
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, "Go on", () {
+                    print("${_curr} +${_numpage}");
+
                     print("My latitude AppCont : -- ${AppConst.LATITUDE}");
                     print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
                     print("My Location AppCont : -- ${AppConst.LOCATION}");
 
                     if (validation(context)) {
+
                       doctorSignUpCtr
                           .doctorSignupOtp(context, emailCtr.text)
                           .then((value) {
@@ -175,7 +190,7 @@ String flag  = "IT";
                             "imagebase": degreebaseimage.toString(),
                             "address": AppConst.LOCATION,
                             "code": code,
-                            "flag":flag,
+                            "flag": flag,
                             "lat": AppConst.LATITUDE,
                             "longitude": AppConst.LONGITUDE,
                             "subcat": subCatIdArray.join(','),
@@ -183,7 +198,8 @@ String flag  = "IT";
                             "graduationDate": dateOfGraduation.text,
                             "qualificationDate": dateOfQualification.text,
                           };
-                          _curr == _numpage
+                          print("my data$data");
+                          _curr == 1 + _numpage
                               ? Get.toNamed(RouteHelper.DSignUpOtp(),
                                   parameters: data, arguments: value)
                               : controller.nextPage(
@@ -217,7 +233,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Enter your name", 13.0, FontWeight.w500, MyColor.primary1),
+                  "Enter your name", 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -228,7 +244,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter your surname", 13.0, FontWeight.w500,
+              child: custom.text("Enter your surname", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -241,7 +257,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter your username", 13.0, FontWeight.w500,
+              child: custom.text("Enter your username", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -254,7 +270,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter a valid email", 13.0, FontWeight.w500,
+              child: custom.text("Enter a valid email", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -268,7 +284,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Phone number", 13.0, FontWeight.w500, MyColor.primary1),
+                  "Phone number", 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -302,7 +318,6 @@ String flag  = "IT";
                   code = cod.dialCode;
                   flag = cod.code;
                   log(flag);
-
                 },
               ),
             ),
@@ -312,7 +327,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Create a password", 13.0, FontWeight.w500, MyColor.primary1),
+                  "Create a password", 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -368,7 +383,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Date of birth", 13.0, FontWeight.w500, MyColor.primary1),
+                  "Date of birth", 13.0, FontWeight.w600, MyColor.primary1),
             ),
             Container(
                 height: 45.0,
@@ -403,7 +418,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Place of birth", 13.0, FontWeight.w500, MyColor.primary1),
+                  "Place of birth", 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -415,7 +430,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("University attended", 13.0, FontWeight.w500,
+              child: custom.text("University attended", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -428,7 +443,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of enrollment", 13.0, FontWeight.w500,
+              child: custom.text("Date of enrollment", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -465,7 +480,7 @@ String flag  = "IT";
             /**/
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of qualification", 13.0, FontWeight.w500,
+              child: custom.text("Date of qualification", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -501,7 +516,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of graduation", 13.0, FontWeight.w500,
+              child: custom.text("Date of graduation", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -537,7 +552,7 @@ String flag  = "IT";
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Register of belonging", 13.0, FontWeight.w500,
+              child: custom.text("Register of belonging", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -562,7 +577,8 @@ String flag  = "IT";
                   flex: 1,
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
                       value: 'Male',
                       groupValue: _selectedGender,
@@ -580,7 +596,8 @@ String flag  = "IT";
                   flex: 1,
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                    visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
                       value: 'Female',
                       groupValue: _selectedGender,
@@ -614,7 +631,7 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text("Select your specializations", 13.0,
-                  FontWeight.w500, MyColor.primary1),
+                  FontWeight.w600, MyColor.primary1),
             ),
             category(),
             const SizedBox(
@@ -623,49 +640,53 @@ String flag  = "IT";
             Align(
               alignment: Alignment.topLeft,
               child: custom.text("Select your sub-specializations", 13.0,
-                  FontWeight.w500, MyColor.primary1),
+                  FontWeight.w600, MyColor.primary1),
             ),
-            doctorListCtr.categoryLoadingSub.value
-                ? custom.MyIndicator()
-                : InkWell(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: MyColor.white,
-                        borderRadius: BorderRadius.circular(7),
-                        border: Border.all(
-                          color: Colors.black38,
-                        ),
-                      ),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 45,
-                      child: const Center(
-                        child: Text("select sub-category"),
-                      ),
-                    ),
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              content: SizedBox(
-                                height: 300,
-                                width: double.maxFinite,
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      InkWell(
-                                          onTap: () {
-                                            Get.back();
-                                          },
-                                          child: const Align(
-                                              alignment: Alignment.topRight,
-                                              child:
-                                                  Icon(Icons.close_outlined))),
-                                      doctorListCtr.subCategory.isEmpty
-                                          ? const Padding(
-                                              padding: EdgeInsets.all(15.0),
-                                              child: Text("no sub category"),
-                                            )
+            InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: MyColor.white,
+                  borderRadius: BorderRadius.circular(7),
+                  border: Border.all(
+                    color: Colors.black38,
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 45,
+                child: const Center(
+                  child: Text("select sub-category"),
+                ),
+              ),
+              onTap: () {
+                showDialog(
+                  barrierDismissible: false,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          height: 300,
+                          width: double.maxFinite,
+                          child: Obx(() {
+                            return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  InkWell(
+                                      onTap: () {
+                                        setState(() {
+
+                                        });
+                                        Get.back();
+                                      },
+                                      child: const Align(
+                                          alignment: Alignment.topRight,
+                                          child: Icon(Icons.close_outlined))),
+                                  doctorListCtr.subCategory.isEmpty
+                                      ? const Padding(
+                                          padding: EdgeInsets.all(17.0),
+                                          child: Text("No Sub-Category"),
+                                        )
+                                      : doctorListCtr.categoryLoadingSub.value
+                                          ? custom.MyIndicator()
                                           : Expanded(
                                               child: ListView.builder(
                                               itemCount: doctorListCtr
@@ -701,6 +722,11 @@ String flag  = "IT";
                                                                       .subCategory[
                                                                           index]
                                                                       .subcatId);
+                                                              subDummyCatIdArray.remove(
+                                                                  doctorListCtr
+                                                                      .subCategory[
+                                                                  index]
+                                                                      .subcatName);
                                                               // unselect
                                                             } else {
                                                               selectedIndexes
@@ -711,6 +737,12 @@ String flag  = "IT";
                                                                           index]
                                                                       .subcatId);
                                                               log(".............$subCatIdArray");
+
+                                                              subDummyCatIdArray.add(
+                                                                  doctorListCtr
+                                                                      .subCategory[
+                                                                  index]
+                                                                      .subcatName);
                                                             }
                                                           });
                                                           log("Temp$selectedIndexes");
@@ -726,21 +758,25 @@ String flag  = "IT";
                                               },
                                               shrinkWrap: true,
                                             ))
-                                    ]),
-                              ),
-                            );
-                          });
-                    },
-                  ),
+                                ]);
+                          }),
+                        ),
+                      );
+                    });
+              },
+            ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: subCatIdArray.length,
+              itemCount: subDummyCatIdArray.length,
               itemBuilder: (context, index) {
-                return Text(subCatIdArray[index]);
+                return Card(
+                   elevation: 1.0,
+                     semanticContainer: true,
+                    color: MyColor.lightcolor,child: Text(subDummyCatIdArray[index]));
               },
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             // Align(
             //   alignment: Alignment.topLeft,
@@ -774,12 +810,9 @@ String flag  = "IT";
             //   ),
             // ),
             // Text("$subCatIdArrayFinal"),
-            const SizedBox(
-              height: 20,
-            ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Upload your degree", 13.0, FontWeight.w500,
+              child: custom.text("Upload your degree", 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -818,56 +851,97 @@ String flag  = "IT";
             const SizedBox(
               height: 17.0,
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text("Select your address or offices", 13.0,
-                  FontWeight.w500, MyColor.primary1),
+                  FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 5.0,
             ),
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(RouteHelper.DSearchLocation());
-                setState(() {});
-                // Get.toNamed(RouteHelper.getViewCertificateScreen());
-              },
-              child: Container(
-                  height: 50.0,
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 2.0),
-                  decoration: BoxDecoration(
-                    color: MyColor.midgray,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          child: custom.text(AppConst.LOCATION, 12.0,
-                              FontWeight.w500, MyColor.black),
-                        ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          size: 20.0,
-                          color: MyColor.black,
-                        ),
-                      ],
-                    ),
-                  )),
+            Padding(
+              padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+              child: custom.searchField(
+                  context,
+                  destinationController,
+                  location,
+                  TextInputType.text,
+                  const Text(""),
+                  const Icon(Icons.search_rounded), () async {
+                var place = await PlacesAutocomplete.show(
+                    context: context,
+                    apiKey: kGoogleApiKey,
+                    mode: Mode.overlay,
+                    types: [],
+                    strictbounds: false,
+                    components: [],
+                    onError: (err) {
+                      print(err);
+                    });
+                if (place != null) {
+                  setState(() {
+                    location = place.description.toString();
+                  });
+
+                  final plist = GoogleMapsPlaces(
+                    apiKey: kGoogleApiKey,
+                    // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                  );
+                  String placeId = place.placeId ?? "0";
+                  final detail = await plist.getDetailsByPlaceId(placeId);
+                  final geometry = detail.result.geometry!;
+                  final lat = geometry.location.lat;
+                  final lang = geometry.location.lng;
+                  var newlatlang = latLng.LatLng(lat, lang);
+                  log(newlatlang.latitude.toString());
+                  log(newlatlang.longitude.toString());
+                  log(">>>>>>>>>>>>>>>>>>", error: location);
+                  try {
+                    AppConst.LATITUDE = newlatlang.latitude.toString();
+                    AppConst.LONGITUDE = newlatlang.longitude.toString();
+                    AppConst.LOCATION = location.toString();
+                  } catch (e) {
+                    print("Exception :-- ${e.toString()}");
+                  }
+                  print("My latitude AppCont : -- ${AppConst.LATITUDE}");
+                  print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
+                  print("My latitude AppCont : -- ${AppConst.LOCATION}");
+                }
+              }, () {}),
             ),
-            const SizedBox(
-              height: 17.0,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Get.toNamed(RouteHelper.DSearchLocation());
+            //     setState(() {});
+            //     // Get.toNamed(RouteHelper.getViewCertificateScreen());
+            //   },
+            //   child: Container(
+            //       height: 50.0,
+            //       margin: const EdgeInsets.symmetric(
+            //           horizontal: 10.0, vertical: 2.0),
+            //       decoration: BoxDecoration(
+            //         color: MyColor.midgray,
+            //         borderRadius: BorderRadius.circular(10.0),
+            //       ),
+            //       child: Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.start,
+            //           children: [
+            //             SizedBox(
+            //               width: MediaQuery.of(context).size.width * 0.7,
+            //               child: custom.text(AppConst.LOCATION, 12.0,
+            //                   FontWeight.w500, MyColor.black),
+            //             ),
+            //             const Icon(
+            //               Icons.arrow_forward,
+            //               size: 20.0,
+            //               color: MyColor.black,
+            //             ),
+            //           ],
+            //         ),
+            //       )),
+            // ),
           ],
         ),
       ),
@@ -1079,5 +1153,29 @@ String flag  = "IT";
         );
       },
     );
+  }
+
+  /*-----------Google Search------------------*/
+  Future<Prediction?> showGoogleAutoComplete(BuildContext context) async {
+    Prediction? p = await PlacesAutocomplete.show(
+      offset: 0,
+      radius: 1000,
+      strictbounds: false,
+      region: "",
+      language: "en",
+      context: context,
+      mode: Mode.overlay,
+      apiKey: kGoogleApiKey,
+      components: [],
+      types: [],
+      hint: "Search City",
+    );
+    return p;
+  }
+
+  Future<latLng.LatLng> buildLatLngFromAddress(dynamic place) async {
+    List<geoCoding.Location> locations =
+        await geoCoding.locationFromAddress(place);
+    return latLng.LatLng(locations.first.latitude, locations.first.longitude);
   }
 }

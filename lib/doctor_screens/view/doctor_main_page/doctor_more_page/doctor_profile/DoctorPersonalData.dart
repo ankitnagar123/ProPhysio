@@ -62,10 +62,11 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     }
   }
 
-
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
-        source: source, imageQuality: 100,);
+      source: source,
+      imageQuality: 100,
+    );
     setState(() {
       if (pickedFile != null) {
         file = File(pickedFile.path);
@@ -167,10 +168,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                 borderRadius: BorderRadius.circular(120.0),
                                 child: file == null
                                     ? InkWell(
-                                  onTap: () {
-                                    imagePopUp(context,files);
-                                  },
-                                      child: FadeInImage.assetNetwork(
+                                        onTap: () {
+                                          imagePopUp(context, files);
+                                        },
+                                        child: FadeInImage.assetNetwork(
                                           imageErrorBuilder: (c, o, s) =>
                                               Image.asset(
                                                   "assets/images/dummyprofile.jpg",
@@ -185,7 +186,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                           image: files,
                                           placeholderFit: BoxFit.cover,
                                         ),
-                                    )
+                                      )
                                     : Image.file(file!,
                                         width: 120,
                                         height: 120,
@@ -603,7 +604,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       code,
                       emailCtrl.text,
                       phoneNumberCtrl.text,
-                      flag,
                       imagename,
                       baseimage,
                       genderCtrl.text,
@@ -613,8 +613,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       dateOfEnrollmentCtr.text,
                       registerOfBelongingCtr.text,
                       dateOfQualification.text,
-                      dateOfGraduation.text);
-                  // doctorProfileCtr.doctorProfileUpdate(context, name, surname, username, category, location, docImg, docBase, code, email, phone, password, image, baseImage)
+                      dateOfGraduation.text,
+                      flag);
                 },
                 MyColor.primary,
                 const TextStyle(fontFamily: "Poppins", color: Colors.white),
@@ -651,12 +651,13 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       },
     );
   }
+
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
@@ -664,7 +665,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
               width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
-                  return  Padding(
+                  return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: InteractiveViewer(
                       panEnabled: false,
@@ -675,15 +676,12 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: FadeInImage.assetNetwork(
-                          imageErrorBuilder:
-                              (context, error, stackTrace) {
+                          imageErrorBuilder: (context, error, stackTrace) {
                             return const Image(
-                                image: AssetImage(
-                                    "assets/images/noimage.png"));
+                                image: AssetImage("assets/images/noimage.png"));
                           },
                           width: MediaQuery.of(context).size.width,
-                          height:
-                          MediaQuery.of(context).size.height * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.5,
                           fit: BoxFit.cover,
                           placeholder: "assets/images/loading.gif",
                           image: image,
@@ -698,5 +696,4 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
           );
         });
   }
-
 }

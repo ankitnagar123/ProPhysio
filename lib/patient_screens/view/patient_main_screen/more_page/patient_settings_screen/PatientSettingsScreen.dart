@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:get/get.dart';
-
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
 
@@ -19,6 +18,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
 
   PatientChangePassCtr changePassCtr = PatientChangePassCtr();
   bool _isHidden = true;
+
 
   @override
   Widget build(BuildContext context) {

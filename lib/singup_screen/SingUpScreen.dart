@@ -58,6 +58,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             elevation: 0.0,
           ),
           body:    const TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               PatientSignUp(),
               DoctorSignUpScreen(),
