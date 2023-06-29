@@ -63,7 +63,7 @@ class BookingController extends GetxController {
         loading.value = true;
         final response =
             await apiService.postData(MyAPI.dBookingAppointmentList, perameter);
-        print(" Category =============${response.body}");
+        print(" doctor booking Appointment =============${response.body}");
         if (response.statusCode == 200) {
           loading.value = false;
           List<bookingList> listbooking = jsonDecode(response.body)

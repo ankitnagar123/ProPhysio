@@ -111,13 +111,18 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     ),
                   ),
                 ),
-                Card(
-                  child: SizedBox(
-                      height: 90,
-                      width: 90,
-                      child: Image(
-                        image: NetworkImage(doctorProfileCtr.degree.value),
-                      )),
+                InkWell(
+                  onTap:  () {
+                    imagePopUp(context,degree);
+                  },
+                  child: Card(
+                    child: SizedBox(
+                        height: 90,
+                        width: 90,
+                        child: Image(
+                          image: NetworkImage(doctorProfileCtr.degree.value),
+                        )),
+                  ),
                 ),
               ],
             ),
@@ -342,4 +347,50 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       print("error while picking file.");
     }
   }
+
+  void imagePopUp(BuildContext context, String image) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: InteractiveViewer(
+                      panEnabled: false,
+                      // Set it to false
+                      boundaryMargin: const EdgeInsets.all(100),
+                      minScale: 0.5,
+                      maxScale: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: FadeInImage.assetNetwork(
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return const Image(
+                                image: AssetImage("assets/images/noimage.png"));
+                          },
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          fit: BoxFit.cover,
+                          placeholder: "assets/images/loading.gif",
+                          image: image,
+                          placeholderFit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
+
 }

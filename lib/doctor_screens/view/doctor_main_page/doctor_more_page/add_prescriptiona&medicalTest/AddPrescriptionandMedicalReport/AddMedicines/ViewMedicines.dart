@@ -51,7 +51,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
             InkWell(
                 onTap: () async {
                   const url =
-                      "https://cisswork.com/Android/Medica/Apis/prescription.php?userid=53&doctor_id=30.pdf";
+                      "https://flowerbet5.com/filename.pdf";
                   final file = await loadPdfFromNetwork(url);
                   openPdf(context, file, url);
                 },
@@ -287,10 +287,12 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
           );
         });
   }
+
+
   Future<File?> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf'],
+      allowedExtensions: ['.php'],
     );
     if (result == null) return null;
     return File(result.paths.first ?? '');

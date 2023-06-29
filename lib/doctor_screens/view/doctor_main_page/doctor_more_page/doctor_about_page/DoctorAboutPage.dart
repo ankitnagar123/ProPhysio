@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io';
+import 'dart:typed_data';
+
 
 class DoctorAboutScreen extends StatefulWidget {
   const DoctorAboutScreen({Key? key}) : super(key: key);
@@ -21,6 +24,9 @@ class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
     loding = true;
     // if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +50,7 @@ class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
                 loding = false;
               });
             },
-            initialUrl: "https://cisswork.com/Android/Medica/Apis/about.php",zoomEnabled: true,
+            initialUrl: "https://cisswork.com/Android/Medica/Apis/prescription.php?userid=53&doctor_id=30",zoomEnabled: true,
           ),loding == true ? Center(
             child: custom.MyIndicator(),
           ): const SizedBox(),

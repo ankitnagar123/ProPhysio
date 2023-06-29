@@ -44,6 +44,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   String files = "";
   String code = '';
   String flag = '';
+  String _selectedGender = '';
 
   File? file;
   final picker = ImagePicker();
@@ -105,7 +106,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         phoneNumberCtrl.text = doctorProfileCtr.phone.value;
 
         /*new*/
-        genderCtrl.text = doctorProfileCtr.gender.value;
+        _selectedGender = doctorProfileCtr.gender.value;
         birthDateController.text = doctorProfileCtr.dateOfBirth.value;
         birthplaceController.text = doctorProfileCtr.placeOfBirth.value;
         universityAttendedCtr.text = doctorProfileCtr.universityAttended.value;
@@ -358,8 +359,48 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        customView.myField(context, genderCtrl, "Enter gender",
-                            TextInputType.text),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                visualDensity:
+                                const VisualDensity(horizontal: -4, vertical: -4),
+                                leading: Radio<String>(
+                                  value: 'male',
+                                  groupValue: _selectedGender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedGender = value!;
+                                      print(_selectedGender);
+                                    });
+                                  },
+                                ),
+                                title: const Text('Male'),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                visualDensity:
+                                const VisualDensity(horizontal: -4, vertical: -4),
+                                leading: Radio<String>(
+                                  value: 'female',
+                                  groupValue: _selectedGender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedGender = value!;
+                                      print(_selectedGender);
+                                    });
+                                  },
+                                ),
+                                title: const Text('Female'),
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(
                           height: height * 0.03,
                         ),
@@ -573,6 +614,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               flag = phone.countryISOCode;
                               log(flag);
                               code = phone.countryCode;
+                              print("code${code}");
                               print(phone.completeNumber);
                             },
                             onCountryChanged: (cod) {
@@ -606,7 +648,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       phoneNumberCtrl.text,
                       imagename,
                       baseimage,
-                      genderCtrl.text,
+                      _selectedGender,
                       birthDateController.text,
                       birthplaceController.text,
                       universityAttendedCtr.text,

@@ -139,10 +139,11 @@ class DoctorSignUpCtr extends GetxController {
       "university_attended":universityAttended,
       "enrollment_date":enrollmentDate,
       "register_of_belonging":registerOfBelonging,
+      "gender":gender,
       "graduation_date":graducationDate,
       "qualification_date":qualificationDate,
     };
-    print("Signup Perameter$signupPerameter");
+    print("Signup Parameter$signupPerameter");
 
     final response = await apiService.postData(MyAPI.DSignUp, signupPerameter);
     try {

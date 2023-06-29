@@ -14,10 +14,10 @@ class PatinetbookingList {
         this.surname,
         this.bookingDate,
         this.status,
-        this.time});
+        this.time,});
 
   PatinetbookingList.fromJson(Map<String, dynamic> json) {
-    bookingId = json['booking_id'];
+    bookingId = json['book_ID'];
     doctorId = json['doctor_id'];
     name = json['name'];
     surname = json['surname'];

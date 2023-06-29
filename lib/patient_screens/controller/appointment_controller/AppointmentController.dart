@@ -8,6 +8,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../doctor_screens/model/DoctorbookedSlotListModel.dart';
 import '../../model/CalenderDateShowModel.dart';
 import '../../model/DoctorPatinetTimeModel.dart';
 import '../../model/VisitChargeModel.dart';
@@ -17,6 +18,8 @@ class AppointmentController extends GetxController {
   ApiService apiService = ApiService();
   var loadingFetch = false.obs;
   var loadingFetchTime = false.obs;
+  var loadingFetchTimeBooked = false.obs;
+
   var loadingFetchDate = false.obs;
 
   var loadingAdd = false.obs;
@@ -24,7 +27,7 @@ class AppointmentController extends GetxController {
   var visitCharge = <VisitChargeModel>[].obs;
   var timeList = <DoctorTimeListModelpatinet>[].obs;
   var dateList = <CalenderDateShowModel>[].obs;
-
+  var bookedTimeSlot = <DoctorbookedSlotList>[].obs;
   var seletedtime = "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -57,22 +60,19 @@ class AppointmentController extends GetxController {
 
   /*------------------For Doctor view date show on calender  list Fetch Api----------------*/
   Future<void> doctorViewDateCalender(String centerId) async {
+    loadingFetchDate.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "center_id":centerId,
     };
     try {
-      loadingFetchDate.value = true;
-      log("calendar list of date's perameter.....$paremert");
-
+      log("calendar list of date's parameter.....$paremert");
       final response = await apiService.postData(MyAPI.pCalenderDate, paremert);
       log("calendar list of date's.....${response.body}");
-
 
       if (response.statusCode == 200) {
         loadingFetchDate.value = false;
         dateList.value = calenderDateShowModelFromJson(response.body);
-        log("date list$dateList");
       } else {
         loadingFetchDate.value = false;
         log("backend error");
@@ -170,7 +170,31 @@ class AppointmentController extends GetxController {
     }
   }
 
-
+  /*------------------Center Doctor Booked time slots list Fetch Api----------------*/
+  Future<void> doctorBookedTimeSlotsFetch(String date,centerId) async {
+    loadingFetchTimeBooked.value = true;
+    final Map<String, dynamic> Peramert = {
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "date": date,
+      "center_id":centerId,
+    };
+    try {
+      final response =
+      await apiService.postData(MyAPI.pDoctorBookedTimeSlot  , Peramert);
+      print(Peramert);
+      print("doctor booked time list*******====${response.body}");
+      if (response.statusCode == 200) {
+        loadingFetchTimeBooked.value = false;
+         bookedTimeSlot.value =doctorbookedSlotListFromJson(response.body);
+      } else {
+        loadingFetchTimeBooked.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingFetchTimeBooked.value = false;
+      print("exception$e");
+    }
+  }
 
   /*-------------Appointment booking  API--------------*/
   Future bookingAppointment(BuildContext context, String reciver, String cardId,

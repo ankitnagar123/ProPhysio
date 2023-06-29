@@ -177,6 +177,33 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 ],
                               ),
                             ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Booking ID",
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 10.0,
+                                        fontFamily: "Poppins"),
+                                  ),
+                                  const SizedBox(
+                                    height: 2.0,
+                                  ),
+                                  Text(
+                                      patientBookingController
+                                          .booking[index].bookingId
+                                          .toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.0,
+                                          fontFamily: "Poppins")),
+                                ],
+                              ),
+                            ),
                           ],
                         )
                       ],

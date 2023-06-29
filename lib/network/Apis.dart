@@ -36,6 +36,8 @@ class MyAPI{
   static const String pDoctorVisitCharge = "visit_charges";
   static const String pBookingAppointment = "booking";
   static const String pDoctorTimeSlot = "user_date";
+  static const String pDoctorBookedTimeSlot = "booked_doctor_timeslot";
+
 
   /*---Booking List{Past,Pending,Upcoming,Cancel,All Details}------*/
   static const String pBookingAppointmentList = "user_history";
