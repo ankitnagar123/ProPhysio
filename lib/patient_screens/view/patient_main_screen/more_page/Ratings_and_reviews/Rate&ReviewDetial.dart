@@ -39,7 +39,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
     print("doctor booking here$bookId");
 
     patientBookingController.bookingAppointmentDetails(
-        context, bookId!, "", () {});
+        context, bookId.toString(), "", () {});
 
     super.initState();
   }

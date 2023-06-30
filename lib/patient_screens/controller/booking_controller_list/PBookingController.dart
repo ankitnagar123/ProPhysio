@@ -22,12 +22,16 @@ class PatientBookingController extends GetxController {
 
 
 /*------Model initialize------*/
+  var bookingCompleteRate = <PatinetbookingList>[].obs;
+
   var booking = <PatinetbookingList>[].obs;
   var cancelReason = <PatientBookingCancelModel>[].obs;
 
 
   /*-----Loading---------*/
   var loading = false.obs;
+  var loadingRate = false.obs;
+
   var loadingd = false.obs;
   var loadingCancelList = false.obs;
   var loadingCancel = false.obs;
@@ -76,6 +80,32 @@ class PatientBookingController extends GetxController {
       }
     } catch (e) {
       loading.value = false;
+      print("exception$e");
+    }
+  }
+
+
+
+  /*---------booking Rating Complete  Appointment List --------*/
+  Future<void> completeRatingAppoint() async {
+
+    final Map<String, dynamic> perameter = {
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+    };
+    try {
+      loadingRate.value = true;
+      final response =
+      await apiService.postData(MyAPI.pBookingAppointmentList, perameter);
+      print(" Category =============${response.body}");
+      if (response.statusCode == 200) {
+        loadingRate.value = false;
+
+      } else {
+        loadingRate.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loadingRate.value = false;
       print("exception$e");
     }
   }
