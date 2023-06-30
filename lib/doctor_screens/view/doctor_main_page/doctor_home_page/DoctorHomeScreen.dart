@@ -67,7 +67,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: height * 0.05,
+                height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -81,40 +81,40 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   custom.text(cdate1, 19, FontWeight.w600, MyColor.black),
-                  Wrap(
-                    spacing: 15.0,
-                    children: [
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: MyColor.midgray,
-                        ),
-                        child: const Center(
-                          child:
-                          Icon(Icons.arrow_back_ios_new_outlined, size: 18),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: MyColor.primary,
-                        ),
-                        child: const Center(
-                          child: Icon(Icons.arrow_forward_ios,
-                              size: 18, color: MyColor.white),
-                        ),
-                      )
-                    ],
-                  )
+                  // Wrap(
+                  //   spacing: 15.0,
+                  //   children: [
+                  //     Container(
+                  //       height: 30,
+                  //       width: 30,
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(30),
+                  //         color: MyColor.midgray,
+                  //       ),
+                  //       child: const Center(
+                  //         child:
+                  //         Icon(Icons.arrow_back_ios_new_outlined, size: 18),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       height: 30,
+                  //       width: 30,
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(30),
+                  //         color: MyColor.primary,
+                  //       ),
+                  //       child: const Center(
+                  //         child: Icon(Icons.arrow_forward_ios,
+                  //             size: 18, color: MyColor.white),
+                  //       ),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
               const Divider(),
               SizedBox(
-                height: height * 0.04,
+                height: height * 0.02,
               ),
               custom.searchField(
                   context,

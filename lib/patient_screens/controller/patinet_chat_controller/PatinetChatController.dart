@@ -305,6 +305,34 @@ try{
 }
 
 
+/*-------------Patient Doctor Delete in chat contact list --------------*/
+  Future<void>drUserMsgListDelete(BuildContext context,String userId,VoidCallback callback)async{
+    loadingListDelete.value = true;
+    final Map<String,dynamic> perameter = {
+      "user_id": userId,
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+    };
+    print("Doctor side user chat list delete Parameter$perameter");
+    final response = await apiService.postData(MyAPI.dChatListDelete, perameter);
+    try{
+      log("response of chat list Delete Api${response.body}");
+      var jsonResponse = jsonDecode(response.body);
+      var result = jsonResponse["result"];
+      log(result);
+      if(result == "delete success"){
+        callback();
+        loadingListDelete.value = false;
+        print("my chat list delete$result");
+        print(result.toString());
+      }else{
+        custom.massenger(context, "Something went wrong");
+      }
+    }catch(e){
+      log("exception$e");
+    }
+
+  }
+
 
 
 /*-------------Doctor Fetch  MSG list on view --------------*/

@@ -93,32 +93,88 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                   itemCount: doctorSpecializationCtr
                       .categoryDetails.value.subcategory?.length,
                   itemBuilder: (context, index) {
-                    return  Align(
-                      alignment: Alignment.topLeft,
-                      child: custom.text(
-                          doctorSpecializationCtr.categoryDetails.value
-                              .subcategory![index].subcatName.toString(),
-                          17,
-                          FontWeight.w500,
-                          MyColor.black),
+                    return  Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: custom.text(
+                              doctorSpecializationCtr.categoryDetails.value
+                                  .subcategory![index].subcatName.toString(),
+                              17,
+                              FontWeight.w500,
+                              MyColor.black),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: doctorSpecializationCtr
+                              .categoryDetails.value.subcategory![index].details?.length,
+                          itemBuilder: (context, index1) {
+                            return Container(
+                                height: 50.0,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 2.0),
+                                decoration: BoxDecoration(
+                                  color: MyColor.midgray,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      custom.text(
+                                          doctorSpecializationCtr.categoryDetails.value.subcategory![index].details![index1].name
+                                              .toString(),
+                                          14.0,
+                                          FontWeight.normal,
+                                          MyColor.primary1),
+                                      custom.text(
+                                          doctorSpecializationCtr.categoryDetails.value.subcategory![index].details![index1].price
+
+                                              .toString(),
+                                          12.0,
+                                          FontWeight.normal,
+                                          MyColor.primary1),
+                                    ],
+                                  ),
+                                ));
+                          },
+                        ),
+                      ],
                     );
                   },
                 ),
                 SizedBox(
                   height: height * 0.02,
                 ),
+
+                SizedBox(
+                  height: height * 0.022,
+                ),
+                const Divider(),
+                SizedBox(
+                  height: height * 0.022,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      "Information", 17, FontWeight.w500, MyColor.black),
+                ),
+                SizedBox(height: 10,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
+                    /* const Icon(
                       Icons.home,
                       size: 18,
                       color: MyColor.grey,
                     ),
                     SizedBox(
                       width: widht * 0.01,
-                    ),
-                    custom.text("Private", 12, FontWeight.normal, MyColor.grey),
+                    ),*/
+                    // custom.text("Private", 12, FontWeight.normal, MyColor.grey),
                     SizedBox(
                       width: widht * 0.03,
                     ),
@@ -133,69 +189,25 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                             MyColor.grey)),
                   ],
                 ),
-                SizedBox(
-                  height: height * 0.022,
+                const SizedBox(
+                  height: 8.0,
                 ),
-                const Divider(),
-                SizedBox(
-                  height: height * 0.022,
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text(
+                        doctorSpecializationCtr.categoryDetails.value.description
+                            .toString(),
+                        13,
+                        FontWeight.normal,
+                        MyColor.black),
+                  ),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(
-                      "Information", 17, FontWeight.w500, MyColor.black),
-                ),
-                SizedBox(
-                  height: height * 0.030,
-                ),
-                custom.text(
-                    doctorSpecializationCtr.categoryDetails.value.description
-                        .toString(),
-                    13,
-                    FontWeight.normal,
-                    MyColor.black),
                 SizedBox(
                   height: height * 0.030,
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: doctorSpecializationCtr
-                      .categoryDetails.value.details?.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                        height: 50.0,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 2.0),
-                        decoration: BoxDecoration(
-                          color: MyColor.midgray,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              custom.text(
-                                  doctorSpecializationCtr.categoryDetails.value
-                                      .details![index].name
-                                      .toString(),
-                                  14.0,
-                                  FontWeight.normal,
-                                  MyColor.primary1),
-                              custom.text(
-                                  doctorSpecializationCtr.categoryDetails.value
-                                      .details![index].price
-                                      .toString(),
-                                  12.0,
-                                  FontWeight.normal,
-                                  MyColor.primary1),
-                            ],
-                          ),
-                        ));
-                  },
-                ),
+
               ],
             );
           }),

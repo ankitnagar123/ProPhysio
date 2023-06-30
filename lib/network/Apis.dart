@@ -41,6 +41,8 @@ class MyAPI{
 
   /*---Booking List{Past,Pending,Upcoming,Cancel,All Details}------*/
   static const String pBookingAppointmentList = "user_history";
+  static const String pBookingRatingAppointList = "user_complete_rating";
+
   static const String pBookingAppointmentDetail = "user_booking_detail";
   static const String pBookingAppointmentCancel = "cancle_user_reason";
   static const String pCancelAppointmentRemove = "delete_booking";

@@ -65,7 +65,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
 
   Widget showList() {
     return Obx(() {
-      if (patientBookingController.loading.value) {
+      if (patientBookingController.loadingRate.value) {
         return categorysubShimmerEffect(context);
       } else if (patientBookingController.bookingCompleteRate.isEmpty) {
         return const Center(
@@ -78,7 +78,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
             itemCount: patientBookingController.bookingCompleteRate.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              var completeList =  patientBookingController.bookingCompleteRate[index];
+
               var id = patientBookingController.bookingCompleteRate[index].doctorId;
               var bookingId = patientBookingController.bookingCompleteRate[index].bookingId;
               return InkWell(
@@ -87,8 +87,8 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => RateAndReviewDetails(
-                                id: id!,
-                                bookingId: bookingId!,
+                                id: id,
+                                bookingId: bookingId,
                               )));
                 },
                 child: Card(
@@ -103,7 +103,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             customView.text(
-                                "Visit with ${completeList.name} ${completeList.surname}"
+                                "Visit with ${patientBookingController.bookingCompleteRate[index].name} ${patientBookingController.bookingCompleteRate[index].surname}"
                                     .toString(),
                                 14.0,
                                 FontWeight.w500,
@@ -132,7 +132,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                     height: 2.0,
                                   ),
                                   Text(
-                                      completeList.bookingDate
+                                      patientBookingController.bookingCompleteRate[index].bookingDate
                                           .toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
@@ -157,7 +157,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                     height: 2.0,
                                   ),
                                   Text(
-                                    completeList.time
+                                    patientBookingController.bookingCompleteRate[index].time
                                         .toString(),
                                     style: const TextStyle(
                                         color: Colors.black,
@@ -167,26 +167,25 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 ],
                               ),
                             ),
-                            const Expanded(
+                             Expanded(
                               flex: 1,
                               child: Column(
                                 crossAxisAlignment:
                                 CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Booking ID",
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 2.0,
                                   ),
                                   Text(
-                                    "",
-                                      // completeList.bookingId,
-                                      style: TextStyle(
+                                      patientBookingController.bookingCompleteRate[index].bookingId.toString(),
+                                      style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
                                           fontFamily: "Poppins")),

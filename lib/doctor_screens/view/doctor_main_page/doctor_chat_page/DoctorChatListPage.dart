@@ -21,8 +21,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
   TextEditingController searchCtr = TextEditingController();
   ChatController chatController = ChatController();
 
-  // HashSet<Nature> selectedItem = HashSet();
-
+  var userIDs = [];
+  var selectedItem = [];
   bool isMultiSelectionEnabled = false;
 
   /*-----SEARCH CHAT LIST-------------*/
@@ -43,16 +43,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
     chatController.doctorMsgListFetch(context);
     // TODO: implement initState
     super.initState();
-    loadData();
   }
 
-  //
-  Future loadData() async {
-    await Future.delayed(const Duration(seconds: 3));
-    setState(() {
-      _enabled = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,74 +61,42 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
             : null,
       ),*/
       appBar: AppBar(
+        leading: isMultiSelectionEnabled
+            ? IconButton(
+            onPressed: () {
+              selectedItem.clear();
+              isMultiSelectionEnabled = false;
+              setState(() {});
+            },
+            icon: const Icon(Icons.close,color: Colors.black,))
+            : null,
         backgroundColor: Colors.white24,
         elevation: 0.0,
         automaticallyImplyLeading: false,
         centerTitle: true == isMultiSelectionEnabled ? false : true,
-        title: const Text(
-            /*isMultiSelectionEnabled ? getSelectedItemCount() : "",*/
-            "Chat List",
-            style: TextStyle(
-                fontSize: 17,
-                letterSpacing: 1,
-                fontFamily: "Poppins",
-                color: MyColor.black)),
+        title: Text(isMultiSelectionEnabled
+            ? getSelectedItemCount()
+            : "Chat",style: const TextStyle(color: Colors.black)),
         actions: [
-          isMultiSelectionEnabled
-              ? IconButton(
-                  onPressed: () {
-                    // selectedItem.clear();
-                    isMultiSelectionEnabled = false;
-                    setState(() {});
-                  },
-                  icon: const Icon(
-                    Icons.close_outlined,
-                    color: MyColor.black,
-                  ))
-              : const Text(""),
-          isMultiSelectionEnabled == false
-              ? IconButton(
-                  onPressed: () {
-                    isMultiSelectionEnabled = true;
-                    // selectedItem.clear();
-                    // isMultiSelectionEnabled = false;
-                    // setState(() {});
-                  },
-                  icon: const Icon(
-                    Icons.edit_attributes_outlined,
-                    color: MyColor.black,
-                  ))
-              : const Text(""),
-          isMultiSelectionEnabled == false
-              ? IconButton(
-                  onPressed: () {
-                    // selectedItem.clear();
-                    // isMultiSelectionEnabled = false;
-                    // setState(() {});
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    color: MyColor.black,
-                  ))
-              : const Text(""),
-          /* Visibility(
-              visible: selectedItem.isNotEmpty,
-              child: IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () {
-                  for (var nature in selectedItem) {
-                    info.remove(nature);
-                  }
-                  selectedItem.clear();
-                  setState(() {});
-                },
-              )),
           Visibility(
               visible: selectedItem.isNotEmpty,
               child: IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () {},
-              )),*/
+                icon: const Icon(Icons.delete,color: Colors.black,),
+                onPressed: () {
+                  /* selectedItem.forEach((nature) {
+                    // list.remove(nature);
+                    list.map((e) => (e) {
+                      list[e].doctorId;
+                      print(list[e].doctorId);
+                      chatController.msgListDelete(context,  list[e].doctorId);
+                    });
+                  });
+                  selectedItem.clear();*/
+                  deletePopUp(context);
+                  setState(() {});
+                },
+              )),
+
           /*Visibility(
               visible: isMultiSelectionEnabled,
               child: IconButton(
@@ -240,8 +200,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                     arguments: patientId);
                               },
                               onLongPress: () {
-                                isMultiSelectionEnabled = true;
-                                // doMultiSelection(nature);
+                                  isMultiSelectionEnabled = true;
+                                  doMultiSelection(list[index]);
                               },
                               child: Stack(
                                   alignment: Alignment.centerRight,
@@ -293,258 +253,152 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                             FontWeight.normal, MyColor.grey)
                                       ],
                                     ),
-                                    // Visibility(
-                                    //     visible: isMultiSelectionEnabled,
-                                    //     child: Icon(
-                                    //       selectedItem.contains(nature)
-                                    //           ? Icons.check_box
-                                    //           : Icons.check_box_outline_blank_outlined,
-                                    //       size: 22,
-                                    //       color: MyColor.primary,
-                                    //     ))
+                                    Visibility(
+                                      visible: isMultiSelectionEnabled,
+                                      child: CheckboxListTile(
+                                        activeColor: MyColor.primary1,
+                                        dense: true,
+                                        value: selectedItem.contains(index),
+                                        onChanged: (vale) {
+                                          setState(() {
+                                            if (selectedItem.contains(index)) {
+                                              selectedItem.remove(index);
+                                              userIDs.remove(list[index].userId);
+                                              // unselect
+                                            } else {
+                                              selectedItem.add(index);// select
+                                              userIDs.add(list[index].userId);
+                                            }
+                                          });
+                                          print(selectedItem);
+                                          print(userIDs);
+                                        },
+                                        controlAffinity: ListTileControlAffinity.trailing,
+                                      ),)
                                   ])),
                         ));
                   },
                 ),
               ),
-
-              // Expanded(
-              //   child: ListView.builder(
-              //     physics: const BouncingScrollPhysics(),
-              //     shrinkWrap: true,
-              //     itemCount: info.length,
-              //     itemBuilder: (context, index,) {
-              //       return Column(
-              //         children: [
-              //           InkWell(
-              //             onTap: () {
-              //                 doMultiSelection(nature);
-              //               },
-              //               onLongPress: () {
-              //               isMultiSelectionEnabled = true;
-              //               // doMultiSelection(nature);
-              //               },
-              //
-              //             child: Padding(
-              //               padding: const EdgeInsets.only(bottom: 8.0),
-              //               child: ListTile(
-              //                 selected: true,
-              //                 selectedColor: info[index]['isSelected'] == true
-              //                     ? Colors.green
-              //                     : Colors.white,
-              //                 title: custom.text(
-              //                     info[index]['name'].toString(),
-              //                     15,
-              //                     FontWeight.w500,
-              //                     MyColor.black),
-              //                 subtitle: Padding(
-              //                   padding: const EdgeInsets.only(top: 6.0),
-              //                   child: custom.text(
-              //                       info[index]['message'].toString(),
-              //                       12,
-              //                       FontWeight.normal,
-              //                       MyColor.grey),
-              //                 ),
-              //                 leading: CircleAvatar(
-              //                   backgroundImage: NetworkImage(
-              //                     info[index]['profilePic'].toString(),
-              //                   ),
-              //                   radius: 35,
-              //                 ),
-              //                 trailing: custom.text(
-              //                     info[index]['time'].toString(),
-              //                     12,
-              //                     FontWeight.normal,
-              //                     MyColor.grey),
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       );
-              //     },
-              //   ),
-              // ),
             ],
           ),
         );
       }),
     );
   }
+  String getSelectedItemCount() {
+    return selectedItem.isNotEmpty
+        ? " Chat delete"
+        : "No selected";
+  }
+  void doMultiSelection(DoctorChatModel nature) {
+    if (isMultiSelectionEnabled) {
+      if (selectedItem.contains(nature.userId)) {
+        selectedItem.remove(nature.userId);
+      } else {
+        selectedItem.add(nature);
+      }
+      setState(() {});
+    } else {
+      //Other logic
+    }
+  }
+  void deletePopUp(BuildContext context,) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text("Delete chat", 17,
+                                FontWeight.w500, Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 14.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text("Are you sure you want to??", 13,
+                                FontWeight.w400, Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          const SizedBox(height: 10.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: custom.text("Dismiss", 14.0,
+                                        FontWeight.w500, MyColor.grey),
+                                  )),
+                              Expanded(
+                                child: custom.mysButton(
+                                  context,
+                                  "Delete chat",
+                                      () {
+                                    /* for (var nature in selectedItem) {
+                                      // natureList.remove(nature);
+                                    }
+                                    selectedItem.clear();
+                                    setState(() {
+                                      isMultiSelectionEnabled == false;
+                                    });*/
+                                    chatController.drUserMsgListDelete(context, userIDs.join(","),() {
+                                      setState(() {});
+                                      isMultiSelectionEnabled = false;
+                                      Get.back();
+                                      chatController.doctorMsgListFetch(context);
+                                    },);
+                                    isMultiSelectionEnabled = false;
+                                  },
+                                  Colors.red,
+                                  const TextStyle(
+                                    color: MyColor.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
 
-// String getSelectedItemCount() {
-//   return selectedItem.isNotEmpty
-//       ? "${selectedItem.length} Delete chat"
-//       : "No selected";
-// }
-//
-// InkWell getListItem(Nature nature) {
-//   return InkWell(
-//       onTap: () {
-//         doMultiSelection(nature);
-//       },
-//       onLongPress: () {
-//         isMultiSelectionEnabled = true;
-//         doMultiSelection(nature);
-//       },
-//       child: Stack(alignment: Alignment.centerRight, children: [
-//         Row(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             ClipRRect(
-//               borderRadius: BorderRadius.circular(120.0),
-//               child: FadeInImage.assetNetwork(
-//                 width: 70,
-//                 height: 70,
-//                 fit: BoxFit.cover,
-//                 placeholder: "assets/images/loading.gif",
-//                 image: nature.url,
-//                 placeholderFit: BoxFit.cover,
-//               ),
-//             ),
-//             const SizedBox(
-//               width: 10,
-//             ),
-//             Expanded(
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   const SizedBox(
-//                     height: 10,
-//                   ),
-//                   SizedBox(
-//                     width: double.infinity,
-//                     height: 18.0,
-//                     child: Text(nature.name),
-//                   ),
-//                   const SizedBox(
-//                     height: 10,
-//                   ),
-//                   SizedBox(
-//                     width: double.infinity,
-//                     height: 14.0,
-//                     child: Text(nature.description),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             custom.text("12:00 AM", 12, FontWeight.normal, MyColor.grey)
-//           ],
-//         ),
-//         Visibility(
-//             visible: isMultiSelectionEnabled,
-//             child: Icon(
-//               selectedItem.contains(nature)
-//                   ? Icons.check_box
-//                   : Icons.check_box_outline_blank_outlined,
-//               size: 22,
-//               color: MyColor.primary,
-//             ))
-//       ]));
-// }
-//
-// void doMultiSelection(Nature nature) {
-//   if (isMultiSelectionEnabled) {
-//     if (selectedItem.contains(nature)) {
-//       selectedItem.remove(nature);
-//     } else {
-//       selectedItem.add(nature);
-//     }
-//     setState(() {});
-//   } else {
-//     //Other logic
-//   }
-// }
-//
-// void deletePopUp(BuildContext context) {
-//   showGeneralDialog(
-//       context: context,
-//       barrierDismissible: true,
-//       barrierLabel:
-//       MaterialLocalizations.of(context).modalBarrierDismissLabel,
-//       barrierColor: Colors.black54,
-//       pageBuilder: (context, anim1, anim2) {
-//         return Center(
-//           child: SizedBox(
-//             width: MediaQuery.of(context).size.width / 1,
-//             child: StatefulBuilder(
-//               builder: (context, StateSetter setState) {
-//                 return Card(
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(7.0),
-//                   ),
-//                   margin: const EdgeInsets.symmetric(horizontal: 15.0),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(
-//                         horizontal: 10.0, vertical: 20.0),
-//                     child: Column(
-//                       mainAxisSize: MainAxisSize.min,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         const SizedBox(
-//                           height: 10.0,
-//                         ),
-//                         Padding(
-//                           padding:
-//                           const EdgeInsets.symmetric(horizontal: 5.0),
-//                           child: custom.text("Delete chat", 17,
-//                               FontWeight.w500, Colors.black),
-//                         ),
-//                         const SizedBox(
-//                           height: 14.0,
-//                         ),
-//                         Padding(
-//                           padding:
-//                           const EdgeInsets.symmetric(horizontal: 5.0),
-//                           child: custom.text("Are you sure you want to??", 13,
-//                               FontWeight.w400, Colors.black),
-//                         ),
-//                         const SizedBox(
-//                           height: 13.0,
-//                         ),
-//                         const SizedBox(height: 10.0),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Expanded(
-//                                 flex: 1,
-//                                 child: TextButton(
-//                                   onPressed: () {
-//                                     Get.back();
-//                                   },
-//                                   child: custom.text("Dismiss", 14.0,
-//                                       FontWeight.w500, MyColor.grey),
-//                                 )),
-//                             Expanded(
-//                               child: custom.mysButton(
-//                                 context,
-//                                 "Delete chat",
-//                                     () {
-//                                   for (var nature in selectedItem) {
-//                                     // natureList.remove(nature);
-//                                   }
-//                                   selectedItem.clear();
-//                                   setState(() {
-//                                     isMultiSelectionEnabled == false;
-//                                   });
-//                                   Get.back();
-//                                   // Get.back();
-//                                 },
-//                                 Colors.red,
-//                                 const TextStyle(
-//                                   color: MyColor.white,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),
-//           ),
-//         );
-//       });
-// }
 }

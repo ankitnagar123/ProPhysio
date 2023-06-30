@@ -35,13 +35,12 @@ class AppointmentController extends GetxController {
 
   /*------------------Doctor date show on calender  list Fetch Api----------------*/
   Future<void> dateCalender(String id,String centerId) async {
+    loadingFetchDate.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": id,
       "center_id":centerId,
     };
     try {
-      loadingFetchDate.value = true;
-
       final response = await apiService.postData(MyAPI.pCalenderDate, paremert);
       log("calendar list of date's.....${response.body}");
       if (response.statusCode == 200) {
@@ -53,6 +52,7 @@ class AppointmentController extends GetxController {
         log("backend error");
       }
     } catch (e) {
+      loadingFetchDate.value = false;
       log("exception$e");
     }
   }
@@ -78,6 +78,7 @@ class AppointmentController extends GetxController {
         log("backend error");
       }
     } catch (e) {
+      loadingFetchDate.value = false;
       log("exception$e");
     }
   }

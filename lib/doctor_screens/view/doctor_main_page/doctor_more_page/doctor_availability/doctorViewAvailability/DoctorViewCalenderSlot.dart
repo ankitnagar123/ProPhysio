@@ -225,15 +225,18 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
             Center(child: custom.MyIndicator());
           }
           return SingleChildScrollView(
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+
                 const Divider(),
+
                 appointmentController.dateList.isEmpty
                     ? const Center(
                         child: Text("No time slot's available at the moment!"))
-                    : /*const Text(""),*/
+                    :
                     Container(
                         margin: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: _calendarCarouselNoHeader,

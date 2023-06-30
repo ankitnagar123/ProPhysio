@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../doctor_screens/model/DoctorBookingRatingModel.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
@@ -22,7 +23,7 @@ class PatientBookingController extends GetxController {
 
 
 /*------Model initialize------*/
-  var bookingCompleteRate = <PatinetbookingList>[].obs;
+  var bookingCompleteRate = <DoctorbooingRatingList>[].obs;
 
   var booking = <PatinetbookingList>[].obs;
   var cancelReason = <PatientBookingCancelModel>[].obs;
@@ -95,11 +96,11 @@ class PatientBookingController extends GetxController {
     try {
       loadingRate.value = true;
       final response =
-      await apiService.postData(MyAPI.pBookingAppointmentList, perameter);
+      await apiService.postData(MyAPI.pBookingRatingAppointList, perameter);
       print(" Category =============${response.body}");
       if (response.statusCode == 200) {
         loadingRate.value = false;
-
+        bookingCompleteRate.value = doctorbooingRatingListFromJson(response.body);
       } else {
         loadingRate.value = false;
         print("error");

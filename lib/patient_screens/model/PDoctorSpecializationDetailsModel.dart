@@ -1,3 +1,4 @@
+/*
 class SpecializationDetailsModel {
   String? doctorId;
   String? description;
@@ -79,6 +80,87 @@ class Details {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['price'] = price;
+    return data;
+  }
+}
+*/
+class SpecializationDetailsModel {
+  String? doctorId;
+  String? description;
+  String? catName;
+  List<Subcategory>? subcategory;
+
+  SpecializationDetailsModel(
+      {this.doctorId, this.description, this.catName, this.subcategory, required List details});
+
+  SpecializationDetailsModel.fromJson(Map<String, dynamic> json) {
+    doctorId = json['doctor_id'];
+    description = json['description'];
+    catName = json['cat_name'];
+    if (json['subcategory'] != null) {
+      subcategory = <Subcategory>[];
+      json['subcategory'].forEach((v) {
+        subcategory!.add(new Subcategory.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['doctor_id'] = this.doctorId;
+    data['description'] = this.description;
+    data['cat_name'] = this.catName;
+    if (this.subcategory != null) {
+      data['subcategory'] = this.subcategory!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Subcategory {
+  String? subcatId;
+  String? subcatName;
+  List<Details>? details;
+
+  Subcategory({this.subcatId, this.subcatName, this.details});
+
+  Subcategory.fromJson(Map<String, dynamic> json) {
+    subcatId = json['subcat_id'];
+    subcatName = json['subcat_name'];
+    if (json['details'] != null) {
+      details = <Details>[];
+      json['details'].forEach((v) {
+        details!.add(new Details.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subcat_id'] = this.subcatId;
+    data['subcat_name'] = this.subcatName;
+    if (this.details != null) {
+      data['details'] = this.details!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Details {
+  String? name;
+  String? price;
+
+  Details({this.name, this.price});
+
+  Details.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    price = json['price'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['price'] = this.price;
     return data;
   }
 }
