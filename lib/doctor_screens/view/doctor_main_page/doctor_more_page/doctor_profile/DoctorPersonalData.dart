@@ -1,16 +1,21 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:latlong2/latlong.dart' as latLng;
 import 'package:medica/doctor_screens/controller/DoctorProfileController.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../helper/AppConst.dart';
 
 class DoctorPersonalData extends StatefulWidget {
   const DoctorPersonalData({Key? key}) : super(key: key);
@@ -29,6 +34,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   TextEditingController name = TextEditingController();
   TextEditingController surename = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
+  TextEditingController addressCtrl = TextEditingController();
+  String location = '';
+  final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
+
   TextEditingController phoneNumberCtrl = TextEditingController();
   TextEditingController genderCtrl = TextEditingController();
 
@@ -40,7 +49,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   TextEditingController registerOfBelongingCtr = TextEditingController();
   TextEditingController dateOfQualification = TextEditingController();
   TextEditingController dateOfGraduation = TextEditingController();
-
+  String latitude = "";
+  String longitude = "";
   String files = "";
   String code = '';
   String flag = '';
@@ -104,7 +114,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         files = doctorProfileCtr.image.value.toString();
         surename.text = doctorProfileCtr.surename.value;
         phoneNumberCtrl.text = doctorProfileCtr.phone.value;
-
+        addressCtrl.text = doctorProfileCtr.location.value;
         /*new*/
         _selectedGender = doctorProfileCtr.gender.value;
         birthDateController.text = doctorProfileCtr.dateOfBirth.value;
@@ -353,6 +363,66 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         SizedBox(
                           height: height * 0.03,
                         ),
+                        customView.text("Your address", 10.0, FontWeight.w600,
+                            MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                          child: customView.searchField(
+                              context,
+                              addressCtrl,
+                              location,
+                              TextInputType.text,
+                              const Text(""),
+                              const Icon(Icons.search_rounded), () async {
+                            var place = await PlacesAutocomplete.show(
+                                context: context,
+                                apiKey: kGoogleApiKey,
+                                mode: Mode.overlay,
+                                types: [],
+                                strictbounds: false,
+                                components: [],
+                                onError: (err) {
+                                  print(err);
+                                });
+                            if (place != null) {
+                              setState(() {
+                                location = place.description.toString();
+                              });
+
+                              final plist = GoogleMapsPlaces(
+                                apiKey: kGoogleApiKey,
+                                // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                              );
+                              String placeId = place.placeId ?? "0";
+                              final detail =
+                                  await plist.getDetailsByPlaceId(placeId);
+                              final geometry = detail.result.geometry!;
+                              final lat = geometry.location.lat;
+                              final lang = geometry.location.lng;
+                              var newlatlang = latLng.LatLng(lat, lang);
+                              log(newlatlang.latitude.toString());
+                              log(newlatlang.longitude.toString());
+                              log(">>>>>>>>>>>>>>>>>>", error: location);
+                              try {
+                                latitude = newlatlang.latitude.toString();
+                                longitude = newlatlang.longitude.toString();
+                                addressCtrl.text = location.toString();
+                              } catch (e) {
+                                print("Exception :-- ${e.toString()}");
+                              }
+                              print("My latitude AppCont : -- ${latitude}");
+                              print(
+                                  "My LONGITUDE AppCont : -- ${longitude}");
+                              print("My address AppCont : -- ${addressCtrl.text}");
+                            }
+                          }, () {}),
+                        ),
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
                         /*-new-*/
                         customView.text("Your gender", 10.0, FontWeight.w600,
                             MyColor.black),
@@ -365,8 +435,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               flex: 1,
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
-                                visualDensity:
-                                const VisualDensity(horizontal: -4, vertical: -4),
+                                visualDensity: const VisualDensity(
+                                    horizontal: -4, vertical: -4),
                                 leading: Radio<String>(
                                   value: 'male',
                                   groupValue: _selectedGender,
@@ -384,8 +454,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               flex: 1,
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
-                                visualDensity:
-                                const VisualDensity(horizontal: -4, vertical: -4),
+                                visualDensity: const VisualDensity(
+                                    horizontal: -4, vertical: -4),
                                 leading: Radio<String>(
                                   value: 'female',
                                   groupValue: _selectedGender,
@@ -643,6 +713,9 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       surename.text,
                       userNameCtrl.text,
                       bioCtrl.text,
+                      addressCtrl.text,
+                      latitude,
+                      longitude,
                       code,
                       emailCtrl.text,
                       phoneNumberCtrl.text,

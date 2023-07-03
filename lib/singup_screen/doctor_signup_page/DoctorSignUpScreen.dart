@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geocoding/geocoding.dart' as geoCoding;
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';

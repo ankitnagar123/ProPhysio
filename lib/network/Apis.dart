@@ -57,6 +57,9 @@ class MyAPI{
 /*-------------------- patient Chat Api's------------*/
   static const String pSendMsg = "send_msg";
   static const String pChatViewListFetch = "fetch_messages";
+
+  static const String doctorChatViewListFetch = "doctor_fetch_messages";
+
   static const String pChatListFetch = "user_msg_list";
   static const String pChatListDelete = "delete_doctor_msg_list";
 

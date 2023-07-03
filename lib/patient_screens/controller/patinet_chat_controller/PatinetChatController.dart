@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../doctor_screens/model/DoctorChatListModel.dart';
+import '../../../doctor_screens/model/DoctorViewMsgList.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import "../../model/Chat Model's/ChatigViewListModel.dart";
@@ -26,6 +27,9 @@ class ChatController extends GetxController {
 
   var receivedMsgList = <ChatingViewListModel>[].obs;
 
+  var drReceivedMsgList = <DoctorViewMsgList>[].obs;
+
+
   var msgList = <PatinetChatModel>[].obs;
 
   var doctorMsgList = <DoctorChatModel>[].obs;
@@ -36,13 +40,14 @@ class ChatController extends GetxController {
 
 /*-------------Patient Send MSG--------------*/
   Future sendingMsgApi(BuildContext context, String receiverId,
-      String statusUpload, String message, VoidCallback callback) async {
+      String statusUpload, String message,String type, VoidCallback callback) async {
     loadingset.value = true;
     final Map<String, dynamic> psentmsg = {
       "sender_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "reciver_id": receiverId,
       "status_upload": statusUpload,
       "message": message,
+      "type":type
     };
     print("Patient Send Msg Parameter$psentmsg");
     final response = await apiService.postData(MyAPI.pSendMsg, psentmsg);
@@ -66,13 +71,14 @@ class ChatController extends GetxController {
 
 /*-------------Doctor Send MSG--------------*/
   Future doctorSendingMsgApi(BuildContext context, String receiverId,
-      String statusUpload, String message, VoidCallback callback) async {
+      String statusUpload, String message,String type ,VoidCallback callback) async {
     loadingset.value = true;
     final Map<String, dynamic> psentmsg = {
       "sender_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "reciver_id": receiverId,
       "status_upload": statusUpload,
       "message": message,
+      "type":type,
     };
     print("Patient Send Msg Parameter$psentmsg");
     final response = await apiService.postData(MyAPI.pSendMsg, psentmsg);
@@ -169,21 +175,21 @@ class ChatController extends GetxController {
         print("my peramiter$Peramert");
 
         loadingFetch.value = true;
-        final response = await apiService.postData(MyAPI.pChatViewListFetch,Peramert);
-        print("Chat view list=============${response.body}");
+        final response = await apiService.postData(MyAPI.doctorChatViewListFetch,Peramert);
+        print("Doctor Chat view list=============${response.body}");
 
         if (response.statusCode == 200) {
           loadingFetch.value = false;
           var jsonString = response.body;
           print(jsonString);
-          List<ChatingViewListModel> list = jsonDecode(response.body)
-              .map((item) => ChatingViewListModel.fromJson(item))
+          List<DoctorViewMsgList> list = jsonDecode(response.body)
+              .map((item) => DoctorViewMsgList.fromJson(item))
               .toList()
-              .cast<ChatingViewListModel>();
-          receivedMsgList.clear();
-          receivedMsgList.addAll(list);
+              .cast<DoctorViewMsgList>();
+          drReceivedMsgList.clear();
+          drReceivedMsgList.addAll(list);
           print(list);
-          print(receivedMsgList);
+          print(drReceivedMsgList);
         } else {
           loadingFetch.value = false;
           print("error");

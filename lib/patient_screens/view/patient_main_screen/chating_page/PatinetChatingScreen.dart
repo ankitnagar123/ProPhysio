@@ -278,7 +278,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                       onPressed: () {
                         if (messageCtr.text.trim().isNotEmpty) {
                           chatController.sendingMsgApi(context, doctorId,
-                              "Text", messageCtr.text, () {});
+                              "Text", messageCtr.text,"User",() {});
                         } else {
                           print('filed');
                         }

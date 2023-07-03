@@ -176,14 +176,14 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
             Expanded(
                 child: SizedBox(
               height: 300,
-              child: chatController.receivedMsgList.isEmpty
+              child: chatController.drReceivedMsgList.isEmpty
                   ? const SizedBox()
                   : ListView.builder(
                       reverse: true,
-                      itemCount: chatController.receivedMsgList.length,
+                      itemCount: chatController.drReceivedMsgList.length,
                       itemBuilder: (BuildContext context, int index) {
                         var reversedList =
-                            chatController.receivedMsgList.reversed.toList();
+                            chatController.drReceivedMsgList.reversed.toList();
                         return Row(
                           mainAxisAlignment: doctorId == reversedList[index].id
                               ? MainAxisAlignment.start
@@ -278,7 +278,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                       onPressed: () {
                         if (messagectr.text.trim().isNotEmpty) {
                           chatController.doctorSendingMsgApi(context, patientId,
-                              "Text", messagectr.text, () {});
+                              "Text", messagectr.text,"Doctor", () {});
                           // chatController.sendingMsgApi(context, doctorId!, "Text", messagectr.text, () {});
                         } else {
                           print('filed');
