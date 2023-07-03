@@ -1,5 +1,6 @@
 class PatinetbookingList {
   String? bookingId;
+  String? bookId;
   String? doctorId;
   String? name;
   String? surname;
@@ -9,6 +10,7 @@ class PatinetbookingList {
 
   PatinetbookingList(
       {this.bookingId,
+        this.bookId,
         this.doctorId,
         this.name,
         this.surname,
@@ -17,7 +19,8 @@ class PatinetbookingList {
         this.time,});
 
   PatinetbookingList.fromJson(Map<String, dynamic> json) {
-    bookingId = json['book_ID'];
+    bookingId = json['booking_id'];
+    bookId = json['book_ID'];
     doctorId = json['doctor_id'];
     name = json['name'];
     surname = json['surname'];
@@ -29,6 +32,7 @@ class PatinetbookingList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['booking_id'] = bookingId;
+    data['book_ID'] = bookId;
     data['doctor_id'] = doctorId;
     data['name'] = name;
     data['surname'] = surname;

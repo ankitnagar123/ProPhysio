@@ -329,7 +329,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                     ),
                                     Text(
                                         patientBookingController
-                                            .booking[index].bookingId
+                                            .booking[index].bookId
                                             .toString(),
                                         style: const TextStyle(
                                             color: Colors.black,

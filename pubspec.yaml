@@ -60,7 +60,6 @@ dev_dependencies:
   custom_info_window: ^1.0.1
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
-#  flutter_credit_card: ^3.0.5
   image_picker: ^0.8.6
   file_picker:
   open_file: ^3.2.1

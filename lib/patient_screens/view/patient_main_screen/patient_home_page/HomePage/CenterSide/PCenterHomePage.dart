@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
 
@@ -49,7 +50,10 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
   Widget showList() {
     return Obx(() {
       if (pCenterCtr.loadingFetch.value) {
-        return Center(heightFactor: 7, child: customView.MyIndicator());
+        return Padding(
+          padding: EdgeInsets.only(top: 17),
+          child: categorysubShimmerEffect(context),
+        );
       }
       return pCenterCtr.centerList.isEmpty
           ? Center(
@@ -84,7 +88,7 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                               horizontal: 7.0, vertical: 10.0),
                           child: Row(
                             children: [
-                              SizedBox(
+                              /*SizedBox(
                                 width: 100,
                                 height: 100,
                                 // margin: const EdgeInsets.all(6),
@@ -92,17 +96,27 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> {
                                   centerList.image,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      color: Colors.amber,
-                                      alignment: Alignment.center,
-                                      child: const Text(
-                                        'Whoops!',
-                                        style: TextStyle(fontSize: 30),
-                                      ),
-                                    );
+                                    return Image(image: AssetImage("assets/images/loading.gif"));
                                   },
                                 ),
-                              ),
+                              ),*/
+                              ClipRRect(
+                                  clipBehavior: Clip.antiAlias,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  child: FadeInImage.assetNetwork(
+                                    imageErrorBuilder: (c, o, s) => Image.asset(
+                                        color: MyColor.midgray,
+                                        "assets/images/noimage.png",
+                                        width: 70,
+                                        height: 70,
+                                        fit: BoxFit.cover),
+                                    width: 90,
+                                    height: 95,
+                                    fit: BoxFit.cover,
+                                    placeholder: "assets/images/loading.gif",
+                                    image: centerList.image,
+                                    placeholderFit: BoxFit.cover,
+                                  )),
                               const SizedBox(
                                 width: 5.0,
                               ),

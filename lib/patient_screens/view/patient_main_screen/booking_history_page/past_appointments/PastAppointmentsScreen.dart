@@ -179,7 +179,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                         ),
                                         Text(
                                             patientBookingController
-                                                .booking[index].bookingId
+                                                .booking[index].bookId
                                                 .toString(),
                                             style: const TextStyle(
                                                 color: Colors.black,

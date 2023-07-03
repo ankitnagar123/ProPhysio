@@ -208,7 +208,7 @@ class _BookingPageState extends State<BookingPage> {
                                             ),
                                             Text(
                                                 patientBookingController
-                                                    .booking[index].bookingId
+                                                    .booking[index].bookId
                                                     .toString(),
                                                 style: const TextStyle(
                                                     color: Colors.black,
@@ -440,7 +440,7 @@ class _BookingPageState extends State<BookingPage> {
                                             ),
                                             Text(
                                                 patientBookingController
-                                                    .booking[index].bookingId
+                                                    .booking[index].bookId
                                                     .toString(),
                                                 style: const TextStyle(
                                                     color: Colors.black,
