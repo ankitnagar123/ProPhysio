@@ -137,7 +137,9 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               child: customView.MyButton(
                 context,
                 "Save profile",
-                () {},
+                () {
+
+                },
                 MyColor.primary,
                 const TextStyle(fontFamily: "Poppins", color: Colors.white),
               ),
@@ -215,7 +217,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             const SizedBox(
               height: 20.0,
             ),
-            Align(
+            /*Align(
               alignment: Alignment.topLeft,
               child: customView.text(
                   "Offices and addresses", 13.0, FontWeight.w500, Colors.black),
@@ -265,7 +267,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       ],
                     ),
                   )),
-            ),
+            ),*/
             // Container(
             //   decoration: BoxDecoration(
             //       color: MyColor.white,
@@ -275,9 +277,9 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             //     Navigator.push(context, MaterialPageRoute(builder: (context)=>const DoctorSelectAddress()));
             //   }),
             // ),
-            const SizedBox(
+           /* const SizedBox(
               height: 17.0,
-            ),
+            ),*/
           ],
         ),
       ),
@@ -337,7 +339,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
     try {
       var pickedfiles = await imgpicker.pickMultiImage();
       //you can use ImageCourse.camera for Camera capture
-      if (pickedfiles != null) {
+      if (pickedfiles == null) {
         imagefiles = pickedfiles;
         setState(() {});
       } else {

@@ -594,8 +594,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
   Future<void> getLatLong() async {
-    List<Location> locations =
-        await locationFromAddress(addressCtrl.text.toString());
+    List<Location> locations = await locationFromAddress(addressCtrl.text.toString());
     setState(() {
       longitude = locations.last.longitude.toString();
       latitude = locations.last.latitude.toString();

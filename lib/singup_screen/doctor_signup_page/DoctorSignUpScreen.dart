@@ -1110,9 +1110,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   void _chooseDegree() async {
     final pickedFile = await degreepicker.getImage(
         source: ImageSource.gallery,
-        imageQuality: 50,
-        maxHeight: 200,
-        maxWidth: 200);
+        imageQuality: 100,
+       );
     setState(() {
       if (pickedFile != null) {
         degreefilePath = File(pickedFile.path);

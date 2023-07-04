@@ -1,11 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
+
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 import '../../../controller/filter_controller/PatientFilterController.dart';
-import 'package:geocoding/geocoding.dart';
 
 class PatientSetLocation extends StatefulWidget {
   const PatientSetLocation({Key? key}) : super(key: key);
@@ -24,14 +25,15 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
   CustomView custom = CustomView();
   String latitude = "";
   String longitude = "";
-String label= "";
+  String label = "";
 
-@override
+  @override
   void initState() {
-  labelCtr.text = patientFilterCtr.lables.value;
+    labelCtr.text = patientFilterCtr.lables.value;
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

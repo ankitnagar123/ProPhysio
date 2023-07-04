@@ -25,12 +25,12 @@ class _FilterScreenState extends State<FilterScreen> {
   var subCat = "";
   @override
   void initState() {
-    cat = Get.parameters['category']!;
-    subCat = Get.parameters['subCat']!;
+    cat = Get.parameters['category'].toString();
+    subCat = Get.parameters['subCat'].toString();
 print("cat$cat");
      cat = AppConst.cat;
     print("store${AppConst.cat}");
-  /*   if(Get.parameters["type"] == "goFilter"){
+     if(Get.parameters["type"] == "goFilter"){
        cat = Get.parameters["category"].toString();
        subCat = Get.parameters["subCat"].toString();
 
@@ -42,7 +42,6 @@ print("cat$cat");
      }else{
        print("object");
      }
-*/
 /*AppConst.FILTER_CAT = cat;
     AppConst.FILTER_SUBCAT = subCat;*/
 

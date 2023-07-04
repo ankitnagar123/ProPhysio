@@ -7,7 +7,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/model/DoctorListModel.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import 'DoctorMapScreen.dart';
@@ -354,27 +354,27 @@ class _DoctorListState extends State<DoctorList> {
                                                 FontWeight.w500,
                                                 MyColor.black)),
 
-                                        // RatingBar(
-                                        //   // ignoreGestures: true,
-                                        //   itemSize: 17,
-                                        //   initialRating: double.parse(list[index].rating),
-                                        //   direction: Axis.horizontal,
-                                        //   allowHalfRating: true,
-                                        //   itemCount: 5,
-                                        //   ratingWidget: RatingWidget(
-                                        //       full:
-                                        //       const Icon(Icons.star, color: MyColor.primary),
-                                        //       half: const Icon(Icons.star_half,
-                                        //           color: MyColor.primary),
-                                        //       empty: const Icon(
-                                        //           Icons.star_border_purple500_outlined,
-                                        //           color: MyColor.primary)),
-                                        //   itemPadding:
-                                        //   const EdgeInsets.symmetric(horizontal: 2.0),
-                                        //   onRatingUpdate: (rating) {
-                                        //     print(rating);
-                                        //   },
-                                        // ),
+                                        RatingBar(
+                                          // ignoreGestures: true,
+                                          itemSize: 17,
+                                          initialRating: double.parse(list[index].rating.toString()),
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          ratingWidget: RatingWidget(
+                                              full:
+                                              const Icon(Icons.star, color: MyColor.primary),
+                                              half: const Icon(Icons.star_half,
+                                                  color: MyColor.primary),
+                                              empty: const Icon(
+                                                  Icons.star_border_purple500_outlined,
+                                                  color: MyColor.primary)),
+                                          itemPadding:
+                                          const EdgeInsets.symmetric(horizontal: 2.0),
+                                          onRatingUpdate: (rating) {
+                                            print(rating);
+                                          },
+                                        ),
                                       ],
                                     )
                                   ],

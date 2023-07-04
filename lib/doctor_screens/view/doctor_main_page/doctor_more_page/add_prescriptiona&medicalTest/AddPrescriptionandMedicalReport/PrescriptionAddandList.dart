@@ -10,7 +10,6 @@ import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import 'AddMedicines/AddMedicinesTab.dart';
 
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
@@ -193,7 +192,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
                       const Text(
-                        "Birth Date",
+                        "Birth place",
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,

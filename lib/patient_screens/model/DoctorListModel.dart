@@ -52,7 +52,7 @@ class DoctorListModel {
   factory DoctorListModel.fromJson(Map<String, dynamic> json) => DoctorListModel(
     result: json["result"],
     fees: json["fees"],
-    rating: json["rating"],
+    rating: json["rating"].toString(),
     doctorId: json["doctor_id"],
     name: json["name"],
     surname: json["surname"],
