@@ -582,7 +582,6 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           "userContact": bookingController.contact.value,
                           "surName": bookingController.surname.value,
                           "name": bookingController.name.value,
-
                           "bookingSide": "booking",
                         };
                         print(patientId);

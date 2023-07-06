@@ -75,7 +75,7 @@ class _PatientHomePageState extends State<PatientHomePage>
                     });*/ /*
               },true),*/
               Container(
-                constraints: const BoxConstraints.expand(height: 50),
+                constraints: const BoxConstraints.expand(height: 60),
                 child: TabBar(
                   // indicatorPadding: EdgeInsets.only(bottom: 0),
                   physics: const NeverScrollableScrollPhysics(),

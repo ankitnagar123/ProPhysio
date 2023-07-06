@@ -19,26 +19,32 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
   String patientId = "";
   String patientName = "";
   String patientPic = "";
-String patientSurname = "";
-String patientUsername = "";
+  String patientSurname = "";
+  String patientUsername = "";
+  String patientAddress = "";
+
   @override
   void initState() {
     super.initState();
-    if(Get.arguments["bookingSide"] == "booking"){
+    if (Get.arguments["bookingSide"] == "booking") {
       patientId = Get.parameters["ID"].toString();
       patientName = Get.arguments["name"];
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
-    }else{
+      patientAddress = Get.arguments["userLocation"];
+      print(patientAddress);
+      } else {
       patientId = Get.arguments["ID"];
       patientName = Get.arguments["name"];
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
+      patientAddress = Get.arguments["address"];
+      print(patientAddress);
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,13 +54,10 @@ String patientUsername = "";
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customView.callButton(
-                context,
-                "Call",
-                    () {
-                  UrlLauncher.launchUrl(Uri.parse(
-                      'tel:${bookingController.contact.value}'));
-                },
+            customView.callButton(context, "Call", () {
+              UrlLauncher.launchUrl(
+                  Uri.parse('tel:${bookingController.contact.value}'));
+            },
                 MyColor.primary,
                 const TextStyle(
                   color: MyColor.white,
@@ -62,7 +65,7 @@ String patientUsername = "";
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, "Massage", () {
+            customView.callButton(context, "Message", () {
               Get.back();
             },
                 MyColor.primary,
@@ -81,14 +84,16 @@ String patientUsername = "";
         elevation: 0,
         backgroundColor: Colors.white24,
         title: customView.text(
-            "@$patientUsername", 17, FontWeight.bold,
-            MyColor.black),
+            "@$patientUsername", 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
           icon: const Icon(
-            Icons.arrow_back_ios, color: MyColor.black, size: 18,),
+            Icons.arrow_back_ios,
+            color: MyColor.black,
+            size: 18,
+          ),
         ),
       ),
       body: Center(
@@ -96,10 +101,12 @@ String patientUsername = "";
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Divider(),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             InkWell(
               onTap: () {
-                imagePopUp(context,patientPic);
+                imagePopUp(context, patientPic);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(120.0),
@@ -120,14 +127,16 @@ String patientUsername = "";
                 ),
               ),
             ),
-            const SizedBox(height: 10.0,),
-
+            const SizedBox(
+              height: 10.0,
+            ),
             Align(
                 alignment: Alignment.center,
-                child: customView.text(
-                    "$patientName $patientSurname", 18, FontWeight.w500,
-                    MyColor.black)),
-            const SizedBox(height: 16.0,),
+                child: customView.text("$patientName $patientSurname", 18,
+                    FontWeight.w500, MyColor.black)),
+            const SizedBox(
+              height: 16.0,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -139,8 +148,7 @@ String patientUsername = "";
                 Align(
                   alignment: Alignment.topRight,
                   child: customView.text(
-                      "Via Massimiliano d’Azeglio 14, Torino (TO)", 12,
-                      FontWeight.normal, MyColor.grey),
+                      patientAddress, 12, FontWeight.normal, MyColor.grey),
                 ),
               ],
             )
@@ -149,12 +157,13 @@ String patientUsername = "";
       ),
     );
   }
+
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
@@ -162,7 +171,7 @@ String patientUsername = "";
               width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
-                  return  Padding(
+                  return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: InteractiveViewer(
                       panEnabled: false,
@@ -173,15 +182,12 @@ String patientUsername = "";
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: FadeInImage.assetNetwork(
-                          imageErrorBuilder:
-                              (context, error, stackTrace) {
+                          imageErrorBuilder: (context, error, stackTrace) {
                             return const Image(
-                                image: AssetImage(
-                                    "assets/images/noimage.png"));
+                                image: AssetImage("assets/images/noimage.png"));
                           },
                           width: MediaQuery.of(context).size.width,
-                          height:
-                          MediaQuery.of(context).size.height * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.5,
                           fit: BoxFit.cover,
                           placeholder: "assets/images/loading.gif",
                           image: image,
@@ -196,5 +202,4 @@ String patientUsername = "";
           );
         });
   }
-
 }

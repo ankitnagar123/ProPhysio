@@ -16,7 +16,6 @@ class DoctorChatListScreen extends StatefulWidget {
 }
 
 class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
-  bool _enabled = true;
   CustomView custom = CustomView();
   TextEditingController searchCtr = TextEditingController();
   ChatController chatController = ChatController();
@@ -83,40 +82,12 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
               child: IconButton(
                 icon: const Icon(Icons.delete,color: Colors.black,),
                 onPressed: () {
-                  /* selectedItem.forEach((nature) {
-                    // list.remove(nature);
-                    list.map((e) => (e) {
-                      list[e].doctorId;
-                      print(list[e].doctorId);
-                      chatController.msgListDelete(context,  list[e].doctorId);
-                    });
-                  });
-                  selectedItem.clear();*/
                   deletePopUp(context);
                   setState(() {});
                 },
               )),
 
-          /*Visibility(
-              visible: isMultiSelectionEnabled,
-              child: IconButton(
-                icon: Icon(
-                  Icons.select_all,
-                  color: selectedItem.length == natureList.length
-                      ? Colors.black
-                      : Colors.white,
-                ),
-                onPressed: () {
-                  if (selectedItem.length == natureList.length) {
-                    selectedItem.clear();
-                  } else {
-                    for (int index = 0; index < natureList.length; index++) {
-                      selectedItem.add(natureList[index]);
-                    }
-                  }
-                  setState(() {});
-                },
-              )),*/
+
         ],
       ),
       body: Obx(() {
@@ -184,7 +155,6 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: 10, right: 10, top: 10, bottom: 10),
-                          // height: 80.0,
                           child: InkWell(
                               onTap: () {
                                 var patientId = {

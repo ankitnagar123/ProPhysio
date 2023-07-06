@@ -116,20 +116,10 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             custom.text(
                                 cat, 16, FontWeight.w500, MyColor.black),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Icon(
-                                  Icons.home,
-                                  size: 18,
-                                  color: MyColor.grey,
-                                ),
-                                custom.text("Private", 12, FontWeight.normal,
-                                    MyColor.grey),
-                                SizedBox(
-                                  width: widht * 0.03,
-                                ),
                                 const Icon(Icons.location_on_outlined,
-                                    size: 18, color: MyColor.grey),
+                                    size: 18, color: MyColor.primary1),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.66,
@@ -244,11 +234,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Icon(
-                                  Icons.home,
-                                  size: 20.0,
-                                  color: MyColor.primary1,
-                                ),
                                 InkWell(
                                   onTap: () {
                                     var data = {
@@ -295,8 +280,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                custom.text("2 place", 13, FontWeight.normal,
-                                    MyColor.grey),
                                 custom.text(
                                     "${patientRatingCtr.address.value.totalReview.toString()} reviews",
                                     13,
@@ -357,7 +340,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             SizedBox(
                               height: height * 0.02,
                             ),
-                            GestureDetector(
+                           /* GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -394,7 +377,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             ),
                             SizedBox(
                               height: height * 0.02,
-                            ),
+                            ),*/
                             Align(
                               alignment: Alignment.topLeft,
                               child: custom.text("Specializations", 15,

@@ -43,7 +43,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, "Massage", () {
+            customView.callButton(context, "Message", () {
               Get.back();
             },
                 MyColor.primary,

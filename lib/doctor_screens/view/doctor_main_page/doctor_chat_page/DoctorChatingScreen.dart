@@ -102,6 +102,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                       "pic":patientPic,
                       "surname":patientName,
                       "username":patientUsername,
+                      // "address":a
                     };
                     Get.toNamed(RouteHelper.DChatProfile(),arguments: patientInfo);
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientChatProfile()));

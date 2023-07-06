@@ -201,7 +201,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
             itemBuilder: (BuildContext context, int index) {
               var bookingId = list[index].bookingId.toString();
               var userid = list[index].id.toString();
-              var status = list[index].status!;
+              var status = list[index].status.toString();
               return InkWell(
                 onTap: () {
                   bookingController.bookingAppointmentDetails(
@@ -650,8 +650,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           fontWeight: FontWeight.w500,
                                           fontSize: 16,
                                         ),
-                                        Icons.call),
-                                    custom.callButton(context, "Chat", () {
+                                        Icons.call), custom.callButton(context, "Chat", () {
                                       var patientId = {
                                         "ID": bookingController.userId.value,
                                         "userName": bookingController.username.value,
@@ -673,6 +672,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           fontSize: 16,
                                         ),
                                         Icons.chat_bubble_outline_outlined)
+
                                   ],
                                 ),
                               ),
