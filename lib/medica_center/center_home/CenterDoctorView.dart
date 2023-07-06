@@ -281,7 +281,7 @@ String keyword = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                    width: 150,
+                                                    width: MediaQuery.sizeOf(context).width/1.2,
                                                     child: custom.text(
                                                         drList[
                                                             index].location,

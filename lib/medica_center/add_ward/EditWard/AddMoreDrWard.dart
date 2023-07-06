@@ -356,7 +356,7 @@ String wardId = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                    width: 150,
+                                                    width: MediaQuery.sizeOf(context).width/0.1,
                                                     child: custom.text(
                                                         list[index]
                                                             .location

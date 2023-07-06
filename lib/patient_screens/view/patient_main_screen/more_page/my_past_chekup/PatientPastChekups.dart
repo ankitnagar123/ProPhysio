@@ -58,22 +58,19 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
                 indicator: const BoxDecoration(
                   color: MyColor.primary,
                 ),
-                unselectedLabelColor: MyColor.grey,
                 labelColor: Colors.white,
+                unselectedLabelColor: Colors.black,
                 controller: tabController,
-                indicatorWeight: 2,
-                tabs: [
+                indicatorWeight: 0,
+                tabs: const [
                   Tab(
-                    child: custom.text(
-                        "Prescription", 14, FontWeight.w500, MyColor.black),
+                      child: Text("Prescription",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
                   ),
                   Tab(
-                    child: custom.text(
-                        "Medical Test", 14, FontWeight.w500, MyColor.black),
+                    child: Text("Medical Test",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                   ),
                   Tab(
-                    child:
-                    custom.text("Medicines", 14, FontWeight.w500, MyColor.black),
+                    child: Text("Medicines",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                   ),
                 ],
               ),

@@ -51,7 +51,7 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
             color: Colors.black,
           ),
         ),
-        title: custom.text("${widget.patientName} Report", 15.0, FontWeight.w500, Colors.black),
+        title: custom.text("${widget.patientName} Report's", 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -88,23 +88,23 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
           Container(
             color: Colors.grey.shade100,
             child:  TabBar(
-                  controller: tabController,
-                  indicatorColor: MyColor.primary,
-                  indicatorWeight: 2,
-                  tabs: [
+              labelPadding: const EdgeInsets.all(8),
+              indicator: const BoxDecoration(
+                color: MyColor.primary,
+              ),
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.black,
+              controller: tabController,
+              indicatorWeight: 0,
+                  tabs: const [
                     Tab(
-                      child: custom.text(
-                          "Prescription", 14, FontWeight.w500, MyColor.black),
+                      child: Text("Prescription",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
                     ),
                     Tab(
-                      child: Tab(
-                        child: custom.text(
-                            "Medical Test", 14, FontWeight.w500, MyColor.black),
-                      ),
+                      child: Text("Medical Test",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                     Tab(
-                      child: custom.text(
-                          "Medicines", 14, FontWeight.w500, MyColor.black),
+                      child: Text("Medicines",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                   ],
                 ),

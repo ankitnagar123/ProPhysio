@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
+
 import '../../medica_center/center_controller/CenterAuthController.dart';
 
 class MedicalCenterSignUp extends StatefulWidget {
@@ -28,6 +32,8 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
 
   CustomView customView = CustomView();
   String code = '';
+  String? latitude;
+  String? longitude;
 
   String _displayText(DateTime? date) {
     if (date != null) {
@@ -43,10 +49,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
 
   @override
   Widget build(BuildContext context) {
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final widht = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
           height: 35.0,
@@ -60,14 +63,15 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  customView.text(
-                      "Do you have an account?", 11, FontWeight.normal,
-                      MyColor.primary1),
-                  const Text("Sign-in", style: TextStyle(
-                      color: MyColor.primary1,
-                      fontWeight: FontWeight.w700,
-                      decoration: TextDecoration.underline),)
-
+                  customView.text("Do you have an account?", 11,
+                      FontWeight.normal, MyColor.primary1),
+                  const Text(
+                    "Sign-in",
+                    style: TextStyle(
+                        color: MyColor.primary1,
+                        fontWeight: FontWeight.w700,
+                        decoration: TextDecoration.underline),
+                  )
                 ],
               ),
             ),
@@ -79,31 +83,25 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .shortestSide / 15,
+              height: MediaQuery.of(context).size.shortestSide / 15,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text(
-                  "Enter your Medical center name", 12.0, FontWeight.w600,
-                  MyColor.primary1),
+              child: customView.text("Enter your Medical center name", 12.0,
+                  FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
-            customView.myField(
-                context, nameCtr, "Your Medical center name",
+            customView.myField(context, nameCtr, "Your Medical center name",
                 TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: customView.text(
-                  "Enter a valid email / username", 12.0, FontWeight.w600,
-                  MyColor.primary1),
+              child: customView.text("Enter a valid email / username", 12.0,
+                  FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -116,8 +114,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Enter password", 12.0, FontWeight.w600,
-                  MyColor.primary1),
+                  "Enter password", 12.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -357,34 +354,37 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Obx(() {
-                  if(centerAuthCtr.loadingotp.value){
+                  if (centerAuthCtr.loadingotp.value) {
                     return customView.MyIndicator();
                   }
                   return customView.MyButton(
                     context,
                     "Sign up",
-                        () {
-                      var data = {
-                        'name': nameCtr.text,
-                        'email': emailCtr.text,
-                        'password': passwordCtr.text,
-                        'address': addressCtr.text,
-                      };
-                      if (_sendDataToVerificationScrn(context)) {
+                    () async {
+                      if (await _sendDataToVerificationScrn(context)) {
+                        var data = {
+                          'name': nameCtr.text,
+                          'email': emailCtr.text,
+                          'password': passwordCtr.text,
+                          'address': addressCtr.text,
+                          "lat": latitude.toString(),
+                          "long":longitude.toString(),
+                        };
                         centerAuthCtr.CenterSignupOtp(context, emailCtr.text)
                             .then((value) {
                           if (value != "") {
-                            Get.toNamed(
-                                RouteHelper.CSignUpOtp(),
+                            Get.toNamed(RouteHelper.CSignUpOtp(),
                                 parameters: data, arguments: value);
                           } else {}
                         });
                       }
                     },
                     MyColor.primary,
-                    const TextStyle(fontWeight: FontWeight.bold,
+                    const TextStyle(
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: "Poppins"),);
+                        fontFamily: "Poppins"),
+                  );
                 }),
               ),
             ),
@@ -421,74 +421,38 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
     );
   }
 
-
-  bool _sendDataToVerificationScrn(BuildContext context) {
-    if (nameCtr.text
-        .toString()
-        .isEmpty) {
+  Future<bool> _sendDataToVerificationScrn(BuildContext context) async {
+    if (nameCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Medical center name is required");
-    } else if (emailCtr.text
-        .toString()
-        .isEmpty) {
+    } else if (emailCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Email is required");
     } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
       customView.MySnackBar(context, "Enter valid email");
-    } else if (passwordCtr.text
-        .toString()
-        .isEmpty) {
+    } else if (passwordCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Password is required");
-    } else if (passwordCtr.text
-        .toString()
-        .length < 6) {
+    } else if (passwordCtr.text.toString().length < 6) {
       customView.MySnackBar(context, "Password should be 6 digit");
     } else if (addressCtr.text.isEmpty) {
       customView.MySnackBar(context, "Address is required");
-    }
-    /*else if (!RegExp('.*[a-z].*').hasMatch(usernameCtr.text.toString())) {
-      customView.MySnackBar(context, "Username should contain a lowercase letter a-z or number.");
-    } else if (emailCtr.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Email ID is required");
-    }else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
-      customView.MySnackBar(context, "Enter valid email");
-    }  else if (healthCardCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Health Card is required");
-    } else if (ageCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Age is required");
-    }else if (weightCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Weight is required");
-    }else if (heightCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Height is required");
-    } else if (taxCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Tax Code is required");
-    }else if (birthPlaceCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Birthplace is required");
-    }else if (_selectedGender == "") {
-      customView.MySnackBar(context, "Select gender");
-    }else if (phoneCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Phone no. is required");
-    }else if (passwordCtr.text
-        .toString()
-        .isEmpty) {
-      customView.MySnackBar(context, "Password is required");
-    }else if (passwordCtr.text.toString().length < 6) {
-      customView.MySnackBar(context, "Password should be 6 digit");
-    }*/ else {
-      return true;
+    } else {
+      return await latLong(addressCtr.text);
     }
     return false;
+  }
+
+  Future<bool> latLong(String address) async {
+    try {
+      List<Location> locationsList = await locationFromAddress(address);
+      print(locationsList[0].latitude);
+      print(locationsList[0].longitude);
+
+      latitude = locationsList[0].latitude.toString();
+      longitude = locationsList[0].longitude.toString();
+      return true;
+    } catch (e) {
+      log("Exception :-", error: e.toString());
+      customView.MySnackBar(context, "invalid address");
+      return false;
+    }
   }
 }

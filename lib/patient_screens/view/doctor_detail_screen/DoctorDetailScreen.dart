@@ -91,7 +91,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       background: FadeInImage.assetNetwork(
                           placeholder: 'assets/images/loading.gif',
                           alignment: Alignment.center,
-                          image: doctorListCtr.image.value,
+                          image: img,
                           fit: BoxFit.fitWidth,
                           width: double.infinity,
                           imageErrorBuilder: (context, error, stackTrace) {
@@ -144,6 +144,11 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         var latlong = {
                                           "lat": latitude,
                                           "long": longitude,
+                                          "name":doctorListCtr.doctorname.value,
+                                          "surname":doctorListCtr.drSurname.value,
+                                          "address":address,
+                                          "img":img,
+                                          "doctorId":doctorListCtr.doctorid.value,
                                         };
                                         print(latlong);
                                         Get.toNamed(

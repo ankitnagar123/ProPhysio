@@ -27,6 +27,8 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
   var password = "";
   var apiotp = "";
   var address = "";
+  var lat = "";
+  var long = "";
 
   @override
   void initState() {
@@ -39,6 +41,9 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
     email = Get.parameters['email']!;
     password = Get.parameters['password']!;
     address = Get.parameters['address']!;
+    lat = Get.parameters['lat']!;
+    long = Get.parameters['long']!;
+
   }
 
   @override
@@ -125,8 +130,8 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
                           email,
                           password,
                           address,
-                          "",
-                          "",
+                          lat,
+                          long,
                           () {
                         Navigator.push(
                             context,

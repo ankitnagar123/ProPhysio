@@ -32,7 +32,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
-      patientAddress = Get.arguments["userLocation"];
+      // patientAddress = Get.arguments["userLocation"];
       print(patientAddress);
       } else {
       patientId = Get.arguments["ID"];
@@ -40,7 +40,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
-      patientAddress = Get.arguments["address"];
+      // patientAddress = Get.arguments["address"];
       print(patientAddress);
     }
   }
@@ -148,7 +148,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
                 Align(
                   alignment: Alignment.topRight,
                   child: customView.text(
-                      patientAddress, 12, FontWeight.normal, MyColor.grey),
+                      bookingController.location.value, 12, FontWeight.normal, MyColor.grey),
                 ),
               ],
             )

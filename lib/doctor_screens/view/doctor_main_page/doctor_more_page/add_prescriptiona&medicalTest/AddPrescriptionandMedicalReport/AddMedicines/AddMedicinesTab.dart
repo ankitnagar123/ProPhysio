@@ -46,7 +46,6 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
         bottom: TabBar(
           controller: tabController,
           indicatorColor: MyColor.primary,
-          indicatorWeight: 2,
           tabs: [
             Tab(
               child: custom.text(
@@ -62,7 +61,7 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 15),
           child: Stack(children: [
             TabBarView(
                 physics: const NeverScrollableScrollPhysics(),controller: tabController, children: [

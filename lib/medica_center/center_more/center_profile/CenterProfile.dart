@@ -33,6 +33,8 @@ class _CenterProfileState extends State<CenterProfile> {
   final picker = ImagePicker();
   String baseimage = "";
   String imagename = "";
+  String lat = "";
+  String long = "";
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
@@ -71,6 +73,8 @@ class _CenterProfileState extends State<CenterProfile> {
         emailCtrl.text = centerAuthCtr.Email.value;
         addressCtrl.text = centerAuthCtr.location.value;
         files = centerAuthCtr.image.value.toString();
+        lat = centerAuthCtr.lat.value.toString();
+        long = centerAuthCtr.long.value.toString();
         log(files);
         log(centerAuthCtr.name.value);
         log(centerAuthCtr.name.value);
@@ -97,8 +101,8 @@ class _CenterProfileState extends State<CenterProfile> {
                               bioCtrl.text,
                               emailCtrl.text,
                               addressCtrl.text,
-                              "",
-                              "",
+                              lat,
+                              long,
                               imagename,
                               baseimage);
                         },

@@ -138,7 +138,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                             const SizedBox(
                               height: 2.0,
                             ),
-                            Text("${details!.name}${details.surname}",
+                            Text("${details?.name}${details?.surname}",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -162,7 +162,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                              details.birthPlace,
+                              details!.birthPlace,
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14.0,
@@ -195,7 +195,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details.contact,
+                                details!.contact,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -219,7 +219,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details.surname,
+                                details!.surname,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -251,7 +251,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details.location,
+                                details!.location,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -275,7 +275,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details.height,
+                                details!.height,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15.0,

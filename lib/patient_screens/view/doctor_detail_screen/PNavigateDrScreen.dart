@@ -27,15 +27,28 @@ class _NavigateMapViewScreenState extends State<NavigateMapViewScreen> {
   CustomInfoWindowController customInfoWindowController =
   CustomInfoWindowController();
   CustomView customView = CustomView();
-  late GoogleMapController controller;
+  late GoogleMapController mapController;
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
-String lat  = "";
-String long = "";
-
+String lat ="";
+String long="";
+String name="";
+String surname="";
+String img = "";
+String address = "";
+String doctorId = "";
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-  List latlang = [];
+  @override
+  void initState() {
+    super.initState();
+    lat = Get.parameters["lat"].toString();
+    long = Get.parameters["long"].toString();
+    name = Get.parameters["name"].toString();
+    surname = Get.parameters["surname"].toString();
+    img = Get.parameters["img"].toString();
+    address = Get.parameters["address"].toString();
+  }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     var markerIcon = await BitmapDescriptor.fromAssetImage(
@@ -43,122 +56,89 @@ String long = "";
       "assets/images/img.png",
     );
     setState(() {
-      for (int i = 0; i < doctorListCtr.doctorList.length; i++) {
-        latlang.add(
-          LatLng(double.parse(doctorListCtr.doctorList[i].latitude.toString()),
-              double.parse(doctorListCtr.doctorList[i].longitude.toString())),
-        );
-        log("my lat longs in new lat-long list=> $latlang");
-      }
-      for (int i = 0; i < latlang.length; i++) {
-        final String markerIdVal = 'marker_id_$i';
-        final MarkerId markerId = MarkerId(markerIdVal);
-        final marker = Marker(
-          icon: markerIcon,
-          markerId: markerId,
-          position: latlang[i],
-          onTap: () {
-            customInfoWindowController.addInfoWindow!(
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                DoctorDetailScreen(
-                                    id:  doctorListCtr.doctorList[i].doctorId.toString(), centerId: '',
-                                )));
-                  },
-                  child: Card(
-                    margin:
-                    const EdgeInsets.symmetric(horizontal: 7, vertical: 6.0),
-                    color: MyColor.white,
-                    elevation: 2.2,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          height: 80,
-                          // margin: const EdgeInsets.all(6),
-                          child: FadeInImage.assetNetwork(
-                              placeholder: "assets/images/YlWC.gif",
-                              alignment: Alignment.center,
-                              image: doctorListCtr.doctorList[i].doctorProfile
-                                  .toString(),
-                              fit: BoxFit.fitWidth,
-                              width: double.infinity,
-                              imageErrorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  'assets/images/noimage.png',
-                                  fit: BoxFit.cover,
-                                );
-                              }),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            customView.text(
-                                doctorListCtr.doctorList[i].name.toString(),
-                                13,
-                                FontWeight.w600,
-                                MyColor.black),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.location_on_outlined, size: 18),
-                                SizedBox(
-                                    width: 150,
-                                    child: Text(
-                                      doctorListCtr.doctorList[i].location
-                                          .toString(),
-                                      maxLines: 2,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                    )),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            SizedBox(
-                                child: customView.text(
-                                    doctorListCtr.doctorList[i].category
-                                        .toString(),
-                                    12,
-                                    FontWeight.w500,
-                                    MyColor.black)),
-                          ],
-                        )
-                      ],
-                    ),
+      const String markerIdVal = 'marker_id';
+      final MarkerId markerId = MarkerId(markerIdVal);
+      final marker = Marker(
+        icon: markerIcon,
+        markerId: markerId,
+        position: LatLng( double.parse(lat),
+          double.parse(long),),
+        onTap: () {
+          customInfoWindowController.addInfoWindow!(
+              GestureDetector(
+                onTap: () {
+
+                },
+                child: Card(
+                  margin:
+                  const EdgeInsets.symmetric(horizontal: 7, vertical: 6.0),
+                  color: MyColor.white,
+                  elevation: 2.2,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 80,
+                        height: 80,
+                        // margin: const EdgeInsets.all(6),
+                        child: FadeInImage.assetNetwork(
+                            placeholder: "assets/images/YlWC.gif",
+                            alignment: Alignment.center,
+                            image: img,
+                            fit: BoxFit.fitWidth,
+                            width: double.infinity,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/noimage.png',
+                                fit: BoxFit.cover,
+                              );
+                            }),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          customView.text(
+                             "$name $surname",
+                              13,
+                              FontWeight.w600,
+                              MyColor.black),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on_outlined, size: 18),
+                              SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    address,
+                                    maxLines: 2,
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                  )),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                latlang[i]);
-          },
-        );
-        setState(() {
-          markers[markerId] = marker;
-        });
-      }
+              ),
+             LatLng(double.parse(lat), double.parse(long)));
+        },
+      );
+      setState(() {
+        markers[markerId] = marker;
+      });
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    lat = Get.parameters["lat"].toString();
-    long = Get.parameters["long"].toString();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // doctorListCtr.doctorlistfetch(context, widget.catId, widget.subCatID,"", "", "", "", "", "");
-    });
 
-
-  }
 
   @override
   void dispose() {
@@ -200,14 +180,12 @@ String long = "";
         onMapCreated: (GoogleMapController controllers) async {
           _onMapCreated(controllers);
           customInfoWindowController.googleMapController = controllers;
-          controller = controllers;
-
+          mapController = controllers;
           for (var marker in markers.values) {
-            controller.showMarkerInfoWindow(marker.markerId);
+            mapController.showMarkerInfoWindow(marker.markerId);
           }
-
         },
-        markers: markers.values.toSet(),
+        markers:markers.values.toSet(),
       ),
       CustomInfoWindow(
         controller: customInfoWindowController,
@@ -215,54 +193,54 @@ String long = "";
         width: 300,
         offset: 50,
       ),
-      Positioned(
-        top: 25,
-        right: 15,
-        left: 15,
-        child: SizedBox(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
-          child: TextFormField(
-            onChanged: (value) {
-              setState(() {
-                // _keyword = value;
-              });
-              print(value);
-            },
-            cursorWidth: 0.0,
-            cursorHeight: 0.0,
-            onTap: () {},
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.name,
-            cursorColor: Colors.black,
-            // controller: searchCtr,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search),
-              prefixIconColor: MyColor.primary1,
-              suffixIcon: InkWell(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.getFilterScreen());
-                  },
-                  child: const Icon(Icons.filter_list_alt)),
-              suffixIconColor: MyColor.primary1,
-              contentPadding: const EdgeInsets.only(top: 3, left: 20),
-              hintText: "search doctor",
-              hintStyle: const TextStyle(
-                  fontSize: 12, color: MyColor.primary1),
-              fillColor: MyColor.lightcolor,
-              filled: true,
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+      // Positioned(
+      //   top: 25,
+      //   right: 15,
+      //   left: 15,
+      //   child: SizedBox(
+      //     width: MediaQuery
+      //         .of(context)
+      //         .size
+      //         .width,
+      //     child: TextFormField(
+      //       onChanged: (value) {
+      //         setState(() {
+      //           // _keyword = value;
+      //         });
+      //         print(value);
+      //       },
+      //       cursorWidth: 0.0,
+      //       cursorHeight: 0.0,
+      //       onTap: () {},
+      //       textInputAction: TextInputAction.next,
+      //       keyboardType: TextInputType.name,
+      //       cursorColor: Colors.black,
+      //       // controller: searchCtr,
+      //       decoration: InputDecoration(
+      //         prefixIcon: const Icon(Icons.search),
+      //         prefixIconColor: MyColor.primary1,
+      //         suffixIcon: InkWell(
+      //             onTap: () {
+      //               Get.toNamed(RouteHelper.getFilterScreen());
+      //             },
+      //             child: const Icon(Icons.filter_list_alt)),
+      //         suffixIconColor: MyColor.primary1,
+      //         contentPadding: const EdgeInsets.only(top: 3, left: 20),
+      //         hintText: "search doctor",
+      //         hintStyle: const TextStyle(
+      //             fontSize: 12, color: MyColor.primary1),
+      //         fillColor: MyColor.lightcolor,
+      //         filled: true,
+      //         border: const OutlineInputBorder(
+      //           borderSide: BorderSide.none,
+      //           borderRadius: BorderRadius.all(
+      //             Radius.circular(10),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     ]);
   }
 }

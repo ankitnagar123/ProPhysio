@@ -194,6 +194,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
             heightFactor: 5.0, child: Text("No Appointment's at the moment!"));
       }
       return SingleChildScrollView(
+
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: list.length,

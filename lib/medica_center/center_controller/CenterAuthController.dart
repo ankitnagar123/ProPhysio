@@ -28,6 +28,9 @@ class CenterAuthCtr extends GetxController {
 
   var name = "".obs;
   var location = "".obs;
+  var lat = "".obs;
+  var long = "".obs;
+
   var Email = "".obs;
   var bio = "".obs;
   var password = "".obs;
@@ -140,6 +143,8 @@ class CenterAuthCtr extends GetxController {
         Email.value = jsonResponse["email"];
         password.value = jsonResponse['password'];
         location.value = jsonResponse["address"];
+        lat.value = jsonResponse["latitude"];
+        long.value = jsonResponse["longitude"];
         image.value = jsonResponse["image"];
         resultVar.value = 1;
       } else {
