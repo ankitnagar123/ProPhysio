@@ -367,62 +367,123 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.03,
               ),
-              customView.text(
-                  "Your Gender", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text(
+                            "Your gender", 10.0, FontWeight.w600, MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(
+                            context, genderCtr, "gender", TextInputType.text),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text("Your age", 10.0, FontWeight.w600,
+                            MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(context, ageCtr, "age",
+                            TextInputType.text),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              customView.myField(
-                  context, genderCtr, "Enter Your gender", TextInputType.text),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              customView.text("Your Age", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(
-                  context, ageCtr, "Enter your age", TextInputType.text),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              customView.text(
-                  "Your Height", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(
-                  context, heightCtr, "Enter your height", TextInputType.text),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              customView.text(
-                  "Your Weight", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(
-                  context, weightCtr, "Enter your weight", TextInputType.text),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              customView.text(
-                  "Your Tax code", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(
-                  context, taxCtr, "Enter your tax code", TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
-              customView.text(
-                  "Your Birth-place", 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text(
+                            "Your height", 10.0, FontWeight.w600, MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(
+                            context, heightCtr, "height", TextInputType.text),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text("Your weight", 10.0, FontWeight.w600,
+                            MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(context, weightCtr, "weight",
+                            TextInputType.text),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              customView.myField(context, birthPlaceCtr,
-                  "Enter your birth-place", TextInputType.text),
+              SizedBox(
+                height: height * 0.03,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text(
+                            "Your Tax code", 10.0, FontWeight.w600, MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(
+                            context, taxCtr, "Tax code", TextInputType.text),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customView.text("Your birth-place", 10.0, FontWeight.w600,
+                            MyColor.black),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        customView.myField(context, birthPlaceCtr, "weight",
+                            TextInputType.text),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: height * 0.03,
               ),

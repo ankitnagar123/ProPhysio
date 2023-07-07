@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../controller/AddAvailablityCtr.dart';
@@ -259,27 +260,71 @@ class _DoctorCenterAddAvailabilityState
                 );
               }),
             ),
-            Obx(() {
-              if (addAvailabilityCtr.loadingd.value) {
-                return custom.MyIndicator();
-              } else {
-                return custom.acceptRejectButton(context, "Select time", () {
-                  if (timeIdArray.isNotEmpty) {
-                    addAvailabilityCtr.addTime(context, timeIdArray.join(","),
-                        addAvailabilityCtr.dateId.value, () {
-                          Get.back();
-                        });
-                  } else {
-                    log("empty");
-                  }
-                }, MyColor.primary, const TextStyle(color: MyColor.white));
-              }
-            }),
+            // Obx(() {
+            //   if (addAvailabilityCtr.loadingd.value) {
+            //     return custom.MyIndicator();
+            //   } else {
+            //     return custom.acceptRejectButton(context, "Select time", () {
+            //       if (timeIdArray.isNotEmpty) {
+            //         addAvailabilityCtr.addTime(context, timeIdArray.join(","),
+            //             addAvailabilityCtr.dateId.value, () {
+            //               Get.back();
+            //             });
+            //       } else {
+            //         log("empty");
+            //       }
+            //     }, MyColor.primary, const TextStyle(color: MyColor.white));
+            //   }
+            // }),
             const SizedBox(
               height: 15,
             ),
           ]),
-        ));
+        ),
+      bottomNavigationBar: Obx(() => addAvailabilityCtr.doctorTimeList.isEmpty
+          ? const Text("")
+          :  Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 20.0, vertical: 10),
+        child: AnimatedButton(
+          // width: MediaQuery.of(context).size.width * 0.8,
+          text: 'Submit',
+          color: MyColor.primary,
+          pressEvent: () {
+            if (timeIdArray.isNotEmpty) {
+              addAvailabilityCtr.addTime(
+                  context,
+                  timeIdArray.join(","),
+                  addAvailabilityCtr.dateId.value, () {
+                AwesomeDialog(
+                  context: context,
+                  animType: AnimType.leftSlide,
+                  headerAnimationLoop: false,
+                  dialogType: DialogType.success,
+                  showCloseIcon: true,
+                  title: 'Success',
+                  desc: 'Center availability add successfully',
+                  btnOkOnPress: () {
+                    debugPrint('OnClick');
+                  },
+                  btnOkIcon: Icons.check_circle,
+                  onDismissCallback: (type) {
+                    Get.back();
+                    debugPrint(
+                        'Dialog Dismiss from callback $type');
+                  },
+                ).show();
+              });
+            } else {
+              custom.MySnackBar(context, "Select slot's");
+              log("empty");
+            }
+          },
+        ),
+
+      ),
+      ),
+    );
   }
 
   //*******date strt end************//

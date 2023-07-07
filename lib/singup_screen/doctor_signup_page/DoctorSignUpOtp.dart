@@ -135,9 +135,13 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
             child: Column(
               children: [
                 SizedBox(height: height * 0.09),
-                const Align(
+                 Align(
                   alignment: Alignment.topLeft,
-                  child: Icon(Icons.arrow_back_ios),
+                  child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
                   height: height * 0.02,

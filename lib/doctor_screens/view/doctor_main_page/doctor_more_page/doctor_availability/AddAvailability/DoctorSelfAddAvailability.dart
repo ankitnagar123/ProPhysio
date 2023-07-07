@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -50,21 +51,26 @@ class _MyAvailabilityState extends State<MyAvailability> {
       return Scaffold(
         body: Center(
           child: Column(children: [
-
             Align(
               alignment: Alignment.topRight,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>const DoctorViewCalender(centerId: "",)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DoctorViewCalender(
+                                centerId: "",
+                              )));
                 },
                 child: Container(
-                  height: 32,width: 120,
+                  height: 32,
+                  width: 120,
                   decoration: BoxDecoration(
                       color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-
-                  child: Center(child: custom.text("View Availability", 13, FontWeight.w500, MyColor.white)),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                      child: custom.text("View Availability", 13,
+                          FontWeight.w500, MyColor.white)),
                 ),
               ),
             ),
@@ -165,7 +171,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                           endDateController.text,
                           () {});
                     }
-                    },
+                  },
                     MyColor.primary,
                     const TextStyle(
                         color: MyColor.white,
@@ -204,8 +210,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                                 child: CheckboxListTile(
                                   activeColor: MyColor.primary,
                                   dense: true,
-                                  title: Text(
-                                      "${list.from} To ${list.to}"),
+                                  title: Text("${list.from} To ${list.to}"),
                                   value: selectedIndexes.contains(index),
                                   onChanged: (vale) {
                                     setState(() {
@@ -232,7 +237,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                     ),
                   ),
             // const Expanded(child: SizedBox()),
-            addAvailabilityCtr.doctorTimeList.isEmpty
+     /*       addAvailabilityCtr.doctorTimeList.isEmpty
                 ? const Text("")
                 : addAvailabilityCtr.loadingd.value
                     ? custom.MyIndicator()
@@ -249,12 +254,53 @@ class _MyAvailabilityState extends State<MyAvailability> {
                           log("empty");
                         }
                       },
-                        MyColor.primary, const TextStyle(color: MyColor.white)),
+                        MyColor.primary, const TextStyle(color: MyColor.white)),*/
             const SizedBox(
               height: 15,
             ),
           ]),
         ),
+        bottomNavigationBar: addAvailabilityCtr.doctorTimeList.isEmpty
+            ? const Text("")
+            :  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10),
+                    child: AnimatedButton(
+                      // width: MediaQuery.of(context).size.width * 0.8,
+                      text: 'Submit',
+                      color: MyColor.primary,
+                      pressEvent: () {
+                        if (timeIdArray.isNotEmpty) {
+                          addAvailabilityCtr.addTime(
+                              context,
+                              timeIdArray.join(","),
+                              addAvailabilityCtr.dateId.value, () {
+                            AwesomeDialog(
+                              context: context,
+                              animType: AnimType.leftSlide,
+                              headerAnimationLoop: false,
+                              dialogType: DialogType.success,
+                              showCloseIcon: true,
+                              title: 'Success',
+                              desc: 'Self Availability Add Successfully',
+                              btnOkOnPress: () {
+                                debugPrint('OnClick');
+                              },
+                              btnOkIcon: Icons.check_circle,
+                              onDismissCallback: (type) {
+                                Get.back();
+                                debugPrint(
+                                    'Dialog Dismiss from callback $type');
+                              },
+                            ).show();
+                          });
+                        } else {
+                          custom.MySnackBar(context, "Select slot's");
+                          log("empty");
+                        }
+                      },
+                    ),
+                  ),
       );
     });
   }
@@ -264,7 +310,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
     return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate:DateTime.now(),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2999),
       builder: (context, child) {
         return Theme(

@@ -9,6 +9,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../model/DSignUpCategoryModel.dart';
 
 class DoctorSignUpCtr extends GetxController {
@@ -16,9 +17,6 @@ class DoctorSignUpCtr extends GetxController {
   ApiService apiService = ApiService();
 
   RxString location = "".obs;
-
-  // RxString location = "".obs;
-  // RxString location = "".obs;
 
   var loading = false.obs;
   var loadingotp = false.obs;
@@ -79,7 +77,7 @@ class DoctorSignUpCtr extends GetxController {
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {
-        custom.massenger(context, result.toString());
+        custom.massenger(context, response.toString());
       }
     } catch (e) {
       loadingotp.value = false;
@@ -144,19 +142,20 @@ class DoctorSignUpCtr extends GetxController {
       "qualification_date":qualificationDate,
     };
     print("Signup Parameter$signupPerameter");
+    print(gender);
 
-    final response = await apiService.postData(MyAPI.DSignUp, signupPerameter);
+     final response = await apiService.postData(MyAPI.DSignUp, signupPerameter);
     try {
-      log("response of Doctor Signup :-${response.body}");
+       log("response of Doctor Signup :-${response.body}");
       loading.value = false;
       var jsonResponse = jsonDecode(response.body);
-      String result = jsonResponse['result'];
+       String result = jsonResponse['result'];
       if (result == "Success") {
         callback();
         loading.value = false;
-        // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-        // Get.toNamed(RouteHelper.getVerification());
-        custom.massenger(context, result);
+         sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
+         Get.toNamed(RouteHelper.getVerification());
+         custom.massenger(context, result);
       } else {
         custom.massenger(context, result);
       }

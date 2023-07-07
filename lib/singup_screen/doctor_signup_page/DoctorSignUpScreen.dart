@@ -171,6 +171,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           .doctorSignupOtp(context, emailCtr.text)
                           .then((value) {
                         if (value != "") {
+                          print("gender dekho${_selectedGender}");
                           var data = {
                             "name": nameCtr.text,
                             "surmane": surnameCtr.text,

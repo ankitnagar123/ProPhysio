@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,6 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
-import '../../../../../helper/AppConst.dart';
 
 class DoctorPersonalData extends StatefulWidget {
   const DoctorPersonalData({Key? key}) : super(key: key);
@@ -132,609 +132,615 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       }
       return Obx(() {
         return Scaffold(
-            appBar: AppBar(
-              actions: [
-                InkWell(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.DProfile());
-                    },
-                    child: const Icon(
-                      color: MyColor.black,
-                      Icons.edit,
-                      size: 19.0,
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-              leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
+          appBar: AppBar(
+            actions: [
+              InkWell(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.DProfile());
+                  },
+                  child: const Icon(
+                    color: MyColor.black,
+                    Icons.edit,
+                    size: 19.0,
+                  )),
+              const SizedBox(
+                width: 10,
               ),
-              title: customView.text(
-                  "Personal data", 15.0, FontWeight.w500, Colors.black),
-              centerTitle: true,
-              elevation: 0.0,
-              backgroundColor: Colors.white24,
+            ],
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: doctorProfileCtr.loading.value
-                  ? Center(heightFactor: 13.0, child: customView.MyIndicator())
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.shortestSide / 10,
+            title: customView.text(
+                "Personal data", 15.0, FontWeight.w500, Colors.black),
+            centerTitle: true,
+            elevation: 0.0,
+            backgroundColor: Colors.white24,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: doctorProfileCtr.loading.value
+                ? Center(heightFactor: 13.0, child: customView.MyIndicator())
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.shortestSide / 10,
+                      ),
+                      Center(
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(120.0),
+                              child: file == null
+                                  ? InkWell(
+                                      onTap: () {
+                                        imagePopUp(context, files);
+                                      },
+                                      child: FadeInImage.assetNetwork(
+                                        imageErrorBuilder: (c, o, s) =>
+                                            Image.asset(
+                                                "assets/images/dummyprofile.jpg",
+                                                width: 120,
+                                                height: 120,
+                                                fit: BoxFit.cover),
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                        placeholder:
+                                            "assets/images/loading.gif",
+                                        image: files,
+                                        placeholderFit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Image.file(file!,
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.fill),
+                            ),
+                            Positioned(
+                              bottom: -10.0,
+                              right: -5.0,
+                              child: IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            backgroundColor: Colors.white,
+                                            content: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    _choose(
+                                                        ImageSource.gallery);
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.image,
+                                                          size: 20),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Image from gallery",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    _choose(ImageSource.camera);
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.camera_alt),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Image from camera",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  icon: const CircleAvatar(
+                                    radius: 13,
+                                    backgroundColor: MyColor.iconColor,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 13.0,
+                                      color: MyColor.white,
+                                    ),
+                                  )),
+                            ),
+                          ],
                         ),
-                        Center(
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(120.0),
-                                child: file == null
-                                    ? InkWell(
-                                        onTap: () {
-                                          imagePopUp(context, files);
-                                        },
-                                        child: FadeInImage.assetNetwork(
-                                          imageErrorBuilder: (c, o, s) =>
-                                              Image.asset(
-                                                  "assets/images/dummyprofile.jpg",
-                                                  width: 120,
-                                                  height: 120,
-                                                  fit: BoxFit.cover),
-                                          width: 110,
-                                          height: 110,
-                                          fit: BoxFit.cover,
-                                          placeholder:
-                                              "assets/images/loading.gif",
-                                          image: files,
-                                          placeholderFit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : Image.file(file!,
-                                        width: 120,
-                                        height: 120,
-                                        fit: BoxFit.fill),
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      customView.text("Your username", 10.0, FontWeight.w600,
+                          MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      customView.myField(context, userNameCtrl,
+                          "Enter User Name", TextInputType.text),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      customView.text(
+                          "Your bio", 10.0, FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      customView.myField(
+                          context, bioCtrl, "Your bio", TextInputType.text),
+                      const Divider(
+                        thickness: 1.5,
+                        height: 50.0,
+                      ),
+                      customView.text("Personal data", 14.0, FontWeight.w500,
+                          MyColor.black),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your name", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(
+                                    context, name, "Name", TextInputType.text),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your surname", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(context, surename, "Surname",
+                                    TextInputType.text),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      customView.text(
+                          "Your email", 10.0, FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      customView.myField(context, emailCtrl, "Enter Email",
+                          TextInputType.text),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      customView.text(
+                          "Your address", 10.0, FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                        child: customView.searchField(
+                            context,
+                            addressCtrl,
+                            location,
+                            TextInputType.text,
+                            const Text(""),
+                            const Icon(Icons.search_rounded), () async {
+                          var place = await PlacesAutocomplete.show(
+                              context: context,
+                              apiKey: kGoogleApiKey,
+                              mode: Mode.overlay,
+                              types: [],
+                              strictbounds: false,
+                              components: [],
+                              onError: (err) {
+                                print(err);
+                              });
+                          if (place != null) {
+                            setState(() {
+                              location = place.description.toString();
+                            });
+
+                            final plist = GoogleMapsPlaces(
+                              apiKey: kGoogleApiKey,
+                              // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                            );
+                            String placeId = place.placeId ?? "0";
+                            final detail =
+                                await plist.getDetailsByPlaceId(placeId);
+                            final geometry = detail.result.geometry!;
+                            final lat = geometry.location.lat;
+                            final lang = geometry.location.lng;
+                            var newlatlang = latLng.LatLng(lat, lang);
+                            log(newlatlang.latitude.toString());
+                            log(newlatlang.longitude.toString());
+                            log(">>>>>>>>>>>>>>>>>>", error: location);
+                            try {
+                              latitude = newlatlang.latitude.toString();
+                              longitude = newlatlang.longitude.toString();
+                              addressCtrl.text = location.toString();
+                            } catch (e) {
+                              print("Exception :-- ${e.toString()}");
+                            }
+                            print("My latitude AppCont : -- ${latitude}");
+                            print("My LONGITUDE AppCont : -- ${longitude}");
+                            print(
+                                "My address AppCont : -- ${addressCtrl.text}");
+                          }
+                        }, () {}),
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      /*-new-*/
+                      customView.text(
+                          "Your gender", 10.0, FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: -4),
+                              leading: Radio<String>(
+                                value: 'male',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                    print(_selectedGender);
+                                  });
+                                },
                               ),
-                              Positioned(
-                                bottom: -10.0,
-                                right: -5.0,
-                                child: IconButton(
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              backgroundColor: Colors.white,
-                                              content: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      _choose(
-                                                          ImageSource.gallery);
-                                                    },
-                                                    child: const Row(
-                                                      children: [
-                                                        Icon(Icons.image,
-                                                            size: 20),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          "Image from gallery",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      _choose(
-                                                          ImageSource.camera);
-                                                    },
-                                                    child: const Row(
-                                                      children: [
-                                                        Icon(Icons.camera_alt),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          "Image from camera",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          });
-                                    },
-                                    icon: const CircleAvatar(
-                                      radius: 13,
-                                      backgroundColor: MyColor.iconColor,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        size: 13.0,
-                                        color: MyColor.white,
+                              title: const Text('Male'),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: -4),
+                              leading: Radio<String>(
+                                value: 'female',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                    print(_selectedGender);
+                                  });
+                                },
+                              ),
+                              title: const Text('Female'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your birth of date", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.005,
+                                ),
+                                Container(
+                                    height: 48.0,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, bottom: 5),
+                                    margin: const EdgeInsets.fromLTRB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(7)),
+                                    child: TextFormField(
+                                      onTap: () async {
+                                        startDate = await pickDate();
+                                        birthDateController.text =
+                                            _displayText(startDate);
+                                      },
+                                      readOnly: true,
+                                      controller: birthDateController,
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.only(top: 8),
+                                        hintText: "Select Date",
+                                        hintStyle: TextStyle(fontSize: 12),
+                                        suffixIcon: Icon(Icons.calendar_month,
+                                            color: MyColor.primary),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
                                       ),
                                     )),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        customView.text("Your username", 10.0, FontWeight.w600,
-                            MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        customView.myField(context, userNameCtrl,
-                            "Enter User Name", TextInputType.text),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        customView.text(
-                            "Your bio", 10.0, FontWeight.w600, MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        customView.myField(
-                            context, bioCtrl, "Your bio", TextInputType.text),
-                        const Divider(
-                          thickness: 1.5,
-                          height: 50.0,
-                        ),
-                        customView.text("Personal data", 14.0, FontWeight.w500,
-                            MyColor.black),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your name", 10.0,
-                                      FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  customView.myField(context, name, "Name",
-                                      TextInputType.text),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your surname", 10.0,
-                                      FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  customView.myField(context, surename,
-                                      "Surname", TextInputType.text),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        customView.text(
-                            "Your email", 10.0, FontWeight.w600, MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        customView.myField(context, emailCtrl, "Enter Email",
-                            TextInputType.text),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        customView.text("Your address", 10.0, FontWeight.w600,
-                            MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                          child: customView.searchField(
-                              context,
-                              addressCtrl,
-                              location,
-                              TextInputType.text,
-                              const Text(""),
-                              const Icon(Icons.search_rounded), () async {
-                            var place = await PlacesAutocomplete.show(
-                                context: context,
-                                apiKey: kGoogleApiKey,
-                                mode: Mode.overlay,
-                                types: [],
-                                strictbounds: false,
-                                components: [],
-                                onError: (err) {
-                                  print(err);
-                                });
-                            if (place != null) {
-                              setState(() {
-                                location = place.description.toString();
-                              });
-
-                              final plist = GoogleMapsPlaces(
-                                apiKey: kGoogleApiKey,
-                                // apiHeaders: await const GoogleApiHeaders().getHeaders(),
-                              );
-                              String placeId = place.placeId ?? "0";
-                              final detail =
-                                  await plist.getDetailsByPlaceId(placeId);
-                              final geometry = detail.result.geometry!;
-                              final lat = geometry.location.lat;
-                              final lang = geometry.location.lng;
-                              var newlatlang = latLng.LatLng(lat, lang);
-                              log(newlatlang.latitude.toString());
-                              log(newlatlang.longitude.toString());
-                              log(">>>>>>>>>>>>>>>>>>", error: location);
-                              try {
-                                latitude = newlatlang.latitude.toString();
-                                longitude = newlatlang.longitude.toString();
-                                addressCtrl.text = location.toString();
-                              } catch (e) {
-                                print("Exception :-- ${e.toString()}");
-                              }
-                              print("My latitude AppCont : -- ${latitude}");
-                              print(
-                                  "My LONGITUDE AppCont : -- ${longitude}");
-                              print("My address AppCont : -- ${addressCtrl.text}");
-                            }
-                          }, () {}),
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        /*-new-*/
-                        customView.text("Your gender", 10.0, FontWeight.w600,
-                            MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                visualDensity: const VisualDensity(
-                                    horizontal: -4, vertical: -4),
-                                leading: Radio<String>(
-                                  value: 'male',
-                                  groupValue: _selectedGender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedGender = value!;
-                                      print(_selectedGender);
-                                    });
-                                  },
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your birthplace", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
                                 ),
-                                title: const Text('Male'),
-                              ),
+                                customView.myField(
+                                    context,
+                                    birthplaceController,
+                                    "birthplace",
+                                    TextInputType.text),
+                              ],
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                visualDensity: const VisualDensity(
-                                    horizontal: -4, vertical: -4),
-                                leading: Radio<String>(
-                                  value: 'female',
-                                  groupValue: _selectedGender,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedGender = value!;
-                                      print(_selectedGender);
-                                    });
-                                  },
-                                ),
-                                title: const Text('Female'),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your birth of date", 10.0,
-                                      FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.005,
-                                  ),
-                                  Container(
-                                      height: 48.0,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.3,
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, bottom: 5),
-                                      margin: const EdgeInsets.fromLTRB(
-                                          0.0, 5.0, 0.0, 0.0),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border:
-                                              Border.all(color: Colors.grey),
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: TextFormField(
-                                        onTap: () async {
-                                          startDate = await pickDate();
-                                          birthDateController.text =
-                                              _displayText(startDate);
-                                        },
-                                        readOnly: true,
-                                        controller: birthDateController,
-                                        decoration: const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(top: 8),
-                                          hintText: "Select Date",
-                                          hintStyle: TextStyle(fontSize: 12),
-                                          suffixIcon: Icon(Icons.calendar_month,
-                                              color: MyColor.primary),
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your birthplace", 10.0,
-                                      FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  customView.myField(
-                                      context,
-                                      birthplaceController,
-                                      "birthplace",
-                                      TextInputType.text),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
 /*-new-*/
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your graduation date", 10.0,
-                                      FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  Container(
-                                      height: 48.0,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.3,
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, bottom: 5),
-                                      margin: const EdgeInsets.fromLTRB(
-                                          0.0, 5.0, 0.0, 0.0),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border:
-                                              Border.all(color: Colors.grey),
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: TextFormField(
-                                        onTap: () async {
-                                          startDate = await pickDate();
-                                          dateOfGraduation.text =
-                                              _displayText(startDate);
-                                          print(dateOfGraduation.text);
-                                        },
-                                        readOnly: true,
-                                        controller: dateOfGraduation,
-                                        decoration: const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(top: 7),
-                                          hintText: "Select Date",
-                                          hintStyle: TextStyle(fontSize: 14),
-                                          suffixIcon: Icon(Icons.calendar_month,
-                                              color: MyColor.primary),
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  customView.text("Your qualification date",
-                                      10.0, FontWeight.w600, MyColor.black),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  Container(
-                                      height: 48.0,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.3,
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0, bottom: 5),
-                                      margin: const EdgeInsets.fromLTRB(
-                                          0.0, 5.0, 0.0, 0.0),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border:
-                                              Border.all(color: Colors.grey),
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: TextFormField(
-                                        onTap: () async {
-                                          startDate = await pickDate();
-                                          dateOfQualification.text =
-                                              _displayText(startDate);
-                                          print(dateOfQualification.text);
-                                        },
-                                        readOnly: true,
-                                        controller: dateOfQualification,
-                                        decoration: const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(top: 7),
-                                          hintText: "Select Date",
-                                          hintStyle: TextStyle(fontSize: 14),
-                                          suffixIcon: Icon(Icons.calendar_month,
-                                              color: MyColor.primary),
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: height * 0.03,
-                        ),
-                        customView.text("Your Contact", 10.0, FontWeight.w600,
-                            MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 1,
-                          child: IntlPhoneField(
-                            controller: phoneNumberCtrl,
-                            decoration: const InputDecoration(
-                              counterText: '',
-                              filled: true,
-                              fillColor: Colors.white,
-                              constraints: BoxConstraints.expand(),
-                              labelText: 'Phone Number',
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your graduation date", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
                                 ),
+                                Container(
+                                    height: 48.0,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, bottom: 5),
+                                    margin: const EdgeInsets.fromLTRB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(7)),
+                                    child: TextFormField(
+                                      onTap: () async {
+                                        startDate = await pickDate();
+                                        dateOfGraduation.text =
+                                            _displayText(startDate);
+                                        print(dateOfGraduation.text);
+                                      },
+                                      readOnly: true,
+                                      controller: dateOfGraduation,
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.only(top: 7),
+                                        hintText: "Select Date",
+                                        hintStyle: TextStyle(fontSize: 14),
+                                        suffixIcon: Icon(Icons.calendar_month,
+                                            color: MyColor.primary),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text("Your qualification date", 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Container(
+                                    height: 48.0,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, bottom: 5),
+                                    margin: const EdgeInsets.fromLTRB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(7)),
+                                    child: TextFormField(
+                                      onTap: () async {
+                                        startDate = await pickDate();
+                                        dateOfQualification.text =
+                                            _displayText(startDate);
+                                        print(dateOfQualification.text);
+                                      },
+                                      readOnly: true,
+                                      controller: dateOfQualification,
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.only(top: 7),
+                                        hintText: "Select Date",
+                                        hintStyle: TextStyle(fontSize: 14),
+                                        suffixIcon: Icon(Icons.calendar_month,
+                                            color: MyColor.primary),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      customView.text(
+                          "Your Contact", 10.0, FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: IntlPhoneField(
+                          controller: phoneNumberCtrl,
+                          decoration: const InputDecoration(
+                            counterText: '',
+                            filled: true,
+                            fillColor: Colors.white,
+                            constraints: BoxConstraints.expand(),
+                            labelText: 'Phone Number',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
                               ),
                             ),
-                            initialCountryCode: flag,
-                            onChanged: (phone) {
-                              flag = phone.countryISOCode;
-                              log(flag);
-                              code = phone.countryCode;
-                              print("code${code}");
-                              print(phone.completeNumber);
-                            },
-                            onCountryChanged: (cod) {
-                              flag = cod.code;
-                              log(flag);
-                              code = cod.dialCode;
-                            },
                           ),
+                          initialCountryCode: flag,
+                          onChanged: (phone) {
+                            flag = phone.countryISOCode;
+                            log(flag);
+                            code = phone.countryCode;
+                            print("code${code}");
+                            print(phone.completeNumber);
+                          },
+                          onCountryChanged: (cod) {
+                            flag = cod.code;
+                            log(flag);
+                            code = cod.dialCode;
+                          },
                         ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                    ],
+                  ),
+          ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: AnimatedButton(
+              // width: MediaQuery.of(context).size.width * 0.8,
+              text: 'Save Profile',
+              color: MyColor.primary,
+              pressEvent: () {
+                doctorProfileCtr.doctorProfileUpdate(
+                    context,
+                    name.text,
+                    surename.text,
+                    userNameCtrl.text,
+                    bioCtrl.text,
+                    addressCtrl.text,
+                    latitude,
+                    longitude,
+                    code,
+                    emailCtrl.text,
+                    phoneNumberCtrl.text,
+                    imagename,
+                    baseimage,
+                    _selectedGender,
+                    birthDateController.text,
+                    birthplaceController.text,
+                    universityAttendedCtr.text,
+                    dateOfEnrollmentCtr.text,
+                    registerOfBelongingCtr.text,
+                    dateOfQualification.text,
+                    dateOfGraduation.text,
+                    flag,() {
+                  AwesomeDialog(
+                    context: context,
+                    animType: AnimType.leftSlide,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.success,
+                    showCloseIcon: true,
+                    title: 'Success',
+                    desc: 'Profile Update Successfully',
+                    btnOkOnPress: () {
+                      debugPrint('OnClick');
+                    },
+                    btnOkIcon: Icons.check_circle,
+                    onDismissCallback: (type) {
+                      debugPrint('Dialog Dismiss from callback $type');
+                    },
+                  ).show();
+                    },);
+              },
             ),
-            bottomNavigationBar: Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: customView.MyButton(
-                context,
-                "Save profile",
-                () {
-                  doctorProfileCtr.doctorProfileUpdate(
-                      context,
-                      name.text,
-                      surename.text,
-                      userNameCtrl.text,
-                      bioCtrl.text,
-                      addressCtrl.text,
-                      latitude,
-                      longitude,
-                      code,
-                      emailCtrl.text,
-                      phoneNumberCtrl.text,
-                      imagename,
-                      baseimage,
-                      _selectedGender,
-                      birthDateController.text,
-                      birthplaceController.text,
-                      universityAttendedCtr.text,
-                      dateOfEnrollmentCtr.text,
-                      registerOfBelongingCtr.text,
-                      dateOfQualification.text,
-                      dateOfGraduation.text,
-                      flag);
-                },
-                MyColor.primary,
-                const TextStyle(fontFamily: "Poppins", color: Colors.white),
-              ),
-            ));
+          ),
+        );
       });
     });
   }
@@ -766,7 +772,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       },
     );
   }
-
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(
         context: context,

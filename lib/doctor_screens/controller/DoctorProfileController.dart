@@ -138,6 +138,7 @@ class DoctorProfileCtr extends GetxController {
     String dateOfQualification,
     String dateOfGraduation,
       String flag,
+      VoidCallback callback,
   ) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
@@ -178,8 +179,9 @@ class DoctorProfileCtr extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       String result = jsonResponse['result'];
       if (result == 'Success') {
+        callback();
         doctorProfile(context);
-        custom.massenger(context, "Profile Update Successfully");
+        // custom.massenger(context, "Profile Update Successfully");
       } else {
         loadingU.value = false;
         custom.massenger(context, "Invalid Inputs");

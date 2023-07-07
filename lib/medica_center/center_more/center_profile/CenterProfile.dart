@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:geocoding/geocoding.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -94,17 +95,19 @@ class _CenterProfileState extends State<CenterProfile> {
                     : customView.MyButton(
                         context,
                         "Save profile",
-                        () {
-                          centerAuthCtr.centerProfileUpdate(
-                              context,
-                              userNameCtrl.text,
-                              bioCtrl.text,
-                              emailCtrl.text,
-                              addressCtrl.text,
-                              lat,
-                              long,
-                              imagename,
-                              baseimage);
+                        () async {
+                          if (await updateValidation(context)) {
+                            centerAuthCtr.centerProfileUpdate(
+                                context,
+                                userNameCtrl.text,
+                                bioCtrl.text,
+                                emailCtrl.text,
+                                addressCtrl.text,
+                                lat,
+                                long,
+                                imagename,
+                                baseimage);
+                          } else {}
                         },
                         MyColor.primary,
                         const TextStyle(
@@ -377,5 +380,36 @@ class _CenterProfileState extends State<CenterProfile> {
             ),
           );
         });
+  }
+
+  Future<bool> updateValidation(BuildContext context) async {
+    if (userNameCtrl.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Medical center name is required");
+    } else if (emailCtrl.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Email is required");
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtrl.text.toString())) {
+      customView.MySnackBar(context, "Enter valid email");
+    } else if (addressCtrl.text.isEmpty) {
+      customView.MySnackBar(context, "Address is required");
+    } else {
+      return await latLong(addressCtrl.text);
+    }
+    return false;
+  }
+
+  Future<bool> latLong(String address) async {
+    try {
+      List<Location> locationsList = await locationFromAddress(address);
+      print(locationsList[0].latitude);
+      print(locationsList[0].longitude);
+
+      lat = locationsList[0].latitude.toString();
+      long = locationsList[0].longitude.toString();
+      return true;
+    } catch (e) {
+      log("Exception :-", error: e.toString());
+      customView.MySnackBar(context, "invalid address");
+      return false;
+    }
   }
 }
