@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -52,7 +51,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   String imagename = "";
   String latitude = "";
   String longitude = "";
-  late Position currentPostion;
 
   void _choose(ImageSource source) async {
     final pickedFile = await picker.pickImage(
@@ -75,7 +73,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
-    _getUserLocation();
     print(" latitude $latitude");
     profileCtr.patientProfile(context);
     nameCtrl.text = profileCtr.name.value;
@@ -544,47 +541,50 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
           // width: MediaQuery.of(context).size.width * 0.8,
           text: 'Save Profile',
           color: MyColor.primary,
-          pressEvent: () {
-            _getUserLocation();
-            getLatLong();
-            profileCtr.patientProfileUpdate(
-                context,
-                nameCtrl.text,
-                sureNameCtrl.text,
-                userNameCtrl.text,
-                emailCtrl.text,
-                healthCardCtrl.text,
-                addressCtrl.text,
-                phoneNumberCtrl.text,
-                code,
-                flag,
-                imagename,
-                baseimage,
-                genderCtr.text,
-                latitude,
-                longitude,
-                ageCtr.text,
-                weightCtr.text,
-                heightCtr.text,
-                birthPlaceCtr.text,
-                taxCtr.text, () {
-              AwesomeDialog(
-                context: context,
-                animType: AnimType.leftSlide,
-                headerAnimationLoop: false,
-                dialogType: DialogType.success,
-                showCloseIcon: true,
-                title: 'Success',
-                desc: 'Profile Update Successfully',
-                btnOkOnPress: () {
-                  debugPrint('OnClick');
-                },
-                btnOkIcon: Icons.check_circle,
-                onDismissCallback: (type) {
-                  debugPrint('Dialog Dismiss from callback $type');
-                },
-              ).show();
-            });
+          pressEvent: ()async {
+            if(await latLong(addressCtrl.text)){
+              profileCtr.patientProfileUpdate(
+                  context,
+                  nameCtrl.text,
+                  sureNameCtrl.text,
+                  userNameCtrl.text,
+                  emailCtrl.text,
+                  healthCardCtrl.text,
+                  addressCtrl.text,
+                  phoneNumberCtrl.text,
+                  code,
+                  flag,
+                  imagename,
+                  baseimage,
+                  genderCtr.text,
+                  latitude,
+                  longitude,
+                  ageCtr.text,
+                  weightCtr.text,
+                  heightCtr.text,
+                  birthPlaceCtr.text,
+                  taxCtr.text, () {
+                AwesomeDialog(
+                  context: context,
+                  animType: AnimType.leftSlide,
+                  headerAnimationLoop: false,
+                  dialogType: DialogType.success,
+                  showCloseIcon: true,
+                  title: 'Success',
+                  desc: 'Profile Update Successfully',
+                  btnOkOnPress: () {
+                    debugPrint('OnClick');
+                  },
+                  btnOkIcon: Icons.check_circle,
+                  onDismissCallback: (type) {
+                    debugPrint('Dialog Dismiss from callback $type');
+                  },
+                ).show();
+              });
+            }else{
+              customView.massenger(context, "Enter valid address");
+            }
+
           },
         ),
       ),
@@ -616,53 +616,24 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
 //*********Get user latitude and longitude*********//
-  void _getUserLocation() async {
-    LocationPermission permission;
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  Future<bool> latLong(String address) async {
+    try {
+      List<Location> locationsList = await locationFromAddress(address);
+      print(locationsList[0].latitude);
+      print(locationsList[0].longitude);
 
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
+      latitude = locationsList[0].latitude.toString();
+      longitude = locationsList[0].longitude.toString();
+      return true;
+    } catch (e) {
+      log("Exception :-", error: e.toString());
+      customView.MySnackBar(context, "invalid address");
+      return false;
     }
-    permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high,
-            forceAndroidLocationManager: true)
-        .then((Position position) {
-      setState(() {
-        currentPostion = position;
-
-        print("...........$position");
-
-        print(">>>>>>>   ${position.latitude}");
-        print(position.longitude);
-      });
-    }).catchError((e) {
-      print("Error>>>>>>>>>>>>>>> :--- " + e);
-    });
   }
 
-  Future<void> getLatLong() async {
-    List<Location> locations = await locationFromAddress(addressCtrl.text.toString());
-    setState(() {
-      longitude = locations.last.longitude.toString();
-      latitude = locations.last.latitude.toString();
-      print('input address longitude---->$longitude');
-      print('input address latitude---->$latitude');
-    });
-  }
+
+
 
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(

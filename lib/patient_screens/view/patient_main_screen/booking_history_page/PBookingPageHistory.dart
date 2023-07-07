@@ -21,7 +21,8 @@ class _BookingPageState extends State<BookingPage> {
   TextEditingController searchCtr = TextEditingController();
   String? cancelId = '';
   String? cancelReason = '';
-  PatientBookingController patientBookingController = Get.put(PatientBookingController());
+  PatientBookingController patientBookingController =
+      Get.put(PatientBookingController());
 
   @override
   void initState() {
@@ -51,7 +52,7 @@ class _BookingPageState extends State<BookingPage> {
                   const Text(""),
                   const Icon(Icons.search_rounded), () {
                 Get.toNamed(RouteHelper.getSearchAppointmentScreen());
-              }, () {},true),
+              }, () {}, true),
               const SizedBox(
                 height: 7.0,
               ),
@@ -72,8 +73,8 @@ class _BookingPageState extends State<BookingPage> {
               },
               child: Container(
                   height: 50.0,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 2.0),
                   decoration: BoxDecoration(
                     color: MyColor.lightcolor,
                     borderRadius: BorderRadius.circular(0.0),
@@ -194,7 +195,7 @@ class _BookingPageState extends State<BookingPage> {
                                         flex: 1,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             const Text(
                                               "Booking ID",
@@ -217,7 +218,6 @@ class _BookingPageState extends State<BookingPage> {
                                           ],
                                         ),
                                       ),
-
                                     ],
                                   ),
                                   const SizedBox(
@@ -426,7 +426,7 @@ class _BookingPageState extends State<BookingPage> {
                                         flex: 1,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             const Text(
                                               "Booking ID",
@@ -854,18 +854,17 @@ class _BookingPageState extends State<BookingPage> {
                                         context,
                                         "Cancel appointment",
                                         () {
-                                          if(cancelReason == null){
-                                            customView.MySnackBar(context, "Select reason");
-                                          }else{
-                                            patientBookingController
-                                                .bookingAppointmentCancel(
-                                                context, id, cancelId!,
-                                                    () {
-                                                  Get.offNamed(RouteHelper
-                                                      .getCancelBookingScreen());
-                                                });
+                                          if (cancelReason == "") {
+                                            customView.MySnackBar(
+                                                context, "Select reason");
+                                          } else {
+                                          patientBookingController
+                                              .bookingAppointmentCancel(
+                                          context, id, cancelId!, () {
+                                          Get.offNamed(RouteHelper
+                                              .getCancelBookingScreen());
+                                          });
                                           }
-
                                         },
                                         Colors.red,
                                         const TextStyle(

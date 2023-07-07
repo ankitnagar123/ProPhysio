@@ -170,6 +170,7 @@ class CenterAuthCtr extends GetxController {
       String long,
       String image,
       String baseImage,
+      VoidCallback callback,
       ) async {
     loadingUpdateP.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
@@ -192,6 +193,7 @@ class CenterAuthCtr extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       String result = jsonResponse['result'];
       if (result == 'Success') {
+        callback();
         centerProfile(context);
         custom.massenger(context, "Profile update successfully");
       } else {

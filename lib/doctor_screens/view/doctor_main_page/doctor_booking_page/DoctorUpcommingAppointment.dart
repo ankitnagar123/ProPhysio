@@ -606,7 +606,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => PrescriptionMedicalTab(
-                                    patientId: userid, patientName: bookingController.name.value,
+                                    patientId: userid,
+                                    patientName: bookingController.name.value,
                                   )));
                     },
                         MyColor.primary,
@@ -752,12 +753,16 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                         context,
                                         "Cancel appointment",
                                         () {
-                                          bookingController
-                                              .bookingAppointmentCancel(
-                                                  context, id, cancelId!, () {
-                                            Get.offNamed(RouteHelper
-                                                .DCancelAppointSucces());
-                                          });
+                                          if (cancelReason == "") {
+                                            custom.MySnackBar(context, "");
+                                          } else {
+                                            bookingController
+                                                .bookingAppointmentCancel(
+                                                    context, id, cancelId!, () {
+                                              Get.offNamed(RouteHelper
+                                                  .DCancelAppointSucces());
+                                            });
+                                          }
                                         },
                                         Colors.red,
                                         const TextStyle(

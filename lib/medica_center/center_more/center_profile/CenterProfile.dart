@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:geocoding/geocoding.dart';
-import 'package:get/get.dart';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -85,57 +86,48 @@ class _CenterProfileState extends State<CenterProfile> {
       return Obx(() {
         return SafeArea(
           child: Scaffold(
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
-              floatingActionButton: Container(
-                margin: const EdgeInsets.symmetric(
-                    horizontal: 15.0, vertical: 10.0),
-                child: centerAuthCtr.loadingUpdateP.value
-                    ? customView.MyIndicator()
-                    : customView.MyButton(
-                        context,
-                        "Save profile",
-                        () async {
-                          if (await updateValidation(context)) {
-                            centerAuthCtr.centerProfileUpdate(
-                                context,
-                                userNameCtrl.text,
-                                bioCtrl.text,
-                                emailCtrl.text,
-                                addressCtrl.text,
-                                lat,
-                                long,
-                                imagename,
-                                baseimage);
-                          } else {}
-                        },
-                        MyColor.primary,
-                        const TextStyle(
-                            fontFamily: "Poppins", color: Colors.white),
-                      ),
+              bottomNavigationBar: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                child: AnimatedButton(
+                    text: 'Submit',
+                    color: MyColor.primary,
+                    pressEvent: () async {
+                      if (await updateValidation(context)) {
+                        centerAuthCtr.centerProfileUpdate(
+                          context,
+                          userNameCtrl.text,
+                          bioCtrl.text,
+                          emailCtrl.text,
+                          addressCtrl.text,
+                          lat,
+                          long,
+                          imagename,
+                          baseimage,
+                          () {
+                            AwesomeDialog(
+                              context: context,
+                              animType: AnimType.leftSlide,
+                              headerAnimationLoop: false,
+                              dialogType: DialogType.success,
+                              showCloseIcon: true,
+                              title: 'Success',
+                              desc: 'Profile update successfully',
+                              btnOkOnPress: () {
+                                debugPrint('OnClick');
+                              },
+                              btnOkIcon: Icons.check_circle,
+                              onDismissCallback: (type) {
+                                Get.back();
+                                debugPrint(
+                                    'Dialog Dismiss from callback $type');
+                              },
+                            ).show();
+                          },
+                        );
+                      } else {}
+                    }),
               ),
-              // bottomNavigationBar: Container(
-              //   margin: const EdgeInsets.symmetric(horizontal: 17.0, vertical: 10.0),
-              //   child: centerAuthCtr.loadingUpdateP.value ? customView
-              //       .MyIndicator() : customView.MyButton(
-              //     context,
-              //     "Save profile",
-              //         () {
-              //       centerAuthCtr.centerProfileUpdate(
-              //           context,
-              //           userNameCtrl.text,
-              //           bioCtrl.text,
-              //           emailCtrl.text,
-              //           addressCtrl.text,
-              //           "",
-              //           "",
-              //           imagename,
-              //           baseimage);
-              //     },
-              //     MyColor.primary,
-              //     const TextStyle(fontFamily: "Poppins", color: Colors.white),
-              //   ),
-              // ),
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {

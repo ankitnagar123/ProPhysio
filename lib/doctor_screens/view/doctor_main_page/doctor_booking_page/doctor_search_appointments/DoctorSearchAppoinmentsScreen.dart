@@ -194,7 +194,6 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
             heightFactor: 5.0, child: Text("No Appointment's at the moment!"));
       }
       return SingleChildScrollView(
-
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: list.length,
@@ -651,14 +650,20 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           fontWeight: FontWeight.w500,
                                           fontSize: 16,
                                         ),
-                                        Icons.call), custom.callButton(context, "Chat", () {
+                                        Icons.call),
+                                    custom.callButton(context, "Chat", () {
                                       var patientId = {
                                         "ID": bookingController.userId.value,
-                                        "userName": bookingController.username.value,
-                                        "userProfile": bookingController.userPic.value,
-                                        "userLocation": bookingController.location.value,
-                                        "userContact": bookingController.contact.value,
-                                        "surName": bookingController.surname.value,
+                                        "userName":
+                                            bookingController.username.value,
+                                        "userProfile":
+                                            bookingController.userPic.value,
+                                        "userLocation":
+                                            bookingController.location.value,
+                                        "userContact":
+                                            bookingController.contact.value,
+                                        "surName":
+                                            bookingController.surname.value,
                                         "name": bookingController.name.value,
                                         "bookingSide": "booking",
                                       };
@@ -673,20 +678,21 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           fontSize: 16,
                                         ),
                                         Icons.chat_bubble_outline_outlined)
-
                                   ],
                                 ),
                               ),
                               Row(
                                 children: [
-                                  custom.callButton(
-                                      context, "prescription", () {
+                                  custom.callButton(context, "prescription",
+                                      () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 PrescriptionMedicalTab(
-                                                  patientId: userid, patientName: bookingController.name.value,
+                                                  patientId: userid,
+                                                  patientName: bookingController
+                                                      .name.value,
                                                 )));
                                   },
                                       MyColor.primary,
@@ -834,12 +840,18 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                         context,
                                         "Cancel appointment",
                                         () {
-                                          bookingController
-                                              .bookingAppointmentCancel(context,
-                                                  id, cancelId.toString(), () {
-                                            Get.offNamed(RouteHelper
-                                                .DCancelAppointSucces());
-                                          });
+                                          if (cancelReason == "") {
+                                            custom.MySnackBar(context, "");
+                                          } else {
+                                            bookingController
+                                                .bookingAppointmentCancel(
+                                                    context,
+                                                    id,
+                                                    cancelId.toString(), () {
+                                              Get.offNamed(RouteHelper
+                                                  .DCancelAppointSucces());
+                                            });
+                                          }
                                         },
                                         Colors.red,
                                         const TextStyle(

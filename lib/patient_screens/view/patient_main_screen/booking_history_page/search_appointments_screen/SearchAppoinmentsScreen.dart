@@ -745,8 +745,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   context,
                                   "Cancel appointment",
                                       () {
-                                    if(cancelReason == null){
-                                      customView.MySnackBar(context, "Select reason");
+                                    if(cancelReason == ""){
+                                      customView.MySnackBar(context, "");
                                     }else{
                                       patientBookingController
                                           .bookingAppointmentCancel(
