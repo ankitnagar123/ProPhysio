@@ -50,7 +50,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
     if (date != null) {
       return date.toString().split(' ')[0];
     } else {
-      return 'Choose The Date';
+      return '';
     }
   }
 
@@ -78,9 +78,9 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   customView.text(
-                      "Do you have an account?", 11, FontWeight.normal,
+                      text.Dont_have_an_account.tr, 11, FontWeight.normal,
                       MyColor.primary1),
-                  const Text("Sign-in",style:TextStyle(color: MyColor.primary1,fontWeight: FontWeight.w700,decoration: TextDecoration.underline) ,)
+                   Text(text.SIGN_IN.tr,style:TextStyle(color: MyColor.primary1,fontWeight: FontWeight.w700,decoration: TextDecoration.underline) ,)
 
                 ],
               ),
@@ -100,109 +100,109 @@ class _PatientSignUpState extends State<PatientSignUp> {
             ), Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Name", 12.0, FontWeight.w600, MyColor.primary1),
+                  text.Enter_Name.tr, 12.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(
-                context, nameCtr, "Your name", TextInputType.text),
+                context, nameCtr,text.H_Enter_Name.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Surname", 12.0, FontWeight.w600,
+                  text.Enter_Surname.tr, 12.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(
-                context, surnameCtr, "Your surname", TextInputType.text),
+                context, surnameCtr, text.H_Enter_Surname.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
             customView.text(
-                "Create a username", 12.0, FontWeight.w600, MyColor.primary1),
+                text.Enter_Username.tr, 12.0, FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, usernameCtr,
-                "Your username", TextInputType.text),
+                text.H_Enter_Username.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
             customView.text(
-                "E-mail", 12.0, FontWeight.w600, MyColor.primary1),
+                text.Enter_Email.tr, 12.0, FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, emailCtr,
-                "Enter a valid email", TextInputType.text),
+                text.H_Enter_Email.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
-            customView.text("Health card code", 12.0,
+            customView.text(text.Heath_Card_Code.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, healthCardCtr,
-                "Enter Your health code", TextInputType.text),
+                text.Heath_Card_Code.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
-            customView.text("Age", 12.0,
+            customView.text(text.Age.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, ageCtr,
-                "Enter your age", TextInputType.text),
+                text.Age.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
-            customView.text("Weight", 12.0,
+            customView.text(text.Weight.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, weightCtr,
-                "Enter your weight", TextInputType.text),
+                text.Weight.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
-            ), customView.text("Height", 12.0,
+            ), customView.text(text.Height.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, heightCtr,
-                "Enter your height", TextInputType.text),
+                text.Height.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
-            ), customView.text("TAX CODE", 12.0,
+            ), customView.text(text.Tax_Code.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, taxCtr,
-                "Enter your tax code", TextInputType.text),
+                text.Tax_Code.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
-            customView.text("Birth place", 12.0,
+            customView.text(text.Birth_Place.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.myField(context, birthPlaceCtr,
-                "Enter your birth place", TextInputType.text),
+                text.Birth_Place.tr, TextInputType.text),
             const SizedBox(
               height: 17.0,
             ),
-            customView.text("Gender", 12.0,
+            customView.text(text.Gender.tr, 12.0,
                 FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
@@ -223,7 +223,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                      });
                    },
                  ),
-                 title: const Text('Male'),
+                 title:  Text(text.Male.tr),
                ),
              ),
              Expanded(
@@ -242,7 +242,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                      });
                    },
                  ),
-                 title: const Text('Female'),
+                 title:  Text(text.Female.tr),
                ),
              ),
            ],),
@@ -280,7 +280,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               height: 22.0,
             ),
             customView.text(
-                "Phone number", 12.0, FontWeight.w600, MyColor.primary1),
+                text.Phone_Number.tr, 12.0, FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
@@ -289,14 +289,14 @@ class _PatientSignUpState extends State<PatientSignUp> {
               width: widht * 1,
               child: IntlPhoneField(
                 controller: phoneCtr,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   // focusedErrorBorder: InputBorder.none,
                   counterText: '',
                   filled: true,
                   fillColor: Colors.white,
                   constraints: BoxConstraints.expand(),
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
+                  labelText: text.Phone_Number.tr,
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
@@ -323,12 +323,12 @@ class _PatientSignUpState extends State<PatientSignUp> {
               height: 15.0,
             ),
             customView.text(
-                "Create a password", 12.0, FontWeight.w600, MyColor.primary1),
+                text.Create_Passsword.tr, 12.0, FontWeight.w600, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
             customView.PasswordField(
-                context, passwordCtr, "Enter at least 6 characters",
+                context, passwordCtr, text.H_Create_Passsword.tr,
                 TextInputType.text, GestureDetector(
                 onTap: () {
                   setState(() {
@@ -359,7 +359,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 }
                 return customView.MyButton(
                   context,
-                  "Sign up",
+                  text.Sign_UP.tr,
                       () {
                     var data = {
                       'name': nameCtr.text,

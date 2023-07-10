@@ -7,6 +7,7 @@ import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassControll
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../helper/CustomView/CustomView.dart';
+import '../language_translator/LanguageTranslate.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   var apiotp = "";
   var iD = '';
   var email = "";
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -70,31 +72,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   height: height * 0.01,
                 ),
                 custom.text(
-                    "Forgot password", 23, FontWeight.w700, MyColor.black),
+                    text.forgot_Password.tr, 23, FontWeight.w700, MyColor.black),
                 SizedBox(height: height * 0.02),
                 custom.text(
-                    "Forgot your password? Please enter OTP number, we sent it on your email account.  Then you can set a new one.",
+                    text.forgot_line_otp.tr,
                     12,
                     FontWeight.normal,
                     MyColor.primary1),
                 SizedBox(height: height * 0.07),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text("Enter OTP number", 13, FontWeight.w600,
+                  child: custom.text(text.Enter_otp.tr, 13, FontWeight.w600,
                       MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
                 custom.myField(
-                    context, optctr, "Enter OTP", TextInputType.emailAddress),
+                    context, optctr, text.Enter_otp.tr, TextInputType.emailAddress),
                 SizedBox(
                   height: height * 0.03,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    custom.text("Not received??", 11, FontWeight.w500,
+                    custom.text(text.Not_recived.tr, 11, FontWeight.w500,
                         MyColor.primary1),
                     GestureDetector(
                         onTap: () {
@@ -113,8 +115,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             }
                           });
                         },
-                        child: const Text(
-                          "Send a new OTP number",
+                        child:  Text(
+                          text.SendNewOtp.tr,
                           style: TextStyle(
                             color: MyColor.primary1,
                             fontWeight: FontWeight.w600,

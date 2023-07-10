@@ -5,6 +5,7 @@ import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassControll
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../helper/CustomView/CustomView.dart';
+import '../language_translator/LanguageTranslate.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -17,12 +18,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController emailCtr = TextEditingController();
   ForgotPassCtr forgotPassCtr = ForgotPassCtr();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -42,24 +43,24 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: height * 0.01,
                 ),
                 custom.text(
-                    "Forgot password", 23, FontWeight.w700, MyColor.black),
+                    text.forgot_Password.tr, 23, FontWeight.w700, MyColor.black),
                 const Divider(),
                 SizedBox(height: height * 0.02),
                 custom.text(
-                    "Forgot your password? Create a new one by entering your email address. We will send you a security OTP code to certify your identity. Then you can set a new one",
+                    text.forgot_line.tr,
                     12,
                     FontWeight.normal,
                     MyColor.primary1),
                 SizedBox(height: height * 0.06),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text("Enter your Email ID", 13, FontWeight.w500,
+                  child: custom.text(text.Enter_Email.tr, 13, FontWeight.w500,
                       MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
-                custom.myField(context, emailCtr, "Enter Email address",
+                custom.myField(context, emailCtr, text.Enter_Email.tr,
                     TextInputType.emailAddress),
                 SizedBox(
                   height: height * 0.35,

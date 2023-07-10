@@ -17,6 +17,7 @@ import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/AppConst.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 
 class DoctorSignUpScreen extends StatefulWidget {
@@ -29,6 +30,9 @@ class DoctorSignUpScreen extends StatefulWidget {
 }
 
 class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
+
+  LocalString text = LocalString();
+
   /*---------TEXT-FIELD CONTROLLER'S----------*/
   TextEditingController nameCtr = TextEditingController();
   TextEditingController surnameCtr = TextEditingController();
@@ -117,10 +121,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  custom.text("Do you have an account?", 11, FontWeight.normal,
+                  custom.text(text.Dont_have_an_account.tr, 11, FontWeight.normal,
                       MyColor.primary1),
-                  const Text(
-                    "Sign-in",
+                   Text(
+                    text.SIGN_IN.tr,
                     style: TextStyle(
                         color: MyColor.primary1,
                         fontWeight: FontWeight.w700,
@@ -158,7 +162,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   if (doctorSignUpCtr.loadingotp.value) {
                     return custom.MyIndicator();
                   }
-                  return custom.MyButton(context, "Go on", () {
+                  return custom.MyButton(context, text.Go_On.tr, () {
                     print("${_curr} +${_numpage}");
 
                     print("My latitude AppCont : -- ${AppConst.LATITUDE}");
@@ -171,7 +175,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           .doctorSignupOtp(context, emailCtr.text)
                           .then((value) {
                         if (value != "") {
-                          print("gender dekho${_selectedGender}");
+                          print("gender dekho$_selectedGender");
                           var data = {
                             "name": nameCtr.text,
                             "surmane": surnameCtr.text,
@@ -234,58 +238,58 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Enter your name", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Enter_Name.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, nameCtr, "Your name", TextInputType.text),
+            custom.myField(context, nameCtr,text.H_Enter_Name.tr, TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter your surname", 13.0, FontWeight.w600,
+              child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(
-                context, surnameCtr, "Your surname", TextInputType.text),
+                context, surnameCtr,text.H_Enter_Surname.tr, TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter your username", 13.0, FontWeight.w600,
+              child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(
-                context, usernameCtr, "Your username", TextInputType.text),
+                context, usernameCtr,text.H_Enter_Username.tr, TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Enter a valid email", 13.0, FontWeight.w600,
+              child: custom.text(  text.Enter_Email.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(
-                context, emailCtr, "Your email address", TextInputType.text),
+                context, emailCtr,  text.H_Enter_Email.tr, TextInputType.text),
             const SizedBox(
               height: 17,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Phone number", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Phone_Number.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -295,12 +299,12 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               width: MediaQuery.of(context).size.width * 1,
               child: IntlPhoneField(
                 controller: phoneCtr,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   counterText: '',
                   filled: true,
                   fillColor: Colors.white,
                   constraints: BoxConstraints.expand(),
-                  labelText: 'Phone Number',
+                  labelText: text.Phone_Number.tr,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.all(
@@ -328,7 +332,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Create a password", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Create_Passsword.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -336,7 +340,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             custom.PasswordField(
                 context,
                 passwordCtr,
-                "Enter Password",
+                text.H_Create_Passsword.tr,
                 TextInputType.text,
                 GestureDetector(
                     onTap: () {
@@ -384,13 +388,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Date of birth", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Date_of_Birth.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             Container(
                 height: 45.0,
                 width: MediaQuery.of(context).size.width / 0.9,
-                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                padding:  EdgeInsets.only(left: 10.0, bottom: 5),
+                margin:  EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey),
@@ -403,8 +407,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   },
                   readOnly: true,
                   controller: birthDateController,
-                  decoration: const InputDecoration(
-                    hintText: "Select Date",
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.calendar_month, color: MyColor.primary),
@@ -419,32 +423,32 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Place of birth", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Place_of_Birth.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, birthplaceController, "Your birthplace",
+            custom.myField(context, birthplaceController, text.Place_of_Birth.tr,
                 TextInputType.text),
             const SizedBox(
               height: 16,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("University attended", 13.0, FontWeight.w600,
+              child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(context, universityAttendedCtr,
-                "Your university attended", TextInputType.text),
+                text.University_Attended.tr, TextInputType.text),
             const SizedBox(
               height: 16,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of enrollment", 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -465,8 +469,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   },
                   readOnly: true,
                   controller: dateOfEnrollmentCtr,
-                  decoration: const InputDecoration(
-                    hintText: "Select Date",
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.calendar_month, color: MyColor.primary),
@@ -481,7 +485,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             /**/
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of qualification", 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -502,8 +506,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   },
                   readOnly: true,
                   controller: dateOfQualification,
-                  decoration: const InputDecoration(
-                    hintText: "Select Date",
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.calendar_month, color: MyColor.primary),
@@ -517,7 +521,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Date of graduation", 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             Container(
@@ -538,8 +542,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   },
                   readOnly: true,
                   controller: dateOfGraduation,
-                  decoration: const InputDecoration(
-                    hintText: "Select Date",
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.calendar_month, color: MyColor.primary),
@@ -553,21 +557,21 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Register of belonging", 13.0, FontWeight.w600,
+              child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(context, registerOfBelongingCtr,
-                "Your register of belonging", TextInputType.text),
+                text.Register_of_Belonging.tr, TextInputType.text),
             const SizedBox(
               height: 16,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Gender", 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Gender.tr, 13.0, FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -590,7 +594,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         });
                       },
                     ),
-                    title: const Text('Male'),
+                    title:  Text(text.Male.tr),
                   ),
                 ),
                 Expanded(
@@ -609,7 +613,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         });
                       },
                     ),
-                    title: const Text('Female'),
+                    title:  Text(text.Female.tr),
                   ),
                 ),
               ],
@@ -631,7 +635,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Select your specializations", 13.0,
+              child: custom.text(text.Select_Category.tr, 13.0,
                   FontWeight.w600, MyColor.primary1),
             ),
             category(),
@@ -640,7 +644,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Select your sub-specializations", 13.0,
+              child: custom.text(text.Select_Sub_Category.tr, 13.0,
                   FontWeight.w600, MyColor.primary1),
             ),
             InkWell(
@@ -654,8 +658,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 45,
-                child: const Center(
-                  child: Text("select sub-category"),
+                child:  Center(
+                  child: Text(text.Select_Sub_Category.tr),
                 ),
               ),
               onTap: () {
@@ -813,7 +817,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             // Text("$subCatIdArrayFinal"),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Upload your degree", 13.0, FontWeight.w600,
+              child: custom.text(text.Upload_your_Degree.tr, 13.0, FontWeight.w600,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -854,7 +858,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Select your address or offices", 13.0,
+              child: custom.text(text.Select_Address.tr, 13.0,
                   FontWeight.w600, MyColor.primary1),
             ),
             const SizedBox(
@@ -1034,7 +1038,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.categoryName),
                   );
                 }).toList(),
-                hint: const Text("Select Category"),
+                hint:  Text(text.Select_Category.tr),
                 // After selecting the desired option,it will
                 // change button value to selected value
                 onChanged: (newValue) {
@@ -1168,7 +1172,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       apiKey: kGoogleApiKey,
       components: [],
       types: [],
-      hint: "Search City",
+      hint: text.SearchAddress.tr,
     );
     return p;
   }
