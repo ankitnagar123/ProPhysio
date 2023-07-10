@@ -4,6 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 
 class CenterChangePasswordScreen extends StatefulWidget {
   const CenterChangePasswordScreen({Key? key}) : super(key: key);
@@ -17,18 +18,17 @@ class _CenterChangePasswordScreenState
     extends State<CenterChangePasswordScreen> {
   CustomView customView = CustomView();
   bool _isHidden = true;
+  LocalString text = LocalString();
   CenterAuthCtr centerAuthCtr = CenterAuthCtr();
   TextEditingController oldPasswordCtrl = TextEditingController();
   TextEditingController newPasswordCtrl = TextEditingController();
   TextEditingController confirmPasswordCtrl = TextEditingController();
 
-  // PatientChangePassCtr changePassCtr = PatientChangePassCtr();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -40,7 +40,7 @@ class _CenterChangePasswordScreenState
             }
             return customView.MyButton(
               context,
-              "Save Password",
+              text.savePassword.tr,
                   () {
                 if (validation()) {
                   centerAuthCtr.centerPasswordChange(
@@ -68,7 +68,7 @@ class _CenterChangePasswordScreenState
             ),
           ),
           title: customView.text(
-              "Change password", 15.0, FontWeight.w500, Colors.black),
+              text.ChangePassword.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -81,7 +81,7 @@ class _CenterChangePasswordScreenState
               SizedBox(
                 height: width * 0.10,
               ),
-              customView.text("Enter your old password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourOldPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -89,7 +89,7 @@ class _CenterChangePasswordScreenState
               customView.PasswordField(
                   context,
                   oldPasswordCtrl,
-                  "Old password",
+                  text.oldPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -112,7 +112,7 @@ class _CenterChangePasswordScreenState
               SizedBox(
                 height: width * 0.1,
               ),
-              customView.text("Enter your new password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourNewPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -120,7 +120,7 @@ class _CenterChangePasswordScreenState
               customView.PasswordField(
                   context,
                   newPasswordCtrl,
-                  "New password",
+                  text.newPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -144,14 +144,14 @@ class _CenterChangePasswordScreenState
                 height: width * 0.1,
               ),
               customView.text(
-                  "Confirm password", 12.0, FontWeight.w500, MyColor.black),
+                  text.confirmPassword.tr, 12.0, FontWeight.w500, MyColor.black),
               SizedBox(
                 height: width * 0.02,
               ),
               customView.PasswordField(
                   context,
                   confirmPasswordCtrl,
-                  "New password",
+                  text.newPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -185,18 +185,18 @@ class _CenterChangePasswordScreenState
   // ******************Change Password VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (oldPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter old password");
+      customView.MySnackBar(context, text.enterYourOldPassword.tr);
     } else if (newPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter new password");
+      customView.MySnackBar(context, text.enterYourNewPassword.tr);
     } else if (newPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "New Password is must be of 6 digit");
+      customView.MySnackBar(context, text.newPasswordAtList6digit.tr);
     } else if (confirmPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter confirm password");
+      customView.MySnackBar(context,  text.confirmPassword.tr);
     } else if (confirmPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "confirm is must be of 6 digit");
+      customView.MySnackBar(context, text.confirmPasswordAtList6digit.tr);
     } else if (newPasswordCtrl.text.toString() !=
         confirmPasswordCtrl.text.toString()) {
-      customView.MySnackBar(context, "Password is doesn't match");
+      customView.MySnackBar(context, text.passwordNotMatch.tr);
     } else {
       return true;
     }

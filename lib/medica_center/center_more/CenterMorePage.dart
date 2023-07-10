@@ -7,6 +7,7 @@ import 'package:medica/medica_center/center_controller/CenterAuthController.dart
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class CenterMorePage extends StatefulWidget {
   const CenterMorePage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
   CustomView customView = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CenterAuthCtr centerAuthCtr = CenterAuthCtr();
-
+  LocalString text = LocalString();
   @override
   void initState() {
     super.initState();
@@ -44,7 +45,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
               const SizedBox(
                 height: 10.0,
               ),
-              customView.text("Hi @ ${centerAuthCtr.name.value}", 17.0,
+              customView.text("${text.hii.tr} @ ${centerAuthCtr.name.value}", 17.0,
                   FontWeight.w500, Colors.black),
               const SizedBox(
                 height: 30.0,
@@ -86,7 +87,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: customView.text("Profile settings",
+                                  child: customView.text(text.ProfileSettings.tr,
                                       12.0, FontWeight.w400, Colors.black)),
                             )),
                       ),
@@ -130,7 +131,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: customView.text("Earnings", 12.0,
+                                  child: customView.text(text.Earnings.tr, 12.0,
                                       FontWeight.w400, Colors.black)),
                             )),
                       ),
@@ -150,7 +151,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Settings", 14.0, FontWeight.w500, Colors.black),
+                    text.Settings.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -205,7 +206,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Terms & conditions", 14.0, FontWeight.w500,
+                    text.TermCondition.tr, 14.0, FontWeight.w500,
                     Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
@@ -222,7 +223,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "About", 14.0, FontWeight.w500, Colors.black),
+                    text.About.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -238,7 +239,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Support", 14.0, FontWeight.w500, Colors.black),
+                    text.Support.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -255,7 +256,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                     deletePopUp(context);
                   },
                   child: customView.text(
-                      "Logout", 15.0, FontWeight.w500, Colors.red),
+                      text.Logout.tr, 15.0, FontWeight.w500, Colors.red),
                 ),
               ),
             ],
@@ -302,7 +303,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Logout", 17, FontWeight.w500, Colors.black),
+                                text.Logout.tr, 17, FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 14.0,
@@ -311,7 +312,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to log out?",
+                               text.AreyouSureExit.tr,
                                 13,
                                 FontWeight.w400,
                                 Colors.black),
@@ -329,13 +330,13 @@ class _CenterMorePageState extends State<CenterMorePage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text("Dismiss", 14.0,
+                                    child: customView.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: customView.mysButton(
                                   context,
-                                  "Logout",
+                                  text.Logout.tr,
                                       () async {
                                     SharedPreferences preferences = await SharedPreferences
                                         .getInstance();

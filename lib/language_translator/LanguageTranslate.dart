@@ -77,6 +77,65 @@ class LocalString extends Translations {
   String Not_recived ="Not received??";
   String SendNewOtp ="Send a new OTP number";
 
+
+
+
+  /* MEDICA CENTER SIDE*/
+
+  /* CENTER MORE PAGE*/
+  String hii = "Hi";
+  String ProfileSettings = "Profile settings";
+  String Earnings = "Earnings";
+  String Settings = "Settings";
+  String TermCondition = "Terms & conditions";
+  String About = "About";
+  String Support = "Support";
+  String Logout = "Logout";
+  String AreyouSureExit = "Are you sure you want to log out?";
+  String Dismiss = "Dismiss";
+
+  /* CENTER SUPPORT PAGE*/
+  String Sendmessage = "Send message";
+  String ContactSupport = "Contact us if you need support.";
+  String Subject = "Subject";
+  String Message = "Message";
+
+  //************************CENTER SETTING PAGE****************//
+  String ChangePassword = "Change Password";
+  String Deleteaccount = "Delete account";
+  String AreyouSureDeleteAccount ="Are you sure you want to delete the account? Please enter your current password to confirm your decision.";
+  String EnterYourPassword = "Enter your Password";
+  String Deleteprofile = "Delete profile";
+
+  /*CENTER CHANGE PASSWORD PAGE*/
+  String savePassword = "Save Password";
+  String enterYourOldPassword = "Enter your old password";
+  String oldPassword = "Old password";
+  String enterYourNewPassword = "Enter your new password";
+  String newPassword = "New password";
+  String confirmPassword = "Confirm password";
+  String newPasswordAtList6digit = "New Password is must be of 6 digit";
+  String confirmPasswordAtList6digit = "confirm is must be of 6 digit";
+  String passwordNotMatch = "Password is doesn't match";
+
+  /*CENTER PROFILE PAGE*/
+  String noImageSelected = "No image selected";
+  String Submit = "Submit";
+  String success = "Success";
+  String ProfileUpdateSuccessfully = "Profile update successfully";
+  String Profile = "Profile";
+  String imageFromgallary = "Image from gallery";
+  String imageFromCamra = "Image from camera";
+  String Yourmedicalcentername = "Your medical center name";
+  String Entermedicalcentername = "Enter medical center name";
+  String yourbio = "Your bio";
+  String yourUsernameEmail = "Your email";
+  String enterEmail = "Enter Email";
+  String enteAddress = "Enter address";
+  String yourAddres = "Your address";
+  String invalidAddress = "invalid address";
+
+
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
@@ -142,6 +201,57 @@ class LocalString extends Translations {
    Enter_otp : "Enter OTP number",
    Not_recived :"Not received??",
    SendNewOtp :"Send a new OTP number",
+
+          //********************CENTER SIDE MORE PAGE*******************/
+          hii:"Hi",
+          ProfileSettings:"Profile settings",
+          Earnings:"Earnings",
+          Settings:"Settings",
+          TermCondition:"Terms & conditions",
+          About:"About",
+          Support:"Support",
+          Logout:"Logout",
+          AreyouSureExit:"Are you sure you want to log out?",
+          Dismiss:"Dismiss",
+          /* CENTER SUPPORT PAGE*/
+          Sendmessage:"Send message",
+          ContactSupport:"Contact us if you need support.",
+          Subject:"Subject",
+          Message:"Message",
+          /* CENTER SETTING PAGE*/
+
+          ChangePassword:"Change Password",
+          Deleteaccount:"Delete account",
+          AreyouSureDeleteAccount:"Are you sure you want to delete the account? Please enter your current password to confirm your decision.",
+          EnterYourPassword:"Enter your Password",
+          Deleteprofile:"Delete profile",
+
+          /*CENTER CHANGE PASSWORD PAGE*/
+          savePassword :"Save Password",
+          enterYourOldPassword:"Enter your old password",
+          oldPassword:"Old password",
+          enterYourNewPassword :"Enter your new password",
+          newPassword:"New password",
+          confirmPassword:"Confirm password",
+          newPasswordAtList6digit:"New Password is must be of 6 digit",
+          confirmPasswordAtList6digit:"confirm is must be of 6 digit",
+          passwordNotMatch:"Password is doesn't match",
+          /*CENTER PROFILE PAGE*/
+          noImageSelected:"No image selected",
+          Submit:"Submit",
+          success:"Success",
+          ProfileUpdateSuccessfully:"Profile update successfully",
+          Profile:"Profile",
+          imageFromgallary:"Image from gallery",
+          imageFromCamra:"Image from camera",
+          Yourmedicalcentername:"Your medical center name",
+          Entermedicalcentername:"Enter medical center name",
+          yourbio:"Your bio",
+          yourUsernameEmail:"Your username / email",
+          enterEmail:"Enter Email",
+          enteAddress:"Enter address",
+          yourAddres:"Your address",
+  invalidAddress : "invalid address",
         },
         'it_IT': {
           /*Sign IN Page*/
@@ -205,6 +315,60 @@ class LocalString extends Translations {
           Enter_otp : "Inserisci numero OTP",
           Not_recived :"Non ricevuto??",
           SendNewOtp :"Invia un nuovo numero OTP",
+
+          // CENTER SIDE MORE PAGE
+          hii:"Ciao",
+          ProfileSettings:"Impostazioni del profilo",
+          Earnings:"Guadagni",
+          Settings:"Impostazioni",
+          TermCondition:"Termini & Condizioni",
+          About:"Di",
+          Support:"Supporto",
+          Logout:"Disconnettersi",
+          AreyouSureExit:"Sei sicuro di voler uscire?",
+          Dismiss:"Congedare",
+          /* CENTER SUPPORT PAGE*/
+          Sendmessage:"Invia messaggio",
+          ContactSupport:"Contattaci se hai bisogno di supporto.",
+          Subject:"Soggetta",
+          Message:"Messaggio",
+
+          /* CENTER SETTING PAGE*/
+
+          ChangePassword:"Cambiare la password",
+          Deleteaccount:"Eliminare l'account",
+          AreyouSureDeleteAccount:"Sei sicuro di voler eliminare l'account? Inserisci la tua password attuale per confermare la tua decisione.",
+          EnterYourPassword:"Inserisci la tua password",
+          Deleteprofile:"Elimina profilo",
+
+          /*CENTER CHANGE PASSWORD PAGE*/
+          savePassword :"Salva la password",
+          enterYourOldPassword:"Inserisci la tua vecchia password",
+          oldPassword:"Vecchia password",
+          enterYourNewPassword :"Inserisci la tua nuova password",
+          newPassword:"Nuova password",
+          confirmPassword:"Conferma password",
+          newPasswordAtList6digit:"La nuova password deve essere di 6 cifre",
+          confirmPasswordAtList6digit:"la conferma deve essere di 6 cifre",
+          passwordNotMatch:"La password non corrisponde",
+
+          /*CENTER PROFILE PAGE*/
+          noImageSelected:"Nessuna immagine selezionata",
+          Submit:"Invia",
+          success:"Successo",
+          ProfileUpdateSuccessfully:"Aggiornamento del profilo riuscito",
+          Profile:"Profilo",
+          imageFromgallary:"Immagine dalla galleria",
+          imageFromCamra:"Immagine dalla fotocamera",
+          Yourmedicalcentername:"Il nome del tuo centro medico",
+          Entermedicalcentername:"Inserisci il nome del centro medico",
+          yourbio:"La tua biografia",
+          yourUsernameEmail:"Il tuo nome utente/e-mail",
+          enterEmail:"Inserisci l'email",
+          enteAddress:"Inserisci l'indirizzo",
+          yourAddres:"Il tuo indirizzo",
+          invalidAddress : "indirizzo non valido",
+
         },
       };
 }

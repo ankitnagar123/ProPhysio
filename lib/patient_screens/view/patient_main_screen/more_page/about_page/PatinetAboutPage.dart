@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../../../language_translator/LanguageTranslate.dart';
 class PatinetAboutScreen extends StatefulWidget {
   const PatinetAboutScreen({Key? key}) : super(key: key);
 
@@ -13,6 +15,7 @@ class PatinetAboutScreen extends StatefulWidget {
 class _PatinetAboutScreenState extends State<PatinetAboutScreen> {
   CustomView custom = CustomView();
   bool loding = true;
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class _PatinetAboutScreenState extends State<PatinetAboutScreen> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("About", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.About.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body:  Stack(
         children: [

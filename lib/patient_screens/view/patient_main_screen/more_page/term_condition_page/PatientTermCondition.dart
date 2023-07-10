@@ -4,6 +4,8 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
+
 class PatientTermCondition extends StatefulWidget {
   const PatientTermCondition({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class PatientTermCondition extends StatefulWidget {
 class _PatientTermConditionState extends State<PatientTermCondition> {
   CustomView custom = CustomView();
   bool loding = true;
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class _PatientTermConditionState extends State<PatientTermCondition> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("Terms & Conditions", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.TermCondition.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Stack(
         children: [

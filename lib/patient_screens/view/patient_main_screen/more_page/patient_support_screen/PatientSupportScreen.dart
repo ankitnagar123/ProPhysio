@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientSupportController.dart';
 
 class PatientSupportScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController msgCtrl = TextEditingController();
+  LocalString text = LocalString();
 
   @override
   Widget build(BuildContext context) {

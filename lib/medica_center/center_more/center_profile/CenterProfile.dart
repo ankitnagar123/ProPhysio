@@ -11,6 +11,8 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
+import '../../../language_translator/LanguageTranslate.dart';
+
 class CenterProfile extends StatefulWidget {
   const CenterProfile({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class CenterProfile extends StatefulWidget {
 
 class _CenterProfileState extends State<CenterProfile> {
   CustomView customView = CustomView();
-
+  LocalString text = LocalString();
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController bioCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
@@ -51,7 +53,7 @@ class _CenterProfileState extends State<CenterProfile> {
         imagename = 'image_${DateTime.now().millisecondsSinceEpoch}_.jpg';
         Get.back();
       } else {
-        customView.MySnackBar(context, "No image selected");
+        customView.MySnackBar(context, text.noImageSelected.tr);
         print('No image selected.');
       }
     });
@@ -90,7 +92,7 @@ class _CenterProfileState extends State<CenterProfile> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: AnimatedButton(
-                    text: 'Submit',
+                    text: text.Submit.tr,
                     color: MyColor.primary,
                     pressEvent: () async {
                       if (await updateValidation(context)) {
@@ -111,8 +113,8 @@ class _CenterProfileState extends State<CenterProfile> {
                               headerAnimationLoop: false,
                               dialogType: DialogType.success,
                               showCloseIcon: true,
-                              title: 'Success',
-                              desc: 'Profile update successfully',
+                              title: text.success.tr,
+                              desc: text.ProfileUpdateSuccessfully.tr,
                               btnOkOnPress: () {
                                 debugPrint('OnClick');
                               },
@@ -139,7 +141,7 @@ class _CenterProfileState extends State<CenterProfile> {
                   ),
                 ),
                 title: customView.text(
-                    "Profile", 15.0, FontWeight.w500, Colors.black),
+                    text.Profile.tr, 15.0, FontWeight.w500, Colors.black),
                 centerTitle: true,
                 elevation: 0.0,
                 backgroundColor: Colors.white24,
@@ -211,7 +213,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                                           _choose(ImageSource
                                                               .gallery);
                                                         },
-                                                        child: const Row(
+                                                        child:  Row(
                                                           children: [
                                                             Icon(Icons.image,
                                                                 size: 20),
@@ -219,7 +221,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              "Image from gallery",
+                                                              text.imageFromgallary.tr,
                                                               style: TextStyle(
                                                                   fontSize: 16,
                                                                   fontWeight:
@@ -237,7 +239,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                                           _choose(ImageSource
                                                               .camera);
                                                         },
-                                                        child: const Row(
+                                                        child:  Row(
                                                           children: [
                                                             Icon(Icons
                                                                 .camera_alt),
@@ -245,7 +247,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              "Image from camera",
+                                                              text.imageFromCamra.tr,
                                                               style: TextStyle(
                                                                   fontSize: 16,
                                                                   fontWeight:
@@ -276,7 +278,7 @@ class _CenterProfileState extends State<CenterProfile> {
                             SizedBox(
                               height: height * 0.03,
                             ),
-                            customView.text("Your medical center name", 12.0,
+                            customView.text(text.Entermedicalcentername.tr, 12.0,
                                 FontWeight.w600, MyColor.primary1),
                             SizedBox(
                               height: height * 0.005,
@@ -284,39 +286,39 @@ class _CenterProfileState extends State<CenterProfile> {
                             customView.myField(
                                 context,
                                 userNameCtrl,
-                                "Enter medical center name",
+                                text.Yourmedicalcentername.tr,
                                 TextInputType.text),
                             SizedBox(
                               height: height * 0.025,
                             ),
-                            customView.text("Your bio", 11.0, FontWeight.w600,
+                            customView.text(text.yourbio.tr, 11.0, FontWeight.w600,
                                 MyColor.primary1),
                             SizedBox(
                               height: height * 0.005,
                             ),
-                            customView.myField(context, bioCtrl, "Your bio",
+                            customView.myField(context, bioCtrl, text.yourbio.tr,
                                 TextInputType.text),
                             SizedBox(
                               height: height * 0.025,
                             ),
-                            customView.text("Your username / email", 11.0,
+                            customView.text(text.yourUsernameEmail.tr, 11.0,
                                 FontWeight.w600, MyColor.primary1),
                             SizedBox(
                               height: height * 0.005,
                             ),
                             customView.myField(context, emailCtrl,
-                                "Enter Email", TextInputType.text),
+                                text.enterEmail.tr, TextInputType.text),
                             SizedBox(
                               height: height * 0.025,
                             ),
                             /*-new-*/
-                            customView.text("Your address", 10.0,
+                            customView.text(text.yourAddres.tr, 10.0,
                                 FontWeight.w600, MyColor.primary1),
                             SizedBox(
                               height: height * 0.005,
                             ),
                             customView.myField(context, addressCtrl,
-                                "Enter address", TextInputType.text),
+                                text.enteAddress.tr, TextInputType.text),
                             SizedBox(
                               height: height * 0.025,
                             ),
@@ -376,13 +378,13 @@ class _CenterProfileState extends State<CenterProfile> {
 
   Future<bool> updateValidation(BuildContext context) async {
     if (userNameCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Medical center name is required");
+      customView.MySnackBar(context, text.Entermedicalcentername.tr);
     } else if (emailCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Email is required");
+      customView.MySnackBar(context, text.enterEmail.tr);
     } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtrl.text.toString())) {
-      customView.MySnackBar(context, "Enter valid email");
+      customView.MySnackBar(context, text.Enter_Email.tr);
     } else if (addressCtrl.text.isEmpty) {
-      customView.MySnackBar(context, "Address is required");
+      customView.MySnackBar(context,text.Select_Address);
     } else {
       return await latLong(addressCtrl.text);
     }
@@ -400,7 +402,7 @@ class _CenterProfileState extends State<CenterProfile> {
       return true;
     } catch (e) {
       log("Exception :-", error: e.toString());
-      customView.MySnackBar(context, "invalid address");
+      customView.MySnackBar(context, text.invalidAddress.tr);
       return false;
     }
   }

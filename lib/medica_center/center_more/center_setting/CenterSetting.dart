@@ -5,6 +5,7 @@ import 'package:medica/medica_center/center_controller/CenterAuthController.dart
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 
 class CenterSettingsScreen extends StatefulWidget {
   const CenterSettingsScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
   CustomView customView = CustomView();
   TextEditingController passwordCtr = TextEditingController();
   bool _isHidden = true;
+  LocalString text = LocalString();
   CenterAuthCtr centerAuthCtr  = CenterAuthCtr();
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
             ),
           ),
           title: customView.text(
-              "Settings", 15.0, FontWeight.w500, Colors.black),
+              text.Settings.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -51,7 +53,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Change Password", 14.0, FontWeight.w500, Colors.black),
+                    text.ChangePassword.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -67,7 +69,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
             onPressed: (){
               deletePopUp(context);
             },
-            child: customView.text("Delete account", 15.0, FontWeight.w500, Colors.red),
+            child: customView.text(text.Deleteaccount.tr, 15.0, FontWeight.w500, Colors.red),
           ),
         ),
       ),
@@ -102,7 +104,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text("Delete account", 17,
+                            child: customView.text(text.Deleteaccount.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -111,7 +113,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to delete the account? Please enter your current password to confirm your decision.",
+                                text.AreyouSureDeleteAccount.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -122,12 +124,12 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: customView.text(
-                                "Enter your Password", 13, FontWeight.w600, MyColor.black),
+                                text.Enter_Password.tr, 13, FontWeight.w600, MyColor.black),
                           ),
                           const SizedBox(
                               height:5.0
                           ),
-                          customView.PasswordField(context, passwordCtr, "Enter Password", TextInputType.text,
+                          customView.PasswordField(context, passwordCtr, text.Enter_Password.tr, TextInputType.text,
                               GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -158,7 +160,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                                   Get.back();
                                 },
                                 child: customView.text(
-                                    "Dismiss", 14.0, FontWeight.w500,
+                                    text.Dismiss.tr, 14.0, FontWeight.w500,
                                     MyColor.grey),
                               ),
                               Obx(() {
@@ -167,7 +169,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                                 }
                                 return customView.mysButton(
                                   context,
-                                  "Delete profile",
+                                  text.Deleteprofile.tr,
                                       () {
                                     if(validation()){
                                       centerAuthCtr.centerDeleteAc(context, passwordCtr.text, () {
@@ -199,7 +201,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
     if (passwordCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Enter password");
+      customView.MySnackBar(context, text.Enter_Password.tr);
     } else {
       return true;
     }
