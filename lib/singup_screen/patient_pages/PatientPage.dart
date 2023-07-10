@@ -4,6 +4,7 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 
 class PatientSignUp extends StatefulWidget {
@@ -14,6 +15,10 @@ class PatientSignUp extends StatefulWidget {
 }
 
 class _PatientSignUpState extends State<PatientSignUp> {
+
+
+  LocalString text = LocalString();
+
   /*-----------Getx Controller initialize----------------*/
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
 

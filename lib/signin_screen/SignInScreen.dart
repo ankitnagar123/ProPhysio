@@ -5,6 +5,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/signin_screen/signin_controller/SignInController.dart';
 
 import '../helper/CustomView/CustomView.dart';
+import '../language_translator/LanguageTranslate.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -15,12 +16,13 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   LoginCtr loginCtr = LoginCtr();
-  final TextEditingController _inputController = TextEditingController();
+  LocalString text = LocalString();
   TextEditingController emailCtr = TextEditingController();
   TextEditingController passwordCtr = TextEditingController();
   bool submit = false;
   final _formKey = GlobalKey<FormState>();
-
+var  enLocal;
+var itLocal;
   @override
   void initState() {
     emailCtr.addListener(() {
@@ -38,7 +40,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Form(
         key: _formKey,
@@ -49,24 +50,24 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: [
                   SizedBox(height: height * 0.12),
-                  custom.text("Sign in", 23, FontWeight.w700, MyColor.black),
+                  custom.text(text.SIGN_IN.tr   , 23, FontWeight.w700, MyColor.black),
                   SizedBox(height: height * 0.08),
                   Align(
                     alignment: Alignment.topLeft,
-                    child: custom.text("Enter your username/email", 13,
+                    child: custom.text(text.ENTER_USER_EMAIL.tr, 13,
                         FontWeight.w500, MyColor.primary1),
                   ),
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  custom.myField(context, emailCtr, "Enter Email ID/User Id",
+                  custom.myField(context, emailCtr, text.HINT_ENTER_USER_EMAIL.tr,
                       TextInputType.emailAddress),
                   SizedBox(
                     height: height * 0.03,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
-                    child: custom.text("Enter your Password", 13,
+                    child: custom.text(text.Enter_Password.tr, 13,
                         FontWeight.w500, MyColor.primary1),
                   ),
                   SizedBox(
@@ -75,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   custom.PasswordField(
                       context,
                       passwordCtr,
-                      "Enter Password",
+                      text.HINT_ENTER_Password.tr,
                       TextInputType.text,
                       GestureDetector(
                           onTap: () {
@@ -100,16 +101,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   Row(
                     children: [
-                      custom.text("Forgot password?", 12, FontWeight.w500,
+                      custom.text(text.Forgot_Password.tr, 12, FontWeight.w500,
                           MyColor.primary1),
                       GestureDetector(
                         onTap: () {
                           // Navigator.push(context, MaterialPageRoute(builder: (context)=> MyApp()));
                           Get.toNamed(RouteHelper.getForgotPasswordScreen());
                         },
-                        child: const Text(
-                          "Create a new one",
-                          style: TextStyle(
+                        child:  Text(
+                          text.Create_New_One.tr,
+                          style: const TextStyle(
                             decoration: TextDecoration.underline,
                             color: MyColor.primary1,
                             fontWeight: FontWeight.w600,
@@ -127,7 +128,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (loginCtr.loading.value) {
                           return custom.MyIndicator();
                         }
-                        return custom.MyButton(context, "Sign in", () {
+                        return custom.MyButton(context, text.SIGN_IN.tr, () {
+                        itLocal = const Locale('it','IT');
+                        Get.updateLocale(itLocal);
                           if (validation()) {
                             loginCtr.login(
                                 context, emailCtr.text, passwordCtr.text);
@@ -150,14 +153,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      custom.text("Don’t have an account?", 12, FontWeight.w500,
+                      custom.text(text.Dont_have_an_account.tr, 12, FontWeight.w500,
                           MyColor.primary1),
                       TextButton(
                         onPressed: () {
                           Get.toNamed(RouteHelper.getSingUpScreen());
                         },
-                        child: const Text(
-                          "Sign up",
+                        child:  Text(
+                          text.Sign_UP.tr,
                           style: TextStyle(
                               color: MyColor.primary1,
                               fontWeight: FontWeight.w600,
@@ -182,11 +185,9 @@ class _SignInScreenState extends State<SignInScreen> {
   //******************LOGIN VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (emailCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Required Email or Username");
-    } else if (emailCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter Valid email address");
-    } else if (passwordCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Incorrect Password or Username");
+      custom.MySnackBar(context, text.Required_Email_or_Username.tr);
+    }  else if (passwordCtr.text.toString().isEmpty) {
+      custom.MySnackBar(context, text.Required_Password.tr);
     } else {
       return true;
     }

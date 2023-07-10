@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/singup_screen/patient_pages/PatientPage.dart';
 import 'package:get/get.dart';
+import '../language_translator/LanguageTranslate.dart';
 import 'doctor_signup_page/DoctorSignUpScreen.dart';
 import 'medical_center_signup/MedicalCenterSignUp.dart';
 
@@ -13,6 +14,8 @@ class SingUpScreen extends StatefulWidget {
 }
 
 class _SingUpScreenState extends State<SingUpScreen> {
+  LocalString text = LocalString();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,26 +33,26 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 color: Colors.black,
               ),
             ),
-            bottom: const TabBar(
+            bottom:  TabBar(
               labelPadding: EdgeInsets.all(7.0),
               indicatorColor: MyColor.primary,
               tabs: [
                 Text(
-                  "I'm a patient",
+                  text.I_Patinet.tr,
                   style: TextStyle(color: MyColor.primary),
                 ),
                 Text(
-                  "I'm a doctor",
+                  text.I_Doctor.tr,
                   style: TextStyle(color:  MyColor.primary),
                 ),
                 Text(
-                  "I'm a center",
+                  text.I_Center.tr,
                   style: TextStyle(color:  MyColor.primary),
                 ),
               ],
             ),
-            title: const Text(
-              'Create an account',
+            title:  Text(
+              text.Create_An_Account.tr,
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),

@@ -68,7 +68,7 @@ class DoctorSignUpCtr extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       otp.value = jsonResponse['otp'].toString();
 
-      // var result = jsonResponse['result'].toString();
+      var result = jsonResponse['result'].toString();
       if (response.statusCode == 200) {
         // callback();
         log("my otp ctr${otp.toString()}");
@@ -77,7 +77,7 @@ class DoctorSignUpCtr extends GetxController {
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {
-        custom.massenger(context, response.toString());
+        custom.massenger(context, result.toString());
       }
     } catch (e) {
       loadingotp.value = false;

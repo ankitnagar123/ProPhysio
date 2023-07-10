@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:medica/firebase_service/firebase_options.dart';
+import 'package:medica/language_translator/LanguageTranslate.dart';
 
 import 'Helper/RoutHelper/RoutHelper.dart';
 import 'firebase_service/NotificationService.dart';
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: LocalString(),
+      locale:const Locale('en','US') ,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
