@@ -177,21 +177,21 @@ class DPrescriptionListModel {
   });
 
   factory DPrescriptionListModel.fromJson(Map<String, dynamic> json) => DPrescriptionListModel(
-    userId: json["user_id"],
-    name: json["name"],
-    surname: json["surname"],
-    username: json["username"],
-    email: json["email"],
-    healthCard: json["health_card"],
-    location: json["location"],
-    enGender: json["en_gender"],
-    code: json["code"],
-    contact: json["contact"],
-    age: json["age"],
-    weight: json["weight"],
-    height: json["height"],
-    birthPlace: json["birth_place"],
-    taxCode: json["tax_code"],
+    userId: json["user_id"].toString(),
+    name: json["name"].toString(),
+    surname: json["surname"].toString(),
+    username: json["username"].toString(),
+    email: json["email"].toString(),
+    healthCard: json["health_card"].toString(),
+    location: json["location"].toString(),
+    enGender: json["en_gender"].toString(),
+    code: json["code"].toString(),
+    contact: json["contact"].toString(),
+    age: json["age"].toString(),
+    weight: json["weight"].toString(),
+    height: json["height"].toString(),
+    birthPlace: json["birth_place"].toString(),
+    taxCode: json["tax_code"].toString(),
     details: List<Detail>.from(json["Details"].map((x) => Detail.fromJson(x))),
   );
 
@@ -237,14 +237,14 @@ class Detail {
   });
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-    result: json["result"],
-    title: json["title"],
-    type: json["type"],
-    description: json["description"],
-    image: json["image"],
-    doctorId: json["doctor_id"],
-    doctorName: json["doctor_name"],
-    doctorSurname: json["doctor_surname"],
+    result: json["result"].toString(),
+    title: json["title"].toString(),
+    type: json["type"].toString(),
+    description: json["description"].toString(),
+    image: json["image"].toString(),
+    doctorId: json["doctor_id"].toString(),
+    doctorName: json["doctor_name"].toString(),
+    doctorSurname: json["doctor_surname"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

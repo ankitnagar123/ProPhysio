@@ -4,6 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:get/get.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../center_more/CenterMorePage.dart';
 import 'CenterHomePage.dart';
 
@@ -18,6 +19,7 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
 
   MyRoute myRoute = Get.put(MyRoute());
   CustomView view = CustomView();
+  LocalString text = LocalString();
   @override
   List screens =  [
      const CenterHomeScreen(),
@@ -35,22 +37,22 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title:  const Text("Exit App",style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
-                  content:  const Text("Do you want to exit an app?",style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
+                  title:   Text(text.Exit_App.tr,style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
+                  content:   Text(text.Want_To_Exist.tr,style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
                   actions: [
                     ElevatedButton(onPressed: (){
                       Navigator.of(context).pop(false);
                     },
                       style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.white)
-                      ), child:  const Text("No",style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
+                      ), child:   Text(text.No.tr,style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
                     ),
                     ElevatedButton(onPressed: (){
                       SystemNavigator.pop();
                     },
                       style:  const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(MyColor.primary1)
-                      ), child:  const Text("Yes",style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
+                      ), child:   Text(text.Yes.tr,style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
                     ),
                   ],
                 );
@@ -103,7 +105,7 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
                         width: 30,
                         child:myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
                         Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.primary,) :Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text("Wards", 12, FontWeight.normal,
+                    view.text(text.Ward.tr, 12, FontWeight.normal,
                       myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==2?
                       MyColor.primary:MyColor.grey,)
 
@@ -122,7 +124,7 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
                     SizedBox(height: 20,
                         width: 30,
                         child:myRoute.pageIndex.value ==1?  Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color:MyColor.grey,)),
-                    view.text("More", 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
+                    view.text(text.More.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
 
                   ],
                 )),

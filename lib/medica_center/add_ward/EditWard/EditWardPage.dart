@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
@@ -6,6 +8,7 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../center_controller/CenterHomeController.dart';
 
 class CenterEditWardScreen extends StatefulWidget {
@@ -20,7 +23,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
-
+  LocalString text = LocalString();
   String? cancelReason = '';
   String? cancelReason1 = '';
 
@@ -73,7 +76,6 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final list = _getFilteredList();
     final height = MediaQuery
         .of(context)
         .size
@@ -90,25 +92,9 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
               child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
           elevation: 0,
           centerTitle: true,
-          title: custom.text("Edit ward", 17, FontWeight.w500, MyColor.black),
+          title: custom.text(text.Edit_Ward.tr, 17, FontWeight.w500, MyColor.black),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButton: Padding(
-        //   padding: const EdgeInsets.only(bottom: 10),
-        //   child: custom.MyButton(context, "Save ward", () {
-        //     if (nameCtr.text.isEmpty) {
-        //       custom.MySnackBar(context, "Enter ward name");
-        //     } else if (drIdMainArray.length == 0) {
-        //       custom.MySnackBar(context, "Select doctor");
-        //     } else {
-        //      /* centerHomeCtr.addDoctors(
-        //           context, nameCtr.text, drIdMainArray.join(','));*/
-        //       print("object");
-        //     }
-        //     // Get.back();
-        //   }, MyColor.primary,
-        //       const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
-        // ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
@@ -118,14 +104,14 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: custom.text("Ward name", 13.0, FontWeight.w600,
+                child: custom.text(text.Edit_Ward.tr, 13.0, FontWeight.w600,
                     MyColor.primary1),
               ),
               const SizedBox(
                 height: 4.0,
               ),
 
-              custom.myField(context, nameCtr, "name", TextInputType.text),
+              custom.myField(context, nameCtr, text.Edit_Ward.tr, TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -137,7 +123,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Edit doctors", 16.0, FontWeight.w500, MyColor.black),
+                        text.Edit_Doctor.tr, 16.0, FontWeight.w500, MyColor.black),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -153,7 +139,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: custom.text(
-                            "Add more doctors", 14.0, FontWeight.w400,
+                            text.Add_More_Doctor.tr, 14.0, FontWeight.w400,
                             MyColor.black),
                       ),
                     ),
@@ -170,87 +156,71 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                   crossAxisCount: 4,
                   children: List.generate(
                       centerHomeCtr.selectedDoctorList.length, (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        /*  categoryId =
-                            doctorSignUpCtr.category[index].categoryId;
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                PDrSubCategory(categoryId: categoryId!,)));*/
-                      },
-                      child: Stack(
-                        children: [
-                          Card(
-                            margin: const EdgeInsets.only(
-                                left: 6, right: 6, bottom: 3, top: 4),
-                            elevation: 3,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 6.0, top: 5),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ClipRRect(
-                                        clipBehavior: Clip.antiAlias,
-                                        borderRadius: BorderRadius.circular(
-                                            13.0),
-                                        child: FadeInImage.assetNetwork(
-                                          imageErrorBuilder: (c, o, s) =>
-                                              Image.asset(
-                                                  color: MyColor.midgray,
-                                                  "assets/images/noimage.png",
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.cover),
-                                          width: 50,
-                                          height: 50,
-                                          fit: BoxFit.cover,
-                                          placeholder:
-                                          "assets/images/loading.gif",
-                                          image: centerHomeCtr
-                                              .selectedDoctorList[index]
-                                              .doctorProfile,
-                                          placeholderFit: BoxFit.cover,
-                                        )),
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          centerHomeCtr
-                                              .selectedDoctorList[index].name,
-                                          style: const TextStyle(fontSize: 11),
-                                          softWrap: false,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
+                    return Stack(
+                      children: [
+                        Card(
+                          margin: const EdgeInsets.only(
+                              left: 6, right: 6, bottom: 3, top: 4),
+                          elevation: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 6.0, top: 5),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                      clipBehavior: Clip.antiAlias,
+                                      borderRadius: BorderRadius.circular(
+                                          13.0),
+                                      child: FadeInImage.assetNetwork(
+                                        imageErrorBuilder: (c, o, s) =>
+                                            Image.asset(
+                                                color: MyColor.midgray,
+                                                "assets/images/noimage.png",
+                                                width: 50,
+                                                height: 50,
+                                                fit: BoxFit.cover),
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                        placeholder:
+                                        "assets/images/loading.gif",
+                                        image: centerHomeCtr
+                                            .selectedDoctorList[index]
+                                            .doctorProfile,
+                                        placeholderFit: BoxFit.cover,
+                                      )),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        centerHomeCtr
+                                            .selectedDoctorList[index].name,
+                                        style: const TextStyle(fontSize: 11),
+                                        softWrap: false,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-
                             ),
                           ),
-                          Positioned(
-                              top: 0,
-                              right: 0,
-
-                              child: GestureDetector(
-                                  onTap: () {
-                                    /*  centerHomeCtr.selectedDoctorList.remove(index);
-                                    centerHomeCtr.selectedDoctorList.removeWhere((element){
-                                      return element.doctorId = index;
-                                    });*/
-                                    doctorId =
-                                        centerHomeCtr.selectedDoctorList[index]
-                                            .doctorId;
-                                    removeDoctor(context, doctorId, index);
-                                  },
-                                  child: const Icon(
-                                    Icons.close_outlined, size: 18,
-                                    color: MyColor.primary1,))),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                            top: 0,
+                            right: 0,
+                            child: GestureDetector(
+                                onTap: () {
+                                  doctorId = centerHomeCtr.selectedDoctorList[index]
+                                          .doctorId;
+                                  removeDoctor(context, doctorId, index);
+                                },
+                                child: const Icon(
+                                  Icons.close_outlined, size: 18,
+                                  color: MyColor.primary1,))),
+                      ],
                     );
                   }),
                 ),
@@ -260,7 +230,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                     deleteWardPopUp(context);
                   },
                   child: custom.text(
-                      "Delete ward", 13, FontWeight.w500, Colors.red))),
+                     text.Delete_Ward.tr, 13, FontWeight.w500, Colors.red))),
               const SizedBox(height: 65,)
             ],
           ),
@@ -314,7 +284,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Remove doctor", 17,
+                            child: custom.text(text.Remove_Doctor.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -324,7 +294,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to remove the doctor from your ward? Please select a reason.",
+                                text.Sure_Want_Remove_Doctor.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -368,7 +338,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               centerHomeCtr.loadingEdit.value
@@ -376,15 +346,20 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                                   : Expanded(
                                 child: custom.mysButton(
                                   context,
-                                  "Remove doctor",
+                                  text.Remove_Doctor.tr,
                                       () {
-                                    centerHomeCtr.editWard(
-                                        context, wardName, doctorId, drCancelId,
-                                        wardId, () {
-                                      centerHomeCtr.centerSelectedDrList(
-                                          context, wardId);
-                                      Get.back();
-                                    });
+                                    if(cancelReason == ""){
+                                      print("select");
+                                    }else{
+                                      centerHomeCtr.editWard(
+                                          context, wardName, doctorId, drCancelId,
+                                          wardId, () {
+                                        centerHomeCtr.centerSelectedDrList(
+                                            context, wardId);
+                                        Get.back();
+                                      });
+                                    }
+
                                     /* bookingController
                                         .bookingAppointmentCancel(
                                         context, id,cancelId!, () {
@@ -449,7 +424,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5.0),
-                              child: custom.text("Delete ward", 17,
+                              child: custom.text(text.Delete_Ward.tr, 17,
                                   FontWeight.w500, Colors.black),
                             ),
                             const SizedBox(
@@ -459,7 +434,7 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5.0),
                               child: custom.text(
-                                  "Are you sure you want to delete the ward? Please select a reason.",
+                                  text.Sure_Want_Remove_Ward.tr,
                                   12,
                                   FontWeight.w400,
                                   Colors.black),
@@ -504,20 +479,25 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
                                     Get.back();
                                   },
                                   child: custom.text(
-                                      "Dismiss", 14.0, FontWeight.w500,
+                                      text.Dismiss.tr, 14.0, FontWeight.w500,
                                       MyColor.grey),
                                 ),
                                 centerHomeCtr.loadingDelete.value
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                   context,
-                                  "Delete profile",
+                                  text.Delete_Ward.tr,
                                       () {
-                                    centerHomeCtr.deleteWard(
-                                        context, wardCancelId, wardId, () {
-                                      Get.toNamed(
-                                          RouteHelper.CBottomNavigation());
-                                    });
+                                    if(cancelReason1 == ""){
+                                      log("empty");
+                                    }else{
+                                      centerHomeCtr.deleteWard(
+                                          context, wardCancelId, wardId, () {
+                                        Get.toNamed(
+                                            RouteHelper.CBottomNavigation());
+                                      });
+                                    }
+
                                   },
                                   Colors.red,
                                   const TextStyle(

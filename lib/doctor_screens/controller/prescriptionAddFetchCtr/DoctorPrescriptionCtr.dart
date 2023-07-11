@@ -154,7 +154,7 @@ class DoctorPrescriptionCtr extends GetxController {
         loadingFetch.value = false;
       }
     } catch (e) {
-      loadingFetch.value = true;
+      loadingFetch.value = false;
       log('Kuch to dikkat hai?$e');
     }
   }
@@ -178,7 +178,7 @@ class DoctorPrescriptionCtr extends GetxController {
         loadingFetchQR.value = false;
       }
     } catch (e) {
-      loadingFetchQR.value = true;
+      loadingFetchQR.value = false;
       log('Kuch to dikkat hai?$e');
     }
   }

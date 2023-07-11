@@ -205,17 +205,17 @@ print(doctorList);
           await apiService.postData(MyAPI.pDoctorDetails, Peramert);
       print("doctor Detail=============${response.body}");
       var jsonResponse = jsonDecode(response.body);
-      var result = jsonResponse["result"];
+      var result = jsonResponse["result"].toString();
       if (result == "Success") {
         loadingFetchD.value = false;
-        String img = jsonResponse["Doctor_document"];
-        String location = jsonResponse["location"];
+        String img = jsonResponse["Doctor_document"].toString();
+        String location = jsonResponse["location"].toString();
 
         print(img);
-        fee.value = jsonResponse["fees"];
+        fee.value = jsonResponse["fees"].toString();
         doctorname.value = jsonResponse["name"].toString();
-        drSurname.value = jsonResponse["surname"];
-        drContact.value = jsonResponse["contact"];
+        drSurname.value = jsonResponse["surname"].toString();
+        drContact.value = jsonResponse["contact"].toString();
         image.value = img;
         address.value = location;
         biography.value = jsonResponse["biography"].toString();

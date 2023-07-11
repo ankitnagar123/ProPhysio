@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../center_controller/CenterHomeController.dart';
 import '../../center_models/CenterAddMoreDr.dart';
 
@@ -22,6 +23,7 @@ class _WardAddMoreDoctorState extends State<WardAddMoreDoctor> {
   TextEditingController nameCtr = TextEditingController();
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
@@ -70,9 +72,9 @@ String wardId = "";
               ? const Text("")
               : centerHomeCtr.loadingMoreAdd.value
                   ? custom.MyIndicator()
-                  : custom.MyButton(context, "Add doctor", () {
+                  : custom.MyButton(context, text.Add_Doctor.tr, () {
                       if (drIdMainArray.isEmpty) {
-                        custom.MySnackBar(context, "Select doctor");
+                        custom.MySnackBar(context, text.Add_Doctor.tr);
                       } else {
                         centerHomeCtr.addMoreDr(context, drIdMainArray.join(','), wardId, () {
                           var data = {
@@ -115,36 +117,15 @@ String wardId = "";
                           },
                           child: const Icon(Icons.arrow_back_ios_new_outlined,
                               size: 20)),
-                      custom.text("Add more doctor", 17, FontWeight.w500,
+                      custom.text(text.Add_More_Doctor.tr, 17, FontWeight.w500,
                           MyColor.black),
                       const Text("")
                     ],
                   ),
                 ),
-                /* SizedBox(
-                  height: height * 0.04,
-                ),*/
-                /* Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text("Edit ward name", 12.0, FontWeight.w600,
-                      MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myField(context, nameCtr, "name", TextInputType.text),*/
-                /* SizedBox(
-                  height: height * 0.03,
-                ),
-                const Divider(thickness: 1.5, color: MyColor.midgray),*/
                 SizedBox(
                   height: height * 0.03,
                 ),
-                // Align(
-                //   alignment: Alignment.topLeft,
-                //   child: custom.text(
-                //       "Add doctors", 17.0, FontWeight.w600, MyColor.black),
-                // ),
                 SizedBox(
                   width: widht,
                   child: TextFormField(
@@ -162,12 +143,12 @@ String wardId = "";
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       suffixIconColor: MyColor.primary1,
                       contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "Search Doctor",
+                      hintText: text.Search_Doctorby_Name.tr,
                       hintStyle:
                           TextStyle(fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
@@ -181,77 +162,6 @@ String wardId = "";
                     ),
                   ),
                 ),
-
-                /*   if (drIdMainArrayimg.isEmpty)
-                  const Text("")
-                else
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: drIdMainArrayimg.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                          clipBehavior: Clip.antiAlias,
-                                          borderRadius:
-                                          BorderRadius.circular(13.0),
-                                          child: FadeInImage.assetNetwork(
-                                            imageErrorBuilder: (c, o, s) =>
-                                                Image.asset(
-                                                    color: MyColor.midgray,
-                                                    "assets/images/noimage.png",
-                                                    width: 50,
-                                                    height: 50,
-                                                    fit: BoxFit.cover),
-                                            width: 50,
-                                            height: 50,
-                                            fit: BoxFit.cover,
-                                            placeholder:
-                                            "assets/images/loading.gif",
-                                            image: "${drIdMainArrayimg[index]}",
-                                            placeholderFit: BoxFit.cover,
-                                          )),
-                                      Positioned(
-                                          left: 0,
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  drIdMainArrayimg.remove(
-                                                      drIdMainArrayimg[index]);
-                                                  */
-                /*drIdArray.remove(index);
-                                         drIdMainArrayimg.clear();*/
-                /*
-                                                  // drIdMainArrayimg.remove(drIdMainArray.remove(list[index].doctorId));
-                                                });
-                                              },
-                                              child: const Icon(
-                                                  Icons.close_outlined)))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),*/
                 centerHomeCtr.loadingFetchNew.value
                     ? Padding(
                         padding: const EdgeInsets.symmetric(
@@ -265,10 +175,10 @@ String wardId = "";
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: list.isEmpty
-                            ? const Center(
+                            ?  Center(
                                 heightFactor: 10,
                                 child:
-                                    Text("Doctor Not Available at the Moment"))
+                                    Text(text.Doctor_Not_Available.tr))
                             : ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
@@ -276,9 +186,6 @@ String wardId = "";
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      /* var id = {
-                              "data": centerHomeCtr.doctorList[index].doctorId
-                            };*/
                                       setState(() {
                                         if (drIdArray.contains(index)) {
                                           drIdArray.remove(index);
@@ -292,17 +199,6 @@ String wardId = "";
                                       });
                                       print(drIdArray);
                                       print(drIdMainArray);
-
-                                      /*   Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoctorDetailScreen(
-                                          id: list[index]
-                                              .doctorId
-                                              .toString(),
-                                        )));*/
-                                      // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                                     },
                                     child: Card(
                                       margin: const EdgeInsets.symmetric(
@@ -356,15 +252,9 @@ String wardId = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                    width: MediaQuery.sizeOf(context).width/0.1,
-                                                    child: custom.text(
-                                                        list[index]
-                                                            .location
-                                                            .toString(),
-                                                        12,
-                                                        FontWeight.normal,
-                                                        MyColor.grey),
-                                                  ),
+                                                      width: MediaQuery.sizeOf(context).width/1.8,
+                                                      child: Text(list[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                                        fontFamily: "Poppins",color: MyColor.grey,),)),
                                                 ],
                                               ),
                                               const SizedBox(
@@ -396,28 +286,27 @@ String wardId = "";
                                                       12,
                                                       FontWeight.w500,
                                                       MyColor.black)),
-
-                                              // RatingBar(
-                                              //   // ignoreGestures: true,
-                                              //   itemSize: 17,
-                                              //   initialRating: double.parse(list[index].rating),
-                                              //   direction: Axis.horizontal,
-                                              //   allowHalfRating: true,
-                                              //   itemCount: 5,
-                                              //   ratingWidget: RatingWidget(
-                                              //       full:
-                                              //       const Icon(Icons.star, color: MyColor.primary),
-                                              //       half: const Icon(Icons.star_half,
-                                              //           color: MyColor.primary),
-                                              //       empty: const Icon(
-                                              //           Icons.star_border_purple500_outlined,
-                                              //           color: MyColor.primary)),
-                                              //   itemPadding:
-                                              //   const EdgeInsets.symmetric(horizontal: 2.0),
-                                              //   onRatingUpdate: (rating) {
-                                              //     print(rating);
-                                              //   },
-                                              // ),
+                                              RatingBar(
+                                                // ignoreGestures: true,
+                                                itemSize: 17,
+                                                initialRating: double.parse(list[index].rating),
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                ratingWidget: RatingWidget(
+                                                    full:
+                                                    const Icon(Icons.star, color: MyColor.primary),
+                                                    half: const Icon(Icons.star_half,
+                                                        color: MyColor.primary),
+                                                    empty: const Icon(
+                                                        Icons.star_border_purple500_outlined,
+                                                        color: MyColor.primary)),
+                                                itemPadding:
+                                                const EdgeInsets.symmetric(horizontal: 2.0),
+                                                onRatingUpdate: (rating) {
+                                                  print(rating);
+                                                },
+                                              ),
                                             ],
                                           ),
                                         ],

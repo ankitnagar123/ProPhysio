@@ -7,6 +7,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterSelectedWardModel.dart';
 
@@ -20,6 +21,7 @@ class CenterHomeScreen extends StatefulWidget {
 class _CenterHomeScreenState extends State<CenterHomeScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
@@ -93,11 +95,11 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "search ward",
+                      hintText: text.search_Ward.tr,
                       hintStyle: TextStyle(
                           fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
@@ -111,101 +113,12 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                     ),
                   ),
                 ),
-             /*   SizedBox(
-                  height: height * 0.04,
-                ),*/
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     custom.text("results", 14, FontWeight.normal,
-                //         MyColor.grey.withOpacity(0.70)),
-                //     GestureDetector(
-                //       onTap: () {
-                //         showModalBottomSheet(
-                //           context: context,
-                //           builder: (context) {
-                //             return Padding(
-                //               padding: const EdgeInsets.only(left: 15.0),
-                //               child: SingleChildScrollView(
-                //                 child: Column(
-                //                   mainAxisAlignment: MainAxisAlignment.start,
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     const SizedBox(
-                //                       height: 25.0,
-                //                     ),
-                //                     Align(
-                //                       alignment: Alignment.topCenter,
-                //                       child: custom.text("Sort by:", 17,
-                //                           FontWeight.w500, MyColor.black),
-                //                     ),
-                //                     const SizedBox(
-                //                       height: 20.0,
-                //                     ),
-                //                     ListTile(
-                //                         visualDensity: const VisualDensity(
-                //                             horizontal: -4, vertical: -4),
-                //                         onTap: () {
-                //                           setState(() {
-                //                             selectedCard = 0;
-                //                           });
-                //
-                //                           Get.back();
-                //                         },
-                //                         leading: custom.text("Date: linear", 15,
-                //                             FontWeight.normal, MyColor.black),
-                //                         trailing: selectedCard == 0
-                //                             ? const Icon(Icons.check_outlined,
-                //                                 color: MyColor.lightblue)
-                //                             : const Text("")),
-                //                     const Divider(
-                //                       thickness: 1.5,
-                //                     ),
-                //                     ListTile(
-                //                         visualDensity: const VisualDensity(
-                //                             horizontal: -4, vertical: -4),
-                //                         onTap: () {
-                //                           setState(() {
-                //                             selectedCard = 1;
-                //                           });
-                //                           Get.back();
-                //                         },
-                //                         leading: custom.text(
-                //                             "Date: reverse",
-                //                             15,
-                //                             FontWeight.normal,
-                //                             MyColor.black),
-                //                         trailing: selectedCard == 1
-                //                             ? const Icon(Icons.check_outlined,
-                //                                 color: MyColor.lightblue)
-                //                             : const Text("")),
-                //                   ],
-                //                 ),
-                //               ),
-                //             );
-                //           },
-                //         );
-                //       },
-                //       child: Wrap(
-                //         children: [
-                //           custom.text("Sort by: ", 14, FontWeight.normal,
-                //               MyColor.grey.withOpacity(0.70)),
-                //           custom.text(
-                //               "Name (A-Z)", 14, FontWeight.w500, MyColor.black),
-                //           const Icon(
-                //             Icons.keyboard_arrow_down,
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 centerHomeCtr.loadingFetchW.value
                     ? Center(heightFactor: 10, child: custom.MyIndicator())
                     : list.isEmpty
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: custom.text("No ward found", 14,
+                            child: custom.text(text.No_Ward.tr, 14,
                                 FontWeight.normal, MyColor.black))
                         : SingleChildScrollView(
                           child: ListView.builder(
@@ -239,7 +152,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
                                           width: 4.0,
                                         ),
                                         custom.text(
-                                            "${list[index].totalDoctor} doctors",
+                                            "${list[index].totalDoctor} ${text.Doctor.tr}",
                                             13.0,
                                             FontWeight.normal,
                                             Colors.black),

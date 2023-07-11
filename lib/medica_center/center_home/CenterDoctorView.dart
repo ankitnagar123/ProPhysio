@@ -8,6 +8,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterSelectedDrModel.dart';
 
@@ -21,6 +22,8 @@ class CenterDoctorViewScreen extends StatefulWidget {
 class _CenterDoctorViewScreenState extends State<CenterDoctorViewScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
 
@@ -108,11 +111,11 @@ String keyword = "";
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "search doctor by name,surname",
+                      hintText: text.Search_Doctorby_Name.tr,
                       hintStyle: TextStyle(
                           fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
@@ -129,101 +132,15 @@ String keyword = "";
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    custom.text("results", 14, FontWeight.normal,
-                        MyColor.grey.withOpacity(0.70)),
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 25.0,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topCenter,
-                                      child: custom.text("Sort by:", 17,
-                                          FontWeight.w500, MyColor.black),
-                                    ),
-                                    const SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    ListTile(
-                                        visualDensity: const VisualDensity(
-                                            horizontal: -4, vertical: -4),
-                                        onTap: () {
-                                          setState(() {
-                                            selectedCard = 0;
-                                          });
-
-                                          Get.back();
-                                        },
-                                        leading: custom.text("Date: linear", 15,
-                                            FontWeight.normal, MyColor.black),
-                                        trailing: selectedCard == 0
-                                            ? const Icon(Icons.check_outlined,
-                                                color: MyColor.lightblue)
-                                            : const Text("")),
-                                    const Divider(
-                                      thickness: 1.5,
-                                    ),
-                                    ListTile(
-                                        visualDensity: const VisualDensity(
-                                            horizontal: -4, vertical: -4),
-                                        onTap: () {
-                                          setState(() {
-                                            selectedCard = 1;
-                                          });
-                                          Get.back();
-                                        },
-                                        leading: custom.text(
-                                            "Date: reverse",
-                                            15,
-                                            FontWeight.normal,
-                                            MyColor.black),
-                                        trailing: selectedCard == 1
-                                            ? const Icon(Icons.check_outlined,
-                                                color: MyColor.lightblue)
-                                            : const Text("")),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Wrap(
-                        children: [
-                          custom.text("Sort by: ", 14, FontWeight.normal,
-                              MyColor.grey.withOpacity(0.70)),
-                          custom.text(
-                              "Name (A-Z)", 14, FontWeight.w500, MyColor.black),
-                          const Icon(
-                            Icons.keyboard_arrow_down,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
                 centerHomeCtr.loadingFetchS.value
                     ? categorysubShimmerEffect(context)
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: drList.isEmpty
-                            ? const Center(
+                            ?  Center(
                                 heightFactor: 10,
                                 child:
-                                    Text("Doctor Not Available at the Moment"))
+                                    Text(text.Doctor_Not_Available.tr))
                             : ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
@@ -281,77 +198,14 @@ String keyword = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                    width: MediaQuery.sizeOf(context).width/1.2,
-                                                    child: custom.text(
-                                                        drList[
-                                                            index].location,
-                                                        12,
-                                                        FontWeight.normal,
-                                                        MyColor.grey),
-                                                  ),
+                                                    width: MediaQuery.sizeOf(context).width/1.8,
+                                                    child: Text(drList[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                                      fontFamily: "Poppins",color: MyColor.grey,),)),
                                                 ],
                                               ),
                                               const SizedBox(
                                                 height: 2,
                                               ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Icon(
-                                              //         Icons.monetization_on,
-                                              //         size: 18),
-                                              //     const SizedBox(
-                                              //       width: 3,
-                                              //     ),
-                                              //     custom.text(
-                                              //         centerHomeCtr.selectedDoctorList[index]["Doctor_profile"],
-                                              //         12,
-                                              //         FontWeight.normal,
-                                              //         MyColor.grey),
-                                              //   ],
-                                              // ),
-                // SizedBox(
-                //                     width: widht * 0.50,
-                //                     child: custom.text(
-                //                         centerHomeCtr.selectedDoctorList[index]["Doctor_profile"],
-                //                         12,
-                //                         FontWeight.w500,
-                //                         MyColor.black)),
-
-                                              // RatingBar(
-                                              //   // ignoreGestures: true,
-                                              //   itemSize: 17,
-                                              //   initialRating: double.parse(list[index].rating),
-                                              //   direction: Axis.horizontal,
-                                              //   allowHalfRating: true,
-                                              //   itemCount: 5,
-                                              //   ratingWidget: RatingWidget(
-                                              //       full:
-                                              //       const Icon(Icons.star, color: MyColor.primary),
-                                              //       half: const Icon(Icons.star_half,
-                                              //           color: MyColor.primary),
-                                              //       empty: const Icon(
-                                              //           Icons.star_border_purple500_outlined,
-                                              //           color: MyColor.primary)),
-                                              //   itemPadding:
-                                              //   const EdgeInsets.symmetric(horizontal: 2.0),
-                                              //   onRatingUpdate: (rating) {
-                                              //     print(rating);
-                                              //   },
-                                              // ),
-                                           /*   ListView.builder(
-                                                itemCount: centerHomeCtr.selectedDoctorList[index].cat.length,
-                                                itemBuilder:  (context, indx) {
-                                                  SizedBox(
-                                                      width: widht * 0.50,
-                                                      child: custom.text(
-                                                          centerHomeCtr.selectedDoctorList[index]
-                                                              .cat[indx].categoryName
-                                                              .toString(),
-                                                          12,
-                                                          FontWeight.w500,
-                                                          MyColor.black));
-                                                },
-                                              ),*/
                                             ],
                                           )
                                         ],

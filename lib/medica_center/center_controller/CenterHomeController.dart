@@ -131,7 +131,7 @@ class CenterHomeCtr extends GetxController {
         loadingAdd.value = false;
         custom.massenger(context, "Wait for doctor approval");
       } else {
-        custom.massenger(context, "somthing ");
+        custom.massenger(context, "something went wrong");
         loadingAdd.value = false;
         print("error");
       }

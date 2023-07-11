@@ -6,6 +6,7 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterAllDrModel.dart';
 
@@ -20,6 +21,8 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
   TextEditingController nameCtr = TextEditingController();
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
@@ -76,7 +79,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
               child: const Icon(Icons.arrow_back_ios, color: MyColor.black,size: 20,)),
           elevation: 0,
           centerTitle: true,
-          title: custom.text("New ward", 16, FontWeight.w500, MyColor.black),
+          title: custom.text(text.New_Ward.tr, 16, FontWeight.w500, MyColor.black),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
@@ -84,11 +87,11 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
           child: drIdMainArray.isEmpty
               ? const Text("")
               : centerHomeCtr.loadingAdd.value ? custom.MyIndicator() : custom
-              .MyButton(context, "Add ward", () {
+              .MyButton(context, text.Add_Ward.tr, () {
             if (nameCtr.text.isEmpty) {
-              custom.MySnackBar(context, "Enter ward name");
+              custom.MySnackBar(context, text.Enter_Ward_Name.tr);
             } else if (drIdMainArray.isEmpty) {
-              custom.MySnackBar(context, "Select doctor");
+              custom.MySnackBar(context, text.Add_Doctor.tr);
             } else {
               centerHomeCtr.addDoctors(
                   context, nameCtr.text, drIdMainArray.join(','), () {
@@ -111,13 +114,13 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text("Enter ward name", 12.0, FontWeight.w600,
+                  child: custom.text(text.Enter_Ward_Name.tr, 12.0, FontWeight.w600,
                       MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
                 ),
-                custom.myField(context, nameCtr, "name", TextInputType.text),
+                custom.myField(context, nameCtr, text.Enter_Ward_Name.tr, TextInputType.text),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -128,7 +131,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Add doctors", 17.0, FontWeight.w500, MyColor.black),
+                      text.Add_Doctor.tr, 17.0, FontWeight.w500, MyColor.black),
                 ),
                 const SizedBox(height: 3,),
                 SizedBox(
@@ -147,12 +150,12 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       suffixIconColor: MyColor.primary1,
                       contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "Search Doctor",
+                      hintText: text.Search_Doctorby_Name.tr,
                       hintStyle:
                       TextStyle(fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
@@ -172,7 +175,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                     heightFactor: 0,
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Selected doctor ${drIdArray.length}", 15, FontWeight.w400, MyColor.black),
+                        "${text.Selected_Doctor.tr} ${drIdArray.length}", 15, FontWeight.w400, MyColor.black),
                   ),
                 ),
                 centerHomeCtr.loadingFetch.value
@@ -187,10 +190,10 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                 ): SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: centerHomeCtr.doctorList.isEmpty
-                      ? const Center(
+                      ?  Center(
                       heightFactor: 10,
                       child:
-                      Text("Doctor Not Available at the Moment"))
+                      Text(text.Doctor_Not_Available.tr))
                       : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -273,15 +276,9 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                                               .location_on_outlined,
                                           size: 18),
                                       SizedBox(
-                                        width: 150,
-                                        child: custom.text(
-                                            list[index]
-                                                .location
-                                                .toString(),
-                                            12,
-                                            FontWeight.normal,
-                                            MyColor.grey),
-                                      ),
+                                          width: MediaQuery.sizeOf(context).width/1.8,
+                                          child: Text(list[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                            fontFamily: "Poppins",color: MyColor.grey,),)),
                                     ],
                                   ),
                                   const SizedBox(
