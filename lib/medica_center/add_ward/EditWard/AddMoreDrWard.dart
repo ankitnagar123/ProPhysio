@@ -252,7 +252,7 @@ String wardId = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                      width: MediaQuery.sizeOf(context).width/1.8,
+                                                      width: MediaQuery.sizeOf(context).width/2,
                                                       child: Text(list[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
                                                         fontFamily: "Poppins",color: MyColor.grey,),)),
                                                 ],

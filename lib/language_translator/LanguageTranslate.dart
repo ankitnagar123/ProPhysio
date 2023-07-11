@@ -170,6 +170,126 @@ class LocalString extends Translations {
   String New_Ward = "New ward";
   String Enter_Ward_Name = "Enter ward name";
 
+  /* DOCTOR SIDE */
+
+  /* DOCTOR SIDE MORE PAGE */
+  String addAvailabilitySelfCenter = "add availability for self & center";
+  String addAvailability = "Add Availability";
+  String prescriptionAndMedicalReports = "prescription and medical reports";
+  String reports = "Reports";
+  String viewYourMedicalRequest = "View your medical request";
+  String centerRequest = "Center request";
+
+  /* DOCTOR SIDE PERSONAL DATA  PAGE */
+  String personalData = "Personal data";
+  String yourGender = "Your gender";
+  String yourBirthplace = "Your birthplace";
+  String yourGraduationDate = "Your graduation date";
+  String yourContact = "Your Contact";
+  String saveProfile = "Save Profile";
+
+  /* DOCTOR SIDE PROFILE  PAGE */
+
+  String certificates = "Certificates";
+  String specializations = "Specializations";
+  String addSpecialization = "Add specialization";
+
+  /* DOCTOR SIDE ADD SPECIALIZATION  PAGE */
+  String category = "Category";
+  String subCategory = "Sub-category";
+  String description = "Description";
+  String descriptionDetail =
+      "Please add a description to tell about your experience, educational qualifications or skills. This information will be visible to medical centers and patients";
+  String yourDescription = "Your description";
+  String servicesPrice = "Services price";
+  String addVisit = "Add visit";
+  String addSuccessfully = "Add successfully";
+  String addService = "Add service";
+  String pleaseEnterServiceNamePrice =
+      "Please enter the service name and the price.";
+  String enterTheName = "Enter the name";
+  String visitName = "Visit’s name";
+  String enterPrice = "Enter price";
+  String selectCategory = "Select category";
+  String selectSubCategory = "Select sub-category";
+  String enterDescription = "Enter description";
+  String enterVisitNameCharges = "Enter visit name with charges";
+  String enterCharges = "Enter charges";
+  String enterVisitName = "Enter visit name";
+  String enterVisitCharge = "Enter visit charge";
+
+  /// DOCTOR SIDE CALCULATE EARNING PAGE //
+  String calculateEarnings = "Calculate earnings";
+  String totalEarning = "Total earning";
+  String calculateYourEarningSelectedPeriod =
+      "Calculate your earning in a selected period.";
+  String startDate = "Start date";
+  String endDate = "End date";
+  String calculate = "Calculate";
+  String resetRangeDate = "Reset range date";
+
+  /* DOCTOR SIDE DOCTOR EARNING PAGE */
+  String earning = "Earning";
+  String noDataOnParticularDate = "No data on this particular date";
+  String date = "Date";
+  String slot = "Slot";
+  String fees = "Fees";
+
+  /*DOCTOR SIDE ADD AVAILABILITY*/
+
+  String self = "Self";
+  String medicalCenter = "Medical center";
+  String viewAvailability = "View Availability";
+  String enterDates = "Enter Dates";
+  String yourTimeSlotAccordingSelectDate =
+      "Your Time Slot's according select date";
+  String selfAvailabilityAddSuccessfully = "Self Availability Add Successfully";
+  String selectSlot = "Select slot's";
+  String selectMedicalCenter = "Select medical center";
+  String fillAllData = "Fill all data";
+  String centerAvailabilityAddSuccessfully =
+      "Center availability add successfully";
+  String selectCenter = "Select center";
+
+  /*DOCTOR SIDE PAST APPOINTMENT OR REPORTS PAGE*/
+
+  String pastAppointment = "Past Appointment";
+  String scanAndCheckReports = "Scan and check reports";
+  String noPastAppointmentAtTheMoment = "No Past Appointment's at the moment!";
+  String bookingID = "Booking ID";
+
+  /*DOCTOR SIDE CENTER REQUEST PAGE*/
+
+  String noCenterRequestAtTheMoment = "No Center request at the moment !";
+  String whoops = "Whoops!";
+  String ward = "Ward";
+  String accept = "Accept";
+  String reject = "Reject";
+  String confirm = "Confirm";
+
+  //**************Patient Side*************//
+  /// **Home PDoctor Tab page******///
+  String Choos_Top_Specialist = "Choose from top Specialist";
+  String SeeAll = "see all";
+  String TopSpecialization = "Top Specialization";
+  String NoTopSpecialization = "No Top Specification";
+  String NoSubCat = "No Sub-Category";
+  String DoctorCategories = "Doctor Categories";
+  String DoctorSubCat = "Doctor Sub-Category";
+  String ListView = "View List";
+  String MapView = "View on map";
+
+  /*Filter Screen's*/
+  String Filters = "Filters";
+  String Location_and_distance = "Location and distance";
+  String km = "km";
+  String Rating = "Rating";
+  String price_Range = "Price range";
+  String Search_city = "Search city";
+  String Select_distance = "Select distance";
+  String From = "From:";
+  String From_current_location = "From current location";
+
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
@@ -323,6 +443,101 @@ class LocalString extends Translations {
           Ward_Name: "Ward name",
           New_Ward: "New ward",
           Enter_Ward_Name: "Enter ward name",
+
+          /* DOCTOR SIDE MORE PAGE */
+          addAvailabilitySelfCenter: "add availability for self & center",
+          addAvailability: "Add Availability",
+          prescriptionAndMedicalReports: "prescription and medical reports",
+          reports: "Reports",
+          viewYourMedicalRequest: "View your medical request",
+          centerRequest: "Center request",
+
+          /* DOCTOR SIDE PERSONAL DATA  PAGE */
+          personalData: "Personal data",
+          yourGender: "Your gender",
+          yourBirthplace: "Your birthplace",
+          yourGraduationDate: "Your graduation date",
+          yourContact: "Your Contact",
+          saveProfile: "Save Profile",
+          /* DOCTOR SIDE PROFILE  PAGE */
+
+          certificates: "Certificates",
+          specializations: "Specializations",
+          addSpecialization: "Add specialization",
+
+          /* DOCTOR SIDE ADD SPECIALIZATION  PAGE */
+          category: "Category",
+          subCategory: "Sub-category",
+          description: "Description",
+          descriptionDetail:
+              "Please add a description to tell about your experience, educational qualifications or skills. This information will be visible to medical centers and patients",
+          yourDescription: "Your description",
+          servicesPrice: "Services price",
+          addVisit: "Add visit",
+          addSuccessfully: "Add successfully",
+          addService: "Add service",
+          pleaseEnterServiceNamePrice:
+              "Please enter the service name and the price.",
+          enterTheName: "Enter the name",
+          visitName: "Visit’s name",
+          enterPrice: "Enter price",
+          selectCategory: "Select category",
+          selectSubCategory: "Select sub-category",
+          enterDescription: "Enter description",
+          enterVisitNameCharges: "Enter visit name with charges",
+          enterCharges: "Enter charges",
+          enterVisitName: "Enter visit name",
+          enterVisitCharge: "Enter visit charge",
+
+          /* DOCTOR SIDE CALCULATE EARNING PAGE */
+
+          calculateEarnings: "Calculate earnings",
+          totalEarning: "Total earning",
+          calculateYourEarningSelectedPeriod:
+              "Calculate your earning in a selected period.",
+          startDate: "Start date",
+          endDate: "End date",
+          calculate: "Calculate",
+          resetRangeDate: "Reset range date",
+
+          /* DOCTOR SIDE DOCTOR EARNING PAGE */
+          earning: "Earning",
+          noDataOnParticularDate: "No data on this particular date",
+          date: "Date",
+          slot: "Slot",
+          fees: "Fees",
+
+          /*DOCTOR SIDE ADD AVAILABILITY*/
+
+          self: "Self",
+          medicalCenter: "Medical center",
+          viewAvailability: "View Availability",
+          enterDates: "Enter Dates",
+          yourTimeSlotAccordingSelectDate:
+              "Your Time Slot's according select date",
+          selfAvailabilityAddSuccessfully: "Self Availability Add Successfully",
+          selectSlot: "Select slot's",
+          selectMedicalCenter: "Select medical center",
+          fillAllData: "Fill all data",
+          centerAvailabilityAddSuccessfully:
+              "Center availability add successfully",
+          selectCenter: "Select center",
+
+          /*DOCTOR SIDE PAST APPOINTMENT OR REPORTS PAGE*/
+
+          pastAppointment: "Past Appointment",
+          scanAndCheckReports: "Scan and check reports",
+          noPastAppointmentAtTheMoment: "No Past Appointment's at the moment!",
+          bookingID: "Booking ID",
+
+          /*DOCTOR SIDE CENTER REQUEST PAGE*/
+
+          noCenterRequestAtTheMoment: "No Center request at the moment !",
+          whoops: "Whoops!",
+          ward: "Ward",
+          accept: "Accept",
+          reject: "Reject",
+          confirm: "Confirm",
         },
         'it_IT': {
           /*Sign IN Page*/
@@ -464,17 +679,114 @@ class LocalString extends Translations {
           Edit_Doctor: "Modifica medici",
           Remove_Doctor: "Rimuovi il dottore",
           Sure_Want_Remove_Doctor:
-          "Sei sicuro di voler rimuovere il medico dal tuo reparto? Seleziona un motivo.",
+              "Sei sicuro di voler rimuovere il medico dal tuo reparto? Seleziona un motivo.",
           Sure_Want_Remove_Ward:
-          "Sei sicuro di voler eliminare il rione? Seleziona un motivo.",
+              "Sei sicuro di voler eliminare il rione? Seleziona un motivo.",
 
-          Add_More_Doctor: "Add more doctors",
-          Add_Doctor: "Add doctors",
-          Add_Ward: "Add ward",
-          Selected_Doctor: "Selected doctor",
-          Ward_Name: "Ward name",
-          New_Ward: "New ward",
-          Enter_Ward_Name: "Enter ward name",
+          Add_More_Doctor: "Aggiungi altri dottori",
+          Add_Doctor: "Aggiungi dottori",
+          Add_Ward: "Aggiungi reparto",
+          Selected_Doctor: "Medico selezionato",
+          Ward_Name: "Nome del rione",
+          New_Ward: "Nuovo reparto",
+          Enter_Ward_Name: "Inserisci il nome del reparto",
+
+          /* DOCTOR SIDE MORE PAGE */
+          addAvailabilitySelfCenter: "aggiungi disponibilità per self & center",
+          addAvailability: "Aggiungi disponibilità",
+          prescriptionAndMedicalReports: "prescrizioni e referti medici",
+          reports: "Rapporti",
+          viewYourMedicalRequest: "Visualizza la tua richiesta medica",
+          centerRequest: "Richiesta centro",
+
+          /* DOCTOR SIDE PERSONAL DATA  PAGE */
+          personalData: "Dati personali",
+          yourGender: "Il tuo genere",
+          yourBirthplace: "Il tuo luogo di nascita",
+          yourGraduationDate: "La tua data di laurea",
+          yourContact: "Il tuo contatto",
+          saveProfile: "Salva il profilo",
+          /* DOCTOR SIDE PROFILE  PAGE */
+
+          certificates: "Certificati",
+          specializations: "Specializzazioni",
+          addSpecialization: "Aggiungi specializzazione",
+
+          /* DOCTOR SIDE ADD SPECIALIZATION  PAGE */
+          category: "Categoria",
+          subCategory: "Sottocategoria",
+          description: "Descrizione",
+          descriptionDetail:
+              "Aggiungi una descrizione per raccontare la tua esperienza, titoli di studio o abilità. Queste informazioni saranno visibili ai centri medici e ai pazienti",
+          yourDescription: "La tua descrizione",
+          servicesPrice: "Prezzo dei servizi",
+          addVisit: "Aggiungi visita",
+          addSuccessfully: "Aggiungi con successo",
+          addService: "Aggiungi servizio",
+          pleaseEnterServiceNamePrice:
+              "Inserisci il nome del servizio e il prezzo.",
+          enterTheName: "Inserisci il nome",
+          visitName: "Nome della visita",
+          enterPrice: "Inserire il prezzo",
+          selectCategory: "Seleziona categoria",
+          selectSubCategory: "Seleziona la sottocategoria",
+          enterDescription: "Inserisci la descrizione",
+          enterVisitNameCharges: "Inserisci il nome della visita con addebiti",
+          enterCharges: "Inserisci gli addebiti",
+          enterVisitName: "Inserisci il nome della visita",
+          enterVisitCharge: "Inserisci l'addebito della visita",
+
+          /* DOCTOR SIDE CALCULATE EARNING PAGE */
+
+          calculateEarnings: "Calcola guadagni",
+          totalEarning: "Guadagno totale",
+          calculateYourEarningSelectedPeriod:
+              "Calcola il tuo guadagno in un periodo selezionato.",
+          startDate: "Data d'inizio",
+          endDate: "Data di fine",
+          calculate: "Calcolare",
+          resetRangeDate: "Reimposta la data dell'intervallo",
+
+          /* DOCTOR SIDE DOCTOR EARNING PAGE */
+          earning: "Guadagnare",
+          noDataOnParticularDate: "Nessun dato su questa data particolare",
+          date: "Data",
+          slot: "Fessura",
+          fees: "Commissioni",
+
+          /*DOCTOR SIDE ADD AVAILABILITY*/
+
+          self: "Se stesso",
+          medicalCenter: "Centro medico",
+          viewAvailability: "Visualizza disponibilità",
+          enterDates: "Inserisci le date",
+          yourTimeSlotAccordingSelectDate:
+              "La tua fascia oraria è in base alla data selezionata",
+          selfAvailabilityAddSuccessfully:
+              "Auto disponibilità Aggiungi con successo",
+          selectSlot: "Seleziona slot",
+          selectMedicalCenter: "Seleziona centro medico",
+          fillAllData: "Compila tutti i dati",
+          centerAvailabilityAddSuccessfully:
+              "La disponibilità del centro è stata aggiunta correttamente",
+          selectCenter: "Seleziona centro",
+
+          /*DOCTOR SIDE PAST APPOINTMENT OR REPORTS PAGE*/
+
+          pastAppointment: "Appuntamento passato",
+          scanAndCheckReports: "Scansiona e controlla i rapporti",
+          noPastAppointmentAtTheMoment:
+              "Nessun appuntamento passato al momento!",
+          bookingID: "Codice di prenotazione",
+
+          /*DOCTOR SIDE CENTER REQUEST PAGE*/
+
+          noCenterRequestAtTheMoment: "Nessuna richiesta al Centro al momento!",
+          whoops: "Ops!",
+          ward: "Reparto",
+          accept: "Accettare",
+          reject: "Rifiutare",
+          confirm: "Confermare",
         },
       };
 }

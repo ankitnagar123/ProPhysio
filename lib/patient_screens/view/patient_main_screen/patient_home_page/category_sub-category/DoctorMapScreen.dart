@@ -210,7 +210,11 @@ class _MapViewScreenState extends State<MapViewScreen> {
           width: 300,
           offset: 50,
         ),
-        Positioned(
+      ]);
+    });
+  }
+}
+/* Positioned(
           top: 25,
           right: 15,
           left: 15,
@@ -257,8 +261,4 @@ class _MapViewScreenState extends State<MapViewScreen> {
               ),
             ),
           ),
-        ),
-      ]);
-    });
-  }
-}
+        ),*/

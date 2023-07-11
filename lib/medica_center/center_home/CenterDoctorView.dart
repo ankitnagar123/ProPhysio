@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
@@ -198,15 +198,14 @@ String keyword = "";
                                                           .location_on_outlined,
                                                       size: 18),
                                                   SizedBox(
-                                                    width: MediaQuery.sizeOf(context).width/1.8,
+                                                    width: MediaQuery.sizeOf(context).width/2,
                                                     child: Text(drList[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
                                                       fontFamily: "Poppins",color: MyColor.grey,),)),
                                                 ],
                                               ),
                                               const SizedBox(
                                                 height: 2,
-                                              ),
-                                            ],
+                                              ),],
                                           )
                                         ],
                                       ),

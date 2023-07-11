@@ -5,6 +5,7 @@ import 'package:medica/helper/AppConst.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _FilterScreenState extends State<FilterScreen> {
 
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   CustomView custom = CustomView();
-
+  LocalString text = LocalString();
 // DoctorListCtr doctorListCtr = DoctorListCtr();
 
   var cat = "" ;
@@ -82,7 +83,7 @@ print("cat$cat");
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white24,
-          title: custom.text("Filters", 17, FontWeight.bold, MyColor.black),
+          title: custom.text(text.Filters.tr, 17, FontWeight.bold, MyColor.black),
           leading: IconButton(
             onPressed: () {
               Get.back();
@@ -105,10 +106,10 @@ print("cat$cat");
                   Get.offNamed(RouteHelper.getLocationDistanceFilter());
                 },
                 title: custom.text(
-                    "Location and distance", 15, FontWeight.w500,
+                    text.Location_and_distance.tr, 15, FontWeight.w500,
                     MyColor.black),
                 subtitle: Text("${AppConst.FILTER_LOCATION} , ${AppConst
-                    .FILTER_DISTANCE}km"),
+                    .FILTER_DISTANCE}${text.km.tr}"),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 20),
               ),
               const Divider(
@@ -119,7 +120,7 @@ print("cat$cat");
                   Get.offNamed(RouteHelper.getRatingFilterScreen());
                 },
                 title: custom.text(
-                    "Rating", 15, FontWeight.w500, MyColor.black),
+                    text.Rating.tr, 15, FontWeight.w500, MyColor.black),
                 subtitle: Text(AppConst.rating),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 20),
               ),
@@ -132,7 +133,7 @@ print("cat$cat");
                   // Get.toNamed(RouteHelper.getSpecializationScreen());
                 },
                 title: custom.text(
-                    "Price range", 15, FontWeight.w500, MyColor.black),
+                    text.price_Range.tr, 15, FontWeight.w500, MyColor.black),
                 subtitle: Row(
                   children: [
                     Text("${AppConst.priceRangeStart}-"),

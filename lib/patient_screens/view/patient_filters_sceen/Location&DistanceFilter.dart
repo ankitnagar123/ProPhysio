@@ -15,6 +15,7 @@ import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/AppConst.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/filter_controller/PatientFilterController.dart';
 
 class LocationDistanceFilter extends StatefulWidget {
@@ -27,6 +28,8 @@ class LocationDistanceFilter extends StatefulWidget {
 class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
   TextEditingController destinationController = TextEditingController();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  LocalString text = LocalString();
+
   String location = '';
   final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
   CustomView custom = CustomView();
@@ -115,7 +118,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
         elevation: 0,
         backgroundColor: Colors.white24,
         title: custom.text(
-            "Location and Distance", 17, FontWeight.bold, MyColor.black),
+            text.Location_and_distance.tr, 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.offNamed(RouteHelper.getFilterScreen());
@@ -126,7 +129,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: custom.MyButton(context, "Submit", () {
+        child: custom.MyButton(context, text.Submit.tr, () {
           Get.offNamed(RouteHelper.getFilterScreen());
         }, MyColor.primary,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
@@ -143,7 +146,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Search city", 17, FontWeight.w500, MyColor.black),
+                    text.Search_city.tr, 17, FontWeight.w500, MyColor.black),
               ),
               const SizedBox(
                 height: 6.0,
@@ -285,14 +288,14 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   custom.text(
-                      "Select distance", 16, FontWeight.w500, MyColor.black),
-                  custom.text("$km+km", 14, FontWeight.w500, MyColor.lightblue),
+                      text.Select_distance.tr, 16, FontWeight.w500, MyColor.black),
+                  custom.text("$km+${text.km.tr}", 14, FontWeight.w500, MyColor.lightblue),
                 ],
               ),
               Slider(
                 activeColor: MyColor.lightblue,
                 thumbColor: MyColor.midgray,
-                label: "Select Age",
+                label: "Select Km",
                 value: km.toDouble(),
                 onChanged: (value) {
                   setState(() {
@@ -306,7 +309,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: custom.text("From:", 16, FontWeight.w300, MyColor.black),
+                child: custom.text(text.From.tr, 16, FontWeight.w300, MyColor.black),
               ),
               radioList()
             ],
@@ -332,7 +335,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
             visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity),
-            value: "From current location",
+            value: text.From_current_location.tr,
             groupValue: _groupValue,
             activeColor:
                 MaterialStateColor.resolveWith((states) => MyColor.lightblue),
@@ -358,7 +361,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
               });
             },
             title: custom.text(
-                "From current location", 12, FontWeight.w500, MyColor.black)),
+                text.From_current_location.tr, 12, FontWeight.w500, MyColor.black)),
         InkWell(
           onTap: () {
             Navigator.push(

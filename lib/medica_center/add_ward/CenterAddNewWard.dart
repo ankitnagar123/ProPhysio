@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
@@ -276,7 +276,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                                               .location_on_outlined,
                                           size: 18),
                                       SizedBox(
-                                          width: MediaQuery.sizeOf(context).width/1.8,
+                                          width: MediaQuery.sizeOf(context).width/1.9,
                                           child: Text(list[index].location,maxLines: 3,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
                                             fontFamily: "Poppins",color: MyColor.grey,),)),
                                     ],
@@ -310,6 +310,28 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
+                                  RatingBar(
+                                    // ignoreGestures: true,
+                                    itemSize: 17,
+                                    initialRating: double.parse(list[index].rating),
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                        full:
+                                        const Icon(Icons.star, color: MyColor.primary),
+                                        half: const Icon(Icons.star_half,
+                                            color: MyColor.primary),
+                                        empty: const Icon(
+                                            Icons.star_border_purple500_outlined,
+                                            color: MyColor.primary)),
+                                    itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 2.0),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+
                                 ],
                               )
                             ],
