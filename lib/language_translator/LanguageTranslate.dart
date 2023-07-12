@@ -170,6 +170,14 @@ class LocalString extends Translations {
   String New_Ward = "New ward";
   String Enter_Ward_Name = "Enter ward name";
 
+  /*Center Language Change screen*/
+  String English = "English";
+  String Italian = "Italian";
+  String Select_language = "Select language";
+  String Language = "Language";
+
+
+
   /* DOCTOR SIDE */
 
   /* DOCTOR SIDE MORE PAGE */
@@ -444,6 +452,14 @@ class LocalString extends Translations {
           New_Ward: "New ward",
           Enter_Ward_Name: "Enter ward name",
 
+   English : "English",
+   Italian : "Italian",
+   Select_language : "Select language",
+   Language : "Language",
+
+
+
+
           /* DOCTOR SIDE MORE PAGE */
           addAvailabilitySelfCenter: "add availability for self & center",
           addAvailability: "Add Availability",
@@ -690,6 +706,12 @@ class LocalString extends Translations {
           Ward_Name: "Nome del rione",
           New_Ward: "Nuovo reparto",
           Enter_Ward_Name: "Inserisci il nome del reparto",
+
+          /*Center Language Change screen*/
+          English : "Inglese",
+          Italian : "Italiano",
+          Select_language : "Seleziona la lingua",
+          Language : "Lingua",
 
           /* DOCTOR SIDE MORE PAGE */
           addAvailabilitySelfCenter: "aggiungi disponibilità per self & center",

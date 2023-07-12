@@ -6,6 +6,7 @@ import 'package:medica/medica_center/center_controller/CenterAuthController.dart
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
+import 'CenterChangeLanguage.dart';
 
 class CenterSettingsScreen extends StatefulWidget {
   const CenterSettingsScreen({Key? key}) : super(key: key);
@@ -50,6 +51,22 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                 },
                 leading: const Icon(
                   Icons.lock,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.ChangePassword.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
+                },
+                leading: const Icon(
+                  Icons.language,
                   color: Colors.black,
                 ),
                 title: customView.text(
