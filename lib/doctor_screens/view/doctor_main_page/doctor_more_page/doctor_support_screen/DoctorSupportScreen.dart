@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DoctorSupportController.dart';
 
 class DoctorSupportScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class DoctorSupportScreen extends StatefulWidget {
 class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
   CustomView customView = CustomView();
   DoctorSupportCtr supportCtr = DoctorSupportCtr();
+  LocalString text= LocalString();
 
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
@@ -36,7 +38,7 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
                 }
                 return customView.MyButton(
                   context,
-                  "Send message",
+                  text.Sendmessage.tr,
                       () {
                     if (validation()) {
                       supportCtr.supportApi(context, subjectCtrl.text,
@@ -63,7 +65,7 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
             color: Colors.black,
           ),
         ),
-        title: customView.text("Support", 15.0, FontWeight.w500, Colors.black),
+        title: customView.text(text.Support.tr, 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white24,
@@ -74,35 +76,35 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Divider(),
-            customView.text("Contact us if you need support.", 14.0,
+            customView.text(text.ContactSupport.tr, 14.0,
                 FontWeight.w500, Colors.black),
             SizedBox(
               height: width * 0.09,
             ),
-            customView.text("Subject", 12.0, FontWeight.w500, MyColor.black),
+            customView.text(text.Subject.tr, 12.0, FontWeight.w500, MyColor.black),
             SizedBox(
               height: width * 0.02,
             ),
             customView.myField(
-                context, subjectCtrl, "Your subject", TextInputType.text),
+                context, subjectCtrl, text.Subject.tr, TextInputType.text),
             SizedBox(
               height: width * 0.05,
             ),
-            customView.text("Email", 12.0, FontWeight.w500, MyColor.black),
+            customView.text(text.Enter_Email.tr, 12.0, FontWeight.w500, MyColor.black),
             SizedBox(
               height: width * 0.02,
             ),
             customView.myField(
-                context, emailCtrl, "Your Email", TextInputType.text),
+                context, emailCtrl, text.H_Enter_Email.tr, TextInputType.text),
             SizedBox(
               height: width * 0.05,
             ),
-            customView.text("Message", 12.0, FontWeight.w500, MyColor.black),
+            customView.text(text.Message.tr, 12.0, FontWeight.w500, MyColor.black),
             SizedBox(
               height: width * 0.02,
             ),
             customView.myField(
-                context, msgCtrl, "Your Message", TextInputType.text),
+                context, msgCtrl, text.Message.tr, TextInputType.text),
             SizedBox(
               height: width * 0.6,
             ),
@@ -115,11 +117,11 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
   // ******************Support Input filed VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (subjectCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter subject");
+      customView.MySnackBar(context, text.Subject.tr);
     } else if (emailCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter E-mail ID");
+      customView.MySnackBar(context,  text.enteAddress.tr);
     } else if (msgCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter Massage");
+      customView.MySnackBar(context, text.Message.tr);
     } else {
       return true;
     }

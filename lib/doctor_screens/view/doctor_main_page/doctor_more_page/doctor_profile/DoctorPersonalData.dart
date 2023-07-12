@@ -16,6 +16,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 
 class DoctorPersonalData extends StatefulWidget {
   const DoctorPersonalData({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
 
   CustomView customView = CustomView();
+  LocalString text = LocalString();
 
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController bioCtrl = TextEditingController();
@@ -157,7 +159,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
               ),
             ),
             title: customView.text(
-                "Personal data", 15.0, FontWeight.w500, Colors.black),
+                text.personalData.tr, 15.0, FontWeight.w500, Colors.black),
             centerTitle: true,
             elevation: 0.0,
             backgroundColor: Colors.white24,
@@ -286,28 +288,28 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.03,
                       ),
-                      customView.text("Your username", 10.0, FontWeight.w600,
-                          MyColor.black),
+                      customView.text(text.H_Enter_Username.tr, 10.0,
+                          FontWeight.w600, MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
                       customView.myField(context, userNameCtrl,
-                          "Enter User Name", TextInputType.text),
+                          text.H_Enter_Username.tr, TextInputType.text),
                       SizedBox(
                         height: height * 0.03,
                       ),
-                      customView.text(
-                          "Your bio", 10.0, FontWeight.w600, MyColor.black),
+                      customView.text(text.yourbio.tr, 10.0, FontWeight.w600,
+                          MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
                       customView.myField(
-                          context, bioCtrl, "Your bio", TextInputType.text),
+                          context, bioCtrl,text.yourbio.tr, TextInputType.text),
                       const Divider(
                         thickness: 1.5,
                         height: 50.0,
                       ),
-                      customView.text("Personal data", 14.0, FontWeight.w500,
+                      customView.text(text.personalData.tr, 14.0, FontWeight.w500,
                           MyColor.black),
                       SizedBox(
                         height: height * 0.03,
@@ -319,13 +321,13 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your name", 10.0,
+                                customView.text(text.H_Enter_Name.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.01,
                                 ),
                                 customView.myField(
-                                    context, name, "Name", TextInputType.text),
+                                    context, name, text.H_Enter_Name.tr, TextInputType.text),
                               ],
                             ),
                           ),
@@ -337,12 +339,12 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your surname", 10.0,
+                                customView.text(text.H_Enter_Surname.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.01,
                                 ),
-                                customView.myField(context, surename, "Surname",
+                                customView.myField(context, surename, text.H_Enter_Surname.tr,
                                     TextInputType.text),
                               ],
                             ),
@@ -353,17 +355,17 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         height: height * 0.03,
                       ),
                       customView.text(
-                          "Your email", 10.0, FontWeight.w600, MyColor.black),
+                          text.yourUsernameEmail.tr, 10.0, FontWeight.w600, MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
-                      customView.myField(context, emailCtrl, "Enter Email",
+                      customView.myField(context, emailCtrl, text.yourUsernameEmail.tr,
                           TextInputType.text),
                       SizedBox(
                         height: height * 0.03,
                       ),
                       customView.text(
-                          "Your address", 10.0, FontWeight.w600, MyColor.black),
+                          text.yourAddres.tr, 10.0, FontWeight.w600, MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
@@ -424,7 +426,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       ),
                       /*-new-*/
                       customView.text(
-                          "Your gender", 10.0, FontWeight.w600, MyColor.black),
+                          text.yourGender.tr, 10.0, FontWeight.w600, MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
@@ -446,7 +448,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   });
                                 },
                               ),
-                              title: const Text('Male'),
+                              title:  Text(text.Male.tr),
                             ),
                           ),
                           Expanded(
@@ -465,7 +467,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                   });
                                 },
                               ),
-                              title: const Text('Female'),
+                              title:  Text(text.Female.tr),
                             ),
                           ),
                         ],
@@ -480,7 +482,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your birth of date", 10.0,
+                                customView.text(text.Date_of_Birth.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.005,
@@ -505,9 +507,9 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                       },
                                       readOnly: true,
                                       controller: birthDateController,
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         contentPadding: EdgeInsets.only(top: 8),
-                                        hintText: "Select Date",
+                                        hintText: text.Select_Date.tr,
                                         hintStyle: TextStyle(fontSize: 12),
                                         suffixIcon: Icon(Icons.calendar_month,
                                             color: MyColor.primary),
@@ -527,7 +529,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your birthplace", 10.0,
+                                customView.text(text.yourBirthplace.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.01,
@@ -535,7 +537,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                 customView.myField(
                                     context,
                                     birthplaceController,
-                                    "birthplace",
+                                    text.yourBirthplace.tr,
                                     TextInputType.text),
                               ],
                             ),
@@ -553,7 +555,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your graduation date", 10.0,
+                                customView.text(text.yourGraduationDate.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.01,
@@ -579,9 +581,9 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                       },
                                       readOnly: true,
                                       controller: dateOfGraduation,
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         contentPadding: EdgeInsets.only(top: 7),
-                                        hintText: "Select Date",
+                                        hintText: text.Select_Date.tr,
                                         hintStyle: TextStyle(fontSize: 14),
                                         suffixIcon: Icon(Icons.calendar_month,
                                             color: MyColor.primary),
@@ -601,7 +603,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text("Your qualification date", 10.0,
+                                customView.text(text.Date_of_Qualification.tr, 10.0,
                                     FontWeight.w600, MyColor.black),
                                 SizedBox(
                                   height: height * 0.01,
@@ -627,9 +629,9 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                       },
                                       readOnly: true,
                                       controller: dateOfQualification,
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         contentPadding: EdgeInsets.only(top: 7),
-                                        hintText: "Select Date",
+                                        hintText: text.Select_Date.tr,
                                         hintStyle: TextStyle(fontSize: 14),
                                         suffixIcon: Icon(Icons.calendar_month,
                                             color: MyColor.primary),
@@ -647,7 +649,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         height: height * 0.03,
                       ),
                       customView.text(
-                          "Your Contact", 10.0, FontWeight.w600, MyColor.black),
+                          text.yourContact.tr, 10.0, FontWeight.w600, MyColor.black),
                       SizedBox(
                         height: height * 0.01,
                       ),
@@ -656,12 +658,12 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         width: MediaQuery.of(context).size.width * 1,
                         child: IntlPhoneField(
                           controller: phoneNumberCtrl,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             counterText: '',
                             filled: true,
                             fillColor: Colors.white,
                             constraints: BoxConstraints.expand(),
-                            labelText: 'Phone Number',
+                            labelText: text.Phone_Number.tr,
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.all(
@@ -694,49 +696,51 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: AnimatedButton(
               // width: MediaQuery.of(context).size.width * 0.8,
-              text: 'Save Profile',
+              text: text.saveProfile.tr,
               color: MyColor.primary,
               pressEvent: () {
                 doctorProfileCtr.doctorProfileUpdate(
-                    context,
-                    name.text,
-                    surename.text,
-                    userNameCtrl.text,
-                    bioCtrl.text,
-                    addressCtrl.text,
-                    latitude,
-                    longitude,
-                    code,
-                    emailCtrl.text,
-                    phoneNumberCtrl.text,
-                    imagename,
-                    baseimage,
-                    _selectedGender,
-                    birthDateController.text,
-                    birthplaceController.text,
-                    universityAttendedCtr.text,
-                    dateOfEnrollmentCtr.text,
-                    registerOfBelongingCtr.text,
-                    dateOfQualification.text,
-                    dateOfGraduation.text,
-                    flag,() {
-                  AwesomeDialog(
-                    context: context,
-                    animType: AnimType.leftSlide,
-                    headerAnimationLoop: false,
-                    dialogType: DialogType.success,
-                    showCloseIcon: true,
-                    title: 'Success',
-                    desc: 'Profile Update Successfully',
-                    btnOkOnPress: () {
-                      debugPrint('OnClick');
-                    },
-                    btnOkIcon: Icons.check_circle,
-                    onDismissCallback: (type) {
-                      debugPrint('Dialog Dismiss from callback $type');
-                    },
-                  ).show();
-                    },);
+                  context,
+                  name.text,
+                  surename.text,
+                  userNameCtrl.text,
+                  bioCtrl.text,
+                  addressCtrl.text,
+                  latitude,
+                  longitude,
+                  code,
+                  emailCtrl.text,
+                  phoneNumberCtrl.text,
+                  imagename,
+                  baseimage,
+                  _selectedGender,
+                  birthDateController.text,
+                  birthplaceController.text,
+                  universityAttendedCtr.text,
+                  dateOfEnrollmentCtr.text,
+                  registerOfBelongingCtr.text,
+                  dateOfQualification.text,
+                  dateOfGraduation.text,
+                  flag,
+                  () {
+                    AwesomeDialog(
+                      context: context,
+                      animType: AnimType.leftSlide,
+                      headerAnimationLoop: false,
+                      dialogType: DialogType.success,
+                      showCloseIcon: true,
+                      title: text.success.tr,
+                      desc: text.ProfileUpdateSuccessfully.tr,
+                      btnOkOnPress: () {
+                        debugPrint('OnClick');
+                      },
+                      btnOkIcon: Icons.check_circle,
+                      onDismissCallback: (type) {
+                        debugPrint('Dialog Dismiss from callback $type');
+                      },
+                    ).show();
+                  },
+                );
               },
             ),
           ),
@@ -772,6 +776,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       },
     );
   }
+
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(
         context: context,

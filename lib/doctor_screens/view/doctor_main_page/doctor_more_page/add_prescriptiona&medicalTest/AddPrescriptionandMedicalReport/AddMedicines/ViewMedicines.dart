@@ -51,7 +51,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
             InkWell(
                 onTap: () async {
                   const url =
-                      "https://cisswork.com/Android/Medica/Apis/savepdf/30_53.pdf";
+                      "https://flowerbet5.com/cisssssss.pdf";
                   final file = await loadPdfFromNetwork(url);
                   openPdf(context, file, url);
                 },

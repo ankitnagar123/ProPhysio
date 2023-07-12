@@ -70,7 +70,7 @@ class _CenterSettingsScreenState extends State<CenterSettingsScreen> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    text.ChangePassword.tr, 14.0, FontWeight.w500, Colors.black),
+                    text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,

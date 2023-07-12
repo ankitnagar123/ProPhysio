@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 
 class PatientAddNewCardScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class PatientAddNewCardScreen extends StatefulWidget {
 class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
   CardCtr cardCtr = CardCtr();
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   TextEditingController cardHolderNameCtrl = TextEditingController();
   TextEditingController cardNumberCtrl = TextEditingController();
   TextEditingController expireDateCtrl = TextEditingController();
@@ -36,7 +38,7 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
             ),
           ),
           title: customView.text(
-              "Add new card", 15.0, FontWeight.w500, Colors.black),
+              text.addNewCard.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -50,14 +52,14 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                 height: width * 0.05,
               ),
               customView.text(
-                  "Add a new card in order to pay the appointment.",
+                  text.addNewCardOrderToPayAppointment.tr,
                   14.0,
                   FontWeight.w500,
                   Colors.black),
               SizedBox(
                 height: width * 0.08,
               ),
-              customView.text("Enter cardholder name", 11.0, FontWeight.w500,
+              customView.text(text.enterCardHolderName.tr, 11.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.01,
@@ -68,7 +70,7 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                 height: width * 0.05,
               ),
               customView.text(
-                  "Enter card number", 11.0, FontWeight.w500, MyColor.black),
+                  text.enterCardNumber.tr, 11.0, FontWeight.w500, MyColor.black),
               SizedBox(
                 height: width * 0.01,
               ),
@@ -84,13 +86,13 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Expire date", 11.0, FontWeight.w500,
+                        customView.text(text.expireDate.tr, 11.0, FontWeight.w500,
                             MyColor.black),
                         SizedBox(
                           height: width * 0.01,
                         ),
                         customView.myField(context, expireDateCtrl,
-                            "Expire date ex. 12/1999", TextInputType.text),
+                            "ex. 12/1999", TextInputType.text),
                       ],
                     ),
                   ),
@@ -128,7 +130,7 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                     }
                     return customView.MyButton(
                       context,
-                      "Save Card",
+                      text.saveCard.tr,
                           () {
 
                         if(isValid() == true){
@@ -159,13 +161,13 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
   }
   bool isValid() {
      if (cardHolderNameCtrl.text == '') {
-    customView.MySnackBar(context,"Please enter your name");
+    customView.MySnackBar(context,text.pleaseEnterYourName.tr);
     }else if (cardNumberCtrl.text.isEmpty || cardNumberCtrl.text.length < 19) {
-      customView.MySnackBar(context, "Enter valid card details");
+      customView.MySnackBar(context, text.enterValidCardDetails.tr);
     } else if (expireDateCtrl.text == '' || expireDateCtrl.text.length < 5) {
-      customView.MySnackBar(context, "Please enter expiry date");
+      customView.MySnackBar(context, text.pleaseEnterExpiryDate.tr);
     } else if (cvcCtrl.text == '' || cvcCtrl.text.length < 3) {
-      customView.MySnackBar(context,"Please enter valid CVC");
+      customView.MySnackBar(context,text.pleaseEnterValidCVC.tr);
     } else {
       return true;
     }

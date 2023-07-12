@@ -11,6 +11,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientProfileController.dart';
 
 class PatientProfileScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class PatientProfileScreen extends StatefulWidget {
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
   CustomView customView = CustomView();
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
+  LocalString text = LocalString();
 
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController nameCtrl = TextEditingController();
@@ -112,7 +114,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             color: Colors.black,
           ),
         ),
-        title: customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
+        title: customView.text(text.Profile.tr, 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -178,14 +180,14 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           onTap: () {
                                             _choose(ImageSource.gallery);
                                           },
-                                          child: const Row(
+                                          child:  Row(
                                             children: [
                                               Icon(Icons.image, size: 20),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
-                                                "Image from gallery",
+                                                text.imageFromgallary.tr,
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
@@ -201,14 +203,14 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           onTap: () {
                                             _choose(ImageSource.camera);
                                           },
-                                          child: const Row(
+                                          child:  Row(
                                             children: [
                                               Icon(Icons.camera_alt),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
-                                                "Image from camera",
+                                                  text.imageFromCamra.tr,
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
@@ -239,12 +241,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 height: height * 0.03,
               ),
               customView.text(
-                  "Your username", 10.0, FontWeight.w600, MyColor.black),
+                  text.H_Enter_Username.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
               customView.myField(
-                  context, userNameCtrl, "Enter User Name", TextInputType.text),
+                  context, userNameCtrl, text.H_Enter_Username.tr, TextInputType.text),
               const Divider(
                 thickness: 2.0,
                 height: 50.0,
@@ -257,12 +259,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            "Your name", 10.0, FontWeight.w600, MyColor.black),
+                            text.H_Enter_Name.tr, 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
                         customView.myField(
-                            context, nameCtrl, "Name", TextInputType.text),
+                            context, nameCtrl, text.Enter_Name.tr, TextInputType.text),
                       ],
                     ),
                   ),
@@ -274,12 +276,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Your surname", 10.0, FontWeight.w600,
+                        customView.text(text.H_Enter_Surname.tr, 10.0, FontWeight.w600,
                             MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        customView.myField(context, sureNameCtrl, "Surname",
+                        customView.myField(context, sureNameCtrl, text.Enter_Surname.tr,
                             TextInputType.text),
                       ],
                     ),
@@ -290,28 +292,28 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 height: height * 0.03,
               ),
               customView.text(
-                  "Your email", 10.0, FontWeight.w600, MyColor.black),
+                  text.yourEmail.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
               customView.myField(
-                  context, emailCtrl, "Enter Email", TextInputType.text),
+                  context, emailCtrl, text.enterEmail.tr, TextInputType.text),
               const Divider(
                 thickness: 2.0,
                 height: 50.0,
               ),
-              customView.text("Your Health card code", 10.0, FontWeight.w600,
+              customView.text(text.yourHealthCardCode.tr, 10.0, FontWeight.w600,
                   MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
               customView.myField(context, healthCardCtrl,
-                  "Enter Health card code", TextInputType.text),
+                  text.enterHealthCardCode.tr, TextInputType.text),
               SizedBox(
                 height: height * 0.03,
               ),
               customView.text(
-                  "Your phone number", 10.0, FontWeight.w600, MyColor.black),
+                  text.yourPhoneNumber.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
@@ -323,12 +325,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   showCountryFlag: true,
                   // initialValue: "IN",
                   controller: phoneNumberCtrl,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     counterText: '',
                     filled: true,
                     fillColor: Colors.white,
                     constraints: BoxConstraints.expand(),
-                    labelText: 'Phone Number',
+                    labelText: text.Phone_Number.tr,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(

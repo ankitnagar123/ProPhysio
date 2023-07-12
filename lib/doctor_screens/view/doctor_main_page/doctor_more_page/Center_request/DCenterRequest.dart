@@ -4,6 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/CenterRequestCtr.dart';
 
 class DCenterRequests extends StatefulWidget {
@@ -16,6 +17,7 @@ class DCenterRequests extends StatefulWidget {
 class _DCenterRequestsState extends State<DCenterRequests> {
   int selectedIndex = -1;
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   CenterRequest centerRequest = Get.put(CenterRequest());
   String wardId = "";
 
@@ -40,7 +42,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
             child: const Icon(Icons.arrow_back_ios, color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: custom.text("Center Request", 15, FontWeight.w400, Colors.black),
+        title: custom.text(text.centerRequest.tr, 15, FontWeight.w400, Colors.black),
       ),
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -50,9 +52,9 @@ class _DCenterRequestsState extends State<DCenterRequests> {
               if (centerRequest.loading.value) {
                 return categorysubShimmerEffect(context);
               } else if (centerRequest.centerRequestList.isEmpty) {
-                return const Center(
+                return  Center(
                     heightFactor: 20,
-                    child: Text("No Center request at the moment !"));
+                    child: Text(text.noCenterRequestAtTheMoment.tr));
               } else {
                 return Column(
                   children: [
@@ -114,7 +116,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                           SizedBox(
                                             width: 150,
                                             child: custom.text(
-                                                "Ward: ${centerRqList.wardName}",
+                                                "${text.ward.tr}: ${centerRqList.wardName}",
                                                 13,
                                                 FontWeight.normal,
                                                 MyColor.grey),
@@ -158,7 +160,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                         selectedIndex == index
                                             ? custom.MyIndicator()
                                             : custom.acceptRejectButton(
-                                                context, "Accept", () {
+                                                context, text.accept.tr, () {
                                                 setState(() {
                                                   selectedIndex = index;
                                                 });
@@ -180,7 +182,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                                     color: MyColor.white)),
                                       ] else ...[
                                         custom.acceptRejectButton(
-                                            context, "Accept", () {
+                                            context, text.accept.tr, () {
                                           setState(() {
                                             selectedIndex = index;
                                           });
@@ -214,7 +216,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                         selectedIndex == index
                                             ? custom.MyIndicator()
                                             : custom.acceptRejectButton(
-                                                context, "Reject", () {
+                                                context, text.reject.tr, () {
                                                 setState(() {
                                                   selectedIndex = index;
                                                 });
@@ -236,7 +238,7 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                                                     color: MyColor.primary)),
                                       ] else ...[
                                         custom.acceptRejectButton(
-                                            context, "Reject", () {
+                                            context, text.reject.tr, () {
                                           setState(() {
                                             selectedIndex = index;
                                           });
@@ -273,40 +275,6 @@ class _DCenterRequestsState extends State<DCenterRequests> {
                         );
                       },
                     ),
-                    // ListView.builder(
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   shrinkWrap: true,
-                    //   itemCount: 5,
-                    //   itemBuilder: (context, index) {
-                    //     return Card(
-                    //       color: MyColor.midgray,
-                    //       child: ListTile(
-                    //           contentPadding: const EdgeInsets.all(12),
-                    //           title: custom.text("list.medicineName", 16,
-                    //               FontWeight.w400, MyColor.primary1),
-                    //           subtitle:      Padding(
-                    //             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //               children: [
-                    //                 custom.acceptRejectButton(
-                    //                     context,
-                    //                     "Reject",
-                    //                         () {
-                    //                     },
-                    //                     MyColor.midgray,
-                    //                     const TextStyle(color: MyColor.primary)),
-                    //                 custom.acceptRejectButton(context, "Accept", () {
-                    //                 }, MyColor.primary, const TextStyle(color: MyColor
-                    //                     .white))
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           trailing: Text("list.medicineSlot")),
-                    //
-                    //     );
-                    //   },
-                    // )
                   ],
                 );
               }

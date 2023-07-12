@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import 'AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 import 'QRScannerReports/QRScannerPage.dart';
@@ -16,6 +17,7 @@ class CompleteAppointPrescription extends StatefulWidget {
 
 class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescription> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
   int selectedCard = -1;
@@ -40,7 +42,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: customView.text("Past Appointment", 17, FontWeight.w500, MyColor.black),
+        title: customView.text(text.pastAppointment.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Stack(
         children: [
@@ -89,7 +91,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
                           color: MyColor.primary1,
                         ),
                         const SizedBox(width: 40.00,),
-                        customView.text("Scan and check reports", 15.0,
+                        customView.text(text.scanAndCheckReports.tr, 15.0,
                             FontWeight.w500, MyColor.primary1),
 
                       ],
@@ -143,8 +145,8 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Date",
+                                 Text(
+                                  text.date.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -168,8 +170,8 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Slot",
+                                 Text(
+                                  text.slot.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -194,8 +196,8 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Booking ID",
+                                 Text(
+                                  text.bookingID.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,

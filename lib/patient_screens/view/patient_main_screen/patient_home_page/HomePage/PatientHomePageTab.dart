@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 
 import 'CenterSide/PCenterHomePage.dart';
@@ -21,6 +22,7 @@ class _PatientHomePageState extends State<PatientHomePage>
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   TextEditingController searchCtr = TextEditingController();
+  LocalString text = LocalString();
   CustomView customView = CustomView();
   TabController? tabController;
 
@@ -49,31 +51,6 @@ class _PatientHomePageState extends State<PatientHomePage>
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 25),
             child: Column(children: [
-              /*  SizedBox(
-                height: height * 0.05,
-              ),
-              customView.searchFieldnew(
-                  context,
-                  searchCtr,
-                  "Search doctors, medical center",
-                  TextInputType.text,
-                  InkWell(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.getFilterScreen());
-                      },
-                      child: const Icon(Icons.filter_list_alt)),
-                  const Icon(Icons.search_rounded), () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DoctorSearchList()));
-              }, () {
-                */
-              /*   setState(() {
-                      doctorListCtr.keywords.value;
-
-                    });*/ /*
-              },true),*/
               Container(
                 constraints: const BoxConstraints.expand(height: 60),
                 child: TabBar(
@@ -94,9 +71,9 @@ class _PatientHomePageState extends State<PatientHomePage>
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    tabs: const [
-                      Tab(text: "Doctor"),
-                      Tab(text: "Medical Center"),
+                    tabs:  [
+                      Tab(text: text.doctor.tr),
+                      Tab(text: text.Medical_Center.tr),
                     ]),
               ),
               Expanded(

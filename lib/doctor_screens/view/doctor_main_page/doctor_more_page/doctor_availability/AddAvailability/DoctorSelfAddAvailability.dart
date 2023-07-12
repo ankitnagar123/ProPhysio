@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/AddAvailablityCtr.dart';
 import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
@@ -19,6 +20,7 @@ class MyAvailability extends StatefulWidget {
 class _MyAvailabilityState extends State<MyAvailability> {
   AddAvailabilityCtr addAvailabilityCtr = Get.put(AddAvailabilityCtr());
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
   //select date's
   var selectedIndexes = [];
@@ -63,13 +65,13 @@ class _MyAvailabilityState extends State<MyAvailability> {
                               )));
                 },
                 child: Container(
-                  height: 32,
+                  height: 40,
                   width: 120,
                   decoration: BoxDecoration(
                       color: MyColor.primary1,
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
-                      child: custom.text("View Availability", 13,
+                      child: custom.text(text.viewAvailability.tr, 13,
                           FontWeight.w500, MyColor.white)),
                 ),
               ),
@@ -79,7 +81,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Start Date", 15, FontWeight.w500, MyColor.black)),
+                      text.startDate.tr, 15, FontWeight.w500, MyColor.black)),
             ),
             Container(
                 height: 40,
@@ -103,8 +105,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
                   },
                   readOnly: true,
                   controller: startDateController,
-                  decoration: const InputDecoration(
-                    hintText: "select start date",
+                  decoration:  InputDecoration(
+                    hintText: text.selectSDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.date_range_outlined, color: MyColor.primary),
@@ -121,7 +123,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "End Date", 15, FontWeight.w500, MyColor.black)),
+                     text.endDate.tr, 15, FontWeight.w500, MyColor.black)),
             ),
             Container(
                 height: 40,
@@ -145,8 +147,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
                   },
                   readOnly: true,
                   controller: endDateController,
-                  decoration: const InputDecoration(
-                    hintText: "select end date",
+                  decoration:  InputDecoration(
+                    hintText: text.selectEDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                         Icon(Icons.date_range_outlined, color: MyColor.primary),
@@ -160,10 +162,10 @@ class _MyAvailabilityState extends State<MyAvailability> {
             ),
             addAvailabilityCtr.loading.value
                 ? custom.MyIndicator()
-                : custom.MyButton(context, "Submit", () {
+                : custom.MyButton(context, text.Submit.tr, () {
                     if (startDateController.text.isEmpty ||
                         endDateController.text.isEmpty) {
-                      custom.MySnackBar(context, "Enter Dates");
+                      custom.MySnackBar(context, text.enterDates.tr);
                     } else {
                       addAvailabilityCtr.addAvailability(
                           context,
@@ -186,7 +188,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                   alignment: Alignment.topLeft,
                   child: addAvailabilityCtr.doctorTimeList.isEmpty
                       ? const Text("")
-                      : custom.text("Your Time Slot's according select date",
+                      : custom.text(text.yourTimeSlotAccordingSelectDate.tr,
                           13, FontWeight.w500, MyColor.black)),
             ),
             addAvailabilityCtr.loadingf.value == true
@@ -210,7 +212,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                                 child: CheckboxListTile(
                                   activeColor: MyColor.primary,
                                   dense: true,
-                                  title: Text("${list.from} To ${list.to}"),
+                                  title: Text("${list.from} ${text.To.tr} ${list.to}"),
                                   value: selectedIndexes.contains(index),
                                   onChanged: (vale) {
                                     setState(() {
@@ -267,7 +269,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                         horizontal: 20.0, vertical: 10),
                     child: AnimatedButton(
                       // width: MediaQuery.of(context).size.width * 0.8,
-                      text: 'Submit',
+                      text: text.Submit.tr,
                       color: MyColor.primary,
                       pressEvent: () {
                         if (timeIdArray.isNotEmpty) {
@@ -281,8 +283,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
                               headerAnimationLoop: false,
                               dialogType: DialogType.success,
                               showCloseIcon: true,
-                              title: 'Success',
-                              desc: 'Self Availability Add Successfully',
+                              title: text.success.tr,
+                              desc: text.selfAvailabilityAddSuccessfully.tr,
                               btnOkOnPress: () {
                                 debugPrint('OnClick');
                               },
@@ -295,7 +297,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                             ).show();
                           });
                         } else {
-                          custom.MySnackBar(context, "Select slot's");
+                          custom.MySnackBar(context,text.selectSlot.tr);
                           log("empty");
                         }
                       },

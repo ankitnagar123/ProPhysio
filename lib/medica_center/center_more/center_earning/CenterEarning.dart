@@ -4,6 +4,7 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 
 class CenterEarningCalculate extends StatefulWidget {
   const CenterEarningCalculate({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class CenterEarningCalculate extends StatefulWidget {
 
 class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   TextEditingController endDateController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
 
@@ -26,7 +29,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
     if (date != null) {
       return date.toString().split(' ')[0];
     } else {
-      return 'Choose The Date';
+      return '';
     }
   }
 
@@ -56,7 +59,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
         elevation: 0,
         centerTitle: true,
         title: custom.text(
-            "Calculate earnings", 17, FontWeight.w500, MyColor.black),
+            text.calculateEarnings.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -69,7 +72,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 custom.text(
-                    "Total earning", 14, FontWeight.w500, MyColor.black),
+                    text.totalEarning.tr, 14, FontWeight.w500, MyColor.black),
                 /*custom.text(
                       "${doctorEarningCtr.earning.value.startDate.month}/"
                           "${doctorEarningCtr.earning.value.startDate.day}/"
@@ -89,13 +92,13 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
             SizedBox(
               height: height * 0.02,
             ),
-            custom.text("Calculate your earning in a selected period.", 14,
+            custom.text(text.calculateYourEarningSelectedPeriod.tr, 14,
                 FontWeight.normal, MyColor.black),
             SizedBox(height: height * 0.04),
             Align(
               alignment: Alignment.topLeft,
               child:
-              custom.text("Start date", 14, FontWeight.w500, MyColor.black),
+              custom.text(text.startDate.tr, 14, FontWeight.w500, MyColor.black),
             ),
             const SizedBox(
               height: 2.0,
@@ -119,8 +122,8 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                   },
                   readOnly: true,
                   controller: startDateController,
-                  decoration: const InputDecoration(
-                    hintText: "Select Date",
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                     Icon(Icons.calendar_month, color: MyColor.primary),
@@ -133,7 +136,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
             Align(
               alignment: Alignment.topLeft,
               child:
-              custom.text("End date", 14, FontWeight.w500, MyColor.black),
+              custom.text(text.endDate.tr, 14, FontWeight.w500, MyColor.black),
             ),
             const SizedBox(
               height: 2.0,
@@ -158,12 +161,11 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                   },
                   readOnly: true,
                   controller: endDateController,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
-                      // labelText: 'Passward',
-                      hintText: "select date",
+                      hintText: text.Select_Date.tr,
                       suffixIcon: Icon(
                         Icons.calendar_month,
                         color: MyColor.primary,
@@ -172,7 +174,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
             SizedBox(
               height: height * 0.1,
             ),
-            custom.MyButton(context, "Calculate", () {
+            custom.MyButton(context,text.calculate.tr, () {
               Get.toNamed(RouteHelper.cEarningLists());
              /* if (validation()) {
                 doctorEarningCtr.fetchEarning(
@@ -194,8 +196,8 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
               onPressed: () {
                 clearText();
               },
-              child: const Text(
-                "Reset range date",
+              child:  Text(
+                text.resetRangeDate.tr,
                 style: TextStyle(
                     color: Colors.red,
                     fontFamily: "Poppins",
@@ -239,9 +241,9 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
 
   bool validation() {
     if (startDateController.text.isEmpty) {
-      custom.MySnackBar(context, "Select start date");
+      custom.MySnackBar(context, text.startDate.tr);
     } else if (endDateController.text.isEmpty) {
-      custom.MySnackBar(context, "Select end date");
+      custom.MySnackBar(context, text.endDate.tr);
     } else {
       return true;
     }

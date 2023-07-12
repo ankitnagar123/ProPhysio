@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/CaculateEarningCtr.dart';
 
 class DoctorEarning extends StatefulWidget {
@@ -14,6 +15,7 @@ class DoctorEarning extends StatefulWidget {
 
 class _DoctorEarningState extends State<DoctorEarning> {
   DoctorEarningCtr doctorEarningCtr = Get.put(DoctorEarningCtr());
+  LocalString text = LocalString();
 
   CustomView custom = CustomView();
 
@@ -33,7 +35,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
             )),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("Earning", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.Earnings.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,7 +51,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     custom.text(
-                        "Total earning", 14, FontWeight.w500, MyColor.black),
+                        text.totalEarning.tr, 14, FontWeight.w500, MyColor.black),
                     custom.text(
                          "${doctorEarningCtr.earning.value.startDate.month}/"
                             "${doctorEarningCtr.earning.value.startDate.day}/"
@@ -82,7 +84,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
 
   Widget showList() {
     return doctorEarningCtr.earning.value.list.isEmpty
-        ? const Text("No data on this particular date")
+        ?  Text(text.noDataOnParticularDate.tr)
         : ListView.builder(
             shrinkWrap: true,
             itemCount: doctorEarningCtr.earning.value.list.length,
@@ -130,8 +132,8 @@ class _DoctorEarningState extends State<DoctorEarning> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Date",
+                                 Text(
+                                  text.date.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -154,8 +156,8 @@ class _DoctorEarningState extends State<DoctorEarning> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Slot",
+                                 Text(
+                                  text.slot.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -165,7 +167,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                                   height: 2.0,
                                 ),
                                 Text(
-                                  "${list.from.toString()} To "
+                                  "${list.from.toString()} ${text.To.tr} "
                                   "${list.to.toString()}",
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -183,8 +185,8 @@ class _DoctorEarningState extends State<DoctorEarning> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Fees",
+                                 Text(
+                                  text.fees.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,

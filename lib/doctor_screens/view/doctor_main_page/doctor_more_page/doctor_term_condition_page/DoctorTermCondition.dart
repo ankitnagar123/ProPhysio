@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 
 class DoctorTermCondition extends StatefulWidget {
   const DoctorTermCondition({Key? key}) : super(key: key);
@@ -14,13 +16,15 @@ class DoctorTermCondition extends StatefulWidget {
 
 class _DoctorTermConditionState extends State<DoctorTermCondition> {
   CustomView custom = CustomView();
+  LocalString text= LocalString();
+
   bool loding = true;
 
   @override
   void initState() {
     super.initState();
     loding = true;
-    // if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
   @override
@@ -36,7 +40,7 @@ class _DoctorTermConditionState extends State<DoctorTermCondition> {
         elevation: 0,
         centerTitle: true,
         title: custom.text(
-            "Terms and conditions", 17, FontWeight.w500, MyColor.black),
+            text.TermCondition.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Stack(
         children: [

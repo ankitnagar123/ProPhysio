@@ -11,6 +11,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../signin_screen/signin_controller/SignInController.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../category_sub-category/DoctorListwithCategoy.dart';
@@ -26,7 +27,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   MyRoute myRoute = Get.put(MyRoute());
   CustomView customView = CustomView();
-SharedPreferenceProvider sp = SharedPreferenceProvider();
+  LocalString text = LocalString();
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   LoginCtr loginCtr = LoginCtr();
 
@@ -74,7 +76,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       const EdgeInsets.only(left: 12.0, top: 5.0, bottom: 5),
                   child: Align(
                       alignment: Alignment.centerLeft,
-                      child: customView.text("Choose from top Specialist", 13,
+                      child: customView.text(text.Choos_Top_Specialist.tr, 13,
                           FontWeight.w500, MyColor.primary1)),
                 ),
                 GestureDetector(
@@ -84,12 +86,12 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                     /*Navigator.push(context, MaterialPageRoute(
                         builder: (context) => const PDrAllCategory()));*/
                   },
-                  child: const Padding(
+                  child:  Padding(
                     padding: EdgeInsets.only(left: 12.0, top: 5.0),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "see all",
+                         text.SeeAll.tr,
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: MyColor.primary1),
@@ -194,12 +196,12 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
             ),
             Align(
                 alignment: Alignment.centerLeft,
-                child: customView.text("Top Specialization", 15,
+                child: customView.text(text.TopSpecialization.tr, 15,
                     FontWeight.w500, MyColor.primary1)),
             doctorListCtr.categoryLoading.value
                 ? categorysubShimmerEffect(context)
                 : doctorListCtr.catSubCat.isEmpty
-                    ? const Text("No Top Specification")
+                    ?  Text(text.NoTopSpecialization.tr)
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: doctorListCtr.catSubCat.length,
@@ -223,10 +225,10 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                 ),
                                 doctorListCtr
                                         .catSubCat[index].subCatDetail.isEmpty
-                                    ? const Center(
+                                    ?  Center(
                                         child: Padding(
                                         padding: EdgeInsets.all(8.0),
-                                        child: Text("No Sub-Category",
+                                        child: Text(text.NoSubCat.tr,
                                             style: TextStyle(
                                                 color: MyColor.primary1,
                                                 letterSpacing: 1.1)),
@@ -343,11 +345,6 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                                                             ),
                                                           ),
                                                         ),
-                                                        // Align(
-                                                        //   alignment: Alignment.center,
-                                                        //   child: customView.text(, 10, FontWeight.normal,
-                                                        //       MyColor.black),
-                                                        // )
                                                       ],
                                                     ),
                                                   ),

@@ -6,6 +6,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/AddAvailablityCtr.dart';
 import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
@@ -20,6 +21,7 @@ class DoctorCenterAddAvailability extends StatefulWidget {
 class _DoctorCenterAddAvailabilityState
     extends State<DoctorCenterAddAvailability> {
   AddAvailabilityCtr addAvailabilityCtr = Get.put(AddAvailabilityCtr());
+  LocalString text = LocalString();
 
   CustomView custom = CustomView();
 
@@ -70,14 +72,14 @@ class _DoctorCenterAddAvailabilityState
 
             },
                 child: Container(
-                  height: 32, width: 120,
+                  height: 40, width: 120,
                   decoration: BoxDecoration(
                       color: MyColor.primary1,
                       borderRadius: BorderRadius.circular(10)
                   ),
 
                   child: Center(child: custom.text(
-                      "View Availability", 13, FontWeight.w500, MyColor.white)),
+                      text.viewAvailability.tr, 13, FontWeight.w500, MyColor.white)),
                 ),
               ),
             ),
@@ -86,7 +88,7 @@ class _DoctorCenterAddAvailabilityState
               child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Select medical center", 14, FontWeight.w500,
+                      text.selectMedicalCenter.tr, 14, FontWeight.w500,
                       MyColor.black)),
             ),
             centerList(),
@@ -98,7 +100,7 @@ class _DoctorCenterAddAvailabilityState
               child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Start Date", 14, FontWeight.w500, MyColor.black)),
+                      text.startDate.tr, 14, FontWeight.w500, MyColor.black)),
             ),
             Container(
                 height: 40,
@@ -121,8 +123,8 @@ class _DoctorCenterAddAvailabilityState
                   },
                   readOnly: true,
                   controller: startDateController,
-                  decoration: const InputDecoration(
-                    hintText: "select start date",
+                  decoration:  InputDecoration(
+                    hintText: text.selectSDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                     Icon(Icons.date_range_outlined, color: MyColor.primary),
@@ -139,7 +141,7 @@ class _DoctorCenterAddAvailabilityState
               child: Align(
                   alignment: Alignment.topLeft,
                   child:
-                  custom.text("End Date", 14, FontWeight.w500, MyColor.black)),
+                  custom.text(text.endDate.tr, 14, FontWeight.w500, MyColor.black)),
             ),
             Container(
                 height: 40,
@@ -162,8 +164,8 @@ class _DoctorCenterAddAvailabilityState
                   },
                   readOnly: true,
                   controller: endDateController,
-                  decoration: const InputDecoration(
-                    hintText: "select end date",
+                  decoration:  InputDecoration(
+                    hintText:  text.selectEDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                     Icon(Icons.date_range_outlined, color: MyColor.primary),
@@ -179,11 +181,11 @@ class _DoctorCenterAddAvailabilityState
                   () =>
               addAvailabilityCtr.loadingC.value
                   ? custom.MyIndicator()
-                  : custom.MyButton(context, "Submit", () {
+                  : custom.MyButton(context, text.Submit.tr, () {
                 if (startDateController.text.isEmpty ||
                     endDateController.text.isEmpty ||
                     selectedCenter == null) {
-                  custom.MySnackBar(context, "Fill all data");
+                  custom.MySnackBar(context, text.fillAllData.tr);
                 } else {
                   addAvailabilityCtr.addCenterAvailability(
                       context,
@@ -208,7 +210,7 @@ class _DoctorCenterAddAvailabilityState
               child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Your Time Slot's according select date", 13,
+                      text.yourTimeSlotAccordingSelectDate.tr, 13,
                       FontWeight.w500, MyColor.black)),
             ),
             addAvailabilityCtr.loadingf.value == true
@@ -233,7 +235,7 @@ class _DoctorCenterAddAvailabilityState
                             child: CheckboxListTile(
                               activeColor: MyColor.primary,
                               dense: true,
-                              title: Text("${list.from} To ${list.to}"),
+                              title: Text("${list.from} ${text.To.tr} ${list.to}"),
                               value: selectedIndexes.contains(index),
                               onChanged: (vale) {
                                 setState(() {
@@ -288,7 +290,7 @@ class _DoctorCenterAddAvailabilityState
             horizontal: 20.0, vertical: 10),
         child: AnimatedButton(
           // width: MediaQuery.of(context).size.width * 0.8,
-          text: 'Submit',
+          text: text.Submit.tr,
           color: MyColor.primary,
           pressEvent: () {
             if (timeIdArray.isNotEmpty) {
@@ -302,8 +304,8 @@ class _DoctorCenterAddAvailabilityState
                   headerAnimationLoop: false,
                   dialogType: DialogType.success,
                   showCloseIcon: true,
-                  title: 'Success',
-                  desc: 'Center availability add successfully',
+                  title: text.Submit.tr,
+                  desc: text.centerAvailabilityAddSuccessfully.tr,
                   btnOkOnPress: () {
                     debugPrint('OnClick');
                   },
@@ -316,7 +318,7 @@ class _DoctorCenterAddAvailabilityState
                 ).show();
               });
             } else {
-              custom.MySnackBar(context, "Select slot's");
+              custom.MySnackBar(context, text.selectSlot.tr);
               log("empty");
             }
           },
@@ -354,7 +356,6 @@ class _DoctorCenterAddAvailabilityState
     );
   }
 
-  /*---------SELECT MULTIPLE CATEGORY-----*/
   Widget centerList() {
     final widht = MediaQuery
         .of(context)
@@ -400,12 +401,14 @@ class _DoctorCenterAddAvailabilityState
                           child: Text(items.name),
                         );
                       }).toList(),
-                      hint: const Text("Select center"),
+                      hint:  Text(text.selectMedicalCenter.tr),
                       // After selecting the desired option,it will
                       // change button value to selected value
                       onChanged: (newValue) {
                         stateSetter(() {
+
                           selectedCenter = newValue;
+
                           log('MY CENTER Select>>>$selectedCenter');
                         });
                       },
@@ -466,12 +469,13 @@ class _DoctorCenterAddAvailabilityState
                           child: Text(items.name),
                         );
                       }).toList(),
-                      hint: const Text("Select center"),
+                      hint:  Text(text.selectMedicalCenter.tr),
                       // After selecting the desired option,it will
                       // change button value to selected value
                       onChanged: (newValue) {
                         stateSetter(() {
                           selectedCenter = newValue;
+
                           log('MY CENTER Select>>>$selectedCenter');
                           Navigator.push(context,MaterialPageRoute(builder: (context)=> DoctorViewCalender(centerId: selectedCenter.toString(),)));
 
@@ -522,7 +526,7 @@ class _DoctorCenterAddAvailabilityState
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 5.0),
-                            child: custom.text("Select Medical Center", 17,
+                            child: custom.text(text.selectMedicalCenter.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -531,7 +535,7 @@ class _DoctorCenterAddAvailabilityState
                           Align(
                             alignment: Alignment.topLeft,
                             child: custom.text(
-                                "Select your Center", 13, FontWeight.w600,
+                                text.selectCenter.tr, 13, FontWeight.w600,
                                 MyColor.black),
                           ),
                           const SizedBox(

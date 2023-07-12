@@ -5,6 +5,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 
 class PatientPaymentScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class PatientPaymentScreen extends StatefulWidget {
 class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
   CustomView customView = CustomView();
   CardCtr cardCtr = Get.put(CardCtr());
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -44,7 +46,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
             ),
           ),
           title: customView.text(
-              "Payment method", 15.0, FontWeight.w500, Colors.black),
+             text.paymentMethod.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -59,9 +61,9 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
               ],
             );*/
           }else if(cardCtr.cardList.isEmpty){
-            return const Center(
+            return  Center(
               heightFactor: 10,
-              child: Text("Add a new card in order to pay the visits."),
+              child: Text(text.addCardOrderPayVisits.tr),
             );
           }
           return Column(
@@ -74,7 +76,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
           margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
           child: customView.MyButton(
             context,
-            "Add new card",
+            text.addNewCard.tr,
                 () {
               Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
             },
@@ -107,7 +109,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         customView.text(
-                            "Card", 15.0, FontWeight.w500, Colors.black),
+                            text.card.tr, 15.0, FontWeight.w500, Colors.black),
                         InkWell(
                             onTap: () {
                               cancelPopUp(context,index);
@@ -123,7 +125,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                       children: [
                         Column(
                           children: [
-                            customView.text("Card number", 12.0,
+                            customView.text(text.cardNumber.tr, 12.0,
                                 FontWeight.w400, Colors.black),
                             customView.text(cardCtr.cardList[index].cardNumber,
                                 12.0, FontWeight.w400, Colors.black),
@@ -135,7 +137,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                         Column(
                           children: [
                             customView.text(
-                                "Expires", 12.0, FontWeight.w400, Colors.black),
+                                text.expires.tr, 12.0, FontWeight.w400, Colors.black),
                             customView.text(
                                 "${cardCtr.cardList[index]
                                     .expiryMonth}/${cardCtr.cardList[index]
@@ -165,7 +167,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            "Card Holder", 12.0, FontWeight.w400, Colors.black),
+                            text.cardHolder.tr, 12.0, FontWeight.w400, Colors.black),
                         customView.text(cardCtr.cardList[index].cardHolderName,
                             12.0, FontWeight.w400, Colors.black),
                       ],
@@ -214,7 +216,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text("Remove Card", 17,
+                            child: customView.text(text.removeCard.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -224,7 +226,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to delete your card?",
+                                text.areYouSureWantDeleteCard.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -239,7 +241,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                                 onPressed: () {
                                   Get.back();
                                 },
-                                child: customView.text("Dismiss", 14.0,
+                                child: customView.text(text.Dismiss.tr, 14.0,
                                     FontWeight.w400, MyColor.grey),
                               ),
                               Obx(() {
@@ -248,7 +250,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                                 }
                                 return customView.mysButton(
                                   context,
-                                  "Remove",
+                                  text.remove.tr,
                                       () {
                                     cardCtr.cardDelete(context, cardCtr.cardList[index].cardId, () {
                                       Get.back();

@@ -17,7 +17,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
   LocalString text = LocalString();
   CustomView customView = CustomView();
   var enlocal;
-  var swlocal;
+  var Itlocal;
 
   int? index;
   @override
@@ -31,6 +31,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
             context,
             text.Submit.tr,
                 () {
+              Get.back();
             },
             MyColor.primary,
             const TextStyle(fontFamily: "Poppins", color: Colors.white),
@@ -40,19 +41,14 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
           centerTitle: true,
           leading: Container(
             margin: const EdgeInsets.fromLTRB(13.0, 9.0, 0.0, 8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: MyColor.primary1,
-                  borderRadius: BorderRadius.circular(5.0)),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Get.back();
-                },
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Colors.white,
               ),
+              onPressed: () {
+                Get.back();
+              },
             ),
           ),
           title:   Text(
@@ -144,8 +140,8 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                       child: InkWell(
                         onTap: (){
                           index = 2;
-                          swlocal= const Locale('sv','SE');
-                          Get.updateLocale(swlocal);
+                          Itlocal= const Locale('it','IT');
+                          Get.updateLocale(Itlocal);
                         },
                         child: Container(
                           decoration: BoxDecoration(

@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../singup_screen/doctor_signup_page/DoctorSelectAddress.dart';
 import '../../../../controller/DoctorProfileController.dart';
 
@@ -20,6 +21,8 @@ class DoctorProfileScreen extends StatefulWidget {
 
 class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
   String degree = "";
 
@@ -46,7 +49,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             color: Colors.black,
           ),
         ),
-        title: customView.text("Profile", 15.0, FontWeight.w500, Colors.black),
+        title: customView.text(text.Profile.tr, 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white24,
@@ -95,7 +98,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Certificates", 13.0, FontWeight.w500, Colors.black),
+                  text.certificates.tr, 13.0, FontWeight.w500, Colors.black),
             ),
             Row(
               children: [
@@ -136,7 +139,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
               child: customView.MyButton(
                 context,
-                "Save profile",
+                text.saveProfile.tr,
                 () {
 
                 },
@@ -167,19 +170,19 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Specializations", 13.0, FontWeight.w500, Colors.black),
+                  text.specializations.tr, 13.0, FontWeight.w500, Colors.black),
             ),
             const SizedBox(
               height: 5.0,
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text(
-                  "Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.",
-                  12.0,
-                  FontWeight.normal,
-                  Colors.black),
-            ),
+            // Align(
+            //   alignment: Alignment.topLeft,
+            //   child: customView.text(
+            //       "Lorem ipsum dolor sit amet consectetur senectus sit iaculis viverra leo imperdiet nisl.",
+            //       12.0,
+            //       FontWeight.normal,
+            //       Colors.black),
+            // ),
             const SizedBox(
               height: 5.0,
             ),
@@ -203,7 +206,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        customView.text("Add specialization", 14.0,
+                        customView.text(text.addSpecialization.tr, 14.0,
                             FontWeight.w500, MyColor.black),
                         const Icon(
                           Icons.arrow_forward,

@@ -5,6 +5,7 @@ import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
@@ -28,6 +29,7 @@ class PatientCheckOutCard extends StatefulWidget {
 class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
   AppointmentController appointmentController = AppointmentController();
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  LocalString text = LocalString();
 
   CardCtr cardCtr = Get.put(CardCtr());
   String? price;
@@ -70,9 +72,9 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
           padding: const EdgeInsets.only(bottom: 10),
           child: appointmentController.loadingAdd.value
               ? custom.MyIndicator()
-              : custom.MyButton(context, "Confirm appointment", () {
+              : custom.MyButton(context, text.confirmAppointment.tr, () {
                   if (cardid == "") {
-                    custom.MySnackBar(context, "Select card");
+                    custom.MySnackBar(context, text.selectCard.tr);
                   } else {
                     appointmentController.bookingAppointment(context, doctorid!,
                         cardid!, time!, price!, date!, centerId, () {
@@ -91,7 +93,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
               child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
           elevation: 0,
           centerTitle: true,
-          title: custom.text("Checkout", 17, FontWeight.w500, MyColor.black),
+          title: custom.text(text.checkOut.tr, 17, FontWeight.w500, MyColor.black),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -104,7 +106,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       height: height * 0.02,
                     ),
                     custom.text(
-                        "Please select a payment method you already entered or add a new card.",
+                        text.pleaseSelectPaymentMethodAlreadyEnteredAddCard.tr,
                         13,
                         FontWeight.normal,
                         MyColor.black),
@@ -130,7 +132,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                custom.text("Add new card", 14.0,
+                                custom.text(text.addNewCard.tr, 14.0,
                                     FontWeight.w500, MyColor.black),
                                 const Icon(
                                   Icons.arrow_forward,
@@ -175,7 +177,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         custom.text(
-                            "Card type", 15.0, FontWeight.w500, Colors.black),
+                            text.cardType.tr, 15.0, FontWeight.w500, Colors.black),
                         Radio<String>(
                           value: index.toString(),
                           groupValue: payment,
@@ -197,7 +199,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       children: [
                         Column(
                           children: [
-                            custom.text("Card number", 12.0, FontWeight.w400,
+                            custom.text(text.cardNumber.tr, 12.0, FontWeight.w400,
                                 Colors.black),
                             custom.text(cardCtr.cardList[index].cardNumber,
                                 13.0, FontWeight.w400, Colors.black),
@@ -209,7 +211,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                         Column(
                           children: [
                             custom.text(
-                                "Expires", 12.0, FontWeight.w400, Colors.black),
+                                text.expires.tr, 12.0, FontWeight.w400, Colors.black),
                             custom.text(
                                 "${cardCtr.cardList[index].expiryMonth}/${cardCtr.cardList[index].expiryYear}",
                                 13.0,
@@ -237,7 +239,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         custom.text(
-                            "Card Holder", 12.0, FontWeight.w400, Colors.black),
+                            text.cardHolder.tr, 12.0, FontWeight.w400, Colors.black),
                         custom.text(cardCtr.cardList[index].cardHolderName,
                             13.0, FontWeight.w400, Colors.black),
                       ],
@@ -252,7 +254,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
 
   bool validation() {
     if (cardid == null) {
-      custom.MySnackBar(context, "Select card");
+      custom.MySnackBar(context,text.selectCard.tr);
     } else {
       return true;
     }

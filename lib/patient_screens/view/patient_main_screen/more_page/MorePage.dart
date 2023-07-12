@@ -7,6 +7,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/more_page/term_condition_page/PatientTermCondition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/auth_controllers/PatientProfileController.dart';
 import "../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import 'Ratings_and_reviews/Rating&ReviewPage.dart';
@@ -27,6 +28,7 @@ class _MorePageState extends State<MorePage> {
 
   CustomView customView = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -55,7 +57,7 @@ class _MorePageState extends State<MorePage> {
                 /*const SizedBox(
                   height: 5.0,
                 ),*/
-                customView.text("Hi @${patientProfileCtr.name.value}", 17.0,
+                customView.text("${text.hii.tr} @${patientProfileCtr.name.value}", 17.0,
                     FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 15.0,
@@ -71,18 +73,18 @@ class _MorePageState extends State<MorePage> {
                             Get.toNamed(
                                 RouteHelper.getPatientAddNewCardScreen());
                           },
-                          title: customView.text("Add a credit card", 16,
+                          title: customView.text(text.addCreditCard.tr, 16,
                               FontWeight.w500, MyColor.primary1),
-                          subtitle: const Row(
+                          subtitle:  Row(
                             children: [
-                              Text("Go to ",
+                              Text(text.goto.tr,
                                   style: TextStyle(color: MyColor.primary1)),
-                              Text("Payment ",
+                              Text( text.payment.tr,
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: MyColor.primary1,
                                       fontWeight: FontWeight.w500)),
-                              Text("to complete it.",
+                              Text(text.toCompleteIt.tr,
                                   style: TextStyle(color: MyColor.primary1)),
                             ],
                           ),
@@ -128,7 +130,7 @@ class _MorePageState extends State<MorePage> {
                                   ),
                                 ),
                                 child: Center(
-                                    child: customView.text("Profile settings",
+                                    child: customView.text(text.ProfileSettings.tr,
                                         12.0, FontWeight.w400, Colors.black)),
                               )),
                         ),
@@ -168,7 +170,7 @@ class _MorePageState extends State<MorePage> {
                                   ),
                                 ),
                                 child: Center(
-                                    child: customView.text("Payment", 12.0,
+                                    child: customView.text(text.payment.tr, 12.0,
                                         FontWeight.w400, Colors.black)),
                               )),
                         ),
@@ -180,7 +182,7 @@ class _MorePageState extends State<MorePage> {
                   height: 30.0,
                 ),
                 ListTile(
-                  subtitle: customView.text("Rate appointment you did",
+                  subtitle: customView.text(text.rateAppointmentYouDid.tr,
                       10.0, FontWeight.w500, Colors.black),
                   visualDensity: VisualDensity.compact,
                   onTap: () {
@@ -195,7 +197,7 @@ class _MorePageState extends State<MorePage> {
                     Icons.star_border_purple500_sharp,
                     color: Colors.black,
                   ),
-                  title: customView.text("Ratings and reviews", 14.0,
+                  title: customView.text(text.ratingsAndReviews.tr, 14.0,
                       FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
@@ -218,9 +220,9 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "Reports", 14.0, FontWeight.w500, Colors.black),
+                      text.reports.tr, 14.0, FontWeight.w500, Colors.black),
                   subtitle: customView.text(
-                      "View your prescription,medical test & medicines",
+                     text.viewYourPrescriptionMedicalTestMedicines.tr,
                       10.0,
                       FontWeight.w500,
                       Colors.black),
@@ -243,9 +245,9 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "QR code", 14.0, FontWeight.w500, Colors.black),
+                      text.qrCode.tr, 14.0, FontWeight.w500, Colors.black),
                   subtitle: customView.text(
-                      "View your QR code", 10.0, FontWeight.w500, Colors.black),
+                      text.viewYourQrCode.tr, 10.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -265,7 +267,7 @@ class _MorePageState extends State<MorePage> {
                     Icons.note_alt,
                     color: Colors.black,
                   ),
-                  title: customView.text("Terms & conditions", 14.0,
+                  title: customView.text(text.TermCondition.tr, 14.0,
                       FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
@@ -286,7 +288,7 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "About", 14.0, FontWeight.w500, Colors.black),
+                      text.About.tr, 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -303,7 +305,7 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "Support", 14.0, FontWeight.w500, Colors.black),
+                  text.Support.tr, 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -320,7 +322,7 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      "Settings", 14.0, FontWeight.w500, Colors.black),
+                      text.Settings.tr, 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -337,7 +339,7 @@ class _MorePageState extends State<MorePage> {
                       deletePopUp(context);
                     },
                     child: customView.text(
-                        "Logout", 15.0, FontWeight.w500, Colors.red),
+                        text.Logout.tr, 15.0, FontWeight.w500, Colors.red),
                   ),
                 ),
               ],
@@ -380,7 +382,7 @@ class _MorePageState extends State<MorePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Logout", 17, FontWeight.w500, Colors.black),
+                                text.Logout.tr, 17, FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 14.0,
@@ -389,7 +391,7 @@ class _MorePageState extends State<MorePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to log out?",
+                               text.AreyouSureExit.tr,
                                 13,
                                 FontWeight.w400,
                                 Colors.black),
@@ -407,13 +409,13 @@ class _MorePageState extends State<MorePage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text("Dismiss", 14.0,
+                                    child: customView.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: customView.mysButton(
                                   context,
-                                  "Logout",
+                                  text.Logout.tr,
                                   () async {
                                     SharedPreferences preferences =
                                         await SharedPreferences.getInstance();

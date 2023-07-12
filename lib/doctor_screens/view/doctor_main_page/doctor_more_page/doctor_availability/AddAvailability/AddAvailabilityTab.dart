@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
 import 'DoctorCenterAddAvailability.dart';
 import 'DoctorSelfAddAvailability.dart';
-
+import 'package:get/get.dart';
 class AddAvailabilityTab extends StatefulWidget {
   const AddAvailabilityTab({
     Key? key,
@@ -19,6 +20,7 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   PCenterCtr pCenterCtr = PCenterCtr();
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -41,12 +43,12 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
           indicatorWeight: 2,
           tabs: [
             Tab(
-              child: custom.text("Self", 14, FontWeight.w500, MyColor.black),
+              child: custom.text(text.self.tr, 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
                 child: custom.text(
-                    "Medical center", 14, FontWeight.w500, MyColor.black),
+                    text.medicalCenter.tr, 14, FontWeight.w500, MyColor.black),
               ),
             ),
           ],

@@ -4,7 +4,8 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
-import 'dart:typed_data';
+
+import '../../../../../language_translator/LanguageTranslate.dart';
 
 
 class DoctorAboutScreen extends StatefulWidget {
@@ -16,13 +17,15 @@ class DoctorAboutScreen extends StatefulWidget {
 
 class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
   CustomView custom = CustomView();
+  LocalString text= LocalString();
+
   bool loding = true;
 
   @override
   void initState() {
     super.initState();
     loding = true;
-    // if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
   }
 
 
@@ -39,7 +42,7 @@ class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("About", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.About.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Stack(
         children: [
@@ -50,7 +53,7 @@ class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
                 loding = false;
               });
             },
-            initialUrl: "https://cisswork.com/Android/Medica/Apis/prescription.php?userid=53&doctor_id=30",zoomEnabled: true,
+            initialUrl: "https://cisswork.com/Android/Medica/Apis/about.php",zoomEnabled: true,
           ),loding == true ? Center(
             child: custom.MyIndicator(),
           ): const SizedBox(),

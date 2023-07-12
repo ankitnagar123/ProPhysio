@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import 'AddMedicines/AddMedicinesTab.dart';
 import 'MedicalTestAddList.dart';
 import 'PrescriptionAddandList.dart';
@@ -24,7 +25,7 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   String pId = "";
-
+LocalString text = LocalString();
   @override
   void initState() {
     pId = widget.patientId;
@@ -51,38 +52,11 @@ class _PrescriptionMedicalTabState extends State<PrescriptionMedicalTab>
             color: Colors.black,
           ),
         ),
-        title: custom.text("${widget.patientName} Report's", 15.0, FontWeight.w500, Colors.black),
+        title: custom.text("${widget.patientName} ${text.reports.tr}", 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
       ),
-
-      // appBar: AppBar(
-      //   elevation: 0.0,
-      //   backgroundColor: MyColor.white,
-      //   toolbarHeight: 10,
-      //   bottom: TabBar(
-      //     controller: tabController,
-      //     indicatorColor: MyColor.primary,
-      //     indicatorWeight: 2,
-      //     tabs: [
-      //       Tab(
-      //         child: custom.text(
-      //             "Prescription", 14, FontWeight.w500, MyColor.black),
-      //       ),
-      //       Tab(
-      //         child: Tab(
-      //           child: custom.text(
-      //               "Medical Test", 14, FontWeight.w500, MyColor.black),
-      //         ),
-      //       ),
-      //       Tab(
-      //         child: custom.text(
-      //             "Medicines", 14, FontWeight.w500, MyColor.black),
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: Column(
         children: [
           Container(

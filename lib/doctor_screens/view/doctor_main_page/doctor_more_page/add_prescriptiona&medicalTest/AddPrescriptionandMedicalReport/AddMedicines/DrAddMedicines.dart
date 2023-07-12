@@ -41,7 +41,6 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
   }
 
   String _keyword = '';
-  List<String> suggestons = ["USA", "UK", "Uganda", "Uruguay", "United Arab Emirates"];
 
   /* ----------For SEARCH Functionality*/
   List<MedicineAllListModel> _getFilteredList() {

@@ -7,6 +7,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/CenterRequestCtr.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/AddAvailability/AddAvailabilityTab.dart';
@@ -21,6 +22,7 @@ class DoctorMorePage extends StatefulWidget {
 class _DoctorMorePageState extends State<DoctorMorePage> {
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CenterRequest centerRequest = Get.put(CenterRequest());
 
@@ -48,7 +50,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               const SizedBox(
                 height: 10.0,
               ),
-              customView.text("Hi @${doctorProfileCtr.name.value}", 17.0,
+              customView.text("${text.hii.tr} @${doctorProfileCtr.name.value}", 17.0,
                   FontWeight.w500, Colors.black),
               const SizedBox(
                 height: 30.0,
@@ -84,7 +86,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: customView.text("Profile settings",
+                                  child: customView.text(text.ProfileSettings.tr,
                                       12.0, FontWeight.w400, Colors.black)),
                             )),
                       ),
@@ -123,7 +125,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: customView.text("Earnings", 12.0,
+                                  child: customView.text(text.Earnings.tr, 12.0,
                                       FontWeight.w400, Colors.black)),
                             )),
                       ),
@@ -135,7 +137,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 height: 30.0,
               ),
               ListTile(
-                subtitle: customView.text("add availability for self & center",
+                subtitle: customView.text(text.addAvailabilitySelfCenter.tr,
                     11.0, FontWeight.w400, Colors.black),
                 onTap: () {
                   Navigator.push(
@@ -149,7 +151,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Add Availability", 14.0, FontWeight.w500, Colors.black),
+                    text.addAvailability.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -157,7 +159,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
               ListTile(
-                subtitle: customView.text("prescription and medical reports",
+                subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
                     11.0, FontWeight.w400, Colors.black),
                 onTap: () {
                   Navigator.push(
@@ -172,7 +174,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Reports", 13.0, FontWeight.w500, Colors.black),
+                    text.reports.tr, 13.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -180,7 +182,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
               ListTile(
-                subtitle: customView.text("View your medical request ", 11.0,
+                subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
                     FontWeight.w400, Colors.black),
                 onTap: () {
                   Get.toNamed(RouteHelper.DCenterRequest());
@@ -194,7 +196,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   ),
                 ),
                 title: customView.text(
-                    "Center request", 14.0, FontWeight.w500, Colors.black),
+                    text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -210,7 +212,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Settings", 14.0, FontWeight.w500, Colors.black),
+                    text.Settings.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -226,7 +228,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Terms & conditions", 14.0, FontWeight.w500, Colors.black),
+                    text.TermCondition.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -242,7 +244,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "About", 14.0, FontWeight.w500, Colors.black),
+                    text.About.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -258,7 +260,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Support", 14.0, FontWeight.w500, Colors.black),
+                    text.Support.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -275,7 +277,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                     deletePopUp(context);
                   },
                   child: customView.text(
-                      "Logout", 15.0, FontWeight.w500, Colors.red),
+                      text.Logout.tr, 15.0, FontWeight.w500, Colors.red),
                 ),
               ),
             ],
@@ -317,7 +319,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Logout", 17, FontWeight.w500, Colors.black),
+                                text.Logout.tr, 17, FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 14.0,
@@ -326,7 +328,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to log out?",
+                                text.AreyouSureExit.tr,
                                 13,
                                 FontWeight.w400,
                                 Colors.black),
@@ -344,13 +346,13 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text("Dismiss", 14.0,
+                                    child: customView.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: customView.mysButton(
                                   context,
-                                  "Logout",
+                                  text.Logout.tr,
                                   () async {
                                     SharedPreferences preferences =
                                         await SharedPreferences.getInstance();

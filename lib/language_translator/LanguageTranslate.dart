@@ -175,8 +175,7 @@ class LocalString extends Translations {
   String Italian = "Italian";
   String Select_language = "Select language";
   String Language = "Language";
-
-
+  String ChangeLanguage = "Change language";
 
   /* DOCTOR SIDE */
 
@@ -189,6 +188,7 @@ class LocalString extends Translations {
   String centerRequest = "Center request";
 
   /* DOCTOR SIDE PERSONAL DATA  PAGE */
+  String yourEmail = "Your email";
   String personalData = "Personal data";
   String yourGender = "Your gender";
   String yourBirthplace = "Your birthplace";
@@ -197,7 +197,6 @@ class LocalString extends Translations {
   String saveProfile = "Save Profile";
 
   /* DOCTOR SIDE PROFILE  PAGE */
-
   String certificates = "Certificates";
   String specializations = "Specializations";
   String addSpecialization = "Add specialization";
@@ -244,7 +243,6 @@ class LocalString extends Translations {
   String fees = "Fees";
 
   /*DOCTOR SIDE ADD AVAILABILITY*/
-
   String self = "Self";
   String medicalCenter = "Medical center";
   String viewAvailability = "View Availability";
@@ -254,6 +252,9 @@ class LocalString extends Translations {
   String selfAvailabilityAddSuccessfully = "Self Availability Add Successfully";
   String selectSlot = "Select slot's";
   String selectMedicalCenter = "Select medical center";
+  String selectSDate = "select start date";
+  String selectEDate = "select end date";
+String To = "To";
   String fillAllData = "Fill all data";
   String centerAvailabilityAddSuccessfully =
       "Center availability add successfully";
@@ -277,10 +278,13 @@ class LocalString extends Translations {
 
   //**************Patient Side*************//
   /// **Home PDoctor Tab page******///
+  String doctor = "Doctor";
+  String Medical_Center = "Medical Center";
+
   String Choos_Top_Specialist = "Choose from top Specialist";
   String SeeAll = "see all";
   String TopSpecialization = "Top Specialization";
-  String NoTopSpecialization = "No Top Specification";
+  String NoTopSpecialization = "No Top Specialization";
   String NoSubCat = "No Sub-Category";
   String DoctorCategories = "Doctor Categories";
   String DoctorSubCat = "Doctor Sub-Category";
@@ -298,11 +302,106 @@ class LocalString extends Translations {
   String From = "From:";
   String From_current_location = "From current location";
 
+  /* PATIENT SIDE*/
+  /* PATIENT SIDE MORE PAGE*/
+
+  String addCreditCard = "Add a credit card";
+  String goto = "Go to";
+  String payment = "Payment";
+  String toCompleteIt="to complete it.";
+  String rateAppointmentYouDid = "Rate appointment you did";
+  String ratingsAndReviews = "Ratings and reviews";
+  String viewYourPrescriptionMedicalTestMedicines = "View your prescription,medical test & medicines";
+  String qrCode = "QR code";
+  String viewYourQrCode = "View your QR code";
+
+  /* PATIENT SIDE ADD NEW CARD PAGE*/
+
+  String addNewCard = "Add new card";
+  String addNewCardOrderToPayAppointment ="Add a new card in order to pay the appointment.";
+  String enterCardHolderName  ="Enter cardholder name";
+  String enterCardNumber = "Enter card number";
+  String expireDate = "Expire date";
+  String saveCard = "Save Card";
+  String pleaseEnterYourName = "Please enter your name";
+  String enterValidCardDetails = "Enter valid card details";
+  String pleaseEnterExpiryDate = "Please enter expiry date";
+  String pleaseEnterValidCVC = "Please enter valid CVC";
+
+  /* PATIENT SIDE CHECK OUT  PAGE*/
+
+  String checkOut = "Checkout";
+  String confirmAppointment = "Confirm appointment";
+  String selectCard  ="Select card";
+  String pleaseSelectPaymentMethodAlreadyEnteredAddCard ="Please select a payment method you already entered or add a new card.";
+  String cardType = "Card type";
+  String cardNumber = "Card number";
+  String expires = "Expires";
+  String cardHolder = "Card Holder";
+
+  /* PATIENT SIDE PAYMENT METHOD PAGE*/
+
+  String paymentMethod  ="Payment method";
+  String addCardOrderPayVisits ="Add a new card in order to pay the visits.";
+  String card = "Card";
+  String removeCard ="Remove Card";
+  String areYouSureWantDeleteCard ="Are you sure you want to delete your card?";
+  String remove = "Remove";
+
+  /* PATIENT SIDE PROFILE PAGE*/
+
+  String yourHealthCardCode = "Your Health card code";
+  String enterHealthCardCode = "Enter Health card code";
+  String yourPhoneNumber ="Your phone number";
+  String yourAge = "Your age";
+  String yourHeight = "Your height";
+  String yourWeight ="Your weight";
+  String yourTaxCode  ="Your Tax code";
+  String taxCode = "Tax code";
+
+  /* PATIENT SIDE RATING AND REVIEW AND REVIEW DETAIL PAGE*/
+  String rateThoseLastVisitsYouDid ="Rate those last visits you did.";
+  String youDonHaveAnyRatingReview = "You don’t have any new rating or review to do.";
+  String visitWith = "Visit with";
+  String selectRatingRange = "Select a rating range";
+  String writeReview = "Write a review";
+  String yourReview ="Your review";
+  String ratingSuccessfully = "Rating Successfully";
+
+  /* PATIENT SIDE REPORT PAGE*/
+
+  String yourReport = "Your Report";
+  String prescription = "Prescription";
+  String medicalTest = "Medical Test";
+  String medicines = "Medicines";
+  String title = "Title";
+  String enterTitle = "Enter Title";
+  String uploadPrescription = "Upload Prescription";
+  String writeDescription = "Write Description";
+  String yourPrescription = "Your Prescription";
+  String noPrescription  = "No prescription right know";
+  String uploadMedicalReport = "Upload Medical report";
+  String pastMedicalReport = "Past Medical report's";
+  String refresh = "Refresh";
+  String noMedicalReportRightKnow = "No medical report right know";
+  String noMedicinesRightKnow  ="No Medicines right know";
+  String submittedBy = "Submitted by";
+  String details ="Details";
+  String medicinesInformation = "Medicines information";
+  String timingTake ="Timing to take";
+
+
+  /* PATIENT SIDE SUPPORT PAGE*/
+  String yourSubject = "Your subject";
+  String yourMessage = "Your Message";
+  String enterSubject = "Enter subject";
+  String enterMassage  ="Enter massage";
+
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          /*Sign IN Page*/
+          //*****************Sign IN Page***************************//
           SIGN_IN: "Sign in",
           ENTER_USER_EMAIL: "Enter your username/email",
           HINT_ENTER_USER_EMAIL: "Enter Email ID/User Id",
@@ -345,6 +444,7 @@ class LocalString extends Translations {
           Select_Date: "Select date",
           Place_of_Birth: "Place of birth",
           University_Attended: "University attended",
+          Date_of_Qualification: "Date of qualification",
           Date_of_Enrollment: "Date of enrollment",
           Register_of_Belonging: "Register of belonging",
           Select_Category: "Select your specializations",
@@ -359,7 +459,8 @@ class LocalString extends Translations {
           forgot_Password: "Forgot password",
           forgot_line:
               "Forgot your password? Create a new one by entering your email address. We will send you a security OTP code to certify your identity. Then you can set a new one",
-/*Forgot password OTP*/
+
+//****Forgot password OTP******//
           forgot_line_otp:
               "Forgot your password? Please enter OTP number, we sent it on your email account.  Then you can set a new one.",
           Enter_otp: "Enter OTP number",
@@ -412,7 +513,7 @@ class LocalString extends Translations {
           Yourmedicalcentername: "Your medical center name",
           Entermedicalcentername: "Enter medical center name",
           yourbio: "Your bio",
-          yourUsernameEmail: "Your username / email",
+          yourUsernameEmail: "Your email",
           enterEmail: "Enter Email",
           enteAddress: "Enter address",
           yourAddres: "Your address",
@@ -452,13 +553,11 @@ class LocalString extends Translations {
           New_Ward: "New ward",
           Enter_Ward_Name: "Enter ward name",
 
-   English : "English",
-   Italian : "Italian",
-   Select_language : "Select language",
-   Language : "Language",
-
-
-
+          English: "English",
+          Italian: "Italian",
+          Select_language: "Select language",
+          Language: "Language",
+          ChangeLanguage: "Change language",
 
           /* DOCTOR SIDE MORE PAGE */
           addAvailabilitySelfCenter: "add availability for self & center",
@@ -469,6 +568,7 @@ class LocalString extends Translations {
           centerRequest: "Center request",
 
           /* DOCTOR SIDE PERSONAL DATA  PAGE */
+          yourEmail : "Your email",
           personalData: "Personal data",
           yourGender: "Your gender",
           yourBirthplace: "Your birthplace",
@@ -534,6 +634,9 @@ class LocalString extends Translations {
           selfAvailabilityAddSuccessfully: "Self Availability Add Successfully",
           selectSlot: "Select slot's",
           selectMedicalCenter: "Select medical center",
+          selectSDate: "select start date",
+          selectEDate: "select end date",
+          To :"To",
           fillAllData: "Fill all data",
           centerAvailabilityAddSuccessfully:
               "Center availability add successfully",
@@ -554,9 +657,130 @@ class LocalString extends Translations {
           accept: "Accept",
           reject: "Reject",
           confirm: "Confirm",
+
+  //**************Patient Side*************//
+  /// **Home PDoctor Tab page******///
+              doctor :"Doctor",
+              Medical_Center : "Medical Center",
+   Choos_Top_Specialist : "Choose from top Specialist",
+   SeeAll : "see all",
+   TopSpecialization : "Top Specialization",
+   NoTopSpecialization : "No Top Specialization",
+   NoSubCat : "No Sub-Category",
+   DoctorCategories : "Doctor Categories",
+   DoctorSubCat : "Doctor Sub-Category",
+   ListView : "View List",
+   MapView : "View on map",
+
+  /*Filter Screen's*/
+   Filters : "Filters",
+   Location_and_distance : "Location and distance",
+   km : "km",
+   Rating : "Rating",
+   price_Range : "Price range",
+   Search_city : "Search city",
+   Select_distance : "Select distance",
+   From : "From:",
+   From_current_location : "From current location",
+
+          /* PATIENT SIDE*/
+          /* PATIENT SIDE MORE PAGE*/
+
+          addCreditCard : "Add a credit card",
+          goto : "Go to",
+          payment : "Payment",
+          toCompleteIt : "to complete it.",
+          rateAppointmentYouDid : "Rate appointment you did",
+          ratingsAndReviews : "Ratings and reviews",
+          viewYourPrescriptionMedicalTestMedicines : "View your prescription,medical test & medicines",
+          qrCode : "QR code",
+          viewYourQrCode : "View your QR code",
+
+          /* PATIENT SIDE ADD NEW CARD PAGE*/
+
+          addNewCard : "Add new card",
+          addNewCardOrderToPayAppointment :"Add a new card in order to pay the appointment.",
+          enterCardHolderName  :"Enter cardholder name",
+          enterCardNumber : "Enter card number",
+          expireDate : "Expire date",
+          saveCard : "Save Card",
+          pleaseEnterYourName : "Please enter your name",
+          enterValidCardDetails : "Enter valid card details",
+          pleaseEnterExpiryDate : "Please enter expiry date",
+          pleaseEnterValidCVC : "Please enter valid CVC",
+
+          /* PATIENT SIDE CHECK OUT  PAGE*/
+
+          checkOut : "Checkout",
+          confirmAppointment : "Confirm appointment",
+          selectCard  :"Select card",
+          pleaseSelectPaymentMethodAlreadyEnteredAddCard :"Please select a payment method you already entered or add a new card.",
+          cardType : "Card type",
+          cardNumber : "Card number",
+          expires : "Expires",
+          cardHolder : "Card Holder",
+
+          /* PATIENT SIDE PAYMENT METHOD PAGE*/
+
+          paymentMethod  :"Payment method",
+          addCardOrderPayVisits :"Add a new card in order to pay the visits.",
+          card : "Card",
+          removeCard :"Remove Card",
+          areYouSureWantDeleteCard :"Are you sure you want to delete your card?",
+          remove : "Remove",
+
+          /* PATIENT SIDE PROFILE PAGE*/
+
+          yourHealthCardCode : "Your Health card code",
+          enterHealthCardCode : "Enter Health card code",
+          yourPhoneNumber :"Your phone number",
+          yourAge : "Your age",
+          yourHeight : "Your height",
+          yourWeight :"Your weight",
+          yourTaxCode  :"Your Tax code",
+          taxCode : "Tax code",
+
+          /* PATIENT SIDE RATING AND REVIEW AND REVIEW DETAIL PAGE*/
+
+          rateThoseLastVisitsYouDid :"Rate those last visits you did.",
+          youDonHaveAnyRatingReview : "You don’t have any new rating or review to do.",
+          visitWith : "Visit with",
+          selectRatingRange : "Select a rating range",
+          writeReview : "Write a review",
+          yourReview :"Your review",
+          ratingSuccessfully : "Rating Successfully",
+
+          /* PATIENT SIDE REPORT PAGE*/
+
+          yourReport : "Your Report",
+          prescription : "Prescription",
+          medicalTest : "Medical Test",
+          medicines : "Medicines",
+          title : "Title",
+          enterTitle : "Enter Title",
+          uploadPrescription : "Upload Prescription",
+          writeDescription :"Write Description",
+          yourPrescription : "Your Prescription",
+          noPrescription  : "No prescription right know",
+          uploadMedicalReport : "Upload Medical report",
+          pastMedicalReport : "Past Medical report's",
+          refresh : "Refresh",
+          noMedicalReportRightKnow : "No medical report right know",
+          noMedicinesRightKnow  :"No Medicines right know",
+          submittedBy : "Submitted by",
+          details :"Details",
+          medicinesInformation : "Medicines information",
+          timingTake :"Timing to take",
+
+
+          /* PATIENT SIDE SUPPORT PAGE*/
+          yourSubject : "Your subject",
+          yourMessage : "Your Message",
+          enterSubject : "Enter subject",
+          enterMassage  :"Enter massage",
         },
         'it_IT': {
-          /*Sign IN Page*/
+          //*****************Sign IN Page***************************//
           SIGN_IN: "Registrazione",
           ENTER_USER_EMAIL: "Inserisci il tuo nome utente/e-mail",
           HINT_ENTER_USER_EMAIL: "Inserisci ID e-mail/ID utente",
@@ -598,6 +822,7 @@ class LocalString extends Translations {
           Select_Date: "Seleziona la data",
           Place_of_Birth: "Luogo di nascita",
           University_Attended: "Università frequentata",
+          Date_of_Qualification: "Data di qualificazione",
           Date_of_Enrollment: "Data di iscrizione",
           Register_of_Belonging: "Registro di appartenenza",
           Select_Category: "Seleziona le tue specializzazioni",
@@ -668,7 +893,7 @@ class LocalString extends Translations {
           Yourmedicalcentername: "Il nome del tuo centro medico",
           Entermedicalcentername: "Inserisci il nome del centro medico",
           yourbio: "La tua biografia",
-          yourUsernameEmail: "Il tuo nome utente/e-mail",
+          yourUsernameEmail: "Il tuo e-mail",
           enterEmail: "Inserisci l'email",
           enteAddress: "Inserisci l'indirizzo",
           yourAddres: "Il tuo indirizzo",
@@ -708,12 +933,13 @@ class LocalString extends Translations {
           Enter_Ward_Name: "Inserisci il nome del reparto",
 
           /*Center Language Change screen*/
-          English : "Inglese",
-          Italian : "Italiano",
-          Select_language : "Seleziona la lingua",
-          Language : "Lingua",
+          English: "Inglese",
+          Italian: "Italiano",
+          Select_language: "Seleziona la lingua",
+          Language: "Lingua",
+          ChangeLanguage: "Cambia lingua",
 
-          /* DOCTOR SIDE MORE PAGE */
+          //*****************DOCTOR SIDE MORE PAGE****************************//
           addAvailabilitySelfCenter: "aggiungi disponibilità per self & center",
           addAvailability: "Aggiungi disponibilità",
           prescriptionAndMedicalReports: "prescrizioni e referti medici",
@@ -722,6 +948,7 @@ class LocalString extends Translations {
           centerRequest: "Richiesta centro",
 
           /* DOCTOR SIDE PERSONAL DATA  PAGE */
+          yourEmail : "La tua email",
           personalData: "Dati personali",
           yourGender: "Il tuo genere",
           yourBirthplace: "Il tuo luogo di nascita",
@@ -788,6 +1015,9 @@ class LocalString extends Translations {
               "Auto disponibilità Aggiungi con successo",
           selectSlot: "Seleziona slot",
           selectMedicalCenter: "Seleziona centro medico",
+          selectSDate: "selezionare la data di inizio",
+          selectEDate: "selezionare la data di fine",
+          To :"A",
           fillAllData: "Compila tutti i dati",
           centerAvailabilityAddSuccessfully:
               "La disponibilità del centro è stata aggiunta correttamente",
@@ -809,6 +1039,128 @@ class LocalString extends Translations {
           accept: "Accettare",
           reject: "Rifiutare",
           confirm: "Confermare",
+
+
+          //**************Patient Side*************//
+          /// **Home PDoctor Tab page******///
+          doctor :"Medico",
+          Medical_Center : "Centro medico",
+          Choos_Top_Specialist : "Scegli tra i migliori specialisti",
+          SeeAll : "vedi tutto",
+          TopSpecialization : "Massima specializzazione",
+          NoTopSpecialization : "Nessuna specializzazione superiore",
+          NoSubCat : "Nessuna sottocategoria",
+          DoctorCategories : "Categorie di dottori",
+          DoctorSubCat : "Sottocategoria medico",
+          ListView : "Visualizza elenco",
+          MapView : "Visualizza sulla mappa",
+
+          /*Filter Screen's*/
+          Filters : "Filtri",
+          Location_and_distance : "Posizione e distanza",
+          km : "km",
+          Rating : "Valutazione",
+          price_Range : "Fascia di prezzo",
+          Search_city : "Cerca città",
+          Select_distance : "Seleziona la distanza",
+          From : "Da:",
+          From_current_location : "Dalla posizione corrente",
+
+          /* PATIENT SIDE*/
+          /* PATIENT SIDE MORE PAGE*/
+
+          addCreditCard : "Aggiungi una carta di credito",
+          goto : "Vai a",
+          payment : "Pagamento",
+          toCompleteIt : "per completarlo.",
+          rateAppointmentYouDid : "Valuta l'appuntamento che hai fatto",
+          ratingsAndReviews : "Valutazioni e recensioni",
+          viewYourPrescriptionMedicalTestMedicines : "Visualizza la tua prescrizione, test medico e farmaci",
+          qrCode : "QR Code",
+          viewYourQrCode : "Visualizza il tuo codice QR",
+
+          /* PATIENT SIDE ADD NEW CARD PAGE*/
+
+          addNewCard : "Aggiungi nuova carta",
+          addNewCardOrderToPayAppointment :"Aggiungi una nuova carta per pagare l'appuntamento.",
+          enterCardHolderName  :"Inserisci il nome del titolare della carta",
+          enterCardNumber : "Inserisci il numero della carta",
+          expireDate : "Data di scadenza",
+          saveCard : "Salva carta",
+          pleaseEnterYourName : "per favore inserisci il tuo nome",
+          enterValidCardDetails : "Inserisci i dettagli della carta valida",
+          pleaseEnterExpiryDate : "Inserisci la data di scadenza",
+          pleaseEnterValidCVC : "Inserisci un CVC valido",
+
+          /* PATIENT SIDE CHECK OUT  PAGE*/
+
+          checkOut : "Guardare",
+          confirmAppointment : "Conferma appuntamento",
+          selectCard  :"Seleziona carta",
+          pleaseSelectPaymentMethodAlreadyEnteredAddCard :"Seleziona un metodo di pagamento che hai già inserito o aggiungi una nuova carta.",
+          cardType : "Tipo di cartae",
+          cardNumber : "Numero di carta",
+          expires : "Scade",
+          cardHolder : "Titolare della carta",
+
+          /* PATIENT SIDE PAYMENT METHOD PAGE*/
+
+          paymentMethod  :"Payment method",
+          addCardOrderPayVisits :"Aggiungi una nuova carta per pagare le visite.",
+          card : "Carta",
+          removeCard :"Rimuovi carta",
+          areYouSureWantDeleteCard :"Sei sicuro di voler cancellare la tua carta?",
+          remove : "Rimuovere",
+
+          /* PATIENT SIDE PROFILE PAGE*/
+
+          yourHealthCardCode : "Il codice della tua tessera sanitaria",
+          enterHealthCardCode : "Inserisci il codice della tessera sanitaria",
+          yourPhoneNumber :"Il tuo numero di telefono",
+          yourAge : "Della tua età",
+          yourHeight : "La tua altezza",
+          yourWeight :"Il tuo peso",
+          yourTaxCode  :"Il tuo Codice Fiscale",
+          taxCode : "Codice fiscale",
+
+          /* PATIENT SIDE RATING AND REVIEW AND REVIEW DETAIL PAGE*/
+
+          rateThoseLastVisitsYouDid :"Valuta le ultime visite che hai fatto.",
+          youDonHaveAnyRatingReview : "Non hai alcuna nuova valutazione o recensione da fare.",
+          visitWith : "Visita con",
+          selectRatingRange : "Seleziona un intervallo di valutazione",
+          writeReview : "Scrivere una recensione",
+          yourReview :"Il tuo commento",
+          ratingSuccessfully : "Valutazione riuscita",
+
+          /* PATIENT SIDE REPORT PAGE*/
+
+          yourReport : "Il tuo rapporto",
+          prescription : "Prescrizione",
+          medicalTest : "Test medico",
+          medicines : "Medicinali",
+          title : "Titolo",
+          enterTitle : "Inserisci Titolo",
+          uploadPrescription : "Carica prescrizione",
+          writeDescription :"Scrivi Descrizione",
+          yourPrescription : "La tua ricetta",
+          noPrescription  : "Nessuna prescrizione lo sa",
+          uploadMedicalReport : "Carica referto medico",
+          pastMedicalReport : "Passati referti medici",
+          refresh : "ricaricare",
+          noMedicalReportRightKnow : "Nessun referto medico lo sa",
+          noMedicinesRightKnow  :"Nessun farmaco lo so",
+          submittedBy : "Inviato da",
+          details :"Dettagli",
+          medicinesInformation : "Informazioni sui medicinali",
+          timingTake :"Tempismo da prendere",
+
+
+          /* PATIENT SIDE SUPPORT PAGE*/
+          yourSubject : "Il tuo argomento",
+          yourMessage : "Il tuo messaggio",
+          enterSubject : "Inserisci oggetto",
+          enterMassage  :"Entra nel massaggio",
         },
       };
 }

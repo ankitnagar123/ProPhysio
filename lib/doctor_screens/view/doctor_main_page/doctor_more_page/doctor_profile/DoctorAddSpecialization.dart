@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../../controller/AddSpecializationCtr.dart';
 import '../../../../controller/DoctorProfileController.dart';
@@ -21,6 +22,8 @@ class DoctorAddSpecialization extends StatefulWidget {
 
 class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   DoctorProfileCtr doctorProfileCtr = Get.put(DoctorProfileCtr());
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
@@ -74,7 +77,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             ),
           ),
           title: customView.text(
-              "Specialization", 15.0, FontWeight.w500, Colors.black),
+              text.specializations.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white24,
@@ -89,7 +92,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             SizedBox(
               height: MediaQuery.of(context).size.shortestSide / 15,
             ),
-            customView.text("Category", 10.0, FontWeight.w600, MyColor.black),
+            customView.text(text.category.tr, 10.0, FontWeight.w600, MyColor.black),
             SizedBox(
               height: height * 0.01,
             ),
@@ -98,7 +101,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
               height: height * 0.02,
             ),
             customView.text(
-                "Sub-category", 10.0, FontWeight.w600, MyColor.black),
+                text.subCategory.tr, 10.0, FontWeight.w600, MyColor.black),
             subcategory(),
             const Divider(
               thickness: 1.5,
@@ -110,7 +113,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Description", 14.0, FontWeight.w600, Colors.black),
+                  text.description.tr, 14.0, FontWeight.w600, Colors.black),
             ),
             const SizedBox(
               height: 5.0,
@@ -118,7 +121,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Please add a description to tell about your experience, educational qualifications or skills. This information will be visible to medical centers and patients",
+                 text.descriptionDetail.tr,
                   12.0,
                   FontWeight.normal,
                   Colors.black),
@@ -127,11 +130,11 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
               height: height * 0.02,
             ),
             customView.text(
-                "Your description", 10.0, FontWeight.w600, MyColor.black),
+                text.yourDescription.tr, 10.0, FontWeight.w600, MyColor.black),
             SizedBox(
               height: height * 0.01,
             ),
-            customView.myField(context, discriptionCtr, "Your description",
+            customView.myField(context, discriptionCtr,  text.yourDescription.tr,
                 TextInputType.text),
             SizedBox(
               height: height * 0.05,
@@ -139,7 +142,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
-                  "Services price", 14.0, FontWeight.w600, Colors.black),
+                  text.servicesPrice.tr, 14.0, FontWeight.w600, Colors.black),
             ),
             GestureDetector(
               onTap: () {
@@ -147,7 +150,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                 // Get.toNamed(RouteHelper.DAddSpecialization());
               },
               child: Container(
-                  height: 50.0,
+                  height: 47.0,
                   margin: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 2.0),
                   decoration: BoxDecoration(
@@ -160,7 +163,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         customView.text(
-                            "Add visit", 14.0, FontWeight.w500, MyColor.black),
+                            text.addVisit.tr, 14.0, FontWeight.w500, MyColor.black),
                         const Icon(
                           Icons.arrow_forward,
                           size: 20.0,
@@ -202,50 +205,53 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                         ));
                   }),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: addSpecializationCtr.loading.value
-                  ? Center(
-                      child: customView.MyIndicator(),
-                    )
-                  : AnimatedButton(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      text: 'Add specialization',
-                      color: MyColor.primary,
-                      pressEvent: () {
-                        if (validation()) {
-                          addSpecializationCtr.addSpecializationFee(
-                              context,
-                              slectedCategory.toString(),
-                              slectedsubCategory.toString(),
-                              discriptionCtr.text,
-                              visitList!,
-                              feeList!, () {
-                           Get.back();
-                            () {
-                              AwesomeDialog(
-                                context: context,
-                                animType: AnimType.leftSlide,
-                                headerAnimationLoop: false,
-                                dialogType: DialogType.success,
-                                showCloseIcon: true,
-                                title: 'Success',
-                                desc: 'Add Successfully',
-                                btnOkOnPress: () {
-                                  debugPrint('OnClcik');
-                                },
-                                btnOkIcon: Icons.check_circle,
-                                onDismissCallback: (type) {
-                                  debugPrint(
-                                      'Dialog Dissmiss from callback $type');
-                                },
-                              ).show();
-                              // Get.back();
-                            };
-                          });
-                        }
-                      },
-                    ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.center,
+                child: addSpecializationCtr.loading.value
+                    ? Center(
+                        child: customView.MyIndicator(),
+                      )
+                    : AnimatedButton(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        text: text.addSpecialization.tr,
+                        color: MyColor.primary,
+                        pressEvent: () {
+                          if (validation()) {
+                            addSpecializationCtr.addSpecializationFee(
+                                context,
+                                slectedCategory.toString(),
+                                slectedsubCategory.toString(),
+                                discriptionCtr.text,
+                                visitList!,
+                                feeList!, () {
+                             Get.back();
+                              () {
+                                AwesomeDialog(
+                                  context: context,
+                                  animType: AnimType.leftSlide,
+                                  headerAnimationLoop: false,
+                                  dialogType: DialogType.success,
+                                  showCloseIcon: true,
+                                  title: text.success.tr,
+                                  desc: text.addSuccessfully.tr,
+                                  btnOkOnPress: () {
+                                    debugPrint('OnClcik');
+                                  },
+                                  btnOkIcon: Icons.check_circle,
+                                  onDismissCallback: (type) {
+                                    debugPrint(
+                                        'Dialog Dissmiss from callback $type');
+                                  },
+                                ).show();
+                                // Get.back();
+                              };
+                            });
+                          }
+                        },
+                      ),
+              ),
             ),
           ]),
         ),
@@ -302,7 +308,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text("Add service", 17,
+                            child: customView.text(text.addService.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -312,7 +318,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Please enter the service name and the price.",
+                                text.pleaseEnterServiceNamePrice.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -322,20 +328,20 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                           ),
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Enter the name", 13,
+                            child: customView.text(text.enterTheName.tr, 13,
                                 FontWeight.w600, MyColor.black),
                           ),
                           const SizedBox(height: 5.0),
                           customView.myField(context, visitnameCtr,
-                              "Visit’s name", TextInputType.name),
+                              text.visitName.tr, TextInputType.name),
                           const SizedBox(height: 15.0),
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Enter price", 13,
+                            child: customView.text(text.enterPrice.tr, 13,
                                 FontWeight.w600, MyColor.black),
                           ),
                           const SizedBox(height: 5.0),
-                          customView.myField(context, feeCtr, "Enter price",
+                          customView.myField(context, feeCtr,text.enterPrice.tr,
                               TextInputType.name),
                           const SizedBox(height: 10.0),
                           Row(
@@ -345,10 +351,10 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child: customView.text("Dismiss", 14.0,
+                                  child: customView.text(text.Dismiss.tr, 14.0,
                                       FontWeight.w500, MyColor.grey),
                                 ),
-                                customView.mysButton(context, "Add visit", () {
+                                customView.mysButton(context, text.addVisit.tr, () {
                                   if (validationVisit()) {
                                     addItemToList();
                                     Get.back();
@@ -385,15 +391,15 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
 
   bool validation() {
     if (slectedCategory == null) {
-      customView.MySnackBar(context, "Select category");
+      customView.MySnackBar(context, text.selectCategory.tr);
     } else if (slectedsubCategory == null) {
-      customView.MySnackBar(context, "Select sub-category");
+      customView.MySnackBar(context, text.selectSubCategory.tr);
     } else if (discriptionCtr.text.isEmpty) {
-      customView.MySnackBar(context, "Enter description");
+      customView.MySnackBar(context, text.enterDescription.tr);
     } else if (visitNames.isEmpty) {
-      customView.MySnackBar(context, "Enter visit name with charges");
+      customView.MySnackBar(context,text.enterVisitNameCharges.tr);
     } else if (visitFee.isEmpty) {
-      customView.MySnackBar(context, "Enter charges");
+      customView.MySnackBar(context, text.enterCharges.tr);
     } else {
       return true;
     }
@@ -402,9 +408,9 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
 
   bool validationVisit() {
     if (visitnameCtr.text.isEmpty) {
-      customView.MySnackBar(context, "Enter visit name");
+      customView.MySnackBar(context, text.enterVisitName.tr);
     } else if (feeCtr.text.isEmpty) {
-      customView.MySnackBar(context, "Enter visit charge");
+      customView.MySnackBar(context,text.enterVisitCharge.tr);
     } else {
       return true;
     }
@@ -446,7 +452,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                       child: Text(items.categoryName),
                     );
                   }).toList(),
-                  hint: const Text("Select Category"),
+                  hint:  Text(text.selectCategory.tr),
                   // After selecting the desired option,it will
                   // change button value to selected value
                   onChanged: (newValue) {
@@ -501,7 +507,7 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                       child: Text(items.subcatName),
                     );
                   }).toList(),
-                  hint: const Text("Select Sub-Category"),
+                  hint:  Text(text.selectSubCategory.tr),
                   // After selecting the desired option,it will
                   // change button value to selected value
                   onChanged: (newValue) {
