@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 class PatientEditLocation extends StatefulWidget {
   const PatientEditLocation({Key? key}) : super(key: key);
 
@@ -13,6 +14,7 @@ class _PatientEditLocationState extends State<PatientEditLocation> {
   TextEditingController  labelCtr = TextEditingController();
   TextEditingController  addressCtr = TextEditingController();
   TextEditingController  capCtr = TextEditingController();
+  LocalString text = LocalString();
 
 
   CustomView custom = CustomView();
@@ -24,7 +26,7 @@ class _PatientEditLocationState extends State<PatientEditLocation> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
-        title: custom.text("Edit location", 17, FontWeight.bold, MyColor.black),
+        title: custom.text(text.editLocation.tr, 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -35,7 +37,7 @@ class _PatientEditLocationState extends State<PatientEditLocation> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: custom.MyButton(context, "Edit location", () {
+        child: custom.MyButton(context,text.editLocation.tr, () {
           Get.back();
         }, MyColor.primary,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
@@ -57,39 +59,38 @@ class _PatientEditLocationState extends State<PatientEditLocation> {
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Set label", 13.0, FontWeight.w500, Colors.black),
+                    text.setLabel.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
               custom.myField(context, labelCtr,
-                  "Your user label", TextInputType.text),
+                  text.setLabel.tr, TextInputType.text),
               SizedBox(
                 height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Enter the address", 13.0, FontWeight.w500, Colors.black),
+                    text.enterAddress.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
               custom.myField(context, labelCtr,
-                  "Your address", TextInputType.text),SizedBox(
+                  text.yourAddres.tr, TextInputType.text),SizedBox(
                 height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Enter CAP", 13.0, FontWeight.w500, Colors.black),
+                    text.enterCAP.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
               custom.myField(context, labelCtr,
-                  "Your CAP", TextInputType.text),
-
+                  text.yourCap.tr, TextInputType.text),
             ],
           ),
         ),

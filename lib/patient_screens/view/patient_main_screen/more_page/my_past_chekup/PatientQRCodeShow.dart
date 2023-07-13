@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientProfileController.dart';
 
 class PatientQRShow extends StatefulWidget {
@@ -15,7 +16,7 @@ class PatientQRShow extends StatefulWidget {
 class _PatientQRShowState extends State<PatientQRShow> {
   CustomView custom = CustomView();
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
-
+LocalString text =LocalString();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -36,7 +37,7 @@ class _PatientQRShowState extends State<PatientQRShow> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("My QR Code", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.qrCode.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Obx(() {
         if (profileCtr.loading.value) {

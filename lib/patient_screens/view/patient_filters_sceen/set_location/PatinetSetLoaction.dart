@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/filter_controller/PatientFilterController.dart';
 
 class PatientSetLocation extends StatefulWidget {
@@ -21,6 +22,7 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
   TextEditingController capCtr = TextEditingController();
 
   PatientFilterCtr patientFilterCtr = Get.put(PatientFilterCtr());
+  LocalString text = LocalString();
 
   CustomView custom = CustomView();
   String latitude = "";
@@ -42,7 +44,7 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
-        title: custom.text("Set location", 17, FontWeight.bold, MyColor.black),
+        title: custom.text(text.setLocation.tr, 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -57,7 +59,7 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
           if (patientFilterCtr.loading.value) {
             return custom.MyIndicator();
           }
-          return custom.MyButton(context, "Set location", () async {
+          return custom.MyButton(context, text.setLocation.tr, () async {
             if (await validation()) {
               patientFilterCtr.setLocation(context, labelCtr.text, capCtr.text,
                   addressCtr.text, latitude, longitude);
@@ -86,38 +88,38 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Set label", 13.0, FontWeight.w500, Colors.black),
+                    text.setLabel.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
               custom.myField(
-                  context, labelCtr, "Your user label", TextInputType.text),
+                  context, labelCtr,text.setLabel.tr, TextInputType.text),
               SizedBox(
                 height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Enter the address", 13.0, FontWeight.w500, Colors.black),
+                    text.enterAddress.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
               custom.myField(
-                  context, addressCtr, "Your address", TextInputType.text),
+                  context, addressCtr, text.yourAddres.tr, TextInputType.text),
               SizedBox(
                 height: height * 0.04,
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: custom.text(
-                    "Enter CAP", 13.0, FontWeight.w500, Colors.black),
+                    text.enterCAP.tr, 13.0, FontWeight.w500, Colors.black),
               ),
               SizedBox(
                 height: height * 0.005,
               ),
-              custom.myField(context, capCtr, "Your CAP", TextInputType.text),
+              custom.myField(context, capCtr,text.yourCap.tr, TextInputType.text),
             ],
           ),
         ),
@@ -127,11 +129,11 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
 
   Future<bool> validation() async {
     if (labelCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Required label");
+      custom.MySnackBar(context, text.requiredLabel.tr);
     } else if (addressCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter address");
+      custom.MySnackBar(context,text.enterAddress.tr);
     } else if (capCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter CAP");
+      custom.MySnackBar(context,text.enterCAP.tr);
     } else {
       return await latLong(addressCtr.text);
     }
@@ -149,7 +151,7 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
       return true;
     } catch (e) {
       log("Exception :-", error: e.toString());
-      custom.MySnackBar(context, "invalid address");
+      custom.MySnackBar(context, text.invalidAddress.tr);
       return false;
     }
   }

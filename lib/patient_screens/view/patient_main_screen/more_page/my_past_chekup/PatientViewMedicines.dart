@@ -4,6 +4,7 @@ import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorP
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 
 class PatientViewMedicines extends StatefulWidget {
   const PatientViewMedicines({
@@ -18,6 +19,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
   CustomView custom = CustomView();
   DoctorPrescriptionCtr doctorPrescriptionCtr =
       Get.put(DoctorPrescriptionCtr());
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -35,9 +37,9 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
         children: [
           doctorPrescriptionCtr.pLoadingMedicineFetch.value
               ? Center(heightFactor: 13, child: custom.MyIndicator())
-              : doctorPrescriptionCtr.patientFetchMedicineList.isEmpty?const Padding(
+              : doctorPrescriptionCtr.patientFetchMedicineList.isEmpty? Padding(
             padding: EdgeInsets.all(10.0),
-            child: Center(heightFactor: 15,child: Text("No Medicines right know")),
+            child: Center(heightFactor: 15,child: Text(text.noMedicinesRightKnow.tr)),
           ): ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -72,7 +74,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                             trailing: Column(
                               children: [
                                 custom.text(
-                                    "Submitted by",
+                                    text.submittedBy.tr,
                                     14,
                                     FontWeight.normal,
                                     MyColor.black),
@@ -105,7 +107,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -116,8 +118,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Medicines information",
+                           Text(
+                           text.medicinesInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -140,8 +142,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Slot",
+                           Text(
+                            text.slot.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -172,8 +174,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Timing to take",
+                           Text(
+                           text.timingTake.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -202,8 +204,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Submitted by",
+                           Text(
+                            text.submittedBy.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -234,8 +236,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Description",
+                           Text(
+                            text.description.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,

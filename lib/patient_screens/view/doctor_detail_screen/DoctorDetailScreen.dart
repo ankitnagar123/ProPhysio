@@ -6,12 +6,12 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../controller/doctor_list_ctr/PDoctorSpecializationCtr.dart';
 import '../../controller/rating_controller/PatinetRatingController.dart';
 import '../book_appointment/AppointmentCalender.dart';
-import 'PatinetOfficeAddress.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
   final String id, centerId;
@@ -26,6 +26,7 @@ class DoctorDetailScreen extends StatefulWidget {
 class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   PatientRatingCtr patientRatingCtr = Get.put(PatientRatingCtr());
+  LocalString text = LocalString();
   AppointmentController appointmentController =
       Get.put(AppointmentController());
   DoctorSpecializationCtr doctorSpecializationCtr =
@@ -205,7 +206,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                     ),
                                   ],
                                 ),
-                                custom.mysButton(context, "Book Appointment",
+                                custom.mysButton(context, text.bookAppointment,
                                     () {
                                   Navigator.push(
                                       context,
@@ -230,7 +231,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             ),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: custom.text("Information", 15,
+                              child: custom.text(text.information.tr, 15,
                                   FontWeight.w500, MyColor.black),
                             ),
                             SizedBox(
@@ -286,11 +287,11 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 custom.text(
-                                    "${patientRatingCtr.address.value.totalReview.toString()} reviews",
+                                    "${patientRatingCtr.address.value.totalReview.toString()} ${text.reviews.tr}",
                                     13,
                                     FontWeight.normal,
                                     MyColor.grey),
-                                custom.text("Medium price", 14,
+                                custom.text(text.mediumPrice.tr, 14,
                                     FontWeight.normal, MyColor.grey),
                               ],
                             ),
@@ -331,7 +332,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        custom.text("View certificate", 14.0,
+                                        custom.text(text.viewCertificate.tr, 14.0,
                                             FontWeight.w500, MyColor.primary1),
                                         const Icon(
                                           Icons.arrow_forward,
@@ -385,19 +386,19 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             ),*/
                             Align(
                               alignment: Alignment.topLeft,
-                              child: custom.text("Specializations", 15,
+                              child: custom.text(text.specializations.tr, 15,
                                   FontWeight.w500, MyColor.primary1),
                             ),
                             SizedBox(
                               height: height * 0.01,
                             ),
                             doctorSpecializationCtr.category.isEmpty
-                                ? const SizedBox(
+                                ?  SizedBox(
                                     height: 50,
                                     child: Center(
                                         child: Text(
-                                      "No  Specialization Added by Doctor",
-                                      style: TextStyle(
+                                      text.noSpecializationAddedDoctor.tr,
+                                      style: const TextStyle(
                                           color: MyColor.primary1,
                                           fontSize: 12),
                                     )))

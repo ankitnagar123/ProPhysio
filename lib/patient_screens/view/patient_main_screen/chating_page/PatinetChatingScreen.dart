@@ -7,6 +7,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../controller/patinet_chat_controller/PatinetChatController.dart';
 import 'PatientChatProfile.dart';
@@ -22,7 +23,7 @@ class PatientChatScreen extends StatefulWidget {
 
 class _PatientChatScreenState extends State<PatientChatScreen> {
   TextEditingController messageCtr = TextEditingController();
-
+LocalString text = LocalString();
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   ChatController chatController = Get.put(ChatController());
 
@@ -86,7 +87,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                     colors: <Color>[MyColor.primary1, MyColor.secondary]),
               ),
             ),
-            toolbarHeight: 85.0,
+            toolbarHeight: 75.0,
             actions: [
               InkWell(
                   onTap: () {
@@ -147,7 +148,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                     Text(
                       "$doctorName $doctorSurname",
                       style:
-                          const TextStyle(fontFamily: "Poppins", fontSize: 18),
+                          const TextStyle(fontFamily: "Poppins", fontSize: 17),
                     ),
                     /* const Text(
                       "online",
@@ -254,10 +255,10 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: 3,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(12),
-                            hintText: 'Enter message...',
+                            hintText: text.enterMessage.tr,
                             hintStyle: TextStyle(
                                 color: MyColor.primary1,
                                 fontSize: 12,

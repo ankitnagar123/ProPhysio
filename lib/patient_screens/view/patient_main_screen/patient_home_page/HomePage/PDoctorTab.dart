@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:ui' as ui;
 
@@ -39,7 +38,6 @@ class _HomeViewState extends State<HomeView> {
   String? categoryId;
   String? subCategoryId;
   String? catWithSubCatId;
-
 
   String? id;
   String? userTyp;
@@ -86,13 +84,13 @@ class _HomeViewState extends State<HomeView> {
                     /*Navigator.push(context, MaterialPageRoute(
                         builder: (context) => const PDrAllCategory()));*/
                   },
-                  child:  Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(left: 12.0, top: 5.0),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                         text.SeeAll.tr,
-                          style: TextStyle(
+                          text.SeeAll.tr,
+                          style: const TextStyle(
                               decoration: TextDecoration.underline,
                               color: MyColor.primary1),
                         )),
@@ -129,13 +127,13 @@ class _HomeViewState extends State<HomeView> {
                             height: 80,
                             width: 80,
                             decoration: BoxDecoration(
-                              color: MyColor.midgray,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
                                   color: MyColor.primary1,
                                   offset: Offset(0, 0),
-                                  blurRadius: 2,
+                                  blurRadius: 1,
                                 ),
                               ],
                             ),
@@ -182,7 +180,6 @@ class _HomeViewState extends State<HomeView> {
                                       ),
                                     ),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -201,14 +198,15 @@ class _HomeViewState extends State<HomeView> {
             doctorListCtr.categoryLoading.value
                 ? categorysubShimmerEffect(context)
                 : doctorListCtr.catSubCat.isEmpty
-                    ?  Text(text.NoTopSpecialization.tr)
+                    ? customView.text(text.NoTopSpecialization.tr, 13,
+                        FontWeight.w500, MyColor.primary1)
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: doctorListCtr.catSubCat.length,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return Card(
-                            color: MyColor.midgray,
+                            color: MyColor.bcolor,
                             child: Column(
                               children: [
                                 Padding(
@@ -225,7 +223,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 doctorListCtr
                                         .catSubCat[index].subCatDetail.isEmpty
-                                    ?  Center(
+                                    ? Center(
                                         child: Padding(
                                         padding: EdgeInsets.all(8.0),
                                         child: Text(text.NoSubCat.tr,
@@ -236,11 +234,15 @@ class _HomeViewState extends State<HomeView> {
                                     : Align(
                                         alignment: Alignment.topLeft,
                                         child: SizedBox(
-                                          height: MediaQuery.of(context).size.height*0.15,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
                                           child: ListView.builder(
                                             shrinkWrap: true,
                                             scrollDirection: Axis.horizontal,
-                                            physics: const BouncingScrollPhysics(),
+                                            physics:
+                                                const BouncingScrollPhysics(),
                                             itemCount: doctorListCtr
                                                 .catSubCat[index]
                                                 .subCatDetail
@@ -248,8 +250,14 @@ class _HomeViewState extends State<HomeView> {
                                             itemBuilder: (context, index1) {
                                               return GestureDetector(
                                                 onTap: () {
-                                                  subCategoryId = doctorListCtr.catSubCat[index].subCatDetail[index1].subcatId;
-                                                  catWithSubCatId = doctorListCtr.catSubCat[index].categoryId;
+                                                  subCategoryId = doctorListCtr
+                                                      .catSubCat[index]
+                                                      .subCatDetail[index1]
+                                                      .subcatId;
+                                                  catWithSubCatId =
+                                                      doctorListCtr
+                                                          .catSubCat[index]
+                                                          .categoryId;
                                                   log("sub category Id=>${subCategoryId}with category Id=>$catWithSubCatId");
                                                   Navigator.push(
                                                       context,
@@ -364,8 +372,9 @@ class _HomeViewState extends State<HomeView> {
       }),
     );
   }
-  void getValuee()async{
-    id = await  sp.getStringValue(sp.PATIENT_ID_KEY);
+
+  void getValuee() async {
+    id = await sp.getStringValue(sp.PATIENT_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);

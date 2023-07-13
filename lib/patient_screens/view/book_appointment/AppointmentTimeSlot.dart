@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import '../../controller/auth_controllers/PatientProfileController.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
@@ -33,6 +34,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
       Get.put(AppointmentController());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
+  LocalString text = LocalString();
 
   CustomView custom = CustomView();
   DateTime _selectedValue = DateTime.now();
@@ -80,11 +82,11 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: custom.MyButton(context, "Confirm appointment", () {
+          child: custom.MyButton(context,text.confirmAppointment.tr, () {
             if (time == null) {
-              custom.MySnackBar(context, "Select time");
+              custom.MySnackBar(context, text.selectTime.tr);
             } else if (fee == null) {
-              custom.MySnackBar(context, "Select visit charge's");
+              custom.MySnackBar(context,text.selectVisitCharge.tr);
             } else {
               Navigator.push(
                   context,
@@ -116,7 +118,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
           elevation: 0,
           centerTitle: true,
           title: custom.text(
-              " Appointment with ${doctorListCtr.doctorname.value}",
+              "${text.appointmentWith.tr} ${doctorListCtr.doctorname.value}",
               16,
               FontWeight.w500,
               MyColor.black),
@@ -158,14 +160,14 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                         alignment: Alignment.topLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5.0, bottom: 7),
-                          child: custom.text("Doctor Time Slots", 16,
+                          child: custom.text(text.DoctorTimeSlots.tr, 16,
                               FontWeight.w500, MyColor.black),
                         ),
                       ),
                       appointmentController.loadingFetchTime.value
                           ? custom.MyIndicator()
                           : appointmentController.timeList.isEmpty
-                              ? const Text("No Time Slot's on this date")
+                              ?  Text(text.noTimeSlotDate.tr)
                               : GridView.builder(
                                   padding: const EdgeInsets.all(0),
                                   physics: const NeverScrollableScrollPhysics(),
@@ -242,12 +244,12 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                       const Divider(height: 50),
                       Align(
                           alignment: Alignment.topLeft,
-                          child: custom.text("Visit Charges", 16,
+                          child: custom.text(text.visitCharges.tr, 16,
                               FontWeight.w500, MyColor.black)),
                       appointmentController.visitCharge.isEmpty
-                          ? const Center(
+                          ?  Center(
                               heightFactor: 5,
-                              child: Text("No visit Charges added by Doctor"),
+                              child: Text(text.noVisitChargesDoctor.tr),
                             )
                           : appointmentController.loadingFetch.value
                               ? custom.MyIndicator()

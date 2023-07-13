@@ -31,6 +31,7 @@ String DOCTOR_ID_KEY = 'DOCTOR_ID_KEY';
   String FILTER_LONG = 'FILTER_LONG';
   String FILTER_CAP = 'FILTER_CAP';
 
+  String LANGUAGE = 'LANGUAGE';
 
   void setBoolValue(String keyBool, bool valueBool) async{
     WidgetsFlutterBinding.ensureInitialized();

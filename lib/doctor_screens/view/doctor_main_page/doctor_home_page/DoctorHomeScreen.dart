@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 import '../../../../signin_screen/signin_controller/SignInController.dart';
 import '../../../controller/DocotorBookingController.dart';
@@ -27,7 +28,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
-
+  LocalString text = LocalString();
   ChatController chatController = Get.put(ChatController());
   BookingController bookingController = Get.put(BookingController());
   LoginCtr loginCtr = LoginCtr();
@@ -69,14 +70,16 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               SizedBox(
                 height: height * 0.04,
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: custom.text(
-                    "${bookingController.booking.length} meetings",
-                    12,
-                    FontWeight.normal,
-                    MyColor.grey.withOpacity(0.70)),
-              ),
+              Obx(() {
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      "${bookingController.booking.length} ${{text.meetings.tr}}",
+                      12,
+                      FontWeight.normal,
+                      MyColor.grey.withOpacity(0.70)),
+                );
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -119,7 +122,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               custom.searchField(
                   context,
                   searchCtr,
-                  "Search appointments",
+                  text.SearchAppointment.tr,
                   TextInputType.text,
                   const Text(""),
                   const Icon(Icons.search_rounded), () {
@@ -145,9 +148,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget showList() {
     return SingleChildScrollView(
       child: bookingController.booking.isEmpty
-          ? const Center(
+          ?  Center(
         heightFactor: 15,
-        child: Text("No Appointment's at the moment!"),
+        child: Text(text.No_Appointments_moment.tr),
       )
           : ListView.builder(
           shrinkWrap: true,
@@ -232,8 +235,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Date",
+                                 Text(
+                                  text.date.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -255,8 +258,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Slot",
+                                 Text(
+                                  text.slot.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -280,8 +283,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Booking ID",
+                                 Text(
+                                  text.bookingID.tr,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
@@ -328,7 +331,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                  custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                   const SizedBox(
                     height: 7.0,
                   ),
@@ -339,8 +342,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Patient",
+                             Text(
+                              text.Patinet.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -362,8 +365,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Patient ID",
+                             Text(
+                              text.PatientId.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -394,9 +397,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Booking information",
-                              style: TextStyle(
+                             Text(
+                              text.Booking_Information.tr,
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -434,10 +437,10 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   fontFamily: "Poppins"),
                             ),
                           ),
-                          const Expanded(
+                           Expanded(
                             flex: 1,
                             child: Text(
-                              "Booking ID",
+                              text.bookingID.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -491,8 +494,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Payment information",
+                             Text(
+                              text.Payment_Information.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -514,8 +517,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Fees",
+                             Text(
+                              text.fees.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -546,8 +549,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Address",
+                             Text(
+                              text.Address.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -576,7 +579,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        custom.acceptRejectButton(context, "Reject", () {
+                        custom.acceptRejectButton(context, text.reject.tr, () {
                           bookingController
                               .bookingAppointmentReject(context, id, () {
                             bookingController.bookingAppointment(
@@ -585,7 +588,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           });
                         }, MyColor.midgray,
                             const TextStyle(color: MyColor.primary)),
-                        custom.acceptRejectButton(context, "Accept", () {
+                        custom.acceptRejectButton(context, text.accept.tr, () {
                           acceptPopUp(context, id);
                         }, MyColor.primary,
                             const TextStyle(color: MyColor.white))
@@ -602,7 +605,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
-                            custom.callButton(context, "Call", () {
+                            custom.callButton(context, text.Call.tr, () {
                               UrlLauncher.launchUrl(Uri.parse(
                                   'tel:${bookingController.contact.value}'));
                             },
@@ -613,14 +616,15 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   fontSize: 16,
                                 ),
                                 Icons.call),
-                            custom.callButton(context, "Chat", () {
+                            custom.callButton(context, text.Chat.tr, () {
                               var patientId = {
                                 "ID": bookingController.userId.value,
                                 "userName": bookingController.username.value,
                                 "userProfile": bookingController.userPic.value,
-                                "userLocation": bookingController.location.value,
+                                "userLocation": bookingController.location
+                                    .value,
                                 "userContact": bookingController.contact.value,
-                                 "surName": bookingController.surname.value,
+                                "surName": bookingController.surname.value,
                                 "name": bookingController.name.value,
                                 "bookingSide": "booking",
                               };
@@ -643,13 +647,15 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       Row(
                         children: [
                           custom.callButton(
-                              context, "Prescription", () {
+                              context, text.prescription.tr, () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         PrescriptionMedicalTab(
-                                          patientId: userid, patientName: bookingController.name.value,
+                                          patientId: userid,
+                                          patientName: bookingController.name
+                                              .value,
                                         )));
                           },
                               MyColor.primary,
@@ -659,7 +665,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 fontSize: 14,
                               ),
                               Icons.medical_information_outlined),
-                          custom.callButton(context, "Complete", () {
+                          custom.callButton(context, text.Complete.tr, () {
                             bookingController.bookingAppointmentDone(
                                 context, id, () {
                               bookingController.bookingAppointment(
@@ -911,10 +917,11 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                           .bookingAppointmentAccept(
                                           context, bookingId.toString(),
                                               () {
-                                                bookingController.bookingAppointment(context, "", "");
-                                                Get.back();
+                                            bookingController
+                                                .bookingAppointment(
+                                                context, "", "");
                                             Get.back();
-
+                                            Get.back();
                                           });
 
                                       // Navigator.push(

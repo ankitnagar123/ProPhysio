@@ -6,11 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-
-import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
-import 'DoctorDetailScreen.dart';
 
 
 class NavigateMapViewScreen extends StatefulWidget {

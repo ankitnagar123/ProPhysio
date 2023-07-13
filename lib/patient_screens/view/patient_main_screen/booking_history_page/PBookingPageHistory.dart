@@ -7,6 +7,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/booking_controller_list/PBookingController.dart';
 
 class BookingPage extends StatefulWidget {
@@ -18,6 +19,8 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   TextEditingController searchCtr = TextEditingController();
   String? cancelId = '';
   String? cancelReason = '';
@@ -47,7 +50,7 @@ class _BookingPageState extends State<BookingPage> {
               customView.searchFieldnew(
                   context,
                   searchCtr,
-                  "Search your appointments",
+                  text.searchYourAppointments.tr,
                   TextInputType.text,
                   const Text(""),
                   const Icon(Icons.search_rounded), () {
@@ -84,7 +87,7 @@ class _BookingPageState extends State<BookingPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        customView.text("Past appointments", 14.0,
+                        customView.text(text.pastAppointments.tr, 14.0,
                             FontWeight.w500, MyColor.primary1),
                         const Icon(
                           Icons.arrow_forward,
@@ -106,8 +109,8 @@ class _BookingPageState extends State<BookingPage> {
       if (patientBookingController.loading.value) {
         return categorysubShimmerEffect(context);
       } else if (patientBookingController.booking.isEmpty) {
-        return const Text(
-            "You don’t have any upcoming or pending appointment right now. Book an appointment  if needed.");
+        return  Text(
+            text.youDonHaveAnyUpcoming.tr);
       } else {}
       return SingleChildScrollView(
         child: ListView.builder(
@@ -197,8 +200,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Booking ID",
+                                             Text(
+                                              text.bookingID.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -224,7 +227,7 @@ class _BookingPageState extends State<BookingPage> {
                                     height: 8.0,
                                   ),
                                   customView.text(
-                                      "Visit with ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
+                                      "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
                                           .toString(),
                                       14.0,
                                       FontWeight.w500,
@@ -240,8 +243,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Date",
+                                             Text(
+                                              text.date.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -267,8 +270,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Slot",
+                                             Text(
+                                              text.slot.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -357,7 +360,7 @@ class _BookingPageState extends State<BookingPage> {
                                     height: 8.0,
                                   ),
                                   customView.text(
-                                      "Visit with ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
+                                      "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
                                           .toString(),
                                       14.0,
                                       FontWeight.w500,
@@ -373,8 +376,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Date",
+                                             Text(
+                                              text.date.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -400,8 +403,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Slot",
+                                             Text(
+                                              text.slot.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -428,8 +431,8 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
-                                              "Booking ID",
+                                             Text(
+                                              text.bookingID.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 10.0,
@@ -475,7 +478,7 @@ class _BookingPageState extends State<BookingPage> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                customView.text("Details", 17.0, FontWeight.w500, Colors.black),
+                customView.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -486,8 +489,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Doctor information",
+                           Text(
+                            text.doctorInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -505,14 +508,14 @@ class _BookingPageState extends State<BookingPage> {
                         ],
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Patient",
-                            style: TextStyle(
+                            text.patient.tr,
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -520,8 +523,8 @@ class _BookingPageState extends State<BookingPage> {
                           SizedBox(
                             height: 2.0,
                           ),
-                          Text(
-                            "You",
+                           Text(
+                            text.you.tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
@@ -542,8 +545,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
+                           Text(
+                            text.Address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -572,8 +575,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                           Text(
+                            text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -599,8 +602,8 @@ class _BookingPageState extends State<BookingPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Status",
+                     Text(
+                      text.status.tr,
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 11.0,
@@ -653,8 +656,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                           Text(
+                            text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -676,8 +679,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Total cost",
+                           Text(
+                            text.totalCost.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -710,8 +713,8 @@ class _BookingPageState extends State<BookingPage> {
                             onPressed: () {
                               cancelPopUp(context, id, idDr);
                             },
-                            child: const Text(
-                              "Cancel appointment",
+                            child:  Text(
+                              text.cancelAppointment.tr,
                               style: TextStyle(
                                   color: Colors.red,
                                   fontSize: 14.0,
@@ -723,8 +726,8 @@ class _BookingPageState extends State<BookingPage> {
                                 onPressed: () {
                                   cancelPopUp(context, id, idDr);
                                 },
-                                child: const Text(
-                                  "Cancel appointment",
+                                child:  Text(
+                                 text.cancelAppointment.tr,
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 14.0,
@@ -738,8 +741,8 @@ class _BookingPageState extends State<BookingPage> {
                                     Get.back();
                                   });
                                 },
-                                child: const Text(
-                                  "Remove from booking section",
+                                child:  Text(
+                                  text.removeFromBookingSection.tr,
                                   style: TextStyle(
                                       color: Colors.red,
                                       decoration: TextDecoration.underline,
@@ -788,7 +791,7 @@ class _BookingPageState extends State<BookingPage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text("Cancel appointment", 17,
+                            child: customView.text(text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -798,7 +801,7 @@ class _BookingPageState extends State<BookingPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to cancel the appointment? Please select a reason.",
+                               text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -843,7 +846,7 @@ class _BookingPageState extends State<BookingPage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text("Dismiss", 14.0,
+                                    child: customView.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -852,11 +855,11 @@ class _BookingPageState extends State<BookingPage> {
                                     ? customView.MyIndicator()
                                     : customView.mysButton(
                                         context,
-                                        "Cancel appointment",
+                                       text.cancelAppointment.tr,
                                         () {
                                           if (cancelReason == "") {
                                             customView.MySnackBar(
-                                                context, "Select reason");
+                                                context, text.selectReason.tr);
                                           } else {
                                           patientBookingController
                                               .bookingAppointmentCancel(

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 class AppointmentBookedSucces extends StatefulWidget {
   const AppointmentBookedSucces({Key? key}) : super(key: key);
 
@@ -13,7 +14,7 @@ class AppointmentBookedSucces extends StatefulWidget {
 
 class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
   CustomView custom = CustomView();
-
+LocalString text = LocalString();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -51,18 +52,18 @@ class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
                 SizedBox(height: height*0.04,),
                 Align(
                     alignment: Alignment.center,
-                    child: custom.text("Appointment correctly saved!", 20, FontWeight.w500, MyColor.white)),
+                    child: custom.text(text.appointmentCorrectlySaved.tr, 20, FontWeight.w500, MyColor.white)),
                 SizedBox(height: height*0.01,),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Align(
                       alignment: Alignment.center,
-                      child: custom.text("You can find your booking in the pending section. Attention! This is a booking request. Wait for the doctor to confirm your booking. You will receive a notification and a confirmation email.", 12, FontWeight.normal, MyColor.white)),
+                      child: custom.text(text.youCanFindYourBooking.tr, 12, FontWeight.normal, MyColor.white)),
                 ),
                  SizedBox(
                   height: height*0.25,
                 ),
-                custom.MyButton(context, "Let’s go", () {
+                custom.MyButton(context, text.letGo.tr, () {
                   Get.offAllNamed(RouteHelper.getBottomNavigation());
                 }, MyColor.white,
                     const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))

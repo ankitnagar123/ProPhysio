@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
 
 class PatientChangePasswordScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _PatientChangePasswordScreenState
     extends State<PatientChangePasswordScreen> {
   CustomView customView = CustomView();
   bool _isHidden = true;
+  LocalString text = LocalString();
 
   TextEditingController oldPasswordCtrl = TextEditingController();
   TextEditingController newPasswordCtrl = TextEditingController();
@@ -42,7 +44,7 @@ class _PatientChangePasswordScreenState
             ),
           ),
           title: customView.text(
-              "Change password", 15.0, FontWeight.w500, Colors.black),
+              text.ChangePassword.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -55,7 +57,7 @@ class _PatientChangePasswordScreenState
               SizedBox(
                 height: width * 0.10,
               ),
-              customView.text("Enter your old password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourOldPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -63,7 +65,7 @@ class _PatientChangePasswordScreenState
               customView.PasswordField(
                   context,
                   oldPasswordCtrl,
-                  "Old password",
+                  text.oldPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -86,7 +88,7 @@ class _PatientChangePasswordScreenState
               SizedBox(
                 height: width * 0.1,
               ),
-              customView.text("Enter your new password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourNewPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -94,7 +96,7 @@ class _PatientChangePasswordScreenState
               customView.PasswordField(
                   context,
                   newPasswordCtrl,
-                  "New password",
+                  text.newPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -118,14 +120,14 @@ class _PatientChangePasswordScreenState
                 height: width * 0.1,
               ),
               customView.text(
-                  "Confirm password", 12.0, FontWeight.w500, MyColor.black),
+                text.confirmPassword.tr, 12.0, FontWeight.w500, MyColor.black),
               SizedBox(
                 height: width * 0.02,
               ),
               customView.PasswordField(
                   context,
                   confirmPasswordCtrl,
-                  "New password",
+                   text.confirmPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -156,7 +158,7 @@ class _PatientChangePasswordScreenState
                   }
                   return customView.MyButton(
                     context,
-                    "Save Password",
+                   text.savePassword.tr,
                     () {
                       if (validation()) {
                         changePassCtr.ChangePasswordApi(
@@ -183,18 +185,18 @@ class _PatientChangePasswordScreenState
   // ******************Change Password VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (oldPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter old password");
+      customView.MySnackBar(context, text.enterYourOldPassword.tr);
     } else if (newPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter new password");
+      customView.MySnackBar(context, text.enterYourNewPassword.tr);
     } else if (newPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "New Password is must be of 6 digit");
+      customView.MySnackBar(context, text.newPasswordAtList6digit.tr);
     } else if (confirmPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter confirm password");
+      customView.MySnackBar(context,text.confirmPassword.tr);
     } else if (confirmPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "confirm is must be of 6 digit");
+      customView.MySnackBar(context, text.confirmPasswordAtList6digit.tr);
     } else if (newPasswordCtrl.text.toString() !=
         confirmPasswordCtrl.text.toString()) {
-      customView.MySnackBar(context, "Password is doesn't match");
+      customView.MySnackBar(context, text.passwordNotMatch.tr);
     } else {
       return true;
     }

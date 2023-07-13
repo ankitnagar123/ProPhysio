@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:medica/patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 
+import '../../../language_translator/LanguageTranslate.dart';
+
 class RatingFilterScreen extends StatefulWidget {
   const RatingFilterScreen({Key? key}) : super(key: key);
 
@@ -20,6 +22,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
   CustomView custom = CustomView();
   var rating = 2.5;
   DoctorListCtr doctorListCtr = DoctorListCtr();
+  LocalString text = LocalString();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white24,
-          title: custom.text("Rating", 17, FontWeight.bold, MyColor.black),
+          title: custom.text(text.Rating.tr, 17, FontWeight.bold, MyColor.black),
           leading: IconButton(
             onPressed: () {
               Get.offNamed(RouteHelper.getFilterScreen());
@@ -47,7 +50,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: custom.MyButton(context, "Submit", () {
+          child: custom.MyButton(context, text.Submit.tr, () {
            Get.offNamed(RouteHelper.getFilterScreen());
           }, MyColor.primary, const TextStyle(
               color: MyColor.white,
@@ -65,7 +68,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
                 height: height * 0.02,
               ),
               custom.text(
-                  "Select rating range", 17, FontWeight.w500, MyColor.black),
+                  text.selectRatingRange.tr, 17, FontWeight.w500, MyColor.black),
               SizedBox(
                 height: height * 0.02,
               ),

@@ -6,6 +6,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 import '../../../../model/PBookingListModel.dart';
 
@@ -19,6 +20,8 @@ class SearchAppointmentScreen extends StatefulWidget {
 
 class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   TextEditingController searchCtr = TextEditingController();
   PatientBookingController patientBookingController = Get.put(PatientBookingController());
   String _keyword = '';
@@ -63,7 +66,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
             elevation: 0,
             backgroundColor: Colors.white24,
             title: customView.text(
-                "Search appointment", 17, FontWeight.bold, MyColor.black),
+                text.searchAppointment.tr, 17, FontWeight.bold, MyColor.black),
             leading: IconButton(
               onPressed: () {
                 patientBookingController.bookingAppointment("");
@@ -92,11 +95,11 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     keyboardType: TextInputType.name,
                     cursorColor: Colors.black,
                     controller: searchCtr,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       contentPadding: EdgeInsets.only(top: 3, left: 20),
-                      hintText: "search your appointment",
+                      hintText: text.searchYourAppointments.tr,
                       hintStyle: TextStyle(fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
                       filled: true,
@@ -116,7 +119,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       flex: 1,
                       child: customView.mysButton(
                         context,
-                        "Upcoming",
+                        text.upcoming.tr,
                         () {
                           setState(() {
                             selectedCard = 0;
@@ -133,7 +136,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       flex: 1,
                       child: customView.mysButton(
                         context,
-                        "Pending",
+                        text.pending.tr,
                         () {
                           setState(() {
                             selectedCard = 1;
@@ -149,7 +152,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       flex: 1,
                       child: customView.mysButton(
                         context,
-                        "Past visits",
+                        text.pastVisits.tr,
                         () {
                           setState(() {
                             selectedCard = 2;
@@ -178,9 +181,9 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
       if (patientBookingController.loading.value) {
         return Center(heightFactor: 10, child: customView.MyIndicator());
       } else if (list.isEmpty) {
-        return const Center(heightFactor: 5.0,
+        return  Center(heightFactor: 5.0,
           child: Text(
-              "You don’t have any  appointment right now. Book an appointment if needed."),
+              text.youDonHaveAnyAppointmentRight.tr),
         );
       } else {
         return SingleChildScrollView(
@@ -253,7 +256,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                             height: 8.0,
                           ),
                           customView.text(
-                              "Visit with ${list[index].name} ${list[index].surname}"
+                              "${text.visitWith.tr} ${list[index].name} ${list[index].surname}"
                                   .toString(),
                               14.0,
                               FontWeight.w500,
@@ -268,8 +271,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Date",
+                                     Text(
+                                      text.date.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -291,8 +294,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Slot",
+                                     Text(
+                                      text.slot.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -317,8 +320,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   crossAxisAlignment:
                                   CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Booking ID",
+                                     Text(
+                                      text.bookingID.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -366,7 +369,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                customView.text("Details", 17.0, FontWeight.w500, Colors.black),
+                customView.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -377,8 +380,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Doctor information",
+                           Text(
+                            text.doctorInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -396,13 +399,13 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         ],
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Patient",
+                            text.patient.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -412,7 +415,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                             height: 2.0,
                           ),
                           Text(
-                            "You",
+                            text.you.tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
@@ -433,8 +436,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
+                           Text(
+                            text.Address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -463,8 +466,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                           Text(
+                           text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -490,8 +493,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Status",
+                     Text(
+                      text.status.tr,
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 11.0,
@@ -544,8 +547,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                           Text(
+                            text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -567,8 +570,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Total cost",
+                           Text(
+                            text.totalCost.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -601,8 +604,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       onPressed: () {
                         cancelPopUp(context, id, idDr);
                       },
-                      child: const Text(
-                        "Cancel appointment",
+                      child:  Text(
+                        text.cancelAppointment.tr,
                         style: TextStyle(
                             color: Colors.red,
                             fontSize: 14.0,
@@ -614,8 +617,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       onPressed: () {
                         cancelPopUp(context, id, idDr);
                       },
-                      child: const Text(
-                        "Cancel appointment",
+                      child:  Text(
+                        text.cancelAppointment.tr,
                         style: TextStyle(
                             color: Colors.red,
                             fontSize: 14.0,
@@ -679,7 +682,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text("Cancel appointment", 17,
+                            child: customView.text(  text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -689,7 +692,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to cancel the appointment? Please select a reason.",
+                                text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -734,7 +737,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text("Dismiss", 14.0,
+                                    child: customView.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -743,7 +746,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                     ? customView.MyIndicator()
                                     : customView.mysButton(
                                   context,
-                                  "Cancel appointment",
+                                  text.cancelAppointment.tr,
                                       () {
                                     if(cancelReason == ""){
                                       customView.MySnackBar(context, "");

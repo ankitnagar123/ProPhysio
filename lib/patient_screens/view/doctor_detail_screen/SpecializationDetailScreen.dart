@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../helper/CustomView/CustomView.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../controller/doctor_list_ctr/PDoctorSpecializationCtr.dart';
 
@@ -16,7 +17,7 @@ class SpecializationScreen extends StatefulWidget {
 class _SpecializationScreenState extends State<SpecializationScreen> {
   DoctorSpecializationCtr doctorSpecializationCtr = Get.put(DoctorSpecializationCtr());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
-
+LocalString text = LocalString();
   CustomView custom = CustomView();
   String? catId;
   String? doctorId;
@@ -48,7 +49,7 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
         elevation: 0,
         centerTitle: true,
         title:
-            custom.text("Specialization", 17, FontWeight.w500, MyColor.black),
+            custom.text(text.specializations.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -66,7 +67,7 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Category", 15, FontWeight.normal, MyColor.black),
+                      text.category.tr, 15, FontWeight.normal, MyColor.black),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
@@ -83,7 +84,7 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Sub-Category", 15, FontWeight.normal, MyColor.black),
+                      text.subCategory.tr, 15, FontWeight.normal, MyColor.black),
                 ),
                 SizedBox(
                   height: height * 0.001,
@@ -160,7 +161,7 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Information", 17, FontWeight.w500, MyColor.black),
+                      text.information.tr, 17, FontWeight.w500, MyColor.black),
                 ),
                 SizedBox(height: 10,),
                 Row(
@@ -207,7 +208,6 @@ class _SpecializationScreenState extends State<SpecializationScreen> {
                 SizedBox(
                   height: height * 0.030,
                 ),
-
               ],
             );
           }),

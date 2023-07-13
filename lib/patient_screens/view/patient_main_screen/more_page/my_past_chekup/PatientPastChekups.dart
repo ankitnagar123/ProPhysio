@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import 'MediclaReport.dart';
 import 'PatientViewMedicines.dart';
 import 'Prescription.dart';
@@ -29,6 +30,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
 
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
               color: Colors.black,
             ),
           ),
-          title: custom.text("Your Report", 15.0, FontWeight.w500, Colors.black),
+          title: custom.text(text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -62,15 +64,15 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
                 unselectedLabelColor: Colors.black,
                 controller: tabController,
                 indicatorWeight: 0,
-                tabs: const [
+                tabs:  [
                   Tab(
-                      child: Text("Prescription",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
+                      child: Text(text.prescription.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
                   ),
                   Tab(
-                    child: Text("Medical Test",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                    child: Text(text.medicalTest.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                   ),
                   Tab(
-                    child: Text("Medicines",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                    child: Text(text.medicines.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                   ),
                 ],
               ),

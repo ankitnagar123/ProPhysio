@@ -3,6 +3,8 @@ import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:get/get.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../medica_center/center_more/center_setting/CenterChangeLanguage.dart';
 import '../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
 
 class PatientSettingsScreen extends StatefulWidget {
@@ -15,7 +17,7 @@ class PatientSettingsScreen extends StatefulWidget {
 class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
   CustomView customView = CustomView();
   TextEditingController passwordCtr = TextEditingController();
-
+  LocalString text = LocalString();
   PatientChangePassCtr changePassCtr = PatientChangePassCtr();
   bool _isHidden = true;
 
@@ -35,7 +37,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
             ),
           ),
           title: customView.text(
-              "Settings", 15.0, FontWeight.w500, Colors.black),
+              text.Settings.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -54,7 +56,23 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                   color: Colors.black,
                 ),
                 title: customView.text(
-                    "Change Password", 14.0, FontWeight.w500, Colors.black),
+                    text.ChangePassword.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
+                },
+                leading: const Icon(
+                  Icons.language,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -71,7 +89,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
               deletePopUp(context);
             },
             child: customView.text(
-                "Delete account", 15.0, FontWeight.w500, Colors.red),
+                text.Deleteaccount.tr, 15.0, FontWeight.w500, Colors.red),
           ),
         ),
       ),
@@ -124,7 +142,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 5.0),
                             child: customView.text(
-                                "Are you sure you want to delete the account? Please enter your current password to confirm your decision.",
+                                text.AreyouSureDeleteAccount.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -135,14 +153,14 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: customView.text(
-                                "Enter your Password", 13, FontWeight.w600,
+                                text.EnterYourPassword.tr, 13, FontWeight.w600,
                                 MyColor.black),
                           ),
                           const SizedBox(
                               height: 5.0
                           ),
                           customView.PasswordField(
-                              context, passwordCtr, "Enter Password",
+                              context, passwordCtr, text.Enter_Password.tr,
                               TextInputType.text, GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -173,7 +191,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                                   Get.back();
                                 },
                                 child: customView.text(
-                                    "Dismiss", 14.0, FontWeight.w500,
+                                    text.Dismiss.tr, 14.0, FontWeight.w500,
                                     MyColor.grey),
                               ),
                               Obx(() {
@@ -182,7 +200,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                                 }
                                   return customView.mysButton(
                                     context,
-                                    "Delete profile",
+                                    text.Deleteaccount.tr,
                                         () {
                                     changePassCtr.deleteAccount(context, passwordCtr.text, () {
                                       Get.offAllNamed(RouteHelper.getLoginScreen());
@@ -212,7 +230,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
     if (passwordCtr.text
         .toString()
         .isEmpty) {
-      customView.MySnackBar(context, "Enter password");
+      customView.MySnackBar(context, text.Enter_Password.tr);
     } else {
       return true;
     }

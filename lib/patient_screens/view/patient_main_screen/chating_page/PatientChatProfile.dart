@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 
 class PatientChatProfile extends StatefulWidget {
   String name, surname, address, img, contact;
@@ -23,6 +24,7 @@ class PatientChatProfile extends StatefulWidget {
 
 class _PatientChatProfileState extends State<PatientChatProfile> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customView.callButton(context, "Call", () {
+            customView.callButton(context, text.Call.tr, () {
               UrlLauncher.launchUrl(Uri.parse('tel:${widget.contact}'));
             },
                 MyColor.primary,
@@ -43,7 +45,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, "Message", () {
+            customView.callButton(context, text.Message.tr, () {
               Get.back();
             },
                 MyColor.primary,

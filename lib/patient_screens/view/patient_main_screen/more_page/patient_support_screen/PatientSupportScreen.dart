@@ -38,7 +38,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                     }
                     return customView.MyButton(
                       context,
-                      "Send message",
+                      text.Sendmessage.tr,
                           () {
                         if(validation()){
                           patientSupportCtr.supportApi(context, subjectCtrl.text,
@@ -68,7 +68,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                 ),
               ),
               title: customView.text(
-                  "Support", 15.0, FontWeight.w500, Colors.black),
+                  text.Support.tr, 15.0, FontWeight.w500, Colors.black),
               centerTitle: true,
               elevation: 0.0,
               backgroundColor: Colors.white24,
@@ -79,38 +79,38 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Divider(),
-                  customView.text("Contact us if you need support.", 14.0,
+                  customView.text(text.ContactSupport.tr, 14.0,
                       FontWeight.w500, Colors.black),
                   SizedBox(
                     height: width * 0.09,
                   ),
                   customView.text(
-                      "Subject", 12.0, FontWeight.w500, MyColor.black),
+                      text.Subject.tr, 12.0, FontWeight.w500, MyColor.black),
                   SizedBox(
                     height: width * 0.02,
                   ),
                   customView.myField(
-                      context, subjectCtrl, "Your subject", TextInputType.text),
+                      context, subjectCtrl, text.yourSubject.tr, TextInputType.text),
                   SizedBox(
                     height: width * 0.05,
                   ),
                   customView.text(
-                      "Email", 12.0, FontWeight.w500, MyColor.black),
+                      text.enterEmail.tr, 12.0, FontWeight.w500, MyColor.black),
                   SizedBox(
                     height: width * 0.02,
                   ),
                   customView.myField(
-                      context, emailCtrl, "Your Email", TextInputType.text),
+                      context, emailCtrl, text.yourEmail.tr, TextInputType.text),
                   SizedBox(
                     height: width * 0.05,
                   ),
                   customView.text(
-                      "Message", 12.0, FontWeight.w500, MyColor.black),
+                      text.Message.tr, 12.0, FontWeight.w500, MyColor.black),
                   SizedBox(
                     height: width * 0.02,
                   ),
                   customView.myField(
-                      context, msgCtrl, "Your Message", TextInputType.text),
+                      context, msgCtrl, text.yourMessage.tr, TextInputType.text),
                   SizedBox(
                     height: width * 0.6,
                   ),
@@ -120,11 +120,11 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
   }
   bool validation() {
     if (subjectCtrl.text.isEmpty) {
-      customView.MySnackBar(context, "Enter subject");
+      customView.MySnackBar(context, text.enterSubject.tr);
     } else if (emailCtrl.text.isEmpty) {
-      customView.MySnackBar(context, "Enter email");
+      customView.MySnackBar(context, text.enterEmail.tr);
     }  else if (msgCtrl.text.isEmpty) {
-      customView.MySnackBar(context, "Enter massage");
+      customView.MySnackBar(context,text.enterMassage.tr);
     }else {
       return true;
     }

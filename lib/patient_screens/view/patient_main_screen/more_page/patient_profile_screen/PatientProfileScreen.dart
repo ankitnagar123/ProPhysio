@@ -357,11 +357,11 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 height: 50.0,
               ),
               customView.text(
-                  "Your Address", 10.0, FontWeight.w600, MyColor.black),
+                 text.yourAddres.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
-              customView.myField(context, addressCtrl, "Enter Your Address",
+              customView.myField(context, addressCtrl,  text.yourAddres.tr,
                   TextInputType.text),
               SizedBox(
                 height: height * 0.03,
@@ -374,12 +374,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            "Your gender", 10.0, FontWeight.w600, MyColor.black),
+                           text.yourGender.tr, 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
                         customView.myField(
-                            context, genderCtr, "gender", TextInputType.text),
+                            context, genderCtr,  text.yourGender.tr, TextInputType.text),
                       ],
                     ),
                   ),
@@ -391,12 +391,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Your age", 10.0, FontWeight.w600,
+                        customView.text(text.yourAge.tr, 10.0, FontWeight.w600,
                             MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        customView.myField(context, ageCtr, "age",
+                        customView.myField(context, ageCtr, text.yourAge.tr,
                             TextInputType.text),
                       ],
                     ),
@@ -414,12 +414,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            "Your height", 10.0, FontWeight.w600, MyColor.black),
+                            text.yourHeight.tr, 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
                         customView.myField(
-                            context, heightCtr, "height", TextInputType.text),
+                            context, heightCtr,  text.yourHeight.tr, TextInputType.text),
                       ],
                     ),
                   ),
@@ -431,12 +431,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Your weight", 10.0, FontWeight.w600,
+                        customView.text(text.yourWeight.tr, 10.0, FontWeight.w600,
                             MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        customView.myField(context, weightCtr, "weight",
+                        customView.myField(context, weightCtr, text.yourWeight.tr,
                             TextInputType.text),
                       ],
                     ),
@@ -454,12 +454,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            "Your Tax code", 10.0, FontWeight.w600, MyColor.black),
+                            text.taxCode.tr, 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
                         customView.myField(
-                            context, taxCtr, "Tax code", TextInputType.text),
+                            context, taxCtr, text.taxCode.tr, TextInputType.text),
                       ],
                     ),
                   ),
@@ -471,12 +471,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text("Your birth-place", 10.0, FontWeight.w600,
+                        customView.text(text.yourBirthplace.tr, 10.0, FontWeight.w600,
                             MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        customView.myField(context, birthPlaceCtr, "weight",
+                        customView.myField(context, birthPlaceCtr, text.yourBirthplace.tr,
                             TextInputType.text),
                       ],
                     ),
@@ -487,7 +487,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 height: height * 0.03,
               ),
               customView.text(
-                  "Your Gender", 10.0, FontWeight.w600, MyColor.black),
+                  text.yourGender.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
                 height: height * 0.01,
               ),
@@ -509,7 +509,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                           });
                         },
                       ),
-                      title: const Text('Male'),
+                      title:  Text(text.Male.tr),
                     ),
                   ),
                   Expanded(
@@ -528,7 +528,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                           });
                         },
                       ),
-                      title: const Text('Female'),
+                      title:  Text(text.Female.tr),
                     ),
                   ),
                 ],
@@ -540,8 +540,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: AnimatedButton(
-          // width: MediaQuery.of(context).size.width * 0.8,
-          text: 'Save Profile',
+          text: text.saveProfile.tr,
           color: MyColor.primary,
           pressEvent: ()async {
             if(await latLong(addressCtrl.text)){
@@ -572,8 +571,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   headerAnimationLoop: false,
                   dialogType: DialogType.success,
                   showCloseIcon: true,
-                  title: 'Success',
-                  desc: 'Profile Update Successfully',
+                  title: text.success.tr,
+                  desc: text.ProfileUpdateSuccessfully.tr,
                   btnOkOnPress: () {
                     debugPrint('OnClick');
                   },
@@ -584,7 +583,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 ).show();
               });
             }else{
-              customView.massenger(context, "Enter valid address");
+              customView.massenger(context, text.invalidAddress.tr);
             }
 
           },
@@ -595,10 +594,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
   Widget myField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {
-    final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: widht,
+      width: MediaQuery.of(context).size.width,
       child: TextFormField(
         readOnly: true,
         textInputAction: TextInputAction.next,
@@ -629,7 +626,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       return true;
     } catch (e) {
       log("Exception :-", error: e.toString());
-      customView.MySnackBar(context, "invalid address");
+      customView.MySnackBar(context, text.invalidAddress.tr);
       return false;
     }
   }

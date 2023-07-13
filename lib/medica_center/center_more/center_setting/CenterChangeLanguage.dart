@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 
 
@@ -18,7 +19,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
   CustomView customView = CustomView();
   var enlocal;
   var Itlocal;
-
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
   int? index;
   @override
   Widget build(BuildContext context) {
@@ -88,6 +89,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                         onTap: () {
                           index = 1;
                           enlocal = const Locale('en','US');
+                          sp.setStringValue(sp.LANGUAGE, "English");
                           Get.updateLocale(enlocal);
                         },
                         child: Container(
@@ -141,6 +143,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                         onTap: (){
                           index = 2;
                           Itlocal= const Locale('it','IT');
+                          sp.setStringValue(sp.LANGUAGE, "Italy");
                           Get.updateLocale(Itlocal);
                         },
                         child: Container(

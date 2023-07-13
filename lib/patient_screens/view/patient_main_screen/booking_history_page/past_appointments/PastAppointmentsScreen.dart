@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 
 class PastAppointmentsScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
   TextEditingController searchCtr = TextEditingController();
   PatientBookingController patientBookingController =
       Get.put(PatientBookingController());
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -26,8 +28,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
+
     return WillPopScope(
       onWillPop: () async {
         Get.back();
@@ -41,7 +42,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
             elevation: 0,
             backgroundColor: Colors.white24,
             title: customView.text(
-                "Past appointments", 17, FontWeight.bold, MyColor.black),
+               text.pastAppointment.tr, 17, FontWeight.bold, MyColor.black),
             leading: IconButton(
               onPressed: () {
                 patientBookingController.bookingAppointment("");
@@ -71,7 +72,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
       return patientBookingController.booking.isEmpty
           ? Center(
               heightFactor: 10,
-              child: customView.text("You don’t have any past appointment.", 14,
+              child: customView.text(text.youDonHaveAnyPastAppointment.tr, 14,
                   FontWeight.w400, MyColor.primary1))
           : SingleChildScrollView(
               child: ListView.builder(
@@ -96,7 +97,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               customView.text(
-                                  "Visit with ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
+                                  "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
                                       .toString(),
                                   14.0,
                                   FontWeight.w500,
@@ -112,8 +113,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          "Date",
+                                         Text(
+                                          text.date.tr,
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
@@ -139,8 +140,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          "Slot",
+                                         Text(
+                                          text.slot.tr,
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
@@ -167,8 +168,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          "Booking ID",
+                                         Text(
+                                 text.bookingID.tr,
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
@@ -214,7 +215,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                customView.text("Details", 17.0, FontWeight.w500, Colors.black),
+                customView.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -225,8 +226,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Doctor information",
+                           Text(
+                            text.doctorInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -244,13 +245,13 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         ],
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Patient",
+                            text.patient.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -260,7 +261,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                             height: 2.0,
                           ),
                           Text(
-                            "You",
+                            text.you.tr,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
@@ -281,8 +282,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
+                           Text(
+                            text.Address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -311,8 +312,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                           Text(
+                            text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -342,8 +343,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                           Text(
+                        text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -365,8 +366,8 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Total cost",
+                           Text(
+                            text.totalCost.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,

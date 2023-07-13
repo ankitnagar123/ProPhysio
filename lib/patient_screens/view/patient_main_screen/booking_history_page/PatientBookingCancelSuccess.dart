@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/PatientMainScreen.dart';
-
+import 'package:get/get.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 
 class PatientBookingCancelSuccess extends StatefulWidget {
   const PatientBookingCancelSuccess({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class PatientBookingCancelSuccess extends StatefulWidget {
 class _PatientBookingCancelSuccessState
     extends State<PatientBookingCancelSuccess> {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class _PatientBookingCancelSuccessState
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: custom.MyButton(context, "OK", () {
+        child: custom.MyButton(context, "Ok", () {
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -65,7 +67,7 @@ class _PatientBookingCancelSuccessState
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: custom.text(
-                        "Appointment \ncancelled \nsuccessfully!",
+                        text.Appointment_cancelled_successfully.tr,
                         22,
                         FontWeight.w600,
                         MyColor.white)),
@@ -76,7 +78,7 @@ class _PatientBookingCancelSuccessState
               Align(
                   alignment: Alignment.center,
                   child: custom.text(
-                      "You can contact the Doctor if you want to.",
+                      text.youCanContactTheDoctor.tr,
                       14,
                       FontWeight.normal,
                       MyColor.white)),

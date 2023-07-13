@@ -37,7 +37,6 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
   int km = 100;
   PatientFilterCtr patientFilterCtr = Get.put(PatientFilterCtr());
 
-
   /*---current location--*/
   String? _currentAddress;
   Position? _currentPosition;
@@ -47,9 +46,9 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
           content: Text(
-              'Location services are disabled. Please enable the services')));
+              text.locationServicesDisabledPleaseEnableServices.tr)));
       return false;
     }
     permission = await Geolocator.checkPermission();
@@ -57,14 +56,14 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Location permissions are denied')));
+             SnackBar(content: Text(text.locationPermissionsDenied.tr)));
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
           content: Text(
-              'Location permissions are permanently denied, we cannot request permissions.')));
+              text.locationPermissionsPermanentlyRequestPermissions.tr)));
       return false;
     }
     return true;
@@ -295,7 +294,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
               Slider(
                 activeColor: MyColor.lightblue,
                 thumbColor: MyColor.midgray,
-                label: "Select Km",
+                label: text.select_Km.tr,
                 value: km.toDouble(),
                 onChanged: (value) {
                   setState(() {
@@ -402,7 +401,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
                 });
               },
               title:
-                  custom.text("From home", 12, FontWeight.w500, MyColor.black)),
+                  custom.text(text.from_Home.tr, 12, FontWeight.w500, MyColor.black)),
         ),
         RadioListTile(
             subtitle: InkWell(
@@ -413,11 +412,11 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
                           builder: (context) => const PatientSetLocation()));
                 },
                 child: custom.text(
-                    'Set Location', 12, FontWeight.w500, MyColor.grey)),
+                    text.setLocation.tr, 12, FontWeight.w500, MyColor.grey)),
             visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity),
-            value: "From office",
+            value: text.fromOffice.tr,
             activeColor:
                 MaterialStateColor.resolveWith((states) => MyColor.lightblue),
             groupValue: _groupValue,
@@ -429,7 +428,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
               });
             },
             title:
-                custom.text("From office", 12, FontWeight.w500, MyColor.black)),
+                custom.text(text.fromOffice.tr, 12, FontWeight.w500, MyColor.black)),
         const SizedBox(
           height: 80,
         )
@@ -450,7 +449,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
       apiKey: kGoogleApiKey,
       components: [],
       types: [],
-      hint: "Search City",
+      hint: text.Search_city.tr
     );
     return p;
   }

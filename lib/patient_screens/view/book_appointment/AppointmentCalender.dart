@@ -12,6 +12,7 @@ import 'package:medica/patient_screens/view/book_appointment/AppointmentTimeSlot
 
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class calender extends StatefulWidget {
@@ -25,6 +26,7 @@ class calender extends StatefulWidget {
 
 class _calenderState extends State<calender> {
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  LocalString text = LocalString();
   AppointmentController appointmentController =
       Get.put(AppointmentController());
   CustomView custom = CustomView();
@@ -104,7 +106,7 @@ class _calenderState extends State<calender> {
 
           print("final date$finalDate");
           if( appointmentController.dateList.isEmpty){
-            return custom.MySnackBar(context, "No time slot on this date");
+            return custom.MySnackBar(context, text.noTimeSlotDate.tr);
           }else{
             Navigator.push(
                 context,
@@ -165,7 +167,7 @@ class _calenderState extends State<calender> {
             elevation: 0,
             centerTitle: true,
             title: custom.text(
-                "Appointment with ${doctorListCtr.doctorname.value}",
+                "${text.appointmentWith.tr} ${doctorListCtr.doctorname.value}",
                 16,
                 FontWeight.w500,
                 MyColor.black),
@@ -191,7 +193,7 @@ class _calenderState extends State<calender> {
                           width: 5,
                         ),
                         custom.text(
-                            "Free slot", 13, FontWeight.w400, MyColor.black),
+                            text.freeSlot.tr, 13, FontWeight.w400, MyColor.black),
                       ],
                     ),
                     Wrap(
@@ -206,7 +208,7 @@ class _calenderState extends State<calender> {
                           width: 5,
                         ),
                         custom.text(
-                            "Few slot", 13, FontWeight.w400, MyColor.black)
+                            text.fewSlot.tr, 13, FontWeight.w400, MyColor.black)
                       ],
                     ),
                     Wrap(
@@ -221,7 +223,7 @@ class _calenderState extends State<calender> {
                           width: 5,
                         ),
                         custom.text(
-                            "full slot", 13, FontWeight.w400, MyColor.black)
+                            text.fullSlot.tr, 13, FontWeight.w400, MyColor.black)
                       ],
                     ),
                   ],
@@ -236,8 +238,8 @@ class _calenderState extends State<calender> {
               children: <Widget>[
                 const Divider(),
                 appointmentController.dateList.isEmpty
-                    ? const Center(
-                        child: Text("No time slot's available at the moment!"))
+                    ?  Center(
+                        child: Text(text.noTimeSlotAvailableMoment.tr))
                     :Text(""),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),

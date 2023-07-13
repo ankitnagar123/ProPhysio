@@ -6,6 +6,7 @@ import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/AppConst.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 class PatientPriceRangeFilter extends StatefulWidget {
   const PatientPriceRangeFilter({Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class PatientPriceRangeFilter extends StatefulWidget {
 
 class _PatientPriceRangeFilterState extends State<PatientPriceRangeFilter> {
   RangeValues _currentRangeValues = const RangeValues(0, 0);
+  LocalString text = LocalString();
 
   CustomView custom = CustomView();
   @override
@@ -25,7 +27,7 @@ class _PatientPriceRangeFilterState extends State<PatientPriceRangeFilter> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
-        title: custom.text("Price range", 17, FontWeight.bold, MyColor.black),
+        title: custom.text(text.price_Range.tr, 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.offNamed(RouteHelper.getFilterScreen());
@@ -36,7 +38,7 @@ class _PatientPriceRangeFilterState extends State<PatientPriceRangeFilter> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: custom.MyButton(context, "Set price", () {
+        child: custom.MyButton(context, text.setPrice.tr, () {
           Get.offNamed(RouteHelper.getFilterScreen());
         }, MyColor.primary,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
@@ -52,7 +54,7 @@ class _PatientPriceRangeFilterState extends State<PatientPriceRangeFilter> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                custom.text("Select price range", 15, FontWeight.w500, MyColor.black),
+                custom.text(text.selectPriceRange.tr, 15, FontWeight.w500, MyColor.black),
                 custom.text("${_currentRangeValues.start.round().toString()}€ - ${_currentRangeValues.end.round().toString()}€", 15, FontWeight.w600, MyColor.lightblue),
               ],
             ),

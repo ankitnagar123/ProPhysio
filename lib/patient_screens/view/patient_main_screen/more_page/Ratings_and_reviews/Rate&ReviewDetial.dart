@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 import '../../../../controller/rating_controller/PatinetRatingController.dart';
 
@@ -23,6 +24,7 @@ class RateAndReviewDetails extends StatefulWidget {
 class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
   CustomView custom = CustomView();
   TextEditingController reviewCtr = TextEditingController();
+  LocalString text = LocalString();
   PatientBookingController patientBookingController = Get.put(PatientBookingController());
   PatientRatingCtr patientRatingCtr = Get.put(PatientRatingCtr());
 
@@ -58,7 +60,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
         elevation: 0,
         centerTitle: true,
         title: custom.text(
-            "Ratings and reviews", 17, FontWeight.w500, MyColor.black),
+            text.ratingsAndReviews.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -77,7 +79,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Visit with ${patientBookingController.name}",
+                      "${text.visitWith.tr} ${patientBookingController.name}",
                       15.0,
                       FontWeight.bold,
                       Colors.black),
@@ -92,8 +94,8 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Date",
+                           Text(
+                            text.date.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10.0,
@@ -115,8 +117,8 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Slot",
+                           Text(
+                        text.slot.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10.0,
@@ -140,7 +142,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                 SizedBox(
                   height: height * 0.04,
                 ),
-                custom.text("Select a rating range", 14.0, FontWeight.w500,
+                custom.text(text.selectRatingRange.tr, 14.0, FontWeight.w500,
                     Colors.black),
                 SizedBox(
                   height: height * 0.01,
@@ -166,7 +168,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                   height: height * 0.06,
                 ),
                 custom.text(
-                    "Write a review", 14.0, FontWeight.w500, Colors.black),
+                    text.writeReview.tr, 14.0, FontWeight.w500, Colors.black),
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -174,9 +176,9 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                   controller: reviewCtr,
                   keyboardType: TextInputType.multiline,
                   maxLines: 4,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     contentPadding: EdgeInsets.only(top: 20, left: 20),
-                    hintText: "Your review",
+                    hintText: text.yourReview.tr,
                     hintStyle: TextStyle(fontSize: 14),
                     filled: true,
                     fillColor: MyColor.white,
@@ -190,7 +192,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                   alignment: Alignment.center,
                   child: AnimatedButton(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    text: 'Submit',
+                    text: text.Submit.tr,
                     color: MyColor.primary,
                     pressEvent: () {
                       if(validation()){
@@ -203,8 +205,8 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                                 headerAnimationLoop: false,
                                 dialogType: DialogType.success,
                                 showCloseIcon: true,
-                                title: 'Success',
-                                desc: 'Rating Successfully',
+                                title: text.success.tr,
+                                desc: text.ratingSuccessfully.tr,
                                 btnOkOnPress: () {
                                   Get.back();
                                   debugPrint('OnClcik');
@@ -231,7 +233,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
   //******************RATING VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (rating == 0.0) {
-      custom.MySnackBar(context, "Select rating range");
+      custom.MySnackBar(context, text.selectRatingRange.tr);
     } else {
       return true;
     }

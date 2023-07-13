@@ -4,6 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 import 'Rate&ReviewDetial.dart';
 
@@ -16,6 +17,7 @@ class PastAppointmentsRating extends StatefulWidget {
 
 class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   TextEditingController searchCtr = TextEditingController();
   PatientBookingController patientBookingController =
       Get.put(PatientBookingController());
@@ -34,7 +36,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white24,
-          title: customView.text("Ratings & Reviews", 15,
+          title: customView.text(text.ratingsAndReviews.tr, 15,
               FontWeight.w500, MyColor.black),
           leading: IconButton(
             onPressed: () {
@@ -50,7 +52,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
               Center(
                 heightFactor: 5,
                 child: customView.text(
-                    "Rate those last visits you did.",
+                    text.rateThoseLastVisitsYouDid.tr,
                     14.0,
                     FontWeight.w500,
                     Colors.black),
@@ -68,9 +70,9 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
       if (patientBookingController.loadingRate.value) {
         return categorysubShimmerEffect(context);
       } else if (patientBookingController.bookingCompleteRate.isEmpty) {
-        return const Center(
+        return  Center(
             heightFactor: 10.0,
-            child: Text("You don’t have any new rating or review to do."));
+            child: Text(text.youDonHaveAnyRatingReview.tr));
       }
       return SingleChildScrollView(
         child: ListView.builder(
@@ -103,7 +105,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             customView.text(
-                                "Visit with ${patientBookingController.bookingCompleteRate[index].name} ${patientBookingController.bookingCompleteRate[index].surname}"
+                                "${text.visitWith.tr} ${patientBookingController.bookingCompleteRate[index].name} ${patientBookingController.bookingCompleteRate[index].surname}"
                                     .toString(),
                                 14.0,
                                 FontWeight.w500,
@@ -121,8 +123,8 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Date",
+                                   Text(
+                                    text.date.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
@@ -146,8 +148,8 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Slot",
+                                   Text(
+                                    text.slot.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
@@ -173,8 +175,8 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 crossAxisAlignment:
                                 CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Booking ID",
+                                   Text(
+                                    text.bookingID.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,

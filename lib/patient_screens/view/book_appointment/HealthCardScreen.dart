@@ -4,6 +4,7 @@ import 'package:medica/patient_screens/view/patient_payment_screen/PatientCheckO
 
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/auth_controllers/PatientProfileController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 
@@ -22,7 +23,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
   TextEditingController healthcodeCtr = TextEditingController();
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
   CardCtr cardCtr = Get.put(CardCtr());
-
+LocalString text = LocalString();
   String? price;
   String? time;
   String? date;
@@ -56,9 +57,9 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
-        child: custom.MyButton(context, "Confirm appointment", () {
+        child: custom.MyButton(context, text.confirmAppointment.tr, () {
           if (healthcodeCtr.text.isEmpty) {
-            custom.MySnackBar(context, "Enter health card code");
+            custom.MySnackBar(context, text.Heath_Card_Code.tr);
           }else{
             Navigator.push(
               context,
@@ -86,7 +87,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title: custom.text("Appointment", 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.appointment.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -97,7 +98,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
               height: height * 0.02,
             ),
             custom.text(
-                "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.",
+                text.weNeedYourHealthCardCode.tr,
                 12,
                 FontWeight.normal,
                 MyColor.black),
@@ -107,7 +108,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Enter Health card code", 13, FontWeight.w500, MyColor.black),
+                  text.Heath_Card_Code.tr, 13, FontWeight.w500, MyColor.black),
             ),
             SizedBox(
               height: height * 0.01,

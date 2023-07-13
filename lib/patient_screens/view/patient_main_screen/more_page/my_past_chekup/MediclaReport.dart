@@ -10,6 +10,7 @@ import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 
 class PatientMedicalReport extends StatefulWidget {
   const PatientMedicalReport({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
   String image = "";
   DoctorPrescriptionCtr doctorPrescriptionCtr =
   Get.put(DoctorPrescriptionCtr());
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -51,19 +53,19 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Title", 13, FontWeight.w500, MyColor.primary1),
+                  text.title.tr, 13, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.01,
             ),
             custom.myField(
-                context, titleCtr, "Enter Title", TextInputType.emailAddress),
+                context, titleCtr,text.enterTitle.tr, TextInputType.emailAddress),
             SizedBox(
               height: height * 0.03,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Upload Medical report", 13.0, FontWeight.w500,
+              child: custom.text(text.uploadPrescription.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             SizedBox(
@@ -108,7 +110,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
+                  text.writeDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.01,
@@ -116,7 +118,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             custom.HField(
               context,
               discCtr,
-              "Enter Description...",
+              text.writeDescription.tr,
               TextInputType.text,
             ),
             SizedBox(
@@ -124,7 +126,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             ),
             doctorPrescriptionCtr.loadingAddP.value
                 ? custom.MyIndicator()
-                : custom.mysButton(context, "Submit", () {
+                : custom.mysButton(context, text.Submit.tr, () {
 
                   if(validation()){
                     doctorPrescriptionCtr.addPrescriptionPatient(
@@ -152,14 +154,14 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 custom.text(
-                    "Past Medical report's", 13.0, FontWeight.w500,
+                    text.pastMedicalReport.tr, 13.0, FontWeight.w500,
                     MyColor.primary1),
                 TextButton(
                     onPressed: () {
                       doctorPrescriptionCtr.fetchPatientPrescription("medical");
                     },
-                    child: const Text(
-                      "Refresh",
+                    child:  Text(
+                      text.refresh.tr,
                       style: TextStyle(color: MyColor.primary1),
                     )),
               ],
@@ -167,9 +169,9 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             doctorPrescriptionCtr.loadingPFetch.value
                 ? SingleChildScrollView(
                 child: categorysubShimmerEffect(context))
-                : doctorPrescriptionCtr.patientPrescriptionList.isEmpty?const Padding(
+                : doctorPrescriptionCtr.patientPrescriptionList.isEmpty? Padding(
               padding: EdgeInsets.all(10.0),
-              child: Text("No medical report right know"),
+              child: Text(text.noMedicalReportRightKnow.tr),
             ):SingleChildScrollView(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -251,13 +253,13 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
     if (titleCtr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "Enter title");
+      custom.MySnackBar(context, text.enterTitle.tr);
     } else if (degreefilePath == null) {
-      custom.MySnackBar(context, "Upload prescription");
+      custom.MySnackBar(context, text.uploadMedicalReport.tr);
     } else if (discCtr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "Enter description");
+      custom.MySnackBar(context, text.writeDescription.tr);
     } else {
       return true;
     }

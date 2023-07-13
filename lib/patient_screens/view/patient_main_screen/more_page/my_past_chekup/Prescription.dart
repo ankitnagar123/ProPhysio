@@ -9,6 +9,8 @@ import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../../../language_translator/LanguageTranslate.dart';
+
 class PatientPrescription extends StatefulWidget {
   const PatientPrescription({Key? key}) : super(key: key);
 
@@ -23,6 +25,8 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
   TextEditingController discCtr = TextEditingController();
   CustomView custom = CustomView();
   String image = "";
+  LocalString text = LocalString();
+
   DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(DoctorPrescriptionCtr());
 
 
@@ -52,20 +56,20 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Title", 13, FontWeight.w500, MyColor.primary1),
+                  text.title.tr, 13, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.01,
             ),
             custom.myField(
-                context, titleCtr, "Enter Title", TextInputType.emailAddress),
+                context, titleCtr, text.enterTitle.tr, TextInputType.emailAddress),
             SizedBox(
               height: height * 0.03,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Upload Prescription", 13.0, FontWeight.w500,
+                  text.uploadPrescription.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             SizedBox(
@@ -110,7 +114,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
+                  text.writeDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.01,
@@ -118,7 +122,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             custom.HField(
               context,
               discCtr,
-              "Enter description...",
+              text.writeDescription.tr,
               TextInputType.text,
             ),
             SizedBox(
@@ -126,7 +130,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             ),
             doctorPrescriptionCtr.loadingAddP.value
                 ? custom.MyIndicator()
-                : custom.mysButton(context, "Submit", () {
+                : custom.mysButton(context, text.Submit.tr, () {
 
                   if(validation()){
                     doctorPrescriptionCtr.addPrescriptionPatient(
@@ -153,14 +157,14 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Your Prescription", 14.0, FontWeight.w500,
+                  text.yourPrescription.tr, 14.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(height: 5.0,),
               doctorPrescriptionCtr.loadingPFetch.value?SingleChildScrollView(
-                    child: categorysubShimmerEffect(context)):doctorPrescriptionCtr.patientPrescriptionList.isEmpty?const Padding(
+                    child: categorysubShimmerEffect(context)):doctorPrescriptionCtr.patientPrescriptionList.isEmpty? Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Text("No prescription right know"),
+                      child: Text(text.noPrescription.tr),
                     ):
               SingleChildScrollView(
                 child: ListView.builder(
@@ -247,13 +251,13 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
     if (titleCtr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "Enter title");
+      custom.MySnackBar(context, text.enterTitle.tr);
     } else if (degreefilePath == null) {
-      custom.MySnackBar(context, "Upload prescription");
+      custom.MySnackBar(context, text.uploadPrescription.tr);
     } else if (discCtr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "Enter description");
+      custom.MySnackBar(context, text.writeDescription.tr);
     } else {
       return true;
     }
