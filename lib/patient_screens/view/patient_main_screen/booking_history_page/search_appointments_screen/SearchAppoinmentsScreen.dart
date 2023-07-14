@@ -437,8 +437,8 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                            Text(
-                            text.Address.tr,
-                            style: TextStyle(
+                            text.address.tr,
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -495,7 +495,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                   children: [
                      Text(
                       text.status.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 11.0,
                           fontFamily: "Poppins"),

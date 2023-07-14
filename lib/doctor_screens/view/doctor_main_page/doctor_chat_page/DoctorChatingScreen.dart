@@ -8,6 +8,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 import '../../../controller/DocotorBookingController.dart';
 
@@ -29,6 +30,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView view = CustomView();
+  LocalString text = LocalString();
 
   // var ilaod = true;
   late Timer _timer;
@@ -255,10 +257,10 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: 3,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(12),
-                            hintText: 'Enter message...',
+                            hintText: text.enterMassage.tr,
                             hintStyle: TextStyle(
                                 color: MyColor.primary1,
                                 fontSize: 12,

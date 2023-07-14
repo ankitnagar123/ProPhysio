@@ -283,7 +283,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                            Text(
-                            text.Address.tr,
+                            text.address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -314,7 +314,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                            Text(
                             text.bookingInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),

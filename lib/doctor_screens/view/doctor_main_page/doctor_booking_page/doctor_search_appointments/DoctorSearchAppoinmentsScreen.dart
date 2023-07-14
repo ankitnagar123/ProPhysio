@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/booking_list_model.dart';
 import '../../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
@@ -21,7 +22,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   CustomView custom = CustomView();
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
-
+LocalString text = LocalString();
 /*------VARIABLES------*/
   String? cancelId = '';
   String? cancelReason = '';
@@ -60,7 +61,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
           elevation: 0,
           backgroundColor: Colors.white24,
           title: custom.text(
-              "Search appointment", 17, FontWeight.bold, MyColor.black),
+              text.searchAppointment.tr, 17, FontWeight.bold, MyColor.black),
           leading: IconButton(
             onPressed: () {
               Get.back();
@@ -89,12 +90,12 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                   keyboardType: TextInputType.name,
                   cursorColor: Colors.black,
                   controller: searchCtr,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     prefixIconColor: MyColor.primary1,
                     suffixIconColor: MyColor.primary1,
                     contentPadding: EdgeInsets.only(top: 3, left: 20),
-                    hintText: "search your appointment",
+                    hintText: text.searchYourAppointments.tr,
                     hintStyle: TextStyle(fontSize: 12, color: MyColor.primary1),
                     fillColor: MyColor.lightcolor,
                     filled: true,
@@ -114,7 +115,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     flex: 1,
                     child: custom.mysButton(
                       context,
-                      "Upcoming",
+                      text.upcoming.tr,
                       () {
                         setState(() {
                           selectedCard = 0;
@@ -134,7 +135,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     flex: 1,
                     child: custom.mysButton(
                       context,
-                      "Pending",
+                      text.pending.tr,
                       () {
                         setState(() {
                           selectedCard = 1;
@@ -154,7 +155,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     flex: 1,
                     child: custom.mysButton(
                       context,
-                      "Past visits",
+                      text.pastVisits.tr,
                       () {
                         setState(() {
                           selectedCard = 2;
@@ -190,8 +191,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
           child: custom.MyIndicator(),
         );
       } else if (bookingController.booking.isEmpty) {
-        return const Center(
-            heightFactor: 5.0, child: Text("No Appointment's at the moment!"));
+        return  Center(
+            heightFactor: 5.0, child: Text(text.No_Appointments_moment.tr));
       }
       return SingleChildScrollView(
         child: ListView.builder(
@@ -272,8 +273,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Date",
+                                   Text(
+                                    text.date.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
@@ -295,8 +296,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Slot",
+                                   Text(
+                                    text.slot.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
@@ -320,8 +321,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "Booking ID",
+                                   Text(
+                                    text.bookingID.tr,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
@@ -368,7 +369,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -379,8 +380,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient",
+                           Text(
+                            text.patient.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -402,8 +403,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient ID",
+                           Text(
+                            text.PatientId.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -434,8 +435,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                           Text(
+                            text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -466,17 +467,17 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            bookingController.status.value,
+                            text.status.tr,
                             style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
                           ),
                         ),
-                        const Expanded(
+                         Expanded(
                           flex: 1,
                           child: Text(
-                            "Booking ID",
+                            text.bookingID.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -532,8 +533,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                           Text(
+                            text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -555,8 +556,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Fees",
+                           Text(
+                            text.fees.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -587,9 +588,9 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
-                            style: TextStyle(
+                           Text(
+                            text.address.tr,
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -619,11 +620,18 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                           children: [
                             custom.acceptRejectButton(
                                 context,
-                                "Reject",
-                                () {},
+                                text.reject.tr,
+                                () {
+                                  bookingController
+                                      .bookingAppointmentReject(context, id, () {
+                                    bookingController.bookingAppointment(
+                                        context, "Pending", "");
+                                    Get.back();
+                                  });
+                                },
                                 MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
-                            custom.acceptRejectButton(context, "Accept", () {
+                            custom.acceptRejectButton(context, text.accept.tr, () {
                               acceptPopUp(context, id);
                             }, MyColor.primary,
                                 const TextStyle(color: MyColor.white))
@@ -640,7 +648,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    custom.callButton(context, "Call", () {
+                                    custom.callButton(context, text.call.tr, () {
                                       UrlLauncher.launchUrl(Uri.parse(
                                           'tel:${bookingController.contact.value}'));
                                     },
@@ -651,7 +659,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           fontSize: 16,
                                         ),
                                         Icons.call),
-                                    custom.callButton(context, "Chat", () {
+                                    custom.callButton(context, text.chat.tr, () {
                                       var patientId = {
                                         "ID": bookingController.userId.value,
                                         "userName":
@@ -683,7 +691,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               ),
                               Row(
                                 children: [
-                                  custom.callButton(context, "prescription",
+                                  custom.callButton(context, text.prescription.tr,
                                       () {
                                     Navigator.push(
                                         context,
@@ -702,7 +710,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                         fontSize: 14,
                                       ),
                                       Icons.medical_information_outlined),
-                                  custom.callButton(context, "Complete", () {
+                                  custom.callButton(context, text.Complete.tr, () {
                                     bookingController.bookingAppointmentDone(
                                         context, id, () {
                                       Get.back();
@@ -724,8 +732,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                     onPressed: () {
                                       cancelPopUp(context, id, userid);
                                     },
-                                    child: const Text(
-                                      "Cancel appointment",
+                                    child:  Text(
+                                     text.cancelAppointment.tr,
                                       style: TextStyle(
                                           decoration: TextDecoration.underline,
                                           color: Colors.red,
@@ -776,7 +784,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Cancel appointment", 17,
+                            child: custom.text(text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -786,7 +794,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to cancel the appointment? Please select a reason.",
+                                text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -830,7 +838,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -838,7 +846,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                         context,
-                                        "Cancel appointment",
+                                        text.cancelAppointment.tr,
                                         () {
                                           if (cancelReason == "") {
                                             custom.MySnackBar(context, "");
@@ -905,7 +913,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Accept request", 17,
+                            child: custom.text(text.accept.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -915,7 +923,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to accept the visit? You will find it in upcoming appointmntes.",
+                               text.AcceptVisitLine.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -930,9 +938,11 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                   flex: 1,
                                   child: TextButton(
                                     onPressed: () {
-                                      // Get.back();
+                                       Get.back();
+                                       Get.back();
+
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -940,7 +950,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                         context,
-                                        "Yes, accept",
+                                       text.Yes_accept.tr,
                                         () {
                                           bookingController
                                               .bookingAppointmentAccept(

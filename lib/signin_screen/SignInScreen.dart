@@ -129,8 +129,8 @@ var itLocal;
                           return custom.MyIndicator();
                         }
                         return custom.MyButton(context, text.SIGN_IN.tr, () {
-                        itLocal = const Locale('it','IT');
-                        Get.updateLocale(itLocal);
+                       /* itLocal = const Locale('it','IT');
+                        Get.updateLocale(itLocal);*/
                           if (validation()) {
                             loginCtr.login(
                                 context, emailCtr.text, passwordCtr.text);

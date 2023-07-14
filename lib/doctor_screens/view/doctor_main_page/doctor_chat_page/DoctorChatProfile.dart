@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorChatProfile extends StatefulWidget {
@@ -15,6 +16,8 @@ class DoctorChatProfile extends StatefulWidget {
 
 class _DoctorChatProfileState extends State<DoctorChatProfile> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   BookingController bookingController = Get.put(BookingController());
   String patientId = "";
   String patientName = "";
@@ -54,7 +57,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customView.callButton(context, "Call", () {
+            customView.callButton(context, text.call.tr, () {
               UrlLauncher.launchUrl(
                   Uri.parse('tel:${bookingController.contact.value}'));
             },
@@ -65,7 +68,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, "Message", () {
+            customView.callButton(context, text.Message.tr, () {
               Get.back();
             },
                 MyColor.primary,

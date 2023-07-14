@@ -9,6 +9,7 @@ import 'package:medica/patient_screens/view/patient_main_screen/patient_home_pag
 import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
 import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/booking_controller_list/PBookingController.dart';
 import 'booking_history_page/PBookingPageHistory.dart';
 import 'chating_page/ChatListScreen.dart';
@@ -24,6 +25,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
   PatientBookingController patientBookingController = Get.put(
       PatientBookingController());
   MyRoute myRoute = Get.put(MyRoute());
+  LocalString text = LocalString();
 CustomView view = CustomView();
   @override
   void initState() {
@@ -58,22 +60,22 @@ CustomView view = CustomView();
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title:  const Text("Exit App",style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
-                  content:  const Text("Do you want to exit an app?",style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
+                  title:   Text(text.Exit_App.tr,style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
+                  content:   Text(text.Want_To_Exist.tr,style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
                   actions: [
                     ElevatedButton(onPressed: (){
                       Navigator.of(context).pop(false);
                     },
                       style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.white)
-                      ), child:  const Text("No",style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
+                      ), child:   Text(text.No.tr,style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
                     ),
                     ElevatedButton(onPressed: (){
                       SystemNavigator.pop();
                     },
                       style:  const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(MyColor.primary1)
-                      ), child:  const Text("Yes",style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
+                      ), child:   Text(text.Yes.tr,style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
                     ),
                   ],
                 );
@@ -126,7 +128,7 @@ CustomView view = CustomView();
                         width: 30,
                         child:myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
                         Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.primary,) :Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text("Doctors", 12, FontWeight.normal,
+                    view.text(text.Doctors.tr, 12, FontWeight.normal,
                       myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
                       MyColor.primary:MyColor.grey,)
 
@@ -145,7 +147,7 @@ CustomView view = CustomView();
                     SizedBox(height: 20,
                         width: 30,
                         child:myRoute.pageIndex.value ==1?  Image.asset("assets/images/BookingIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/BookingIcon.png",height: 20,width: 20,color:MyColor.grey,)),
-                    view.text("Booking", 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
+                    view.text(text.Booking.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
 
                   ],
                 )),
@@ -161,7 +163,7 @@ CustomView view = CustomView();
                     SizedBox(height: 20,
                         width: 30,
                         child:myRoute.pageIndex.value ==2?  Image.asset("assets/images/ChatIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/ChatIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text("Chats", 12, FontWeight.normal, myRoute.pageIndex.value ==2? MyColor.primary:MyColor.grey,)
+                    view.text(text.chat.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==2? MyColor.primary:MyColor.grey,)
 
                   ],
                 )),
@@ -178,7 +180,7 @@ CustomView view = CustomView();
                     SizedBox(height: 20,
                         width: 30,
                         child:myRoute.pageIndex.value ==3?  Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color:MyColor.primary,):Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text("More", 12, FontWeight.normal, myRoute.pageIndex.value ==3? MyColor.primary: MyColor.grey,)
+                    view.text(text.More.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==3? MyColor.primary: MyColor.grey,)
 
                   ],
                 )),

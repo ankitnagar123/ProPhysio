@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorListwithCategoy.dart';
 
@@ -17,6 +18,8 @@ class PDrSubCategory extends StatefulWidget {
 
 class _PDrSubCategoryState extends State<PDrSubCategory> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   String? subCategoryId;
 
@@ -44,7 +47,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
             ),
           ),
           title: customView.text(
-              "Doctor Sub-Category", 15.0, FontWeight.w500, Colors.black),
+              text.DoctorSubCat.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white24,
@@ -56,7 +59,7 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
             return Center(
               heightFactor: 10.0,
               child: customView.text(
-                  "No sub-category", 15, FontWeight.w400, MyColor.primary1),
+                  text.NoSubCat.tr, 15, FontWeight.w400, MyColor.primary1),
             );
           } else {
             return Column(

@@ -103,7 +103,7 @@ String centerId = "";
                               MaterialPageRoute(
                                   builder: (context) =>
                                       DoctorDetailScreen(
-                                        id:   centerHomeCtr.selectedDoctorList[index].doctorId, centerId:centerId,
+                                        id:   centerHomeCtr.selectedDoctorList[index].doctorId, centerId:centerId, drImg: centerHomeCtr.selectedDoctorList[index].doctorProfile,
                                       )));
                         },
                         child: Card(

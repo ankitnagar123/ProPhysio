@@ -138,7 +138,9 @@ class _DoctorSearchListState extends State<DoctorSearchList>
                                             DoctorDetailScreen(
                                               id: list[index]
                                                   .doctorId
-                                                  .toString(), centerId: '',
+                                                  .toString(), centerId: '', drImg:list[index]
+                                                .doctorProfile
+                                                .toString(),
                                             )));
                                 // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                               },
