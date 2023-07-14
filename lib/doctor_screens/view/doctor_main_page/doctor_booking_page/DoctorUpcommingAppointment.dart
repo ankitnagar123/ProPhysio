@@ -8,6 +8,7 @@ import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 import '../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
@@ -22,6 +23,8 @@ class DoctorUpcomingAppointment extends StatefulWidget {
 class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   BookingController bookingController = Get.put(BookingController());
   String? cancelId = '';
   String? cancelReason = '';
@@ -47,7 +50,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                custom.text("${bookingController.booking.length} results", 14,
+                custom.text("${bookingController.booking.length} ${text.results.tr}", 14,
                     FontWeight.normal, MyColor.grey.withOpacity(0.70)),
                 GestureDetector(
                   onTap: () {
@@ -66,7 +69,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                 ),
                                 Align(
                                   alignment: Alignment.topCenter,
-                                  child: custom.text("Sort by:", 17,
+                                  child: custom.text("${text.Sort_by.tr}:", 17,
                                       FontWeight.w500, MyColor.black),
                                 ),
                                 const SizedBox(
@@ -83,7 +86,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                           context, "Confirmed", "linear");
                                       Get.back();
                                     },
-                                    leading: custom.text("Date: linear", 15,
+                                    leading: custom.text("${text.date.tr}: ${text.linear.tr}", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 0
                                         ? const Icon(Icons.check_outlined,
@@ -103,7 +106,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                           context, "Confirmed", "reverse");
                                       Get.back();
                                     },
-                                    leading: custom.text("Date: reverse", 15,
+                                    leading: custom.text("${text.date.tr}: ${text.reverse.tr}", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 1
                                         ? const Icon(Icons.check_outlined,
@@ -118,9 +121,9 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                   },
                   child: Wrap(
                     children: [
-                      custom.text("Sort by: ", 14, FontWeight.normal,
+                      custom.text("${text.Sort_by.tr}: ", 14, FontWeight.normal,
                           MyColor.grey.withOpacity(0.70)),
-                      custom.text("Date", 14, FontWeight.w500, MyColor.black),
+                      custom.text(text.date.tr, 14, FontWeight.w500, MyColor.black),
                       const Icon(
                         Icons.keyboard_arrow_down,
                       ),
@@ -143,9 +146,9 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
   Widget showList() {
     return SingleChildScrollView(
       child: bookingController.booking.isEmpty
-          ? const Center(
+          ?  Center(
               heightFactor: 15,
-              child: Text("No Upcoming Appointment at the moment!"),
+              child: Text(text.NoUpcomingAppoint.tr),
             )
           : ListView.builder(
               shrinkWrap: true,
@@ -226,8 +229,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Date",
+                                     Text(
+                                      text.date.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -249,8 +252,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Slot",
+                                     Text(
+                                      text.slot.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -274,8 +277,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Booking ID",
+                                     Text(
+                                      text.bookingID.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -321,7 +324,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -332,8 +335,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient",
+                           Text(
+                            text.patient.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -355,8 +358,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient ID",
+                           Text(
+                            text.PatientId.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -387,8 +390,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                           Text(
+                            text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -419,17 +422,17 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            bookingController.status.value,
+                            text.status.tr,
                             style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
                           ),
                         ),
-                        const Expanded(
+                         Expanded(
                           flex: 1,
                           child: Text(
-                            "Booking ID",
+                            text.bookingID.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -479,8 +482,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                           Text(
+                            text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -502,8 +505,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Fees",
+                           Text(
+                            text.fees.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -534,8 +537,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
+                           Text(
+                            text.address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -562,7 +565,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      custom.callButton(context, "Call", () {
+                      custom.callButton(context, text.call.tr, () {
                         UrlLauncher.launchUrl(Uri.parse(
                             'tel:${bookingController.contact.value}'));
                       },
@@ -573,7 +576,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                             fontSize: 16,
                           ),
                           Icons.call),
-                      custom.callButton(context, "Chat", () {
+                      custom.callButton(context, text.chat.tr, () {
                         var patientId = {
                           "ID": bookingController.userId.value,
                           "userName": bookingController.username.value,
@@ -601,7 +604,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    custom.callButton(context, "Prescription", () {
+                    custom.callButton(context, text.prescription.tr, () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -617,7 +620,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           fontSize: 14,
                         ),
                         Icons.medical_information_outlined),
-                    custom.callButton(context, "Complete", () {
+                    custom.callButton(context, text.Complete.tr, () {
                       bookingController.bookingAppointmentDone(context, id, () {
                         bookingController.bookingAppointment(
                             context, "Confirmed", "");
@@ -640,8 +643,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                       onPressed: () {
                         cancelPopUp(context, id, userid);
                       },
-                      child: const Text(
-                        "Cancel appointment",
+                      child:  Text(
+                       text.cancelAppointment.tr,
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: Colors.red,
@@ -689,7 +692,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Cancel appointment", 17,
+                            child: custom.text(text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -699,7 +702,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to cancel the appointment? Please select a reason.",
+                                text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -743,7 +746,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -751,7 +754,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                         context,
-                                        "Cancel appointment",
+                                       text.cancelAppointment.tr,
                                         () {
                                           if (cancelReason == "") {
                                             custom.MySnackBar(context, "");

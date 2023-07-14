@@ -74,7 +74,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 return Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "${bookingController.booking.length} ${{text.meetings.tr}}",
+                      "${bookingController.booking.length} ${text.meetings.tr}",
                       12,
                       FontWeight.normal,
                       MyColor.grey.withOpacity(0.70)),
@@ -84,35 +84,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   custom.text(cdate1, 19, FontWeight.w600, MyColor.black),
-                  // Wrap(
-                  //   spacing: 15.0,
-                  //   children: [
-                  //     Container(
-                  //       height: 30,
-                  //       width: 30,
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(30),
-                  //         color: MyColor.midgray,
-                  //       ),
-                  //       child: const Center(
-                  //         child:
-                  //         Icon(Icons.arrow_back_ios_new_outlined, size: 18),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 30,
-                  //       width: 30,
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(30),
-                  //         color: MyColor.primary,
-                  //       ),
-                  //       child: const Center(
-                  //         child: Icon(Icons.arrow_forward_ios,
-                  //             size: 18, color: MyColor.white),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )
                 ],
               ),
               const Divider(),
@@ -343,7 +314,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text(
-                              text.Patinet.tr,
+                              text.patient.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -398,7 +369,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text(
-                              text.Booking_Information.tr,
+                              text.bookingInformation.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -430,7 +401,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           Expanded(
                             flex: 1,
                             child: Text(
-                              bookingController.status.value,
+                              text.status.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -495,7 +466,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text(
-                              text.Payment_Information.tr,
+                              text.paymentInformation.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -550,7 +521,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text(
-                              text.Address.tr,
+                              text.address.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -605,7 +576,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
-                            custom.callButton(context, text.Call.tr, () {
+                            custom.callButton(context, text.call.tr, () {
                               UrlLauncher.launchUrl(Uri.parse(
                                   'tel:${bookingController.contact.value}'));
                             },
@@ -616,7 +587,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   fontSize: 16,
                                 ),
                                 Icons.call),
-                            custom.callButton(context, text.Chat.tr, () {
+                            custom.callButton(context, text.chat.tr, () {
                               var patientId = {
                                 "ID": bookingController.userId.value,
                                 "userName": bookingController.username.value,
@@ -689,8 +660,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             onPressed: () {
                               cancelPopUp(context, id, userid);
                             },
-                            child: const Text(
-                              "Cancel appointment",
+                            child:  Text(
+                              text.cancelAppointment.tr,
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   color: Colors.red,
@@ -747,7 +718,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Cancel appointment", 17,
+                            child: custom.text(text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -757,7 +728,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to cancel the appointment? Please select a reason.",
+                                text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -801,7 +772,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
@@ -809,7 +780,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                   context,
-                                  "Cancel appointment",
+                                 text.cancelAppointment.tr,
                                       () {
                                     bookingController
                                         .bookingAppointmentCancel(
@@ -875,7 +846,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Accept request", 17,
+                            child: custom.text(text.AcceptVisit.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -885,7 +856,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to accept the visit? You will find it in upcoming appointmntes.",
+                                text.AcceptVisitLine.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -903,7 +874,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                       onPressed: () {
                                         Get.back();
                                       },
-                                      child: custom.text("Dismiss", 14.0,
+                                      child: custom.text(text.Dismiss.tr, 14.0,
                                           FontWeight.w400, MyColor.grey),
                                     )),
                                 Expanded(
@@ -911,7 +882,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                       ? Center(child: custom.MyIndicator())
                                       : custom.mysButton(
                                     context,
-                                    "Yes, accept",
+                                    text.Yes_accept.tr,
                                         () {
                                       bookingController
                                           .bookingAppointmentAccept(

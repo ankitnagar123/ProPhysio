@@ -35,7 +35,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customView.callButton(context, text.Call.tr, () {
+            customView.callButton(context, text.call.tr, () {
               UrlLauncher.launchUrl(Uri.parse('tel:${widget.contact}'));
             },
                 MyColor.primary,

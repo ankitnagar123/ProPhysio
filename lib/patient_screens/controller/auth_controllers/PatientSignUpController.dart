@@ -43,8 +43,8 @@ class PatientSignUpCtr extends GetxController {
         // callback();
         print("my otp ctr${otp.toString()}");
         custom.massenger(context, otp.toString());
-        loadingotp.value = false;
 
+        loadingotp.value = false;
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorCompleteAppoint extends StatefulWidget {
@@ -14,13 +16,15 @@ class DoctorCompleteAppoint extends StatefulWidget {
 
 class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
+
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
   int selectedCard = -1;
 
   @override
   void initState() {
-    bookingController.bookingAppointment(context,"Complete","");
+    bookingController.bookingAppointment(context, "Complete", "");
     // TODO: implement initState
     super.initState();
   }
@@ -30,7 +34,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(() {
-        if(bookingController.loading.value){
+        if (bookingController.loading.value) {
           return categorysubShimmerEffect(context);
         }
         return Column(
@@ -38,8 +42,11 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                customView.text("${bookingController.booking.length} results", 14,
-                    FontWeight.normal, MyColor.grey.withOpacity(0.70)),
+                customView.text(
+                    "${bookingController.booking.length} ${text.results.tr}",
+                    14,
+                    FontWeight.normal,
+                    MyColor.grey.withOpacity(0.70)),
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
@@ -57,8 +64,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                 ),
                                 Align(
                                   alignment: Alignment.topCenter,
-                                  child: customView.text("Sort by:", 17,
-                                      FontWeight.w500, MyColor.black),
+                                  child: customView.text("${text.Sort_by.tr}:",
+                                      17, FontWeight.w500, MyColor.black),
                                 ),
                                 const SizedBox(
                                   height: 20.0,
@@ -71,14 +78,17 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                         selectedCard = 0;
                                       });
                                       bookingController.bookingAppointment(
-                                          context,"Complete", "linear");
+                                          context, "Complete", "linear");
                                       Get.back();
                                     },
-                                    leading: customView.text("Date: linear", 15,
-                                        FontWeight.normal, MyColor.black),
+                                    leading: customView.text(
+                                        "${text.date}: ${{text.linear.tr}}",
+                                        15,
+                                        FontWeight.normal,
+                                        MyColor.black),
                                     trailing: selectedCard == 0
                                         ? const Icon(Icons.check_outlined,
-                                        color: MyColor.lightblue)
+                                            color: MyColor.lightblue)
                                         : const Text("")),
                                 const Divider(
                                   thickness: 1.5,
@@ -95,13 +105,13 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                       Get.back();
                                     },
                                     leading: customView.text(
-                                        "Date: reverse",
+                                        "${text.date.tr}: ${text.reverse.tr}",
                                         15,
                                         FontWeight.normal,
                                         MyColor.black),
                                     trailing: selectedCard == 1
                                         ? const Icon(Icons.check_outlined,
-                                        color: MyColor.lightblue)
+                                            color: MyColor.lightblue)
                                         : const Text("")),
                               ],
                             ),
@@ -112,9 +122,10 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                   },
                   child: Wrap(
                     children: [
-                      customView.text("Sort by: ", 14, FontWeight.normal,
+                      customView.text(text.Sort_by.tr, 14, FontWeight.normal,
                           MyColor.grey.withOpacity(0.70)),
-                      customView.text("Date", 14, FontWeight.w500, MyColor.black),
+                      customView.text(
+                          text.date.tr, 14, FontWeight.w500, MyColor.black),
                       const Icon(
                         Icons.keyboard_arrow_down,
                       ),
@@ -123,7 +134,9 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                 ),
               ],
             ),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             showList(),
           ],
         );
@@ -131,128 +144,126 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
     );
   }
 
-
   Widget showList() {
     return SingleChildScrollView(
-      child: bookingController.booking.isEmpty?const Center(heightFactor: 15,child: Text("No Past Appointment's at the moment!"),): ListView.builder(
-          shrinkWrap: true,
-          itemCount: bookingController.booking.length,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            var bookingId = bookingController.booking[index].bookingId.toString();
-            var  completeList = bookingController.booking[index];
-            return InkWell(
-              onTap: () {
-                bookingController.bookingAppointmentDetails(context, bookingId, "Complete", () {
-                  showBottomSheet(bookingId);
-                });
-              },
-              child: Card(
-                color: MyColor.midgray,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 7.0, vertical: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      customView.text(
-                          completeList.name.toString(),
-                          14.0,
-                          FontWeight.w500,
-                          Colors.black),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
+      child: bookingController.booking.isEmpty
+          ? Center(
+              heightFactor: 15,
+              child: Text(text.noPastAppointmentAtTheMoment.tr),
+            )
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: bookingController.booking.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                var bookingId =
+                    bookingController.booking[index].bookingId.toString();
+                var completeList = bookingController.booking[index];
+                return InkWell(
+                  onTap: () {
+                    bookingController.bookingAppointmentDetails(
+                        context, bookingId, "Complete", () {
+                      showBottomSheet(bookingId);
+                    });
+                  },
+                  child: Card(
+                    color: MyColor.midgray,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 7.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Date",
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                Text(
-                                    completeList.bookingDate
-                                        .toString(),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12.0,
-                                        fontFamily: "Poppins")),
-                              ],
-                            ),
+                          customView.text(completeList.name.toString(), 14.0,
+                              FontWeight.w500, Colors.black),
+                          const SizedBox(
+                            height: 10.0,
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Slot",
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.date.tr,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(completeList.bookingDate.toString(),
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.0,
+                                            fontFamily: "Poppins")),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 2.0,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.slot.tr,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(
+                                      completeList.time.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  completeList.time
-                                      .toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.0,
-                                      fontFamily: "Poppins"),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.bookingID.tr,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(
+                                      completeList.bookID.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Booking ID",
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                Text(
-                                  completeList.bookID
-                                      .toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            );
-          }),
+                );
+              }),
     );
   }
-
 
   showBottomSheet(String id) {
     showModalBottomSheet(
@@ -261,7 +272,6 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
         context: context,
         builder: (BuildContext context) {
-
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: /*bookingController.loadingd == true
@@ -270,12 +280,13 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
               height: 100,
               child: Center(child: custom.MyIndicator()))
               :*/
-            Column(
+                Column(
               children: [
                 const SizedBox(
                   height: 15.0,
                 ),
-                customView.text("Details", 17.0, FontWeight.w500, Colors.black),
+                customView.text(
+                    text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -286,8 +297,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient",
+                          Text(
+                            text.patient.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -309,8 +320,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Patient ID",
+                          Text(
+                            text.PatientId.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -341,8 +352,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Booking information",
+                          Text(
+                            text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -372,8 +383,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Payment information",
+                          Text(
+                            text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -395,8 +406,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Fees",
+                          Text(
+                            text.fees.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -427,8 +438,8 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Address",
+                          Text(
+                            text.address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,

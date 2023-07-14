@@ -159,7 +159,7 @@ var flag ="";
                           taxCode,
                           gender, () {
                         custom.massenger(context, "SignUp Successfully");
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const SignInScreen()));

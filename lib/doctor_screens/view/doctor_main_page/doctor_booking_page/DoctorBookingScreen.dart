@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import 'DoctorCompletAppoint.dart';
 import 'DoctorPendingAppoiment.dart';
 import 'DoctorUpcommingAppointment.dart';
@@ -21,6 +22,7 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
   TabController? tabController;
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -45,7 +47,7 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
             child: custom.searchField(
                 context,
                 searchCtr,
-                "Search appointments",
+                text.searchAppointment.tr,
                 TextInputType.text,
                 const Text(""),
                 const Icon(Icons.search_rounded), () {
@@ -60,18 +62,18 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
           indicatorWeight: 2,
           tabs: [
             Tab(
-              child: custom.text("Pending", 14, FontWeight.w500, MyColor.black),
+              child: custom.text(text.pending.tr, 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
                 child:
-                    custom.text("Upcoming", 14, FontWeight.w500, MyColor.black),
+                    custom.text(text.upcoming.tr, 14, FontWeight.w500, MyColor.black),
               ),
             ),
             Tab(
               child: Tab(
                 child: custom.text(
-                    "Completed", 14, FontWeight.w500, MyColor.black),
+                    text.Complete.tr, 14, FontWeight.w500, MyColor.black),
               ),
             ),
           ],

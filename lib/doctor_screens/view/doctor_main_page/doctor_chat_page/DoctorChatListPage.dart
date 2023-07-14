@@ -6,6 +6,7 @@ import 'package:medica/patient_screens/controller/patinet_chat_controller/Patine
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../model/DoctorChatListModel.dart';
 
 class DoctorChatListScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
   CustomView custom = CustomView();
   TextEditingController searchCtr = TextEditingController();
   ChatController chatController = ChatController();
+  LocalString text = LocalString();
 
   var userIDs = [];
   var selectedItem = [];
@@ -75,7 +77,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
         centerTitle: true == isMultiSelectionEnabled ? false : true,
         title: Text(isMultiSelectionEnabled
             ? getSelectedItemCount()
-            : "Chat",style: const TextStyle(color: Colors.black)),
+            : text.chat.tr,style: const TextStyle(color: Colors.black)),
         actions: [
           Visibility(
               visible: selectedItem.isNotEmpty,
@@ -114,11 +116,11 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                   keyboardType: TextInputType.name,
                   cursorColor: Colors.black,
                   controller: searchCtr,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     prefixIconColor: MyColor.primary1,
                     contentPadding: EdgeInsets.only(top: 3, left: 20),
-                    hintText: "Search between your chats",
+                    hintText: text.searchBetweenYourChats.tr,
                     hintStyle:
                         TextStyle(fontSize: 12, color: MyColor.primary1),
                     fillColor: MyColor.lightcolor,
@@ -137,7 +139,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
               ),
             chatController.doctorMsgList.isEmpty?
            Center(heightFactor: 13.0,child:  custom.text(
-              "You don’t have any chat.",
+            text.youDonHaveAnyChat.tr,
               14,
               FontWeight.normal,
               MyColor.black),):Expanded(
@@ -258,8 +260,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
   }
   String getSelectedItemCount() {
     return selectedItem.isNotEmpty
-        ? " Chat delete"
-        : "No selected";
+        ? text.deleteChat.tr
+        :text.noSelected.tr;
   }
   void doMultiSelection(DoctorChatModel nature) {
     if (isMultiSelectionEnabled) {
@@ -304,7 +306,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Delete chat", 17,
+                            child: custom.text(text.deleteChat.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -313,7 +315,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                           Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Are you sure you want to??", 13,
+                            child: custom.text(text.areYouSureYouWantDeleteChat.tr, 13,
                                 FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
@@ -329,13 +331,13 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: custom.text("Dismiss", 14.0,
+                                    child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: custom.mysButton(
                                   context,
-                                  "Delete chat",
+                                  text.deleteChat.tr,
                                       () {
                                     /* for (var nature in selectedItem) {
                                       // natureList.remove(nature);

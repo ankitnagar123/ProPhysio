@@ -8,6 +8,7 @@ import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/model/DoctorListModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import 'DoctorMapScreen.dart';
@@ -26,6 +27,7 @@ class DoctorListWithCategory extends StatefulWidget {
 class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
     with SingleTickerProviderStateMixin {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   TextEditingController searchCtr = TextEditingController();
   TabController? tabController;
@@ -83,14 +85,16 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  customView.text(
-                      _isListView
-                          ? 'View List'
-                          : 'View on map'
-                              '',
-                      14,
-                      FontWeight.w500,
-                      MyColor.white),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.2,
+                    child: customView.text(
+                        _isListView
+                            ? text.ListView.tr
+                            : text.MapView.tr,
+                        13,
+                        FontWeight.w500,
+                        MyColor.white),
+                  ),
                   const SizedBox(
                     width: 3.0,
                   ),
@@ -155,6 +159,7 @@ class _DoctorListState extends State<DoctorList> {
 
   TextEditingController searchCtr = TextEditingController();
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   TabController? tabController;
   String _keyword = '';
 
@@ -218,7 +223,7 @@ class _DoctorListState extends State<DoctorList> {
                       child: const Icon(Icons.filter_list_alt)),
                   suffixIconColor: MyColor.primary1,
                   contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                  hintText: "Search Doctor",
+                  hintText: text.Search_Doctorby_Name.tr,
                   hintStyle:
                       const TextStyle(fontSize: 12, color: MyColor.primary1),
                   fillColor: MyColor.lightcolor,
@@ -248,9 +253,9 @@ class _DoctorListState extends State<DoctorList> {
                 return SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: doctorListCtr.doctorList.isEmpty
-                      ? const Center(
+                      ?  Center(
                           heightFactor: 10,
-                          child: Text("Doctor Not Available at the Moment"))
+                          child: Text(text.Doctor_Not_Available.tr))
                       : ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
@@ -265,7 +270,9 @@ class _DoctorListState extends State<DoctorList> {
                                             DoctorDetailScreen(
                                               id: list[index]
                                                   .doctorId
-                                                  .toString(), centerId: '',
+                                                  .toString(), centerId: '', drImg:  list[index]
+                                                .doctorProfile
+                                                .toString(),
                                             )));
                                 // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                               },

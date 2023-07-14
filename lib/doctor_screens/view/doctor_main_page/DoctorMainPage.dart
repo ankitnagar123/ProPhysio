@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-
+import 'package:get/get.dart';
 import '../../../helper/CustomView/CustomView.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import 'doctor_booking_page/DoctorBookingScreen.dart';
 import 'doctor_chat_page/DoctorChatListPage.dart';
 import 'doctor_home_page/DoctorHomeScreen.dart';
@@ -16,6 +17,8 @@ class DoctorMainScreen extends StatefulWidget {
 
 class _DoctorMainScreenState extends State<DoctorMainScreen> {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   int _selectedIndex = 0;
   static const List<Widget> screens = [
     DoctorHomeScreen(),
@@ -35,28 +38,28 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
+            items:  <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/dhomeIcon.png"),
                       size: 20.0),
-                  label: 'Home',
-                  tooltip: 'Home'),
+                  label:text.Home.tr,
+                  tooltip: text.Home.tr),
               BottomNavigationBarItem(
                 icon: ImageIcon(AssetImage("assets/images/dIcon.png"),
                     size: 20.0),
-                label: 'Booking',
-                tooltip: 'Booking',
+                label: text.Booking.tr,
+                tooltip: text.Booking.tr,
               ),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/ChatIcon.png"),
                       size: 20.0),
-                  label: 'Chat',
-                  tooltip: 'Chat'),
+                  label: text.chat.tr,
+                  tooltip: text.chat.tr),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/moreIcon.png"),
                       size: 20),
-                  label: 'More',
-                  tooltip: 'More'),
+                  label: text.More.tr,
+                  tooltip: text.More.tr),
             ],
             type: BottomNavigationBarType.shifting,
             currentIndex: _selectedIndex,

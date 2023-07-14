@@ -140,6 +140,9 @@ class LocalString extends Translations {
   String No_Ward = "No ward found";
   String Doctor_Not_Available = "Doctor Not Available at the Moment";
   String Doctor = "doctor";
+  String Doctors = "Doctors";
+  String Booking = "Booking";
+
 
   /*Center Edit Ward*/
   String Edit_Ward = "Edit ward";
@@ -274,16 +277,25 @@ class LocalString extends Translations {
 /*Doctor Home Page */
   String SearchAppointment = "Search appointments";
   String meetings = "meetings";
-  String Patinet = "Patient";
   String PatientId = "Patient ID";
   String No_Appointments_moment = "No Appointment's at the moment!";
-  String Booking_Information = "Booking information";
-  String Payment_Information = "Payment information";
-  String Address = "Address";
-  String Call = "Call";
-  String Chat = "Chat";
   String Complete = "Complete";
 
+
+  /*new dr side string's*/
+String AcceptVisitLine = "Are you sure you want to accept the visit? You will find it in upcoming appointments.";
+  String AcceptVisit = "Accept visit";
+  String Yes_accept = "Yes, accept";
+
+  String results = "results";
+String Sort_by = "Sort by";
+
+String linear = "linear";
+String reverse = "reverse";
+String NoPendingAppoint = "No Pending Appointment's at the moment!";
+  String NoUpcomingAppoint = "No Upcoming Appointment's at the moment!";
+String Home = "Home";
+String Accept_request = "Accept request";
   /**********************Patient Side************************/
   /*Home PDoctor Tab page*/
   String doctor = "Doctor";
@@ -293,6 +305,7 @@ class LocalString extends Translations {
   String TopSpecialization = "Top Specialization";
   String NoTopSpecialization = "No Top Specialization";
   String NoSubCat = "No Sub-Category";
+  String NoCat = "No Category";
   String DoctorCategories = "Doctor Categories";
   String DoctorSubCat = "Doctor Sub-Category";
   String ListView = "View List";
@@ -414,7 +427,9 @@ class LocalString extends Translations {
   String you = "You";
   String bookingInformation = "Booking information";
   String status = "Status";
+  String address = "Address";
   String paymentInformation = "Payment information";
+  String cancel = "Cancel";
   String totalCost = "Total cost";
   String cancelAppointment = "Cancel appointment";
   String removeFromBookingSection = "Remove from booking section";
@@ -633,7 +648,8 @@ String reviews = "reviews";
           No_Ward: "No ward found",
           Doctor_Not_Available: "Doctor Not Available at the Moment",
           Doctor: "doctor",
-
+          Doctors : "Doctors",
+          Booking : "Booking",
           /*Center Edit Ward*/
           Edit_Ward: "Edit ward",
           Delete_Ward: "Delete ward",
@@ -751,6 +767,26 @@ String reviews = "reviews";
           reject: "Reject",
           confirm: "Confirm",
 
+/*Doctor Home Page */
+   SearchAppointment : "Search appointments",
+   meetings : "meetings",
+   PatientId : "Patient ID",
+   No_Appointments_moment : "No Appointment's at the moment!",
+   Complete : "Complete",
+
+
+   AcceptVisitLine : "Are you sure you want to accept the visit? You will find it in upcoming appointments.",
+   AcceptVisit : "Accept visit",
+   Yes_accept : "Yes, accept",
+  results : "results",
+          Sort_by : "Sort by",
+
+   linear : "linear",
+   reverse : "reverse",
+   NoPendingAppoint : "No Pending Appointment's at the moment!",
+   NoUpcomingAppoint : "No Upcoming Appointment's at the moment!",
+   Home : "Home",
+   Accept_request : "Accept request",
           //**************Patient Side*************//
           //**Home PDoctor Tab page******/
           doctor: "Doctor",
@@ -760,6 +796,7 @@ String reviews = "reviews";
           TopSpecialization: "Top Specialization",
           NoTopSpecialization: "No Top Specialization",
           NoSubCat: "No Sub-Category",
+          NoCat : "No Category",
           DoctorCategories: "Doctor Categories",
           DoctorSubCat: "Doctor Sub-Category",
           ListView: "View List",
@@ -886,7 +923,9 @@ String reviews = "reviews";
           you: "You",
           bookingInformation: "Booking information",
           status: "Status",
+          address: "Address",
           paymentInformation: "Payment information",
+  cancel : "Cancel",
           totalCost: "Total cost",
           cancelAppointment: "Cancel appointment",
           removeFromBookingSection: "Remove from booking section",
@@ -1090,7 +1129,8 @@ String reviews = "reviews";
           No_Ward: "Nessun reparto trovato",
           Doctor_Not_Available: "Medico non disponibile al momento",
           Doctor: "medico",
-
+          Doctors : "Medici",
+          Booking : "Prenotazione",
           /*Center Edit Ward*/
           Edit_Ward: "Modifica reparto",
           Delete_Ward: "Elimina reparto",
@@ -1218,6 +1258,26 @@ String reviews = "reviews";
           reject: "Rifiutare",
           confirm: "Confermare",
 
+          /*Doctor Home Page */
+          SearchAppointment : "Cerca appuntamenti",
+          meetings : "incontri",
+          PatientId : "ID paziente",
+          No_Appointments_moment : "Nessun appuntamento al momento!",
+          Complete : "Completare",
+
+          AcceptVisitLine : "Sei sicuro di voler accettare la visita? Lo troverete nei prossimi appuntamenti.",
+          AcceptVisit : "Accetta visita",
+          Yes_accept : "Sì, accetta",
+          results : "risultati",
+          Sort_by : "Ordina per",
+
+
+          linear : "lineare",
+          reverse : "inversione",
+          NoPendingAppoint : "Nessun appuntamento in sospeso al momento!",
+          NoUpcomingAppoint : "Nessun appuntamento imminente al momento!",
+          Home : "Casa",
+          Accept_request : "Richiesta accettata",
           //**************Patient Side*************//
           /// **Home PDoctor Tab page******///
           doctor: "Medico",
@@ -1227,6 +1287,7 @@ String reviews = "reviews";
           TopSpecialization: "Massima specializzazione",
           NoTopSpecialization: "Nessuna specializzazione superiore",
           NoSubCat: "Nessuna sottocategoria",
+          NoCat : "Nessuna categoria",
           DoctorCategories: "Categorie di dottori",
           DoctorSubCat: "Sottocategoria medico",
           ListView: "Visualizza elenco",
@@ -1369,7 +1430,9 @@ String reviews = "reviews";
           you: "Voi",
           bookingInformation: "Informazioni sulla prenotazione",
           status: "Stato",
+          address: "Indirizzo",
           paymentInformation: "Informazioni sul pagamento",
+          cancel : "Annulla",
           totalCost: "Costo totale",
           cancelAppointment: "Annulla appuntamento",
           removeFromBookingSection: "Rimuovi dalla sezione di prenotazione",

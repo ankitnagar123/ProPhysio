@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorPendingAppointment extends StatefulWidget {
@@ -16,6 +17,7 @@ class DoctorPendingAppointment extends StatefulWidget {
 
 class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   TextEditingController searchCtr = TextEditingController();
+  LocalString text = LocalString();
   CustomView custom = CustomView();
   BookingController bookingController = Get.put(BookingController());
   int selectedCard = -1;
@@ -39,7 +41,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                custom.text("${bookingController.booking.length} results", 14,
+                custom.text("${bookingController.booking.length} ${text.results.tr}", 14,
                     FontWeight.normal, MyColor.grey.withOpacity(0.70)),
                 GestureDetector(
                   onTap: () {
@@ -58,7 +60,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 ),
                                 Align(
                                   alignment: Alignment.topCenter,
-                                  child: custom.text("Sort by:", 17,
+                                  child: custom.text("${text.Sort_by.tr}:", 17,
                                       FontWeight.w500, MyColor.black),
                                 ),
                                 const SizedBox(
@@ -72,10 +74,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                         selectedCard = 0;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, "Pending", "linear");
+                                          context, text.pending.tr, text.linear.tr);
                                       Get.back();
                                     },
-                                    leading: custom.text("Date: linear", 15,
+                                    leading: custom.text("${text.date}: ${{text.linear.tr}}", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 0
                                         ? const Icon(Icons.check_outlined,
@@ -92,10 +94,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                         selectedCard = 1;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, "Pending", "reverse");
+                                          context, text.pending, text.reverse.tr);
                                       Get.back();
                                     },
-                                    leading: custom.text("Date: reverse", 15,
+                                    leading: custom.text("${text.date.tr}: ${text.reverse.tr}", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 1
                                         ? const Icon(Icons.check_outlined,
@@ -110,9 +112,9 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                   },
                   child: Wrap(
                     children: [
-                      custom.text("Sort by: ", 14, FontWeight.normal,
+                      custom.text(text.Sort_by.tr, 14, FontWeight.normal,
                           MyColor.grey.withOpacity(0.70)),
-                      custom.text("Date", 14, FontWeight.w500, MyColor.black),
+                      custom.text(text.date.tr, 14, FontWeight.w500, MyColor.black),
                       const Icon(
                         Icons.keyboard_arrow_down,
                       ),
@@ -135,9 +137,9 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   Widget showList() {
     return SingleChildScrollView(
       child: bookingController.booking.isEmpty
-          ? const Center(
+          ?  Center(
               heightFactor: 15,
-              child: Text("No Pending Appointment's at the moment!"),
+              child: Text(text.NoPendingAppoint.tr),
             )
           : ListView.builder(
               shrinkWrap: true,
@@ -214,9 +216,9 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Date",
-                                      style: TextStyle(
+                                     Text(
+                                      text.date.tr,
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -237,8 +239,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Slot",
+                                     Text(
+                                      text.slot.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -262,8 +264,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Booking ID",
+                                     Text(
+                                      text.bookingID.tr,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
@@ -315,7 +317,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                  custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                   const SizedBox(
                     height: 7.0,
                   ),
@@ -326,8 +328,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Patient",
+                             Text(
+                              text.patient.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -349,8 +351,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Patient ID",
+                             Text(
+                              text.PatientId.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -381,8 +383,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Booking information",
+                             Text(
+                             text.bookingInformation.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -420,10 +422,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   fontFamily: "Poppins"),
                             ),
                           ),
-                          const Expanded(
+                           Expanded(
                             flex: 1,
                             child: Text(
-                              "Booking ID",
+                             text.bookingID.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -473,8 +475,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Payment information",
+                             Text(
+                              text.paymentInformation.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -496,8 +498,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Fees",
+                             Text(
+                              text.fees.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -528,8 +530,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Address",
+                             Text(
+                              text.address.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -561,7 +563,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           widthFactor: 10,
                                 child: custom.MyIndicator(),
                               )
-                            : custom.acceptRejectButton(context, "Reject", () {
+                            : custom.acceptRejectButton(context, text.reject.tr, () {
                                 bookingController
                                     .bookingAppointmentReject(context, id, () {
                                   bookingController.bookingAppointment(
@@ -570,7 +572,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 });
                               }, MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
-                        custom.acceptRejectButton(context, "Accept", () {
+                        custom.acceptRejectButton(context, text.accept.tr, () {
                           acceptPopUp(context, id);
                         }, MyColor.primary,
                             const TextStyle(color: MyColor.white))
@@ -619,7 +621,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text("Accept request", 17,
+                            child: custom.text(text.Accept_request.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
@@ -629,7 +631,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
-                                "Are you sure you want to accept the visit? You will find it in upcoming appointmntes.",
+                               text.AcceptVisitLine.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -645,9 +647,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                     flex: 1,
                                     child: TextButton(
                                       onPressed: () {
-                                        // Get.back();
+                                         Get.back();
+                                         Get.back();
                                       },
-                                      child: custom.text("Dismiss", 14.0,
+                                      child: custom.text(text.Dismiss.tr, 14.0,
                                           FontWeight.w400, MyColor.grey),
                                     )),
                                 Expanded(
@@ -655,7 +658,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                       ? Center(child: custom.MyIndicator())
                                       : custom.mysButton(
                                           context,
-                                          "Yes, accept",
+                                          text.Yes_accept.tr,
                                           () {
                                             bookingController
                                                 .bookingAppointmentAccept(
@@ -666,12 +669,6 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                               Get.back();
                                               Get.back();
                                             });
-
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //         const CancelAppointmentSuccess()));
                                           },
                                           MyColor.primary,
                                           const TextStyle(

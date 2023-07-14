@@ -14,9 +14,9 @@ import '../../controller/rating_controller/PatinetRatingController.dart';
 import '../book_appointment/AppointmentCalender.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
-  final String id, centerId;
+  final String id, centerId,drImg;
 
-  const DoctorDetailScreen({Key? key, required this.id, required this.centerId})
+  const DoctorDetailScreen({Key? key, required this.id, required this.centerId, required this.drImg})
       : super(key: key);
 
   @override
@@ -92,7 +92,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       background: FadeInImage.assetNetwork(
                           placeholder: 'assets/images/loading.gif',
                           alignment: Alignment.center,
-                          image: img,
+                          image: widget.drImg,
                           fit: BoxFit.fitWidth,
                           width: double.infinity,
                           imageErrorBuilder: (context, error, stackTrace) {
@@ -206,7 +206,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                     ),
                                   ],
                                 ),
-                                custom.mysButton(context, text.bookAppointment,
+                                custom.mysButton(context, text.bookAppointment.tr,
                                     () {
                                   Navigator.push(
                                       context,

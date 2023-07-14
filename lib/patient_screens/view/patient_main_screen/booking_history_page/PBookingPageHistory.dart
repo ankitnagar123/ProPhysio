@@ -546,7 +546,7 @@ class _BookingPageState extends State<BookingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                            Text(
-                            text.Address.tr,
+                            text.address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
