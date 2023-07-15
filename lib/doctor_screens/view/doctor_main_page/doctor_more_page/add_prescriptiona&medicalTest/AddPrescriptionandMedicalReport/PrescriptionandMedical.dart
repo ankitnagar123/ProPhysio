@@ -70,15 +70,15 @@ LocalString text = LocalString();
               unselectedLabelColor: Colors.black,
               controller: tabController,
               indicatorWeight: 0,
-                  tabs: const [
+                  tabs:  [
                     Tab(
-                      child: Text("Prescription",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
+                      child: Text(text.prescription.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
                     ),
                     Tab(
-                      child: Text("Medical Test",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                      child: Text(text.medicalTest.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                     Tab(
-                      child: Text("Medicines",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                      child: Text(text.medicines.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                   ],
                 ),

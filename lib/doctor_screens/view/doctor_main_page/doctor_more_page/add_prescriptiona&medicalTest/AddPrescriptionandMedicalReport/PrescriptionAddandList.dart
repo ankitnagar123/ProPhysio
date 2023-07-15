@@ -10,6 +10,8 @@ import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../../../../language_translator/LanguageTranslate.dart';
+
 
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
@@ -30,6 +32,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
   DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(DoctorPrescriptionCtr());
   String image = "";
   MobileScannerController mobileScannerController = MobileScannerController();
+  LocalString text = LocalString();
 
 
   @override
@@ -53,20 +56,20 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
           return Column(children: [
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text("Title", 13, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.title.tr, 13, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.005,
             ),
             custom.myField(
-                context, titleCtr, "Enter Title", TextInputType.emailAddress),
+                context, titleCtr, text.enterTitle.tr, TextInputType.emailAddress),
             SizedBox(
               height: height * 0.02,
             ),
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Upload Prescription", 13.0, FontWeight.w500, MyColor.primary1),
+                  text.uploadPrescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.005,
@@ -106,7 +109,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
+                  text.writeDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             SizedBox(
               height: height * 0.005,
@@ -114,7 +117,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             custom.HField(
               context,
               discCtr,
-              "Enter description",
+              text.writeDescription.tr,
               TextInputType.text,
             ),
             SizedBox(
@@ -122,13 +125,13 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             ),
             doctorPrescriptionCtr.loadingAdd.value == true
                 ? custom.MyIndicator()
-                : custom.mysButton(context, "Submit", () {
+                : custom.mysButton(context, text.Submit.tr, () {
               if(titleCtr.text.isEmpty){
-                custom.MySnackBar(context, "Enter title");
+                custom.MySnackBar(context, text.enterTitle.tr);
               }else if(discCtr.text.isEmpty){
-                custom.MySnackBar(context, "Enter description");
+                custom.MySnackBar(context, text.writeDescription.tr);
               }else if(filename.isEmpty){
-                custom.MySnackBar(context, "Upload prescription");
+                custom.MySnackBar(context, text.uploadPrescription.tr);
               }else{
                 doctorPrescriptionCtr.addPrescription(
                   context,
@@ -153,8 +156,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             const SizedBox(height: 10,),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  "Patient Medical Record",
+              child: custom.text(text.pastMedicalReport.tr,
                   18,
                   FontWeight.w500,
                   MyColor.primary1),
@@ -167,8 +169,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Patient Information",
+                       Text(
+                        text.Patient_Information.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
@@ -190,8 +192,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Birth place",
+                       Text(
+                        text.Birth_Place.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
@@ -223,8 +225,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Contact",
+                       Text(
+                        text.Contact.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
@@ -247,8 +249,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Weight",
+                       Text(
+                        text.weight.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
@@ -279,8 +281,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Address",
+                       Text(
+                        text.address.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
@@ -303,8 +305,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:  [
-                      const Text(
-                        "Height",
+                       Text(
+                        text.Height.tr,
                         style: TextStyle(
                             color: MyColor.primary1,
                             fontSize: 14.0,
@@ -331,7 +333,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "General Medical History",
+                  text.General_Medical_History.tr,
                   18,
                   FontWeight.w500,
                   MyColor.primary1),
@@ -342,9 +344,9 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
               height: 20.0,
             ),
             doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
-                ?  const Padding(
+                ?   Padding(
               padding: EdgeInsets.all(12.0),
-              child: Text("No Past Prescription at the moment!"),
+              child: Text(text.noPrescription.tr),
             )
                 :  ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -375,7 +377,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         ),
                         const SizedBox(height: 5,),
                         custom.text(
-                            "consult with Dr.${list.doctorName}",
+                            "${text.consult_Dr.tr}.${list.doctorName}",
                             12,
                             FontWeight.w400,
                             MyColor.primary1),

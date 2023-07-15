@@ -11,6 +11,7 @@ import 'package:medica/patient_screens/controller/appointment_controller/Appoint
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorViewTimeSlots.dart';
 
@@ -28,6 +29,8 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
   AppointmentController appointmentController =
       Get.put(AppointmentController());
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
 
   DateTime focusedDay = DateTime.now();
   DateTime selectedDay = DateTime.now();
@@ -160,7 +163,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
           elevation: 0,
           centerTitle: true,
           title: custom.text(
-              "Appointment date", 16, FontWeight.w500, MyColor.black),
+              text.Appointment_date.tr, 16, FontWeight.w500, MyColor.black),
         ),
         bottomNavigationBar: Container(
           color: MyColor.midgray,
@@ -182,7 +185,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                         width: 5,
                       ),
                       custom.text(
-                          "Free slot", 13, FontWeight.w400, MyColor.black),
+                          text.freeSlot.tr, 13, FontWeight.w400, MyColor.black),
                     ],
                   ),
                   Wrap(
@@ -197,7 +200,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                         width: 5,
                       ),
                       custom.text(
-                          "Few slot", 13, FontWeight.w400, MyColor.black)
+                          text.fewSlot.tr, 13, FontWeight.w400, MyColor.black)
                     ],
                   ),
                   Wrap(
@@ -212,7 +215,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                         width: 5,
                       ),
                       custom.text(
-                          "full slot", 13, FontWeight.w400, MyColor.black)
+                          text.fullSlot.tr, 13, FontWeight.w400, MyColor.black)
                     ],
                   ),
                 ],
@@ -234,8 +237,8 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                 const Divider(),
 
                 appointmentController.dateList.isEmpty
-                    ? const Center(
-                        child: Text("No time slot's available at the moment!"))
+                    ?  Center(
+                        child: Text(text.noTimeSlotAvailableMoment.tr))
                     :
                     Container(
                         margin: const EdgeInsets.symmetric(horizontal: 16.0),

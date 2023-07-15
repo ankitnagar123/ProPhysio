@@ -24,52 +24,58 @@ LocalString text = LocalString();
         return await Get.toNamed(RouteHelper.getBottomNavigation());
       },
       child: Scaffold(
-        body: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height,
-          decoration:  const BoxDecoration(
-            gradient: LinearGradient(
-                begin:  Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  MyColor.primary,
-                  MyColor.secondary
-                ]
-            ),
-          ),
-          child: Center(
-            child: Column(
+        body: Column(
+          children: [
+            Center(
+              child: Container(
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height,
+                decoration:  const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin:  Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        MyColor.primary,
+                        MyColor.secondary
+                      ]
+                  ),
+                ),
+                child: Center(
+                  child: Column(
 
-              children: [
-                SizedBox(
-                  height: height*0.2,
+                    children: [
+                      SizedBox(
+                        height: height*0.1,
+                      ),
+                      Image(
+                        image: const AssetImage('assets/images/MEDICAlogo.png'),
+                        height: height*0.2,
+                        width: widht*0.4,
+                      ),
+                      SizedBox(height: height*0.04,),
+                      Align(
+                          alignment: Alignment.center,
+                          child: custom.text(text.appointmentCorrectlySaved.tr, 17, FontWeight.w500, MyColor.white)),
+                      SizedBox(height: height*0.01,),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: custom.text(text.youCanFindYourBooking.tr, 12, FontWeight.normal, MyColor.white)),
+                      ),
+                       SizedBox(
+                        height: height*0.25,
+                      ),
+                      custom.MyButton(context, text.letGo.tr, () {
+                        Get.offAllNamed(RouteHelper.getBottomNavigation());
+                      }, MyColor.white,
+                          const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
+                    ],
+                  ),
                 ),
-                Image(
-                  image: const AssetImage('assets/images/MEDICAlogo.png'),
-                  height: height*0.2,
-                  width: widht*0.4,
-                ),
-                SizedBox(height: height*0.04,),
-                Align(
-                    alignment: Alignment.center,
-                    child: custom.text(text.appointmentCorrectlySaved.tr, 20, FontWeight.w500, MyColor.white)),
-                SizedBox(height: height*0.01,),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: custom.text(text.youCanFindYourBooking.tr, 12, FontWeight.normal, MyColor.white)),
-                ),
-                 SizedBox(
-                  height: height*0.25,
-                ),
-                custom.MyButton(context, text.letGo.tr, () {
-                  Get.offAllNamed(RouteHelper.getBottomNavigation());
-                }, MyColor.white,
-                    const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

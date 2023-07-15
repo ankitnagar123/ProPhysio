@@ -515,9 +515,9 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   "Pending"
                                   ? MyColor.statusYellow
                                   : patientBookingController.status.value ==
-                                  "Confirmed"
-                                  ? Colors.green
-                                  : MyColor.primary1,
+                                  "Complete"
+                                  ? MyColor.primary
+                                  : Colors.red,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),

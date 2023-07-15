@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import 'package:medica/language_translator/LanguageTranslate.dart';
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
@@ -24,6 +25,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
   TextEditingController medicineIdCtr = TextEditingController();
   TextEditingController discCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   TextEditingController searchCtr = TextEditingController();
   DoctorPrescriptionCtr doctorPrescriptionCtr =
       Get.put(DoctorPrescriptionCtr());
@@ -54,7 +56,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
         .toList();
   }
 
-  List<String>data= ['Morning','Afternoon','Evening'];
+  List<String>data= ["Morning",'Afternoon','Evening'];
   List<String> userChecked = [];
 
 
@@ -69,7 +71,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           if (doctorPrescriptionCtr.loadingAddMedicne.value) {
             return Center(child: custom.MyIndicator());
           }
-          return custom.MyButton(context, "Save", () {
+          return custom.MyButton(context, text.Submit.tr, () {
             doctorPrescriptionCtr.medicinesAdd(
                 context,
                 widget.patientId,
@@ -92,7 +94,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           Align(
             alignment: Alignment.topLeft,
             child: custom.text(
-                "Medicine Name", 13, FontWeight.w500, MyColor.primary1),
+                text.Medicine_Name.tr, 13, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
             height: height * 0.005,
@@ -131,12 +133,12 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           Align(
             alignment: Alignment.topLeft,
             child: custom.text(
-                "Medicine Id", 13.0, FontWeight.w500, MyColor.primary1),
+                text.Medicine_Id.tr, 13.0, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
             height: height * 0.005,
           ),
-          custom.myField(context, medicineIdCtr, "Medicine id",
+          custom.myField(context, medicineIdCtr,text.Medicine_Id.tr,
               TextInputType.emailAddress),
           SizedBox(
             height: height * 0.02,
@@ -147,12 +149,12 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           ),
           InkWell(
             onTap: () {
-              medicinesPopUp(context);
+              // medicinesPopUp(context);
             },
             child: Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  "Medicine Timing", 13.0, FontWeight.w500, MyColor.primary1),
+                  text.Medicine_Timing.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
           ),
           ListView.builder(
@@ -179,7 +181,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           Align(
             alignment: Alignment.topLeft,
             child: custom.text(
-                "Medicine Slot", 13.0, FontWeight.w500, MyColor.primary1),
+                text.MedicineSlot.tr, 13.0, FontWeight.w500, MyColor.primary1),
           ),
           Card(
             color: MyColor.midgray,
@@ -188,12 +190,11 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                 Expanded(
                   flex: 1,
                   child: ListTile(
-
                     horizontalTitleGap: 5,
                     contentPadding: EdgeInsets.zero,
                     visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
                     leading: Radio<String>(
-                      value: 'Before Meal',
+                      value: text.Before_Meal.tr,
                       groupValue: _selectedGender,
                       onChanged: (value) {
                         setState(() {
@@ -202,7 +203,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                         });
                       },
                     ),
-                    title: const Text('Before Meal',
+                    title:  Text(text.Before_Meal.tr,
                         style: TextStyle(fontSize: 14)),
                   ),
                 ),
@@ -213,7 +214,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                     contentPadding: EdgeInsets.zero,
                     visualDensity: const VisualDensity(horizontal: -4.0, vertical: -4.0),
                     leading: Radio<String>(
-                      value: 'After Meal',
+                      value: text.AfterMeal.tr,
                       groupValue: _selectedGender,
                       onChanged: (value) {
                         setState(() {
@@ -222,7 +223,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                         });
                       },
                     ),
-                    title: const Text('After Meal',
+                    title:  Text(text.AfterMeal.tr,
                         style: TextStyle(fontSize: 14)),
                   ),
                 ),
@@ -235,7 +236,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           Align(
             alignment: Alignment.topLeft,
             child: custom.text(
-                "Description", 13.0, FontWeight.w500, MyColor.primary1),
+                text.description.tr, 13.0, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
             height: height * 0.005,
@@ -243,7 +244,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
           custom.HField(
             context,
             discCtr,
-            "Enter description",
+            text.enterDescription.tr,
             TextInputType.text,
           ),
           SizedBox(
@@ -297,7 +298,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                       child: Text(items.medicineName),
                     );
                   }).toList(),
-                  hint: const Text("Select Medicine"),
+                  hint:  Text(text.SelectMedicine.tr),
                   onChanged: (newValue) {
                     stateSetter(() {
                       selectedMedicine = newValue.toString();

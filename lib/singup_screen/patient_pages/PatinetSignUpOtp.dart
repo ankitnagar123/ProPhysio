@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-
+import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 import '../../signin_screen/SignInScreen.dart';
@@ -159,10 +159,11 @@ var flag ="";
                           taxCode,
                           gender, () {
                         custom.massenger(context, "SignUp Successfully");
-                        Navigator.pushReplacement(
+                        Get.offAllNamed(RouteHelper.getLoginScreen());
+                       /* Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SignInScreen()));
+                                builder: (context) => const SignInScreen()));*/
                       });
                       /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
                         Navigator.push(context,

@@ -194,33 +194,7 @@ class _BookingPageState extends State<BookingPage> {
                                           ),
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                             Text(
-                                              text.bookingID.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                                patientBookingController
-                                                    .booking[index].bookId
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Poppins")),
-                                          ],
-                                        ),
-                                      ),
+
                                     ],
                                   ),
                                   const SizedBox(
@@ -289,6 +263,33 @@ class _BookingPageState extends State<BookingPage> {
                                                   fontSize: 12.0,
                                                   fontFamily: "Poppins"),
                                             ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              text.bookingID.tr,
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 10.0,
+                                                  fontFamily: "Poppins"),
+                                            ),
+                                            const SizedBox(
+                                              height: 2.0,
+                                            ),
+                                            Text(
+                                                patientBookingController
+                                                    .booking[index].bookId
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12.0,
+                                                    fontFamily: "Poppins")),
                                           ],
                                         ),
                                       ),

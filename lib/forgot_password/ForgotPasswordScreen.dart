@@ -63,13 +63,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 custom.myField(context, emailCtr, text.Enter_Email.tr,
                     TextInputType.emailAddress),
                 SizedBox(
-                  height: height * 0.35,
+                  height: height * 0.30,
                 ),
                 Obx(() {
                   if (forgotPassCtr.loadingotp.value) {
                     return custom.MyIndicator();
                   }
-                  return custom.MyButton(context, "Submit", () {
+                  return custom.MyButton(context, text.Submit.tr, () {
                     if (validation()) {
                       forgotPassCtr.forgotPassword(context, emailCtr.text,)
                           .then((value) {
@@ -98,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   bool validation() {
     if (emailCtr.text.toString().isEmpty) {
       // values = forgotPassCtr.otp.value;
-      custom.MySnackBar(context, "Enter Email ID");
+      custom.MySnackBar(context, text.enterEmail.tr);
     } else {
       return true;
     }

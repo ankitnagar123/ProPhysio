@@ -8,6 +8,7 @@ import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorP
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 
 class MedicalAddAndList extends StatefulWidget {
   String patientId;
@@ -27,6 +28,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
   DoctorPrescriptionCtr doctorPrescriptionCtr = DoctorPrescriptionCtr();
   CustomView custom = CustomView();
   String image = "";
+  LocalString text = LocalString();
 
   @override
   void initState() {
@@ -50,19 +52,19 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
 
           Align(
             alignment: Alignment.topLeft,
-            child: custom.text("Title", 13, FontWeight.w500, MyColor.primary1),
+            child: custom.text(text.title.tr, 13, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
             height: height * 0.005,
           ),
           custom.myField(
-              context, titleCtr, "Enter Title", TextInputType.emailAddress),
+              context, titleCtr,text.enterTitle.tr, TextInputType.emailAddress),
           SizedBox(
             height: height * 0.02,
           ),
           Align(
             alignment: Alignment.topLeft,
-            child: custom.text("Upload Medical report", 13.0, FontWeight.w500,
+            child: custom.text(text.uploadPrescription.tr, 13.0, FontWeight.w500,
                 MyColor.primary1),
           ),
           SizedBox(
@@ -103,7 +105,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           Align(
             alignment: Alignment.topLeft,
             child: custom.text(
-                "Write Description", 13.0, FontWeight.w500, MyColor.primary1),
+                text.writeDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
           ),
           SizedBox(
             height: height  * 0.005,
@@ -111,7 +113,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           custom.HField(
             context,
             discCtr,
-            "Enter description...",
+            text.writeDescription.tr,
             TextInputType.text,
           ),
           SizedBox(
@@ -119,13 +121,13 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           ),
           doctorPrescriptionCtr.loadingAdd.value == true
               ? custom.MyIndicator()
-              : custom.mysButton(context, "Submit", () {
+              : custom.mysButton(context,  text.Submit.tr, () {
             if(titleCtr.text.isEmpty){
-              custom.MySnackBar(context, "Enter title");
+              custom.MySnackBar(context, text.enterTitle.tr);
             }else if(discCtr.text.isEmpty){
-              custom.MySnackBar(context, "Enter description");
+              custom.MySnackBar(context,text.writeDescription.tr);
             }else if(filename.isEmpty){
-              custom.MySnackBar(context, "Upload prescription");
+              custom.MySnackBar(context,text.uploadPrescription.tr);
             }else{
               doctorPrescriptionCtr.addPrescription(
                 context,
@@ -146,13 +148,13 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           ),
           Align(
             alignment: Alignment.topLeft,
-            child: custom.text("Patient past Medical report's", 15.0,
+            child: custom.text(text.pastMedicalReport.tr, 15.0,
                 FontWeight.w500, MyColor.primary1),
           ),
           doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
-              ?  const Padding(
+              ?   Padding(
             padding: EdgeInsets.all(12.0),
-            child: Text("No Past Prescription at the moment!"),
+            child: Text(text.noMedicalReportRightKnow.tr),
           )
               :  ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -183,7 +185,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                       ),
                       const SizedBox(height: 5,),
                       custom.text(
-                          "consult with Dr.${list.doctorName}",
+                          "${text.consult_Dr.tr}.${list.doctorName}",
                           12,
                           FontWeight.w400,
                           MyColor.primary1),

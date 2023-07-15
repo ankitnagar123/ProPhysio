@@ -46,7 +46,7 @@ class LocalString extends Translations {
   String Weight = "Enter Weight";
   String Height = "Height";
   String Tax_Code = "Tax Code";
-  String Birth_Place = "Bith place";
+  String Birth_Place = "Birth place";
   String Gender = "Gender";
   String Male = "Male";
   String Female = "Female";
@@ -78,7 +78,9 @@ class LocalString extends Translations {
   String Enter_otp = "Enter OTP number";
   String Not_recived = "Not received??";
   String SendNewOtp = "Send a new OTP number";
-
+  String SetPassword = "Set a new password";
+  String invalid_otp = "invalid otp";
+String CreatePassLine= "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.";
   /// ***************** MEDICA CENTER SIDE*****************///
   /* CENTER MORE PAGE*/
   String hii = "Hi";
@@ -265,7 +267,33 @@ class LocalString extends Translations {
   String scanAndCheckReports = "Scan and check reports";
   String noPastAppointmentAtTheMoment = "No Past Appointment's at the moment!";
   String bookingID = "Booking ID";
+  /*15jul*/
 
+  String Patient_Information = "Patient Information";
+String Contact = "Contact";
+String weight = "Weight";
+String General_Medical_History ="General Medical History";
+String consult_Dr = "consult with Dr";
+
+String AddMedicine = "Add Medicine";
+String View_Medicine = "View Medicine";
+String Medicine_Name = "Medicine Name";
+String Medicine_Timing = "Medicine Timing";
+String MedicineSlot = "Medicine Slot";
+String Before_Meal = "Before Meal";
+String AfterMeal = "After Meal";
+String SelectMedicine = "Select Medicine";
+String Medicine_Id = 'Medicine Id';
+String Morning = 'Morning';
+  String Afternoon = 'Afternoon';
+  String Evening ='Evening';
+
+  String Yourtimeslots = "Your time slots";
+  String ActiveTimeSlots = "Active Time Slots";
+  String YouhaventTimeSlot = "You haven't Time Slot's on this date";
+  String BookedTimeSlots = "Booked Time Slots";
+  String NoBookedtimeslots = "No Booked time slots at the moment";
+  String Appointment_date = "Appointment date";
   /*DOCTOR SIDE CENTER REQUEST PAGE*/
   String noCenterRequestAtTheMoment = "No Center request at the moment !";
   String whoops = "Whoops!";
@@ -494,7 +522,7 @@ String Accept_request = "Accept request";
   String averageRating = "Average rating";
 String reviews = "reviews";
   /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
-  String appointmentCorrectlySaved = "Appointment correctly saved!";
+  String appointmentCorrectlySaved = "Appointment correctly\n saved!";
   String youCanFindYourBooking =
       "You can find your booking in the pending section. Attention! This is a booking request. Wait for the doctor to confirm your booking. You will receive a notification and a confirmation email.";
   String letGo = "Let’s go";
@@ -550,7 +578,7 @@ String reviews = "reviews";
           Weight: "Enter Weight",
           Height: "Height",
           Tax_Code: "Tax Code",
-          Birth_Place: "Bith place",
+          Birth_Place: "Birth place",
           Gender: "Gender",
           Male: "Male",
           Female: "Female",
@@ -581,8 +609,13 @@ String reviews = "reviews";
           Enter_otp: "Enter OTP number",
           Not_recived: "Not received??",
           SendNewOtp: "Send a new OTP number",
+   SetPassword : "Set a new password",
+   invalid_otp : "invalid otp",
+   CreatePassLine: "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
 
-          //********************CENTER SIDE MORE PAGE*******************/
+
+
+  //********************CENTER SIDE MORE PAGE*******************/
           hii: "Hi",
           ProfileSettings: "Profile settings",
           Earnings: "Earnings",
@@ -759,6 +792,32 @@ String reviews = "reviews";
           scanAndCheckReports: "Scan and check reports",
           noPastAppointmentAtTheMoment: "No Past Appointment's at the moment!",
           bookingID: "Booking ID",
+
+   Patient_Information : "Patient Information",
+   Contact : "Contact",
+   weight : "Weight",
+   General_Medical_History :"General Medical History",
+   consult_Dr : "consult with Dr",
+
+   AddMedicine : "Add Medicine",
+   View_Medicine : "View Medicine",
+   Medicine_Name : "Medicine Name",
+   Medicine_Timing : "Medicine Timing",
+   MedicineSlot : "Medicine Slot",
+   Before_Meal : "Before Meal",
+   AfterMeal : "After Meal",
+   SelectMedicine : "Select Medicine",
+   Medicine_Id : 'Medicine Id',
+   Morning : 'Morning',
+   Afternoon : 'Afternoon',
+   Evening :'Evening',
+
+   Yourtimeslots : "Your time slots",
+   ActiveTimeSlots : "Active Time Slots",
+   YouhaventTimeSlot : "You haven't Time Slot's on this date",
+   BookedTimeSlots : "Booked Time Slots",
+   NoBookedtimeslots : "No Booked time slots at the moment",
+   Appointment_date : "Appointment date",
           /*DOCTOR SIDE CENTER REQUEST PAGE*/
           noCenterRequestAtTheMoment: "No Center request at the moment !",
           whoops: "Whoops!",
@@ -1061,6 +1120,11 @@ String reviews = "reviews";
           Enter_otp: "Inserisci numero OTP",
           Not_recived: "Non ricevuto??",
           SendNewOtp: "Invia un nuovo numero OTP",
+          SetPassword : "Imposta una nuova password",
+          invalid_otp : "invalido otp",
+          CreatePassLine: "Crea una nuova password con almeno sei caratteri. Se vuoi renderlo più sicuro aggiungi una lettera maiuscola, una lettera speciale e un numero.",
+
+
 
           // CENTER SIDE MORE PAGE
           hii: "Ciao",
@@ -1249,6 +1313,31 @@ String reviews = "reviews";
               "Nessun appuntamento passato al momento!",
           bookingID: "Codice di prenotazione",
 
+          Patient_Information : "Informazioni per il paziente",
+          Contact : "Contatto",
+          weight : "Peso",
+          General_Medical_History :"Storia medica generale",
+          consult_Dr : "consultare il Dott",
+
+          AddMedicine : "Aggiungi Medicina",
+          View_Medicine : "Guarda Medicina",
+          Medicine_Name : "Nome della medicina",
+          Medicine_Timing : "Tempismo della medicina",
+          MedicineSlot : "Fessura Medicina",
+          Before_Meal : "Prima del pasto",
+          AfterMeal : "Dopo il pasto",
+          SelectMedicine : "Seleziona Medicina",
+          Medicine_Id : 'ID medicina',
+          Morning : 'Mattina',
+          Afternoon : 'Pomeriggio',
+          Evening :'Sera',
+
+          Yourtimeslots : "Le tue fasce orarie",
+          ActiveTimeSlots : "Fasce orarie attive",
+          YouhaventTimeSlot : "Non hai fasce orarie in questa data",
+          BookedTimeSlots : "Fasce orarie prenotate",
+          NoBookedtimeslots : "Nessuna fascia oraria prenotata al momento",
+          Appointment_date : "Data dell'appuntamento",
           /*DOCTOR SIDE CENTER REQUEST PAGE*/
 
           noCenterRequestAtTheMoment: "Nessuna richiesta al Centro al momento!",

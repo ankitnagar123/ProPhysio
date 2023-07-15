@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../../language_translator/LanguageTranslate.dart';
 import 'DrAddMedicines.dart';
 import 'ViewMedicines.dart';
 
@@ -21,6 +22,7 @@ class AddMedicinesTab extends StatefulWidget {
 class _AddMedicinesTabState extends State<AddMedicinesTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
+  LocalString text = LocalString();
   String pId = "";
 
   @override
@@ -49,12 +51,12 @@ class _AddMedicinesTabState extends State<AddMedicinesTab>
           tabs: [
             Tab(
               child: custom.text(
-                  "Add Medicine", 14, FontWeight.w500, MyColor.black),
+                  text.AddMedicine.tr, 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
                 child: custom.text(
-                    "View Medicine", 14, FontWeight.w500, MyColor.black),
+                    text.View_Medicine.tr, 14, FontWeight.w500, MyColor.black),
               ),
             ),
           ],

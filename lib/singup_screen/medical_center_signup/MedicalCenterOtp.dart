@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../medica_center/center_controller/CenterAuthController.dart';
 import '../../signin_screen/SignInScreen.dart';
@@ -133,11 +134,9 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
                           lat,
                           long,
                           () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignInScreen()));
-                      });
+                            Get.offAllNamed(RouteHelper.getLoginScreen());
+
+                          });
                       /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
 
                       });*/

@@ -44,7 +44,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: custom.MyButton(context, "Submit", () {
+        floatingActionButton: custom.MyButton(context, text.Submit.tr, () {
           if (validationotp()) {
             var id = {
               "id": iD,
@@ -146,13 +146,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");
     if (optctr.text.isEmpty || optctr.text.length != 4) {
-      custom.massenger(context, "Please enter OTP");
+      custom.massenger(context, text.Enter_otp.tr);
     } else if (apiotp == optctr.text) {
       print("Correct OTP");
-      custom.massenger(context, "Set a new password");
+      custom.massenger(context, text.SetPassword.tr);
       return true;
     } else {
-      custom.massenger(context, "invalid otp");
+      custom.massenger(context, text.invalid_otp.tr);
       return false;
     }
     return false;

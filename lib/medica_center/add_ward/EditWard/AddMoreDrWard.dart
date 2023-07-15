@@ -287,7 +287,7 @@ String wardId = "";
                                                       FontWeight.w500,
                                                       MyColor.black)),
                                               RatingBar(
-                                                // ignoreGestures: true,
+                                                ignoreGestures: true,
                                                 itemSize: 17,
                                                 initialRating: double.parse(list[index].rating),
                                                 direction: Axis.horizontal,

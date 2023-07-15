@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:medica/language_translator/LanguageTranslate.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
@@ -14,7 +15,7 @@ import '../../model/DoctorPatinetTimeModel.dart';
 import '../../model/VisitChargeModel.dart';
 
 class AppointmentController extends GetxController {
-
+LocalString text = LocalString();
   ApiService apiService = ApiService();
   var loadingFetch = false.obs;
   var loadingFetchTime = false.obs;
@@ -220,7 +221,7 @@ class AppointmentController extends GetxController {
       if (result == "success") {
         loadingAdd.value = false;
         print("my Appointment $result");
-        custom.massenger(context, "Booking Success");
+        custom.massenger(context, text.appointmentCorrectlySaved.tr);
         print(result.toString());
         callback();
       } else {

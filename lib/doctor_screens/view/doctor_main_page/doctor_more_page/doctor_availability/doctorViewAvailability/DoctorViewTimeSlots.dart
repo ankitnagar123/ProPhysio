@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/appointment_controller/AppointmentController.dart';
 import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 
@@ -25,6 +26,8 @@ class DoctorViewTimeSlot extends StatefulWidget {
 class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
   AppointmentController appointmentController =
       Get.put(AppointmentController());
+  LocalString text = LocalString();
+
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
   // PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
@@ -80,7 +83,7 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
           elevation: 0,
           centerTitle: true,
           title: custom.text(
-              "Your time slots", 16, FontWeight.w500, MyColor.black),
+              text.Yourtimeslots.tr, 16, FontWeight.w500, MyColor.black),
         ),
         body: appointmentController.loadingFetch.value
             ? Center(child: custom.MyIndicator())
@@ -95,15 +98,15 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
                         alignment: Alignment.topLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5.0, bottom: 7),
-                          child: custom.text("Active Time Slots", 16,
+                          child: custom.text(text.ActiveTimeSlots.tr, 16,
                               FontWeight.w500, MyColor.black),
                         ),
                       ),
                       appointmentController.loadingFetchTime.value
                           ? custom.MyIndicator()
                           : appointmentController.timeList.isEmpty
-                              ? const Text(
-                                  "You haven't Time Slot's on this date")
+                              ?  Text(
+                                  text.YouhaventTimeSlot.tr)
                               : GridView.builder(
                                   padding: const EdgeInsets.all(0),
                                   physics: const NeverScrollableScrollPhysics(),
@@ -164,14 +167,14 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
                         alignment: Alignment.topLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5.0, bottom: 7),
-                          child: custom.text("Booked Time Slots", 16,
+                          child: custom.text(text.BookedTimeSlots.tr, 16,
                               FontWeight.w500, MyColor.black),
                         ),
                       ),
                       appointmentController.loadingFetchTimeBooked.value
                           ? custom.MyIndicator()
                           : appointmentController.bookedTimeSlot.isEmpty
-                              ? const Text("No Booked time slots at the moment")
+                              ?  Text(text.NoBookedtimeslots.tr)
                               : GridView.builder(
                                   padding: const EdgeInsets.all(0),
                                   physics: const NeverScrollableScrollPhysics(),

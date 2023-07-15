@@ -7,6 +7,8 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 import '../helper/CustomView/CustomView.dart';
 import 'package:get/get.dart';
 
+import '../language_translator/LanguageTranslate.dart';
+
 class SetNewPassword extends StatefulWidget {
   const SetNewPassword({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class SetNewPassword extends StatefulWidget {
 class _SetNewPasswordState extends State<SetNewPassword> {
   TextEditingController newpasswordctr = TextEditingController();
   TextEditingController confirmpasswordctr = TextEditingController();
+  LocalString text = LocalString();
 
   ForgotPassCtr forgotPassCtr = ForgotPassCtr();
   CustomView custom = CustomView();
@@ -49,7 +52,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
               if(forgotPassCtr.loadingset.value){
                 return custom.MyIndicator();
               }
-            return custom.MyButton(context, "Submit", () {
+            return custom.MyButton(context, text.Submit, () {
               forgotPassCtr.setPassword(context, id, newpasswordctr.text, confirmpasswordctr.text, () {
                 Get.offAndToNamed(RouteHelper.getSetPassSuccess());
 
@@ -76,14 +79,14 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                custom.text("Create a new password", 23, FontWeight.w700,
+                custom.text(text.Create_New_One.tr, 23, FontWeight.w700,
                     MyColor.black),
                 const Divider(),
                 SizedBox(
                     height: height * 0.02
                 ),
                 custom.text(
-                    "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
+                    text.CreatePassLine.tr,
                     12, FontWeight.normal, MyColor.primary1),
 
                 SizedBox(
@@ -93,14 +96,14 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Enter a new password", 12, FontWeight.w600,
+                      text.SetPassword.tr, 12, FontWeight.w600,
                       MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
                 custom.PasswordField(
-                    context, newpasswordctr, "Enter at least 6 characters",
+                    context, newpasswordctr, text.H_Create_Passsword.tr,
                     TextInputType.text, GestureDetector(
                     onTap: () {
                       setState(() {
@@ -126,13 +129,13 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      "Confirm password", 12, FontWeight.w600, MyColor.primary1),
+                      text.confirmPassword.tr, 12, FontWeight.w600, MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
                 custom.PasswordField(
-                    context, confirmpasswordctr, "Enter at least 6 characters",
+                    context, confirmpasswordctr, text.H_Create_Passsword.tr,
                     TextInputType.text, GestureDetector(
                     onTap: () {
                       setState(() {
@@ -169,22 +172,22 @@ class _SetNewPasswordState extends State<SetNewPassword> {
     if (newpasswordctr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "new passord required");
+      custom.MySnackBar(context, text.SetPassword.tr);
     } else if (newpasswordctr.text
         .toString()
         .length < 8) {
-      custom.MySnackBar(context, "New Password is must be of 8 digit");
+      custom.MySnackBar(context, text.newPasswordAtList6digit.tr);
     } else if (confirmpasswordctr.text
         .toString()
         .isEmpty) {
-      custom.MySnackBar(context, "Confirm Password is Required");
+      custom.MySnackBar(context, text.confirmPassword.tr);
     } else if (confirmpasswordctr.text
         .toString()
         .length < 8) {
-      custom.MySnackBar(context, "Confirm is must be of 8 digit");
+      custom.MySnackBar(context, text.confirmPasswordAtList6digit.tr);
     } else
     if (newpasswordctr.text.toString() != confirmpasswordctr.text.toString()) {
-      custom.MySnackBar(context, "Password is does not match");
+      custom.MySnackBar(context, text.passwordNotMatch.tr);
     } else {
       return true;
     }

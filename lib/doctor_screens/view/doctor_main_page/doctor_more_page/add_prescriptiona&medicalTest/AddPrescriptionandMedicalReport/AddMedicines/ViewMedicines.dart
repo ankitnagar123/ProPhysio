@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../../language_translator/LanguageTranslate.dart';
 import 'PDF/medicinePDFVIew.dart';
 
 class DrViewMedicines extends StatefulWidget {
@@ -30,6 +31,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
   TextEditingController titleCtr = TextEditingController();
   TextEditingController discCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   DoctorPrescriptionCtr doctorPrescriptionCtr =
       Get.put(DoctorPrescriptionCtr());
 
@@ -51,7 +53,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
             InkWell(
                 onTap: () async {
                   const url =
-                      "https://cisswork.com/Android/Medica/Apis/savepdf/30_16.pdf";
+                      "https://cisswork.com/PHP/Travelistas/api/savepdf/Mr.Rishabh1.pdf";
                   final file = await loadPdfFromNetwork(url);
                   openPdf(context, file, url);
                 },
@@ -123,7 +125,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                custom.text("Details", 17.0, FontWeight.w500, Colors.black),
+                custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -138,8 +140,8 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Medicines information",
+                             Text(
+                              text.medicinesInformation.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -162,8 +164,8 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Slot",
+                             Text(
+                              text.slot.tr,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -195,8 +197,8 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Timing to take",
+                           Text(
+                            text.timingTake.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
@@ -257,8 +259,8 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Description",
+                           Text(
+                            text.description.tr,
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,

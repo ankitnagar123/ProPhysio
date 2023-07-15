@@ -359,7 +359,7 @@ class _DoctorListState extends State<DoctorList> {
                                                 MyColor.black)),
 
                                         RatingBar(
-                                          // ignoreGestures: true,
+                                           ignoreGestures: true,
                                           itemSize: 17,
                                           initialRating: double.parse(list[index].rating.toString()),
                                           direction: Axis.horizontal,
