@@ -22,8 +22,8 @@ class bookingList {
         this.time});
 
   bookingList.fromJson(Map<String, dynamic> json) {
-    bookingId = json['booking_id'];
-    id = json['user_id'];
+    bookingId = json['bookd'];
+    id = json['used'];
     bookID = json['book_ID'];
     name = json['name'];
     bookingDate = json['booking_date'];
