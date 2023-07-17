@@ -52,8 +52,8 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
           children: [
             InkWell(
                 onTap: () async {
-                  const url =
-                      "https://cisswork.com/PHP/Travelistas/api/savepdf/Mr.Rishabh1.pdf";
+                  var url ="${doctorPrescriptionCtr.fetchMedicineList.value?.pdf}";
+                      /*"https://cisswork.com/PHP/Travelistas/api/savepdf/Mr.Rishabh1.pdf"*/;
                   final file = await loadPdfFromNetwork(url);
                   openPdf(context, file, url);
                 },
@@ -63,13 +63,13 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                 : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: doctorPrescriptionCtr.fetchMedicineList.length,
+                    itemCount: doctorPrescriptionCtr.fetchMedicineList.value!.details.length,
                     itemBuilder: (context, index) {
-                      var list = doctorPrescriptionCtr.fetchMedicineList[index];
-                      var medicineName = list.medicineName;
+                      var list = doctorPrescriptionCtr.fetchMedicineList.value!.details[index];
+                    /*  var medicineName = list.;
                       var medicineTime = list.medicineTiming;
                       var medicineSlot = list.medicineSlot;
-                      var medicineDisc = list.description;
+                      var medicineDisc = list.description;*/
                    /*   var medicineDrName = list.doctorName;
                       var medicineDrSurname = list.doctorSurname;*/
                       return InkWell(
@@ -78,7 +78,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                           color: MyColor.midgray,
                           child: ListTile(
                               contentPadding: const EdgeInsets.all(12),
-                              title: custom.text(list.medicineName, 16,
+                              title: custom.text(list.madcine, 16,
                                   FontWeight.w400, MyColor.primary1),
                               subtitle: Text(
                                 style: const TextStyle(

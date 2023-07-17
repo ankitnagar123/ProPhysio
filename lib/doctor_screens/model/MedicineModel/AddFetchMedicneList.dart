@@ -4,34 +4,54 @@
 
 import 'dart:convert';
 
-List<AddFetchMedicineListModel> addFetchMedicineListModelFromJson(String str) => List<AddFetchMedicineListModel>.from(json.decode(str).map((x) => AddFetchMedicineListModel.fromJson(x)));
+AddFetchMedicineListModel addFetchMedicineListModelFromJson(String str) => AddFetchMedicineListModel.fromJson(json.decode(str));
 
-String addFetchMedicineListModelToJson(List<AddFetchMedicineListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String addFetchMedicineListModelToJson(AddFetchMedicineListModel data) => json.encode(data.toJson());
 
 class AddFetchMedicineListModel {
+  String pdf;
+  List<Detail> details;
+
+  AddFetchMedicineListModel({
+    required this.pdf,
+    required this.details,
+  });
+
+  factory AddFetchMedicineListModel.fromJson(Map<String, dynamic> json) => AddFetchMedicineListModel(
+    pdf: json["PDF"],
+    details: List<Detail>.from(json["Details"].map((x) => Detail.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "PDF": pdf,
+    "Details": List<dynamic>.from(details.map((x) => x.toJson())),
+  };
+}
+
+class Detail {
   String medicineId;
   String madcine;
-  String medicineName;
+  String? medicineName;
   String medicineTiming;
   String medicineSlot;
   String description;
 
-  AddFetchMedicineListModel({
+  Detail({
     required this.medicineId,
     required this.madcine,
-    required this.medicineName,
+    this.medicineName,
     required this.medicineTiming,
     required this.medicineSlot,
     required this.description,
   });
 
-  factory AddFetchMedicineListModel.fromJson(Map<String, dynamic> json) => AddFetchMedicineListModel(
-    medicineId: json["medicine_id"].toString(),
-    madcine: json["madcine"].toString(),
-    medicineName: json["medicine_name"].toString(),
-    medicineTiming: json["medicine_timing"].toString(),
-    medicineSlot: json["medicine_slot"].toString(),
-    description: json["description"].toString(),
+  factory Detail.fromJson(Map<String, dynamic> json) => Detail(
+    medicineId: json["medicine_id"],
+    madcine: json["madcine"],
+    medicineName: json["medicine_name"],
+    medicineTiming: json["medicine_timing"],
+    medicineSlot: json["medicine_slot"],
+    description: json["description"],
   );
 
   Map<String, dynamic> toJson() => {

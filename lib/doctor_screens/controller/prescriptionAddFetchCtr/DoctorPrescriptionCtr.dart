@@ -48,7 +48,7 @@ class DoctorPrescriptionCtr extends GetxController {
   var allMedicineList = <MedicineAllListModel>[].obs;
 
   /*For Medicine add wali List*/
-  var fetchMedicineList = <AddFetchMedicineListModel>[].obs;
+  var fetchMedicineList = Rxn<AddFetchMedicineListModel>();
 
   /*For Patient show Medicine  List*/
   var patientFetchMedicineList = <PatinetMedicineListModel>[].obs;
