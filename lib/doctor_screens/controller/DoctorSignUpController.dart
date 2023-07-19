@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +10,13 @@ import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
 import '../../Helper/RoutHelper/RoutHelper.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../model/DSignUpCategoryModel.dart';
 
 class DoctorSignUpCtr extends GetxController {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   ApiService apiService = ApiService();
 
   RxString location = "".obs;
@@ -51,17 +54,26 @@ class DoctorSignUpCtr extends GetxController {
 /*-----------Doctor SignUp Otp Api----------*/
   Future<String> doctorSignupOtp(
     BuildContext context,
-    String email,
+      String countryCode,
+      String phone,
+      String email,
     // VoidCallback callback,
   ) async {
     loadingotp.value = true;
     final Map<String, dynamic> signupPerameter = {
+      "user_type":"Doctor",
+      "country_code":countryCode,
+      "contact":phone,
       "email": email,
     };
     print("SignupParameter$signupPerameter");
-
-    final response =
-        await apiService.postData(MyAPI.DSignUpOtp, signupPerameter);
+    final response = await http.post(
+        Uri.parse(
+          "https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php",
+        ),
+        body: signupPerameter);
+   /* final response =
+        await apiService.postData(MyAPI.DSignUpOtp, signupPerameter);*/
     try {
       log("response of Doctor Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -72,15 +84,16 @@ class DoctorSignUpCtr extends GetxController {
       if (response.statusCode == 200) {
         // callback();
         log("my otp ctr${otp.toString()}");
-        custom.massenger(context, otp.toString());
+        // custom.massenger(context, otp.toString());
         loadingotp.value = false;
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.SomthingWentWrong.tr);
       }
     } catch (e) {
       loadingotp.value = false;
+      custom.massenger(context, text.SomthingWentWrong.tr);
 
       log("exception$e");
       return '';
@@ -154,8 +167,8 @@ class DoctorSignUpCtr extends GetxController {
         callback();
         loading.value = false;
          sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-         Get.toNamed(RouteHelper.getVerification());
-         custom.massenger(context, result);
+          Get.toNamed(RouteHelper.getVerification());
+         custom.massenger(context, text.SignUPSuccess.tr);
       } else {
         custom.massenger(context, result);
       }

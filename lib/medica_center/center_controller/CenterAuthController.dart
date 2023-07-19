@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,9 +9,12 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class CenterAuthCtr extends GetxController {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
   ApiService apiService = ApiService();
   var loading = false.obs;
   var loadingotp = false.obs;
@@ -42,17 +45,26 @@ class CenterAuthCtr extends GetxController {
 /*-----------Patient SignUp Otp Api----------*/
   Future<String> CenterSignupOtp(
     BuildContext context,
-    String email,
+      String countryCode,
+      String phone,
+      String email,
     // VoidCallback callback,
   ) async {
     loadingotp.value = true;
     final Map<String, dynamic> signupPerameter = {
+      "user_type":"Medical",
+      "country_code":countryCode,
+      "contact":phone,
       "email": email,
     };
     print("Signup Parameter$signupPerameter");
-
-    final response =
-        await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
+    final response = await http.post(
+        Uri.parse(
+          "https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php",
+        ),
+        body: signupPerameter);
+/*    final response =
+        await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);*/
     try {
       log("response of Medical Center Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -66,9 +78,10 @@ class CenterAuthCtr extends GetxController {
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.SomthingWentWrong.tr);
       }
     } catch (e) {
+      custom.massenger(context, text.SomthingWentWrong.tr);
       log("exception$e");
       return '';
     }

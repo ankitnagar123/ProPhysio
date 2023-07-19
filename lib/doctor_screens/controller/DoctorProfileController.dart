@@ -8,9 +8,13 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../Network/ApiService.dart';
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class DoctorProfileCtr extends GetxController {
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
+
   ApiService apiService = ApiService();
   var loading = false.obs;
   var loadingU = false.obs;
@@ -184,7 +188,7 @@ class DoctorProfileCtr extends GetxController {
         // custom.massenger(context, "Profile Update Successfully");
       } else {
         loadingU.value = false;
-        custom.massenger(context, "Invalid Inputs");
+        custom.massenger(context, text.Invalid.tr);
       }
     } catch (e) {
       loadingU.value = false;

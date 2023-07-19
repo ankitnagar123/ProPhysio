@@ -9,9 +9,11 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class DoctorChangePassCtr extends GetxController {
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
   var loadingset = false.obs;
   var loadingd = false.obs;
 
@@ -39,11 +41,11 @@ class DoctorChangePassCtr extends GetxController {
       if (result == "Changed Successfull") {
         loadingset.value = false;
         print("my Doctor set pass$result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.Changed_Pass_Successfully.tr);
         print(result.toString());
         callback();
       } else {
-        custom.massenger(context, "password doesn't match");
+        custom.massenger(context,text.SomthingWentWrong.tr);
       }
     } catch (e) {
       loadingset.value = false;
@@ -72,11 +74,11 @@ class DoctorChangePassCtr extends GetxController {
         callback();
         loadingd.value = false;
         print("my patient $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.DeleteaccountSuccess.tr);
         print(result.toString());
       } else {
         log("message$result");
-        custom.massenger(context, "Invalid Inputs!");
+        custom.massenger(context,text.Invalid.tr);
       }
     } catch (e) {
       loadingd.value = false;

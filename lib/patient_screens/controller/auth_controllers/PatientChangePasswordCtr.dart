@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:medica/language_translator/LanguageTranslate.dart';
 
 import '../../../Network/ApiService.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 
 class PatientChangePassCtr extends GetxController {
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
   var loadingset = false.obs;
   var loadingd = false.obs;
 
@@ -37,11 +39,11 @@ class PatientChangePassCtr extends GetxController {
       if (result == "Changed Successfull") {
         loadingset.value = false;
         print("my patient set pass$result");
-        custom.massenger(context, "Changed Successfully");
+        custom.massenger(context, text.Changed_Pass_Successfully.tr);
         print(result.toString());
         callback();
       } else {
-        custom.massenger(context, "password doesn't match");
+        custom.massenger(context, text.passwordNotMatch.tr);
       }
     } catch (e) {
       loadingset.value = false;
@@ -71,11 +73,11 @@ class PatientChangePassCtr extends GetxController {
         callback();
         loadingd.value = false;
         print("my patient $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context,text.DeleteaccountSuccess.tr);
         print(result.toString());
       } else {
         log("message$result");
-        custom.massenger(context, "Invalid Inputs!");
+        custom.massenger(context, text.Invalid.tr);
       }
     } catch (e) {
       loadingd.value = false;

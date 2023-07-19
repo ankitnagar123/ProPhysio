@@ -77,7 +77,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                           context, text.pending.tr, text.linear.tr);
                                       Get.back();
                                     },
-                                    leading: custom.text("${text.date}: ${{text.linear.tr}}", 15,
+                                    leading: custom.text("${text.date}: ${text.linear.tr}", 15,
                                         FontWeight.normal, MyColor.black),
                                     trailing: selectedCard == 0
                                         ? const Icon(Icons.check_outlined,

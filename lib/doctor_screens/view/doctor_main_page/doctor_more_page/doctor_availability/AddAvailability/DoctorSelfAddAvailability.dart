@@ -64,18 +64,15 @@ class _MyAvailabilityState extends State<MyAvailability> {
                                 centerId: "",
                               )));
                 },
-                child: Container(
-                  height: 40,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(10)),
+                child: Card(
+                  color: MyColor.midgray,
                   child: Center(
                       child: custom.text(text.viewAvailability.tr, 13,
-                          FontWeight.w500, MyColor.white)),
+                          FontWeight.w500, MyColor.primary1)),
                 ),
               ),
             ),
+            Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Align(
@@ -160,7 +157,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
             const SizedBox(
               height: 30.0,
             ),
-            addAvailabilityCtr.loading.value
+            addAvailabilityCtr.doctorTimeList.isEmpty?  addAvailabilityCtr.loading.value
                 ? custom.MyIndicator()
                 : custom.MyButton(context, text.Submit.tr, () {
                     if (startDateController.text.isEmpty ||
@@ -179,11 +176,11 @@ class _MyAvailabilityState extends State<MyAvailability> {
                         color: MyColor.white,
                         fontSize: 16,
                         fontFamily: 'Heebo',
-                        letterSpacing: 0.8)),
+                        letterSpacing: 0.8)):Text(""),
 
             const Divider(),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+              padding: const EdgeInsets.only(left: 20.0,),
               child: Align(
                   alignment: Alignment.topLeft,
                   child: addAvailabilityCtr.doctorTimeList.isEmpty
@@ -266,7 +263,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
             ? const Text("")
             :  Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 10),
+                        horizontal: 15.0,),
                     child: AnimatedButton(
                       // width: MediaQuery.of(context).size.width * 0.8,
                       text: text.Submit.tr,

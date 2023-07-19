@@ -188,7 +188,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         var reversedList =
                             chatController.drReceivedMsgList.reversed.toList();
                         return Row(
-                          mainAxisAlignment: doctorId == reversedList[index].id
+                          mainAxisAlignment: patientId == reversedList[index].id
                               ? MainAxisAlignment.start
                               : MainAxisAlignment.end,
                           children: [

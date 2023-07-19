@@ -10,12 +10,14 @@ import 'package:medica/network/Internet_connectivity_checker/InternetConnectivit
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../model/DoctorCancelBookingModel.dart';
 import '../model/booking_list_model.dart';
 
 class BookingController extends GetxController {
   CustomView custom = CustomView();
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -183,7 +185,7 @@ class BookingController extends GetxController {
         print(jsonResponse.toString());
       } else {
         loadingAccept.value = false;
-        custom.massenger(context, "Invalid");
+        custom.massenger(context, text.Invalid.tr);
       }
     } catch (e) {
       loadingAccept.value = false;
@@ -216,7 +218,7 @@ class BookingController extends GetxController {
         print(jsonResponse.toString());
       } else {
         loadingReject.value = false;
-        custom.massenger(context, "Invalid");
+        custom.massenger(context, text.Invalid.tr);
       }
     } catch (e) {
       loadingReject.value = false;
@@ -304,7 +306,7 @@ class BookingController extends GetxController {
         print(jsonResponse.toString());
       } else {
         loadingCancel.value = false;
-        custom.massenger(context, "Invalid");
+        custom.massenger(context,text.Invalid.tr);
       }
     } catch (e) {
       loadingCancel.value = false;

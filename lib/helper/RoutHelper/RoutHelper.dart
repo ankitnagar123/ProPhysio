@@ -407,11 +407,5 @@ class RouteHelper {
     GetPage(name: cAddMoreDr, page: () => const WardAddMoreDoctor()),
 
 
-
-
-
-
-
-
   ];
 }

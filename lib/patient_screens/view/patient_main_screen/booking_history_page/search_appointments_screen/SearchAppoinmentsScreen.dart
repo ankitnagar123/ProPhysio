@@ -517,7 +517,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   : patientBookingController.status.value ==
                                   "Complete"
                                   ? MyColor.primary
-                                  : Colors.red,
+                                  :patientBookingController.status.value == "Cancel"? Colors.red:Colors.green,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),

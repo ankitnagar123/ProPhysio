@@ -8,6 +8,7 @@ import 'package:medica/Network/Apis.dart';
 import '../../Network/ApiService.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../model/CenterRequestListModel.dart';
 
 class CenterRequest extends GetxController {
@@ -18,6 +19,9 @@ class CenterRequest extends GetxController {
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
+
   var centerRequestList = <CenterRequestListModel>[].obs;
   ApiService apiService = ApiService();
 
@@ -35,7 +39,7 @@ class CenterRequest extends GetxController {
         log(centerRequestList.toString());
       } else {
         loading.value = false;
-        custom.massenger(context, "Something went wrong");
+        custom.massenger(context, text.SomthingWentWrong.tr);
       }
     } catch (e) {
       loading.value = false;
@@ -70,12 +74,12 @@ class CenterRequest extends GetxController {
         loadingAccept.value = false;
         loadingReject.value = false;
         log("response of CenterRequest Accept/Reject $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context,text.Success.tr);
         log(result.toString());
       } else {
         loadingAccept.value = false;
         loadingReject.value = false;
-        custom.massenger(context, result.toString());
+        custom.massenger(context,text.Success.tr);
       }
     } catch (e) {
       loadingAccept.value = false;

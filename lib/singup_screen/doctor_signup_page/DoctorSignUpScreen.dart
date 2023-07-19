@@ -172,7 +172,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     if (validation(context)) {
 
                       doctorSignUpCtr
-                          .doctorSignupOtp(context, emailCtr.text)
+                          .doctorSignupOtp(context, code,phoneCtr.text,emailCtr.text)
                           .then((value) {
                         if (value != "") {
                           print("gender dekho$_selectedGender");

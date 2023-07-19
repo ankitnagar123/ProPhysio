@@ -20,7 +20,6 @@ class _SingUpScreenState extends State<SingUpScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(

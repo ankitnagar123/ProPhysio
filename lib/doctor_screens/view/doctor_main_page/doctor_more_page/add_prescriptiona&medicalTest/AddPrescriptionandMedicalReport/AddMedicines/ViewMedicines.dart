@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
 import 'package:path/path.dart';
-// import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';

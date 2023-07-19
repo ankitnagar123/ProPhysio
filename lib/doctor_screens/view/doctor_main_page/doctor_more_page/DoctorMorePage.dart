@@ -37,13 +37,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-        ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

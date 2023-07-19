@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
@@ -18,6 +19,9 @@ class _PatientChangePasswordScreenState
     extends State<PatientChangePasswordScreen> {
   CustomView customView = CustomView();
   bool _isHidden = true;
+  bool _isHidden1 = true;
+  bool _isHidden2 = true;
+
   LocalString text = LocalString();
 
   TextEditingController oldPasswordCtrl = TextEditingController();
@@ -101,10 +105,10 @@ class _PatientChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden1 = !_isHidden1;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden1
                           ? const Icon(
                               Icons.visibility_off,
                               color: MyColor.primary,
@@ -115,7 +119,7 @@ class _PatientChangePasswordScreenState
                               color: MyColor.primary,
                               size: 20.0,
                             )),
-                  _isHidden),
+                  _isHidden1),
               SizedBox(
                 height: width * 0.1,
               ),
@@ -132,10 +136,10 @@ class _PatientChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden2 = !_isHidden2;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden2
                           ? const Icon(
                               Icons.visibility_off,
                               color: MyColor.primary,
@@ -146,35 +150,71 @@ class _PatientChangePasswordScreenState
                               color: MyColor.primary,
                               size: 20.0,
                             )),
-                  _isHidden),
+                  _isHidden2),
               SizedBox(
                 height: height*0.5,
               ),
               Align(
                 alignment: Alignment.center,
-                child: Obx(() {
-                  if (changePassCtr.loadingset.value) {
-                    return customView.MyIndicator();
-                  }
-                  return customView.MyButton(
-                    context,
-                   text.savePassword.tr,
-                    () {
-                      if (validation()) {
-                        changePassCtr.ChangePasswordApi(
-                            context,
-                            oldPasswordCtrl.text,
-                            newPasswordCtrl.text,
-                            confirmPasswordCtrl.text, () {
-                          Get.back();
-                        });
-                      }
-                    },
-                    MyColor.primary,
-                    const TextStyle(fontFamily: "Poppins", color: Colors.white),
-                  );
-                }),
-              )
+                child: AnimatedButton(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  text: text.savePassword.tr,
+                  color: MyColor.primary,
+                  pressEvent: () {
+                    if (validation()) {
+                      changePassCtr.ChangePasswordApi(
+                          context,
+                          oldPasswordCtrl.text,
+                          newPasswordCtrl.text,
+                          confirmPasswordCtrl.text, () {
+                        AwesomeDialog(
+                          context: context,
+                          animType: AnimType.leftSlide,
+                          headerAnimationLoop: false,
+                          dialogType: DialogType.success,
+                          showCloseIcon: true,
+                          title: text.success.tr,
+                          desc: text.Changed_Pass_Successfully.tr,
+                          btnOkOnPress: () {
+                            Get.back();
+                            debugPrint('OnClcik');
+                          },
+                          btnOkIcon: Icons.check_circle,
+                          onDismissCallback: (type) {
+                            debugPrint('Dialog Dismiss from callback $type');
+                          },
+                        ).show();
+                          });
+                    }
+                    /*if(validation()){
+                      patientRatingCtr.ratingAdd(
+                          context, doctorId.toString(), rating.toString(), reviewCtr.text,
+                              () {
+                            AwesomeDialog(
+                              context: context,
+                              animType: AnimType.leftSlide,
+                              headerAnimationLoop: false,
+                              dialogType: DialogType.success,
+                              showCloseIcon: true,
+                              title: text.success.tr,
+                              desc: text.ratingSuccessfully.tr,
+                              btnOkOnPress: () {
+                                Get.back();
+                                debugPrint('OnClcik');
+                              },
+                              btnOkIcon: Icons.check_circle,
+                              onDismissCallback: (type) {
+                                debugPrint('Dialog Dismiss from callback $type');
+                              },
+                            ).show();
+                            // Get.back();
+                          });
+                    }*/
+
+                  },
+                ),
+              ),
+
             ],
           ),
         ),

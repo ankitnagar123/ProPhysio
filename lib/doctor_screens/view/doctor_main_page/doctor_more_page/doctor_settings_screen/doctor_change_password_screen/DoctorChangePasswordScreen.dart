@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/doctor_screens/controller/DoctorChangePasswordCtr.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:medica/language_translator/LanguageTranslate.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 
@@ -16,6 +18,7 @@ class DoctorChangePasswordScreen extends StatefulWidget {
 class _DoctorChangePasswordScreenState
     extends State<DoctorChangePasswordScreen> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   bool _isHidden = true;
 
   TextEditingController oldPasswordCtrl = TextEditingController();
@@ -42,7 +45,7 @@ class _DoctorChangePasswordScreenState
             ),
           ),
           title: customView.text(
-              "Change password", 15.0, FontWeight.w500, Colors.black),
+              text.ChangePassword.tr, 15.0, FontWeight.w500, Colors.black),
           centerTitle: true,
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -55,7 +58,7 @@ class _DoctorChangePasswordScreenState
               SizedBox(
                 height: width * 0.10,
               ),
-              customView.text("Enter your old password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourOldPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -63,7 +66,7 @@ class _DoctorChangePasswordScreenState
               customView.PasswordField(
                   context,
                   oldPasswordCtrl,
-                  "Old password",
+                  text.oldPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -86,7 +89,7 @@ class _DoctorChangePasswordScreenState
               SizedBox(
                 height: width * 0.1,
               ),
-              customView.text("Enter your new password", 12.0, FontWeight.w500,
+              customView.text(text.enterYourNewPassword.tr, 12.0, FontWeight.w500,
                   MyColor.black),
               SizedBox(
                 height: width * 0.02,
@@ -94,7 +97,7 @@ class _DoctorChangePasswordScreenState
               customView.PasswordField(
                   context,
                   newPasswordCtrl,
-                  "New password",
+                  text.newPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -118,14 +121,14 @@ class _DoctorChangePasswordScreenState
                 height: width * 0.1,
               ),
               customView.text(
-                  "Confirm password", 12.0, FontWeight.w500, MyColor.black),
+                 text.confirmPassword.tr, 12.0, FontWeight.w500, MyColor.black),
               SizedBox(
                 height: width * 0.02,
               ),
               customView.PasswordField(
                   context,
                   confirmPasswordCtrl,
-                  "New password",
+                  text.confirmPassword.tr,
                   TextInputType.text,
                   GestureDetector(
                       onTap: () {
@@ -150,6 +153,42 @@ class _DoctorChangePasswordScreenState
               ),
               Align(
                 alignment: Alignment.center,
+                child: AnimatedButton(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  text: text.savePassword.tr,
+                  color: MyColor.primary,
+                  pressEvent: () {
+                    if (validation()) {
+                      changePassCtr.changePasswordApi(
+                          context,
+                          oldPasswordCtrl.text,
+                          newPasswordCtrl.text,
+                          confirmPasswordCtrl.text, () {
+                        AwesomeDialog(
+                          context: context,
+                          animType: AnimType.leftSlide,
+                          headerAnimationLoop: false,
+                          dialogType: DialogType.success,
+                          showCloseIcon: true,
+                          title: text.success.tr,
+                          desc: text.Changed_Pass_Successfully.tr,
+                          btnOkOnPress: () {
+                            Get.back();
+                            debugPrint('OnClcik');
+                          },
+                          btnOkIcon: Icons.check_circle,
+                          onDismissCallback: (type) {
+                            debugPrint('Dialog Dismiss from callback $type');
+                          },
+                        ).show();
+                      });
+                    }
+                  },
+                ),
+              ),
+
+          /*    Align(
+                alignment: Alignment.center,
                 child: Obx(() {
                   if (changePassCtr.loadingset.value) {
                     return customView.MyIndicator();
@@ -172,7 +211,7 @@ class _DoctorChangePasswordScreenState
                     const TextStyle(fontFamily: "Poppins", color: Colors.white),
                   );
                 }),
-              )
+              )*/
             ],
           ),
         ),
@@ -182,18 +221,18 @@ class _DoctorChangePasswordScreenState
   // ******************Change Password VALIDATION (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
     if (oldPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter old password");
+      customView.MySnackBar(context, text.enterYourOldPassword.tr);
     } else if (newPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter new password");
+      customView.MySnackBar(context, text.enterYourNewPassword.tr);
     } else if (newPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "New Password is must be of 6 digit");
+      customView.MySnackBar(context, text.newPasswordAtList6digit.tr);
     } else if (confirmPasswordCtrl.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter confirm password");
+      customView.MySnackBar(context,text.confirmPassword.tr);
     } else if (confirmPasswordCtrl.text.toString().length < 6) {
-      customView.MySnackBar(context, "confirm is must be of 6 digit");
+      customView.MySnackBar(context, text.confirmPasswordAtList6digit.tr);
     } else if (newPasswordCtrl.text.toString() !=
         confirmPasswordCtrl.text.toString()) {
-      customView.MySnackBar(context, "Password is doesn't match");
+      customView.MySnackBar(context, text.passwordNotMatch.tr);
     } else {
       return true;
     }

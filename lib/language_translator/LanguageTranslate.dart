@@ -80,7 +80,9 @@ class LocalString extends Translations {
   String SendNewOtp = "Send a new OTP number";
   String SetPassword = "Set a new password";
   String invalid_otp = "invalid otp";
-String CreatePassLine= "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.";
+  String CreatePassLine =
+      "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.";
+
   /// ***************** MEDICA CENTER SIDE*****************///
   /* CENTER MORE PAGE*/
   String hii = "Hi";
@@ -144,7 +146,6 @@ String CreatePassLine= "Create a new password with at least six characters. If y
   String Doctor = "doctor";
   String Doctors = "Doctors";
   String Booking = "Booking";
-
 
   /*Center Edit Ward*/
   String Edit_Ward = "Edit ward";
@@ -267,26 +268,27 @@ String CreatePassLine= "Create a new password with at least six characters. If y
   String scanAndCheckReports = "Scan and check reports";
   String noPastAppointmentAtTheMoment = "No Past Appointment's at the moment!";
   String bookingID = "Booking ID";
+
   /*15jul*/
 
   String Patient_Information = "Patient Information";
-String Contact = "Contact";
-String weight = "Weight";
-String General_Medical_History ="General Medical History";
-String consult_Dr = "consult with Dr";
+  String Contact = "Contact";
+  String weight = "Weight";
+  String General_Medical_History = "General Medical History";
+  String consult_Dr = "consult with Dr";
 
-String AddMedicine = "Add Medicine";
-String View_Medicine = "View Medicine";
-String Medicine_Name = "Medicine Name";
-String Medicine_Timing = "Medicine Timing";
-String MedicineSlot = "Medicine Slot";
-String Before_Meal = "Before Meal";
-String AfterMeal = "After Meal";
-String SelectMedicine = "Select Medicine";
-String Medicine_Id = 'Medicine Id';
-String Morning = 'Morning';
+  String AddMedicine = "Add Medicine";
+  String View_Medicine = "View Medicine";
+  String Medicine_Name = "Medicine Name";
+  String Medicine_Timing = "Medicine Timing";
+  String MedicineSlot = "Medicine Slot";
+  String Before_Meal = "Before Meal";
+  String AfterMeal = "After Meal";
+  String SelectMedicine = "Select Medicine";
+  String Medicine_Id = 'Medicine Id';
+  String Morning = 'Morning';
   String Afternoon = 'Afternoon';
-  String Evening ='Evening';
+  String Evening = 'Evening';
 
   String Yourtimeslots = "Your time slots";
   String ActiveTimeSlots = "Active Time Slots";
@@ -294,6 +296,7 @@ String Morning = 'Morning';
   String BookedTimeSlots = "Booked Time Slots";
   String NoBookedtimeslots = "No Booked time slots at the moment";
   String Appointment_date = "Appointment date";
+
   /*DOCTOR SIDE CENTER REQUEST PAGE*/
   String noCenterRequestAtTheMoment = "No Center request at the moment !";
   String whoops = "Whoops!";
@@ -309,21 +312,22 @@ String Morning = 'Morning';
   String No_Appointments_moment = "No Appointment's at the moment!";
   String Complete = "Complete";
 
-
   /*new dr side string's*/
-String AcceptVisitLine = "Are you sure you want to accept the visit? You will find it in upcoming appointments.";
+  String AcceptVisitLine =
+      "Are you sure you want to accept the visit? You will find it in upcoming appointments.";
   String AcceptVisit = "Accept visit";
   String Yes_accept = "Yes, accept";
 
   String results = "results";
-String Sort_by = "Sort by";
+  String Sort_by = "Sort by";
 
-String linear = "linear";
-String reverse = "reverse";
-String NoPendingAppoint = "No Pending Appointment's at the moment!";
+  String linear = "linear";
+  String reverse = "reverse";
+  String NoPendingAppoint = "No Pending Appointment's at the moment!";
   String NoUpcomingAppoint = "No Upcoming Appointment's at the moment!";
-String Home = "Home";
-String Accept_request = "Accept request";
+  String Home = "Home";
+  String Accept_request = "Accept request";
+
   /**********************Patient Side************************/
   /*Home PDoctor Tab page*/
   String doctor = "Doctor";
@@ -338,8 +342,6 @@ String Accept_request = "Accept request";
   String DoctorSubCat = "Doctor Sub-Category";
   String ListView = "View List";
   String MapView = "View on map";
-
-
 
   /* PATIENT SIDE MORE PAGE*/
   String addCreditCard = "Add a credit card";
@@ -520,7 +522,8 @@ String Accept_request = "Accept request";
   String viewCertificate = "View certificate";
   String noSpecializationAddedDoctor = "No Specialization Added by Doctor";
   String averageRating = "Average rating";
-String reviews = "reviews";
+  String reviews = "reviews";
+
   /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
   String appointmentCorrectlySaved = "Appointment correctly\n saved!";
   String youCanFindYourBooking =
@@ -539,6 +542,25 @@ String reviews = "reviews";
   String noVisitChargesDoctor = "No visit Charges added by Doctor";
   String weNeedYourHealthCardCode =
       "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.";
+
+  /*API response text*/
+  String AddDateSucces = "Date add successfully";
+  String SomthingWentWrong = "Something went wrong";
+  String Success = "Success";
+  String Invalid = "Invalid";
+  String DeleteaccountSuccess = "Account delete Successfully";
+  String SignUPSuccess = "Signup successfully";
+  String Changed_Pass_Successfully = "Change password successfully";
+
+  /*Signup OTP verification screen texts*/
+  String Verification = "Verification";
+
+  String SignupOtpVerifiy =
+      "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.";
+  String Enter_6_characters = "Enter 6 characters";
+  String Please_enter_OTP = "Please enter OTP";
+  String Resend_OTP_in = "Resend OTP in";
+  String seconds = "seconds";
 
   @override
   // TODO: implement keys
@@ -609,13 +631,12 @@ String reviews = "reviews";
           Enter_otp: "Enter OTP number",
           Not_recived: "Not received??",
           SendNewOtp: "Send a new OTP number",
-   SetPassword : "Set a new password",
-   invalid_otp : "invalid otp",
-   CreatePassLine: "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
+          SetPassword: "Set a new password",
+          invalid_otp: "invalid otp",
+          CreatePassLine:
+              "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
 
-
-
-  //********************CENTER SIDE MORE PAGE*******************/
+          //********************CENTER SIDE MORE PAGE*******************/
           hii: "Hi",
           ProfileSettings: "Profile settings",
           Earnings: "Earnings",
@@ -681,8 +702,8 @@ String reviews = "reviews";
           No_Ward: "No ward found",
           Doctor_Not_Available: "Doctor Not Available at the Moment",
           Doctor: "doctor",
-          Doctors : "Doctors",
-          Booking : "Booking",
+          Doctors: "Doctors",
+          Booking: "Booking",
           /*Center Edit Ward*/
           Edit_Ward: "Edit ward",
           Delete_Ward: "Delete ward",
@@ -793,31 +814,31 @@ String reviews = "reviews";
           noPastAppointmentAtTheMoment: "No Past Appointment's at the moment!",
           bookingID: "Booking ID",
 
-   Patient_Information : "Patient Information",
-   Contact : "Contact",
-   weight : "Weight",
-   General_Medical_History :"General Medical History",
-   consult_Dr : "consult with Dr",
+          Patient_Information: "Patient Information",
+          Contact: "Contact",
+          weight: "Weight",
+          General_Medical_History: "General Medical History",
+          consult_Dr: "consult with Dr",
 
-   AddMedicine : "Add Medicine",
-   View_Medicine : "View Medicine",
-   Medicine_Name : "Medicine Name",
-   Medicine_Timing : "Medicine Timing",
-   MedicineSlot : "Medicine Slot",
-   Before_Meal : "Before Meal",
-   AfterMeal : "After Meal",
-   SelectMedicine : "Select Medicine",
-   Medicine_Id : 'Medicine Id',
-   Morning : 'Morning',
-   Afternoon : 'Afternoon',
-   Evening :'Evening',
+          AddMedicine: "Add Medicine",
+          View_Medicine: "View Medicine",
+          Medicine_Name: "Medicine Name",
+          Medicine_Timing: "Medicine Timing",
+          MedicineSlot: "Medicine Slot",
+          Before_Meal: "Before Meal",
+          AfterMeal: "After Meal",
+          SelectMedicine: "Select Medicine",
+          Medicine_Id: 'Medicine Id',
+          Morning: 'Morning',
+          Afternoon: 'Afternoon',
+          Evening: 'Evening',
 
-   Yourtimeslots : "Your time slots",
-   ActiveTimeSlots : "Active Time Slots",
-   YouhaventTimeSlot : "You haven't Time Slot's on this date",
-   BookedTimeSlots : "Booked Time Slots",
-   NoBookedtimeslots : "No Booked time slots at the moment",
-   Appointment_date : "Appointment date",
+          Yourtimeslots: "Your time slots",
+          ActiveTimeSlots: "Active Time Slots",
+          YouhaventTimeSlot: "You haven't Time Slot's on this date",
+          BookedTimeSlots: "Booked Time Slots",
+          NoBookedtimeslots: "No Booked time slots at the moment",
+          Appointment_date: "Appointment date",
           /*DOCTOR SIDE CENTER REQUEST PAGE*/
           noCenterRequestAtTheMoment: "No Center request at the moment !",
           whoops: "Whoops!",
@@ -827,25 +848,25 @@ String reviews = "reviews";
           confirm: "Confirm",
 
 /*Doctor Home Page */
-   SearchAppointment : "Search appointments",
-   meetings : "meetings",
-   PatientId : "Patient ID",
-   No_Appointments_moment : "No Appointment's at the moment!",
-   Complete : "Complete",
+          SearchAppointment: "Search appointments",
+          meetings: "meetings",
+          PatientId: "Patient ID",
+          No_Appointments_moment: "No Appointment's at the moment!",
+          Complete: "Complete",
 
+          AcceptVisitLine:
+              "Are you sure you want to accept the visit? You will find it in upcoming appointments.",
+          AcceptVisit: "Accept visit",
+          Yes_accept: "Yes, accept",
+          results: "results",
+          Sort_by: "Sort by",
 
-   AcceptVisitLine : "Are you sure you want to accept the visit? You will find it in upcoming appointments.",
-   AcceptVisit : "Accept visit",
-   Yes_accept : "Yes, accept",
-  results : "results",
-          Sort_by : "Sort by",
-
-   linear : "linear",
-   reverse : "reverse",
-   NoPendingAppoint : "No Pending Appointment's at the moment!",
-   NoUpcomingAppoint : "No Upcoming Appointment's at the moment!",
-   Home : "Home",
-   Accept_request : "Accept request",
+          linear: "linear",
+          reverse: "reverse",
+          NoPendingAppoint: "No Pending Appointment's at the moment!",
+          NoUpcomingAppoint: "No Upcoming Appointment's at the moment!",
+          Home: "Home",
+          Accept_request: "Accept request",
           //**************Patient Side*************//
           //**Home PDoctor Tab page******/
           doctor: "Doctor",
@@ -855,7 +876,7 @@ String reviews = "reviews";
           TopSpecialization: "Top Specialization",
           NoTopSpecialization: "No Top Specialization",
           NoSubCat: "No Sub-Category",
-          NoCat : "No Category",
+          NoCat: "No Category",
           DoctorCategories: "Doctor Categories",
           DoctorSubCat: "Doctor Sub-Category",
           ListView: "View List",
@@ -865,8 +886,8 @@ String reviews = "reviews";
           Filters: "Filters",
           Location_and_distance: "Location and distance",
           km: "km",
-  select_Km : "Select Km",
-  from_Home : "From home",
+          select_Km: "Select Km",
+          from_Home: "From home",
           Rating: "Rating",
           price_Range: "Price range",
           Search_city: "Search city",
@@ -984,7 +1005,7 @@ String reviews = "reviews";
           status: "Status",
           address: "Address",
           paymentInformation: "Payment information",
-  cancel : "Cancel",
+          cancel: "Cancel",
           totalCost: "Total cost",
           cancelAppointment: "Cancel appointment",
           removeFromBookingSection: "Remove from booking section",
@@ -1035,7 +1056,7 @@ String reviews = "reviews";
           viewCertificate: "View certificate",
           noSpecializationAddedDoctor: "No Specialization Added by Doctor",
           averageRating: "Average rating",
-  reviews : "reviews",
+          reviews: "reviews",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appointment correctly saved!",
           youCanFindYourBooking:
@@ -1050,10 +1071,28 @@ String reviews = "reviews";
           selectVisitCharge: "Select visit charge's",
           noTimeSlotDate: "No Time Slot's on this date",
           visitCharges: "Visit Charges",
-  DoctorTimeSlots : "Doctor Time Slots",
+          DoctorTimeSlots: "Doctor Time Slots",
           noVisitChargesDoctor: "No visit Charges added by Doctor",
           weNeedYourHealthCardCode:
               "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.",
+
+          AddDateSucces: "Date add successfully",
+          SomthingWentWrong: "Something went wrong",
+          Success: "Success",
+          Invalid: "Invalid",
+          DeleteaccountSuccess: "Account delete Successfully",
+          SignUPSuccess: "Signup successfully",
+          Changed_Pass_Successfully: "Change password successfully",
+
+          /*Signup OTP verification screen texts*/
+          Verification: "Verification",
+
+          SignupOtpVerifiy:
+              "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.",
+          Enter_6_characters: "Enter 6 characters",
+          Please_enter_OTP: "Please enter OTP",
+          Resend_OTP_in: "Resend OTP in",
+          seconds: "seconds",
         },
         'it_IT': {
           //*****************Sign IN Page***************************//
@@ -1120,11 +1159,10 @@ String reviews = "reviews";
           Enter_otp: "Inserisci numero OTP",
           Not_recived: "Non ricevuto??",
           SendNewOtp: "Invia un nuovo numero OTP",
-          SetPassword : "Imposta una nuova password",
-          invalid_otp : "invalido otp",
-          CreatePassLine: "Crea una nuova password con almeno sei caratteri. Se vuoi renderlo più sicuro aggiungi una lettera maiuscola, una lettera speciale e un numero.",
-
-
+          SetPassword: "Imposta una nuova password",
+          invalid_otp: "invalido otp",
+          CreatePassLine:
+              "Crea una nuova password con almeno sei caratteri. Se vuoi renderlo più sicuro aggiungi una lettera maiuscola, una lettera speciale e un numero.",
 
           // CENTER SIDE MORE PAGE
           hii: "Ciao",
@@ -1193,8 +1231,8 @@ String reviews = "reviews";
           No_Ward: "Nessun reparto trovato",
           Doctor_Not_Available: "Medico non disponibile al momento",
           Doctor: "medico",
-          Doctors : "Medici",
-          Booking : "Prenotazione",
+          Doctors: "Medici",
+          Booking: "Prenotazione",
           /*Center Edit Ward*/
           Edit_Ward: "Modifica reparto",
           Delete_Ward: "Elimina reparto",
@@ -1313,31 +1351,31 @@ String reviews = "reviews";
               "Nessun appuntamento passato al momento!",
           bookingID: "Codice di prenotazione",
 
-          Patient_Information : "Informazioni per il paziente",
-          Contact : "Contatto",
-          weight : "Peso",
-          General_Medical_History :"Storia medica generale",
-          consult_Dr : "consultare il Dott",
+          Patient_Information: "Informazioni per il paziente",
+          Contact: "Contatto",
+          weight: "Peso",
+          General_Medical_History: "Storia medica generale",
+          consult_Dr: "consultare il Dott",
 
-          AddMedicine : "Aggiungi Medicina",
-          View_Medicine : "Guarda Medicina",
-          Medicine_Name : "Nome della medicina",
-          Medicine_Timing : "Tempismo della medicina",
-          MedicineSlot : "Fessura Medicina",
-          Before_Meal : "Prima del pasto",
-          AfterMeal : "Dopo il pasto",
-          SelectMedicine : "Seleziona Medicina",
-          Medicine_Id : 'ID medicina',
-          Morning : 'Mattina',
-          Afternoon : 'Pomeriggio',
-          Evening :'Sera',
+          AddMedicine: "Aggiungi Medicina",
+          View_Medicine: "Guarda Medicina",
+          Medicine_Name: "Nome della medicina",
+          Medicine_Timing: "Tempismo della medicina",
+          MedicineSlot: "Fessura Medicina",
+          Before_Meal: "Prima del pasto",
+          AfterMeal: "Dopo il pasto",
+          SelectMedicine: "Seleziona Medicina",
+          Medicine_Id: 'ID medicina',
+          Morning: 'Mattina',
+          Afternoon: 'Pomeriggio',
+          Evening: 'Sera',
 
-          Yourtimeslots : "Le tue fasce orarie",
-          ActiveTimeSlots : "Fasce orarie attive",
-          YouhaventTimeSlot : "Non hai fasce orarie in questa data",
-          BookedTimeSlots : "Fasce orarie prenotate",
-          NoBookedtimeslots : "Nessuna fascia oraria prenotata al momento",
-          Appointment_date : "Data dell'appuntamento",
+          Yourtimeslots: "Le tue fasce orarie",
+          ActiveTimeSlots: "Fasce orarie attive",
+          YouhaventTimeSlot: "Non hai fasce orarie in questa data",
+          BookedTimeSlots: "Fasce orarie prenotate",
+          NoBookedtimeslots: "Nessuna fascia oraria prenotata al momento",
+          Appointment_date: "Data dell'appuntamento",
           /*DOCTOR SIDE CENTER REQUEST PAGE*/
 
           noCenterRequestAtTheMoment: "Nessuna richiesta al Centro al momento!",
@@ -1348,25 +1386,25 @@ String reviews = "reviews";
           confirm: "Confermare",
 
           /*Doctor Home Page */
-          SearchAppointment : "Cerca appuntamenti",
-          meetings : "incontri",
-          PatientId : "ID paziente",
-          No_Appointments_moment : "Nessun appuntamento al momento!",
-          Complete : "Completare",
+          SearchAppointment: "Cerca appuntamenti",
+          meetings: "incontri",
+          PatientId: "ID paziente",
+          No_Appointments_moment: "Nessun appuntamento al momento!",
+          Complete: "Completare",
 
-          AcceptVisitLine : "Sei sicuro di voler accettare la visita? Lo troverete nei prossimi appuntamenti.",
-          AcceptVisit : "Accetta visita",
-          Yes_accept : "Sì, accetta",
-          results : "risultati",
-          Sort_by : "Ordina per",
+          AcceptVisitLine:
+              "Sei sicuro di voler accettare la visita? Lo troverete nei prossimi appuntamenti.",
+          AcceptVisit: "Accetta visita",
+          Yes_accept: "Sì, accetta",
+          results: "risultati",
+          Sort_by: "Ordina per",
 
-
-          linear : "lineare",
-          reverse : "inversione",
-          NoPendingAppoint : "Nessun appuntamento in sospeso al momento!",
-          NoUpcomingAppoint : "Nessun appuntamento imminente al momento!",
-          Home : "Casa",
-          Accept_request : "Richiesta accettata",
+          linear: "lineare",
+          reverse: "inversione",
+          NoPendingAppoint: "Nessun appuntamento in sospeso al momento!",
+          NoUpcomingAppoint: "Nessun appuntamento imminente al momento!",
+          Home: "Casa",
+          Accept_request: "Richiesta accettata",
           //**************Patient Side*************//
           /// **Home PDoctor Tab page******///
           doctor: "Medico",
@@ -1376,7 +1414,7 @@ String reviews = "reviews";
           TopSpecialization: "Massima specializzazione",
           NoTopSpecialization: "Nessuna specializzazione superiore",
           NoSubCat: "Nessuna sottocategoria",
-          NoCat : "Nessuna categoria",
+          NoCat: "Nessuna categoria",
           DoctorCategories: "Categorie di dottori",
           DoctorSubCat: "Sottocategoria medico",
           ListView: "Visualizza elenco",
@@ -1386,8 +1424,8 @@ String reviews = "reviews";
           Filters: "Filtri",
           Location_and_distance: "Posizione e distanza",
           km: "km",
-          select_Km : "Seleziona Km",
-          from_Home : "Da casa",
+          select_Km: "Seleziona Km",
+          from_Home: "Da casa",
           Rating: "Valutazione",
           price_Range: "Fascia di prezzo",
           Search_city: "Cerca città",
@@ -1521,7 +1559,7 @@ String reviews = "reviews";
           status: "Stato",
           address: "Indirizzo",
           paymentInformation: "Informazioni sul pagamento",
-          cancel : "Annulla",
+          cancel: "Annulla",
           totalCost: "Costo totale",
           cancelAppointment: "Annulla appuntamento",
           removeFromBookingSection: "Rimuovi dalla sezione di prenotazione",
@@ -1574,7 +1612,7 @@ String reviews = "reviews";
           noSpecializationAddedDoctor:
               "Nessuna specializzazione aggiunta dal dottore",
           averageRating: "Voto medio",
-          reviews : "recensioni",
+          reviews: "recensioni",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appuntamento salvato correttamente!",
           youCanFindYourBooking:
@@ -1590,10 +1628,28 @@ String reviews = "reviews";
           selectVisitCharge: "Seleziona l'addebito della visita",
           noTimeSlotDate: "Nessuna fascia oraria in questa data",
           visitCharges: "Visita Addebiti",
-          DoctorTimeSlots : "Fascia oraria del dottore",
+          DoctorTimeSlots: "Fascia oraria del dottore",
           noVisitChargesDoctor: "Nessuna visita Addebiti aggiunti dal medico",
           weNeedYourHealthCardCode:
               "Abbiamo bisogno del codice della tua tessera sanitaria per confermare la tua prenotazione. Seleziona il tuo codice o inserisci quello della persona a cui stai prenotando la visita.",
+
+          AddDateSucces: "Data aggiunta con successo",
+          SomthingWentWrong: "Qualcosa è andato storto",
+          Success: "Successo",
+          Invalid: "Non valido",
+          DeleteaccountSuccess: "Eliminazione dell'account riuscita",
+          SignUPSuccess: "Iscriviti con successo",
+          Changed_Pass_Successfully: "Cambia password con successo",
+
+          /*Signup OTP verification screen texts*/
+          Verification: "Verifica",
+
+          SignupOtpVerifiy:
+              "Abbiamo bisogno di verificare la tua email per creare il tuo account. Inserisci il numero OTP, lo abbiamo inviato sul tuo account e-mail.",
+          Enter_6_characters: "Inserisci 6 caratteri",
+          Please_enter_OTP: "Inserisci OTP",
+          Resend_OTP_in: "Invia nuovamente OTP",
+          seconds: "secondi",
         },
       };
 }

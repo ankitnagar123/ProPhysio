@@ -71,18 +71,14 @@ class _DoctorCenterAddAvailabilityState
 
 
             },
-                child: Container(
-                  height: 40, width: 120,
-                  decoration: BoxDecoration(
-                      color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-
+                child: Card(
+                  color: MyColor.midgray,
                   child: Center(child: custom.text(
-                      text.viewAvailability.tr, 13, FontWeight.w500, MyColor.white)),
+                      text.viewAvailability.tr, 13, FontWeight.w500, MyColor.primary1)),
                 ),
               ),
             ),
+            Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Align(
@@ -177,7 +173,7 @@ class _DoctorCenterAddAvailabilityState
             const SizedBox(
               height: 30.0,
             ),
-            Obx(
+            addAvailabilityCtr.doctorTimeList.isEmpty?Obx(
                   () =>
               addAvailabilityCtr.loadingC.value
                   ? custom.MyIndicator()
@@ -203,13 +199,13 @@ class _DoctorCenterAddAvailabilityState
                       fontSize: 16,
                       fontFamily: 'Heebo',
                       letterSpacing: 0.8)),
-            ),
+            ):Text(""),
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
               child: Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(
+                  child:  addAvailabilityCtr.doctorTimeList.isEmpty?Text(""):custom.text(
                       text.yourTimeSlotAccordingSelectDate.tr, 13,
                       FontWeight.w500, MyColor.black)),
             ),

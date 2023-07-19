@@ -71,7 +71,7 @@ class _BookingPageState extends State<BookingPage> {
             child: InkWell(
               onTap: () {
                 patientBookingController.bookingAppointment("Complete");
-                print("on-tap");
+                log("on-tap");
                 Get.toNamed(RouteHelper.getPastAppointmentsScreen());
               },
               child: Container(
@@ -109,8 +109,7 @@ class _BookingPageState extends State<BookingPage> {
       if (patientBookingController.loading.value) {
         return categorysubShimmerEffect(context);
       } else if (patientBookingController.booking.isEmpty) {
-        return  Text(
-            text.youDonHaveAnyUpcoming.tr);
+        return Text(text.youDonHaveAnyUpcoming.tr);
       } else {}
       return SingleChildScrollView(
         child: ListView.builder(
@@ -194,7 +193,6 @@ class _BookingPageState extends State<BookingPage> {
                                           ),
                                         ),
                                       ),
-
                                     ],
                                   ),
                                   const SizedBox(
@@ -217,7 +215,7 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             Text(
+                                            Text(
                                               text.date.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -244,7 +242,7 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             Text(
+                                            Text(
                                               text.slot.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -270,7 +268,7 @@ class _BookingPageState extends State<BookingPage> {
                                         flex: 1,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               text.bookingID.tr,
@@ -377,7 +375,7 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             Text(
+                                            Text(
                                               text.date.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -404,7 +402,7 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             Text(
+                                            Text(
                                               text.slot.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -432,7 +430,7 @@ class _BookingPageState extends State<BookingPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                             Text(
+                                            Text(
                                               text.bookingID.tr,
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -479,9 +477,37 @@ class _BookingPageState extends State<BookingPage> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                customView.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(""),
+                    customView.text(
+                        text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                    patientBookingController.status == "Confirmed"
+                        ? GestureDetector(
+                            onTap: () {
+                            var data = {
+                              "DrName": patientBookingController.name,
+
+                            };
+                            },
+                            child: Wrap(
+                              children: [
+                                customView.text(text.chat.tr, 14.0,
+                                    FontWeight.w400, Colors.black),
+                                Icon(
+                                  Icons.chat,
+                                  color: MyColor.primary,
+                                  size: 28,
+                                )
+                              ],
+                            ),
+                          )
+                        : Text(""),
+                  ],
+                ),
                 const SizedBox(
-                  height: 7.0,
+                  height: 9.0,
                 ),
                 Row(
                   children: [
@@ -490,7 +516,7 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.doctorInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
@@ -509,7 +535,7 @@ class _BookingPageState extends State<BookingPage> {
                         ],
                       ),
                     ),
-                     Expanded(
+                    Expanded(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -524,7 +550,7 @@ class _BookingPageState extends State<BookingPage> {
                           SizedBox(
                             height: 2.0,
                           ),
-                           Text(
+                          Text(
                             text.you.tr,
                             style: TextStyle(
                                 color: Colors.black,
@@ -546,7 +572,7 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.address.tr,
                             style: TextStyle(
                                 color: Colors.grey,
@@ -576,7 +602,7 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.bookingInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
@@ -603,7 +629,7 @@ class _BookingPageState extends State<BookingPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
+                    Text(
                       text.status.tr,
                       style: TextStyle(
                           color: Colors.grey,
@@ -657,7 +683,7 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.paymentInformation.tr,
                             style: TextStyle(
                                 color: Colors.grey,
@@ -680,7 +706,7 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.totalCost.tr,
                             style: TextStyle(
                                 color: Colors.grey,
@@ -714,7 +740,7 @@ class _BookingPageState extends State<BookingPage> {
                             onPressed: () {
                               cancelPopUp(context, id, idDr);
                             },
-                            child:  Text(
+                            child: Text(
                               text.cancelAppointment.tr,
                               style: TextStyle(
                                   color: Colors.red,
@@ -727,8 +753,8 @@ class _BookingPageState extends State<BookingPage> {
                                 onPressed: () {
                                   cancelPopUp(context, id, idDr);
                                 },
-                                child:  Text(
-                                 text.cancelAppointment.tr,
+                                child: Text(
+                                  text.cancelAppointment.tr,
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 14.0,
@@ -742,7 +768,7 @@ class _BookingPageState extends State<BookingPage> {
                                     Get.back();
                                   });
                                 },
-                                child:  Text(
+                                child: Text(
                                   text.removeFromBookingSection.tr,
                                   style: TextStyle(
                                       color: Colors.red,
@@ -792,8 +818,8 @@ class _BookingPageState extends State<BookingPage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text(text.cancelAppointment.tr, 17,
-                                FontWeight.w500, Colors.black),
+                            child: customView.text(text.cancelAppointment.tr,
+                                17, FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -802,7 +828,7 @@ class _BookingPageState extends State<BookingPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
-                               text.areYouSureYouWantCancelAppointment.tr,
+                                text.areYouSureYouWantCancelAppointment.tr,
                                 12,
                                 FontWeight.w400,
                                 Colors.black),
@@ -847,8 +873,8 @@ class _BookingPageState extends State<BookingPage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text(text.Dismiss.tr, 14.0,
-                                        FontWeight.w400, MyColor.grey),
+                                    child: customView.text(text.Dismiss.tr,
+                                        14.0, FontWeight.w400, MyColor.grey),
                                   )),
                               Expanded(
                                 child: patientBookingController
@@ -856,18 +882,18 @@ class _BookingPageState extends State<BookingPage> {
                                     ? customView.MyIndicator()
                                     : customView.mysButton(
                                         context,
-                                       text.cancelAppointment.tr,
+                                        text.cancelAppointment.tr,
                                         () {
                                           if (cancelReason == "") {
                                             customView.MySnackBar(
                                                 context, text.selectReason.tr);
                                           } else {
-                                          patientBookingController
-                                              .bookingAppointmentCancel(
-                                          context, id, cancelId!, () {
-                                          Get.offNamed(RouteHelper
-                                              .getCancelBookingScreen());
-                                          });
+                                            patientBookingController
+                                                .bookingAppointmentCancel(
+                                                    context, id, cancelId!, () {
+                                              Get.offNamed(RouteHelper
+                                                  .getCancelBookingScreen());
+                                            });
                                           }
                                         },
                                         Colors.red,

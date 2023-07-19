@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
-
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../../medica_center/center_controller/CenterAuthController.dart';
 
@@ -32,15 +32,19 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
   LocalString text = LocalString();
 
   CustomView customView = CustomView();
-  String code = '';
   String? latitude;
   String? longitude;
-
+  String code = '';
+  String flag = '';
   DateTime? startDate, endData;
 
 
   @override
   Widget build(BuildContext context) {
+    final widht = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       bottomNavigationBar: Container(
           height: 35.0,
@@ -102,6 +106,44 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
             const SizedBox(
               height: 17.0,
             ),
+            SizedBox(
+              height: 50,
+              width: widht * 1,
+              child: IntlPhoneField(
+                controller: phoneCtr,
+                decoration:  InputDecoration(
+                  // focusedErrorBorder: InputBorder.none,
+                  counterText: '',
+                  filled: true,
+                  fillColor: Colors.white,
+                  constraints: BoxConstraints.expand(),
+                  labelText: text.Phone_Number.tr,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                ),
+                initialCountryCode: flag,
+                onChanged: (phone) {
+                  // var flag = phone.countryISOCode;
+                  flag = phone.countryISOCode;
+                  print(flag);
+                  code = phone.countryCode;
+                  print(phone.completeNumber);
+                },
+                onCountryChanged: (cod) {
+                  flag = cod.code;
+                  print(flag);
+                  code = cod.code;
+                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+            ),
+            const SizedBox(
+              height: 17.0,
+            ),
             Align(
               alignment: Alignment.topLeft,
               child: customView.text(
@@ -137,12 +179,15 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                         var data = {
                           'name': nameCtr.text,
                           'email': emailCtr.text,
+                          'phone': phoneCtr.text,
+                          "flag":flag,
+                          'code':code,
                           'password': passwordCtr.text,
                           'address': addressCtr.text,
                           "lat": latitude.toString(),
                           "long":longitude.toString(),
                         };
-                        centerAuthCtr.CenterSignupOtp(context, emailCtr.text)
+                        centerAuthCtr.CenterSignupOtp(context,code,phoneCtr.text, emailCtr.text)
                             .then((value) {
                           if (value != "") {
                             Get.toNamed(RouteHelper.CSignUpOtp(),

@@ -184,7 +184,7 @@ LocalString text = LocalString();
                                 .toList();
                             return Row(
                               mainAxisAlignment:
-                                  patientId == reversedList[index].id
+                                  doctorId == reversedList[index].id
                                       ? MainAxisAlignment.start
                                       : MainAxisAlignment.end,
                               children: [

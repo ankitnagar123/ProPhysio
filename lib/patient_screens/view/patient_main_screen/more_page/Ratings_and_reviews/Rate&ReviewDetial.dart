@@ -197,7 +197,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                     pressEvent: () {
                       if(validation()){
                         patientRatingCtr.ratingAdd(
-                            context, doctorId!, rating.toString(), reviewCtr.text,
+                            context, doctorId.toString(), rating.toString(), reviewCtr.text,
                                 () {
                               AwesomeDialog(
                                 context: context,
@@ -213,7 +213,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                                 },
                                 btnOkIcon: Icons.check_circle,
                                 onDismissCallback: (type) {
-                                  debugPrint('Dialog Dissmiss from callback $type');
+                                  debugPrint('Dialog Dismiss from callback $type');
                                 },
                               ).show();
                               // Get.back();

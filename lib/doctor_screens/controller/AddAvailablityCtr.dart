@@ -9,11 +9,14 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../model/DoctorSelectedCenter.dart';
 import '../model/DoctorTimeListModel.dart';
 
 class AddAvailabilityCtr extends GetxController {
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
+
   var loading = false.obs;
   var loadingC = false.obs;
   var loadingf = false.obs;
@@ -46,7 +49,9 @@ var loadingCenter = false.obs;
         dateId.value = jsonResponse["date_id"].toString();
         log("Date id.......$dateId");
         log("my Doctor Add Availability $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.AddDateSucces.tr);
+
+        /*Time Slot's api call here*/
         doctorFetchTimeList();
         log(result.toString());
         callback();
@@ -73,15 +78,15 @@ var loadingCenter = false.obs;
     log(" support parameter Parameter $psetpass");
     final response = await apiService.postData(MyAPI.dAddAvailibitly, psetpass);
     try {
-      log("response of Doctor Add Availability :-${response.body}");
+      log("response of Doctor Add Availability  for Center:-${response.body}");
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       if (result == "success") {
         loadingC.value = false;
         dateId.value = jsonResponse["date_id"].toString();
         log("Date id.......$dateId");
-        log("my Doctor Add Availability $result");
-        custom.massenger(context, result.toString());
+        log("my Doctor Add Availability for center $result");
+        custom.massenger(context,text.AddDateSucces.tr);
         doctorFetchTimeList();
         log(result.toString());
         callback();
@@ -140,10 +145,11 @@ var loadingCenter = false.obs;
       if (result == "Success") {
         loadingd.value = false;
         log("my Doctor Add  add Time $result");
-        custom.massenger(context, result);
+        // custom.massenger(context, result);
         print(result.toString());
         callback();
       } else {
+         custom.massenger(context, text.SomthingWentWrong.tr);
         loadingd.value = false;
         custom.massenger(context, result);
       }

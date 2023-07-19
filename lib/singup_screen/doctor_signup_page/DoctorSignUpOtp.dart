@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
@@ -5,6 +7,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class DoctorSignUpOtp extends StatefulWidget {
   const DoctorSignUpOtp({Key? key}) : super(key: key);
@@ -15,6 +18,56 @@ class DoctorSignUpOtp extends StatefulWidget {
 
 class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   DoctorSignUpCtr doctorSignUpCtr = DoctorSignUpCtr();
+LocalString text = LocalString();
+
+  late Timer _timer;
+  int _countdownSeconds = 60;
+  bool _timerRunning = false;
+
+  void _startTimer() {
+    if (!_timerRunning) {
+      _timerRunning = true;
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        setState(() {
+          if (_countdownSeconds > 0) {
+            _countdownSeconds--;
+          } else {
+            _stopTimer();
+          }
+        });
+      });
+    }
+  }
+
+  void _stopTimer() {
+    if (_timerRunning) {
+      _timerRunning = false;
+      _timer.cancel();
+    }
+  }
+
+  void _handleResendOtp() {
+    doctorSignUpCtr.doctorSignupOtp(context, code,phoneno,email);
+    // Replace this with your logic to resend OTP
+    // For demonstration, we'll just print a message here
+    print('Resending OTP...');
+    _startTimer();
+  }
+
+  void _handleButtonPress() {
+    if (!_timerRunning) {
+      _handleResendOtp();
+    }
+  }
+
+  @override
+  void dispose() {
+    _stopTimer(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
+
+
+
   var name = "";
   var surname = "";
   var username = "";
@@ -83,7 +136,6 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -93,7 +145,7 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
             if (doctorSignUpCtr.loading.value) {
               return custom.MyIndicator();
             }
-            return custom.MyButton(context, "Verificate", () {
+            return custom.MyButton(context, text.Verification.tr, () {
               if (validationotp()) {
                 doctorSignUpCtr.doctorSignup(
                     context,
@@ -146,23 +198,23 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                custom.text("Verification", 23, FontWeight.w700, MyColor.black),
+                custom.text(text.Verification.tr, 23, FontWeight.w700, MyColor.black),
                 SizedBox(height: height * 0.02),
                 custom.text(
-                    "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.",
+                    text.SignupOtpVerifiy.tr,
                     12,
                     FontWeight.normal,
                     MyColor.primary1),
                 SizedBox(height: height * 0.07),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text("Enter OTP number", 13, FontWeight.w600,
+                  child: custom.text(text.Enter_otp.tr, 13, FontWeight.w600,
                       MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
-                custom.myField(context, optctr, "Enter 4 characters",
+                custom.myField(context, optctr, text.Enter_6_characters.tr,
                     TextInputType.emailAddress),
                 SizedBox(
                   height: height * 0.03,
@@ -170,14 +222,20 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    custom.text("Not received??", 11, FontWeight.w500,
+                    custom.text(text.Not_recived.tr, 11, FontWeight.w500,
                         MyColor.primary1),
-                    const Text(
-                      "Send a new OTP number",
-                      style: TextStyle(
-                        color: MyColor.primary1,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
+                    GestureDetector(
+                      onTap: () {
+                        _timerRunning ? null :_handleButtonPress();
+                      },
+                      child:  Text(
+                        _countdownSeconds > 0 ? '${text.Resend_OTP_in.tr} $_countdownSeconds ${text.seconds.tr}' : text.SendNewOtp.tr,
+                        style: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: MyColor.primary1,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -203,12 +261,12 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
     print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");
     if (optctr.text.isEmpty || optctr.text.length != 4) {
-      custom.massenger(context, "plz filled all fild");
+      custom.massenger(context, text.Please_enter_OTP.tr);
     } else if (apiotp == optctr.text) {
       print("Correct OTP");
       return true;
     } else {
-      custom.massenger(context, "invalid otp");
+      custom.massenger(context,  text.Invalid.tr);
       return false;
     }
     return false;

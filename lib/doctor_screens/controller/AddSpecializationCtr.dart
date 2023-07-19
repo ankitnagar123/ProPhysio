@@ -9,11 +9,13 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../model/DoctorSelectedCategoryModel.dart';
 import '../model/DrSelectSubCatModel.dart';
 
 class AddSpecializationCtr extends GetxController {
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
   var loading = false.obs;
   var categoryloding = false.obs;
   var categorySubLoading = false.obs;
@@ -104,10 +106,10 @@ class AddSpecializationCtr extends GetxController {
         callback();
         loading.value = false;
         print("my Doctor add Specialization Fee Api  $result");
-        custom.massenger(context, result.toString());
+        // custom.massenger(context, result.toString());
         print(result.toString());
       } else {
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.SomthingWentWrong.tr);
       }
     } catch (e) {
       loading.value = false;
