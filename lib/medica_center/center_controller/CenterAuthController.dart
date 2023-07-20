@@ -112,7 +112,7 @@ class CenterAuthCtr extends GetxController {
     print("Signup Parameter$signupPerameter");
     final response = await http.post(
         Uri.parse(
-          "https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php",
+            MyAPI.send_otp_twiliosms,
         ),
         body: signupPerameter);
 /*    final response =
@@ -175,8 +175,6 @@ class CenterAuthCtr extends GetxController {
       if (result == "Success") {
         callback();
         loading.value = false;
-        // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-        // Get.toNamed(RouteHelper.getVerification());
         custom.massenger(context, "Sign up successfully");
       } else {
         custom.massenger(context, result);

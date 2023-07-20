@@ -16,6 +16,47 @@ class ForgotPassCtr extends GetxController {
   var otp = "".obs;
   var id = "".obs;
 
+  /*-------------Forgot Password Verification  OTP--------------*/
+  Future<String> forgotPasswordVerification(
+      BuildContext context,
+      String email,String countryCode,String phone,
+       VoidCallback callback
+      ) async {
+    loadingotp.value = true;
+    final Map<String, dynamic> pforgot = {
+      "user_type":"Doctor",
+      "country_code":countryCode,
+      "contact":phone,
+      "email": email,
+    };
+    print("Forgot Perameter$pforgot");
+
+    final response = await apiService.postData(MyAPI.forgotPassword, pforgot);
+    try {
+      log("response forgot OTP :-${response.body}");
+      loadingotp.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      otp.value = jsonResponse['otp'].toString();
+      id.value = jsonResponse['id'].toString();
+      var result = jsonResponse['result'].toString();
+      if (result == 'success') {
+        // callback();
+        print("my otp ctr${otp.toString()}");
+        custom.massenger(context, otp.toString());
+        loadingotp.value = false;
+
+        print(result.toString());
+        return jsonResponse['otp'].toString();
+      } else {
+        custom.massenger(context, "Invalid Email");
+      }
+    } catch (e) {
+      log("exception$e");
+      return '';
+    }
+    return '';
+  }
+
   /*-------------Forgot Password OTP--------------*/
   Future<String> forgotPassword(
       BuildContext context,
@@ -53,6 +94,8 @@ class ForgotPassCtr extends GetxController {
     }
     return '';
   }
+
+
 
   /*-------------Set New Password--------------*/
   Future setPassword(BuildContext context, String id, String newpassword,

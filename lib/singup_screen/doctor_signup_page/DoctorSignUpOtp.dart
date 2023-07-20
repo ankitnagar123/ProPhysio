@@ -78,12 +78,10 @@ LocalString text = LocalString();
   var imagename = "";
   var imagebase = "";
   var address = "";
-  var apiotp = "";
   var code = "";
   var lat = "";
   var long = "";
   var subcat = "";
-
   var birthDate = "";
   var birthPlace = "";
   var universityAttended = "";
@@ -97,8 +95,7 @@ LocalString text = LocalString();
   @override
   void initState() {
     super.initState();
-    apiotp = Get.arguments;
-    print(apiotp);
+
     gender = Get.parameters["gender"].toString();
     subcat = Get.parameters["subcat"].toString();
     category = Get.parameters["category"].toString();
@@ -126,6 +123,9 @@ LocalString text = LocalString();
     graduationDate = Get.parameters["graduationDate"].toString();
     qualificationDate = Get.parameters["qualificationDate"].toString();
     flag = Get.parameters["flag"].toString();
+
+    /*OTP  API*/
+    doctorSignUpCtr.doctorSignupOtp(context, code,phoneno,email);
 
   }
 
@@ -258,11 +258,10 @@ LocalString text = LocalString();
   }
 
   bool validationotp() {
-    print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");
     if (optctr.text.isEmpty || optctr.text.length != 4) {
       custom.massenger(context, text.Please_enter_OTP.tr);
-    } else if (apiotp == optctr.text) {
+    } else if (doctorSignUpCtr.otp.value == optctr.text) {
       print("Correct OTP");
       return true;
     } else {

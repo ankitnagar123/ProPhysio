@@ -170,48 +170,84 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     print("My Location AppCont : -- ${AppConst.LOCATION}");
 
                     if (validation(context)) {
-
-                      doctorSignUpCtr
-                          .doctorSignupOtp(context, code,phoneCtr.text,emailCtr.text)
-                          .then((value) {
-                        if (value != "") {
-                          print("gender dekho$_selectedGender");
-                          var data = {
-                            "name": nameCtr.text,
-                            "surmane": surnameCtr.text,
-                            "username": usernameCtr.text,
-                            "email": emailCtr.text,
-                            "phone": phoneCtr.text,
-                            "password": passwordCtr.text,
-                            /*new added*/
-                            "birthDate": birthDateController.text,
-                            "birthPlace": birthplaceController.text,
-                            "universityAttended": universityAttendedCtr.text,
-                            "dateOfEnrol": dateOfEnrollmentCtr.text,
-                            "registerOfBelonging": registerOfBelongingCtr.text,
-                            /*********/
-                            "category": slectedCategory.toString(),
-                            "imagename": degreefilename.toString(),
-                            "imagebase": degreebaseimage.toString(),
-                            "address": AppConst.LOCATION,
-                            "code": code,
-                            "flag": flag,
-                            "lat": AppConst.LATITUDE,
-                            "longitude": AppConst.LONGITUDE,
-                            "subcat": subCatIdArray.join(','),
-                            'gender': _selectedGender,
-                            "graduationDate": dateOfGraduation.text,
-                            "qualificationDate": dateOfQualification.text,
-                          };
-                          print("my data$data");
-                          _curr == 1 + _numpage
-                              ? Get.toNamed(RouteHelper.DSignUpOtp(),
-                                  parameters: data, arguments: value)
-                              : controller.nextPage(
-                                  duration: const Duration(milliseconds: 200),
-                                  curve: Curves.bounceIn);
-                        } else {}
-                      });
+                      doctorSignUpCtr.doctorSignupOtpVerification(context,code,phoneCtr.text,emailCtr.text,() {
+                        print("gender dekho$_selectedGender");
+                        var data = {
+                          "name": nameCtr.text,
+                          "surmane": surnameCtr.text,
+                          "username": usernameCtr.text,
+                          "email": emailCtr.text,
+                          "phone": phoneCtr.text,
+                          "password": passwordCtr.text,
+                          /*new added*/
+                          "birthDate": birthDateController.text,
+                          "birthPlace": birthplaceController.text,
+                          "universityAttended": universityAttendedCtr.text,
+                          "dateOfEnrol": dateOfEnrollmentCtr.text,
+                          "registerOfBelonging": registerOfBelongingCtr.text,
+                          /*********/
+                          "category": slectedCategory.toString(),
+                          "imagename": degreefilename.toString(),
+                          "imagebase": degreebaseimage.toString(),
+                          "address": AppConst.LOCATION,
+                          "code": code,
+                          "flag": flag,
+                          "lat": AppConst.LATITUDE,
+                          "longitude": AppConst.LONGITUDE,
+                          "subcat": subCatIdArray.join(','),
+                          'gender': _selectedGender,
+                          "graduationDate": dateOfGraduation.text,
+                          "qualificationDate": dateOfQualification.text,
+                        };
+                        print("my data$data");
+                        _curr == 1 + _numpage
+                            ? Get.toNamed(RouteHelper.DSignUpOtp(),
+                            parameters: data)
+                            : controller.nextPage(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.bounceIn);
+                      },);
+                      // doctorSignUpCtr
+                      //     .doctorSignupOtp(context, code,phoneCtr.text,emailCtr.text)
+                      //     .then((value) {
+                      //   if (value != "") {
+                      //     print("gender dekho$_selectedGender");
+                      //     var data = {
+                      //       "name": nameCtr.text,
+                      //       "surmane": surnameCtr.text,
+                      //       "username": usernameCtr.text,
+                      //       "email": emailCtr.text,
+                      //       "phone": phoneCtr.text,
+                      //       "password": passwordCtr.text,
+                      //       /*new added*/
+                      //       "birthDate": birthDateController.text,
+                      //       "birthPlace": birthplaceController.text,
+                      //       "universityAttended": universityAttendedCtr.text,
+                      //       "dateOfEnrol": dateOfEnrollmentCtr.text,
+                      //       "registerOfBelonging": registerOfBelongingCtr.text,
+                      //       /*********/
+                      //       "category": slectedCategory.toString(),
+                      //       "imagename": degreefilename.toString(),
+                      //       "imagebase": degreebaseimage.toString(),
+                      //       "address": AppConst.LOCATION,
+                      //       "code": code,
+                      //       "flag": flag,
+                      //       "lat": AppConst.LATITUDE,
+                      //       "longitude": AppConst.LONGITUDE,
+                      //       "subcat": subCatIdArray.join(','),
+                      //       'gender': _selectedGender,
+                      //       "graduationDate": dateOfGraduation.text,
+                      //       "qualificationDate": dateOfQualification.text,
+                      //     };
+                      //     print("my data$data");
+                      //     _curr == 1 + _numpage
+                      //         ? Get.toNamed(RouteHelper.DSignUpOtp(),
+                      //             parameters: data, arguments: value)
+                      //         : controller.nextPage(
+                      //             duration: const Duration(milliseconds: 200),
+                      //             curve: Curves.bounceIn);
+                      //   } else {}
+                      // });
                     }
                   },
                       MyColor.primary,

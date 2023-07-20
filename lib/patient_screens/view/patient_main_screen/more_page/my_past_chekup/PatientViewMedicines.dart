@@ -5,6 +5,7 @@ import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorP
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
+import 'PatinetViewPdfMedcines.dart';
 
 class PatientViewMedicines extends StatefulWidget {
   const PatientViewMedicines({
@@ -47,44 +48,25 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                       doctorPrescriptionCtr.patientFetchMedicineList.length,
                   itemBuilder: (context, index) {
                     var list = doctorPrescriptionCtr.patientFetchMedicineList[index];
-                    var medicineName = list.medicineName;
+                  /*  var medicineName = list.medicineName;
                     var medicineTime = list.medicineTiming;
                     var medicineSlot = list.medicineSlot;
-                    var medicineDisc = list.description;
+                    var medicineDisc = list.description;*/
                     var medicineDrName = list.doctorName;
+                    var drId = list.doctorId;
                     var medicineDrSurname = list.doctorSurname;
-                    print(medicineSlot);
                     return InkWell(
-                     onTap: () => showBottomSheet(medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),medicineDrName.toString(),medicineDrSurname.toString(),medicineDisc.toString()),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>PatientViewMedicinesPdf( drId: drId,)));
+                      },
+                     // onTap: () => showBottomSheet(medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),medicineDrName.toString(),medicineDrSurname.toString(),medicineDisc.toString()),
                       child: Card(
                         color: MyColor.midgray,
                         child: ListTile(
                             contentPadding: const EdgeInsets.all(12),
-                            title: custom.text(list.medicineName.toString(), 16,
+                            title: custom.text("${list.doctorName.toString()} ${list.doctorSurname.toString()}", 16,
                                 FontWeight.w400, MyColor.primary1),
-                            subtitle: Text(
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontFamily: "Poppins",
-                              ),
-                              list.description,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            trailing: Column(
-                              children: [
-                                custom.text(
-                                    text.submittedBy.tr,
-                                    14,
-                                    FontWeight.normal,
-                                    MyColor.black),
-                                custom.text(
-                                    "${list.doctorName} ${list.doctorSurname}",
-                                    13,
-                                    FontWeight.normal,
-                                    MyColor.primary1)
-                              ],
-                            )),
+                        ),
                       ),
                     );
                   },

@@ -295,6 +295,32 @@ class DoctorPrescriptionCtr extends GetxController {
   }
 
 
+  /*---------for Patient add Medicine add Wali List *---------*/
+  Future<void> AddFetchmedicinePatinet(String doctorId) async {
+    loadingMedicineFetch.value = true;
+    Map<String, dynamic> data = {
+       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      "doctor_id": doctorId,
+    };
+    final response =
+    await apiService.postData(MyAPI.addFetchMedicineList, data);
+    log("parameter medicine all list ${response.body}");
+    try {
+      if (response.statusCode == 200) {
+        loadingMedicineFetch.value = false;
+        fetchMedicineList.value =
+            addFetchMedicineListModelFromJson(response.body);
+        log(fetchMedicineList.toString());
+      } else {
+        loadingMedicineFetch.value = false;
+      }
+    } catch (e) {
+      loadingMedicineFetch.value = false;
+      log('Kuch to dikkat hai?$e');
+    }
+  }
+
+
   Future<void> patientFetchmedicineList() async {
     pLoadingMedicineFetch.value = true;
     Map<String, dynamic> data = {

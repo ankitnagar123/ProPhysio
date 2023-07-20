@@ -70,7 +70,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, text.Submit.tr, () {
+                    // forgotPassCtr.forgotPasswordVerification(context, emailCtr.text, "", "",)
                     if (validation()) {
+
                       forgotPassCtr.forgotPassword(context, emailCtr.text,)
                           .then((value) {
                         if (value != "") {

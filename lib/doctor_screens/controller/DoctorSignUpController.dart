@@ -26,6 +26,8 @@ class DoctorSignUpCtr extends GetxController {
 
   var categoryloding = false.obs;
   var otp = ''.obs;
+  var msg = ''.obs;
+
   var result = ''.obs;
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -51,6 +53,59 @@ class DoctorSignUpCtr extends GetxController {
     }
   }
 
+
+
+/*-----------Doctor SignUp Otp Verification Api----------*/
+  Future<String> doctorSignupOtpVerification(
+      BuildContext context,
+      String countryCode,
+      String phone,
+      String email,
+       VoidCallback callback,
+      ) async {
+    loadingotp.value = true;
+    final Map<String, dynamic> signupPerameter = {
+      "country_code":countryCode,
+      "contact":phone,
+      "email": email,
+    };
+    print("SignupParameter$signupPerameter");
+     final response =
+        await apiService.postData(MyAPI.DSignUpOtp, signupPerameter);
+    try {
+      log("response of Doctor Signup OTP :-${response.body}");
+      loadingotp.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      otp.value = jsonResponse['otp'].toString();
+      msg.value = jsonResponse['msg'].toString();
+
+      var result = jsonResponse['result'].toString();
+      if (response.statusCode == 200) {
+        loadingotp.value = false;
+        if(msg.value == "true"){
+          callback();
+          log("my otp ctr${otp.toString()}");
+        }else{
+          custom.massenger(context, result.toString());
+          print(result.toString());
+          return jsonResponse['otp'].toString();
+        }
+
+      } else {
+        custom.massenger(context, text.SomthingWentWrong.tr);
+      }
+    } catch (e) {
+      loadingotp.value = false;
+      custom.massenger(context, text.SomthingWentWrong.tr);
+
+      log("exception$e");
+      return '';
+    }
+    return '';
+  }
+
+
+
 /*-----------Doctor SignUp Otp Api----------*/
   Future<String> doctorSignupOtp(
     BuildContext context,
@@ -69,7 +124,7 @@ class DoctorSignUpCtr extends GetxController {
     print("SignupParameter$signupPerameter");
     final response = await http.post(
         Uri.parse(
-          "https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php",
+          MyAPI.send_otp_twiliosms,
         ),
         body: signupPerameter);
    /* final response =

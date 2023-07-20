@@ -95,7 +95,7 @@ class PatientSignUpCtr extends GetxController {
 
     final response = await http.post(
         Uri.parse(
-          "https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php",
+            MyAPI.send_otp_twiliosms,
         ),
         body: signupPerameter);
         // await apiService.postData("https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php", signupPerameter);
@@ -164,7 +164,7 @@ class PatientSignUpCtr extends GetxController {
     print("SignupPerameter$signupPerameter");
     final response = await http.post(
         Uri.parse(
-          "https://cisswork.com/Android/Medica/Apis/a.php",
+          MyAPI.PSignUp,
         ),
         body: signupPerameter);
     // final response = await apiService.postData("https://cisswork.com/Android/Medica/Apis/a.php", signupPerameter);

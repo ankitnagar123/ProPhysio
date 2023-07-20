@@ -1,13 +1,18 @@
 import 'dart:core';
 class MyAPI{
-  static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
+  // static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
+  static const String BaseUrl = "https://sicparvismagna.it/Medica/Apis/process.php?action=";
+
   /*--------Patient Side API-----------*/
   static const String Login = "user_login";
   static const String forgotPassword = "get_user_forgot_password";
   static const String setNewPassword = "user_reset_pass";
 
+  /*twilio api for OTP*/
+  static const String send_otp_twiliosms = "https://sicparvismagna.it/Medica/Apis/twiliosms/send_otp.php";
 
-  static const String PSignUp = "user_signup";
+
+  static const String PSignUp = "https://sicparvismagna.it/Medica/Apis/a.php";
   static const String PSignUpOtp = "signup_email_otp";
 
   static const String PFetchProfile = "fetch_user_profile";
