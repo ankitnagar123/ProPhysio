@@ -48,7 +48,8 @@ LocalString text = LocalString();
       doctorImg = Get.arguments["drImg"];
       doctorSurname = Get.arguments["drSurname"];
       // doctorContact = Get.arguments["contact"];
-    }else /*if(Get.arguments["doctorList"] =="drListData")*/{
+    }else
+               {
       doctorId = Get.arguments["doctorId"];
       doctorName = Get.arguments["drName"];
       doctorAddress = Get.arguments["drAddress"];

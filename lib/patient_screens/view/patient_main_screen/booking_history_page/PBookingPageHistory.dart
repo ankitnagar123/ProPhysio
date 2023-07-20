@@ -487,9 +487,16 @@ class _BookingPageState extends State<BookingPage> {
                         ? GestureDetector(
                             onTap: () {
                             var data = {
-                              "DrName": patientBookingController.name,
-
+                              "drName": patientBookingController.name.value,
+                              "doctorId": idDr,
+                              "drSurname": patientBookingController.surname.value,
+                              "drImg": "/*h*/",
+                              "drAddress" :patientBookingController.location.value,
+                              "contact":"/*h*/",
+                              "doctorList": "drListData",
                             };
+                            Get.toNamed(RouteHelper.getChatScreen(),
+                                arguments: data);
                             },
                             child: Wrap(
                               children: [

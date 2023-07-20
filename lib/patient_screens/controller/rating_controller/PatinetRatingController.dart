@@ -24,7 +24,7 @@ class PatientRatingCtr extends GetxController {
 
 /*-------------Rating Add API--------------*/
   Future ratingAdd(BuildContext context, String doctorId,
-      String rating, String review,
+      String rating, String review, String bookingID,
       VoidCallback callback) async {
     loadingAdd.value = true;
     final Map<String, dynamic> cardPeramert = {
@@ -32,6 +32,7 @@ class PatientRatingCtr extends GetxController {
       "doctor_id": doctorId,
       "rating": rating,
       "review": review,
+      "booking_id":bookingID,
     };
     print("Rating Parameter$cardPeramert");
     final response = await apiService.postData(MyAPI.pAddRating, cardPeramert);
@@ -43,7 +44,7 @@ class PatientRatingCtr extends GetxController {
       if (result == "success") {
         loadingAdd.value = false;
         print("my patient review $result");
-        custom.massenger(context, "Rating successfully");
+        // custom.massenger(context, "Rating successfully");
         print(result.toString());
         callback();
       } else {

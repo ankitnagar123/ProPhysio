@@ -17,8 +17,63 @@ class PatientSignUpCtr extends GetxController {
   var loading = false.obs;
   var loadingotp = false.obs;
   var otp = ''.obs;
+  var msg = ''.obs;
+
   var result = ''.obs;
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+
+
+
+  /*-----------Patient SignUp Otp Verification Api----------*/
+  Future<String> PatientSignupOtpVerification(
+      BuildContext context,
+      String countryCode,
+      String phone,
+      String email,
+      VoidCallback callback,
+      ) async {
+    loadingotp.value = true;
+    final Map<String, dynamic> signupPerameter = {
+      "country_code":countryCode,
+      "contact":phone,
+      "email": email,
+    };
+
+    print("SignupPerameter$signupPerameter");
+    final response =  await apiService.postData(MyAPI.PSignUpOtp, signupPerameter);
+    try {
+      log("response of Patient verification Signup OTP :-${response.body}");
+      loadingotp.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      otp.value = jsonResponse['otp'].toString();
+      msg.value = jsonResponse['msg'].toString();
+
+      var result = jsonResponse['result'].toString();
+      if (response.statusCode == 200) {
+        if(msg.value == "true"){
+          callback();
+          print("my otp ctr${otp.toString()}");
+
+        }else{
+          loadingotp.value = false;
+          custom.massenger(context, result.toString());
+          print(result.toString());
+          return jsonResponse['otp'].toString();
+        }
+
+      } else {
+        custom.massenger(context,  text.SomthingWentWrong.tr);
+      }
+    } catch (e) {
+      custom.massenger(context, text.SomthingWentWrong.tr);
+      log("exception$e");
+      return '';
+    }
+    return '';
+  }
+
+
+
 
 /*-----------Patient SignUp Otp Api----------*/
   Future<String> PatientSignupOtp(

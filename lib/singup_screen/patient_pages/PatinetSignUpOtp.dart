@@ -75,7 +75,6 @@ LocalString text = LocalString();
   var phone = "";
   var password = "";
   var code = "";
-  var apiotp = "";
   var taxCode = "";
   var heightp = "";
   var weight = "";
@@ -86,29 +85,30 @@ var flag ="";
   @override
   void initState() {
     super.initState();
-    apiotp = Get.arguments;
-    log(apiotp);
+
+    gender = Get.parameters["gender"].toString();
+    log(gender);
+    name = Get.parameters['name'].toString();
+    surname = Get.parameters['surname'].toString();
+    username = Get.parameters['username'].toString();
+    email = Get.parameters['email'].toString();
+    phone = Get.parameters['phone'].toString();
+    healthCode = Get.parameters['healthcard'].toString();
+    password = Get.parameters['password'].toString();
+    code = Get.parameters['code'].toString();
+    heightp = Get.parameters['height'].toString();
+    weight = Get.parameters['weight'].toString();
+    taxCode = Get.parameters['tax'].toString();
+    age = Get.parameters['age'].toString();
+    flag = Get.parameters['flag'].toString();
+    birthPlace = Get.parameters['birthPlace'].toString();
     print(username);
     print(email);
     print(password);
     print(code);
     print(healthCode);
-    gender = Get.parameters["gender"].toString();
-    name = Get.parameters['name']!;
-    surname = Get.parameters['surname']!;
-    username = Get.parameters['username']!;
-    email = Get.parameters['email']!;
-    phone = Get.parameters['phone']!;
-    healthCode = Get.parameters['healthcard']!;
-    password = Get.parameters['password']!;
-    code = Get.parameters['code']!;
-    heightp = Get.parameters['height']!;
-    weight = Get.parameters['weight']!;
-    taxCode = Get.parameters['tax']!;
-    age = Get.parameters['age']!;
-    flag = Get.parameters['flag']!;
+    patientSignUpCtr.PatientSignupOtp(context,code,phone,email,);
 
-    birthPlace = Get.parameters['birthPlace']!;
   }
   @override
   void dispose() {
@@ -239,11 +239,12 @@ var flag ="";
   }
 
   bool validationotp() {
-    print("api otp${apiotp.toString()}");
+
+    print("api otp${patientSignUpCtr.otp.value.toString()}");
     print("my otp${optctr.text.toString()}");
     if (optctr.text.isEmpty || optctr.text.length != 6) {
       custom.massenger(context, text.Please_enter_OTP.tr);
-    } else if (apiotp == optctr.text) {
+    } else if (patientSignUpCtr.otp.value == optctr.text) {
       print("Correct OTP");
       return true;
     } else {

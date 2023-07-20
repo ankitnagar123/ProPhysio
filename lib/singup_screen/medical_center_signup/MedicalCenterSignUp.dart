@@ -187,13 +187,17 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                           "lat": latitude.toString(),
                           "long":longitude.toString(),
                         };
-                        centerAuthCtr.CenterSignupOtp(context,code,phoneCtr.text, emailCtr.text)
+                        centerAuthCtr.CenterSignupOtpVerification(context,code,phoneCtr.text,emailCtr.text,() {
+                          Get.toNamed(RouteHelper.CSignUpOtp(),
+                              parameters: data,);
+                        },);
+                       /* centerAuthCtr.CenterSignupOtp(context,code,phoneCtr.text, emailCtr.text)
                             .then((value) {
                           if (value != "") {
                             Get.toNamed(RouteHelper.CSignUpOtp(),
                                 parameters: data, arguments: value);
                           } else {}
-                        });
+                        });*/
                       }
                     },
                     MyColor.primary,

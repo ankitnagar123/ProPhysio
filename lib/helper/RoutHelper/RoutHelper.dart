@@ -354,7 +354,7 @@ class RouteHelper {
     GetPage(name: pNavigateDrScreen, page: () =>  const NavigateMapViewScreen()),
 
     // GetPage(name: doctorDetailScreen, page: () => const DoctorDetailScreen()),
-    GetPage(name: pChatScreen, page: () =>  const PatientChatScreen()),
+     GetPage(name: pChatScreen, page: () =>  const PatientChatScreen()),
     GetPage(name: patientSettingsScreen, page: () => const PatientSettingsScreen()),
     GetPage(name: patientChangePasswordScreen, page: () => const PatientChangePasswordScreen()),
     GetPage(name: patientSupportScreen, page: () => const PatientSupportScreen()),

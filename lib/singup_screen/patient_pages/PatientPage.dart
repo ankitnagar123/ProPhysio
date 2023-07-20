@@ -379,14 +379,19 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       'gender':_selectedGender,
                     };
                     if (_sendDataToVerificationScrn(context)) {
-                      patientSignUpCtr.PatientSignupOtp(context,code,phoneCtr.text,emailCtr.text,)
+                      patientSignUpCtr.PatientSignupOtpVerification(context,code,phoneCtr.text,emailCtr.text, () {
+                        Get.toNamed(
+                            RouteHelper.getSingUpOtpScreen(),
+                            parameters: data,);
+                      });
+                     /* patientSignUpCtr.PatientSignupOtp(context,code,phoneCtr.text,emailCtr.text,)
                           .then((value) {
                         if (value != "") {
                           Get.toNamed(
                               RouteHelper.getSingUpOtpScreen(),
                               parameters: data, arguments: value);
                         } else {}
-                      });
+                      });*/
                     }
                   },
                   MyColor.primary,

@@ -197,7 +197,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                     pressEvent: () {
                       if(validation()){
                         patientRatingCtr.ratingAdd(
-                            context, doctorId.toString(), rating.toString(), reviewCtr.text,
+                            context, doctorId.toString(), rating.toString(), reviewCtr.text,bookId.toString(),
                                 () {
                               AwesomeDialog(
                                 context: context,
@@ -209,7 +209,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                                 desc: text.ratingSuccessfully.tr,
                                 btnOkOnPress: () {
                                   Get.back();
-                                  debugPrint('OnClcik');
+                                  debugPrint('OnClick');
                                 },
                                 btnOkIcon: Icons.check_circle,
                                 onDismissCallback: (type) {

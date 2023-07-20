@@ -65,19 +65,19 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                     itemCount: doctorPrescriptionCtr.fetchMedicineList.value!.details.length,
                     itemBuilder: (context, index) {
                       var list = doctorPrescriptionCtr.fetchMedicineList.value!.details[index];
-                    /*  var medicineName = list.;
+                      var medicineName = list.medicineName;
                       var medicineTime = list.medicineTiming;
                       var medicineSlot = list.medicineSlot;
-                      var medicineDisc = list.description;*/
-                   /*   var medicineDrName = list.doctorName;
+                      var medicineDisc = list.description;
+                   /*   var medicineDrName = list.;
                       var medicineDrSurname = list.doctorSurname;*/
                       return InkWell(
-                        // onTap: () => showBottomSheet(context,medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
+                        onTap: () => showBottomSheet(context,medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
                         child: Card(
                           color: MyColor.midgray,
                           child: ListTile(
                               contentPadding: const EdgeInsets.all(12),
-                              title: custom.text(list.madcine, 16,
+                              title: custom.text(list.medicineName.toString(), 16,
                                   FontWeight.w400, MyColor.primary1),
                               subtitle: Text(
                                 style: const TextStyle(
@@ -88,19 +88,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                                 maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              trailing: Column(
-                                children: [
-                                  InkWell(
-                                      onTap: () async {
-                                        const url =
-                                            "https://www.hca.wa.gov/assets/billers-and-providers/13_794.pdf";
-                                        final file = await loadPdfFromNetwork(url);
-                                        openPdf(context, file, url);
-                                      },
-                                      child: const Icon(Icons.download,color: MyColor.primary1,size: 20)),
-                                  Text(list.medicineSlot),
-                                ],
-                              )),
+                              trailing: Text(list.medicineSlot)),
                         ),
                       );
                     },

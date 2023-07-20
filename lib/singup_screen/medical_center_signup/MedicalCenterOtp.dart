@@ -8,7 +8,6 @@ import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../../medica_center/center_controller/CenterAuthController.dart';
-import '../../signin_screen/SignInScreen.dart';
 
 class MedicalCenterOtp extends StatefulWidget {
   // String name, email, phone, password, otp, code,healthcard;
@@ -28,38 +27,35 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
   var name = "";
   var email = "";
   var password = "";
-  var apiotp = "";
   var address = "";
   var lat = "";
   var long = "";
-var code ="";
-  var phone="";
-  var flag="";
+  var code = "";
+  var phone = "";
+  var flag = "";
 
   @override
   void initState() {
     super.initState();
-    apiotp = Get.arguments;
-    log("api otp$apiotp");
     print(email);
     print(password);
-    name = Get.parameters['name']!;
-    email = Get.parameters['email']!;
-    password = Get.parameters['password']!;
-    address = Get.parameters['address']!;
-    lat = Get.parameters['lat']!;
-    long = Get.parameters['long']!;
+    name = Get.parameters['name'].toString();
+    email = Get.parameters['email'].toString();
+    password = Get.parameters['password'].toString();
+    address = Get.parameters['address'].toString();
+    lat = Get.parameters['lat'].toString();
+    long = Get.parameters['long'].toString();
     code = Get.parameters["code"].toString();
     flag = Get.parameters['flag'].toString();
     phone = Get.parameters['phone'].toString();
-
-
+    /*OTP API CALL*/
+    centerAuthCtr.CenterSignupOtp(
+        context, code, phone, email);
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -80,18 +76,16 @@ var code ="";
                 SizedBox(
                   height: height * 0.02,
                 ),
-                custom.text(text.Verification.tr, 23, FontWeight.w700, MyColor.black),
-                SizedBox(height: height * 0.02),
                 custom.text(
-                    text.SignupOtpVerifiy.tr,
-                    12,
-                    FontWeight.normal,
+                    text.Verification.tr, 23, FontWeight.w700, MyColor.black),
+                SizedBox(height: height * 0.02),
+                custom.text(text.SignupOtpVerifiy.tr, 12, FontWeight.normal,
                     MyColor.primary1),
                 SizedBox(height: height * 0.07),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_otp.tr, 13, FontWeight.w600,
-                      MyColor.primary1),
+                  child: custom.text(
+                      text.Enter_otp.tr, 13, FontWeight.w600, MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
@@ -108,11 +102,12 @@ var code ="";
                         MyColor.primary1),
                     GestureDetector(
                       onTap: () {
-                        centerAuthCtr.CenterSignupOtp(context,code,phone, email);
+                        centerAuthCtr.CenterSignupOtp(
+                            context, code, phone, email);
                       },
-                      child:  Text(
+                      child: Text(
                         text.SendNewOtp.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           decoration: TextDecoration.underline,
                           color: MyColor.primary1,
                           fontWeight: FontWeight.w600,
@@ -134,22 +129,14 @@ var code ="";
                   }
                   return custom.MyButton(context, text.Verification.tr, () {
                     if (validationotp()) {
-                      centerAuthCtr.centerSignup(
-                          context,
-                          name,
-                          email,
-                          password,
-                          address,
-                          lat,
-                          long,
-                          () {
-                            Get.offAllNamed(RouteHelper.getLoginScreen());
-                          });
-                      /*   patientSignUpCtr.patientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
+                      centerAuthCtr.centerSignup(context, flag, code, phone,
+                          name, email, password, address, lat, long, () {
+                        Get.offAllNamed(RouteHelper.getLoginScreen());
+                      });
+                      /*   patientSignUpCtr.pa tientSignup(context, name,surname,username, email, code, phone, password, healthCode,age,weight,birthPlace,heightp, () {
 
                       });*/
                     }
-
                   },
                       MyColor.primary,
                       const TextStyle(
@@ -169,11 +156,10 @@ var code ="";
   }
 
   bool validationotp() {
-    print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");
-    if (optctr.text.isEmpty || optctr.text.length != 4) {
+    if (optctr.text.isEmpty || optctr.text.length != 6) {
       custom.massenger(context, text.Please_enter_OTP.tr);
-    } else if (apiotp == optctr.text) {
+    } else if (centerAuthCtr.otp.value == optctr.text) {
       print("Correct OTP");
       // custom.massenger(context, "SignUp Successfully");
       return true;

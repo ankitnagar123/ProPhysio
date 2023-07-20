@@ -19,6 +19,8 @@ class CenterAuthCtr extends GetxController {
   var loading = false.obs;
   var loadingotp = false.obs;
   var otp = ''.obs;
+  var msg = ''.obs;
+
   var result = ''.obs;
   var loadingP = false.obs;
   var loadingUpdateP = false.obs;
@@ -42,7 +44,57 @@ class CenterAuthCtr extends GetxController {
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
-/*-----------Patient SignUp Otp Api----------*/
+
+  /*-----------Center SignUp Otp Verification Api----------*/
+  Future<String> CenterSignupOtpVerification(
+      BuildContext context,
+      String countryCode,
+      String phone,
+      String email,
+       VoidCallback callback,
+      ) async {
+    loadingotp.value = true;
+    final Map<String, dynamic> signupPerameter = {
+      "country_code":countryCode,
+      "contact":phone,
+      "email": email,
+    };
+    print("Signup Parameter$signupPerameter");
+    final response =
+        await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
+    try {
+      log("response of Medical Center Signup OTP :-${response.body}");
+      loadingotp.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      otp.value = jsonResponse['otp'].toString();
+      msg.value = jsonResponse['msg'].toString();
+      var result = jsonResponse['result'].toString();
+
+      if (response.statusCode == 200) {
+        loadingotp.value = false;
+        if(msg.value == "true"){
+          callback();
+          print("my otp ctr${otp.toString()}");
+        }else{
+          print(result.toString());
+          custom.massenger(context, result.toString());
+          return jsonResponse['otp'].toString();
+        }
+        // custom.massenger(context, otp.toString());
+
+      } else {
+        custom.massenger(context, text.SomthingWentWrong.tr);
+      }
+    } catch (e) {
+      custom.massenger(context, text.SomthingWentWrong.tr);
+      log("exception$e");
+      return '';
+    }
+    return '';
+  }
+
+
+/*-----------Center SignUp Otp Api----------*/
   Future<String> CenterSignupOtp(
     BuildContext context,
       String countryCode,
@@ -72,7 +124,7 @@ class CenterAuthCtr extends GetxController {
       otp.value = jsonResponse['otp'].toString();
       if (response.statusCode == 200) {
         print("my otp ctr${otp.toString()}");
-        custom.massenger(context, otp.toString());
+        // custom.massenger(context, otp.toString());
         loadingotp.value = false;
 
         print(result.toString());
@@ -90,6 +142,9 @@ class CenterAuthCtr extends GetxController {
 
   void centerSignup(
       BuildContext context,
+      String flag,
+      String code,
+      String phone,
       String name,
       String email,
       String password,
@@ -99,6 +154,9 @@ class CenterAuthCtr extends GetxController {
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
+      "flag":flag,
+      "code":code,
+      "contact":phone,
       "name": name,
       "email": email,
       "address": address,
