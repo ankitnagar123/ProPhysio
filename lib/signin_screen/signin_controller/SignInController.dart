@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -10,11 +9,12 @@ import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../Network/ApiService.dart';
 import '../../Network/Apis.dart';
 import '../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../language_translator/LanguageTranslate.dart';
 import '../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 
 class LoginCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
-
+LocalString text =  LocalString();
   CustomView custom = CustomView();
   ApiService apiService = ApiService();
   var loading = false.obs;
@@ -43,24 +43,7 @@ class LoginCtr extends GetxController {
         String id = jsonResponse['id'].toString();
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
-          AnimatedButton(
-            text: 'Info Reverse Dialog Without buttons',
-            pressEvent: () {
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.infoReverse,
-                headerAnimationLoop: true,
-                animType: AnimType.bottomSlide,
-                title: 'INFO Reversed',
-                reverseBtnOrder: true,
-                btnOkOnPress: () {},
-                btnCancelOnPress: () {},
-                desc:
-                    'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
-              ).show();
-            },
-          );
-          custom.massenger(context, 'Login successfully');
+          custom.massenger(context, text.Login_successfully.tr);
           if (usertype == "Doctor") {
             loading.value = false;
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
@@ -83,19 +66,20 @@ class LoginCtr extends GetxController {
             Get.offAndToNamed(RouteHelper.CBottomNavigation());
           }else {
             loading.value = false;
-            custom.massenger(context, result);
+            custom.massenger(context, text.SomthingWentWrong.tr);
           }
         } else {
-          custom.massenger(context, result.toString());
+          custom.massenger(context, text.SomthingWentWrong.tr);
           loading.value = false;
         }
       } catch (e) {
+        custom.massenger(context, text.SomthingWentWrong.tr);
         loading.value = false;
         log("exception$e");
       }
     } else {
       loading.value = false;
-      custom.MySnackBar(context, "Check your Internet connection");
+      custom.MySnackBar(context, text.CheckInternetconnection.tr);
     }
   }
 
@@ -131,66 +115,3 @@ class LoginCtr extends GetxController {
     }
   }
 }
-
-
-
-
-//*********Get  Device (for notification)Token**************//
-// Future<String> _getDeviceToken() async {
-//   String _deviceToken="";
-//   if(Platform.isIOS) {
-//     _deviceToken = (await FirebaseMessaging.instance.getAPNSToken())!;
-//   }else {
-//     _deviceToken = (await FirebaseMessaging.instance.getToken())!;
-//   }
-//   if (_deviceToken != null) {
-//     print('--------Device Token---------- '+_deviceToken);
-//   }
-//   return _deviceToken;
-// }
-
-// SharedPreferenceProvider sp = SharedPreferenceProvider();
-
-/************Update Token(for notification)***************/
-// Future<http.Response?> updateToken(String id,String deviceTyp,String userTyp) async {
-//   try {
-//     String _deviceToken = await _getDeviceToken();
-//     // FirebaseMessaging.instance.subscribeToTopic(AppConstants.TOPIC);
-//     late final response;
-//     if (Platform.isIOS) {
-//       response = await http.post(Uri.parse(MyAPI.updateToken),
-//           body: {
-//             "user_id": id,
-//             "device_id": _deviceToken,
-//             "device_status": deviceTyp,
-//             "user_type": userTyp,
-//           }
-//       );
-//     } else {
-//       response = await http.post(Uri.parse(MyAPI.updateToken),
-//           body: {
-//             "user_id":  await sp.getStringValue(sp.DOCTOR_ID_KEY),
-//             "device_id": _deviceToken,
-//             "device_status": "Android",
-//             "user_type": "Doctor"
-//           }
-//       );
-//     }
-//     print("My device id *******${response}");
-// return response;
-//   }catch(e){
-//     return null!;
-//     print("Excaption$e");
-//   }
-// }
-
-// String apiUrl;
-// if(usertype == "User"){
-//   apiUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=user_login";
-//   // final response = await apiService.postData(MyAPI.Login, LoginPerameter);
-// }else if(usertype == "Doctor"){
-//   apiUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=user_login";
-//   // final response = await apiService.postData(MyAPI.Login, LoginPerameter);
-// }else {
-//   throw Exception('Invalid user type: $usertype');
-// }

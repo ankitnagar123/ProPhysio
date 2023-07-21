@@ -64,7 +64,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
                         MaterialPageRoute(
                             builder: (context) =>
                                 DoctorDetailScreen(
-                                  id:  doctorListCtr.doctorList[i].doctorId.toString(), centerId: '', drImg: '',
+                                  id:  doctorListCtr.doctorList[i].doctorId.toString(), centerId: '', drImg: doctorListCtr.doctorList[i].doctorProfile.toString(),
                                 )));
                   },
                   child: Card(

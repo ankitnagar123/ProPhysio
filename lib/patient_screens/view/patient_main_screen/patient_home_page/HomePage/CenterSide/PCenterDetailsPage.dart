@@ -5,6 +5,7 @@ import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
 import '../../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
 
 
@@ -19,11 +20,9 @@ class PCenterDetailScreen extends StatefulWidget {
 
 class _PCenterDetailScreenState extends State<PCenterDetailScreen> {
 
- /* DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
-  PatientRatingCtr patientRatingCtr = Get.put(PatientRatingCtr());
-  AppointmentController appointmentController = Get.put(AppointmentController());
-  DoctorSpecializationCtr doctorSpecializationCtr = Get.put(DoctorSpecializationCtr());*/
+
   CustomView custom = CustomView();
+  LocalString text = LocalString();
   CenterAuthCtr centerAuthCtr = CenterAuthCtr();
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
   String centerId = '';
@@ -39,35 +38,19 @@ class _PCenterDetailScreenState extends State<PCenterDetailScreen> {
   String wardName = "";
   @override
   void initState() {
+    super.initState();
     centerId = widget.id.toString();
     print("doctor my  id$centerId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerWardListPatient(context,centerId);
 centerAuthCtr.centerDetails(context, centerId.toString());
-   /*   patientRatingCtr.fetchRating(doctorId);
-      doctorListCtr.doctorDetialsfetch(doctorId);
-      appointmentController.dateCalender(doctorId);
-      doctorSpecializationCtr.specializationFetch(doctorId);*/
+
     });
-
-   /* img = doctorListCtr.image.value.toString();
-    doc = doctorListCtr.doc.value.toString();
-    print("doctor =img${doctorListCtr.image.value.toString()}");
-    print("doctor =doc${doctorListCtr.doc.value.toString()}");
-    latitude = doctorListCtr.latitude.value.toString();
-    longitude = doctorListCtr.longitude.value.toString();
-    address = doctorListCtr.address.value;*/
-    // fee = doctorListCtr.fee.value;
-    // cat = doctorListCtr.category.value;
-
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final widht = MediaQuery.of(context).size.width;
     return Obx(() {
       return Scaffold(
         body:  centerAuthCtr.loadingDetails.value?Center(heightFactor: 16, child: custom.MyIndicator()):NestedScrollView(
@@ -131,13 +114,13 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                       const Divider(),
                       Align(
                         alignment: Alignment.topLeft,
-                        child: custom.text("Center ward", 15,
+                        child: custom.text(text.Centerward.tr, 15,
                             FontWeight.w500, MyColor.primary1),
                       ),
                       centerHomeCtr.loadingFetchW.value?custom.MyIndicator():centerHomeCtr.selectedWardList.isEmpty?
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: custom.text("No ward added by center", 14,
+                        child: custom.text(text.NoWardAddedCenter.tr, 14,
                             FontWeight.w400, MyColor.black),
                       ): ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
@@ -158,7 +141,6 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                                   "address":address,
                                 };
                                 Get.toNamed(RouteHelper.getCenterWardDrList(),parameters: data);
-                                // Get.toNamed(RouteHelper.getPatientSettingsScreen());
                               },
                               title: custom.text(
                                   centerHomeCtr.selectedWardList[index].wardName, 14.0,

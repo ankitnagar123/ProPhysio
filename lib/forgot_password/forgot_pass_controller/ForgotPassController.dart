@@ -19,15 +19,14 @@ class ForgotPassCtr extends GetxController {
   /*-------------Forgot Password Verification  OTP--------------*/
   Future<String> forgotPasswordVerification(
       BuildContext context,
-      String email,String countryCode,String phone,
+      String countryCode,String phone,
        VoidCallback callback
       ) async {
     loadingotp.value = true;
     final Map<String, dynamic> pforgot = {
-      "user_type":"Doctor",
       "country_code":countryCode,
       "contact":phone,
-      "email": email,
+      // "email": email,
     };
     print("Forgot Perameter$pforgot");
 
@@ -65,6 +64,9 @@ class ForgotPassCtr extends GetxController {
       ) async {
     loadingotp.value = true;
     final Map<String, dynamic> pforgot = {
+   /*   "user_type":"Medical",
+      "country_code":countryCode,
+      "contact":phone,*/
       "email": email,
     };
     print("Forgot Perameter$pforgot");

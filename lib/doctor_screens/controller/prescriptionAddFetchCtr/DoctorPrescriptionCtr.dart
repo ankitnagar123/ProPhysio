@@ -9,6 +9,7 @@ import 'package:medica/doctor_screens/model/DPrescriptionModel.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../../patient_screens/model/MedicinsListModel.dart';
 import '../../../patient_screens/model/PatinetPrescriptionModel.dart';
 import '../../model/MedicineModel/AddFetchMedicneList.dart';
@@ -17,6 +18,7 @@ import '../../model/QrPresciptionList.dart';
 
 class DoctorPrescriptionCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  LocalString text = LocalString();
   ApiService apiService = ApiService();
   CustomView customView = CustomView();
 
@@ -81,14 +83,16 @@ class DoctorPrescriptionCtr extends GetxController {
       var myData = result["result"];
       if (myData == "Success") {
         callback();
-        customView.MySnackBar(context, myData);
+        customView.MySnackBar(context, text.success.tr);
         loadingAdd.value = false;
         log("result........$result");
       } else {
+        customView.MySnackBar(context, text.SomthingWentWrong.tr);
         loadingAdd.value = false;
         print("Backend Error");
       }
     } catch (e) {
+      customView.MySnackBar(context, text.SomthingWentWrong.tr);
       loadingAdd.value = false;
       log("Exception$e");
     }
@@ -121,14 +125,16 @@ class DoctorPrescriptionCtr extends GetxController {
       var myData = result["result"];
       if (myData == "Success") {
         callback();
-        customView.MySnackBar(context, myData);
+        customView.MySnackBar(context, text.success.tr);
         loadingAddP.value = false;
         log("result........$result");
       } else {
+        customView.MySnackBar(context, text.SomthingWentWrong.tr);
         loadingAddP.value = false;
         print("Backend Error");
       }
     } catch (e) {
+      customView.MySnackBar(context, text.SomthingWentWrong.tr);
       loadingAddP.value = false;
       log("Exception$e");
     }
@@ -256,14 +262,16 @@ class DoctorPrescriptionCtr extends GetxController {
       var myData = result["result"];
       if (myData == "Success") {
         callback();
-        customView.MySnackBar(context, myData);
+        customView.MySnackBar(context, text.success.tr);
         loadingAddMedicne.value = false;
         log("result........$result");
       } else {
-        loadingAddMedicne.value = false;
+        customView.MySnackBar(context, text.SomthingWentWrong.tr);
+      loadingAddMedicne.value = false;
         print("Backend Error");
       }
     } catch (e) {
+      customView.MySnackBar(context, text.SomthingWentWrong.tr);
       loadingAddMedicne.value = false;
       log("Exception$e");
     }

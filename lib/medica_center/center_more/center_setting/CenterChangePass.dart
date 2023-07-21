@@ -18,6 +18,9 @@ class _CenterChangePasswordScreenState
     extends State<CenterChangePasswordScreen> {
   CustomView customView = CustomView();
   bool _isHidden = true;
+  bool _isHidden1 = true;
+  bool _isHidden2 = true;
+
   LocalString text = LocalString();
   CenterAuthCtr centerAuthCtr = CenterAuthCtr();
   TextEditingController oldPasswordCtrl = TextEditingController();
@@ -125,10 +128,10 @@ class _CenterChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden1 = !_isHidden1;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden1
                           ? const Icon(
                         Icons.visibility_off,
                         color: MyColor.primary,
@@ -139,7 +142,7 @@ class _CenterChangePasswordScreenState
                         color: MyColor.primary,
                         size: 20.0,
                       )),
-                  _isHidden),
+                  _isHidden1),
               SizedBox(
                 height: width * 0.1,
               ),
@@ -156,10 +159,10 @@ class _CenterChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden2 = !_isHidden2;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden2
                           ? const Icon(
                         Icons.visibility_off,
                         color: MyColor.primary,
@@ -170,7 +173,7 @@ class _CenterChangePasswordScreenState
                         color: MyColor.primary,
                         size: 20.0,
                       )),
-                  _isHidden),
+                  _isHidden2),
               SizedBox(
                 height: height*0.5,
               ),

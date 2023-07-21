@@ -15,6 +15,7 @@ class PatientSupportScreen extends StatefulWidget {
 
 class _PatientSupportScreenState extends State<PatientSupportScreen> {
   CustomView customView = CustomView();
+
   PatientSupportCtr patientSupportCtr = PatientSupportCtr();
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();

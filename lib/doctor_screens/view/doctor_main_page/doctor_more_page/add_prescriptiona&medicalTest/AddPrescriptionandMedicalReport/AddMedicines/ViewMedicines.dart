@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
@@ -49,14 +48,6 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            InkWell(
-                onTap: () async {
-                  var url ="${doctorPrescriptionCtr.fetchMedicineList.value?.pdf}";
-                      /*"https://cisswork.com/PHP/Travelistas/api/savepdf/Mr.Rishabh1.pdf"*/;
-                  final file = await loadPdfFromNetwork(url);
-                  openPdf(context, file, url);
-                },
-                child: const Icon(Icons.download,color: MyColor.primary1,size: 20)),
             doctorPrescriptionCtr.loadingMedicineFetch.value
                 ? Center(heightFactor: 13, child: custom.MyIndicator())
                 : ListView.builder(
@@ -277,7 +268,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
         });
   }
 
-
+/*
   Future<File?> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -302,7 +293,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
       print('$file');
     }
     return file;
-  }
+  }*/
 
   //final file = File('example.pdf');
   //await file.writeAsBytes(await pdf.save());

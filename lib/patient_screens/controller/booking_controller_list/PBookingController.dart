@@ -47,6 +47,9 @@ class PatientBookingController extends GetxController {
   var location = "".obs;
   var name = "".obs;
   var surname = "".obs;
+  var contact = "".obs;
+  var drImg = "".obs;
+
   var bookingId = "".obs;
 
   var selectedCard = -1.obs;
@@ -144,6 +147,10 @@ class PatientBookingController extends GetxController {
         location.value = jsonResponse["location"];
         name.value = jsonResponse["name"];
         surname.value = jsonResponse["surname"];
+
+        drImg.value = jsonResponse["doctor_profile"];
+        contact.value = jsonResponse["contact"];
+
         bookingId.value = jsonResponse["booking_id"];
       } else {
         loadingd.value = false;

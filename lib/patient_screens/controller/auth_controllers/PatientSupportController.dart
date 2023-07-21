@@ -9,9 +9,11 @@ import 'package:get/get.dart';
 
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 
 class PatientSupportCtr extends GetxController {
   ApiService apiService = ApiService();
+  LocalString text =  LocalString();
   var loading = false.obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -38,11 +40,11 @@ class PatientSupportCtr extends GetxController {
       if (result == "success") {
         loading.value = false;
         log("my patient support $result");
-        custom.massenger(context, result.toString());
+        custom.massenger(context,text.success.tr );
         print(result.toString());
         callback();
       } else {
-        custom.massenger(context, result.toString());
+        custom.massenger(context, text.SomthingWentWrong.tr);
       }
     } catch (e) {
       loading.value = false;

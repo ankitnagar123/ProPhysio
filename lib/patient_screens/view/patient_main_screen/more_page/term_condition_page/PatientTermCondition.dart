@@ -46,7 +46,7 @@ class _PatientTermConditionState extends State<PatientTermCondition> {
                 loding = false;
               });
             },
-            initialUrl: "https://cisswork.com/Android/Medica/Apis/terms_conditions.php",zoomEnabled: true,
+            initialUrl: "https://sicparvismagna.it/Medica/Apis/terms_conditions.php",zoomEnabled: true,
           ),loding == true ? Center(
             child: custom.MyIndicator(),
           ): const SizedBox(),

@@ -46,7 +46,7 @@ class _PatinetAboutScreenState extends State<PatinetAboutScreen> {
                 loding = false;
               });
             },
-            initialUrl: "https://cisswork.com/Android/Medica/Apis/about.php",zoomEnabled: true,
+            initialUrl: "https://sicparvismagna.it/Medica/Apis/about.php",zoomEnabled: true,
           ),loding == true ? Center(
             child: custom.MyIndicator(),
           ): const SizedBox(),

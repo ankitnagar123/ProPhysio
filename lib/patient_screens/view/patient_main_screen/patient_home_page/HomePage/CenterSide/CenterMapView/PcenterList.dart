@@ -4,6 +4,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import '../../../../../../../language_translator/LanguageTranslate.dart';
 import '../PCenterDetailsPage.dart';
 
 class PCenterListView extends StatefulWidget {
@@ -15,6 +16,7 @@ class PCenterListView extends StatefulWidget {
 
 class _PCenterListViewState extends State<PCenterListView> {
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   PCenterCtr pCenterCtr = PCenterCtr();
   @override
   void initState() {
@@ -50,7 +52,7 @@ class _PCenterListViewState extends State<PCenterListView> {
       return pCenterCtr.centerList.isEmpty
           ? Center(
           heightFactor: 10,
-          child: customView.text("Center not available at the moment.", 14,
+          child: customView.text(text.Center_not_available_moment.tr, 14,
               FontWeight.w400, MyColor.primary1))
           : SingleChildScrollView(
         child: ListView.builder(

@@ -5,6 +5,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
 import '../../../../doctor_detail_screen/DoctorDetailScreen.dart';
 
@@ -18,6 +19,9 @@ class PWardDrListScreen extends StatefulWidget {
 class _PWardDrListScreenState extends State<PWardDrListScreen> {
   TextEditingController searchCtr = TextEditingController();
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
+
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = CenterHomeCtr();
@@ -40,7 +44,6 @@ String centerId = "";
       centerHomeCtr.centerSelectedDrList(context,wardId);
     });
     centerHomeCtr.wardDeleteReason(context);
-
   }
 
   @override
@@ -72,7 +75,7 @@ String centerId = "";
                 custom.searchField(
                     context,
                     searchCtr,
-                    "Search doctors by name, surname",
+                    text.Search_Doctorby_Name.tr,
                     TextInputType.text,
                     const Text(""),
                     const Icon(Icons.search_rounded), () {
@@ -86,10 +89,10 @@ String centerId = "";
                     : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: centerHomeCtr.selectedDoctorList.isEmpty
-                      ? const Center(
+                      ?  Center(
                       heightFactor: 10,
                       child:
-                      Text("Doctor Not Available at the Moment"))
+                      Text(text.Doctor_Not_Available.tr,))
                       : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

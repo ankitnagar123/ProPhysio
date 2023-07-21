@@ -490,9 +490,9 @@ class _BookingPageState extends State<BookingPage> {
                               "drName": patientBookingController.name.value,
                               "doctorId": idDr,
                               "drSurname": patientBookingController.surname.value,
-                              "drImg": "/*h*/",
+                              "drImg": patientBookingController.drImg.value,
                               "drAddress" :patientBookingController.location.value,
-                              "contact":"/*h*/",
+                              "contact": patientBookingController.contact.value,
                               "doctorList": "drListData",
                             };
                             Get.toNamed(RouteHelper.getChatScreen(),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
 
+import '../../../../../../language_translator/LanguageTranslate.dart';
 import 'CenterMapView/PcenterList.dart';
 import 'CenterMapView/PcenterMapViewList.dart';
-import 'PCenterDetailsPage.dart';
 
 class PCenterHomeScreen extends StatefulWidget {
   const PCenterHomeScreen({Key? key}) : super(key: key);
@@ -18,6 +17,7 @@ class PCenterHomeScreen extends StatefulWidget {
 
 class _PCenterHomeScreenState extends State<PCenterHomeScreen> with SingleTickerProviderStateMixin{
   CustomView customView = CustomView();
+  LocalString text = LocalString();
   PCenterCtr pCenterCtr = PCenterCtr();
   TabController? tabController;
   int _selectedIndex = 0;
@@ -62,14 +62,16 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> with SingleTicker
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  customView.text(
-                      _isListView
-                          ? 'View List'
-                          : 'View on map'
-                          '',
-                      14,
-                      FontWeight.w500,
-                      MyColor.white),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.2,
+                    child: customView.text(
+                        _isListView
+                            ? text.ListView.tr
+                            : text.MapView.tr,
+                        13,
+                        FontWeight.w500,
+                        MyColor.white),
+                  ),
                   const SizedBox(
                     width: 3.0,
                   ),

@@ -33,15 +33,15 @@ class PatinetPrescriptionModel {
 
 
   factory PatinetPrescriptionModel.fromJson(Map<String, dynamic> json) => PatinetPrescriptionModel(
-    result: json["result"],
-    userId: json["user_id"],
-    doctorId: json["doctor_id"],
-    doctorName: json["doctor_name"],
-    doctorSurname: json["doctor_surname"],
-    title: json["title"],
-    type: json["type"],
-    description: json["description"],
-    image: json["image"],
+    result: json["result"].toString(),
+    userId: json["user_id"].toString(),
+    doctorId: json["doctor_id"].toString(),
+    doctorName: json["doctor_name"].toString(),
+    doctorSurname: json["doctor_surname"].toString(),
+    title: json["title"].toString(),
+    type: json["type"].toString(),
+    description: json["description"].toString(),
+    image: json["image"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

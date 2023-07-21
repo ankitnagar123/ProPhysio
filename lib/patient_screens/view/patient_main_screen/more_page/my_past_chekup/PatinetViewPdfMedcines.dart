@@ -65,7 +65,6 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                   child: InkWell(
                     onTap: () async {
                       var url ="${doctorPrescriptionCtr.fetchMedicineList.value?.pdf}";
-                      /*"https://cisswork.com/PHP/Travelistas/api/savepdf/Mr.Rishabh1.pdf"*/;
                       final file = await loadPdfFromNetwork(url);
                       openPdf(context, file, url);
                     },

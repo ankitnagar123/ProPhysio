@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class LocalString extends Translations {
   /// ******************Sign In Page************** //
+  String Download_report_successful = "Download report successful";
   String SIGN_IN = "Sign in";
   String ENTER_USER_EMAIL = "Enter your username/email";
   String HINT_ENTER_USER_EMAIL = "Enter Email ID/User Id";
@@ -515,7 +516,6 @@ class LocalString extends Translations {
   String requiredLabel = "Required label";
 
   /*PATIENT SIDE DETAIL SCREEN*/
-
   String bookAppointment = "Book Appointment";
   String information = "Information";
   String mediumPrice = "Medium price";
@@ -524,6 +524,10 @@ class LocalString extends Translations {
   String averageRating = "Average rating";
   String reviews = "reviews";
 
+  /*PATIENT CENTER SIDE DETAIL SCREEN*/
+String Center_not_available_moment = "Center not available at the moment.";
+String Centerward = "Center ward";
+String NoWardAddedCenter = "No ward added by center";
   /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
   String appointmentCorrectlySaved = "Appointment correctly\n saved!";
   String youCanFindYourBooking =
@@ -544,6 +548,8 @@ class LocalString extends Translations {
       "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.";
 
   /*API response text*/
+  String CheckInternetconnection = "Check your Internet connection";
+  String Login_successfully = "Login successfully";
   String AddDateSucces = "Date add successfully";
   String SomthingWentWrong = "Something went wrong";
   String Success = "Success";
@@ -567,6 +573,7 @@ class LocalString extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           //*****************Sign IN Page***************************//
+  Download_report_successful : "Download report successful",
           SIGN_IN: "Sign in",
           ENTER_USER_EMAIL: "Enter your username/email",
           HINT_ENTER_USER_EMAIL: "Enter Email ID/User Id",
@@ -1057,6 +1064,10 @@ class LocalString extends Translations {
           noSpecializationAddedDoctor: "No Specialization Added by Doctor",
           averageRating: "Average rating",
           reviews: "reviews",
+
+   Center_not_available_moment : "Center not available at the moment.",
+   Centerward : "Center ward",
+   NoWardAddedCenter : "No ward added by center",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appointment correctly saved!",
           youCanFindYourBooking:
@@ -1076,6 +1087,10 @@ class LocalString extends Translations {
           weNeedYourHealthCardCode:
               "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.",
 
+
+/*api respone*/
+   CheckInternetconnection : "Check your Internet connection",
+   Login_successfully : "Login successfully",
           AddDateSucces: "Date add successfully",
           SomthingWentWrong: "Something went wrong",
           Success: "Success",
@@ -1096,6 +1111,7 @@ class LocalString extends Translations {
         },
         'it_IT': {
           //*****************Sign IN Page***************************//
+          Download_report_successful : "Download del rapporto riuscito",
           SIGN_IN: "Registrazione",
           ENTER_USER_EMAIL: "Inserisci il tuo nome utente/e-mail",
           HINT_ENTER_USER_EMAIL: "Inserisci ID e-mail/ID utente",
@@ -1613,6 +1629,10 @@ class LocalString extends Translations {
               "Nessuna specializzazione aggiunta dal dottore",
           averageRating: "Voto medio",
           reviews: "recensioni",
+
+          Center_not_available_moment : "Centro non disponibile al momento.",
+          Centerward : "Reparto centrale",
+          NoWardAddedCenter : "Nessun rione aggiunto dal centro",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appuntamento salvato correttamente!",
           youCanFindYourBooking:
@@ -1633,6 +1653,10 @@ class LocalString extends Translations {
           weNeedYourHealthCardCode:
               "Abbiamo bisogno del codice della tua tessera sanitaria per confermare la tua prenotazione. Seleziona il tuo codice o inserisci quello della persona a cui stai prenotando la visita.",
 
+
+          /*api response*/
+          CheckInternetconnection : "Controlla la tua connessione Internet",
+          Login_successfully : "Accedi con successo",
           AddDateSucces: "Data aggiunta con successo",
           SomthingWentWrong: "Qualcosa è andato storto",
           Success: "Successo",

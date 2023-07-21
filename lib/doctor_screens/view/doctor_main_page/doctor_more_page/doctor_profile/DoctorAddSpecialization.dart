@@ -226,27 +226,24 @@ class _DoctorAddSpecializationState extends State<DoctorAddSpecialization> {
                                 discriptionCtr.text,
                                 visitList!,
                                 feeList!, () {
-                             Get.back();
-                              () {
-                                AwesomeDialog(
-                                  context: context,
-                                  animType: AnimType.leftSlide,
-                                  headerAnimationLoop: false,
-                                  dialogType: DialogType.success,
-                                  showCloseIcon: true,
-                                  title: text.success.tr,
-                                  desc: text.addSuccessfully.tr,
-                                  btnOkOnPress: () {
-                                    debugPrint('OnClcik');
-                                  },
-                                  btnOkIcon: Icons.check_circle,
-                                  onDismissCallback: (type) {
-                                    debugPrint(
-                                        'Dialog Dissmiss from callback $type');
-                                  },
-                                ).show();
-                                // Get.back();
-                              };
+                              AwesomeDialog(
+                                context: context,
+                                animType: AnimType.leftSlide,
+                                headerAnimationLoop: false,
+                                dialogType: DialogType.success,
+                                showCloseIcon: true,
+                                title: text.success.tr,
+                                desc: text.addSuccessfully.tr,
+                                btnOkOnPress: () {
+                                  Get.back();
+                                  debugPrint('OnClcik');
+                                },
+                                btnOkIcon: Icons.check_circle,
+                                onDismissCallback: (type) {
+                                  debugPrint(
+                                      'Dialog Dissmiss from callback $type');
+                                },
+                              ).show();
                             });
                           }
                         },

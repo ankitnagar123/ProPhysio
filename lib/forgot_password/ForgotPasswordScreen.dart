@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassController.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../helper/CustomView/CustomView.dart';
 import '../language_translator/LanguageTranslate.dart';
@@ -16,14 +17,22 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController emailCtr = TextEditingController();
+  TextEditingController phoneCtr = TextEditingController();
+
   ForgotPassCtr forgotPassCtr = ForgotPassCtr();
+
   CustomView custom = CustomView();
   LocalString text = LocalString();
-
+  String code = '';
+  String flag = '';
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery
+        .of(context)
+        .size
+        .width;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -54,14 +63,47 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 SizedBox(height: height * 0.06),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_Email.tr, 13, FontWeight.w500,
+                  child: custom.text(text.Phone_Number.tr, 13, FontWeight.w500,
                       MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
                 ),
-                custom.myField(context, emailCtr, text.Enter_Email.tr,
-                    TextInputType.emailAddress),
+                SizedBox(
+                  height: 50,
+                  width: widht * 1,
+                  child: IntlPhoneField(
+                    controller: phoneCtr,
+                    decoration:  InputDecoration(
+                      // focusedErrorBorder: InputBorder.none,
+                      counterText: '',
+                      filled: true,
+                      fillColor: Colors.white,
+                      constraints: BoxConstraints.expand(),
+                      labelText: text.Phone_Number.tr,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                    ),
+                    initialCountryCode: flag,
+                    onChanged: (phone) {
+                      // var flag = phone.countryISOCode;
+                      flag = phone.countryISOCode;
+                      print(flag);
+                      code = phone.countryCode;
+                      print(phone.completeNumber);
+                    },
+                    onCountryChanged: (cod) {
+                      flag = cod.code;
+                      print(flag);
+                      code = cod.code;
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                ),
                 SizedBox(
                   height: height * 0.30,
                 ),
@@ -70,8 +112,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, text.Submit.tr, () {
-                    // forgotPassCtr.forgotPasswordVerification(context, emailCtr.text, "", "",)
                     if (validation()) {
+                      forgotPassCtr.forgotPasswordVerification(context, code,phoneCtr.text,() {
+                        var id = {"id": forgotPassCtr.id.value,"code":code,"phone":phoneCtr.text};
+                        Get.toNamed(RouteHelper.getVerification(),parameters: id);
+                      },);
+                    }
+
+                    /*   if (validation()) {
 
                       forgotPassCtr.forgotPassword(context, emailCtr.text,)
                           .then((value) {
@@ -81,7 +129,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               arguments: value, parameters: id);
                         }
                       });
-                    }
+                    }*/
                   },
                       MyColor.primary,
                       const TextStyle(
@@ -98,9 +146,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   bool validation() {
-    if (emailCtr.text.toString().isEmpty) {
+    if (phoneCtr.text.toString().isEmpty) {
       // values = forgotPassCtr.otp.value;
-      custom.MySnackBar(context, text.enterEmail.tr);
+      custom.MySnackBar(context, text.Phone_Number.tr);
     } else {
       return true;
     }

@@ -25,13 +25,12 @@ var  enLocal;
 var itLocal;
   @override
   void initState() {
+    super.initState();
     emailCtr.addListener(() {
       setState(() {
         submit = emailCtr.text.isNotEmpty;
       });
     });
-    // TODO: implement initState
-    super.initState();
   }
 
   CustomView custom = CustomView();

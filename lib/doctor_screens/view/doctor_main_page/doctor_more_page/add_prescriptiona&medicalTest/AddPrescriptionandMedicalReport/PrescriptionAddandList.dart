@@ -194,7 +194,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.Birth_Place.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
