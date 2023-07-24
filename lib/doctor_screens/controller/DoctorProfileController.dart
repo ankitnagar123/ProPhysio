@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -173,9 +173,14 @@ class DoctorProfileCtr extends GetxController {
       "graduation_date": dateOfGraduation,
       "qualification_date": dateOfQualification,
     };
-    print("Patient Profile Update Parameter$profileUpdatePerameter");
+    print(" Doctor Profile Update Parameter$profileUpdatePerameter");
 
-    final response =
+    final response =/*await http.post(
+        Uri.parse(
+          // MyAPI.DUpdateProfile,
+          "https://sicparvismagna.it/Medica/Apis/process.php?action=update_Doctor_profile"
+        ),
+        body: profileUpdatePerameter);*/
         await apiService.postData(MyAPI.DUpdateProfile, profileUpdatePerameter);
     try {
       log("response of Doctor Profile Update :-${response.body}");

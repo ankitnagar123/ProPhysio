@@ -103,12 +103,13 @@ class CardCtr extends GetxController {
       var result = jsonResponse['result'].toString();
       loadingAdd.value = false;
       if (result == "success") {
+        callback();
         loadingAdd.value = false;
         print("my patient Card remove $result");
         custom.massenger(context, result.toString());
         print(result.toString());
         cardFetch();
-        callback();
+
       } else {
         loadingAdd.value = false;
         custom.massenger(context, result.toString());

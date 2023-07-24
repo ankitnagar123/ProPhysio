@@ -123,7 +123,7 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
                   child: Obx(() {
                     if (cardCtr.loadingAdd.value) {
                       return customView.MyIndicator();
@@ -132,18 +132,18 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
                       context,
                       text.saveCard.tr,
                           () {
-
                         if(isValid() == true){
                           var month = expireDateCtrl.text.split('/').elementAt(0);
                           var year = expireDateCtrl.text.split('/').elementAt(1);
                           cardCtr.cardAdd(context, cardHolderNameCtrl.text,
                               cardNumberCtrl.text, month, year, cvcCtrl.text, () {
-                            cardHolderNameCtrl.clear();
+                                Get.back();
+                                Get.back();
+                                cardHolderNameCtrl.clear();
                             cardNumberCtrl.clear();
                             expireDateCtrl.clear();
                             cvcCtrl.clear();
                             cardCtr.cardFetch();
-                            Get.back();
                            // Get.toNamed(RouteHelper.getPatientPaymentScreen());
                               });
                         }

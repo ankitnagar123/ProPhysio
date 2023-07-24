@@ -288,7 +288,7 @@ class _DoctorListState extends State<DoctorList> {
                                       height: 100.0,
                                       // margin: const EdgeInsets.all(6),
                                       child: FadeInImage.assetNetwork(
-                                          placeholder: "assets/images/YlWC.gif",
+                                          placeholder: "assets/images/drsymbol.gif",/*"assets/images/YlWC.gif",*/
                                           alignment: Alignment.center,
                                           image: list[index]
                                               .doctorProfile

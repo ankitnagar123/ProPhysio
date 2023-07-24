@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../mycolor/mycolor.dart';
-
+import 'package:get/get.dart';
 
 
 class CustomView {
@@ -196,7 +196,7 @@ class CustomView {
       context,
       String msg,
       ) {
-    final snackBar = SnackBar(
+    /*final snackBar = SnackBar(
       content: Text(msg,
           style: const TextStyle(
               color: Colors.white,
@@ -208,11 +208,24 @@ class CustomView {
       backgroundColor: MyColor.primary,
       duration: const Duration(seconds: 1),
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);*/
+    Get.rawSnackbar(
+      message:
+      msg,
+      // icon: Icon(Icons.person, color: Colors.white),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: MyColor.primary1,
+      borderRadius: 15.0,
+      margin: EdgeInsets.all(20),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+      dismissDirection: DismissDirection.startToEnd,
+      forwardAnimationCurve: Curves.easeOutBack,
+
+    );
   }
 
 //*********** main TextField********//
-
   Widget myField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {
     final height = MediaQuery.of(context).size.height;
@@ -385,29 +398,33 @@ class CustomView {
       );
   }
 
+
+  /*For Alert INfo*/
   massenger(BuildContext context, String text) {
-    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(text,
-          style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "RobotoMono",
-              letterSpacing: 1.0,
-              fontSize: 13)),
-      backgroundColor: MyColor.primary,
-      behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.all(25),
-    ));
+    return  Get.rawSnackbar(
+      message:
+      text,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: MyColor.primary1,
+      borderRadius: 20,
+      margin: EdgeInsets.all(15),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+      dismissDirection: DismissDirection.startToEnd,
+      forwardAnimationCurve: Curves.easeOutBack,
+    );
   }
+
 
   Widget MyIndicator() {
     return SizedBox(
-      height: 28,
-      width: 28,
-      child: CircularProgressIndicator(
-        strokeWidth: 2.0,
-        backgroundColor: MyColor.primary.withOpacity(0.1),
+      height: 40,
+      width: 40,
+      child: Image.asset("assets/images/iphoneIndicator.gif")/*CircularProgressIndicator(
+        strokeWidth: 2.8,
+        backgroundColor: MyColor.primary.withOpacity(0.3),
         color: MyColor.primary,
-      ),
+      ),*/
     );
   }
 }

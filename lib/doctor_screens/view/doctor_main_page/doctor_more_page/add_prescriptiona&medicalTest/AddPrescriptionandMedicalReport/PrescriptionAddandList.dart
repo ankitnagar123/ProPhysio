@@ -179,7 +179,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                       const SizedBox(
                         height: 2.0,
                       ),
-                      Text(details!.username,
+                      Text(details!.username.toString(),
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
@@ -203,7 +203,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         height: 2.0,
                       ),
                       Text(
-                        details!.birthPlace.toString(),
+                        details.birthPlace.toString(),
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 14.0,
@@ -236,7 +236,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         height: 2.0,
                       ),
                       Text(
-                          details!.contact,
+                          details.contact,
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
@@ -260,7 +260,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         height: 2.0,
                       ),
                       Text(
-                          details!.weight,
+                          details.weight,
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
@@ -292,7 +292,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         height: 2.0,
                       ),
                       Text(
-                          details!.location,
+                          details.location,
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14.0,
@@ -316,7 +316,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                         height: 2.0,
                       ),
                       Text(
-                          details!.height,
+                          details.height,
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15.0,
