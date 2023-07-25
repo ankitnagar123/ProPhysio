@@ -45,16 +45,15 @@ var loadingCenter = false.obs;
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       if (result == "success") {
+        callback();
         loading.value = false;
         dateId.value = jsonResponse["date_id"].toString();
         log("Date id.......$dateId");
         log("my Doctor Add Availability $result");
         custom.massenger(context, text.AddDateSucces.tr);
-
         /*Time Slot's api call here*/
         doctorFetchTimeList();
         log(result.toString());
-        callback();
       } else {
         loading.value = false;
         custom.massenger(context, result.toString());

@@ -35,8 +35,9 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          /*leading: IconButton(
+        /*  leading: IconButton(
             onPressed: () {
+              print("object");
               Get.back();
             },
             icon: const Icon(

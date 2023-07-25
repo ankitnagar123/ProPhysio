@@ -92,6 +92,7 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
       ),
     );
   }
+
   void deletePopUp(BuildContext context) {
     showGeneralDialog(
         context: context,
@@ -188,9 +189,12 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
                                   context,
                                   text.Deleteprofile.tr,
                                       () {
-                                    changePassCtr.deleteAccount(context, passwordCtr.text, () {
-                                      Get.offAllNamed(RouteHelper.getLoginScreen());
-                                    });
+                                    if(validation()){
+                                      changePassCtr.deleteAccount(context, passwordCtr.text, () {
+                                        Get.offAllNamed(RouteHelper.getLoginScreen());
+                                      });
+                                    }
+
                                   },
                                   Colors.red,
                                   const TextStyle(

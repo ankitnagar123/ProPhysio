@@ -197,8 +197,7 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
             ),
             zoom: 15.0,
           ),
-          // onMapCreated: _onMapCreated,
-          onMapCreated: (GoogleMapController controllers) async {
+                                                            onMapCreated: (GoogleMapController controllers) async {
             _onMapCreated(controllers);
             customInfoWindowController.googleMapController = controllers;
             controller = controllers;

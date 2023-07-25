@@ -36,11 +36,11 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen> with SingleTicker
     final widht = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
+      floatingActionButton:pCenterCtr.centerList.isEmpty?const Text(""): Padding(
         padding: const EdgeInsets.only(bottom: 10.0),
         child: Container(
           height: 38.0,
-          width: widht * 0.37,
+          width: widht * 0.40,
           decoration: BoxDecoration(
               color: MyColor.primary, borderRadius: BorderRadius.circular(30)),
           child: Center(

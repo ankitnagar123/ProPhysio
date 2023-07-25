@@ -44,21 +44,16 @@ class _MorePageState extends State<MorePage> {
     return Obx(() {
       return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.white24,
-            elevation: 0.0,
-          ),
           body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /*const SizedBox(
-                  height: 5.0,
-                ),*/
-                customView.text("${text.hii.tr} @${patientProfileCtr.name.value}", 17.0,
-                    FontWeight.w500, Colors.black),
+                customView.text(
+                    "${text.hii.tr} @${patientProfileCtr.name.value}",
+                    17.0,
+                    FontWeight.w500,
+                    Colors.black),
                 const SizedBox(
                   height: 15.0,
                 ),
@@ -75,15 +70,18 @@ class _MorePageState extends State<MorePage> {
                           },
                           title: customView.text(text.addCreditCard.tr, 16,
                               FontWeight.w500, MyColor.primary1),
-                          subtitle:  Row(
+                          subtitle: Row(
                             children: [
                               Text(text.goto.tr,
                                   style: TextStyle(color: MyColor.primary1)),
-                              Text( text.payment.tr,
-                                  style: TextStyle(
+                              Text(text.payment.tr,
+                                  style: const TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: MyColor.primary1,
                                       fontWeight: FontWeight.w500)),
+                              SizedBox(
+                                width: 4,
+                              ),
                               Text(text.toCompleteIt.tr,
                                   style: TextStyle(color: MyColor.primary1)),
                             ],
@@ -130,8 +128,11 @@ class _MorePageState extends State<MorePage> {
                                   ),
                                 ),
                                 child: Center(
-                                    child: customView.text(text.ProfileSettings.tr,
-                                        12.0, FontWeight.w400, Colors.black)),
+                                    child: customView.text(
+                                        text.ProfileSettings.tr,
+                                        12.0,
+                                        FontWeight.w400,
+                                        Colors.black)),
                               )),
                         ),
                       ),
@@ -170,8 +171,8 @@ class _MorePageState extends State<MorePage> {
                                   ),
                                 ),
                                 child: Center(
-                                    child: customView.text(text.payment.tr, 12.0,
-                                        FontWeight.w400, Colors.black)),
+                                    child: customView.text(text.payment.tr,
+                                        12.0, FontWeight.w400, Colors.black)),
                               )),
                         ),
                       ),
@@ -182,8 +183,8 @@ class _MorePageState extends State<MorePage> {
                   height: 30.0,
                 ),
                 ListTile(
-                  subtitle: customView.text(text.rateAppointmentYouDid.tr,
-                      10.0, FontWeight.w500, Colors.black),
+                  subtitle: customView.text(text.rateAppointmentYouDid.tr, 10.0,
+                      FontWeight.w500, Colors.black),
                   visualDensity: VisualDensity.compact,
                   onTap: () {
                     Navigator.push(
@@ -222,7 +223,7 @@ class _MorePageState extends State<MorePage> {
                   title: customView.text(
                       text.reports.tr, 14.0, FontWeight.w500, Colors.black),
                   subtitle: customView.text(
-                     text.viewYourPrescriptionMedicalTestMedicines.tr,
+                      text.viewYourPrescriptionMedicalTestMedicines.tr,
                       10.0,
                       FontWeight.w500,
                       Colors.black),
@@ -246,15 +247,16 @@ class _MorePageState extends State<MorePage> {
                   ),
                   title: customView.text(
                       text.qrCode.tr, 14.0, FontWeight.w500, Colors.black),
-                  subtitle: customView.text(
-                      text.viewYourQrCode.tr, 10.0, FontWeight.w500, Colors.black),
+                  subtitle: customView.text(text.viewYourQrCode.tr, 10.0,
+                      FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
                     size: 20.0,
                   ),
                 ),
-                ListTile(
+
+               /* ListTile(
                   visualDensity: VisualDensity.compact,
                   onTap: () {
                     Navigator.push(
@@ -294,7 +296,8 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                     size: 20.0,
                   ),
-                ),
+                ),*/
+
                 ListTile(
                   visualDensity: VisualDensity.compact,
                   onTap: () {
@@ -305,7 +308,7 @@ class _MorePageState extends State<MorePage> {
                     color: Colors.black,
                   ),
                   title: customView.text(
-                  text.Support.tr, 14.0, FontWeight.w500, Colors.black),
+                      text.Support.tr, 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
@@ -381,8 +384,8 @@ class _MorePageState extends State<MorePage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text(
-                                text.Logout.tr, 17, FontWeight.w500, Colors.black),
+                            child: customView.text(text.Logout.tr, 17,
+                                FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 14.0,
@@ -390,11 +393,8 @@ class _MorePageState extends State<MorePage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text(
-                               text.AreyouSureExit.tr,
-                                13,
-                                FontWeight.w400,
-                                Colors.black),
+                            child: customView.text(text.AreyouSureExit.tr, 13,
+                                FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -409,8 +409,8 @@ class _MorePageState extends State<MorePage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text(text.Dismiss.tr, 14.0,
-                                        FontWeight.w500, MyColor.grey),
+                                    child: customView.text(text.Dismiss.tr,
+                                        14.0, FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: customView.mysButton(

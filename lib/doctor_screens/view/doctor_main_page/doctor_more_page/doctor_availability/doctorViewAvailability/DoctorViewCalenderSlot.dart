@@ -224,7 +224,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
           ]),
         ),
         body: Obx(() {
-          if (appointmentController.loadingFetchDate.value) {
+          if (appointmentController.loadingFetchDateDr.value) {
             Center(child: custom.MyIndicator());
           }
           return SingleChildScrollView(

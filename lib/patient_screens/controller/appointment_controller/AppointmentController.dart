@@ -22,8 +22,10 @@ LocalString text = LocalString();
   var loadingFetchTimeBooked = false.obs;
 
   var loadingFetchDate = false.obs;
+var loadingFetchDateDr = false.obs;
 
-  var loadingAdd = false.obs;
+
+var loadingAdd = false.obs;
 
   var visitCharge = <VisitChargeModel>[].obs;
   var timeList = <DoctorTimeListModelpatinet>[].obs;
@@ -61,7 +63,7 @@ LocalString text = LocalString();
 
   /*------------------For Doctor view date show on calender  list Fetch Api----------------*/
   Future<void> doctorViewDateCalender(String centerId) async {
-    loadingFetchDate.value = true;
+    loadingFetchDateDr.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "center_id":centerId,
@@ -72,14 +74,14 @@ LocalString text = LocalString();
       log("calendar list of date's.....${response.body}");
 
       if (response.statusCode == 200) {
-        loadingFetchDate.value = false;
+        loadingFetchDateDr.value = false;
         dateList.value = calenderDateShowModelFromJson(response.body);
       } else {
-        loadingFetchDate.value = false;
+        loadingFetchDateDr.value = false;
         log("backend error");
       }
     } catch (e) {
-      loadingFetchDate.value = false;
+      loadingFetchDateDr.value = false;
       log("exception$e");
     }
   }

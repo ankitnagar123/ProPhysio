@@ -6,6 +6,8 @@ import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../medica_center/center_more/center_setting/CenterChangeLanguage.dart';
 import '../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
+import '../about_page/PatinetAboutPage.dart';
+import '../term_condition_page/PatientTermCondition.dart';
 
 class PatientSettingsScreen extends StatefulWidget {
   const PatientSettingsScreen({Key? key}) : super(key: key);
@@ -43,13 +45,15 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
           backgroundColor: Colors.white,
         ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               ListTile(
                 onTap: () {
                   Get.toNamed(
-                      RouteHelper.getPatientChangePasswordScreen());
+                      RouteHelper.getPatientChangePasswordScreen(),
+
+                  );
                 },
                 leading: const Icon(
                   Icons.lock,
@@ -73,6 +77,47 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                 ),
                 title: customView.text(
                     text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                visualDensity: VisualDensity.compact,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const PatientTermCondition()));
+                },
+                leading: const Icon(
+                  Icons.note_alt,
+                  color: Colors.black,
+                ),
+                title: customView.text(text.TermCondition.tr, 14.0,
+                    FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                visualDensity: VisualDensity.compact,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PatinetAboutScreen()));
+                },
+                leading: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.About.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,

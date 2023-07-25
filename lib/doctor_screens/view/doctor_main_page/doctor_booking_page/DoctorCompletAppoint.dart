@@ -82,7 +82,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                       Get.back();
                                     },
                                     leading: customView.text(
-                                        "${text.date}: ${{text.linear.tr}}",
+                                        "${text.date}: ${text.linear.tr}",
                                         15,
                                         FontWeight.normal,
                                         MyColor.black),

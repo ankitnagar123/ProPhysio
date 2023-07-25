@@ -40,17 +40,14 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
         ),
         appBar: AppBar(
           centerTitle: true,
-          leading: Container(
-            margin: const EdgeInsets.fromLTRB(13.0, 9.0, 0.0, 8.0),
-            child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_rounded,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Get.back();
-              },
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Colors.black,
             ),
+            onPressed: () {
+              Get.back();
+            },
           ),
           title:   Text(
             text.Language.tr,

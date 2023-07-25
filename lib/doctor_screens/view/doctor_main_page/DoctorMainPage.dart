@@ -35,45 +35,43 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            items:  <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage("assets/images/dhomeIcon.png"),
-                      size: 20.0),
-                  label:text.Home.tr,
-                  tooltip: text.Home.tr),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage("assets/images/dIcon.png"),
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          items:  <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage("assets/images/dhomeIcon.png"),
                     size: 20.0),
-                label: text.Booking.tr,
-                tooltip: text.Booking.tr,
-              ),
-              BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage("assets/images/ChatIcon.png"),
-                      size: 20.0),
-                  label: text.chat.tr,
-                  tooltip: text.chat.tr),
-              BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage("assets/images/moreIcon.png"),
-                      size: 20),
-                  label: text.More.tr,
-                  tooltip: text.More.tr),
-            ],
-            type: BottomNavigationBarType.shifting,
-            currentIndex: _selectedIndex,
-            selectedItemColor: MyColor.iconColor,
-            unselectedItemColor: MyColor.black,
-            selectedFontSize: 12,
-            selectedLabelStyle: const TextStyle(fontSize: 12),
-            showUnselectedLabels: true,
-            unselectedLabelStyle: const TextStyle(color: Colors.black38),
-            iconSize: 25,
-            onTap: _onItemTapped,
-            elevation: 5),
-        body: screens.elementAt(_selectedIndex),
-      ),
+                label:text.Home.tr,
+                tooltip: text.Home.tr),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/images/dIcon.png"),
+                  size: 20.0),
+              label: text.Booking.tr,
+              tooltip: text.Booking.tr,
+            ),
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage("assets/images/ChatIcon.png"),
+                    size: 20.0),
+                label: text.chat.tr,
+                tooltip: text.chat.tr),
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage("assets/images/moreIcon.png"),
+                    size: 20),
+                label: text.More.tr,
+                tooltip: text.More.tr),
+          ],
+          type: BottomNavigationBarType.shifting,
+          currentIndex: _selectedIndex,
+          selectedItemColor: MyColor.iconColor,
+          unselectedItemColor: MyColor.black,
+          selectedFontSize: 12,
+          selectedLabelStyle: const TextStyle(fontSize: 12),
+          showUnselectedLabels: true,
+          unselectedLabelStyle: const TextStyle(color: Colors.black38),
+          iconSize: 25,
+          onTap: _onItemTapped,
+          elevation: 5),
+      body: screens.elementAt(_selectedIndex),
     );
   }
 }
