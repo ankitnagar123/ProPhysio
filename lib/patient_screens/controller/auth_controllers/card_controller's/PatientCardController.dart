@@ -43,7 +43,7 @@ class CardCtr extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       loadingAdd.value = false;
-      if (result == "successfully") {
+      if (result == "success") {
         callback();
         cardFetch();
         loadingAdd.value = false;

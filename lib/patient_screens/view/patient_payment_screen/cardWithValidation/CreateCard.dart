@@ -27,11 +27,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   var _formKey = new GlobalKey<FormState>();
-  var numberController = new TextEditingController();
-  var _paymentCard = PaymentCard();
+  TextEditingController holderNameController =  TextEditingController();
+  TextEditingController cVVController =  TextEditingController();
+  TextEditingController expiryController =  TextEditingController();
+  TextEditingController numberController =  TextEditingController();
+  final _paymentCard = PaymentCard();
   var _autoValidateMode = AutovalidateMode.disabled;
 
-  var _card = new PaymentCard();
+  final _card = new PaymentCard();
 
   @override
   void initState() {
@@ -42,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final widht = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
@@ -68,12 +71,26 @@ class _MyHomePageState extends State<MyHomePage> {
               autovalidateMode: _autoValidateMode,
               child:  ListView(
                 children: <Widget>[
-                   const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: width * 0.05,
+                  ),
+                  customView.text(text.addNewCardOrderToPayAppointment.tr, 14.0,
+                      FontWeight.w500, Colors.black),
+                  SizedBox(
+                    height: width * 0.08,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40.0),
+                    child: customView.text(text.enterCardHolderName.tr, 11.0,
+                        FontWeight.w500, MyColor.black),
+                  ),
+                  SizedBox(
+                    height: width * 0.01,
                   ),
               SizedBox(
-                width: widht,
+                width: width,
                 child: TextFormField(
+                  controller: holderNameController,
                   onSaved: (String? value) {
                     _card.name = value;
                     print(value);
@@ -100,10 +117,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
                   SizedBox(
-                    height: 30.0,
+                    height: width * 0.05,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40.0),
+                    child: customView.text(text.enterCardNumber.tr, 11.0,
+                        FontWeight.w500, MyColor.black),
+                  ),
+                  SizedBox(
+                    height: width * 0.01,
                   ),
                    TextFormField(
-
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
@@ -128,100 +152,139 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     validator: CardUtils.validateCardNum,
                   ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      new LengthLimitingTextInputFormatter(4),
-                    ],
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                      hintStyle: const TextStyle(fontSize: 12),
-                      filled: true,
-                      fillColor: MyColor.white,
-                      border: const OutlineInputBorder(),
-                      icon: Image.asset(
-                        'assets/images/cvv.png',
-                        width: 25.0,
-                        color: Colors.grey[600],
+            SizedBox(
+              height: width * 0.05,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0),
+                        child: customView.text(text.expireDate.tr, 11.0,
+                            FontWeight.w500, MyColor.black),
                       ),
-                      hintText: 'CVV',
-                      // labelText: 'CVV',
-                    ),
-                    validator: CardUtils.validateCVV,
-                    keyboardType: TextInputType.number,
-                    onSaved: (value) {
-                      _paymentCard.cvv = int.parse(value!);
-                    },
-                  ),
-                  new SizedBox(
-                    height: 30.0,
-                  ),
-                  TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      new LengthLimitingTextInputFormatter(4),
-                      new CardMonthInputFormatter()
+                      SizedBox(
+                        height: width * 0.01,
+                      ),
+                      TextFormField(
+                        controller: expiryController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          new LengthLimitingTextInputFormatter(4),
+                          new CardMonthInputFormatter()
+                        ],
+                        decoration: const InputDecoration(
+                          contentPadding:
+                          const EdgeInsets.only(top: 3, left: 20),
+                          hintStyle: const TextStyle(fontSize: 12),
+                          filled: true,
+                          fillColor: MyColor.white,
+                          border: const OutlineInputBorder(),
+                          icon: Icon(Icons.calendar_month, size: 25),
+                          hintText: 'MM/YY',
+                          // labelText: 'Expiry Date',
+                        ),
+                        validator: CardUtils.validateDate,
+                        keyboardType: TextInputType.number,
+                        onSaved: (value) {
+                          List<int> expiryDate =
+                          CardUtils.getExpiryDate(value!);
+                          _paymentCard.month = expiryDate[0];
+                          _paymentCard.year = expiryDate[1];
+                        },
+                      ),
                     ],
-                    decoration: const InputDecoration(
-                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                      hintStyle: const TextStyle(fontSize: 12),
-                      filled: true,
-                      fillColor: MyColor.white,
-                      border: const OutlineInputBorder(),
-                      icon: Icon(Icons.calendar_month,size: 25),
-                      hintText: 'MM/YY',
-                      // labelText: 'Expiry Date',
-                    ),
-                    validator: CardUtils.validateDate,
-                    keyboardType: TextInputType.number,
-                    onSaved: (value) {
-                      List<int> expiryDate = CardUtils.getExpiryDate(value!);
-                      _paymentCard.month = expiryDate[0];
-                      _paymentCard.year = expiryDate[1];
-                    },
                   ),
-                  new SizedBox(
-                    height: 50.0,
+                ),
+                const SizedBox(
+                  width: 14.0,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0),
+                        child: customView.text(
+                            "CVC/CVV", 11.0, FontWeight.w500, MyColor.black),
+                      ),
+                      SizedBox(
+                        height: width * 0.01,
+                      ),
+                      TextFormField(
+                        controller: cVVController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          new LengthLimitingTextInputFormatter(4),
+                        ],
+                        decoration: InputDecoration(
+                          contentPadding:
+                          const EdgeInsets.only(top: 3, left: 20),
+                          hintStyle: const TextStyle(fontSize: 12),
+                          filled: true,
+                          fillColor: MyColor.white,
+                          border: const OutlineInputBorder(),
+                          icon: Image.asset(
+                            'assets/images/cvv.png',
+                            width: 25.0,
+                            color: Colors.grey[600],
+                          ),
+                          hintText: 'CVV',
+                          // labelText: 'CVV',
+                        ),
+                        validator: CardUtils.validateCVV,
+                        keyboardType: TextInputType.number,
+                        onSaved: (value) {
+                          _paymentCard.cvv = int.parse(value!);
+                        },
+                      ),
+                    ],
                   ),
-                  // Align(
-                  //   alignment: Alignment.center,
-                  //   child: Container(
-                  //     margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
-                  //     child: Obx(() {
-                  //       if (cardCtr.loadingAdd.value) {
-                  //         return customView.MyIndicator();
-                  //       }
-                  //       return customView.MyButton(
-                  //         context,
-                  //         text.saveCard.tr,
-                  //             () {
-                  //           if( _validateInputs()){
-                  //             cardCtr.cardAdd(context, cardHolderNameCtrl.text,
-                  //                 cardNumberCtrl.text, month, year, cvcCtrl.text, () {
-                  //                   Get.back();
-                  //                   Get.back();
-                  //                   cardHolderNameCtrl.clear();
-                  //                   cardNumberCtrl.clear();
-                  //                   expireDateCtrl.clear();
-                  //                   cvcCtrl.clear();
-                  //                   cardCtr.cardFetch();
-                  //                   // Get.toNamed(RouteHelper.getPatientPaymentScreen());
-                  //                 });
-                  //           }
-                  //         },
-                  //         MyColor.primary,
-                  //         const TextStyle(fontFamily: "Poppins", color: Colors.white),
-                  //       );
-                  //     }),
-                  //   ),
-                  // ),
-                  Container(
+                ),
+              ],
+            ),
+            // Expanded(child: SizedBox()),
+            SizedBox(
+              height: width * 0.4,
+            ),
+                  Align(
                     alignment: Alignment.center,
-                    child: _getPayButton(),
-                  )
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+                      child: Obx(() {
+                        if (cardCtr.loadingAdd.value) {
+                          return customView.MyIndicator();
+                        }
+                        return customView.MyButton(
+                          context,
+                          text.saveCard.tr,
+                              () {
+                            if( validateInputs()){
+                              var month = expiryController.text.split('/').elementAt(0);
+                              var year = expiryController.text.split('/').elementAt(1);
+                              cardCtr.cardAdd(context, holderNameController.text,
+                                  numberController.text,month, year, cVVController.text, () {
+                                    Get.back();
+                                    holderNameController.clear();
+                                    numberController.clear();
+                                    expiryController.clear();
+                                    cVVController.clear();
+                                    cardCtr.cardFetch();
+                                    // Get.toNamed(RouteHelper.getPatientPaymentScreen());
+                                  });
+                            }
+                          },
+                          MyColor.primary,
+                          const TextStyle(fontFamily: "Poppins", color: Colors.white),
+                        );
+                      }),
+                    ),
+                  ),
                 ],
               )),
         ));
@@ -243,46 +306,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-   _validateInputs() {
+   bool validateInputs() {
     final FormState form = _formKey.currentState!;
     if (!form.validate()) {
       setState(() {
         _autoValidateMode =
             AutovalidateMode.always; // Start validating on every change.
       });
-      _showInSnackBar('Please fix the errors in red before submitting.');
     } else {
       form.save();
-      // Encrypt and send send payment details to payment gateway
-      _showInSnackBar('Payment card is valid');
+      return true;
     }
-  }
-
-  Widget _getPayButton() {
-    if (Platform.isIOS) {
-      return new CupertinoButton(
-        onPressed: _validateInputs,
-        color: CupertinoColors.activeBlue,
-        child: const Text(
-          Strings.pay,
-          style: const TextStyle(fontSize: 17.0),
-        ),
-      );
-    } else {
-      return ElevatedButton(
-        onPressed: _validateInputs,
-        child: Text(
-          Strings.pay.toUpperCase(),
-          style: const TextStyle(fontSize: 17.0),
-        ),
-      );
-    }
-  }
-
-  void _showInSnackBar(String value) {
-    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-      content: new Text(value),
-      duration: new Duration(seconds: 3),
-    ));
+    return false;
   }
 }

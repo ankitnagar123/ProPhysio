@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Strings.dart';
 
 class PaymentCard {
+
   CardType? type;
   String? number;
   String? name;

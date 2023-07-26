@@ -9,6 +9,7 @@ import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
+import 'cardWithValidation/CreateCard.dart';
 
 class PatientCheckOutCard extends StatefulWidget {
   String price, time, healthCard, date, centerId;
@@ -115,7 +116,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+                        // Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
                         // Get.toNamed(RouteHelper.getViewCertificateScreen());
                       },
                       child: Container(
