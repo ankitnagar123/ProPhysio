@@ -77,6 +77,55 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
                   size: 20.0,
                 ),
               ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DSupportScreen());
+                },
+                leading: const Icon(
+                  Icons.person_outline,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.Support.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DTandCScreen());
+                },
+                leading: const Icon(
+                  Icons.note_alt,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.TermCondition.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DAboutScreen());
+                },
+                leading: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.About.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+
             ],
           ),
         ),

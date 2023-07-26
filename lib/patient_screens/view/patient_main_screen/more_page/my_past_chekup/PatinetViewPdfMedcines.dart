@@ -58,64 +58,84 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
           title: custom.text(text.View_Medicine.tr, 17, FontWeight.w500, MyColor.black),
         ),
         body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  InkWell(
                     onTap: () async {
                       var url ="${doctorPrescriptionCtr.fetchMedicineList.value?.pdf}";
                       final file = await loadPdfFromNetwork(url);
                       openPdf(context, file, url);
                     },
                     child: Card(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                           custom.text(text.View_Medicine.tr, 14, FontWeight.w500, MyColor.black),
-                          const Icon(Icons.download,color: MyColor.primary1,size: 20),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width/2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                               custom.text(text.View_Medicine.tr, 14, FontWeight.w500, MyColor.black),
+                              const Icon(Icons.download,color: MyColor.primary1,size: 20),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                doctorPrescriptionCtr.loadingMedicineFetch.value
-                    ? Center(heightFactor: 13, child: custom.MyIndicator())
-                    : ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: doctorPrescriptionCtr.fetchMedicineList.value!.details.length,
-                  itemBuilder: (context, index) {
-                    var list = doctorPrescriptionCtr.fetchMedicineList.value!.details[index];
-                    var medicineName = list.medicineName;
-                    var medicineTime = list.medicineTiming;
-                    var medicineSlot = list.medicineSlot;
-                    var medicineDisc = list.description;
-                    /*   var medicineDrName = list.;
-                      var medicineDrSurname = list.doctorSurname;*/
-                    return InkWell(
-                      onTap: () => showBottomSheet(context,medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
-                      child: Card(
-                        color: MyColor.midgray,
-                        child: ListTile(
-                            contentPadding: const EdgeInsets.all(12),
-                            title: custom.text(list.medicineName.toString(), 16,
-                                FontWeight.w400, MyColor.primary1),
-                            subtitle: Text(
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontFamily: "Poppins",
+                  doctorPrescriptionCtr.loadingMedicineFetch.value
+                      ? Center(heightFactor: 13, child: custom.MyIndicator())
+                      : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: doctorPrescriptionCtr.fetchMedicineList.value!.details.length,
+                    itemBuilder: (context, index) {
+                      var list = doctorPrescriptionCtr.fetchMedicineList.value!.details[index];
+                      var medicineName = list.medicineName;
+                      var medicineTime = list.medicineTiming;
+                      var medicineSlot = list.medicineSlot;
+                      var medicineDisc = list.description;
+                      /*   var medicineDrName = list.;
+                        var medicineDrSurname = list.doctorSurname;*/
+                      return InkWell(
+                        onTap: () => showBottomSheet(context,medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),/*medicineDrName.toString(),medicineDrSurname.toString(),*/medicineDisc.toString()),
+                        child: Card(
+                          color: MyColor.midgray,
+                          child: ListTile(
+                              contentPadding: const EdgeInsets.all(7),
+                              title: custom.text(list.medicineName.toString(), 16,
+                                  FontWeight.w400, MyColor.primary1),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: "Poppins",
+                                    ),
+                                    list.medicineSlot,
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: "Poppins",
+                                    ),
+                                    list.description,
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                              list.description,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            trailing: Text(list.medicineSlot)),
-                      ),
-                    );
-                  },
-                )
-              ],
+                              trailing: const Icon(Icons.details,color: MyColor.primary1,)),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
             )),
       );
     });

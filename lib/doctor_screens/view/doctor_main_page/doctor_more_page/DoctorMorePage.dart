@@ -38,7 +38,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
     return Obx(() {
       return Scaffold(
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -214,7 +214,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
+             /* ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DTandCScreen());
                 },
@@ -261,7 +261,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                   size: 20.0,
                 ),
-              ),
+              ),*/
               const Divider(
                 height: 30.0,
               ),

@@ -7,6 +7,7 @@ import '../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
+import 'cardWithValidation/CreateCard.dart';
 
 class PatientPaymentScreen extends StatefulWidget {
   const PatientPaymentScreen({Key? key}) : super(key: key);
@@ -78,7 +79,8 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
             context,
             text.addNewCard.tr,
                 () {
-              Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+              // Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
             },
             MyColor.primary,
             const TextStyle(fontFamily: "Poppins", color: Colors.white),

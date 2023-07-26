@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 class LocalString extends Translations {
   /// ******************Sign In Page************** //
   String Download_report_successful = "Download report successful";
+  String Select_doctor = "Select doctor";
+
   String SIGN_IN = "Sign in";
   String ENTER_USER_EMAIL = "Enter your username/email";
   String HINT_ENTER_USER_EMAIL = "Enter Email ID/User Id";
@@ -574,6 +576,7 @@ String NoWardAddedCenter = "No ward added by center";
         'en_US': {
           //*****************Sign IN Page***************************//
   Download_report_successful : "Download report successful",
+  Select_doctor : "Select doctor",
           SIGN_IN: "Sign in",
           ENTER_USER_EMAIL: "Enter your username/email",
           HINT_ENTER_USER_EMAIL: "Enter Email ID/User Id",
@@ -1112,6 +1115,7 @@ String NoWardAddedCenter = "No ward added by center";
         'it_IT': {
           //*****************Sign IN Page***************************//
           Download_report_successful : "Download del rapporto riuscito",
+          Select_doctor : "Seleziona dottore",
           SIGN_IN: "Registrazione",
           ENTER_USER_EMAIL: "Inserisci il tuo nome utente/e-mail",
           HINT_ENTER_USER_EMAIL: "Inserisci ID e-mail/ID utente",

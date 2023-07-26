@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       translations: LocalString(),
       locale:const Locale('en','US') ,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blueGrey
       ),
       debugShowCheckedModeBanner: false,
       title: 'Medica',
