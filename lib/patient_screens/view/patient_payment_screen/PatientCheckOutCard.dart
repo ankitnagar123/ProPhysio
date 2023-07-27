@@ -116,9 +116,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
-                        // Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
-                        // Get.toNamed(RouteHelper.getViewCertificateScreen());
+                         Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
                       },
                       child: Container(
                           height: 50.0,

@@ -259,7 +259,7 @@ LocalString text = LocalString();
 
   bool validationotp() {
     print("my otp${optctr.text.toString()}");
-    if (optctr.text.isEmpty || optctr.text.length != 4) {
+    if (optctr.text.isEmpty) {
       custom.massenger(context, text.Please_enter_OTP.tr);
     } else if (doctorSignUpCtr.otp.value == optctr.text) {
       print("Correct OTP");

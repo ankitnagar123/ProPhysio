@@ -392,7 +392,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                         children: [
                            Text(
                             text.bookingInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),

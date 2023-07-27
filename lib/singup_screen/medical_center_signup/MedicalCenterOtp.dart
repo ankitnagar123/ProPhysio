@@ -48,6 +48,9 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
     code = Get.parameters["code"].toString();
     flag = Get.parameters['flag'].toString();
     phone = Get.parameters['phone'].toString();
+    print(code);
+    print(phone);
+    print(email);
     /*OTP API CALL*/
     centerAuthCtr.CenterSignupOtp(
         context, code, phone, email);

@@ -138,7 +138,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 child: Stack(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(120.0),
+                      borderRadius: BorderRadius.circular(80.0),
                       child: file == null
                           ? InkWell(
                               onTap: () {
@@ -150,8 +150,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                     width: 120,
                                     height: 120,
                                     fit: BoxFit.cover),
-                                width: 110,
-                                height: 110,
+                                width: 120,
+                                height: 120,
                                 fit: BoxFit.cover,
                                 placeholder: "assets/images/loading.gif",
                                 image: files,
@@ -159,7 +159,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                               ),
                             )
                           : Image.file(file!,
-                              width: 120, height: 120, fit: BoxFit.fill),
+                              width: 120, height: 120, fit: BoxFit.cover),
                     ),
                     Positioned(
                       bottom: -10.0,

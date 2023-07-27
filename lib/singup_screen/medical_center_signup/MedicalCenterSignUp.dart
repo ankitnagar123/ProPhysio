@@ -34,8 +34,8 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
   CustomView customView = CustomView();
   String? latitude;
   String? longitude;
-  String code = '';
-  String flag = '';
+  String code = '+39';
+  String flag = 'IT';
   DateTime? startDate, endData;
 
 
@@ -164,6 +164,9 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
             ),
             customView.myField(
                 context, addressCtr,  text.Select_Address.tr, TextInputType.text),
+            const SizedBox(
+              height: 22,
+            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(15.0),

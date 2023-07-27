@@ -58,7 +58,7 @@ class DoctorListCtr extends GetxController {
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
 
     };
-    print("doctor list peramiter=============$cardPeramert");
+    print("doctor list parameter=============$cardPeramert");
 
     bool connection = await  checkInternetConnection();
   if(connection){

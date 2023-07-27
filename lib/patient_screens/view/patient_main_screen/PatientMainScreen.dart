@@ -41,7 +41,7 @@ CustomView view = CustomView();
     const MorePage(),
     const PDrAllCategory(),
     PDrSubCategory(categoryId: '',),
-    DoctorListWithCategory(catId: '', subCatId: '',)
+    DoctorListWithCategory(catId: '', subCatId: '', rating: '', startPrice: '', EndPrice: '',)
   ];
 
   void _onItemTapped(int index) {

@@ -59,7 +59,7 @@ class CenterAuthCtr extends GetxController {
       "contact":phone,
       "email": email,
     };
-    print("Signup Parameter$signupPerameter");
+    print("Signup verification Parameter$signupPerameter");
     final response =
         await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);
     try {
@@ -117,6 +117,7 @@ class CenterAuthCtr extends GetxController {
         body: signupPerameter);
 /*    final response =
         await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);*/
+    print("parameter  for medical center${signupPerameter}");
     try {
       log("response of Medical Center Signup OTP :-${response.body}");
       loadingotp.value = false;

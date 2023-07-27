@@ -59,6 +59,7 @@ import '../../patient_screens/view/patient_main_screen/more_page/patient_setting
 import '../../patient_screens/view/patient_main_screen/more_page/patient_settings_screen/patient_change_password_screen/PatientChangePasswordScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_support_screen/PatientSupportScreen.dart';
 import '../../patient_screens/view/patient_payment_screen/PatientPaymentScreen.dart';
+import '../../patient_screens/view/patient_payment_screen/cardWithValidation/CreateCard.dart';
 import '../../singup_screen/doctor_signup_page/DoctorSelectAddress.dart';
 import '../../singup_screen/medical_center_signup/MedicalCenterOtp.dart';
 import '../../splash_screen/SplaceScreen.dart';
@@ -348,7 +349,7 @@ class RouteHelper {
 
     GetPage(name: patientProfileScreen, page: () => const PatientProfileScreen()),
     GetPage(name: patientPaymentScreen, page: () => const PatientPaymentScreen()),
-    GetPage(name: patientAddNewCardScreen, page: () => const PatientAddNewCardScreen()),
+    GetPage(name: patientAddNewCardScreen, page: () => const PatientAddNewCard()),
     GetPage(name: viewCertificateScreen, page: () => const ViewCertificateScreen()),
     GetPage(name: reviewsScreen, page: () => const ReviewsScreen()),
     GetPage(name: pNavigateDrScreen, page: () =>  const NavigateMapViewScreen()),

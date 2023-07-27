@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -291,6 +292,7 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
     );
   }
 
+*/
 /*  bool isValid() {
      if (cardHolderNameCtrl.text == '') {
     customView.MySnackBar(context,text.pleaseEnterYourName.tr);
@@ -304,7 +306,8 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
       return true;
     }
     return false;
-  }*/
+  }*//*
+
   @override
   void dispose() {
     // Clean up the controller when the Widget is removed from the Widget tree
@@ -335,3 +338,4 @@ class _PatientAddNewCardScreenState extends State<PatientAddNewCardScreen> {
     return false;
   }
 }
+*/

@@ -42,6 +42,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
   @override
   void initState() {
     super.initState();
+    getValuee();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerDoctorListFetch(context);
     });
@@ -350,8 +351,7 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
   }
 
   void getValuee() async {
-
-    id = await sp.getStringValue(sp.DOCTOR_ID_KEY);
+    id = await sp.getStringValue(sp.CENTER_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);

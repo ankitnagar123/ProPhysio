@@ -26,8 +26,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   void initState() {
-    iD = Get.parameters["id"]!;
-    email = Get.parameters["email"]!;
+    iD = Get.parameters["id"].toString();
+    email = Get.parameters["email"].toString();
     log("my email$email");
     apiotp = Get.arguments;
     print(" otp is here$apiotp");

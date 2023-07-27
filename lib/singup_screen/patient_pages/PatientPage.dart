@@ -43,8 +43,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
   bool _isHidden = true;
 
   CustomView customView = CustomView();
-  String code = '';
-  String flag = '';
+  String code = '+39';
+  String flag = 'IT';
 
   String _displayText(DateTime? date) {
     if (date != null) {
@@ -97,30 +97,41 @@ class _PatientSignUpState extends State<PatientSignUp> {
                   .of(context)
                   .size
                   .shortestSide / 15,
-            ), Align(
-              alignment: Alignment.topLeft,
-              child: customView.text(
-                  text.Enter_Name.tr, 12.0, FontWeight.w600, MyColor.primary1),
             ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            customView.myField(
-                context, nameCtr,text.H_Enter_Name.tr, TextInputType.text),
-            const SizedBox(
-              height: 17.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text(
-                  text.Enter_Surname.tr, 12.0, FontWeight.w600,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            customView.myField(
-                context, surnameCtr, text.H_Enter_Surname.tr, TextInputType.text),
+           Row(
+             children: [
+               Expanded(
+                   flex: 1,
+                   child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       customView.text(
+                           text.Enter_Name.tr, 12.0, FontWeight.w600, MyColor.primary1),
+                 const SizedBox(
+                   height: 3.0,
+                 ),
+                 customView.myField(
+                     context, nameCtr,text.H_Enter_Name.tr, TextInputType.text),
+               ],)),
+               const SizedBox(
+                 width: 10.0,
+               ),
+             Expanded(
+                 flex: 1,child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+               customView.text(
+                   text.Enter_Surname.tr, 12.0, FontWeight.w600,
+                   MyColor.primary1),
+               const SizedBox(
+                 height: 3.0,
+               ),
+               customView.myField(
+                   context, surnameCtr, text.H_Enter_Surname.tr, TextInputType.text),
+             ],))
+
+             ],
+           ),
             const SizedBox(
               height: 17.0,
             ),

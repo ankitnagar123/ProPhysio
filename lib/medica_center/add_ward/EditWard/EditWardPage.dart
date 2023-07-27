@@ -51,8 +51,8 @@ class _CenterEditWardScreenState extends State<CenterEditWardScreen> {
     wardId = Get.parameters["wardId"].toString();
     wardName = Get.parameters["wardName"].toString();
 
-    print("ward Id$wardId");
-    print("ward Name$wardName");
+    log("ward Id$wardId");
+    log("ward Name$wardName");
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       centerHomeCtr.centerSelectedDrList(context, wardId);

@@ -12,14 +12,14 @@ import 'Strings.dart';
 import 'input_formate.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key,}) : super(key: key);
+class PatientAddNewCard extends StatefulWidget {
+  const PatientAddNewCard({Key? key,}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _PatientAddNewCardState createState() =>  _PatientAddNewCardState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PatientAddNewCardState extends State<PatientAddNewCard> {
 
   CardCtr cardCtr = CardCtr();
   CustomView customView = CustomView();

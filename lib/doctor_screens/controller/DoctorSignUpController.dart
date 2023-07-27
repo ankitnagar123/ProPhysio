@@ -129,6 +129,7 @@ class DoctorSignUpCtr extends GetxController {
         body: signupPerameter);
    /* final response =
         await apiService.postData(MyAPI.DSignUpOtp, signupPerameter);*/
+    print("perameter$signupPerameter");
     try {
       log("response of Doctor Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -221,8 +222,8 @@ class DoctorSignUpCtr extends GetxController {
       if (result == "Success") {
         callback();
         loading.value = false;
-         sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-          Get.toNamed(RouteHelper.getVerification());
+         // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
+         //  Get.toNamed(RouteHelper.getVerification());
          custom.massenger(context, text.SignUPSuccess.tr);
       } else {
         custom.massenger(context, result);

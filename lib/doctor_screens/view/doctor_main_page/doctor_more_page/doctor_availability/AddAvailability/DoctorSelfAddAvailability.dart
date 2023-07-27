@@ -7,6 +7,8 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../patient_screens/controller/appointment_controller/AppointmentController.dart';
+import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../../../controller/AddAvailablityCtr.dart';
 import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
@@ -22,6 +24,8 @@ class _MyAvailabilityState extends State<MyAvailability> {
   CustomView custom = CustomView();
   LocalString text = LocalString();
 
+  AppointmentController appointmentController =
+  Get.put(AppointmentController());
   //select date's
   var selectedIndexes = [];
   var timeIdArray = [];
@@ -29,7 +33,9 @@ class _MyAvailabilityState extends State<MyAvailability> {
   @override
   void initState() {
     super.initState();
+    appointmentController.doctorViewDateCalender("");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      appointmentController.doctorViewDateCalender("");
       addAvailabilityCtr.doctorTimeList.clear();
     });
   }

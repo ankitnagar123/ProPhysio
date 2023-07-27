@@ -268,7 +268,7 @@ class _HomeViewState extends State<HomeView> {
                                                                     .toString(),
                                                                 subCatId:
                                                                     subCategoryId
-                                                                        .toString(),
+                                                                        .toString(), rating: '', startPrice: '', EndPrice: '',
                                                               )));
                                                 },
                                                 child: Container(

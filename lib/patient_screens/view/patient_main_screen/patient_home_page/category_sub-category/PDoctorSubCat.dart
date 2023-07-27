@@ -81,7 +81,10 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                               MaterialPageRoute(
                                   builder: (context) => DoctorListWithCategory(
                                         catId: widget.categoryId,
-                                        subCatId: subCategoryId!,
+                                        subCatId: subCategoryId.toString(),
+                                    EndPrice: "",
+                                    startPrice: "",
+                                    rating: "",
                                       )));
                         },
                         child: Card(

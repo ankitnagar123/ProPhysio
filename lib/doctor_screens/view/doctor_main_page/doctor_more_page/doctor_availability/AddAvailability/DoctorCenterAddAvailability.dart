@@ -7,6 +7,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../patient_screens/controller/appointment_controller/AppointmentController.dart';
 import '../../../../../controller/AddAvailablityCtr.dart';
 import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
@@ -22,7 +23,8 @@ class _DoctorCenterAddAvailabilityState
     extends State<DoctorCenterAddAvailability> {
   AddAvailabilityCtr addAvailabilityCtr = Get.put(AddAvailabilityCtr());
   LocalString text = LocalString();
-
+  AppointmentController appointmentController =
+  Get.put(AppointmentController());
   CustomView custom = CustomView();
 
   //select date's
@@ -471,6 +473,7 @@ class _DoctorCenterAddAvailabilityState
                       onChanged: (newValue) {
                         stateSetter(() {
                           selectedCenter = newValue;
+                          appointmentController.doctorViewDateCalender(selectedCenter.toString());
 
                           log('MY CENTER Select>>>$selectedCenter');
                           Navigator.push(context,MaterialPageRoute(builder: (context)=> DoctorViewCalender(centerId: selectedCenter.toString(),)));

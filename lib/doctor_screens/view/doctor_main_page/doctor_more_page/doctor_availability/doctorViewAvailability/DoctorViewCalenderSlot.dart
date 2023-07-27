@@ -44,7 +44,6 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
   void initState() {
     centerId = widget.centerId;
     print("center id $centerId");
-    appointmentController.doctorViewDateCalender(centerId);
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // doctorId = doctorListCtr.doctorid.value;

@@ -117,7 +117,13 @@ print("cat$cat");
               ),
               ListTile(
                 onTap: () async {
-                  Get.offNamed(RouteHelper.getRatingFilterScreen());
+                  var data = {
+                    "cat":cat,
+                    "subCat":subCat,
+                  };
+                  Get.offNamed(RouteHelper.getRatingFilterScreen(),
+                  parameters: data,
+                  );
                 },
                 title: custom.text(
                     text.Rating.tr, 15, FontWeight.w500, MyColor.black),
@@ -129,7 +135,12 @@ print("cat$cat");
               ),
               ListTile(
                 onTap: () {
-                  Get.offNamed(RouteHelper.getPriceRange());
+                  var data = {
+                    "cat":cat,
+                    "subCat":subCat,
+                  };
+                  Get.offNamed(RouteHelper.getPriceRange(),
+                  parameters: data);
                   // Get.toNamed(RouteHelper.getSpecializationScreen());
                 },
                 title: custom.text(

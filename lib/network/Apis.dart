@@ -9,7 +9,7 @@ class MyAPI{
   static const String setNewPassword = "user_reset_pass";
 
   /*twilio api for OTP*/
-  static const String send_otp_twiliosms = "https://sicparvismagna.it/Medica/Apis/twiliosms/send_otp.php";
+  static const String send_otp_twiliosms = "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 
 
   static const String PSignUp = "https://sicparvismagna.it/Medica/Apis/a.php";

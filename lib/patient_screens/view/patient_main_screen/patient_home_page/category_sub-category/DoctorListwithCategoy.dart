@@ -15,10 +15,10 @@ import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import 'DoctorMapScreen.dart';
 
 class DoctorListWithCategory extends StatefulWidget {
-  String catId, subCatId;
+  String catId, subCatId, rating,startPrice,EndPrice;
 
   DoctorListWithCategory(
-      {Key? key, required this.catId, required this.subCatId})
+      {Key? key, required this.catId, required this.subCatId,required this.rating,required this.startPrice,required this.EndPrice})
       : super(key: key);
 
   @override
@@ -37,18 +37,25 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   bool _isListView = true;
   String? catId;
   String? subCatId;
+// String rating = "";
+String startTime = "";
+  String endTime = "";
 
   @override
   void initState() {
     super.initState();
+    // rating = widget.rating;
+    startTime = widget.startPrice;
+    endTime = widget.EndPrice;
     tabController = TabController(vsync: this, length: 2);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       catId = widget.catId;
       subCatId = widget.subCatId;
+
       print("category$catId");
       print(subCatId);
       doctorListCtr.doctorlistfetch(context, catId.toString(),
-          subCatId.toString(), '', '', '', '', '', '');
+          subCatId.toString(), startTime.toString(), endTime.toString(), '', '', '', '');
     });
 
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -292,7 +299,8 @@ class _DoctorListState extends State<DoctorList> {
                                       child: FadeInImage.assetNetwork(
                                           placeholder:
                                               "assets/images/drsymbol.gif",
-                                          placeholderCacheHeight: 30,
+                                          placeholderCacheHeight: 20,
+                                          placeholderCacheWidth: 20,
                                           /*"assets/images/YlWC.gif",*/
                                           alignment: Alignment.center,
                                           image: list[index]

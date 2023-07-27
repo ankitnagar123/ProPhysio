@@ -63,8 +63,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   CustomView custom = CustomView();
   PageController controller = PageController();
-  String flag = "IT";
-  String code = '';
+  String code = '+39';
+  String flag = 'IT';
   bool _isHidden = true;
   int _curr = 1;
   final int _numpage = 2;

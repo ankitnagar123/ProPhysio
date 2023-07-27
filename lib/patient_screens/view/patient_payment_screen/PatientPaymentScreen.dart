@@ -79,8 +79,8 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
             context,
             text.addNewCard.tr,
                 () {
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
-            //  Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+             //  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+              Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
             },
             MyColor.primary,
             const TextStyle(fontFamily: "Poppins", color: Colors.white),

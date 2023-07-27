@@ -44,6 +44,7 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
   @override
   void initState() {
     super.initState();
+    appointmentController.doctorViewDateCalender(centerId);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print("final date...................${widget.date}");
       print("day...................${widget.day}");

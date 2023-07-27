@@ -119,6 +119,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         addressCtrl.text = doctorProfileCtr.location.value;
         /*new*/
         _selectedGender = doctorProfileCtr.gender.value;
+        print("user ka gender${_selectedGender}");
+
         birthDateController.text = doctorProfileCtr.dateOfBirth.value;
         birthplaceController.text = doctorProfileCtr.placeOfBirth.value;
         universityAttendedCtr.text = doctorProfileCtr.universityAttended.value;
@@ -439,7 +441,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               visualDensity: const VisualDensity(
                                   horizontal: -4, vertical: -4),
                               leading: Radio<String>(
-                                value: 'male',
+                                value: 'Male',
                                 groupValue: _selectedGender,
                                 onChanged: (value) {
                                   setState(() {
@@ -458,7 +460,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                               visualDensity: const VisualDensity(
                                   horizontal: -4, vertical: -4),
                               leading: Radio<String>(
-                                value: 'female',
+                                value: 'Female',
                                 groupValue: _selectedGender,
                                 onChanged: (value) {
                                   setState(() {
