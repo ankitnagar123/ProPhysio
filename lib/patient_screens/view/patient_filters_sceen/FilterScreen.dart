@@ -67,9 +67,8 @@ print("cat$cat");
         .of(context)
         .size
         .width;
-    return Obx(() {
-      return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    return   Scaffold(
+      /*  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: doctorListCtr.loadingFetchF.value?custom.MyIndicator():custom.MyButton(context, "Show All 0 results", () {
@@ -78,85 +77,84 @@ print("cat$cat");
             Get.back();
           }, MyColor.primary,
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
+        ),*/
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white24,
+        title: custom.text(text.Filters.tr, 17, FontWeight.bold, MyColor.black),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(Icons.close_outlined, color: MyColor.black),
         ),
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.white24,
-          title: custom.text(text.Filters.tr, 17, FontWeight.bold, MyColor.black),
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(Icons.close_outlined, color: MyColor.black),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Divider(),
-              SizedBox(
-                height: height * 0.03,
-              ),
-              ListTile(
-                onTap: () {
-                  Get.offNamed(RouteHelper.getLocationDistanceFilter());
-                },
-                title: custom.text(
-                    text.Location_and_distance.tr, 15, FontWeight.w500,
-                    MyColor.black),
-                subtitle: Text("${AppConst.FILTER_LOCATION} , ${AppConst
-                    .FILTER_DISTANCE}${text.km.tr}"),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 20),
-              ),
-              const Divider(
-                height: 2,
-              ),
-              ListTile(
-                onTap: () async {
-                  var data = {
-                    "cat":cat,
-                    "subCat":subCat,
-                  };
-                  Get.offNamed(RouteHelper.getRatingFilterScreen(),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Divider(),
+            SizedBox(
+              height: height * 0.03,
+            ),
+            ListTile(
+              onTap: () {
+                Get.offNamed(RouteHelper.getLocationDistanceFilter());
+              },
+              title: custom.text(
+                  text.Location_and_distance.tr, 15, FontWeight.w500,
+                  MyColor.black),
+              subtitle: Text("${AppConst.FILTER_LOCATION} , ${AppConst
+                  .FILTER_DISTANCE}${text.km.tr}"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+            ),
+            const Divider(
+              height: 2,
+            ),
+            ListTile(
+              onTap: () async {
+                var data = {
+                  "cat":cat,
+                  "subCat":subCat,
+                };
+                Get.offAndToNamed(RouteHelper.getRatingFilterScreen(),
                   parameters: data,
-                  );
-                },
-                title: custom.text(
-                    text.Rating.tr, 15, FontWeight.w500, MyColor.black),
-                subtitle: Text(AppConst.rating),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+                );
+              },
+              title: custom.text(
+                  text.Rating.tr, 15, FontWeight.w500, MyColor.black),
+              subtitle: Text(AppConst.rating),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+            ),
+            const Divider(
+              height: 2,
+            ),
+            ListTile(
+              onTap: () {
+                var data = {
+                  "cat":cat,
+                  "subCat":subCat,
+                };
+                Get.offNamed(RouteHelper.getPriceRange(),
+                    parameters: data);
+                // Get.toNamed(RouteHelper.getSpecializationScreen());
+              },
+              title: custom.text(
+                  text.price_Range.tr, 15, FontWeight.w500, MyColor.black),
+              subtitle: Row(
+                children: [
+                  Text("${AppConst.priceRangeStart}-"),
+                  Text(AppConst.priceRangeEnd),
+                ],
               ),
-              const Divider(
-                height: 2,
-              ),
-              ListTile(
-                onTap: () {
-                  var data = {
-                    "cat":cat,
-                    "subCat":subCat,
-                  };
-                  Get.offNamed(RouteHelper.getPriceRange(),
-                  parameters: data);
-                  // Get.toNamed(RouteHelper.getSpecializationScreen());
-                },
-                title: custom.text(
-                    text.price_Range.tr, 15, FontWeight.w500, MyColor.black),
-                subtitle: Row(
-                  children: [
-                    Text("${AppConst.priceRangeStart}-"),
-                    Text(AppConst.priceRangeEnd),
-                  ],
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 20),
-              ),
-            ],
-          ),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+            ),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 }

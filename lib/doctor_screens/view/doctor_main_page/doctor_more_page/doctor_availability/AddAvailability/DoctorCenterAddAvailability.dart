@@ -60,7 +60,8 @@ class _DoctorCenterAddAvailabilityState
         .of(context)
         .size
         .width;
-    return Scaffold(
+    return Obx(() {
+      return Scaffold(
         body: Center(
           child: Column(children: [
 
@@ -68,15 +69,15 @@ class _DoctorCenterAddAvailabilityState
               alignment: Alignment.topRight,
               child: InkWell(
                 onTap: () {
-                    SelectCenter(context);
+                  SelectCenter(context);
                   // SelectCenter(context);
 
-
-            },
+                },
                 child: Card(
                   color: MyColor.midgray,
                   child: Center(child: custom.text(
-                      text.viewAvailability.tr, 13, FontWeight.w500, MyColor.primary1)),
+                      text.viewAvailability.tr, 13, FontWeight.w500,
+                      MyColor.primary1)),
                 ),
               ),
             ),
@@ -121,7 +122,7 @@ class _DoctorCenterAddAvailabilityState
                   },
                   readOnly: true,
                   controller: startDateController,
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     hintText: text.selectSDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
@@ -139,7 +140,8 @@ class _DoctorCenterAddAvailabilityState
               child: Align(
                   alignment: Alignment.topLeft,
                   child:
-                  custom.text(text.endDate.tr, 14, FontWeight.w500, MyColor.black)),
+                  custom.text(
+                      text.endDate.tr, 14, FontWeight.w500, MyColor.black)),
             ),
             Container(
                 height: 40,
@@ -162,8 +164,8 @@ class _DoctorCenterAddAvailabilityState
                   },
                   readOnly: true,
                   controller: endDateController,
-                  decoration:  InputDecoration(
-                    hintText:  text.selectEDate.tr,
+                  decoration: InputDecoration(
+                    hintText: text.selectEDate.tr,
                     hintStyle: TextStyle(fontSize: 15),
                     suffixIcon:
                     Icon(Icons.date_range_outlined, color: MyColor.primary),
@@ -173,9 +175,9 @@ class _DoctorCenterAddAvailabilityState
                   ),
                 )),
             const SizedBox(
-              height: 30.0,
+              height: 20.0,
             ),
-            addAvailabilityCtr.doctorTimeList.isEmpty?Obx(
+            addAvailabilityCtr.doctorTimeList.isEmpty ? Obx(
                   () =>
               addAvailabilityCtr.loadingC.value
                   ? custom.MyIndicator()
@@ -201,13 +203,15 @@ class _DoctorCenterAddAvailabilityState
                       fontSize: 16,
                       fontFamily: 'Heebo',
                       letterSpacing: 0.8)),
-            ):Text(""),
+            ) : Text(""),
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
               child: Align(
                   alignment: Alignment.topLeft,
-                  child:  addAvailabilityCtr.doctorTimeList.isEmpty?Text(""):custom.text(
+                  child: addAvailabilityCtr.doctorTimeList.isEmpty
+                      ? Text("")
+                      : custom.text(
                       text.yourTimeSlotAccordingSelectDate.tr, 13,
                       FontWeight.w500, MyColor.black)),
             ),
@@ -233,7 +237,8 @@ class _DoctorCenterAddAvailabilityState
                             child: CheckboxListTile(
                               activeColor: MyColor.primary,
                               dense: true,
-                              title: Text("${list.from} ${text.To.tr} ${list.to}"),
+                              title: Text(
+                                  "${list.from} ${text.To.tr} ${list.to}"),
                               value: selectedIndexes.contains(index),
                               onChanged: (vale) {
                                 setState(() {
@@ -281,50 +286,52 @@ class _DoctorCenterAddAvailabilityState
             ),
           ]),
         ),
-      bottomNavigationBar: Obx(() => addAvailabilityCtr.doctorTimeList.isEmpty
-          ? const Text("")
-          :  Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 20.0, vertical: 10),
-        child: AnimatedButton(
-          // width: MediaQuery.of(context).size.width * 0.8,
-          text: text.Submit.tr,
-          color: MyColor.primary,
-          pressEvent: () {
-            if (timeIdArray.isNotEmpty) {
-              addAvailabilityCtr.addTime(
-                  context,
-                  timeIdArray.join(","),
-                  addAvailabilityCtr.dateId.value, () {
-                AwesomeDialog(
-                  context: context,
-                  animType: AnimType.leftSlide,
-                  headerAnimationLoop: false,
-                  dialogType: DialogType.success,
-                  showCloseIcon: true,
-                  title: text.Submit.tr,
-                  desc: text.centerAvailabilityAddSuccessfully.tr,
-                  btnOkOnPress: () {
-                    debugPrint('OnClick');
-                  },
-                  btnOkIcon: Icons.check_circle,
-                  onDismissCallback: (type) {
-                    Get.back();
-                    debugPrint(
-                        'Dialog Dismiss from callback $type');
-                  },
-                ).show();
-              });
-            } else {
-              custom.MySnackBar(context, text.selectSlot.tr);
-              log("empty");
-            }
-          },
-        ),
+        bottomNavigationBar: Obx(() =>
+        addAvailabilityCtr.doctorTimeList.isEmpty
+            ? const Text("")
+            : Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 20.0, vertical: 10),
+          child: AnimatedButton(
+            // width: MediaQuery.of(context).size.width * 0.8,
+            text: text.Submit.tr,
+            color: MyColor.primary,
+            pressEvent: () {
+              if (timeIdArray.isNotEmpty) {
+                addAvailabilityCtr.addTime(
+                    context,
+                    timeIdArray.join(","),
+                    addAvailabilityCtr.dateId.value, () {
+                  AwesomeDialog(
+                    context: context,
+                    animType: AnimType.leftSlide,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.success,
+                    showCloseIcon: true,
+                    title: text.Submit.tr,
+                    desc: text.centerAvailabilityAddSuccessfully.tr,
+                    btnOkOnPress: () {
+                      debugPrint('OnClick');
+                    },
+                    btnOkIcon: Icons.check_circle,
+                    onDismissCallback: (type) {
+                      Get.back();
+                      debugPrint(
+                          'Dialog Dismiss from callback $type');
+                    },
+                  ).show();
+                });
+              } else {
+                custom.MySnackBar(context, text.selectSlot.tr);
+                log("empty");
+              }
+            },
+          ),
 
-      ),
-      ),
-    );
+        ),
+        ),
+      );
+    });
   }
 
   //*******date strt end************//
@@ -399,12 +406,11 @@ class _DoctorCenterAddAvailabilityState
                           child: Text(items.name),
                         );
                       }).toList(),
-                      hint:  Text(text.selectMedicalCenter.tr),
+                      hint: Text(text.selectMedicalCenter.tr),
                       // After selecting the desired option,it will
                       // change button value to selected value
                       onChanged: (newValue) {
                         stateSetter(() {
-
                           selectedCenter = newValue;
 
                           log('MY CENTER Select>>>$selectedCenter');
@@ -448,7 +454,7 @@ class _DoctorCenterAddAvailabilityState
                       return Center(child: custom.MyIndicator());
                     }
                     return DropdownButton(
-                      onTap: (){
+                      onTap: () {
 
                       },
                       menuMaxHeight: MediaQuery
@@ -467,17 +473,20 @@ class _DoctorCenterAddAvailabilityState
                           child: Text(items.name),
                         );
                       }).toList(),
-                      hint:  Text(text.selectMedicalCenter.tr),
+                      hint: Text(text.selectMedicalCenter.tr),
                       // After selecting the desired option,it will
                       // change button value to selected value
                       onChanged: (newValue) {
                         stateSetter(() {
                           selectedCenter = newValue;
-                          appointmentController.doctorViewDateCalender(selectedCenter.toString());
+                          appointmentController.doctorViewDateCalender(
+                              selectedCenter.toString());
 
                           log('MY CENTER Select>>>$selectedCenter');
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=> DoctorViewCalender(centerId: selectedCenter.toString(),)));
-
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  DoctorViewCalender(
+                                    centerId: selectedCenter.toString(),)));
                         });
                       },
                     );

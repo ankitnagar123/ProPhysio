@@ -66,7 +66,7 @@ class NotificationService {
 
         flutterLocalNotificationsPlugin.show(0, message.notification!.title,
             message.notification!.body, notificationDetails,
-            payload: message.notification!.title);
+            payload: message.notification!.title,);
 
         FirebaseMessaging.onMessageOpenedApp.listen((message) {
           print("on message recived ==> ${message.notification!.title}");
@@ -77,5 +77,36 @@ class NotificationService {
 }
 
 Future<void> BackgroundMessageHandler(RemoteMessage message) async {
+
   print("Remote message Handler==>$message");
+
+
+  // pushMessagingService() async{
+  //   messagingreference.configure(
+  //     onMessage: (Map<String, dynamic> message) {
+  //
+  //       print("I am here in on message");
+  //       print(message);
+  //     },
+  //     onLaunch: (Map<String, dynamic> message) {
+  //       print("I am here onLaunch");
+  //       print(message);
+  //     },
+  //     onResume: (Map<String, dynamic> message) {
+  //       print("I am hereonResume");
+  //       print(message);
+  //     },
+  //   );
+  //   messagingreference.requestNotificationPermissions(
+  //       const IosNotificationSettings(sound: true, badge: true, alert: true));
+  //   messagingreference.onIosSettingsRegistered
+  //       .listen((IosNotificationSettings settings) {
+  //     print("Settings registered: $settings");
+  //   });
+  //   messagingreference.getToken().then((String token) async {
+  //
+  //
+  //     print(token);
+  //   });
+  // }
 }

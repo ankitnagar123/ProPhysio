@@ -182,7 +182,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                         color: MyColor.white,
                         fontSize: 16,
                         fontFamily: 'Heebo',
-                        letterSpacing: 0.8)):Text(""),
+                        letterSpacing: 0.8)):const Text(""),
 
             const Divider(),
             Padding(

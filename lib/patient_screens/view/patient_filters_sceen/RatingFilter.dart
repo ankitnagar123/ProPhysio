@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 import 'package:medica/helper/AppConst.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:medica/patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 
 import '../../../language_translator/LanguageTranslate.dart';
+import '../patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 
 class RatingFilterScreen extends StatefulWidget {
   const RatingFilterScreen({Key? key}) : super(key: key);
@@ -20,10 +21,17 @@ class RatingFilterScreen extends StatefulWidget {
 
 class _RatingFilterScreenState extends State<RatingFilterScreen> {
   CustomView custom = CustomView();
-  var rating = 2.5;
   DoctorListCtr doctorListCtr = DoctorListCtr();
   LocalString text = LocalString();
-
+  var cat = "";
+  var subCat = "";
+  String ratings = "";
+  @override
+  void initState() {
+    super.initState();
+    cat = Get.parameters['cat'].toString();
+    subCat = Get.parameters['subCat'].toString();
+  }
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery
@@ -42,7 +50,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
           title: custom.text(text.Rating.tr, 17, FontWeight.bold, MyColor.black),
           leading: IconButton(
             onPressed: () {
-              Get.offNamed(RouteHelper.getFilterScreen());
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
           ),
@@ -51,7 +59,16 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.Submit.tr, () {
-           Get.offNamed(RouteHelper.getFilterScreen());
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DoctorListWithCategory(
+                      catId: cat,
+                      subCatId: subCat,
+                      startPrice: "",
+                      EndPrice:  "", rating: ratings,
+                    )));
+           // Get.offNamed(RouteHelper.getFilterScreen());
           }, MyColor.primary, const TextStyle(
               color: MyColor.white,
               fontFamily: "Poppins"
@@ -90,7 +107,8 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
                  // doctorListCtr.location.value = rating.toString();
                   /*=================*/
                   setState(() {
-                    AppConst.rating = rating.toString();
+                    ratings = rating.toString();
+                    // AppConst.rating = rating.toString();
                   });
 
 

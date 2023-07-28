@@ -44,11 +44,7 @@ CustomView view = CustomView();
     DoctorListWithCategory(catId: '', subCatId: '', rating: '', startPrice: '', EndPrice: '',)
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -37,14 +37,14 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   bool _isListView = true;
   String? catId;
   String? subCatId;
-// String rating = "";
+ String rating = "";
 String startTime = "";
   String endTime = "";
 
   @override
   void initState() {
     super.initState();
-    // rating = widget.rating;
+    rating = widget.rating;
     startTime = widget.startPrice;
     endTime = widget.EndPrice;
     tabController = TabController(vsync: this, length: 2);
@@ -55,7 +55,7 @@ String startTime = "";
       print("category$catId");
       print(subCatId);
       doctorListCtr.doctorlistfetch(context, catId.toString(),
-          subCatId.toString(), startTime.toString(), endTime.toString(), '', '', '', '');
+          subCatId.toString(), startTime.toString(), endTime.toString(), rating, '', '', '');
     });
 
     // WidgetsBinding.instance.addPostFrameCallback((_) {

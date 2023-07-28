@@ -106,14 +106,9 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                               height: 3,
                             ),
                             SizedBox(
-                                width: 150,
-                                child: Text(
-                                  pCenterCtr.centerList[i].biography
-                                      .toString(),
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                )),
+                                width: MediaQuery.sizeOf(context).width/2,
+                                child: Text( pCenterCtr.centerList[i].address,maxLines: 2,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                  fontFamily: "Poppins",color: MyColor.grey,),)),
                             const SizedBox(
                               height: 3,
                             ),
@@ -121,14 +116,9 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                               children: [
                                 const Icon(Icons.location_on_outlined, size: 18),
                                 SizedBox(
-                                    width: 150,
-                                    child: Text(
-                                      pCenterCtr.centerList[i].address
-                                          .toString(),
-                                      maxLines: 2,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                    )),
+                                    width: MediaQuery.sizeOf(context).width/2,
+                                    child: Text( pCenterCtr.centerList[i].address,maxLines: 2,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                      fontFamily: "Poppins",color: MyColor.grey,),)),
                               ],
                             ),
                             const SizedBox(
