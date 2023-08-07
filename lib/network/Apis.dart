@@ -1,7 +1,9 @@
 import 'dart:core';
-class MyAPI{
+
+class MyAPI {
   // static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
-  static const String BaseUrl = "https://sicparvismagna.it/Medica/Apis/process.php?action=";
+  static const String BaseUrl =
+      "https://sicparvismagna.it/Medica/Apis/process.php?action=";
 
   /*--------Patient Side API-----------*/
   static const String Login = "user_login";
@@ -9,8 +11,8 @@ class MyAPI{
   static const String setNewPassword = "user_reset_pass";
 
   /*twilio api for OTP*/
-  static const String send_otp_twiliosms = "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
-
+  static const String send_otp_twiliosms =
+      "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 
   static const String PSignUp = "https://sicparvismagna.it/Medica/Apis/a.php";
   static const String PSignUpOtp = "signup_email_otp";
@@ -18,7 +20,7 @@ class MyAPI{
   static const String PFetchProfile = "fetch_user_profile";
   static const String PUpdateProfile = "update_user_profile";
   static const String PChangePassword = "user_change_pass";
-  static const String PDeleteAccount ="delete_user_account";
+  static const String PDeleteAccount = "delete_user_account";
   static const String pSupport = "user_support";
 
   /*----Card API-------*/
@@ -28,11 +30,11 @@ class MyAPI{
 
   /*-----Doctor List API-------*/
   static const String pDoctorList = "doctor_list";
-  static const String pDoctorDetails ="fetch_doctor";
+  static const String pDoctorDetails = "fetch_doctor";
 
   /*----Specialization-----*/
-  static const String pFetchSpecialization ="category";
-  static const String pFetchSpecializationDetials ="specialization_details";
+  static const String pFetchSpecialization = "category";
+  static const String pFetchSpecializationDetials = "specialization_details";
 
   /*--Calender API for Date Show---*/
   static const String pCalenderDate = "calender";
@@ -42,7 +44,6 @@ class MyAPI{
   static const String pBookingAppointment = "booking";
   static const String pDoctorTimeSlot = "user_date";
   static const String pDoctorBookedTimeSlot = "booked_doctor_timeslot";
-
 
   /*---Booking List{Past,Pending,Upcoming,Cancel,All Details}------*/
   static const String pBookingAppointmentList = "user_history";
@@ -69,23 +70,21 @@ class MyAPI{
   static const String pChatListDelete = "delete_doctor_msg_list";
 
 /*---Prescription api with type Medical report and prescription----*/
-  static const String pFetchPrescription= "fetch_user_prescription";
-
-
+  static const String pFetchPrescription = "fetch_user_prescription";
 
 /*--------Doctor Side API-----------*/
 
   /*----Dr SignUp Time Add Cat and Sub-Cat multiple------*/
-  static const String catSubcategoryList= "fetch_all_sub_category";
-  static const String subcategoryList= "subcategory_list";
-  static const String DCategorySignUp= "category_list";
+  static const String catSubcategoryList = "fetch_all_sub_category";
+  static const String subcategoryList = "subcategory_list";
+  static const String DCategorySignUp = "category_list";
   static const String DSignUpOtp = "doctor_otp_signup";
   static const String DSignUp = "doctor_signup";
   static const String DForgotPassword = "get_doctor_forgot_password";
   static const String DFetchProfile = "fetch_doctor_profile";
   static const String DUpdateProfile = "update_Doctor_profile";
-  static const String DUpdateDegree= "Update_doctor_document";
-  static const String DDeleteAccount ="delete_doctor_account";
+  static const String DUpdateDegree = "Update_doctor_document";
+  static const String DDeleteAccount = "delete_doctor_account";
   static const String DChangePassword = "doctor_change_pass";
   static const String DSupport = "doctor_support";
 
@@ -96,9 +95,8 @@ class MyAPI{
   /*----Add Date, multiple Time slot's -----*/
   static const String dAddAvailibitly = "date";
   static const String dAddMultipleTime = "select_time";
-  static const String dFetchTime ="Time_lists";
-  static const String dSelectedCenter ="selected_center_list";
-
+  static const String dFetchTime = "Time_lists";
+  static const String dSelectedCenter = "selected_center_list";
 
   /*---Booking List{Past,Pending,Upcoming,Cancel,All Details}------*/
   static const String dBookingAppointmentList = "booking_history";
@@ -117,17 +115,17 @@ class MyAPI{
   static const String dSelectedSubCategory = "selected_subcategory";
 
 /*----Add Prescription by doctor------*/
-static const String dAddPrescription= "prescription";
-  static const String fetchPrescription= "fetch_prescription";
+  static const String dAddPrescription = "prescription";
 
-  static const String fetchQrPrescription= "fetch_qr_code_prescription";
+  static const String fetchPrescription = "fetch_prescription";
+
+  static const String fetchQrPrescription = "fetch_qr_code_prescription";
 
   static const String allMedicineList = "fetch_medicine_list";
 
   static const String addMedicineList = "add_medicine";
 
   static const String addFetchMedicineList = "fetch_doctor_medicine";
-
 
   /*Chat list Dr*/
 
@@ -137,7 +135,6 @@ static const String dAddPrescription= "prescription";
   /*Center Request to doctor */
   static const String dCenterRequest = "ward_doctor_request_list";
   static const String dCenterRequestAcceptReject = "accept_ward_doctor_request";
-
 
   static const String updateToken = "android_update_userdevice_id";
 
@@ -168,5 +165,4 @@ static const String dAddPrescription= "prescription";
 
   /*User Side*/
   static const String cCenterList = "medical_center_list";
-
 }

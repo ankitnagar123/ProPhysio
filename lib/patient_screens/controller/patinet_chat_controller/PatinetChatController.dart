@@ -103,19 +103,19 @@ class ChatController extends GetxController {
 
 /*-------------Patient Fetch  received MSG list on view --------------*/
   Future<void> receivedMsgListFetch(BuildContext context,String receiverId) async {
-    final Map<String, dynamic> Peramert = {
+    final Map<String, dynamic> parameter = {
       "sender_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
       "receiver_id":receiverId,
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
     if(connection){
-      print("my peramiter$Peramert");
+      print("my parameter$parameter");
       try {
-        print("my peramiter$Peramert");
+        print("my parameter$parameter");
 
         loadingFetch.value = true;
-        final response = await apiService.postData(MyAPI.pChatViewListFetch,Peramert);
+        final response = await apiService.postData(MyAPI.pChatViewListFetch,parameter);
         print("Chat view list=============${response.body}");
 
         if (response.statusCode == 200) {

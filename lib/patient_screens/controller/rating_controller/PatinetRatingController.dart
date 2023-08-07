@@ -15,7 +15,7 @@ class PatientRatingCtr extends GetxController {
   var loading = false.obs;
   var loadingAdd = false.obs;
 
-  var address = RatingListModel(aveRating: '', totalReview: 0, users: []).obs;
+  var address = RatingListModel(aveRating: '', totalReview: "", users: []).obs;
 
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();

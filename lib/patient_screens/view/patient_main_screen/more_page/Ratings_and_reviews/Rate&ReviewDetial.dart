@@ -209,6 +209,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                                 desc: text.ratingSuccessfully.tr,
                                 btnOkOnPress: () {
                                   Get.back();
+                                  Get.back();
                                   debugPrint('OnClick');
                                 },
                                 btnOkIcon: Icons.check_circle,

@@ -74,12 +74,12 @@ class RatingListModel {
   });
 
   String aveRating;
-  int totalReview;
+  String totalReview;
   List<User> users;
 
   factory RatingListModel.fromJson(Map<String, dynamic> json) => RatingListModel(
-    aveRating: json["ave_rating"],
-    totalReview: json["total_review"],
+    aveRating: json["ave_rating"].toString(),
+    totalReview: json["total_review"].toString(),
     users: List<User>.from(json["Users"].map((x) => User.fromJson(x))),
   );
 
@@ -106,11 +106,11 @@ class User {
   String time;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    userName: json["user_name"],
-    rating: json["rating"],
-    review: json["review"],
-    date: json["date"],
-    time: json["time"],
+    userName: json["user_name"].toString(),
+    rating: json["rating"].toString(),
+    review: json["review"].toString(),
+    date: json["date"].toString(),
+    time: json["time"].toString(),
   );
 
   Map<String, dynamic> toJson() => {

@@ -5,6 +5,7 @@ import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:medica/helper/mycolor/mycolor.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
+import "../../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 
 import 'CenterSide/PCenterHomePage.dart';
@@ -21,6 +22,8 @@ class _PatientHomePageState extends State<PatientHomePage>
     with SingleTickerProviderStateMixin {
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  CardCtr cardCtr = Get.put(CardCtr());
+
   TextEditingController searchCtr = TextEditingController();
   LocalString text = LocalString();
   CustomView customView = CustomView();
@@ -30,6 +33,7 @@ class _PatientHomePageState extends State<PatientHomePage>
   void initState() {
     super.initState();
     doctorSignUpCtr.DoctorCategory();
+    cardCtr.cardFetch();
     print("doctor length${doctorListCtr.doctorList.length}");
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }

@@ -24,7 +24,7 @@ class MorePage extends StatefulWidget {
 
 class _MorePageState extends State<MorePage> {
   PatientProfileCtr patientProfileCtr = Get.put(PatientProfileCtr());
-  CardCtr cardCtr = Get.put(CardCtr());
+   CardCtr cardCtr = Get.put(CardCtr());
 
   CustomView customView = CustomView();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -32,9 +32,9 @@ class _MorePageState extends State<MorePage> {
 
   @override
   void initState() {
+    // cardCtr.cardFetch();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       patientProfileCtr.patientProfile(context);
-      cardCtr.cardFetch();
     });
     super.initState();
   }

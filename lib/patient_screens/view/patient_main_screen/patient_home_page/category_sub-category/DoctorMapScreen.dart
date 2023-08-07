@@ -42,6 +42,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
     );
     setState(() {
       for (int i = 0; i < doctorListCtr.doctorList.length; i++) {
+latlang.clear();
         latlang.add(
           LatLng(double.parse(doctorListCtr.doctorList[i].latitude.toString()),
               double.parse(doctorListCtr.doctorList[i].longitude.toString())),
@@ -56,6 +57,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
           markerId: markerId,
           position: latlang[i],
           onTap: () {
+
             customInfoWindowController.addInfoWindow!(
                 GestureDetector(
                   onTap: () {
@@ -149,7 +151,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // doctorListCtr.doctorlistfetch(context, widget.catId, widget.subCatID,"", "", "", "", "", "");
+       doctorListCtr.doctorlistfetch(context, widget.catId, widget.subCatID,"", "", "", "", "", "");
     });
 
     super.initState();
@@ -194,7 +196,9 @@ class _MapViewScreenState extends State<MapViewScreen> {
           ),
           // onMapCreated: _onMapCreated,
           onMapCreated: (GoogleMapController controllers) async {
-            _onMapCreated(controllers);
+            setState(() {
+              _onMapCreated(controllers);
+            });
             customInfoWindowController.googleMapController = controllers;
             controller = controllers;
             for (var marker in markers.values) {
