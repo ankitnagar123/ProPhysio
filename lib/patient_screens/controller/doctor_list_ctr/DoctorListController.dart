@@ -47,6 +47,7 @@ class DoctorListCtr extends GetxController {
   /*------------------Doctor list  Fetch Api----------------*/
   Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId, String priceRangeStart, String priceRangeEnd, String rating, String filterLatitude, String filterLongitude, String filterDistance,) async {
     final Map<String, dynamic> cardPeramert = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "cat_id":categoryId,
       "subcat_id":subCatId,
       "price_start":priceRangeStart,
@@ -197,6 +198,7 @@ print(doctorList);
 
   void doctorDetialsfetch(String id) async {
     final Map<String, dynamic> Peramert = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": id,
     };
     try {
@@ -242,6 +244,7 @@ print(doctorList);
   /*-------------Sub+Category List--------------------*/
   Future<void> subCatList(String categoryId) async {
     final Map<String, dynamic> Peramert = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "category_id":categoryId,
     };
     try {
@@ -264,9 +267,12 @@ print(doctorList);
 
   /*------------------Category SubCategory both in one list------------------------*/
   Future<void> catSubCatList() async {
+    final Map<String, dynamic> Peramert = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     try {
       categoryLoading.value = true;
-      final response = await apiService.getData(MyAPI.catSubcategoryList);
+      final response = await apiService.postData(MyAPI.catSubcategoryList,Peramert);
       print(" Category Sub Category List  =============${response.body}");
       if (response.statusCode == 200) {
         categoryLoading.value = false;

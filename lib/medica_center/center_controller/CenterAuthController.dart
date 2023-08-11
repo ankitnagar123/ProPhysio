@@ -162,8 +162,8 @@ class CenterAuthCtr extends GetxController {
       "email": email,
       "address": address,
       "password": password,
-      "lat": lat,
-      "long": long
+      "latitude": lat,
+      "longitude": long
     };
     print("SignupPerameter for medical center$signupPerameter");
 

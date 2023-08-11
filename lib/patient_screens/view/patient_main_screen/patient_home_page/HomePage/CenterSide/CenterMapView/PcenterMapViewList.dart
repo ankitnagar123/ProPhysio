@@ -107,7 +107,7 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                             ),
                             SizedBox(
                                 width: MediaQuery.sizeOf(context).width/2,
-                                child: Text( pCenterCtr.centerList[i].address,maxLines: 2,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
+                                child: Text( pCenterCtr.centerList[i].biography,maxLines: 1,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
                                   fontFamily: "Poppins",color: MyColor.grey,),)),
                             const SizedBox(
                               height: 3,

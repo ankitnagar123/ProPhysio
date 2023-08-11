@@ -35,9 +35,13 @@ class DoctorSignUpCtr extends GetxController {
 
   /*---------Doctor All Category --------*/
   Future<void> DoctorCategory() async {
+    final Map<String, dynamic> parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
+    print("parameter$parameter");
     try {
       categoryloding.value = true;
-      final response = await apiService.getData(MyAPI.DCategorySignUp);
+      final response = await apiService.postData(MyAPI.DCategorySignUp,parameter);
       print(" Category =============${response.body}");
       if (response.statusCode == 200) {
         categoryloding.value = false;

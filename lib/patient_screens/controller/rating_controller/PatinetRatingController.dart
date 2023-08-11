@@ -62,6 +62,7 @@ class PatientRatingCtr extends GetxController {
   /*---------Fetch Rating's --------*/
   Future<void> fetchRating(String doctorId) async {
     final Map<String, dynamic> perameter = {
+
       "doctor_id":doctorId
     };
     try {

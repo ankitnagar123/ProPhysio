@@ -47,6 +47,7 @@ class PatientProfileCtr extends GetxController {
   void patientProfile(BuildContext context) async {
     loading.value = true;
     final Map<String, dynamic> ProfilePerameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     print("Patient Login Parameter$ProfilePerameter");

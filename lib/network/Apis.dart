@@ -42,6 +42,8 @@ class MyAPI {
   /*---Appointment Api...----*/
   static const String pDoctorVisitCharge = "visit_charges";
   static const String pBookingAppointment = "booking";
+  // static const String pPaymentAppointment = "booking";
+
   static const String pDoctorTimeSlot = "user_date";
   static const String pDoctorBookedTimeSlot = "booked_doctor_timeslot";
 

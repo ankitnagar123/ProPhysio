@@ -77,8 +77,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                   if (cardid == "") {
                     custom.MySnackBar(context, text.selectCard.tr);
                   } else {
-                    appointmentController.bookingAppointment(context, doctorid!,
-                        cardid!, time!, price!, date!, centerId, () {
+                    appointmentController.bookingAppointment(context, doctorid.toString(),
+                        cardid.toString(), time.toString(), price.toString(), date.toString(), centerId, () {
                       Get.offNamed(RouteHelper.getBookingSuccess());
                     });
                   }

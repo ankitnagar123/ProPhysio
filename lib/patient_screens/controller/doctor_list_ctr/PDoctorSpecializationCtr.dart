@@ -27,6 +27,7 @@ var categoryDetails = SpecializationDetailsModel(doctorId: '', description: '', 
   /*--------------------specialization Fetch List  Fetch Api-----------------*/
   Future<void> specializationFetch(String doctorId) async {
     final Map<String, dynamic> Peramert = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": doctorId,
     };
     try {
@@ -52,6 +53,7 @@ var categoryDetails = SpecializationDetailsModel(doctorId: '', description: '', 
   /*----------specialization Fetch List Details Fetch Api-------------*/
   Future specializationDetails(String doctorId,String catId) async {
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": doctorId,
       "cat_id":catId,
     };

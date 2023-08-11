@@ -46,7 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     getValue();
     getLanguage();
-    // TODO: implement initState
   }
 
   @override
@@ -117,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void getLanguage() async {
-    if (await sp.getStringValue(sp.LANGUAGE) == "Italy") {
+    if (await sp.getStringValue(sp.LANGUAGE) == "it") {
       var Itlocal = const Locale('it', 'IT');
       Get.updateLocale(Itlocal);
     } else {

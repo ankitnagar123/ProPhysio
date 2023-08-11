@@ -86,7 +86,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                         onTap: () {
                           index = 1;
                           enlocal = const Locale('en','US');
-                          sp.setStringValue(sp.LANGUAGE, "English");
+                          sp.setStringValue(sp.LANGUAGE, "en");
                           Get.updateLocale(enlocal);
                         },
                         child: Container(
@@ -140,7 +140,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                         onTap: (){
                           index = 2;
                           Itlocal= const Locale('it','IT');
-                          sp.setStringValue(sp.LANGUAGE, "Italy");
+                          sp.setStringValue(sp.LANGUAGE, "it");
                           Get.updateLocale(Itlocal);
                         },
                         child: Container(

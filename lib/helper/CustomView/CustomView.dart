@@ -196,19 +196,6 @@ class CustomView {
       context,
       String msg,
       ) {
-    /*final snackBar = SnackBar(
-      content: Text(msg,
-          style: const TextStyle(
-              color: Colors.white,
-              letterSpacing: 1.0,
-              fontFamily: "RobotoMono",
-              fontWeight: FontWeight.bold,
-              fontSize: 12)),
-      padding: const EdgeInsets.all(10),
-      backgroundColor: MyColor.primary,
-      duration: const Duration(seconds: 1),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);*/
     Get.rawSnackbar(
       message:
       msg,

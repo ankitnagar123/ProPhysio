@@ -90,6 +90,7 @@ LocalString text = LocalString();
                   height: height * 0.001,
                 ),
                 ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: doctorSpecializationCtr
                       .categoryDetails.value.subcategory?.length,
@@ -106,6 +107,7 @@ LocalString text = LocalString();
                               MyColor.black),
                         ),
                         ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: doctorSpecializationCtr
                               .categoryDetails.value.subcategory![index].details?.length,

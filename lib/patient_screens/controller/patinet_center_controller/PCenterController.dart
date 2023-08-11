@@ -25,10 +25,12 @@ class PCenterCtr extends GetxController {
 
   /*-------------Center List Api--------------------*/
   Future<void> centerListApi() async {
-
+    final Map<String, dynamic> Parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     try {
       loadingFetch.value = true;
-      final response = await apiService.getData(MyAPI.cCenterList,);
+      final response = await apiService.postData(MyAPI.cCenterList,Parameter);
       log("Center List>>>>>>=======${response.body}");
       if (response.statusCode == 200) {
         loadingFetch.value = false;

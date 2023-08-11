@@ -64,7 +64,8 @@ class CardCtr extends GetxController {
   /*--------------------Card Fetch Api-----------------*/
   Future<void> cardFetch() async {
     final Map<String, dynamic> cardPeramert = {
-    "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      // "language": await sp.getStringValue(sp.LANGUAGE)??"",
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
   };
     try {
     loadingFetch.value = true;

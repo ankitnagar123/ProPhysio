@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
@@ -32,6 +32,7 @@ var loadingAdd = false.obs;
   var dateList = <CalenderDateShowModel>[].obs;
   var bookedTimeSlot = <DoctorbookedSlotList>[].obs;
   var seletedtime = "".obs;
+var bookingId = "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView custom = CustomView();
@@ -88,7 +89,11 @@ var loadingAdd = false.obs;
 
   /*------------------Doctor visit charge list Fetch Api----------------*/
   Future<void> doctorVisitChargefetch(String id) async {
-    final Map<String, dynamic> Peramert = {"doctor_id": id};
+    final Map<String, dynamic> Peramert = {
+      "doctor_id": id,
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
+    print(Peramert);
     try {
       loadingFetch.value = true;
       final response =
@@ -200,6 +205,39 @@ var loadingAdd = false.obs;
     }
   }
 
+/*-------------Appointment booking  Payment API--------------*/
+Future paymentAppointment(BuildContext context, String bookingId,VoidCallback callback) async {
+  loadingAdd.value = true;
+  final Map<String, dynamic> Peramert = {
+    "booking_id": bookingId,
+  };
+  print(" Parameter----------------$Peramert");
+  final response = await http.post(
+      Uri.parse(
+        "https://sicparvismagna.it/Medica/Apis/test_payment.php",
+      ),
+      body: Peramert);
+  try {
+    log("response of Booking Payment Appointment  :-${response.body}");
+    var jsonResponse = jsonDecode(response.body);
+    var result = jsonResponse['result'].toString();
+    if (result == "Payment Successfully") {
+      loadingAdd.value = false;
+      print("my  payment Appointment $result");
+      custom.massenger(context, text.appointmentCorrectlySaved.tr);
+      print(result.toString());
+      callback();
+    } else {
+      loadingAdd.value = false;
+      custom.massenger(context, result.toString());
+    }
+  } catch (e) {
+    loadingAdd.value = false;
+    log("exception$e");
+  }
+}
+
+
   /*-------------Appointment booking  API--------------*/
   Future bookingAppointment(BuildContext context, String reciver, String cardId,
       String time, String price, String date,String centerId, VoidCallback callback) async {
@@ -222,10 +260,15 @@ var loadingAdd = false.obs;
       var result = jsonResponse['result'].toString();
       if (result == "success") {
         loadingAdd.value = false;
+        String id = jsonResponse["booking_id"].toString();
+        print("id----------------->:$id");
+        print("booking id${bookingId.value}");
         print("my Appointment $result");
-        custom.massenger(context, text.appointmentCorrectlySaved.tr);
+        paymentAppointment(context,  id, () {
+          callback();
+        });
+        // custom.massenger(context, text.appointmentCorrectlySaved.tr);
         print(result.toString());
-        callback();
       } else {
         loadingAdd.value = false;
         custom.massenger(context, result.toString());

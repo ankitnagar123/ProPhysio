@@ -45,6 +45,7 @@ class _MedicalCenterOtpState extends State<MedicalCenterOtp> {
     address = Get.parameters['address'].toString();
     lat = Get.parameters['lat'].toString();
     long = Get.parameters['long'].toString();
+    print("otp side lat long${lat+long}");
     code = Get.parameters["code"].toString();
     flag = Get.parameters['flag'].toString();
     phone = Get.parameters['phone'].toString();

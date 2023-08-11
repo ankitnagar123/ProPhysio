@@ -60,6 +60,7 @@ class PatientBookingController extends GetxController {
   Future<void> bookingAppointment(String statusType) async {
 
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "status": statusType,
     };
@@ -94,6 +95,7 @@ class PatientBookingController extends GetxController {
   Future<void> completeRatingAppoint() async {
 
     final Map<String, dynamic> perameter = {
+       "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     try {
@@ -123,6 +125,7 @@ class PatientBookingController extends GetxController {
       ) async {
     loadingd.value = true;
     final Map<String, dynamic> Perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "booking_id": id,
       "status": statusType,
@@ -164,10 +167,13 @@ class PatientBookingController extends GetxController {
 
   /*---------booking Appointment Cancel Reason's List--------*/
   Future<void> appointmentCancelReason() async {
+    final Map<String, dynamic> Perameter = {
+       "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     try {
       loadingCancelList.value = true;
       final response =
-      await apiService.getData(MyAPI.pBookingAppointmentCancel);
+      await apiService.postData(MyAPI.pBookingAppointmentCancel,Perameter);
       print(" appointment Cancel Reason =============${response.body}");
       if (response.statusCode == 200) {
         loadingCancelList.value = false;
