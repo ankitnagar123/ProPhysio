@@ -196,7 +196,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
-                                    upcomingList.status.toString(),
+                                    text.Upcoming.tr,
                                     11.0,
                                     FontWeight.w400,
                                     Colors.black),
@@ -460,7 +460,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                         /*-----------*/
                         Expanded(
                           flex: 1,
-                          child: custom.text(bookingController.status.value,
+                          child: custom.text(text.Upcoming.tr,
                               11.0, FontWeight.w400, Colors.black),
                         ),
                         Expanded(

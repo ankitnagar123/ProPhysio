@@ -11,25 +11,21 @@ import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../controller/patinet_center_controller/PCenterController.dart';
 import '../PCenterDetailsPage.dart';
 
-
-
 class CenterMapViewScreen extends StatefulWidget {
-
-  CenterMapViewScreen({Key? key,})
-      : super(key: key);
+  CenterMapViewScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<CenterMapViewScreen> createState() => _CenterMapViewScreenState();
 }
 
 class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
-
   CustomInfoWindowController customInfoWindowController =
-  CustomInfoWindowController();
+      CustomInfoWindowController();
   CustomView customView = CustomView();
   late GoogleMapController controller;
   PCenterCtr pCenterCtr = PCenterCtr();
-
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
@@ -63,12 +59,12 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => PCenterDetailScreen(
-                              id: pCenterCtr.centerList[i].centerId,
-                            )));
+                                  id: pCenterCtr.centerList[i].centerId,
+                                )));
                   },
                   child: Card(
-                    margin:
-                    const EdgeInsets.symmetric(horizontal: 7, vertical: 6.0),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 7, vertical: 6.0),
                     color: MyColor.white,
                     elevation: 2.2,
                     child: Row(
@@ -80,8 +76,7 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                           child: FadeInImage.assetNetwork(
                               placeholder: "assets/images/YlWC.gif",
                               alignment: Alignment.center,
-                              image: pCenterCtr.centerList[i].image
-                                  .toString(),
+                              image: pCenterCtr.centerList[i].image.toString(),
                               fit: BoxFit.fitWidth,
                               width: double.infinity,
                               imageErrorBuilder: (context, error, stackTrace) {
@@ -106,25 +101,41 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
                               height: 3,
                             ),
                             SizedBox(
-                                width: MediaQuery.sizeOf(context).width/2,
-                                child: Text( pCenterCtr.centerList[i].biography,maxLines: 1,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
-                                  fontFamily: "Poppins",color: MyColor.grey,),)),
+                                width: MediaQuery.sizeOf(context).width / 2,
+                                child: Text(
+                                  pCenterCtr.centerList[i].biography,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: "Poppins",
+                                    color: MyColor.grey,
+                                  ),
+                                )),
                             const SizedBox(
                               height: 3,
                             ),
                             Row(
                               children: [
-                                const Icon(Icons.location_on_outlined, size: 18),
+                                const Icon(Icons.location_on_outlined,
+                                    size: 18),
                                 SizedBox(
-                                    width: MediaQuery.sizeOf(context).width/2,
-                                    child: Text( pCenterCtr.centerList[i].address,maxLines: 2,  overflow:TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,
-                                      fontFamily: "Poppins",color: MyColor.grey,),)),
+                                    width: MediaQuery.sizeOf(context).width / 2,
+                                    child: Text(
+                                      pCenterCtr.centerList[i].address,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: "Poppins",
+                                        color: MyColor.grey,
+                                      ),
+                                    )),
                               ],
                             ),
                             const SizedBox(
                               height: 2,
                             ),
-
                           ],
                         )
                       ],
@@ -140,6 +151,10 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
       }
     });
   }
+
+
+
+
 
   @override
   void initState() {
@@ -187,16 +202,15 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
             ),
             zoom: 15.0,
           ),
-                                                            onMapCreated: (GoogleMapController controllers) async {
+          onMapCreated: (GoogleMapController controllers) async {
             _onMapCreated(controllers);
             customInfoWindowController.googleMapController = controllers;
             controller = controllers;
             for (var marker in markers.values) {
               controller.showMarkerInfoWindow(marker.markerId);
             }
-
           },
-          markers: markers.values.toSet(),
+          markers: latlang.isNotEmpty ? markers.values.toSet() : <Marker>{},
         ),
         CustomInfoWindow(
           controller: customInfoWindowController,
@@ -204,7 +218,6 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
           width: 300,
           offset: 50,
         ),
-
       ]);
     });
   }

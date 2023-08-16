@@ -242,7 +242,13 @@ LocalString text = LocalString();
                             ),
                             Expanded(
                               flex: 1,
-                              child: custom.text(list[index].status.toString(),
+                              child: custom.text(list[index].status == "Pending"
+                                  ? text.Pending.tr
+                                  : list[index].status == "Cancel"
+                                  ? text.Cancel.tr
+                                  : list[index].status == "Complete"
+                                  ?text.Complete.tr
+                                  : text.Upcoming.tr,
                                   11.0, FontWeight.w400, Colors.black),
                             ),
                             const Expanded(
@@ -511,7 +517,13 @@ LocalString text = LocalString();
                         /*-----------*/
                         Expanded(
                           flex: 1,
-                          child: custom.text(bookingController.status.value,
+                          child: custom.text(bookingController.status.value == "Pending"
+                              ? text.Pending.tr
+                              : bookingController.status.value == "Cancel"
+                              ? text.Cancel.tr
+                              : bookingController.status.value == "Complete"
+                              ?text.Complete.tr
+                              : text.Upcoming.tr,
                               11.0, FontWeight.w400, Colors.black),
                         ),
                         Expanded(

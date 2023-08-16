@@ -234,7 +234,21 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                               Expanded(
                                 flex: 1,
                                 child: customView.text(
-                                    list[index].status.toString(),
+                                    patientBookingController
+                                        .booking[index].status ==
+                                        "Pending"
+                                        ? text.Pending.tr
+                                        : patientBookingController
+                                        .booking[index]
+                                        .status ==
+                                        "Confirmed"
+                                        ? text.Upcoming.tr
+                                        : patientBookingController
+                                        .booking[index]
+                                        .status ==
+                                        "Reject"
+                                        ? text.reject.tr
+                                        : text.Cancel.tr,
                                     11.0,
                                     FontWeight.w400,
                                     Colors.black),
@@ -515,9 +529,11 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   "Pending"
                                   ? MyColor.statusYellow
                                   : patientBookingController.status.value ==
-                                  "Complete"
-                                  ? MyColor.primary
-                                  :patientBookingController.status.value == "Cancel"? Colors.red:Colors.green,
+                                  "Confirmed"
+                                  ? Colors.green
+                                  :  patientBookingController.status.value
+                                  == "Reject"
+                                  ? Colors.red: patientBookingController.status.value == "Cancel"? Colors.red:MyColor.primary,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
@@ -528,7 +544,17 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         Expanded(
                           flex: 1,
                           child: customView.text(
-                              patientBookingController.status.value,
+
+                              patientBookingController.status.value ==
+                              "Pending"
+                          ? text.Pending.tr
+                              :  patientBookingController.status.value ==
+                          "Confirmed"
+                              ? text.Upcoming.tr
+                                  :  patientBookingController.status.value
+                               == "Reject"
+                          ? text.reject.tr
+                              : text.Cancel.tr,
                               11.0,
                               FontWeight.w400,
                               Colors.black),

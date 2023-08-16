@@ -43,7 +43,7 @@ class _CenterProfileState extends State<CenterProfile> {
   void _choose(ImageSource source) async {
     final pickedFile = await picker.getImage(
       source: source,
-      imageQuality: 70,
+      imageQuality: 100,
     );
     setState(() {
       if (pickedFile != null) {
@@ -217,12 +217,12 @@ class _CenterProfileState extends State<CenterProfile> {
                                                           children: [
                                                             Icon(Icons.image,
                                                                 size: 20),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 10,
                                                             ),
                                                             Text(
                                                               text.imageFromgallary.tr,
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   fontSize: 16,
                                                                   fontWeight:
                                                                       FontWeight

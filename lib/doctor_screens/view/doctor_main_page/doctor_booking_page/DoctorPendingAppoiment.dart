@@ -60,7 +60,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 ),
                                 Align(
                                   alignment: Alignment.topCenter,
-                                  child: custom.text("${text.Sort_by.tr}:", 17,
+                                  child: custom.text("${text.Sort_by.tr} :", 17,
                                       FontWeight.w500, MyColor.black),
                                 ),
                                 const SizedBox(
@@ -183,7 +183,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
-                                    pendingList.status.toString(),
+                                    text.Pending.tr,
                                     11.0,
                                     FontWeight.w400,
                                     Colors.black),
@@ -415,7 +415,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           Expanded(
                             flex: 1,
                             child: Text(
-                              bookingController.status.value,
+                              text.status.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -453,7 +453,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           /*-----------*/
                           Expanded(
                             flex: 1,
-                            child: custom.text(bookingController.status.value,
+                            child: custom.text(text.Pending.tr,
                                 11.0, FontWeight.w400, Colors.black),
                           ),
                           Expanded(

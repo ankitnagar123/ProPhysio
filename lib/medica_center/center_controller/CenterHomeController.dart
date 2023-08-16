@@ -146,6 +146,7 @@ class CenterHomeCtr extends GetxController {
 Future<void> centerSelectedWardList(BuildContext context,) async {
     loadingFetchW.value = true;
     final Map<String, dynamic>Perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
@@ -179,6 +180,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
   Future<void> centerWardListPatient(BuildContext context,String id ) async {
     loadingFetchW.value = true;
     final Map<String, dynamic>Perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "center_id": id,
     };
     bool connection = await  checkInternetConnection();
@@ -212,6 +214,7 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
   /*----------------- Selected Doctor list  Fetch Api----------------*/
   Future<void> centerSelectedDrList(BuildContext context,String wardId) async {
     final Map<String, dynamic>Perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "ward_id":wardId
     };
     bool connection = await  checkInternetConnection();
@@ -244,9 +247,12 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
 
   /*----------------- Selected Doctor Ward Remove Cancel Reason list  Api----------------*/
   Future<void> wardDrRemoveReason(BuildContext context,) async {
+    final Map<String, dynamic>parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     loadingCancelD.value = true;
       try {
-        final response = await apiService.getData(MyAPI.cDoctorRemoveReason);
+        final response = await apiService.postData(MyAPI.cDoctorRemoveReason,parameter);
         print("Cancel reason remove doctor list=====${response.body}");
         if (response.statusCode == 200) {
           loadingCancelD.value = false;
@@ -265,9 +271,12 @@ Future<void> centerSelectedWardList(BuildContext context,) async {
 
   /*----------------- Ward Delete Cancel Reason list  Api----------------*/
   Future<void> wardDeleteReason(BuildContext context,) async {
+    final Map<String, dynamic>parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     loadingCancelW.value = true;
     try {
-      final response = await apiService.getData(MyAPI.cWardRemoveReason);
+      final response = await apiService.postData(MyAPI.cWardRemoveReason,parameter);
       print("doctor list=====${response.body}");
       if (response.statusCode == 200) {
         loadingCancelW.value = false;

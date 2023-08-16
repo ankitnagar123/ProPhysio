@@ -29,6 +29,7 @@ class AddSpecializationCtr extends GetxController {
   /*-------------Doctor fetch selected category --------------*/
   Future<void> doctorSelectedCategory() async {
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
     };
     try {
@@ -53,6 +54,7 @@ class AddSpecializationCtr extends GetxController {
   /*-------------Doctor fetch selected sub category --------------*/
   Future<void> doctorSelectedSubCategory(String categoryId) async {
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "cat_id": categoryId,
     };

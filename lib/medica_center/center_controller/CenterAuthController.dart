@@ -190,6 +190,7 @@ class CenterAuthCtr extends GetxController {
     loadingP.value = true;
     resultVar.value = 0;
     final Map<String, dynamic> ProfilePerameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "center_id": await sp.getStringValue(sp.CENTER_ID_KEY),
     };
     print("Doctor Profile Parameter$ProfilePerameter");
@@ -280,6 +281,7 @@ class CenterAuthCtr extends GetxController {
   void centerDetails(BuildContext context, String id) async {
     loadingDetails.value = true;
     final Map<String, dynamic> ProfilePerameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "center_id": id,
     };
     print("Doctor Profile Parameter$ProfilePerameter");

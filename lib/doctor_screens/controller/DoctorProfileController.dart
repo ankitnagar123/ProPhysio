@@ -56,6 +56,7 @@ class DoctorProfileCtr extends GetxController {
     loading.value = true;
     resultVar.value = 0;
     final Map<String, dynamic> ProfilePerameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
     };
     print("Doctor Profile Parameter$ProfilePerameter");

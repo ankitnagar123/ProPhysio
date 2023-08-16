@@ -56,6 +56,7 @@ class BookingController extends GetxController {
       BuildContext context, String statusType, String dateFilter) async {
     bool connection = await checkInternetConnection();
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "status": statusType,
       "type": dateFilter,
@@ -115,6 +116,7 @@ class BookingController extends GetxController {
   ) async {
     loadingd.value = true;
     final Map<String, dynamic> Perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "booking_id": id,
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "status": statusType,
@@ -261,9 +263,12 @@ class BookingController extends GetxController {
 
   /*---------booking Appointment Cancel Reason's List--------*/
   Future<void> appointmentCancelReason() async {
+    final Map<String, dynamic> parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
     try {
       loadingCancelList.value = true;
-      final response = await apiService.getData(MyAPI.dAppointmentCancelList);
+      final response = await apiService.postData(MyAPI.dAppointmentCancelList,parameter);
       print(" appointment Cancel Reason =============${response.body}");
       if (response.statusCode == 200) {
         loadingCancelList.value = false;

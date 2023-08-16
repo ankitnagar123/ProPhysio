@@ -8,6 +8,7 @@ import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
+import '../../signin_screen/signin_controller/SignInController.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterSelectedWardModel.dart';
 
@@ -23,8 +24,12 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   CustomView custom = CustomView();
   LocalString text = LocalString();
   SharedPreferenceProvider sp = SharedPreferenceProvider();
-  int selectedCard = -1;
   CenterHomeCtr centerHomeCtr = Get.put(CenterHomeCtr());
+  LoginCtr loginCtr = LoginCtr();
+
+
+  int selectedCard = -1;
+
   String wardId = "";
   String wardName = "";
 
@@ -175,8 +180,8 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
     id = await sp.getStringValue(sp.CENTER_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
-    userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
+    // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
 
-   // loginCtr.updateToken(context, id!, "Doctor", deviceId!, deviceTyp!);
+    loginCtr.updateToken(context, id!, "Center", deviceId!, deviceTyp!);
   }
 }

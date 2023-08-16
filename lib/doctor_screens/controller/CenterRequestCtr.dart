@@ -28,6 +28,7 @@ class CenterRequest extends GetxController {
   Future<void> CenterRequestListApi(BuildContext context) async {
     loading.value = true;
     final Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
     };
     try {

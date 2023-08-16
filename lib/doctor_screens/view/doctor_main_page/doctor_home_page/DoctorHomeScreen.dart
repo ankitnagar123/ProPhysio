@@ -175,7 +175,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: custom.text(list.status.toString(), 11.0,
+                            child: custom.text(/*list.status.toString()*/list.status == "Pending"?text.Pending.tr:list.status == "Cancel"?text.Cancel.tr:text.Upcoming.tr, 11.0,
                                 FontWeight.w400, Colors.black),
                           ),
                           const Expanded(
@@ -443,7 +443,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           /*-----------*/
                           Expanded(
                             flex: 1,
-                            child: custom.text(bookingController.status.value,
+                            child: custom.text(bookingController.status.value == "Pending"?text.Pending.tr:bookingController.status.value == "Cancel"?text.Cancel.tr:text.Upcoming.tr,
                                 11.0, FontWeight.w400, Colors.black),
                           ),
                           Expanded(

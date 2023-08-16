@@ -23,6 +23,7 @@ class DoctorEarningCtr extends GetxController {
   /*---------Fetch Earning behalf of Past Appointment --------*/
   Future<void> fetchEarning(String startDate,String endDate,VoidCallback callback) async {
     final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id":await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "start_date":startDate,
       "end_date":endDate,

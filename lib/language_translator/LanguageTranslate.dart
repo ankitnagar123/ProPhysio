@@ -2,6 +2,14 @@ import 'package:get/get.dart';
 
 class LocalString extends Translations {
   /// ******************Sign In Page************** //
+  ///
+  ///
+  /*Docotr Side APi static texts*/
+  String Pending = " Pending";
+  String Cancel = "Cancel";
+  String Upcoming = "Confirmed";
+
+
   String Download_report_successful = "Download report successful";
   String Select_doctor = "Select doctor";
 
@@ -85,6 +93,8 @@ class LocalString extends Translations {
   String invalid_otp = "invalid otp";
   String CreatePassLine =
       "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.";
+String PasswordChangedSuccess = "Password changed successfully!";
+  String easilylogback = "You can easily log back into your account by entering your username and\n new password.";
 
   /// ***************** MEDICA CENTER SIDE*****************///
   /* CENTER MORE PAGE*/
@@ -532,6 +542,8 @@ String Centerward = "Center ward";
 String NoWardAddedCenter = "No ward added by center";
   /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
   String appointmentCorrectlySaved = "Appointment correctly\n saved!";
+  String appointmentPayment = "Please wait while we process your payment";
+
   String youCanFindYourBooking =
       "You can find your booking in the pending section. Attention! This is a booking request. Wait for the doctor to confirm your booking. You will receive a notification and a confirmation email.";
   String letGo = "Let’s go";
@@ -576,12 +588,16 @@ String NoWardAddedCenter = "No ward added by center";
         'en_US': {
           //*****************Sign IN Page***************************//
   Download_report_successful : "Download report successful",
-  Select_doctor : "Select doctor",
+          Pending : "Pending",
+          Cancel : "Cancel",
+          Upcoming : "Confirmed",
+          Select_doctor : "Select doctor",
           SIGN_IN: "Sign in",
           ENTER_USER_EMAIL: "Enter your username/email",
           HINT_ENTER_USER_EMAIL: "Enter Email ID/User Id",
           Enter_Password: "Enter your Password",
           HINT_ENTER_Password: "Enter Password",
+
           Forgot_Password: "Forgot password?",
           Create_New_One: "Create a new one",
           Dont_have_an_account: "Don’t have an account?",
@@ -645,7 +661,8 @@ String NoWardAddedCenter = "No ward added by center";
           invalid_otp: "invalid otp",
           CreatePassLine:
               "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
-
+  PasswordChangedSuccess : "Password changed successfully!",
+  easilylogback : "You can easily log back into your account by entering your username and\n new password.",
           //********************CENTER SIDE MORE PAGE*******************/
           hii: "Hi",
           ProfileSettings: "Profile settings",
@@ -1073,6 +1090,7 @@ String NoWardAddedCenter = "No ward added by center";
    NoWardAddedCenter : "No ward added by center",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appointment correctly saved!",
+  appointmentPayment : "Please wait while we process your payment",
           youCanFindYourBooking:
               "You can find your booking in the pending section. Attention! This is a booking request. Wait for the doctor to confirm your booking. You will receive a notification and a confirmation email.",
           letGo: "Let’s go",
@@ -1114,6 +1132,10 @@ String NoWardAddedCenter = "No ward added by center";
         },
         'it_IT': {
           //*****************Sign IN Page***************************//
+          Pending : "In attesa di",
+          Cancel : "Annulla",
+          Upcoming : "Confermato",
+
           Download_report_successful : "Download del rapporto riuscito",
           Select_doctor : "Seleziona dottore",
           SIGN_IN: "Registrazione",
@@ -1181,6 +1203,10 @@ String NoWardAddedCenter = "No ward added by center";
           SendNewOtp: "Invia un nuovo numero OTP",
           SetPassword: "Imposta una nuova password",
           invalid_otp: "invalido otp",
+          PasswordChangedSuccess : "Password cambiata con successo!",
+          easilylogback : "Puoi facilmente accedere nuovamente al tuo account inserendo il tuo nome utente e\n la nuova password.",
+
+
           CreatePassLine:
               "Crea una nuova password con almeno sei caratteri. Se vuoi renderlo più sicuro aggiungi una lettera maiuscola, una lettera speciale e un numero.",
 
@@ -1639,6 +1665,8 @@ String NoWardAddedCenter = "No ward added by center";
           NoWardAddedCenter : "Nessun rione aggiunto dal centro",
           /*PATIENT SIDE BOOK APPOINTMENT SCREEN*/
           appointmentCorrectlySaved: "Appuntamento salvato correttamente!",
+          appointmentPayment : "Attendi mentre elaboriamo il tuo pagamento",
+
           youCanFindYourBooking:
               "Puoi trovare la tua prenotazione nella sezione in sospeso. Attenzione! Questa è una richiesta di prenotazione. Attendi che il medico confermi la tua prenotazione. Riceverai una notifica e una mail di conferma.",
           letGo: "Andiamo",

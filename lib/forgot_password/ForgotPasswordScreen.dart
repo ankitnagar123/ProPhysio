@@ -113,10 +113,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   }
                   return custom.MyButton(context, text.Submit.tr, () {
                     if (validation()) {
-                      forgotPassCtr.forgotPasswordVerification(context, code,phoneCtr.text,() {
-                        var id = {"id": forgotPassCtr.id.value,"code":code,"phone":phoneCtr.text};
-                        Get.toNamed(RouteHelper.getVerification(),parameters: id);
-                      },);
+                      forgotPassCtr.forgotPasswordVerification(context, code,phoneCtr.text,"",() {},);
                     }
 
                     /*   if (validation()) {

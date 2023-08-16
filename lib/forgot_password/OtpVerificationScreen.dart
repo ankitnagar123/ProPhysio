@@ -22,17 +22,30 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   var apiotp = "";
   var iD = '';
   var email = "";
+  var countryCode = "";
+  var phoneNo = "";
+  var userType = "";
   LocalString text = LocalString();
 
   @override
   void initState() {
-    iD = Get.parameters["id"].toString();
-    email = Get.parameters["email"].toString();
-    log("my email$email");
-    apiotp = Get.arguments;
-    print(" otp is here$apiotp");
-    // TODO: implement initState
     super.initState();
+    userType = forgotPassCtr.userTyp.value.toString();
+    apiotp = forgotPassCtr.otp.value.toString();
+    log("API OTP$apiotp");
+log(userType);
+    // apiotp = Get.arguments;
+    // print(" otp is here$apiotp");
+    countryCode = Get.parameters["code"].toString();
+    log(countryCode);
+    phoneNo = Get.parameters["phone"].toString();
+    log(phoneNo);
+    iD = Get.parameters["id"].toString();
+    userType = Get.parameters["userType"].toString();
+
+    // email = Get.parameters["email"].toString();
+    // log("my email$email");
+    forgotPassCtr.forgotPassOtp(context, countryCode, phoneNo, "", userType);
   }
 
   CustomView custom = CustomView();
@@ -47,6 +60,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           if (validationotp()) {
             var id = {
               "id": iD,
+              "userType":userType,
             };
             Get.toNamed(RouteHelper.getSetPassword(), parameters: id);
           } else {}
@@ -99,7 +113,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         MyColor.primary1),
                     GestureDetector(
                         onTap: () {
-                          forgotPassCtr
+           /*               forgotPassCtr
                               .forgotPassword(
                             context,
                             email,
@@ -112,7 +126,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               // Get.toNamed(RouteHelper.getVerification(),
                               //     arguments: value, parameters: id);
                             }
-                          });
+                          });*/
                         },
                         child:  Text(
                           text.SendNewOtp.tr,
@@ -144,9 +158,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   bool validationotp() {
     print("api otp${apiotp.toString()}");
     print("my otp${optctr.text.toString()}");
-    if (optctr.text.isEmpty || optctr.text.length != 4) {
+    if (optctr.text.isEmpty) {
       custom.massenger(context, text.Enter_otp.tr);
-    } else if (apiotp == optctr.text) {
+    } else if (forgotPassCtr.otp.value == optctr.text) {
       print("Correct OTP");
       custom.massenger(context, text.SetPassword.tr);
       return true;

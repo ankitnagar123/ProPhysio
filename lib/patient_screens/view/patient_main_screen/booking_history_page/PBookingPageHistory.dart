@@ -122,341 +122,362 @@ class _BookingPageState extends State<BookingPage> {
               var idDr = patientBookingController.booking[index].doctorId;
               return InkWell(
                 onTap: () {
-                  patientBookingController
-                      .bookingAppointmentDetails(context, id!, "", () {
-                    showBottomSheet(id, idDr!);
+                  patientBookingController.bookingAppointmentDetails(
+                      context, id.toString(), "", () {
+                    showBottomSheet(id.toString(), idDr.toString());
                   });
                 },
-                child:
-                    patientBookingController.booking[index].status == "Cancel"
-                        ? Card(
-                            borderOnForeground: true,
-                            shadowColor: Colors.red,
-                            shape: const RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Colors.red, //<-- SEE HERE
-                              ),
-                            ),
-                            color: Colors.red.shade50,
-                            elevation: 5,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 7.0, vertical: 10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 0,
-                                        child: Container(
-                                          height: 10.0,
-                                          width: 10.0,
-                                          decoration: BoxDecoration(
-                                            color: patientBookingController
-                                                        .booking[index]
-                                                        .status ==
-                                                    "Pending"
-                                                ? MyColor.statusYellow
-                                                : patientBookingController
-                                                            .booking[index]
-                                                            .status ==
-                                                        "Confirmed"
-                                                    ? Colors.green
-                                                    : Colors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 7.0,
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: customView.text(
-                                            patientBookingController
-                                                .booking[index].status
-                                                .toString(),
-                                            11.0,
-                                            FontWeight.w400,
-                                            Colors.black),
-                                      ),
-                                      const Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.black,
-                                            size: 18.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8.0,
-                                  ),
-                                  customView.text(
-                                      "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
-                                          .toString(),
-                                      14.0,
-                                      FontWeight.w500,
-                                      Colors.black),
-                                  const SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.date.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                                patientBookingController
-                                                    .booking[index].bookingDate
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Poppins")),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.slot.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                              patientBookingController
-                                                  .booking[index].time
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.bookingID.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                                patientBookingController
-                                                    .booking[index].bookId
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Poppins")),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        : Card(
-                            color: MyColor.midgray,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 7.0, vertical: 10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 0,
-                                        child: Container(
-                                          height: 10.0,
-                                          width: 10.0,
-                                          decoration: BoxDecoration(
-                                            color: patientBookingController
-                                                        .booking[index]
-                                                        .status ==
-                                                    "Pending"
-                                                ? MyColor.statusYellow
-                                                : patientBookingController
-                                                            .booking[index]
-                                                            .status ==
-                                                        "Confirmed"
-                                                    ? Colors.green
-                                                    : Colors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 7.0,
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: customView.text(
-                                            patientBookingController
-                                                .booking[index].status
-                                                .toString(),
-                                            11.0,
-                                            FontWeight.w400,
-                                            Colors.black),
-                                      ),
-                                      const Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.black,
-                                            size: 18.0,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8.0,
-                                  ),
-                                  customView.text(
-                                      "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
-                                          .toString(),
-                                      14.0,
-                                      FontWeight.w500,
-                                      Colors.black),
-                                  const SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.date.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                                patientBookingController
-                                                    .booking[index].bookingDate
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Poppins")),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.slot.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                              patientBookingController
-                                                  .booking[index].time
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 12.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              text.bookingID.tr,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10.0,
-                                                  fontFamily: "Poppins"),
-                                            ),
-                                            const SizedBox(
-                                              height: 2.0,
-                                            ),
-                                            Text(
-                                                patientBookingController
-                                                    .booking[index].bookId
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12.0,
-                                                    fontFamily: "Poppins")),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
+                child: patientBookingController.booking[index].status ==
+                        "Cancel"
+                    ? Card(
+                        borderOnForeground: true,
+                        shadowColor: Colors.red,
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.red, //<-- SEE HERE
                           ),
+                        ),
+                        color: Colors.red.shade50,
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7.0, vertical: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 0,
+                                    child: Container(
+                                      height: 10.0,
+                                      width: 10.0,
+                                      decoration: BoxDecoration(
+                                        color: patientBookingController
+                                                    .booking[index].status ==
+                                                "Pending"
+                                            ? MyColor.statusYellow
+                                            : patientBookingController
+                                                        .booking[index]
+                                                        .status ==
+                                                    "Confirmed"
+                                                ? Colors.green
+                                                : Colors.red,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 7.0,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: customView.text(
+                                        patientBookingController
+                                                    .booking[index].status ==
+                                                "Pending"
+                                            ? text.Pending.tr
+                                            : patientBookingController
+                                                        .booking[index]
+                                                        .status ==
+                                                    "Confirmed"
+                                                ? text.Upcoming.tr
+                                                : patientBookingController
+                                                            .booking[index]
+                                                            .status ==
+                                                        "Reject"
+                                                    ? text.reject.tr
+                                                    : text.Cancel.tr,
+                                        11.0,
+                                        FontWeight.w400,
+                                        Colors.black),
+                                  ),
+                                  const Expanded(
+                                    flex: 1,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                        size: 18.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8.0,
+                              ),
+                              customView.text(
+                                  "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
+                                      .toString(),
+                                  14.0,
+                                  FontWeight.w500,
+                                  Colors.black),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.date.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                            patientBookingController
+                                                .booking[index].bookingDate
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12.0,
+                                                fontFamily: "Poppins")),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.slot.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                          patientBookingController
+                                              .booking[index].time
+                                              .toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.bookingID.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                            patientBookingController
+                                                .booking[index].bookId
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12.0,
+                                                fontFamily: "Poppins")),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    : Card(
+                        color: MyColor.midgray,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7.0, vertical: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 0,
+                                    child: Container(
+                                      height: 10.0,
+                                      width: 10.0,
+                                      decoration: BoxDecoration(
+                                        color: patientBookingController
+                                                    .booking[index].status ==
+                                                "Pending"
+                                            ? MyColor.statusYellow
+                                            : patientBookingController
+                                                        .booking[index]
+                                                        .status ==
+                                                    "Confirmed"
+                                                ? Colors.green
+                                                : Colors.red,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 7.0,
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: customView.text(
+                                          patientBookingController
+                                                      .booking[index].status ==
+                                                  "Pending"
+                                              ? text.Pending.tr
+                                              : patientBookingController
+                                                          .booking[index]
+                                                          .status ==
+                                                      "Confirmed"
+                                                  ? text.Upcoming.tr
+                                                  : patientBookingController
+                                                              .booking[index]
+                                                              .status ==
+                                                          "Reject"
+                                                      ? text.reject.tr
+                                                      : text.Cancel.tr,
+                                          11.0,
+                                          FontWeight.w400,
+                                          Colors.black)),
+                                  const Expanded(
+                                    flex: 1,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                        size: 18.0,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8.0,
+                              ),
+                              customView.text(
+                                  "${text.visitWith.tr} ${patientBookingController.booking[index].name} ${patientBookingController.booking[index].surname}"
+                                      .toString(),
+                                  14.0,
+                                  FontWeight.w500,
+                                  Colors.black),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.date.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                            patientBookingController
+                                                .booking[index].bookingDate
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12.0,
+                                                fontFamily: "Poppins")),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.slot.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                          patientBookingController
+                                              .booking[index].time
+                                              .toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.bookingID.tr,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 10.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                            patientBookingController
+                                                .booking[index].bookId
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12.0,
+                                                fontFamily: "Poppins")),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
               );
             }),
       );
@@ -486,17 +507,20 @@ class _BookingPageState extends State<BookingPage> {
                     patientBookingController.status == "Confirmed"
                         ? GestureDetector(
                             onTap: () {
-                            var data = {
-                              "drName": patientBookingController.name.value,
-                              "doctorId": idDr,
-                              "drSurname": patientBookingController.surname.value,
-                              "drImg": patientBookingController.drImg.value,
-                              "drAddress" :patientBookingController.location.value,
-                              "contact": patientBookingController.contact.value,
-                              "doctorList": "drListData",
-                            };
-                            Get.toNamed(RouteHelper.getChatScreen(),
-                                arguments: data);
+                              var data = {
+                                "drName": patientBookingController.name.value,
+                                "doctorId": idDr,
+                                "drSurname":
+                                    patientBookingController.surname.value,
+                                "drImg": patientBookingController.drImg.value,
+                                "drAddress":
+                                    patientBookingController.location.value,
+                                "contact":
+                                    patientBookingController.contact.value,
+                                "doctorList": "drListData",
+                              };
+                              Get.toNamed(RouteHelper.getChatScreen(),
+                                  arguments: data);
                             },
                             child: Wrap(
                               children: [
@@ -671,7 +695,15 @@ class _BookingPageState extends State<BookingPage> {
                         Expanded(
                           flex: 1,
                           child: customView.text(
-                              patientBookingController.status.value,
+                              patientBookingController.status.value == "Pending"
+                                  ? text.Pending.tr
+                                  : patientBookingController.status.value ==
+                                          "Confirmed"
+                                      ? text.Upcoming.tr
+                                      : patientBookingController.status.value ==
+                                              "Reject"
+                                          ? text.reject.tr
+                                          : text.Cancel.tr,
                               11.0,
                               FontWeight.w400,
                               Colors.black),

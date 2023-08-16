@@ -4,29 +4,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medica/helper/CustomView/CustomView.dart';
-
+import 'package:medica/language_translator/LanguageTranslate.dart';
+import 'package:http/http.dart' as http;
+import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../Network/ApiService.dart';
 import '../../Network/Apis.dart';
 
 class ForgotPassCtr extends GetxController {
   CustomView custom =CustomView();
   ApiService apiService = ApiService();
+  LocalString text = LocalString();
   var loadingotp = false.obs;
   var loadingset = false.obs;
   var otp = "".obs;
-  var id = "".obs;
+  var ID = "".obs;
+  var userTyp = "".obs;
+  var result = ''.obs;
 
   /*-------------Forgot Password Verification  OTP--------------*/
   Future<String> forgotPasswordVerification(
       BuildContext context,
-      String countryCode,String phone,
-       VoidCallback callback
+      String countryCode,String phone,String email,
+       VoidCallback callback,
       ) async {
     loadingotp.value = true;
     final Map<String, dynamic> pforgot = {
       "country_code":countryCode,
       "contact":phone,
-      // "email": email,
+       "email": email,
+      // "user_type":userType
     };
     print("Forgot Perameter$pforgot");
 
@@ -36,18 +42,21 @@ class ForgotPassCtr extends GetxController {
       loadingotp.value = false;
       var jsonResponse = jsonDecode(response.body);
       otp.value = jsonResponse['otp'].toString();
-      id.value = jsonResponse['id'].toString();
       var result = jsonResponse['result'].toString();
       if (result == 'success') {
-        // callback();
+         userTyp.value = jsonResponse["user_type"].toString();
+         ID.value = jsonResponse['id'].toString();
+         print("usertype${userTyp.value}");
         print("my otp ctr${otp.toString()}");
-        custom.massenger(context, otp.toString());
-        loadingotp.value = false;
+         // callback();
+         var id = {"code":countryCode,"phone":phone,"userType": userTyp.value,"id":ID.value};
+         Get.toNamed(RouteHelper.getVerification(),parameters: id);
+         loadingotp.value = false;
 
         print(result.toString());
         return jsonResponse['otp'].toString();
       } else {
-        custom.massenger(context, "Invalid Email");
+        custom.massenger(context, text.Invalid);
       }
     } catch (e) {
       log("exception$e");
@@ -56,7 +65,54 @@ class ForgotPassCtr extends GetxController {
     return '';
   }
 
-  /*-------------Forgot Password OTP--------------*/
+
+   Future<String> forgotPassOtp(
+    BuildContext context,
+      String countryCode,
+      String phone,
+      String email,
+    String userTyp
+    // VoidCallback callback,
+  ) async {
+    loadingotp.value = true;
+    final Map<String, dynamic> signupPerameter = {
+      "user_type":userTyp,
+      "country_code":countryCode,
+      "contact":phone,
+      "email": email,
+    };
+    print("Signup Parameter$signupPerameter");
+    final response = await http.post(
+        Uri.parse(
+            MyAPI.send_otp_twiliosms,
+        ),
+        body: signupPerameter);
+/*    final response =
+        await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);*/
+    print("parameter  for medical center${signupPerameter}");
+    try {
+      log("response of Medical Center Signup OTP :-${response.body}");
+      loadingotp.value = false;
+      var jsonResponse = jsonDecode(response.body);
+      otp.value = jsonResponse['otp'].toString();
+      if (response.statusCode == 200) {
+        print("my otp ctr${otp.toString()}");
+        // custom.massenger(context, otp.toString());
+        loadingotp.value = false;
+
+        print(result.toString());
+        return jsonResponse['otp'].toString();
+      } else {
+        custom.massenger(context, text.SomthingWentWrong.tr);
+      }
+    } catch (e) {
+      custom.massenger(context, text.SomthingWentWrong.tr);
+      log("exception$e");
+      return '';
+    }
+    return '';
+  }
+/*  *//*-------------Forgot Password OTP--------------*//*
   Future<String> forgotPassword(
       BuildContext context,
       String email,
@@ -64,12 +120,12 @@ class ForgotPassCtr extends GetxController {
       ) async {
     loadingotp.value = true;
     final Map<String, dynamic> pforgot = {
-   /*   "user_type":"Medical",
+   *//*   "user_type":"Medical",
       "country_code":countryCode,
-      "contact":phone,*/
+      "contact":phone,*//*
       "email": email,
     };
-    print("Forgot Perameter$pforgot");
+    print("Forgot Parameter$pforgot");
 
     final response = await apiService.postData(MyAPI.forgotPassword, pforgot);
     try {
@@ -95,18 +151,19 @@ class ForgotPassCtr extends GetxController {
       return '';
     }
     return '';
-  }
+  }*/
 
 
 
   /*-------------Set New Password--------------*/
   Future setPassword(BuildContext context, String id, String newpassword,
-      String confimpass, VoidCallback callback) async {
+      String confimpass,String userType, VoidCallback callback) async {
     loadingset.value = true;
     final Map<String, dynamic> pSetPass = {
       "id": id,
       "newpassword": newpassword,
       "confirmpassword":confimpass,
+      "user_type":userType
     };
     print("Set new password Parameter$pSetPass");
 

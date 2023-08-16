@@ -82,7 +82,6 @@ class MyAPI {
   static const String DCategorySignUp = "category_list";
   static const String DSignUpOtp = "doctor_otp_signup";
   static const String DSignUp = "doctor_signup";
-  static const String DForgotPassword = "get_doctor_forgot_password";
   static const String DFetchProfile = "fetch_doctor_profile";
   static const String DUpdateProfile = "update_Doctor_profile";
   static const String DUpdateDegree = "Update_doctor_document";

@@ -27,12 +27,13 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   bool _isHidden1 = true;
 
   var id = "";
-
+var userType = "";
   @override
   void initState() {
-    id = Get.parameters["id"]!;
-    // TODO: implement initState
     super.initState();
+    id = Get.parameters["id"].toString();
+    userType = Get.parameters["userType"].toString();
+    print("id for set pass:${id} user type:$userType");
   }
 
   @override
@@ -41,10 +42,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
         .of(context)
         .size
         .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -53,7 +51,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                 return custom.MyIndicator();
               }
             return custom.MyButton(context, text.Submit, () {
-              forgotPassCtr.setPassword(context, id, newpasswordctr.text, confirmpasswordctr.text, () {
+              forgotPassCtr.setPassword(context, id, newpasswordctr.text, confirmpasswordctr.text,userType,() {
                 Get.offAndToNamed(RouteHelper.getSetPassSuccess());
 
               });

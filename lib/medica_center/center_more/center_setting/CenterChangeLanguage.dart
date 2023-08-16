@@ -22,10 +22,16 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   int? index;
   @override
+  void initState() {
+
+    super.initState();
+    getVal();
+  }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      /*  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Container(
           margin: const EdgeInsets.symmetric(horizontal: 14,vertical: 10),
           child:  customView.MyButton(
@@ -37,7 +43,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
             MyColor.primary,
             const TextStyle(fontFamily: "Poppins", color: Colors.white),
           ),
-        ),
+        ),*/
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
@@ -103,7 +109,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                           ),
                           child: Card(
                               elevation: 0.0,
-                              shape:index==1?  RoundedRectangleBorder(
+                              shape:  index==1?  RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   side:  BorderSide(color: MyColor.primary,width: 3)
                               ):null ,
@@ -141,6 +147,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                           index = 2;
                           Itlocal= const Locale('it','IT');
                           sp.setStringValue(sp.LANGUAGE, "it");
+
                           Get.updateLocale(Itlocal);
                         },
                         child: Container(
@@ -193,6 +200,17 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
             ]),
       ),
     );
+  }
+  void getVal()async{
+    if(await sp.getStringValue(sp.LANGUAGE ) == "it"){
+      setState(() {
+        index = 2;
+      });
+    }else{
+      setState(() {
+        index =1;
+      });
+    }
   }
 }
 

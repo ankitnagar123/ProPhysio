@@ -267,7 +267,7 @@ Future paymentAppointment(BuildContext context, String bookingId,VoidCallback ca
         paymentAppointment(context,  id, () {
           callback();
         });
-        // custom.massenger(context, text.appointmentCorrectlySaved.tr);
+        custom.massenger(context, text.appointmentPayment.tr);
         print(result.toString());
       } else {
         loadingAdd.value = false;

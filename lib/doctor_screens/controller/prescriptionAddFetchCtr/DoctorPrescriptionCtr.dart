@@ -144,6 +144,7 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> fetchPrescription(String patientId, String type) async {
     loadingFetch.value = true;
     Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": patientId,
       "type": type,
     };
@@ -169,6 +170,7 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> fetchQrPrescription(String patientId, String type) async {
     loadingFetchQR.value = true;
     Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "patient_id": patientId,
       "type": type,
     };
@@ -193,6 +195,7 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> fetchPatientPrescription(String type) async {
     loadingPFetch.value = true;
     Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "type": type,
     };
@@ -281,6 +284,7 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> AddFetchmedicineListAll(String userId) async {
     loadingMedicineFetch.value = true;
     Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "user_id": userId,
     };
@@ -307,7 +311,8 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> AddFetchmedicinePatinet(String doctorId) async {
     loadingMedicineFetch.value = true;
     Map<String, dynamic> data = {
-       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "doctor_id": doctorId,
     };
     final response =
@@ -332,6 +337,7 @@ class DoctorPrescriptionCtr extends GetxController {
   Future<void> patientFetchmedicineList() async {
     pLoadingMedicineFetch.value = true;
     Map<String, dynamic> data = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     final response =
