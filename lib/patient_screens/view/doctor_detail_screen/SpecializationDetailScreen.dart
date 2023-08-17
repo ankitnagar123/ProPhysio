@@ -67,7 +67,7 @@ LocalString text = LocalString();
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      text.category.tr, 15, FontWeight.normal, MyColor.black),
+                      text.category.tr, 13, FontWeight.normal, MyColor.black),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
@@ -84,12 +84,12 @@ LocalString text = LocalString();
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
-                      text.subCategory.tr, 15, FontWeight.normal, MyColor.black),
+                      text.subCategory.tr, 13, FontWeight.normal, MyColor.black),
                 ),
                 SizedBox(
                   height: height * 0.001,
                 ),
-                ListView.builder(
+                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: doctorSpecializationCtr
@@ -105,14 +105,15 @@ LocalString text = LocalString();
                               17,
                               FontWeight.w500,
                               MyColor.black),
-                        ),
-                        ListView.builder(
+                        ), ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: doctorSpecializationCtr
                               .categoryDetails.value.subcategory![index].details?.length,
                           itemBuilder: (context, index1) {
-                            return Container(
+                            return      doctorSpecializationCtr
+                                .categoryDetails.value.subcategory![index].details?[index1].name ==""|| doctorSpecializationCtr
+                                .categoryDetails.value.subcategory![index].details?[index1].price ==""?const Text(""):Container(
                                 height: 50.0,
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 margin: const EdgeInsets.symmetric(

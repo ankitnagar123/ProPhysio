@@ -56,7 +56,7 @@ class BookingController extends GetxController {
       BuildContext context, String statusType, String dateFilter) async {
     bool connection = await checkInternetConnection();
     final Map<String, dynamic> perameter = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+       "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "status": statusType,
       "type": dateFilter,

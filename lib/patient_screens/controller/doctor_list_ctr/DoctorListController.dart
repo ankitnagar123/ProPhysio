@@ -194,7 +194,7 @@ print(doctorList);
   var fee ="".obs;
   var latitude = "".obs;
   var longitude= "".obs;
-
+var category = "".obs;
 
   void doctorDetialsfetch(String id) async {
     final Map<String, dynamic> Peramert = {
@@ -212,7 +212,8 @@ print(doctorList);
         loadingFetchD.value = false;
         String img = jsonResponse["Doctor_document"].toString();
         String location = jsonResponse["location"].toString();
-
+// category.value = jsonResponse["cat"].jsonResponse["category_name"].toString();
+print("cate..........${category.value}");
         print(img);
         fee.value = jsonResponse["fees"].toString();
         doctorname.value = jsonResponse["name"].toString();

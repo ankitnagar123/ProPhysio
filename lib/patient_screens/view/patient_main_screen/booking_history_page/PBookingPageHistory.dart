@@ -724,7 +724,7 @@ class _BookingPageState extends State<BookingPage> {
                         children: [
                           Text(
                             text.paymentInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -747,7 +747,7 @@ class _BookingPageState extends State<BookingPage> {
                         children: [
                           Text(
                             text.totalCost.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),

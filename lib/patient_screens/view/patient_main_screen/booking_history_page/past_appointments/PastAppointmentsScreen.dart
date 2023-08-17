@@ -115,7 +115,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       children: [
                                          Text(
                                           text.date.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -142,7 +142,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       children: [
                                          Text(
                                           text.slot.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -170,7 +170,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                                       children: [
                                          Text(
                                  text.bookingID.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),

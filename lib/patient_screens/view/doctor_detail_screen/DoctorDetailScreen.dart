@@ -108,19 +108,17 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
                           children: [
                             SizedBox(
-                              height: height * 0.015,
+                              height: height * 0.010,
                             ),
-                            custom.text(
-                                cat, 16, FontWeight.w500, MyColor.black),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Icon(Icons.location_on_outlined,
-                                    size: 18, color: MyColor.primary1),
+                                    size: 20, color: MyColor.primary1),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.width *
                                         0.66,
@@ -131,104 +129,74 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         MyColor.grey)),
                               ],
                             ),
-                            SizedBox(
-                              height: height * 0.02,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Wrap(
-                                  spacing: 10.0,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        var latlong = {
-                                          "lat": latitude,
-                                          "long": longitude,
-                                          "name":doctorListCtr.doctorname.value,
-                                          "surname":doctorListCtr.drSurname.value,
-                                          "address":address,
-                                          "img":img,
-                                          "doctorId":doctorListCtr.doctorid.value,
-                                        };
-                                        print(latlong);
-                                        Get.toNamed(
-                                            RouteHelper.getNavigateDoctor(),
-                                            parameters: latlong);
-                                      },
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: MyColor.primary,
-                                                width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: const Center(
-                                          child: Icon(Icons.navigation_outlined,
-                                              color: MyColor.primary),
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        var data = {
-                                          "doctorId": doctorId,
-                                          "drName":
-                                              doctorListCtr.doctorname.value,
-                                          "drSurname":
-                                              doctorListCtr.drSurname.value,
-                                          "drImg": doctorListCtr.image.value,
-                                          "drAddress":
-                                              doctorListCtr.address.value,
-                                          "contact":
-                                              doctorListCtr.drContact.value,
-                                          "doctorList": "drListData",
-                                        };
-                                        Get.toNamed(RouteHelper.getChatScreen(),
-                                            arguments: data);
-                                      },
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: MyColor.primary,
-                                                width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: const Center(
-                                          child: Icon(Icons.chat_bubble_outline,
-                                              color: MyColor.primary),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                custom.mysButton(context, text.bookAppointment.tr,
-                                    () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => calender(
-                                                centerId: CenterId,
-                                              )));
-                                },
-                                    MyColor.primary,
-                                    const TextStyle(
-                                        fontSize: 14,
-                                        color: MyColor.white,
-                                        fontFamily: "Poppins")),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: custom.text(
+                                    doctorListCtr.biography.value,
+                                    11,
+                                    FontWeight.normal,
+                                    MyColor.primary1),
+                              ),
                             ),
                             SizedBox(
                               height: height * 0.02,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      var latlong = {
+                                        "lat": latitude,
+                                        "long": longitude,
+                                        "name":doctorListCtr.doctorname.value,
+                                        "surname":doctorListCtr.drSurname.value,
+                                        "address":address,
+                                        "img":img,
+                                        "doctorId":doctorListCtr.doctorid.value,
+                                      };
+                                      print(latlong);
+                                      Get.toNamed(
+                                          RouteHelper.getNavigateDoctor(),
+                                          parameters: latlong);
+                                    },
+                                    child: Container(
+                                      height: 45,
+                                      width: 45,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: MyColor.primary,
+                                              width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: const Center(
+                                        child: Icon(Icons.navigation_outlined,
+                                            color: MyColor.primary),
+                                      ),
+                                    ),
+                                  ),
+                                  custom.mysButton(context, text.bookAppointment.tr,
+                                      () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => calender(
+                                                  centerId: CenterId,
+                                                )));
+                                  },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                          fontSize: 14,
+                                          color: MyColor.white,
+                                          fontFamily: "Poppins")),
+                                ],
+                              ),
                             ),
                             const Divider(),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
                             Align(
                               alignment: Alignment.topLeft,
                               child: custom.text(text.information.tr, 15,
@@ -286,11 +254,20 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                custom.text(
-                                    "${patientRatingCtr.address.value.totalReview.toString()} ${text.reviews.tr}",
-                                    13,
-                                    FontWeight.normal,
-                                    MyColor.grey),
+                                InkWell(
+                                  onTap: () {
+                                    var data = {
+                                      "doctorid": doctorId,
+                                    };
+                                    Get.toNamed(RouteHelper.getReviewsScreen(),
+                                        arguments: data);
+                                  },
+                                  child: custom.text(
+                                      "${patientRatingCtr.address.value.totalReview.toString()} ${text.reviews.tr}",
+                                      13,
+                                      FontWeight.normal,
+                                      MyColor.grey),
+                                ),
                                 custom.text(text.mediumPrice.tr, 14,
                                     FontWeight.normal, MyColor.grey),
                               ],
@@ -298,20 +275,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             SizedBox(
                               height: height * 0.02,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: custom.text(
-                                    doctorListCtr.biography.value,
-                                    11,
-                                    FontWeight.normal,
-                                    MyColor.grey),
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
+
                             GestureDetector(
                               onTap: () {
                                 Get.toNamed(
@@ -389,9 +353,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                               child: custom.text(text.specializations.tr, 15,
                                   FontWeight.w500, MyColor.primary1),
                             ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
                             doctorSpecializationCtr.category.isEmpty
                                 ?  SizedBox(
                                     height: 50,
@@ -458,9 +419,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                       );
                                     },
                                   ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
                           ],
                         ),
                       ),

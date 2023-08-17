@@ -100,20 +100,20 @@ print("cat$cat");
             SizedBox(
               height: height * 0.03,
             ),
-            ListTile(
-              onTap: () {
-                Get.offNamed(RouteHelper.getLocationDistanceFilter());
-              },
-              title: custom.text(
-                  text.Location_and_distance.tr, 15, FontWeight.w500,
-                  MyColor.black),
-              subtitle: Text("${AppConst.FILTER_LOCATION} , ${AppConst
-                  .FILTER_DISTANCE}${text.km.tr}"),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 20),
-            ),
-            const Divider(
-              height: 2,
-            ),
+            // ListTile(
+            //   onTap: () {
+            //     Get.offNamed(RouteHelper.getLocationDistanceFilter());
+            //   },
+            //   title: custom.text(
+            //       text.Location_and_distance.tr, 15, FontWeight.w500,
+            //       MyColor.black),
+            //   subtitle: Text("${AppConst.FILTER_LOCATION} , ${AppConst
+            //       .FILTER_DISTANCE}${text.km.tr}"),
+            //   trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+            // ),
+            // const Divider(
+            //   height: 2,
+            // ),
             ListTile(
               onTap: () async {
                 var data = {
@@ -138,18 +138,18 @@ print("cat$cat");
                   "cat":cat,
                   "subCat":subCat,
                 };
-                Get.offNamed(RouteHelper.getPriceRange(),
+                Get.offAndToNamed(RouteHelper.getPriceRange(),
                     parameters: data);
                 // Get.toNamed(RouteHelper.getSpecializationScreen());
               },
               title: custom.text(
                   text.price_Range.tr, 15, FontWeight.w500, MyColor.black),
-              subtitle: Row(
+            /*  subtitle: Row(
                 children: [
                   Text("${AppConst.priceRangeStart}-"),
                   Text(AppConst.priceRangeEnd),
                 ],
-              ),
+              ),*/
               trailing: const Icon(Icons.arrow_forward_ios, size: 20),
             ),
           ],
