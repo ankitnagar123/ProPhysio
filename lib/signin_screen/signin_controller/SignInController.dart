@@ -66,10 +66,10 @@ LocalString text =  LocalString();
             Get.offAndToNamed(RouteHelper.CBottomNavigation());
           }else {
             loading.value = false;
-            custom.massenger(context, text.SomthingWentWrong.tr);
+            custom.massenger(context, text.Invalidemailpassword.tr);
           }
         } else {
-          custom.massenger(context, text.SomthingWentWrong.tr);
+          custom.massenger(context, text.Invalidemailpassword.tr);
           loading.value = false;
         }
       } catch (e) {

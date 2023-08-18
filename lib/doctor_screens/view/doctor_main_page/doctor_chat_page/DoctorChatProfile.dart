@@ -29,13 +29,13 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
   @override
   void initState() {
     super.initState();
-    if (Get.arguments["bookingSide"] == "booking") {
+   /* if (Get.arguments["bookingSide"] == "booking") {
       patientId = Get.parameters["ID"].toString();
       patientName = Get.arguments["name"];
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
-      // patientAddress = Get.arguments["userLocation"];
+       patientAddress = Get.arguments["address"];
       print(patientAddress);
       } else {
       patientId = Get.arguments["ID"];
@@ -43,9 +43,16 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
       patientPic = Get.arguments["pic"];
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
-      // patientAddress = Get.arguments["address"];
+       patientAddress = Get.arguments["address"];
       print(patientAddress);
-    }
+    }*/
+    patientId = Get.parameters["ID"].toString();
+    patientName = Get.parameters["name"].toString();
+    patientPic = Get.parameters["pic"].toString();
+    patientSurname = Get.parameters["surname"].toString();
+    patientUsername = Get.parameters["username"].toString();
+    patientAddress = Get.parameters["address"].toString();
+    print("profile address user $patientAddress");
   }
 
   @override
@@ -151,7 +158,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
                 Align(
                   alignment: Alignment.topRight,
                   child: customView.text(
-                      bookingController.location.value, 12, FontWeight.normal, MyColor.grey),
+                      patientAddress, 12, FontWeight.normal, MyColor.grey),
                 ),
               ],
             )

@@ -43,6 +43,7 @@ class _CenterHomeScreenState extends State<CenterHomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      getValue();
       centerHomeCtr.centerSelectedWardList(context);
     });
   }

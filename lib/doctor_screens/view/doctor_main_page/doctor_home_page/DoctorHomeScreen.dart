@@ -42,12 +42,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   @override
   void initState() {
     super.initState();
-    chatController.doctorReceivedMsgListFetch(
-        context, bookingController.userId.value);
+/*    chatController.doctorReceivedMsgListFetch(
+        context, bookingController.userId.value);*/
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      bookingController.appointmentCancelReason();
       getValue();
       bookingController.bookingAppointment(context, "", "");
+      bookingController.appointmentCancelReason();
     });
   }
 
@@ -291,7 +291,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     showModalBottomSheet(
         isDismissible: true,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(
@@ -300,7 +300,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               return Column(
                 children: [
                   const SizedBox(
-                    height: 15.0,
+                    height: 10.0,
                   ),
                   custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                   const SizedBox(
@@ -673,7 +673,37 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   )
-                      : const Text(""),
+                      :
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                             Text(
+                             text.cancelReason.tr,
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 11.0,
+                                  fontFamily: "Poppins"),
+                            ),
+                            const SizedBox(
+                              height: 2.0,
+                            ),
+                            Text(bookingController.reasonCancel.value,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.0,
+                                    fontFamily: "Poppins")),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    height: 20.0,
+                  ),
                 ],
               );
             }),

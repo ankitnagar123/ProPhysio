@@ -121,7 +121,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  custom.text(text.Dont_have_an_account.tr, 11, FontWeight.normal,
+                  custom.text(text.have_an_account.tr, 11, FontWeight.normal,
                       MyColor.primary1),
                    Text(
                     text.SIGN_IN.tr,

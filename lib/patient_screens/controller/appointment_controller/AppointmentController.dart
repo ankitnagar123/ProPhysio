@@ -206,9 +206,11 @@ var bookingId = "".obs;
   }
 
 /*-------------Appointment booking  Payment API--------------*/
-Future paymentAppointment(BuildContext context, String bookingId,VoidCallback callback) async {
+Future paymentAppointment(BuildContext context, String bookingId,String recivedId,VoidCallback callback) async {
   loadingAdd.value = true;
   final Map<String, dynamic> Peramert = {
+    "sender_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
+    "reciver_id":recivedId,
     "booking_id": bookingId,
   };
   print(" Parameter----------------$Peramert");
@@ -261,10 +263,11 @@ Future paymentAppointment(BuildContext context, String bookingId,VoidCallback ca
       if (result == "success") {
         loadingAdd.value = false;
         String id = jsonResponse["booking_id"].toString();
+        String reciverid = jsonResponse["reciver_id"].toString();
         print("id----------------->:$id");
         print("booking id${bookingId.value}");
         print("my Appointment $result");
-        paymentAppointment(context,  id, () {
+        paymentAppointment(context,  id,reciverid ,() {
           callback();
         });
         custom.massenger(context, text.appointmentPayment.tr);

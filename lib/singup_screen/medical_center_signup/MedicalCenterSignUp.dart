@@ -58,7 +58,7 @@ class _MedicalCenterSignUpState extends State<MedicalCenterSignUp> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  customView.text(text.Dont_have_an_account.tr, 11,
+                  customView.text(text.have_an_account.tr, 11,
                       FontWeight.normal, MyColor.primary1),
                    Text(
                     text.SIGN_IN.tr,

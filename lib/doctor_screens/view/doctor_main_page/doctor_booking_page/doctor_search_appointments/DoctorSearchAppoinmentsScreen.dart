@@ -8,6 +8,8 @@ import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/booking_list_model.dart';
+import '../../DoctorMainPage.dart';
+import '../../doctor_home_page/DoctorHomeScreen.dart';
 import '../../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorSearchAppointments extends StatefulWidget {
@@ -51,9 +53,10 @@ LocalString text = LocalString();
     final widht = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async {
-        Get.back();
-        await bookingController.bookingAppointment(context, "Pending", "");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorMainScreen()));
+        await bookingController.bookingAppointment(context, "", "");
         return true;
+        /*Pending*/
       },
       child: Scaffold(
         appBar: AppBar(
@@ -65,7 +68,8 @@ LocalString text = LocalString();
           leading: IconButton(
             onPressed: () {
               Get.back();
-              bookingController.bookingAppointment(context, "Pending", "");
+              bookingController.bookingAppointment(context, "", "");
+              /*Pending*/
             },
             icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
           ),
@@ -373,7 +377,7 @@ LocalString text = LocalString();
             child: Column(
               children: [
                 const SizedBox(
-                  height: 15.0,
+                  height: 10.0,
                 ),
                 custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
@@ -757,7 +761,36 @@ LocalString text = LocalString();
                               ),
                             ],
                           )
-                        : Container(),
+                        : Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            text.cancelReason.tr,
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(bookingController.reasonCancel.value,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+            const Divider(
+              height: 20.0,
+            ),
               ],
             ),
           );

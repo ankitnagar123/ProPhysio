@@ -61,6 +61,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
       patientAddress = Get.arguments["address"];
+      print("chat side address $patientAddress");
       // patientContact = Get.arguments["userContact"];
     }
 
@@ -103,10 +104,10 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                       "pic": patientPic,
                       "surname": patientName,
                       "username": patientUsername,
-                      // "address":a
+                       "address":patientAddress,
                     };
                     Get.toNamed(RouteHelper.DChatProfile(),
-                        arguments: patientInfo);
+                        parameters: patientInfo);
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientChatProfile()));
                   },
                   child: const Icon(Icons.more_vert)),

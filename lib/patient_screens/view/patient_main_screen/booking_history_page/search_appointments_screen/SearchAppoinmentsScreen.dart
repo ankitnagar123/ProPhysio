@@ -621,6 +621,35 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                 const Divider(
                   height: 30.0,
                 ),
+                patientBookingController.status.value == "Cancel"?
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            text.cancelReason.tr,
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(patientBookingController.reasonCancel.value,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
+                      ),
+                    ),
+                  ],
+                ):Container(),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -645,7 +674,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       },
                       child:  Text(
                         text.cancelAppointment.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.red,
                             fontSize: 14.0,
                             fontFamily: "Poppins"),

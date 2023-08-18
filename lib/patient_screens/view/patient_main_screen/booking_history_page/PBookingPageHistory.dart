@@ -770,6 +770,36 @@ class _BookingPageState extends State<BookingPage> {
                 const Divider(
                   height: 30.0,
                 ),
+                patientBookingController.status.value == "Cancel"?
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            text.cancelReason.tr,
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(patientBookingController.reasonCancel.value,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
+                      ),
+                    ),
+                  ],
+                ):Container(),
+
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -800,7 +830,38 @@ class _BookingPageState extends State<BookingPage> {
                                       fontFamily: "Poppins"),
                                 ),
                               )
-                            : TextButton(
+                            :
+                   /* Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                text.cancelReason.tr,
+                                style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 11.0,
+                                    fontFamily: "Poppins"),
+                              ),
+                              const SizedBox(
+                                height: 2.0,
+                              ),
+                              Text(patientBookingController.reasonCancel.value,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14.0,
+                                      fontFamily: "Poppins")),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      height: 20.0,
+                    ),*/
+                    TextButton(
                                 onPressed: () {
                                   patientBookingController
                                       .cancelAppointmentRemove(context, id, () {
@@ -815,6 +876,7 @@ class _BookingPageState extends State<BookingPage> {
                                       fontWeight: FontWeight.w500,
                                       letterSpacing: 0.9),
                                 )),
+
                     const SizedBox(
                       height: 8.0,
                     )

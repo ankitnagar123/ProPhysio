@@ -45,10 +45,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
     centerId = widget.centerId;
     print("center id $centerId");
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // doctorId = doctorListCtr.doctorid.value;
-      appointmentController.doctorViewDateCalender(centerId);
-    });
+    appointmentController.doctorViewDateCalender(centerId);
   }
 
 /*---Show Icon on Calender custom---*/
@@ -79,74 +76,76 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < appointmentController.dateList.length; i++) {
-      int day = int.parse(appointmentController.dateList[i].day);
-      int month = int.parse(appointmentController.dateList[i].month);
-      int year = int.parse(appointmentController.dateList[i].year);
-      log("my date$day");
-      log("my month$month");
-      log("my year$year");
-      _markedDateMap.add(
-          DateTime(year, month, day),
-          Event(
-            location: "available",
-            date: DateTime(year, month, day),
-            icon: _presentIcon(appointmentController.dateList[i].day,
-                int.parse(appointmentController.dateList[i].percent)),
-          ));
-    }
-    _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      onDayPressed: (DateTime selectDay, event) {
-        setState(() {
-          selectedDay = selectDay;
-          var finalDate = DateFormat("yyyy-MM-dd").format(selectDay);
+   setState(() {
+     for (int i = 0; i < appointmentController.dateList.length; i++) {
+       int day = int.parse(appointmentController.dateList[i].day);
+       int month = int.parse(appointmentController.dateList[i].month);
+       int year = int.parse(appointmentController.dateList[i].year);
+       log("my date$day");
+       log("my month$month");
+       log("my year$year");
+       _markedDateMap.add(
+           DateTime(year, month, day),
+           Event(
+             location: "available",
+             date: DateTime(year, month, day),
+             icon: _presentIcon(appointmentController.dateList[i].day,
+                 int.parse(appointmentController.dateList[i].percent)),
+           ));
+     }
+     _calendarCarouselNoHeader = CalendarCarousel<Event>(
+       onDayPressed: (DateTime selectDay, event) {
+         setState(() {
+           selectedDay = selectDay;
+           var finalDate = DateFormat("yyyy-MM-dd").format(selectDay);
 
-          var day = DateFormat("dd").format(selectDay);
-          var month = DateFormat("MM").format(selectDay);
-          var year = DateFormat("yyyy").format(selectDay);
+           var day = DateFormat("dd").format(selectDay);
+           var month = DateFormat("MM").format(selectDay);
+           var year = DateFormat("yyyy").format(selectDay);
 
-          print("final date$finalDate");
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DoctorViewTimeSlot(
-                        date: finalDate,
-                        day: day,
-                        month: month,
-                        year: year,
-                        centerId: centerId,
-                      )));
-          // focusedDay = event;
-        });
-        print(selectDay);
-      },
-      weekdayTextStyle: const TextStyle(color: Colors.black),
-      height: MediaQuery.of(context).size.height,
-      rightButtonIcon:
-          const Icon(Icons.arrow_circle_right, color: MyColor.primary1),
-      leftButtonIcon:
-          const Icon(Icons.arrow_circle_left, color: MyColor.primary1),
-      headerMargin: const EdgeInsets.only(bottom: 20, top: 10.0),
-      headerTextStyle: const TextStyle(
-          color: MyColor.primary1, fontSize: 18, fontFamily: "Poppins"),
-      weekendTextStyle: const TextStyle(
-        color: Colors.black,
-      ),
-      todayButtonColor: MyColor.midgray,
-      todayTextStyle: const TextStyle(color: Colors.black),
-      todayBorderColor: Colors.black,
-      markedDatesMap: _markedDateMap,
-      markedDateShowIcon: true,
-      markedDateIconMargin: 0.0,
-      customGridViewPhysics: const BouncingScrollPhysics(),
+           print("final date$finalDate");
+           Navigator.push(
+               context,
+               MaterialPageRoute(
+                   builder: (context) => DoctorViewTimeSlot(
+                     date: finalDate,
+                     day: day,
+                     month: month,
+                     year: year,
+                     centerId: centerId,
+                   )));
+           // focusedDay = event;
+         });
+         print(selectDay);
+       },
+       weekdayTextStyle: const TextStyle(color: Colors.black),
+       height: MediaQuery.of(context).size.height,
+       rightButtonIcon:
+       const Icon(Icons.arrow_circle_right, color: MyColor.primary1),
+       leftButtonIcon:
+       const Icon(Icons.arrow_circle_left, color: MyColor.primary1),
+       headerMargin: const EdgeInsets.only(bottom: 20, top: 10.0),
+       headerTextStyle: const TextStyle(
+           color: MyColor.primary1, fontSize: 18, fontFamily: "Poppins"),
+       weekendTextStyle: const TextStyle(
+         color: Colors.black,
+       ),
+       todayButtonColor: MyColor.midgray,
+       todayTextStyle: const TextStyle(color: Colors.black),
+       todayBorderColor: Colors.black,
+       markedDatesMap: _markedDateMap,
+       markedDateShowIcon: true,
+       markedDateIconMargin: 0.0,
+       customGridViewPhysics: const BouncingScrollPhysics(),
 
-      markedDateIconMaxShown: 1,
-      markedDateMoreShowTotal: null,
-      // null for not showing hidden events indicator
-      markedDateIconBuilder: (event) {
-        return event.icon;
-      },
-    );
+       markedDateIconMaxShown: 1,
+       markedDateMoreShowTotal: null,
+       // null for not showing hidden events indicator
+       markedDateIconBuilder: (event) {
+         return event.icon;
+       },
+     );
+   });
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white24,

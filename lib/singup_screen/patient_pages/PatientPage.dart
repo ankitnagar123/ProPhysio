@@ -19,7 +19,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
   LocalString text = LocalString();
 
-  /*-----------Getx Controller initialize----------------*/
+  /*-----------Get-x Controller initialize----------------*/
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
 
   //*************Controllers*************//
@@ -78,7 +78,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   customView.text(
-                      text.Dont_have_an_account.tr, 11, FontWeight.normal,
+                      text.have_an_account.tr, 11, FontWeight.normal,
                       MyColor.primary1),
                    Text(text.SIGN_IN.tr,style:TextStyle(color: MyColor.primary1,fontWeight: FontWeight.w700,decoration: TextDecoration.underline) ,)
 

@@ -45,7 +45,7 @@ class DoctorChangePassCtr extends GetxController {
         print(result.toString());
         callback();
       } else {
-        custom.massenger(context,text.SomthingWentWrong.tr);
+        custom.massenger(context,text.passwordNotMatch.tr);
       }
     } catch (e) {
       loadingset.value = false;

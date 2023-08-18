@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
@@ -23,9 +22,8 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
 
   @override
   void initState() {
-    doctorSignUpCtr.DoctorCategory();
-    // TODO: implement initState
     super.initState();
+    doctorSignUpCtr.DoctorCategory();
   }
 
   String? categoryId;

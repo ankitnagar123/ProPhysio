@@ -39,6 +39,7 @@ class BookingController extends GetxController {
   var price = "".obs;
   var bookingDate = "".obs;
   var status = "".obs;
+  var reasonCancel = "".obs;
   var time = "".obs;
   var bookId = "".obs;
   var patientId = "".obs;
@@ -141,6 +142,7 @@ class BookingController extends GetxController {
         price.value = jsonResponse["price"].toString();
         bookingDate.value = jsonResponse["booking_date"].toString();
         status.value = jsonResponse["status"].toString();
+        reasonCancel.value = jsonResponse['cancle_reason'].toString();
         time.value = jsonResponse["Time"].toString();
         bookId.value = jsonResponse["book_ID"].toString();
         patientId.value = jsonResponse["patient_ID"].toString();

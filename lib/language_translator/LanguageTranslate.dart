@@ -21,6 +21,7 @@ class LocalString extends Translations {
   String Forgot_Password = "Forgot password?";
   String Create_New_One = "Create a new one";
   String Dont_have_an_account = "Don’t have an account?";
+  String have_an_account = "Have an account?";
   String Sign_UP = "Sign up";
 
   /*Sign In Page Validation text*/
@@ -279,7 +280,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   /*DOCTOR SIDE PAST APPOINTMENT OR REPORTS PAGE*/
   String pastAppointment = "Past Appointment";
   String scanAndCheckReports = "Scan and check reports";
-  String noPastAppointmentAtTheMoment = "No Past Appointment's at the moment!";
+  String noPastAppointmentAtTheMoment = "No Past Appointments at the moment!";
   String bookingID = "Booking ID";
 
   /*15jul*/
@@ -322,7 +323,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String SearchAppointment = "Search appointments";
   String meetings = "meetings";
   String PatientId = "Patient ID";
-  String No_Appointments_moment = "No Appointment's at the moment!";
+  String No_Appointments_moment = "No Appointments at the moment!";
   String Complete = "Complete";
 
   /*new dr side string's*/
@@ -336,8 +337,8 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   String linear = "linear";
   String reverse = "reverse";
-  String NoPendingAppoint = "No Pending Appointment's at the moment!";
-  String NoUpcomingAppoint = "No Upcoming Appointment's at the moment!";
+  String NoPendingAppoint = "No Pending Appointments at the moment!";
+  String NoUpcomingAppoint = "No Upcoming Appointments at the moment!";
   String Home = "Home";
   String Accept_request = "Accept request";
 
@@ -479,6 +480,8 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String areYouSureYouWantCancelAppointment =
       "Are you sure you want to cancel the appointment? Please select a reason.";
   String selectReason = "Select reason";
+  String cancelReason = "Cancel reason";
+
   String appointment = "Appointment";
   String Appointment_cancelled_successfully =
       "Appointment \ncancelled \nsuccessfully!";
@@ -566,6 +569,7 @@ String NoWardAddedCenter = "No ward added by center";
   String Login_successfully = "Login successfully";
   String AddDateSucces = "Date add successfully";
   String SomthingWentWrong = "Something went wrong";
+  String Invalidemailpassword = "Invalid email or password";
   String Success = "Success";
   String Invalid = "Invalid";
   String DeleteaccountSuccess = "Account delete Successfully";
@@ -601,6 +605,7 @@ String NoWardAddedCenter = "No ward added by center";
           Forgot_Password: "Forgot password?",
           Create_New_One: "Create a new one",
           Dont_have_an_account: "Don’t have an account?",
+  have_an_account : "Have an account?",
           Sign_UP: "Sign up",
           Required_Email_or_Username: "Required Email or Username",
           Required_Password: "Required Password",
@@ -838,7 +843,7 @@ String NoWardAddedCenter = "No ward added by center";
           /*DOCTOR SIDE PAST APPOINTMENT OR REPORTS PAGE*/
           pastAppointment: "Past Appointment",
           scanAndCheckReports: "Scan and check reports",
-          noPastAppointmentAtTheMoment: "No Past Appointment's at the moment!",
+          noPastAppointmentAtTheMoment: "No Past Appointments at the moment!",
           bookingID: "Booking ID",
 
           Patient_Information: "Patient Information",
@@ -878,7 +883,7 @@ String NoWardAddedCenter = "No ward added by center";
           SearchAppointment: "Search appointments",
           meetings: "meetings",
           PatientId: "Patient ID",
-          No_Appointments_moment: "No Appointment's at the moment!",
+          No_Appointments_moment: "No Appointments at the moment!",
           Complete: "Complete",
 
           AcceptVisitLine:
@@ -890,8 +895,8 @@ String NoWardAddedCenter = "No ward added by center";
 
           linear: "linear",
           reverse: "reverse",
-          NoPendingAppoint: "No Pending Appointment's at the moment!",
-          NoUpcomingAppoint: "No Upcoming Appointment's at the moment!",
+          NoPendingAppoint: "No Pending Appointments at the moment!",
+          NoUpcomingAppoint: "No Upcoming Appointments at the moment!",
           Home: "Home",
           Accept_request: "Accept request",
           //**************Patient Side*************//
@@ -1039,6 +1044,7 @@ String NoWardAddedCenter = "No ward added by center";
           areYouSureYouWantCancelAppointment:
               "Are you sure you want to cancel the appointment? Please select a reason.",
           selectReason: "Select reason",
+          cancelReason : "Cancel reason",
           appointment: "Appointment",
           Appointment_cancelled_successfully:
               "Appointment \ncancelled \nsuccessfully!",
@@ -1114,6 +1120,7 @@ String NoWardAddedCenter = "No ward added by center";
    Login_successfully : "Login successfully",
           AddDateSucces: "Date add successfully",
           SomthingWentWrong: "Something went wrong",
+  Invalidemailpassword : "Invalid email or password",
           Success: "Success",
           Invalid: "Invalid",
           DeleteaccountSuccess: "Account delete Successfully",
@@ -1146,6 +1153,7 @@ String NoWardAddedCenter = "No ward added by center";
           Forgot_Password: "Ha dimenticato la password?",
           Create_New_One: "Creane uno nuovo",
           Dont_have_an_account: "Non hai un account?",
+          have_an_account : "Avere un conto?",
           Sign_UP: "Iscrizione",
           Required_Email_or_Username: "Email o nome utente obbligatori",
           Required_Password: "Password obbligatoria",
@@ -1612,6 +1620,7 @@ String NoWardAddedCenter = "No ward added by center";
           areYouSureYouWantCancelAppointment:
               "Sei sicuro di voler cancellare l'appuntamento? Seleziona un motivo.",
           selectReason: "Seleziona il motivo",
+          cancelReason: "Annulla motivo",
           appointment: "Appuntamento",
           Appointment_cancelled_successfully:
               "Appuntamento \ncancellato \ncon successo!",
@@ -1690,6 +1699,7 @@ String NoWardAddedCenter = "No ward added by center";
           CheckInternetconnection : "Controlla la tua connessione Internet",
           Login_successfully : "Accedi con successo",
           AddDateSucces: "Data aggiunta con successo",
+  Invalidemailpassword : "E-mail o password non validi",
           SomthingWentWrong: "Qualcosa è andato storto",
           Success: "Successo",
           Invalid: "Non valido",

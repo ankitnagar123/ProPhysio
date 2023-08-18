@@ -47,6 +47,7 @@ class PatientBookingController extends GetxController {
   var location = "".obs;
   var name = "".obs;
   var surname = "".obs;
+  var reasonCancel = "".obs;
   var contact = "".obs;
   var drImg = "".obs;
 
@@ -93,7 +94,6 @@ class PatientBookingController extends GetxController {
 
   /*---------booking Rating Complete  Appointment List --------*/
   Future<void> completeRatingAppoint() async {
-
     final Map<String, dynamic> perameter = {
        "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
@@ -150,7 +150,7 @@ class PatientBookingController extends GetxController {
         location.value = jsonResponse["location"];
         name.value = jsonResponse["name"];
         surname.value = jsonResponse["surname"];
-
+        reasonCancel.value = jsonResponse["cancle_reason"];
         drImg.value = jsonResponse["doctor_profile"];
         contact.value = jsonResponse["contact"];
 
