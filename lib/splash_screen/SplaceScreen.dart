@@ -33,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         token = value!;
         sp.setStringValue(sp.FIREBASE_TOKEN_KEY, token);
         print("Firebase Token :-- $token");
+
       });
       sp.setStringValue(sp.CURRENT_DEVICE_KEY, "Android");
     } else if (GetPlatform.isIOS) {
@@ -45,45 +46,18 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     }
     getValue();
-    getLanguage();
+    // getLanguage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              tileMode: TileMode.repeated,
-              stops: [
-            0.1,
-            0.7,
-            0.2,
-          ],
-              colors: [
-            MyColor.secondary,
-            MyColor.primary,
-            MyColor.secondary,
-          ])),
-      child: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage("assets/images/MEDICAlogo.png"),
-              color: MyColor.white,
-
-              // image: AssetImage("assets/images/welcome0.png"),
-              height: 150,
-              width: 150,
-            ),
-          ],
-        ),
-      ),
-    ));
+        body: Image(
+          image: AssetImage("assets/images/splace_logo.png"),
+          fit: BoxFit.fill,
+          height: double.infinity,
+          width: double.infinity,
+        ));
   }
 
   getValue() async {
@@ -97,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("doctorLogin Key = $doctorLogin");
     print("CenterLogin Key = $centerLogin");
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 5), () {
       Get.offNamed(RouteHelper.getOnBoardingScreen());
       if (onBoarding == true) {
         if (patientLogin == true) {
@@ -115,6 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+/*
   void getLanguage() async {
     if (await sp.getStringValue(sp.LANGUAGE) == "it") {
       var Itlocal = const Locale('it', 'IT');
@@ -124,4 +99,6 @@ class _SplashScreenState extends State<SplashScreen> {
       Get.updateLocale(enlocal);
     }
   }
+*/
+
 }

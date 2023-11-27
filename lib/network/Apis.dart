@@ -2,9 +2,12 @@ import 'dart:core';
 
 class MyAPI {
   // static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
-  static const String BaseUrl =
-      "https://sicparvismagna.it/Medica/Apis/process.php?action=";
+/*  static const String BaseUrl =
+      "https://sicparvismagna.it/Medica/Apis/process.php?action=";*/
 
+
+  static const String BaseUrl =
+      "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=";
   /*--------Patient Side API-----------*/
   static const String Login = "user_login";
   static const String forgotPassword = "get_user_forgot_password";
@@ -14,7 +17,7 @@ class MyAPI {
   static const String send_otp_twiliosms =
       "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 
-  static const String PSignUp = "https://sicparvismagna.it/Medica/Apis/a.php";
+  static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/a.php";
   static const String PSignUpOtp = "signup_email_otp";
 
   static const String PFetchProfile = "fetch_user_profile";
@@ -80,6 +83,7 @@ class MyAPI {
   static const String catSubcategoryList = "fetch_all_sub_category";
   static const String subcategoryList = "subcategory_list";
   static const String DCategorySignUp = "category_list";
+  static const String DBranchList = "fetch_branch";
   static const String DSignUpOtp = "doctor_otp_signup";
   static const String DSignUp = "doctor_signup";
   static const String DFetchProfile = "fetch_doctor_profile";

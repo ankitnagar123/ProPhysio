@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 
+import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
@@ -113,9 +113,9 @@ class _CalculateEarningState extends State<CalculateEarning> {
                     controller: startDateController,
                     decoration:  InputDecoration(
                       hintText: text.Select_Date.tr,
-                      hintStyle: TextStyle(fontSize: 15),
+                      hintStyle: const TextStyle(fontSize: 15),
                       suffixIcon:
-                      Icon(Icons.calendar_month, color: MyColor.primary),
+                      const Icon(Icons.calendar_month, color: MyColor.primary),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -155,7 +155,7 @@ class _CalculateEarningState extends State<CalculateEarning> {
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         hintText: text.Select_Date.tr,
-                        suffixIcon: Icon(
+                        suffixIcon: const Icon(
                           Icons.calendar_month,
                           color: MyColor.primary,
                         )),
@@ -175,7 +175,7 @@ class _CalculateEarningState extends State<CalculateEarning> {
                   });
                 }
               },
-                  MyColor.primary,
+                  MyColor.red,
                   const TextStyle(
                       color: MyColor.white,
                       fontSize: 15,
@@ -190,7 +190,7 @@ class _CalculateEarningState extends State<CalculateEarning> {
                 },
                 child:  Text(
                   text.resetRangeDate.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.red,
                       fontFamily: "Poppins",
                       decoration: TextDecoration.underline,

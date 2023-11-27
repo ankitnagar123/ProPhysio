@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/QRScannerReports/QRScanOverLay.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
+
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../../helper/mycolor/mycolor.dart';
 import 'QRPrescriptionList.dart';
+import 'QRScanOverLay.dart';
 
 class QRScannerDoctor extends StatefulWidget {
   const QRScannerDoctor({Key? key}) : super(key: key);

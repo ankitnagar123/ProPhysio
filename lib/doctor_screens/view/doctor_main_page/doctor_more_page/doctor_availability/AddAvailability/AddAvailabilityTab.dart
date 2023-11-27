@@ -25,7 +25,7 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 1, vsync: this, initialIndex: 0);
   }
 
   CustomView custom = CustomView();
@@ -36,21 +36,21 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: MyColor.white,
-        toolbarHeight: 10,
+         toolbarHeight: 10,
         bottom: TabBar(
           controller: tabController,
           indicatorColor: MyColor.primary,
           indicatorWeight: 2,
           tabs: [
             Tab(
-              child: custom.text(text.self.tr, 14, FontWeight.w500, MyColor.black),
+              child: custom.text("Add Availability", 14, FontWeight.w500, MyColor.black),
             ),
-            Tab(
-              child: Tab(
-                child: custom.text(
-                    text.medicalCenter.tr, 14, FontWeight.w500, MyColor.black),
-              ),
-            ),
+            // Tab(
+            //   child: Tab(
+            //     child: custom.text(
+            //         text.medicalCenter.tr, 14, FontWeight.w500, MyColor.black),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -61,7 +61,7 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController, children: const [
               MyAvailability(),
-              DoctorCenterAddAvailability(),
+              // DoctorCenterAddAvailability(),
             ]),
           ])),
     );

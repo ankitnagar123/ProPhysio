@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
+
 import 'package:get/get.dart';
+import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../medica_center/center_more/center_setting/CenterChangeLanguage.dart';

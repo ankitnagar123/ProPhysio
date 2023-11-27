@@ -81,7 +81,7 @@ String endRange = "";
                     EndPrice:  endRange, rating: '',
                   )));
           // Get.offNamed(RouteHelper.getFilterScreen());
-        }, MyColor.primary,
+        }, MyColor.red,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
       ),
       body: Padding(

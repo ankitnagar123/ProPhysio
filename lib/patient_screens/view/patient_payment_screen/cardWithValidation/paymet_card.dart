@@ -104,7 +104,7 @@ class CardUtils {
   }
 
   static List<int> getExpiryDate(String value) {
-    var split = value.split(new RegExp(r'(/)'));
+    var split = value.split(RegExp(r'(/)'));
     return [int.parse(split[0]), int.parse(split[1])];
   }
 
@@ -127,7 +127,7 @@ class CardUtils {
   }
 
   static String getCleanedNumber(String text) {
-    RegExp regExp = new RegExp(r"[^0-9]");
+    RegExp regExp = RegExp(r"[^0-9]");
     return text.replaceAll(regExp, '');
   }
 

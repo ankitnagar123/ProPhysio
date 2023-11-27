@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassController.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../Helper/RoutHelper/RoutHelper.dart';
 import '../helper/CustomView/CustomView.dart';
+import '../helper/mycolor/mycolor.dart';
 import '../language_translator/LanguageTranslate.dart';
+import 'forgot_pass_controller/ForgotPassController.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({Key? key}) : super(key: key);
@@ -65,7 +65,7 @@ log(userType);
             Get.toNamed(RouteHelper.getSetPassword(), parameters: id);
           } else {}
         },
-            MyColor.primary,
+            MyColor.red,
             const TextStyle(
                 fontSize: 18, color: MyColor.white, fontFamily: "Poppins")),
         body: Padding(

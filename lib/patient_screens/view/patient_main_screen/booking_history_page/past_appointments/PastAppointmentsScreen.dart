@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 
@@ -42,7 +43,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
             elevation: 0,
             backgroundColor: Colors.white24,
             title: customView.text(
-               text.pastAppointment.tr, 17, FontWeight.bold, MyColor.black),
+               text.pastAppointment.tr, 17, FontWeight.w500, MyColor.black),
             leading: IconButton(
               onPressed: () {
                 patientBookingController.bookingAppointment("");
@@ -228,7 +229,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                            Text(
                             text.doctorInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -252,17 +253,17 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                           Text(
                             text.patient.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2.0,
                           ),
                           Text(
                             text.you.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
                                 fontFamily: "Poppins"),
@@ -284,7 +285,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                            Text(
                             text.address.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -345,7 +346,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                            Text(
                         text.paymentInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -368,7 +369,7 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                         children: [
                            Text(
                             text.totalCost.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),

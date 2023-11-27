@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 import 'package:get/get.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
+import '../../helper/CustomView/CustomView.dart';
+import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../center_more/CenterMorePage.dart';
 import 'CenterHomePage.dart';
@@ -37,22 +37,22 @@ class _CenterMainScreenState extends State<CenterMainScreen> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title:   Text(text.Exit_App.tr,style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
-                  content:   Text(text.Want_To_Exist.tr,style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
+                  title:   Text(text.Exit_App.tr,style: const TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
+                  content:   Text(text.Want_To_Exist.tr,style: const TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
                   actions: [
                     ElevatedButton(onPressed: (){
                       Navigator.of(context).pop(false);
                     },
                       style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.white)
-                      ), child:   Text(text.No.tr,style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
+                      ), child:   Text(text.No.tr,style: const TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
                     ),
                     ElevatedButton(onPressed: (){
                       SystemNavigator.pop();
                     },
                       style:  const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(MyColor.primary1)
-                      ), child:   Text(text.Yes.tr,style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
+                      ), child:   Text(text.Yes.tr,style: const TextStyle(fontFamily: 'Poppins',color: Colors.white),),
                     ),
                   ],
                 );

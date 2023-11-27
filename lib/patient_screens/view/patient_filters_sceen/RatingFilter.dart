@@ -1,15 +1,14 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/AppConst.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:get/get.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:medica/patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../helper/AppConst.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
+import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 
 class RatingFilterScreen extends StatefulWidget {
@@ -69,7 +68,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
                       EndPrice:  "", rating: ratings,
                     )));
            // Get.offNamed(RouteHelper.getFilterScreen());
-          }, MyColor.primary, const TextStyle(
+          }, MyColor.red, const TextStyle(
               color: MyColor.white,
               fontFamily: "Poppins"
           )),

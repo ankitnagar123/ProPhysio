@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
 
+
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/CenterRequestCtr.dart';

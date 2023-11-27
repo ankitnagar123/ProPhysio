@@ -5,10 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
+
 
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 
@@ -162,7 +163,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                     },
                     child:  Text(
                       text.refresh.tr,
-                      style: TextStyle(color: MyColor.primary1),
+                      style: const TextStyle(color: MyColor.primary1),
                     )),
               ],
             ),
@@ -170,7 +171,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                 ? SingleChildScrollView(
                 child: categorysubShimmerEffect(context))
                 : doctorPrescriptionCtr.patientPrescriptionList.isEmpty? Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(text.noMedicalReportRightKnow.tr),
             ):SingleChildScrollView(
               child: ListView.builder(

@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
 class MedicalAddAndList extends StatefulWidget {
   String patientId;
@@ -35,7 +35,6 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
 
     super.initState();
     doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
-    // TODO: implement initState
 
   }
 
@@ -153,7 +152,7 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
           ),
           doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
               ?   Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             child: Text(text.noMedicalReportRightKnow.tr),
           )
               :  ListView.builder(

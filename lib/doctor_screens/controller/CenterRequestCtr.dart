@@ -3,9 +3,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:medica/Network/Apis.dart';
 
 import '../../Network/ApiService.dart';
+import '../../Network/Apis.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../language_translator/LanguageTranslate.dart';

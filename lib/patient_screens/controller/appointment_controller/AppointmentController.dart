@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/language_translator/LanguageTranslate.dart';
+
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../doctor_screens/model/DoctorbookedSlotListModel.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../model/CalenderDateShowModel.dart';
 import '../../model/DoctorPatinetTimeModel.dart';
 import '../../model/VisitChargeModel.dart';
@@ -242,7 +243,7 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
 
   /*-------------Appointment booking  API--------------*/
   Future bookingAppointment(BuildContext context, String reciver, String cardId,
-      String time, String price, String date,String centerId, VoidCallback callback) async {
+      String time, String price, String date,String centerId,String type ,VoidCallback callback) async {
     loadingAdd.value = true;
     final Map<String, dynamic> Peramert = {
       "sender_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
@@ -252,6 +253,7 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
       "price": price,
       "date": date,
       "center_id":centerId,
+      "type":type,
     };
     print("card Parameter$Peramert");
     final response =
@@ -264,14 +266,17 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
         loadingAdd.value = false;
         String id = jsonResponse["booking_id"].toString();
         String reciverid = jsonResponse["reciver_id"].toString();
-        print("id----------------->:$id");
-        print("booking id${bookingId.value}");
-        print("my Appointment $result");
-        paymentAppointment(context,  id,reciverid ,() {
+        log("id----------------->:$id");
+        log("booking id${bookingId.value}");
+        log("my Appointment $result");
+        if(type == "Paid"){
+          paymentAppointment(context,  id,reciverid ,() {
+            callback();
+          });
+        }else{
           callback();
-        });
+        }
         custom.massenger(context, text.appointmentPayment.tr);
-        print(result.toString());
       } else {
         loadingAdd.value = false;
         custom.massenger(context, result.toString());

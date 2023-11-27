@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../../controller/AddSpecializationCtr.dart';

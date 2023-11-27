@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/more_page/MorePage.dart';
+
 import 'package:get/get.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PDoctorTab.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
+
 import '../../../doctor_screens/controller/RoutCtr.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/booking_controller_list/PBookingController.dart';
 import 'booking_history_page/PBookingPageHistory.dart';
 import 'chating_page/ChatListScreen.dart';
+import 'more_page/MorePage.dart';
 
 class PatientMainScreen extends StatefulWidget {
   const PatientMainScreen({Key? key}) : super(key: key);
@@ -33,9 +36,9 @@ CustomView view = CustomView();
     super.initState();
   }
 
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   List screens =  [
-    const PatientHomePage(),
+    const HomeView(),
     const BookingPage(),
     const ChatListScreen(),
     const MorePage(),
@@ -56,22 +59,22 @@ CustomView view = CustomView();
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title:   Text(text.Exit_App.tr,style: TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
-                  content:   Text(text.Want_To_Exist.tr,style: TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
+                  title:   Text(text.Exit_App.tr,style: const TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
+                  content:   Text(text.Want_To_Exist.tr,style: const TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
                   actions: [
                     ElevatedButton(onPressed: (){
                       Navigator.of(context).pop(false);
                     },
                       style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.white)
-                      ), child:   Text(text.No.tr,style: TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
+                      ), child:   Text(text.No.tr,style: const TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
                     ),
                     ElevatedButton(onPressed: (){
                       SystemNavigator.pop();
                     },
                       style:  const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(MyColor.primary1)
-                      ), child:   Text(text.Yes.tr,style: TextStyle(fontFamily: 'Poppins',color: Colors.white),),
+                          backgroundColor: MaterialStatePropertyAll(MyColor.red)
+                      ), child:   Text(text.Yes.tr,style: const TextStyle(fontFamily: 'Poppins',color: Colors.white),),
                     ),
                   ],
                 );
@@ -107,7 +110,7 @@ CustomView view = CustomView();
         color: Colors.white24,
       ),
       child: IconTheme(
-        data: const IconThemeData(color: MyColor.primary1, size: 25),
+        data: const IconThemeData(color: MyColor.red, size: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -118,15 +121,17 @@ CustomView view = CustomView();
                   });
                 },
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(height: 20,
                         width: 30,
                         child:myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
-                        Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.primary,) :Image.asset("assets/images/DrIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text(text.Doctors.tr, 12, FontWeight.normal,
+
+Icon(Icons.home_outlined,color: MyColor.red,size: 27,) :Icon(Icons.home_outlined,color: MyColor.grey,)
+                    ),
+                    view.text(text.Home.tr, 12, FontWeight.normal,
                       myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
-                      MyColor.primary:MyColor.grey,)
+                      MyColor.red:MyColor.grey,)
 
                   ],
                 )),
@@ -138,12 +143,14 @@ CustomView view = CustomView();
                   });
                 },
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+
                   children: [
                     SizedBox(height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==1?  Image.asset("assets/images/BookingIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/BookingIcon.png",height: 20,width: 20,color:MyColor.grey,)),
-                    view.text(text.Booking.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.primary:MyColor.grey,)
+                        child:myRoute.pageIndex.value ==1?
+                        Icon(Icons.book_outlined,color: MyColor.red,size: 27,) :Icon(Icons.book_outlined,color: MyColor.grey,)                     ),
+                    view.text(text.Booking.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.red:MyColor.grey,)
 
                   ],
                 )),
@@ -154,12 +161,14 @@ CustomView view = CustomView();
                   });
                 },
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==2?  Image.asset("assets/images/ChatIcon.png",height: 20,width: 20,color: MyColor.primary,):Image.asset("assets/images/ChatIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text(text.chat.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==2? MyColor.primary:MyColor.grey,)
+                        child:myRoute.pageIndex.value ==2?
+                        Icon(Icons.chat_rounded,color: MyColor.red,size: 27,) :Icon(Icons.chat_rounded,color: MyColor.grey,)
+                    ),
+                    view.text(text.chat.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==2? MyColor.red:MyColor.grey,)
 
                   ],
                 )),
@@ -171,12 +180,14 @@ CustomView view = CustomView();
                   });
                 },
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==3?  Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color:MyColor.primary,):Image.asset("assets/images/moreIcon.png",height: 20,width: 20,color: MyColor.grey,)),
-                    view.text(text.More.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==3? MyColor.primary: MyColor.grey,)
+                        child:myRoute.pageIndex.value ==3?
+                        Icon(Icons.list_outlined,color: MyColor.red,size: 27,) :Icon(Icons.list_outlined,color: MyColor.grey,)
+                    ),
+                    view.text(text.More.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==3? MyColor.red: MyColor.grey,)
 
                   ],
                 )),
@@ -200,7 +211,7 @@ CustomView view = CustomView();
                 ),
                 BottomNavigationBarItem(
                     icon: ImageIcon(
-                        AssetImage("assets/images/ChatIcon.png"), size: 20.0),
+                        AssetImage("assets/images/map.png"), size: 20.0),
                     label: 'Chat',
                     tooltip: 'Chat'),
                 BottomNavigationBarItem(

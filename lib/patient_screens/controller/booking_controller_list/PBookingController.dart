@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../doctor_screens/model/DoctorBookingRatingModel.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';

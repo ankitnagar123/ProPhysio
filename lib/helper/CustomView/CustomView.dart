@@ -42,6 +42,7 @@ class CustomView {
     return Text(
       text,
       style: TextStyle(
+        letterSpacing: 0.6,
           color: color,
           fontSize: size,
           fontFamily: "Poppins",
@@ -203,7 +204,7 @@ class CustomView {
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: MyColor.primary1,
       borderRadius: 15.0,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       duration: const Duration(seconds: 2),
       isDismissible: true,
       dismissDirection: DismissDirection.startToEnd,
@@ -300,6 +301,7 @@ class CustomView {
         SizedBox(
           width: widht,
           child: TextFormField(
+            readOnly: true,
             onChanged: (value) {
             // doctorListCtr.keywords.value=value;
               search();
@@ -319,12 +321,14 @@ class CustomView {
             controller: controller,
             decoration: InputDecoration(
               prefixIcon: icon1,
-              prefixIconColor: MyColor.primary1,
+              prefixIconColor: MyColor.white,
               suffixIcon: icon,
-                 suffixIconColor: MyColor.primary1,
+                 suffixIconColor: MyColor.white,
               contentPadding: const EdgeInsets.only(top: 3, left: 20),
               hintText: hintText,
-              hintStyle: const TextStyle(fontSize: 12,color: MyColor.primary1),
+              hintStyle: const TextStyle(fontSize: 12,color: MyColor.white),
+              labelStyle: const TextStyle(fontSize: 12,color: MyColor.white),
+
               fillColor: MyColor.lightcolor,
               filled: true,
               border: const OutlineInputBorder(
@@ -366,12 +370,12 @@ class CustomView {
           controller: controller,
           decoration: InputDecoration(
             prefixIcon: icon1,
-            prefixIconColor: MyColor.primary1,
+            prefixIconColor: MyColor.white,
             suffixIcon: icon,
-            suffixIconColor: MyColor.primary1,
+            suffixIconColor: MyColor.white,
             contentPadding: const EdgeInsets.only(top: 3, left: 20),
             hintText: hintText,
-            hintStyle: const TextStyle(fontSize: 12,color: MyColor.primary1),
+            hintStyle: const TextStyle(fontSize: 12,color: MyColor.white),
             fillColor: MyColor.lightcolor,
             filled: true,
             border: const OutlineInputBorder(
@@ -394,7 +398,7 @@ class CustomView {
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: MyColor.primary1,
       borderRadius: 20,
-      margin: EdgeInsets.all(15),
+      margin: const EdgeInsets.all(15),
       duration: const Duration(seconds: 2),
       isDismissible: true,
       dismissDirection: DismissDirection.startToEnd,

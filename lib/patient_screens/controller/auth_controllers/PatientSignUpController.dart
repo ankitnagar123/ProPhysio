@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../../network/ApiService.dart';
@@ -89,15 +89,15 @@ class PatientSignUpCtr extends GetxController {
       "country_code":countryCode,
       "contact":phone,
       "email": email,
-
     };
-    print("SignupPerameter$signupPerameter");
-
+    log("Signup-Parameter$signupPerameter");
     final response = await http.post(
         Uri.parse(
-            MyAPI.send_otp_twiliosms,
+          MyAPI.send_otp_twiliosms,
         ),
         body: signupPerameter);
+
+    //await apiService.postData("https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php", signupPerameter)
         // await apiService.postData("https://cisswork.com/Android/Medica/Apis/twiliosms/send_otp.php", signupPerameter);
     try {
       log("response of Patient Signup OTP :-${response.body}");
@@ -129,13 +129,13 @@ class PatientSignUpCtr extends GetxController {
       BuildContext context,
       String name,
       String surname,
-      String username,
+      // String username,
       String email,
       String countrycode,
       String mobileNo,
       String flag,
       String password,
-      String healthCard,
+      // String healthCard,
       String age,
       String weight,
       String birthplace,
@@ -147,13 +147,13 @@ class PatientSignUpCtr extends GetxController {
     final Map<String, dynamic> signupPerameter = {
       "name": name,
       "surname": surname,
-      "username": username,
+      // "username": username,
       "email": email,
       "code": countrycode,
       "contact": mobileNo,
       "flag": flag,
       "password": password,
-      "health_card": healthCard,
+      // "health_card": healthCard,
       "age": age,
       "weight": weight,
       "birth_place": birthplace,
@@ -161,7 +161,7 @@ class PatientSignUpCtr extends GetxController {
       "tax_code": taxCode,
       "gender": gender,
     };
-    print("SignupPerameter$signupPerameter");
+    print("Signup-Parameter$signupPerameter");
     final response = await http.post(
         Uri.parse(
           MyAPI.PSignUp,

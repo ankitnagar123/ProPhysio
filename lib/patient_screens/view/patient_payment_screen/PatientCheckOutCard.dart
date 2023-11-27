@@ -9,16 +9,14 @@ import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
-import 'cardWithValidation/CreateCard.dart';
 
 class PatientCheckOutCard extends StatefulWidget {
-  String price, time, healthCard, date, centerId;
+  String price, time, date, centerId;
 
   PatientCheckOutCard(
       {Key? key,
       required this.price,
       required this.time,
-      required this.healthCard,
       required this.date,
       required this.centerId})
       : super(key: key);
@@ -46,7 +44,6 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
       doctorid = doctorListCtr.doctorid.value;
       price = widget.price;
       time = widget.time;
-      healthCard = widget.healthCard;
       date = widget.date;
       centerId = widget.centerId;
       print("center id$centerId");
@@ -78,7 +75,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     custom.MySnackBar(context, text.selectCard.tr);
                   } else {
                     appointmentController.bookingAppointment(context, doctorid.toString(),
-                        cardid.toString(), time.toString(), price.toString(), date.toString(), centerId, () {
+                        cardid.toString(), time.toString(), price.toString(), date.toString(), centerId,"Paid", () {
                       Get.offNamed(RouteHelper.getBookingSuccess());
                     });
                   }

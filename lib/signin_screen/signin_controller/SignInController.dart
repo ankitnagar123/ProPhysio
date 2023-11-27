@@ -3,11 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../Network/ApiService.dart';
 import '../../Network/Apis.dart';
+import '../../ZegoCallService/ZegoCallService.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../../network/Internet_connectivity_checker/InternetConnectivity.dart';
@@ -41,22 +42,37 @@ LocalString text =  LocalString();
         String result = jsonResponse['result'].toString();
         String usertype = jsonResponse['user_type'].toString();
         String id = jsonResponse['id'].toString();
+        String name = jsonResponse['name'].toString();
+        String surname = jsonResponse['surname'].toString();
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
+          sp.setStringValue(sp.DOCTOR_NAME_KEY, name);
+          sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
+          log("name surname $name$surname");
           custom.massenger(context, text.Login_successfully.tr);
           if (usertype == "Doctor") {
             loading.value = false;
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
+            log("name..............${sp.DOCTOR_NAME_KEY}-----$surname");
+
+            // sp.setStringValue(keyString, valueString)
+
             sp.setBoolValue(sp.DOCTOR_LOGIN_KEY, true);
-            print(sp.DOCTOR_LOGIN_KEY);
-            print(sp.getStringValue(sp.DOCTOR_ID_KEY));
-            print("Doctor login ID${id.toString()}");
+            log(sp.DOCTOR_LOGIN_KEY);
+            log("${sp.getStringValue(sp.DOCTOR_ID_KEY)}");
+             onUserLogin(id.toString(),id.toString(),"Doctor");
+            log("Doctor login ID${id.toString()}");
             Get.offAndToNamed(RouteHelper.DHomePage());
           } else if (usertype == "User") {
             loading.value = false;
+
             sp.setStringValue(sp.PATIENT_ID_KEY, id);
+            sp.setStringValue(sp.PATIENT_NAME_KEY, name);
+            sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
+
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
             print(" Patient login ID${id.toString()}");
+             onUserLogin(id.toString(),id.toString(),"user");
             Get.offAndToNamed(RouteHelper.getBottomNavigation());
           } else if (usertype == "Medical") {
             loading.value = false;
@@ -66,10 +82,22 @@ LocalString text =  LocalString();
             Get.offAndToNamed(RouteHelper.CBottomNavigation());
           }else {
             loading.value = false;
-            custom.massenger(context, text.Invalidemailpassword.tr);
+            if(result =="Wait for admin Approve"){
+              custom.massenger(context, text.WaitforadminApprove.tr);
+
+            }else{
+              custom.massenger(context, text.Invalidemailpassword.tr);
+
+            }
           }
         } else {
-          custom.massenger(context, text.Invalidemailpassword.tr);
+          if(result =="Wait for admin Approve"){
+            custom.massenger(context, text.WaitforadminApprove.tr);
+
+          }else{
+            custom.massenger(context, text.Invalidemailpassword.tr);
+
+          }
           loading.value = false;
         }
       } catch (e) {

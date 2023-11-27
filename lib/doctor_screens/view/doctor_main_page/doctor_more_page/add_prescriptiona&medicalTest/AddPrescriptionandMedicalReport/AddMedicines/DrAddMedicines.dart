@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
-import 'package:medica/language_translator/LanguageTranslate.dart';
+
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import '../../../../../../model/MedicineModel/MedicineAllListModel.dart';
 
 class DrAddMedicines extends StatefulWidget {
@@ -86,7 +87,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
               discCtr.clear();
               _selectedGender = "";
             });
-          }, MyColor.primary, const TextStyle(fontSize: 17, color: MyColor.white));
+          }, MyColor.red, const TextStyle(fontSize: 17, color: MyColor.white));
         }),
       ),
       body: SingleChildScrollView(
@@ -158,7 +159,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
             ),
           ),
           ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
               itemCount: data.length,
               itemBuilder: (context, i) {
@@ -204,7 +205,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                       },
                     ),
                     title:  Text(text.Before_Meal.tr,
-                        style: TextStyle(fontSize: 14)),
+                        style: const TextStyle(fontSize: 14)),
                   ),
                 ),
                 Expanded(
@@ -224,7 +225,7 @@ class _DrAddMedicinesState extends State<DrAddMedicines> {
                       },
                     ),
                     title:  Text(text.AfterMeal.tr,
-                        style: TextStyle(fontSize: 14)),
+                        style: const TextStyle(fontSize: 14)),
                   ),
                 ),
               ],

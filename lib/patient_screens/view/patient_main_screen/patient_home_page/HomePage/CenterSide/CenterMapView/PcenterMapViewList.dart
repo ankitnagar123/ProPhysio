@@ -5,14 +5,14 @@ import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../controller/patinet_center_controller/PCenterController.dart';
 import '../PCenterDetailsPage.dart';
 
 class CenterMapViewScreen extends StatefulWidget {
-  CenterMapViewScreen({
+  const CenterMapViewScreen({
     Key? key,
   }) : super(key: key);
 
@@ -34,7 +34,7 @@ class _CenterMapViewScreenState extends State<CenterMapViewScreen> {
   Future<void> _onMapCreated(GoogleMapController controller) async {
     var markerIcon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size.fromHeight(10.0)),
-      "assets/images/img.png",
+      "assets/images/map.png",
     );
     setState(() {
       for (int i = 0; i < pCenterCtr.centerList.length; i++) {

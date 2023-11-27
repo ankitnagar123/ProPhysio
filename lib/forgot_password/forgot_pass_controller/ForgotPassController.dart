@@ -3,12 +3,13 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/language_translator/LanguageTranslate.dart';
+
 import 'package:http/http.dart' as http;
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../Network/ApiService.dart';
 import '../../Network/Apis.dart';
+import '../../helper/CustomView/CustomView.dart';
+import '../../language_translator/LanguageTranslate.dart';
 
 class ForgotPassCtr extends GetxController {
   CustomView custom =CustomView();
@@ -89,7 +90,7 @@ class ForgotPassCtr extends GetxController {
         body: signupPerameter);
 /*    final response =
         await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);*/
-    print("parameter  for medical center${signupPerameter}");
+    print("parameter  for medical center$signupPerameter");
     try {
       log("response of Medical Center Signup OTP :-${response.body}");
       loadingotp.value = false;

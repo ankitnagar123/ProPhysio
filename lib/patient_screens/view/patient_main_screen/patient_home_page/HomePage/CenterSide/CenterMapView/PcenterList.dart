@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import '../../../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../controller/patinet_center_controller/PCenterController.dart';
 import '../PCenterDetailsPage.dart';
 
 class PCenterListView extends StatefulWidget {
@@ -45,7 +45,7 @@ class _PCenterListViewState extends State<PCenterListView> {
     return Obx(() {
       if (pCenterCtr.loadingFetch.value) {
         return Padding(
-          padding: EdgeInsets.only(top: 17),
+          padding: const EdgeInsets.only(top: 17),
           child: categorysubShimmerEffect(context),
         );
       }

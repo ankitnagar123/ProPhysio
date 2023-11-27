@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:prophysio/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
 class PDF extends StatefulWidget {
   const PDF({Key? key}) : super(key: key);
 
@@ -40,7 +40,7 @@ class _PDFState extends State<PDF> {
                   String url = '';
                   final file = await pickFile();
                   if (file == null) return;
-                  openPdf(context, file, url);
+                  // openPdf(context, file, url);
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -63,7 +63,7 @@ class _PDFState extends State<PDF> {
                   const url =
                       "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
                   final file = await loadPdfFromNetwork(url);
-                  openPdf(context, file, url);
+                  // openPdf(context, file, url);
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -108,7 +108,7 @@ class _PDFState extends State<PDF> {
   //final file = File('example.pdf');
   //await file.writeAsBytes(await pdf.save());
 
-  void openPdf(BuildContext context, File file, String url) =>
+/*  void openPdf(BuildContext context, File file, String url) =>
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PdfViewerPage(
@@ -116,5 +116,5 @@ class _PDFState extends State<PDF> {
             url: url,
           ),
         ),
-      );
+      );*/
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
+import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
@@ -159,7 +159,7 @@ class _PatientChangePasswordScreenState
                 child: AnimatedButton(
                   width: MediaQuery.of(context).size.width * 0.9,
                   text: text.savePassword.tr,
-                  color: MyColor.primary,
+                  color: MyColor.red,
                   pressEvent: () {
                     if (validation()) {
                       changePassCtr.ChangePasswordApi(

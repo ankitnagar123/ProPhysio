@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../medica_center/center_controller/CenterHomeController.dart';
 import '../../../../doctor_detail_screen/DoctorDetailScreen.dart';

@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
@@ -96,14 +96,14 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     cursorColor: Colors.black,
                     controller: searchCtr,
                     decoration:  InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      prefixIconColor: MyColor.primary1,
-                      contentPadding: EdgeInsets.only(top: 3, left: 20),
+                      prefixIcon: const Icon(Icons.search,color: Colors.white,),
+                      prefixIconColor: MyColor.white,
+                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
                       hintText: text.searchYourAppointments.tr,
-                      hintStyle: TextStyle(fontSize: 12, color: MyColor.primary1),
+                      hintStyle: const TextStyle(fontSize: 12, color: MyColor.white),
                       fillColor: MyColor.lightcolor,
                       filled: true,
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -287,7 +287,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   children: [
                                      Text(
                                       text.date.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -310,7 +310,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   children: [
                                      Text(
                                       text.slot.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -336,7 +336,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                                   children: [
                                      Text(
                                       text.bookingID.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -396,7 +396,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         children: [
                            Text(
                             text.doctorInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -420,17 +420,17 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         children: [
                           Text(
                             text.patient.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2.0,
                           ),
                           Text(
                             text.you.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
                                 fontFamily: "Poppins"),
@@ -482,7 +482,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         children: [
                            Text(
                            text.bookingInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -575,7 +575,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         children: [
                            Text(
                             text.paymentInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -598,7 +598,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                         children: [
                            Text(
                             text.totalCost.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -661,7 +661,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                       },
                       child:  Text(
                         text.cancelAppointment.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.red,
                             fontSize: 14.0,
                             fontFamily: "Poppins"),

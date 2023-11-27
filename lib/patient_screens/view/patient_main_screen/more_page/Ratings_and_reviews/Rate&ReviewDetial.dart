@@ -96,7 +96,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                         children: [
                            Text(
                             text.date.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10.0,
                                 fontFamily: "Poppins"),
@@ -119,7 +119,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                         children: [
                            Text(
                         text.slot.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10.0,
                                 fontFamily: "Poppins"),
@@ -177,12 +177,12 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                   keyboardType: TextInputType.multiline,
                   maxLines: 4,
                   decoration:  InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 20, left: 20),
+                    contentPadding: const EdgeInsets.only(top: 20, left: 20),
                     hintText: text.yourReview.tr,
-                    hintStyle: TextStyle(fontSize: 14),
+                    hintStyle: const TextStyle(fontSize: 14),
                     filled: true,
                     fillColor: MyColor.white,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 SizedBox(
@@ -193,7 +193,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                   child: AnimatedButton(
                     width: MediaQuery.of(context).size.width * 0.9,
                     text: text.Submit.tr,
-                    color: MyColor.primary,
+                    color: MyColor.red,
                     pressEvent: () {
                       if(validation()){
                         patientRatingCtr.ratingAdd(

@@ -34,63 +34,60 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+        ),
+        title: custom.text(text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            child: TabBar(
+              padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
+              labelPadding: const EdgeInsets.all(7.0),
+              indicatorColor: MyColor.red,
+              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.3),borderRadius: BorderRadius.circular(25),),
+              unselectedLabelColor: Colors.black,
+              controller: tabController,
+              // indicatorWeight: 0,
+              tabs:  [
+                Tab(
+                    child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
+                ),
+                Tab(
+                  child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                ),
+                Tab(
+                  child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                ),
+              ],
             ),
           ),
-          title: custom.text(text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
-          centerTitle: true,
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-        ),
-        body: Column(
-          children: [
-            Container(
-              color: Colors.grey.shade100,
-              child: TabBar(
-                labelPadding: const EdgeInsets.all(8),
-                indicator: const BoxDecoration(
-                  color: MyColor.primary,
-                ),
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.black,
+          Expanded(child:  Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: tabController,
-                indicatorWeight: 0,
-                tabs:  [
-                  Tab(
-                      child: Text(text.prescription.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
-                  ),
-                  Tab(
-                    child: Text(text.medicalTest.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
-                  ),
-                  Tab(
-                    child: Text(text.medicines.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(child:  Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: tabController,
-                  children: const [
-                    PatientPrescription(),
-                    PatientMedicalReport(),
-                    PatientViewMedicines(),
-                  ]),
-            ),),
+                children: const [
+                  PatientPrescription(),
+                  PatientMedicalReport(),
+                  PatientViewMedicines(),
+                ]),
+          ),),
 
-          ],
-        ),
+        ],
       ),
     );
   }

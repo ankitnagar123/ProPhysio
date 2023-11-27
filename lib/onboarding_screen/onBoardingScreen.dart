@@ -40,38 +40,39 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                           0.6,
                         ],
                         colors: [
-                          Color(0xff5376AA),
-                          Color(0xffF6A6CD),
+                          Color(0xff003D7C),
+                          Color(0xff0172B9),
                         ]),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15))),
                 width: double.infinity,
                 child: const Center(
-                  child: Image(image: AssetImage("assets/images/medicalogo2.png"),height: 80,width: 80),
+                  child: Image(image: AssetImage("assets/images/prologo.png"),width: 220,),
                 ),
               ),
-              const Align(
-                alignment: Alignment.topLeft,
-                child: Image(
-                  image: AssetImage("assets/images/MEDICAlogo1.png"),
-                  height: 95,
-                  width: 110,
-                ),
-              ),
+              SizedBox(height: 10,),
+              // const Align(
+              //   alignment: Alignment.topLeft,
+              //   child: Image(
+              //     image: AssetImage("assets/images/loading.gif"),
+              //     height: 60,
+              //     width: 60,
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 32),
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: customView.text(
-                        'Hey! 😊', 20, FontWeight.bold, MyColor.black)),
+                        'Hey! 😊', 20, FontWeight.bold, MyColor.primary1)),
               ),
                Padding(
                 padding: const EdgeInsets.only(left: 32, right: 20, top: 10),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: customView.text(
-                      "Welcome on Medica. Sign in to navigate among the doctors and book all kind of visits you need, for yourself or others.",
+                      "Welcome on PRO PHYSIO. Sign in to navigate among the doctors and book all kind of visits you need, for yourself or\n others.",
                       14,
                       FontWeight.normal,
                       MyColor.primary1),
@@ -83,7 +84,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
               customView.MyButton(context, "let's go", () {
                 sp.setBoolValue(sp.ON_BOARDING_KEY, true);
                 Get.offNamed(RouteHelper.getLoginScreen());
-              }, MyColor.primary,
+              }, MyColor.red,
                   const TextStyle(fontSize: 15.0, color: MyColor.white,fontFamily: "Poppins")),
               const SizedBox(
                 height: 15,

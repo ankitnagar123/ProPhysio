@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
 
 class CenterAuthCtr extends GetxController {
@@ -117,7 +117,7 @@ class CenterAuthCtr extends GetxController {
         body: signupPerameter);
 /*    final response =
         await apiService.postData(MyAPI.CSignUpOtp, signupPerameter);*/
-    print("parameter  for medical center${signupPerameter}");
+    print("parameter  for medical center$signupPerameter");
     try {
       log("response of Medical Center Signup OTP :-${response.body}");
       loadingotp.value = false;
@@ -185,7 +185,7 @@ class CenterAuthCtr extends GetxController {
     }
   }
 
-/*----------Fetch Doctor Profile Data API-----------*/
+/*----------Fetch Center Profile Data API-----------*/
   void centerProfile(BuildContext context) async {
     loadingP.value = true;
     resultVar.value = 0;

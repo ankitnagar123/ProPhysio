@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/AppConst.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../helper/AppConst.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 

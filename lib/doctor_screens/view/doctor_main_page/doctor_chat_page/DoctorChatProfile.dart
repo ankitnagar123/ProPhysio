@@ -125,7 +125,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
                     return const CircleAvatar(
                       backgroundColor: Colors.white,
                       child: Image(
-                          image: AssetImage("assets/images/dummyprofile.jpg")),
+                          image: AssetImage("assets/images/dummyprofile.png")),
                     );
                   },
                   width: 80,

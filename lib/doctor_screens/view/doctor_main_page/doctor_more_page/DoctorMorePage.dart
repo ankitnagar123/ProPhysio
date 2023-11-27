@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/DoctorProfileController.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../ZegoCallService/ZegoCallService.dart';
+import '../../../../helper/CustomView/CustomView.dart';
+import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/CenterRequestCtr.dart';
+import '../../../controller/DoctorProfileController.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/AddAvailability/AddAvailabilityTab.dart';
 
@@ -45,10 +47,18 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               const SizedBox(
                 height: 10.0,
               ),
+              Align(
+                alignment: Alignment.center,
+                child: Image(
+                  image: AssetImage("assets/images/runlogo.png"),
+                  height: 40,
+                  width: 40,
+                ),
+              ),
               customView.text("${text.hii.tr} @${doctorProfileCtr.name.value}", 17.0,
                   FontWeight.w500, Colors.black),
               const SizedBox(
-                height: 30.0,
+                height: 20.0,
               ),
               Row(
                 children: [
@@ -61,10 +71,10 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                       child: Container(
                         height: MediaQuery.of(context).size.shortestSide / 3.2,
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
+                          gradient:  LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
-                            colors: [MyColor.primary, MyColor.secondary],
+                            colors: [MyColor.primary, MyColor.primary1],
                           ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -103,7 +113,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           gradient: const LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
-                            colors: [MyColor.primary, MyColor.secondary],
+                            colors: [MyColor.primary, MyColor.primary1  ],
                           ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -176,36 +186,36 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
-                subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
-                    FontWeight.w400, Colors.black),
-                onTap: () {
-                  Get.toNamed(RouteHelper.DCenterRequest());
-                },
-                leading: Badge(
-                  backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
-                  label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
-                  child: const Icon(
-                    Icons.medical_services_outlined,
-                    color: Colors.black,
-                  ),
-                ),
-                title: customView.text(
-                    text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
+              // ListTile(
+              //   subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
+              //       FontWeight.w400, Colors.black),
+              //   onTap: () {
+              //     Get.toNamed(RouteHelper.DCenterRequest());
+              //   },
+              //   leading: Badge(
+              //     backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
+              //     label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
+              //     child: const Icon(
+              //       Icons.medical_services_outlined,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              //   title: customView.text(
+              //       text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
               ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DSettingScreen());
                 },
-                leading: const Icon(
-                  Icons.settings,
-                  color: Colors.black,
-                ),
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Colors.black,
+                  ),
                 title: customView.text(
                     text.Settings.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
@@ -352,6 +362,9 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                     SharedPreferences preferences =
                                         await SharedPreferences.getInstance();
                                     preferences.remove("DOCTOR_LOGIN_KEY");
+                                    preferences.remove("DOCTOR_ID_KEY");
+                                    sp.clearSharedPreference();
+                                    onUserLogout();
                                     print(
                                         preferences.remove("DOCTOR_LOGIN_KEY"));
                                     sp.setBoolValue(sp.ON_BOARDING_KEY, true);

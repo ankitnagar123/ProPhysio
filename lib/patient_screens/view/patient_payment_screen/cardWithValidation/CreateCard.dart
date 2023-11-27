@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:medica/patient_screens/view/patient_payment_screen/cardWithValidation/paymet_card.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/patient_screens/view/patient_payment_screen/cardWithValidation/paymet_card.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
@@ -25,8 +23,8 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
   CustomView customView = CustomView();
   LocalString text = LocalString();
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
-  var _formKey = new GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
   TextEditingController holderNameController =  TextEditingController();
   TextEditingController cVVController =  TextEditingController();
   TextEditingController expiryController =  TextEditingController();
@@ -34,7 +32,7 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
   final _paymentCard = PaymentCard();
   var _autoValidateMode = AutovalidateMode.disabled;
 
-  final _card = new PaymentCard();
+  final _card = PaymentCard();
 
   @override
   void initState() {
@@ -103,15 +101,15 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
                   decoration:  InputDecoration(
                     hintText: text.enterCardHolderName.tr,
                     // labelText: 'Card Holder Name',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.person,
                       size: 25.0,
                     ),
-                    contentPadding: EdgeInsets.only(top: 3, left: 20),
-                    hintStyle: TextStyle(fontSize: 12),
+                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
+                    hintStyle: const TextStyle(fontSize: 12),
                     filled: true,
                     fillColor: MyColor.white,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
 
                   ),
                 ),
@@ -131,8 +129,8 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      new LengthLimitingTextInputFormatter(19),
-                      new CardNumberInputFormatter()
+                      LengthLimitingTextInputFormatter(19),
+                      CardNumberInputFormatter()
                     ],
                     controller: numberController,
                     decoration: InputDecoration(
@@ -174,16 +172,16 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
                         controller: expiryController,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
-                          new LengthLimitingTextInputFormatter(4),
-                          new CardMonthInputFormatter()
+                          LengthLimitingTextInputFormatter(4),
+                          CardMonthInputFormatter()
                         ],
                         decoration: const InputDecoration(
                           contentPadding:
-                          const EdgeInsets.only(top: 3, left: 20),
-                          hintStyle: const TextStyle(fontSize: 12),
+                          EdgeInsets.only(top: 3, left: 20),
+                          hintStyle: TextStyle(fontSize: 12),
                           filled: true,
                           fillColor: MyColor.white,
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           icon: Icon(Icons.calendar_month, size: 25),
                           hintText: 'MM/YY',
                           // labelText: 'Expiry Date',
@@ -220,7 +218,7 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
                         controller: cVVController,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
-                          new LengthLimitingTextInputFormatter(4),
+                          LengthLimitingTextInputFormatter(4),
                         ],
                         decoration: InputDecoration(
                           contentPadding:
@@ -279,7 +277,7 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
                                   });
                             }
                           },
-                          MyColor.primary,
+                          MyColor.red,
                           const TextStyle(fontFamily: "Poppins", color: Colors.white),
                         );
                       }),
@@ -302,7 +300,7 @@ class _PatientAddNewCardState extends State<PatientAddNewCard> {
     String input = CardUtils.getCleanedNumber(numberController.text);
     CardType cardType = CardUtils.getCardTypeFrmNumber(input);
     setState(() {
-      this._paymentCard.type = cardType;
+      _paymentCard.type = cardType;
     });
   }
 

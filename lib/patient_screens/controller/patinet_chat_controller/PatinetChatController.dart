@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../Network/ApiService.dart';
@@ -11,6 +10,7 @@ import 'package:get/get.dart';
 import '../../../Network/Apis.dart';
 import '../../../doctor_screens/model/DoctorChatListModel.dart';
 import '../../../doctor_screens/model/DoctorViewMsgList.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import "../../model/Chat Model's/ChatigViewListModel.dart";

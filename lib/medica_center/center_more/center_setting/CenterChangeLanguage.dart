@@ -57,7 +57,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
           ),
           title:   Text(
             text.Language.tr,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
                 color: Colors.black),
@@ -111,14 +111,14 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                               elevation: 0.0,
                               shape:  index==1?  RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  side:  BorderSide(color: MyColor.primary,width: 3)
+                                  side:  const BorderSide(color: MyColor.primary,width: 3)
                               ):null ,
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   children: [
                                     Image.asset(
-                                      "assets/images/img_1.png",
+                                      "assets/images/DrIcon.png",
                                       width: 80,
                                     ),
                                     const SizedBox(
@@ -166,7 +166,7 @@ class _CenterLanguagePageState extends State<CenterLanguagePage> {
                               elevation: 0.0,
                               shape:index == 2?  RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  side:  BorderSide(color: MyColor.primary,width: 3)
+                                  side:  const BorderSide(color: MyColor.primary,width: 3)
                               ):null ,
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),

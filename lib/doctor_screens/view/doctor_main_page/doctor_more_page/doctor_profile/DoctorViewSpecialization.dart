@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../patient_screens/controller/doctor_list_ctr/PDoctorSpecializationCtr.dart';
 

@@ -41,7 +41,7 @@ class _SetPasswordSuccessState extends State<SetPasswordSuccess> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: const AssetImage('assets/images/MEDICAlogo.png'),
+                  image: const AssetImage('assets/images/logo.png'),
                   height: height*0.2,
                   width: widht*0.4,
                 ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../controller/doctor_list_ctr/PDoctorSpecializationCtr.dart';
@@ -90,7 +90,7 @@ LocalString text = LocalString();
                   height: height * 0.001,
                 ),
                  ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: doctorSpecializationCtr
                       .categoryDetails.value.subcategory?.length,
@@ -106,7 +106,7 @@ LocalString text = LocalString();
                               FontWeight.w500,
                               MyColor.black),
                         ), ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: doctorSpecializationCtr
                               .categoryDetails.value.subcategory![index].details?.length,
@@ -166,7 +166,7 @@ LocalString text = LocalString();
                   child: custom.text(
                       text.information.tr, 17, FontWeight.w500, MyColor.black),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

@@ -3,12 +3,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/CustomView/CustomView.dart';
+import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
-import '../../signin_screen/SignInScreen.dart';
 
 class PatientSignUpOtp extends StatefulWidget {
   // String name, email, phone, password, otp, code,healthcard;
@@ -28,7 +27,7 @@ LocalString text = LocalString();
   void _startTimer() {
     if (!_timerRunning) {
       _timerRunning = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setState(() {
           if (_countdownSeconds > 0) {
             _countdownSeconds--;
@@ -69,7 +68,6 @@ LocalString text = LocalString();
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
   var name = "";
   var surname = "";
-  var username = "";
   var email = "";
   var healthCode = "";
   var phone = "";
@@ -78,7 +76,6 @@ LocalString text = LocalString();
   var taxCode = "";
   var heightp = "";
   var weight = "";
-  var birthPlace = "";
   var age = "";
   var gender = "";
 var flag ="";
@@ -90,7 +87,6 @@ var flag ="";
     log(gender);
     name = Get.parameters['name'].toString();
     surname = Get.parameters['surname'].toString();
-    username = Get.parameters['username'].toString();
     email = Get.parameters['email'].toString();
     phone = Get.parameters['phone'].toString();
     healthCode = Get.parameters['healthcard'].toString();
@@ -101,8 +97,6 @@ var flag ="";
     taxCode = Get.parameters['tax'].toString();
     age = Get.parameters['age'].toString();
     flag = Get.parameters['flag'].toString();
-    birthPlace = Get.parameters['birthPlace'].toString();
-    print(username);
     print(email);
     print(password);
     print(code);
@@ -193,7 +187,6 @@ var flag ="";
                           context,
                           name,
                           surname,
-                          username,
                           email,
                           code,
                           phone,
@@ -202,7 +195,6 @@ var flag ="";
                           healthCode,
                           age,
                           weight,
-                          birthPlace,
                           heightp,
                           taxCode,
                           gender, () {
@@ -221,7 +213,7 @@ var flag ="";
                     }
                     // Get.toNamed(RouteHelper.getSetPassword());
                   },
-                      MyColor.primary,
+                      MyColor.red,
                       const TextStyle(
                           fontSize: 16,
                           color: MyColor.white,

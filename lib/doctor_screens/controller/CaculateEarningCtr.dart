@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-
 import '../../../../Network/ApiService.dart';
 import '../../../../Network/Apis.dart';
 import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:get/get.dart';
 
+import '../../helper/CustomView/CustomView.dart';
 import '../model/CalculateEarningModel.dart';
 
 

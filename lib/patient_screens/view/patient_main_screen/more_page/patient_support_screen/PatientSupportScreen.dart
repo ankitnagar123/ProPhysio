@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientSupportController.dart';
@@ -51,7 +51,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                         }
 
                       },
-                      MyColor.primary,
+                      MyColor.red,
                       const TextStyle(
                           fontFamily: "Poppins", color: Colors.white),
                     );

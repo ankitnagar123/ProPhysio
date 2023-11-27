@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../model/CenterSide/pCenterListModel.dart';
 
 class PCenterCtr extends GetxController {

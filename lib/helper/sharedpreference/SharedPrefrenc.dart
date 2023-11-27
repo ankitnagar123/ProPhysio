@@ -12,6 +12,9 @@ class SharedPreferenceProvider{
   String PATIENT_LOGIN_KEY = 'LOGIN_KEY';
   String PATIENT_ID_KEY = 'PATIENT_ID_KEY';
   String PATIENT_NAME_KEY = 'PATIENT_NAME_KEY';
+  String PATIENT_SURE_NAME_KEY ="PATIENT_NAME_KEY";
+
+
   String PATIENT_EMAIL_KEY = 'PATIENT_EMAIL_KEY';
   String PATIENT_PHONE_KEY = 'PATIENT_PHONE_KEY';
   String PATIENT_COUNTRYCODE_KEY = 'PATIENT_COUNTRYCODE_KEY';
@@ -19,6 +22,8 @@ class SharedPreferenceProvider{
   /*--------Doctor side------*/
 String DOCTOR_LOGIN_KEY = 'DOCTOR_LOGIN_KEY';
 String DOCTOR_ID_KEY = 'DOCTOR_ID_KEY';
+String DOCTOR_NAME_KEY ="DOCTOR_NAME_KEY";
+String DOCTOR_SURE_NAME_KEY ="DOCTOR_SURE_NAME_KEY";
 
   /*--------Medical Center side------*/
   String CENTER_LOGIN_KEY = 'CENTER_LOGIN_KEY';

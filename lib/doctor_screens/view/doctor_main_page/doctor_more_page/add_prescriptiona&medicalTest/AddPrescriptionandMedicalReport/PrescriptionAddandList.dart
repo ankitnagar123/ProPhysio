@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
 
 class PrescriptionAddAndList extends StatefulWidget {
@@ -171,7 +171,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.Patient_Information.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
@@ -227,7 +227,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.Contact.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
@@ -251,7 +251,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.weight.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
@@ -283,7 +283,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.address.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 15.0,
                             fontFamily: "Poppins"),
@@ -307,7 +307,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                     children:  [
                        Text(
                         text.Height.tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: MyColor.primary1,
                             fontSize: 14.0,
                             fontFamily: "Poppins"),
@@ -345,7 +345,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
             ),
             doctorPrescriptionCtr.prescriptionList.value!.details.isEmpty
                 ?   Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Text(text.noPrescription.tr),
             )
                 :  ListView.builder(

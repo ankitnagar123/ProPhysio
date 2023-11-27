@@ -4,13 +4,13 @@ import 'dart:developer';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/network/Internet_connectivity_checker/InternetConnectivity.dart';
 
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
+import '../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import '../model/DoctorCancelBookingModel.dart';
 import '../model/booking_list_model.dart';
 

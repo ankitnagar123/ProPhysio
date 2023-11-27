@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
+import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/appointment_controller/AppointmentController.dart';
@@ -81,7 +81,7 @@ class _DoctorCenterAddAvailabilityState
                 ),
               ),
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Align(
@@ -124,9 +124,9 @@ class _DoctorCenterAddAvailabilityState
                   controller: startDateController,
                   decoration: InputDecoration(
                     hintText: text.selectSDate.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                    Icon(Icons.date_range_outlined, color: MyColor.primary),
+                    const Icon(Icons.date_range_outlined, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -166,9 +166,9 @@ class _DoctorCenterAddAvailabilityState
                   controller: endDateController,
                   decoration: InputDecoration(
                     hintText: text.selectEDate.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                    Icon(Icons.date_range_outlined, color: MyColor.primary),
+                    const Icon(Icons.date_range_outlined, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -197,20 +197,20 @@ class _DoctorCenterAddAvailabilityState
 
                 // Get.offNamed(RouteHelper.DLoginScreen());
               },
-                  MyColor.primary,
+                  MyColor.red,
                   const TextStyle(
                       color: MyColor.white,
                       fontSize: 16,
                       fontFamily: 'Heebo',
                       letterSpacing: 0.8)),
-            ) : Text(""),
+            ) : const Text(""),
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
               child: Align(
                   alignment: Alignment.topLeft,
                   child: addAvailabilityCtr.doctorTimeList.isEmpty
-                      ? Text("")
+                      ? const Text("")
                       : custom.text(
                       text.yourTimeSlotAccordingSelectDate.tr, 13,
                       FontWeight.w500, MyColor.black)),

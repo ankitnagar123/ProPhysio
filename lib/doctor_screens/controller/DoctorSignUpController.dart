@@ -4,13 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/ApiService.dart';
 import '../../../network/Apis.dart';
-import '../../Helper/RoutHelper/RoutHelper.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
+import '../model/BranchModel.dart';
 import '../model/DSignUpCategoryModel.dart';
 
 class DoctorSignUpCtr extends GetxController {
@@ -25,6 +25,7 @@ class DoctorSignUpCtr extends GetxController {
   var loadingotp = false.obs;
 
   var categoryloding = false.obs;
+  var branchLoading = false.obs;
   var otp = ''.obs;
   var msg = ''.obs;
 
@@ -32,6 +33,7 @@ class DoctorSignUpCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   var category = <AllCategoryModel>[].obs;
+  var branchList = <BranchModel>[].obs;
 
   /*---------Doctor All Category --------*/
   Future<void> DoctorCategory() async {
@@ -53,6 +55,31 @@ class DoctorSignUpCtr extends GetxController {
       }
     } catch (e) {
       categoryloding.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*---------BRANCH--------*/
+  Future<void> branchListApi() async {
+    final Map<String, dynamic> parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+    };
+    print("parameter$parameter");
+    try {
+      branchLoading.value = true;
+      final response = await apiService.postData(MyAPI.DBranchList,parameter);
+      print(" branch List Api =============${response.body}");
+      if (response.statusCode == 200) {
+        branchLoading.value = false;
+        branchList.value = branchModelFromJson(response.body.toString());
+        log(category.toString());
+      } else {
+        branchLoading.value = false;
+        log("error");
+      }
+    } catch (e) {
+      branchLoading.value = false;
       log("exception$e");
     }
   }
@@ -187,6 +214,12 @@ class DoctorSignUpCtr extends GetxController {
       String gender,
       String graducationDate,
       String qualificationDate,
+      String age,
+      String experience,
+      String description,
+      String first_Service,
+      String branch,
+
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
@@ -213,6 +246,12 @@ class DoctorSignUpCtr extends GetxController {
       "gender":gender,
       "graduation_date":graducationDate,
       "qualification_date":qualificationDate,
+
+      "age":age,
+      "experience":experience,
+      "description":description,
+      "first_Service":first_Service,
+      "branch":branch,
     };
     print("Signup Parameter$signupPerameter");
     print(gender);

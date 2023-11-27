@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
+import '../../helper/CustomView/CustomView.dart';
 
 import '../../../Network/ApiService.dart';
 import 'package:get/get.dart';

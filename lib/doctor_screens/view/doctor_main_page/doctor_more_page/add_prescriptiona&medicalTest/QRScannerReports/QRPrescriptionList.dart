@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
@@ -195,7 +195,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details!.contact,
+                                details.contact,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -219,7 +219,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details!.surname,
+                                details.surname,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -251,7 +251,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details!.location,
+                                details.location,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -275,7 +275,7 @@ class _QRPrescriptionListState extends State<QRPrescriptionList> {
                               height: 2.0,
                             ),
                             Text(
-                                details!.height,
+                                details.height,
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15.0,

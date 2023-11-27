@@ -14,8 +14,8 @@ class LocalString extends Translations {
   String Select_doctor = "Select doctor";
 
   String SIGN_IN = "Sign in";
-  String ENTER_USER_EMAIL = "Enter your username/email";
-  String HINT_ENTER_USER_EMAIL = "Enter Email ID/User Id";
+  String ENTER_USER_EMAIL = "Enter your email";
+  String HINT_ENTER_USER_EMAIL = "Enter Email-Id";
   String Enter_Password = "Enter your Password";
   String HINT_ENTER_Password = "Enter Password";
   String Forgot_Password = "Forgot password?";
@@ -57,7 +57,7 @@ class LocalString extends Translations {
   String Age = "Enter Age";
   String Weight = "Enter Weight";
   String Height = "Height";
-  String Tax_Code = "Tax Code";
+  String TRM = "TRM";
   String Birth_Place = "Birth place";
   String Gender = "Gender";
   String Male = "Male";
@@ -72,10 +72,18 @@ class LocalString extends Translations {
   String Date_of_Qualification = "Date of qualification";
   String Register_of_Belonging = "Register of belonging";
   String Select_Category = "Select your specializations";
+  String Select_Branch = "Select your Branch";
   String Select_Sub_Category = "Select your sub-specializations";
   String Upload_your_Degree = "Upload your degree";
   String Select_Address = "Select your address";
   String SearchAddress = "Search City";
+  String  firstConsultation = "Provide first consultation fees";
+
+
+  /*---------new String ------------*/
+ String  experience = "Year of Experience";
+
+
 
   /*medical center signup*/
   String MedicalName = "Enter your Medical center name";
@@ -197,7 +205,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /// ********************DOCTOR SIDE********************** ///
   /* DOCTOR SIDE MORE PAGE */
-  String addAvailabilitySelfCenter = "add availability for self & center";
+  String addAvailabilitySelfCenter = "add availability and check";
   String addAvailability = "Add Availability";
   String prescriptionAndMedicalReports = "prescription and medical reports";
   String reports = "Reports";
@@ -260,7 +268,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String fees = "Fees";
 
   /*DOCTOR SIDE ADD AVAILABILITY*/
-  String self = "Self";
+  String self = "Add Availability";
   String medicalCenter = "Medical center";
   String viewAvailability = "View Availability";
   String enterDates = "Enter Dates";
@@ -342,12 +350,12 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String Home = "Home";
   String Accept_request = "Accept request";
 
-  /**********************Patient Side************************/
+  /// ********************Patient Side***********************
   /*Home PDoctor Tab page*/
   String doctor = "Doctor";
   String Medical_Center = "Medical Center";
   String Choos_Top_Specialist = "Choose from top Specialist";
-  String SeeAll = "see all";
+  String SeeAll = "See All";
   String TopSpecialization = "Top Specialization";
   String NoTopSpecialization = "No Top Specialization";
   String NoSubCat = "No Sub-Category";
@@ -359,7 +367,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /* PATIENT SIDE MORE PAGE*/
   String addCreditCard = "Add a credit card";
-  String goto = "Go to";
+  String goto = "Go to ";
   String payment = "Payment";
   String toCompleteIt = "to complete it.";
   String rateAppointmentYouDid = "Rate appointment you did";
@@ -570,6 +578,7 @@ String NoWardAddedCenter = "No ward added by center";
   String AddDateSucces = "Date add successfully";
   String SomthingWentWrong = "Something went wrong";
   String Invalidemailpassword = "Invalid email or password";
+  String WaitforadminApprove = "Wait for admin Approve";
   String Success = "Success";
   String Invalid = "Invalid";
   String DeleteaccountSuccess = "Account delete Successfully";
@@ -597,8 +606,8 @@ String NoWardAddedCenter = "No ward added by center";
           Upcoming : "Confirmed",
           Select_doctor : "Select doctor",
           SIGN_IN: "Sign in",
-          ENTER_USER_EMAIL: "Enter your username/email",
-          HINT_ENTER_USER_EMAIL: "Enter Email ID/User Id",
+          ENTER_USER_EMAIL: "Enter your email",
+          HINT_ENTER_USER_EMAIL: "Enter Email-Id",
           Enter_Password: "Enter your Password",
           HINT_ENTER_Password: "Enter Password",
 
@@ -630,7 +639,7 @@ String NoWardAddedCenter = "No ward added by center";
           Age: "Enter Age",
           Weight: "Enter Weight",
           Height: "Height",
-          Tax_Code: "Tax Code",
+          TRM: "TRM",
           Birth_Place: "Birth place",
           Gender: "Gender",
           Male: "Male",
@@ -644,10 +653,14 @@ String NoWardAddedCenter = "No ward added by center";
           Date_of_Enrollment: "Date of enrollment",
           Register_of_Belonging: "Register of belonging",
           Select_Category: "Select your specializations",
+          Select_Branch: "Select your Branch",
           Select_Sub_Category: "Select your sub-specializations",
           Upload_your_Degree: "Upload your degree",
           Select_Address: "Select your address or offices",
           SearchAddress: "Search City",
+          firstConsultation: "Provide first consultation fees",
+          experience: "Year of Experience",
+  description : "Enter Description",
           /*medical center signup*/
           MedicalName: "Enter your Medical center name",
           HMedicalName: "Your Medical center name",
@@ -762,7 +775,7 @@ String NoWardAddedCenter = "No ward added by center";
           ChangeLanguage: "Change language",
 
           /* DOCTOR SIDE MORE PAGE */
-          addAvailabilitySelfCenter: "add availability for self & center",
+          addAvailabilitySelfCenter: "add availability and check",
           addAvailability: "Add Availability",
           prescriptionAndMedicalReports: "prescription and medical reports",
           reports: "Reports",
@@ -824,7 +837,7 @@ String NoWardAddedCenter = "No ward added by center";
           slot: "Slot",
           fees: "Fees",
           /*DOCTOR SIDE ADD AVAILABILITY*/
-          self: "Self",
+          self: "Add Availability",
           medicalCenter: "Medical center",
           viewAvailability: "View Availability",
           enterDates: "Enter Dates",
@@ -904,7 +917,7 @@ String NoWardAddedCenter = "No ward added by center";
           doctor: "Doctor",
           Medical_Center: "Medical Center",
           Choos_Top_Specialist: "Choose from top Specialist",
-          SeeAll: "see all",
+          SeeAll: "See All",
           TopSpecialization: "Top Specialization",
           NoTopSpecialization: "No Top Specialization",
           NoSubCat: "No Sub-Category",
@@ -1121,6 +1134,7 @@ String NoWardAddedCenter = "No ward added by center";
           AddDateSucces: "Date add successfully",
           SomthingWentWrong: "Something went wrong",
   Invalidemailpassword : "Invalid email or password",
+  WaitforadminApprove : "Wait for admin Approve",
           Success: "Success",
           Invalid: "Invalid",
           DeleteaccountSuccess: "Account delete Successfully",
@@ -1146,8 +1160,8 @@ String NoWardAddedCenter = "No ward added by center";
           Download_report_successful : "Download del rapporto riuscito",
           Select_doctor : "Seleziona dottore",
           SIGN_IN: "Registrazione",
-          ENTER_USER_EMAIL: "Inserisci il tuo nome utente/e-mail",
-          HINT_ENTER_USER_EMAIL: "Inserisci ID e-mail/ID utente",
+          ENTER_USER_EMAIL: "Inserisci il tuo nome e-mail",
+          HINT_ENTER_USER_EMAIL: "Inserisci  e-mail/ utente",
           Enter_Password: "Inserisci la tua password",
           HINT_ENTER_Password: "Inserire la password",
           Forgot_Password: "Ha dimenticato la password?",
@@ -1177,7 +1191,7 @@ String NoWardAddedCenter = "No ward added by center";
           Age: "Inserisci Età",
           Weight: "Inserire il peso",
           Height: "Altezza",
-          Tax_Code: "Codice Fiscale",
+          TRM: "TRM",
           Birth_Place: "Luogo di nascita",
           Gender: "Genere",
           Male: "Maschia",

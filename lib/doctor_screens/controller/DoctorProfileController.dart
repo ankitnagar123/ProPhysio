@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../Network/ApiService.dart';
 import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
 
 class DoctorProfileCtr extends GetxController {
@@ -47,6 +47,13 @@ class DoctorProfileCtr extends GetxController {
   var dateOfQualification = "".obs;
   var dateOfGraduation = "".obs;
   var flag ="".obs;
+
+  var age ="".obs;
+  var experience ="".obs;
+  var description ="".obs;
+  var firstService ="".obs;
+  var branch ="".obs;
+
   var resultVar = RxnInt(0);
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
@@ -100,6 +107,12 @@ class DoctorProfileCtr extends GetxController {
         registerOfBelonging.value = jsonResponse["register_of_belonging"];
         dateOfGraduation.value = jsonResponse["graduation_date"];
         dateOfQualification.value = jsonResponse["qualification_date"];
+
+        age.value = jsonResponse["age"];
+        experience.value = jsonResponse["experience"];
+        description.value = jsonResponse["description"];
+        firstService.value = jsonResponse["first_Service"];
+        branch.value = jsonResponse["branch_name"];
         resultVar.value = 1;
 
         // Massenger(context, 'My Profile');
@@ -142,6 +155,11 @@ class DoctorProfileCtr extends GetxController {
     String registerOfBelonging,
     String dateOfQualification,
     String dateOfGraduation,
+
+    String Age,
+    String Experience,
+    String Description,
+    String FristFee,
       String flag,
       VoidCallback callback,
   ) async {
@@ -173,6 +191,11 @@ class DoctorProfileCtr extends GetxController {
       "register_of_belonging": registerOfBelonging,
       "graduation_date": dateOfGraduation,
       "qualification_date": dateOfQualification,
+      /*new*/
+      "age":Age,
+      "experience":Experience,
+      "description":Description,
+      "first_Service":FristFee,
     };
     print(" Doctor Profile Update Parameter$profileUpdatePerameter");
 

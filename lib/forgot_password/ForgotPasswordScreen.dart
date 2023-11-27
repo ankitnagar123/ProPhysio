@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassController.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
+
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../helper/CustomView/CustomView.dart';
+import '../helper/mycolor/mycolor.dart';
 import '../language_translator/LanguageTranslate.dart';
-
+import 'forgot_pass_controller/ForgotPassController.dart';
+import 'package:get/get.dart';
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
 
@@ -79,7 +78,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       counterText: '',
                       filled: true,
                       fillColor: Colors.white,
-                      constraints: BoxConstraints.expand(),
+                      constraints: const BoxConstraints.expand(),
                       labelText: text.Phone_Number.tr,
                       border: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
@@ -128,7 +127,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       });
                     }*/
                   },
-                      MyColor.primary,
+                      MyColor.red,
                       const TextStyle(
                           fontSize: 18,
                           color: MyColor.white,

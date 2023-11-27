@@ -100,18 +100,18 @@ class SpecializationDetailsModel {
     if (json['subcategory'] != null) {
       subcategory = <Subcategory>[];
       json['subcategory'].forEach((v) {
-        subcategory!.add(new Subcategory.fromJson(v));
+        subcategory!.add(Subcategory.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['doctor_id'] = this.doctorId;
-    data['description'] = this.description;
-    data['cat_name'] = this.catName;
-    if (this.subcategory != null) {
-      data['subcategory'] = this.subcategory!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['doctor_id'] = doctorId;
+    data['description'] = description;
+    data['cat_name'] = catName;
+    if (subcategory != null) {
+      data['subcategory'] = subcategory!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -130,17 +130,17 @@ class Subcategory {
     if (json['details'] != null) {
       details = <Details>[];
       json['details'].forEach((v) {
-        details!.add(new Details.fromJson(v));
+        details!.add(Details.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['subcat_id'] = this.subcatId;
-    data['subcat_name'] = this.subcatName;
-    if (this.details != null) {
-      data['details'] = this.details!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['subcat_id'] = subcatId;
+    data['subcat_name'] = subcatName;
+    if (details != null) {
+      data['details'] = details!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -158,9 +158,9 @@ class Details {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['price'] = this.price;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['price'] = price;
     return data;
   }
 }

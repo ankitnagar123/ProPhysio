@@ -72,13 +72,13 @@ LocalString text = LocalString();
               indicatorWeight: 0,
                   tabs:  [
                     Tab(
-                      child: Text(text.prescription.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
+                      child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
                     ),
                     Tab(
-                      child: Text(text.medicalTest.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                      child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                     Tab(
-                      child: Text(text.medicines.tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                      child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
                   ],
                 ),

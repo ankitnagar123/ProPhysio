@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/forgot_password/forgot_pass_controller/ForgotPassController.dart';
 
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+import '../Helper/RoutHelper/RoutHelper.dart';
 import '../helper/CustomView/CustomView.dart';
 import 'package:get/get.dart';
 
+import '../helper/mycolor/mycolor.dart';
 import '../language_translator/LanguageTranslate.dart';
+import 'forgot_pass_controller/ForgotPassController.dart';
 
 class SetNewPassword extends StatefulWidget {
   const SetNewPassword({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ var userType = "";
     super.initState();
     id = Get.parameters["id"].toString();
     userType = Get.parameters["userType"].toString();
-    print("id for set pass:${id} user type:$userType");
+    print("id for set pass:$id user type:$userType");
   }
 
   @override
@@ -55,7 +55,7 @@ var userType = "";
                 Get.offAndToNamed(RouteHelper.getSetPassSuccess());
 
               });
-            }, MyColor.primary, const TextStyle(
+            }, MyColor.red, const TextStyle(
                 fontSize: 18, color: MyColor.white, fontFamily: "Poppins"));
         }),
         body: Padding(

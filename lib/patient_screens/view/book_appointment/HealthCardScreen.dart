@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/patient_screens/view/patient_payment_screen/PatientCheckOutCard.dart';
 
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/auth_controllers/PatientProfileController.dart';
 import "../../controller/auth_controllers/card_controller's/PatientCardController.dart";
-
+import '../patient_payment_screen/PatientCheckOutCard.dart';
+/*Remove==============================================*/
 class HealthCardScreen extends StatefulWidget {
   String timeid, price, date, centerId;
 
@@ -44,12 +46,13 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
     date = widget.date;
     centerId = widget.centerId;
 
-    print("center id $centerId");
-    print("date$date");
-    print("price$price");
-    print("time slot$time");
+    log("center id $centerId");
+    log("date$date");
+    log("price$price");
+    log("time slot$time");
     healthcodeCtr.text = profileCtr.healthCard.value;
-    print("my health Card${healthcodeCtr.text.toString()}");
+    log("my health Card${healthcodeCtr.text.toString()}");
+
   }
 
   @override
@@ -69,7 +72,6 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                 builder: (context) => PatientCheckOutCard(
                   price: price.toString(),
                   time: time.toString(),
-                  healthCard: healthcodeCtr.text.toString(),
                   date: date.toString(),
                   centerId: centerId,
                 ),
@@ -78,7 +80,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
           }
 
           // Get.back();
-        }, MyColor.primary,
+        }, MyColor.red,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
       ),
       appBar: AppBar(

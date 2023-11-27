@@ -64,6 +64,6 @@ class DefaultFirebaseOptions {
     projectId: 'medica-14c21',
     storageBucket: 'medica-14c21.appspot.com',
     iosClientId: '1030822803064-ohsg5n34pqgvaalcrh4tdlnfcrlk2e69.apps.googleusercontent.com',
-    iosBundleId: 'com.medica.medica',
+    iosBundleId: 'com.prophysio',
   );
 }

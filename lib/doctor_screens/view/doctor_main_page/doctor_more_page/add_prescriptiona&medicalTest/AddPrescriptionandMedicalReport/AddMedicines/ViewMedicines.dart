@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
-import 'package:flutter/foundation.dart';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
-import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
-import 'package:path/path.dart';
-import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import 'PDF/medicinePDFVIew.dart';
+import 'PDF/pdf_viewer_page.dart';
 
 class DrViewMedicines extends StatefulWidget {
   String patientId;
@@ -120,7 +116,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                           children: [
                              Text(
                               text.medicinesInformation.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -144,7 +140,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                           children: [
                              Text(
                               text.slot.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -177,7 +173,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                         children: [
                            Text(
                             text.timingTake.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -239,7 +235,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
                         children: [
                            Text(
                             text.description.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -298,7 +294,7 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
   //final file = File('example.pdf');
   //await file.writeAsBytes(await pdf.save());
 
-  void openPdf(BuildContext context, File file, String url) =>
+/*  void openPdf(BuildContext context, File file, String url) =>
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PdfViewerPage(
@@ -306,5 +302,5 @@ class _DrViewMedicinesState extends State<DrViewMedicines> {
             url: url,
           ),
         ),
-      );
+      );*/
 }

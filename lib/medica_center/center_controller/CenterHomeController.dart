@@ -3,19 +3,19 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:medica/medica_center/center_models/CenterSelectedWardModel.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
+import '../../helper/CustomView/CustomView.dart';
 import '../center_models/CencelModels/WardDeleteReasonModel.dart';
 import '../center_models/CencelModels/WardRemoveDoctorReason.dart';
 import '../center_models/CenterAddMoreDr.dart';
 import '../center_models/CenterAllDrModel.dart';
 import '../center_models/CenterSelectedDrModel.dart';
+import '../center_models/CenterSelectedWardModel.dart';
 
 
 class CenterHomeCtr extends GetxController {

@@ -1,7 +1,7 @@
+/*
 import 'dart:io';
 import 'package:file_utils/file_utils.dart';
 import 'package:get/get.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:intl/intl.dart';
@@ -104,7 +104,7 @@ LocalString text = LocalString();
               Get.back();
             },
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
-        title: Text(name,style: TextStyle(color: MyColor.black)),
+        title: Text(name,style: const TextStyle(color: MyColor.black)),
         actions: [
           IconButton(
             color: MyColor.primary1,
@@ -132,3 +132,4 @@ LocalString text = LocalString();
 
 
 }
+*/

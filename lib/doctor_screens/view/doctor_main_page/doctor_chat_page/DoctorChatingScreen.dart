@@ -1,16 +1,25 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:prophysio/AgoraCall/call_controller.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../AgoraCall/callScreen.dart';
+import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../ZegoCallService/ZegoCallService.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
+import '../../../../pdfview/print_Invoice.dart';
 import '../../../controller/DocotorBookingController.dart';
+import 'Add_Invoice.dart';
 
 class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({
@@ -44,6 +53,14 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
 
   String? doctorId;
 
+  final appId = '94a17beb94774769a4372f873bc053ee';
+  final appCertificate = '79717ca6faa94fb5acc061beb699ed93';
+
+  final expirationInSeconds = 3600;
+  final currentTimestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+  FilePickerResult? result;
+
   @override
   void initState() {
     if (Get.arguments["bookingSide"] == "booking") {
@@ -68,7 +85,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
     print("doctor Id==>>>>$patientId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
         chatController.doctorReceivedMsgListFetch(context, patientId);
       });
     });
@@ -88,14 +105,54 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
         appBar: AppBar(
             flexibleSpace: Container(
               decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.topLeft,
-                    colors: <Color>[MyColor.primary1, MyColor.secondary]),
+                    colors: <Color>[MyColor.primary, MyColor.primary1]),
               ),
             ),
-            toolbarHeight: 85.0,
+            toolbarHeight: 75.0,
             actions: [
+           /*   GestureDetector(
+                  onTap: () async {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const PrintScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddInvoice(),));
+
+
+                  },
+                  child: Row(
+                    children: [
+                      view.text("Invoice", 11, FontWeight.normal, Colors.white),
+                      const Icon(Icons.check_circle),
+                    ],
+                  )),*/
+              ZegoSendCallInvitationButton(
+                isVideoCall: true,
+                invitees: getInvitesFromTextCtrl(patientId,"$patientName $patientSurname"),
+                resourceID: 'zego_data',
+                iconSize: const Size(40, 40),
+                buttonSize: const Size(40, 40),
+                onPressed: onSendCallInvitationFinished,
+                // clickableBackgroundColor: Colors.white,
+                icon: ButtonIcon(icon: const Icon(Icons.video_call_sharp,color: Colors.white,fill: CircularProgressIndicator.strokeAlignOutside),),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              ZegoSendCallInvitationButton(
+                isVideoCall: false,
+                invitees: getInvitesFromTextCtrl(patientId,"$patientName $patientSurname"),
+                resourceID: 'zego_data',
+                iconSize: const Size(40, 40),
+                buttonSize: const Size(40, 40),
+                onPressed: onSendCallInvitationFinished,
+                // clickableBackgroundColor: Colors.white,
+                icon: ButtonIcon(icon: const Icon(Icons.call,color: Colors.white,fill: CircularProgressIndicator.strokeAlignOutside),),
+              ),
+              SizedBox(
+                width: 8,
+              ),
               InkWell(
                   onTap: () {
                     var patientInfo = {
@@ -104,7 +161,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                       "pic": patientPic,
                       "surname": patientName,
                       "username": patientUsername,
-                       "address":patientAddress,
+                      "address": patientAddress,
                     };
                     Get.toNamed(RouteHelper.DChatProfile(),
                         parameters: patientInfo);
@@ -113,7 +170,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   child: const Icon(Icons.more_vert)),
               const SizedBox(
                 width: 10.0,
-              )
+              ),
             ],
             systemOverlayStyle:
                 const SystemUiOverlayStyle(statusBarColor: MyColor.primary),
@@ -133,20 +190,21 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 )),
             elevation: 0,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(120.0),
+                  borderRadius: BorderRadius.circular(100.0),
                   child: FadeInImage.assetNetwork(
                     imageErrorBuilder: (context, error, stackTrace) {
                       return const CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Image(
                             image:
-                                AssetImage("assets/images/dummyprofile.jpg")),
+                                AssetImage("assets/images/dummyprofile.png")),
                       );
                     },
-                    width: 56,
-                    height: 56,
+                    width: 50,
+                    height: 50,
                     fit: BoxFit.cover,
                     placeholder: "assets/images/loading.gif",
                     image: patientPic,
@@ -154,20 +212,14 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   ),
                 ),
                 const SizedBox(
-                  width: 9.0,
+                  width: 12.0,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "$patientName $patientSurname",
-                      style:
-                          const TextStyle(fontFamily: "Poppins", fontSize: 17),
-                    ),
-                    /* const Text(
-                      "online",
-                      style: TextStyle(fontFamily: "Poppins", fontSize: 12),
-                    )*/
-                  ],
+                SizedBox(
+                  width: 70,
+                  child: Text(
+                    patientName,
+                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16),
+                  ),
                 ),
               ],
             ),
@@ -259,8 +311,8 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                          color: MyColor.lightcolor,
-                          border: Border.all(color: Colors.black38),
+                          color: Colors.grey.shade200,
+                          // border: Border.all(color: Colors.black38),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
                         style: const TextStyle(decorationThickness: 0),
@@ -269,11 +321,63 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         minLines: 1,
                         maxLines: 3,
                         decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(25.0),
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.grey.shade200,
+                                      // <-- SEE HERE
+                                      builder: (context) {
+                                        return SizedBox(
+                                          height: 100,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                result = await FilePicker
+                                                    .platform
+                                                    .pickFiles(
+                                                        allowMultiple: true);
+                                                if (result == null) {
+                                                  log("No file selected");
+                                                } else {
+                                                  setState(() {});
+                                                  for (var element in result!.files) {
+                                                    log("pdf ko naam-------${element.name}==${element.path}==${element.bytes}");
+                                                  }
+                                                }
+                                              },
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  view.text(
+                                                      "Select Patient Prescription and Invoices file to send",
+                                                      13,
+                                                      FontWeight.w500,
+                                                      MyColor.primary1),
+                                                  const Icon(Icons.file_present,
+                                                      size: 31,
+                                                      color: MyColor.primary1),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: const Icon(Icons.file_upload_outlined,
+                                    color: MyColor.primary1)),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.all(12),
+                            contentPadding: const EdgeInsets.all(12),
                             hintText: text.enterMassage.tr,
-                            hintStyle: TextStyle(
-                                color: MyColor.primary1,
+                            hintStyle: const TextStyle(
+                                color: MyColor.white,
                                 fontSize: 12,
                                 letterSpacing: 1.0)),
                       ),

@@ -1,3 +1,5 @@
+
+
 import 'dart:async';
 import 'dart:developer';
 
@@ -5,15 +7,13 @@ import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
-
-
 class NavigateMapViewScreen extends StatefulWidget {
-
-  const NavigateMapViewScreen({Key? key,})
-      : super(key: key);
+  const NavigateMapViewScreen({Key? key}) : super(key: key);
 
   @override
   State<NavigateMapViewScreen> createState() => _NavigateMapViewScreenState();
@@ -21,40 +21,32 @@ class NavigateMapViewScreen extends StatefulWidget {
 
 class _NavigateMapViewScreenState extends State<NavigateMapViewScreen> {
 
+
   CustomInfoWindowController customInfoWindowController =
   CustomInfoWindowController();
   CustomView customView = CustomView();
   late GoogleMapController mapController;
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
-String lat ="";
-String long="";
-String name="";
-String surname="";
-String img = "";
-String address = "";
-String doctorId = "";
+  String lat ="";
+  String long="";
+  String name="";
+  String surname="";
+  String img = "";
+  String address = "";
+  String doctorId = "";
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-  @override
-  void initState() {
-    super.initState();
-    lat = Get.parameters["lat"].toString();
-    long = Get.parameters["long"].toString();
-    name = Get.parameters["name"].toString();
-    surname = Get.parameters["surname"].toString();
-    img = Get.parameters["img"].toString();
-    address = Get.parameters["address"].toString();
-  }
+
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     var markerIcon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size.fromHeight(10.0)),
-      "assets/images/img.png",
+      "assets/images/map.png",
     );
     setState(() {
       const String markerIdVal = 'marker_id';
-      final MarkerId markerId = MarkerId(markerIdVal);
+      const MarkerId markerId = MarkerId(markerIdVal);
       final marker = Marker(
         icon: markerIcon,
         markerId: markerId,
@@ -97,7 +89,7 @@ String doctorId = "";
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           customView.text(
-                             "$name $surname",
+                              "$name $surname",
                               13,
                               FontWeight.w600,
                               MyColor.black),
@@ -126,7 +118,7 @@ String doctorId = "";
                   ),
                 ),
               ),
-             LatLng(double.parse(lat), double.parse(long)));
+              LatLng(double.parse(lat), double.parse(long)));
         },
       );
       setState(() {
@@ -134,8 +126,19 @@ String doctorId = "";
       });
     });
   }
+@override
+  void initState() {
+    lat = Get.parameters["lat"].toString();
 
-
+    long = Get.parameters["long"].toString();
+    log("$lat$long");
+    name = Get.parameters["name"].toString();
+    surname = Get.parameters["surname"].toString();
+    img = Get.parameters["img"].toString();
+    address = Get.parameters["address"].toString();
+    doctorId = Get.parameters["doctorId"].toString();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -143,9 +146,13 @@ String doctorId = "";
     super.dispose();
   }
 
+
+  LocalString text = LocalString();
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
+
+
   @override
   Widget build(BuildContext context) {
-    print("Doctor MAP");
     return Stack(children: [
       GoogleMap(
         mapType: MapType.normal,
@@ -166,10 +173,11 @@ String doctorId = "";
         onCameraMove: (position) {
           customInfoWindowController.onCameraMove!();
         },
+
         initialCameraPosition:  CameraPosition(
           target: LatLng(
-            double.parse(lat),
-             double.parse(long),
+            double.parse(lat.toString()),
+            double.parse(long.toString()),
           ),
           zoom: 15.0,
         ),
@@ -240,4 +248,5 @@ String doctorId = "";
       // ),
     ]);
   }
+
 }

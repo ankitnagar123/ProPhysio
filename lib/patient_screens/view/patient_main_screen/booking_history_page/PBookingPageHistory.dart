@@ -2,11 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/booking_controller_list/PBookingController.dart';
 
@@ -38,22 +39,29 @@ class _BookingPageState extends State<BookingPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Stack(children: [
+      body: Stack(
+          children: [
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
               SizedBox(
-                height: height * 0.05,
+                height: height * 0.045,
               ),
+              const Image(
+                image: AssetImage("assets/images/runlogo.png"),
+                height: 40,
+                width: 40,
+              ),
+              SizedBox(height: 3,),
               customView.searchFieldnew(
                   context,
                   searchCtr,
                   text.searchYourAppointments.tr,
                   TextInputType.text,
                   const Text(""),
-                  const Icon(Icons.search_rounded), () {
+                  const Icon(Icons.search_rounded,color: Colors.white), () {
                 Get.toNamed(RouteHelper.getSearchAppointmentScreen());
               }, () {}, true),
               const SizedBox(
@@ -65,7 +73,7 @@ class _BookingPageState extends State<BookingPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(12.0),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: InkWell(
@@ -75,12 +83,12 @@ class _BookingPageState extends State<BookingPage> {
                 Get.toNamed(RouteHelper.getPastAppointmentsScreen());
               },
               child: Container(
-                  height: 50.0,
+                  height: 47.0,
                   margin: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 2.0),
                   decoration: BoxDecoration(
-                    color: MyColor.lightcolor,
-                    borderRadius: BorderRadius.circular(0.0),
+                    color: MyColor.primary,
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 13.0),
@@ -88,11 +96,11 @@ class _BookingPageState extends State<BookingPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         customView.text(text.pastAppointments.tr, 14.0,
-                            FontWeight.w500, MyColor.primary1),
+                            FontWeight.w500, MyColor.white),
                         const Icon(
                           Icons.arrow_forward,
                           size: 20.0,
-                          color: MyColor.primary1,
+                          color: MyColor.white,
                         ),
                       ],
                     ),
@@ -228,7 +236,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.date.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -255,7 +263,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.slot.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -283,7 +291,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.bookingID.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -398,7 +406,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.date.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -425,7 +433,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.slot.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -453,7 +461,7 @@ class _BookingPageState extends State<BookingPage> {
                                       children: [
                                         Text(
                                           text.bookingID.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 10.0,
                                               fontFamily: "Poppins"),
@@ -501,7 +509,7 @@ class _BookingPageState extends State<BookingPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(""),
+                    const Text(""),
                     customView.text(
                         text.details.tr, 17.0, FontWeight.w500, Colors.black),
                     patientBookingController.status == "Confirmed"
@@ -534,7 +542,7 @@ class _BookingPageState extends State<BookingPage> {
                               ],
                             ),
                           )
-                        : Text(""),
+                        : const Text(""),
                   ],
                 ),
                 const SizedBox(
@@ -549,7 +557,7 @@ class _BookingPageState extends State<BookingPage> {
                         children: [
                           Text(
                             text.doctorInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -578,12 +586,12 @@ class _BookingPageState extends State<BookingPage> {
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2.0,
                           ),
                           Text(
                             text.you.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14.0,
                                 fontFamily: "Poppins"),
@@ -605,7 +613,7 @@ class _BookingPageState extends State<BookingPage> {
                         children: [
                           Text(
                             text.address.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -635,7 +643,7 @@ class _BookingPageState extends State<BookingPage> {
                         children: [
                           Text(
                             text.bookingInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -662,7 +670,7 @@ class _BookingPageState extends State<BookingPage> {
                   children: [
                     Text(
                       text.status.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 11.0,
                           fontFamily: "Poppins"),
@@ -811,7 +819,7 @@ class _BookingPageState extends State<BookingPage> {
                             },
                             child: Text(
                               text.cancelAppointment.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.red,
                                   fontSize: 14.0,
                                   fontFamily: "Poppins"),
@@ -824,7 +832,7 @@ class _BookingPageState extends State<BookingPage> {
                                 },
                                 child: Text(
                                   text.cancelAppointment.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.red,
                                       fontSize: 14.0,
                                       fontFamily: "Poppins"),
@@ -870,7 +878,7 @@ class _BookingPageState extends State<BookingPage> {
                                 },
                                 child: Text(
                                   text.removeFromBookingSection.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.red,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.w500,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -163,7 +163,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
             const SizedBox(height: 5.0,),
               doctorPrescriptionCtr.loadingPFetch.value?SingleChildScrollView(
                     child: categorysubShimmerEffect(context)):doctorPrescriptionCtr.patientPrescriptionList.isEmpty? Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(text.noPrescription.tr),
                     ):
               SingleChildScrollView(

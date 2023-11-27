@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../helper/CustomView/CustomView.dart';
+import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../helper/Shimmer/ChatShimmer.dart';
 import '../../helper/mycolor/mycolor.dart';
+import '../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../center_controller/CenterHomeController.dart';
 import '../center_models/CenterAllDrModel.dart';
@@ -152,16 +153,16 @@ class _CenterAddWardScreenState extends State<CenterAddWardScreen> {
                     cursorColor: Colors.black,
                     controller: searchCtr,
                     decoration:  InputDecoration(
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       prefixIconColor: MyColor.primary1,
                       suffixIconColor: MyColor.primary1,
-                      contentPadding: EdgeInsets.only(top: 3, left: 20),
+                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
                       hintText: text.Search_Doctorby_Name.tr,
                       hintStyle:
-                      TextStyle(fontSize: 12, color: MyColor.primary1),
+                      const TextStyle(fontSize: 12, color: MyColor.primary1),
                       fillColor: MyColor.lightcolor,
                       filled: true,
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),

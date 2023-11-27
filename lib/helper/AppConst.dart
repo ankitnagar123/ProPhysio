@@ -1,18 +1,23 @@
-class AppConst{
+class AppConst {
+  /// Define App ID and Token
+  static String appId = '94a17beb94774769a4372f873bc053ee';
+  static String channgeId = "";
+  static String token = "";
 
-  static  String LOCATION = "";
-  static  String LATITUDE = "";
-  static  String LONGITUDE = "";
+  static String LOCATION = "";
+  static String LATITUDE = "";
+  static String LONGITUDE = "";
+
   /*filter use*/
-  static String  priceRangeStart = "";
-  static String  priceRangeEnd = "";
-  static String  rating = "";
-  static  String FILTER_LOCATION = "";
-  static  String FILTER_DISTANCE = "";
-  static  String FILTER_LATITUDE = "";
-  static  String FILTER_LONGITUDE = "";
-  static  String FILTER_CAT = "";
-  static  String FILTER_SUBCAT = "";
+  static String priceRangeStart = "";
+  static String priceRangeEnd = "";
+  static String rating = "";
+  static String FILTER_LOCATION = "";
+  static String FILTER_DISTANCE = "";
+  static String FILTER_LATITUDE = "";
+  static String FILTER_LONGITUDE = "";
+  static String FILTER_CAT = "";
+  static String FILTER_SUBCAT = "";
   static String cat = "";
   static String subCat = "";
 

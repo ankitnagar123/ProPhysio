@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/PatientMainScreen.dart';
 import 'package:get/get.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
+import '../PatientMainScreen.dart';
 
 class PatientBookingCancelSuccess extends StatefulWidget {
   const PatientBookingCancelSuccess({Key? key}) : super(key: key);

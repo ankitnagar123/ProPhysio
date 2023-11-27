@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/booking_list_model.dart';
 import '../../DoctorMainPage.dart';
-import '../../doctor_home_page/DoctorHomeScreen.dart';
 import '../../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorSearchAppointments extends StatefulWidget {
@@ -24,7 +23,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   CustomView custom = CustomView();
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
-LocalString text = LocalString();
+  LocalString text = LocalString();
+
 /*------VARIABLES------*/
   String? cancelId = '';
   String? cancelReason = '';
@@ -53,31 +53,77 @@ LocalString text = LocalString();
     final widht = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorMainScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const DoctorMainScreen()));
         await bookingController.bookingAppointment(context, "", "");
         return true;
         /*Pending*/
       },
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.white24,
-          title: custom.text(
-              text.searchAppointment.tr, 17, FontWeight.bold, MyColor.black),
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-              bookingController.bookingAppointment(context, "", "");
-              /*Pending*/
-            },
-            icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
-          ),
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 100,
+        //   centerTitle: true,
+        //   elevation: 0,
+        //   backgroundColor: Colors.white24,
+        //   title: Column(
+        //     children: [
+        //       Image(
+        //         image: AssetImage("assets/images/runlogo.png"),
+        //         height: 45,
+        //         width: 45,
+        //       ),
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           IconButton(
+        //             onPressed: () {
+        //               Get.back();
+        //               bookingController.bookingAppointment(context, "", "");
+        //               /*Pending*/
+        //             },
+        //             icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
+        //           ),
+        //           custom.text(
+        //               text.searchAppointment.tr, 17, FontWeight.w500, MyColor.black),
+        //           Text(""),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 35,
+              ),
+              Image(
+                image: AssetImage("assets/images/runlogo.png"),
+                height: 45,
+                width: 45,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                      bookingController.bookingAppointment(context, "", "");
+                      /*Pending*/
+                    },
+                    icon:
+                        const Icon(Icons.arrow_back_ios, color: MyColor.black,size: 20),
+                  ),
+                  custom.text(text.searchAppointment.tr, 17, FontWeight.w500,
+                      MyColor.black),
+                  Text(""),
+                ],
+              ),
+              Divider(color: Colors.black54),
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 width: widht,
                 child: TextFormField(
@@ -94,16 +140,19 @@ LocalString text = LocalString();
                   keyboardType: TextInputType.name,
                   cursorColor: Colors.black,
                   controller: searchCtr,
-                  decoration:  InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: MyColor.primary1,
-                    suffixIconColor: MyColor.primary1,
-                    contentPadding: EdgeInsets.only(top: 3, left: 20),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    prefixIconColor: MyColor.white,
+                    suffixIconColor: MyColor.white,
+                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
                     hintText: text.searchYourAppointments.tr,
-                    hintStyle: TextStyle(fontSize: 12, color: MyColor.primary1),
+                    hintStyle:
+                        const TextStyle(fontSize: 12, color: MyColor.white),
+                    labelStyle:
+                        const TextStyle(fontSize: 12, color: MyColor.white),
                     fillColor: MyColor.lightcolor,
                     filled: true,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
@@ -112,7 +161,6 @@ LocalString text = LocalString();
                   ),
                 ),
               ),
-              const Divider(),
               Row(
                 children: [
                   Expanded(
@@ -195,7 +243,7 @@ LocalString text = LocalString();
           child: custom.MyIndicator(),
         );
       } else if (bookingController.booking.isEmpty) {
-        return  Center(
+        return Center(
             heightFactor: 5.0, child: Text(text.No_Appointments_moment.tr));
       }
       return SingleChildScrollView(
@@ -246,14 +294,17 @@ LocalString text = LocalString();
                             ),
                             Expanded(
                               flex: 1,
-                              child: custom.text(list[index].status == "Pending"
-                                  ? text.Pending.tr
-                                  : list[index].status == "Cancel"
-                                  ? text.Cancel.tr
-                                  : list[index].status == "Complete"
-                                  ?text.Complete.tr
-                                  : text.Upcoming.tr,
-                                  11.0, FontWeight.w400, Colors.black),
+                              child: custom.text(
+                                  list[index].status == "Pending"
+                                      ? text.Pending.tr
+                                      : list[index].status == "Cancel"
+                                          ? text.Cancel.tr
+                                          : list[index].status == "Complete"
+                                              ? text.Complete.tr
+                                              : text.Upcoming.tr,
+                                  11.0,
+                                  FontWeight.w400,
+                                  Colors.black),
                             ),
                             const Expanded(
                               flex: 1,
@@ -283,9 +334,9 @@ LocalString text = LocalString();
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   Text(
+                                  Text(
                                     text.date.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
@@ -306,9 +357,9 @@ LocalString text = LocalString();
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   Text(
+                                  Text(
                                     text.slot.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
@@ -331,9 +382,9 @@ LocalString text = LocalString();
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   Text(
+                                  Text(
                                     text.bookingID.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
@@ -379,7 +430,8 @@ LocalString text = LocalString();
                 const SizedBox(
                   height: 10.0,
                 ),
-                custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                custom.text(
+                    text.details.tr, 17.0, FontWeight.w500, Colors.black),
                 const SizedBox(
                   height: 7.0,
                 ),
@@ -390,9 +442,9 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.patient.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -413,9 +465,9 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.PatientId.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -445,9 +497,9 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.bookingInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -484,11 +536,11 @@ LocalString text = LocalString();
                                 fontFamily: "Poppins"),
                           ),
                         ),
-                         Expanded(
+                        Expanded(
                           flex: 1,
                           child: Text(
                             text.bookingID.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -521,14 +573,18 @@ LocalString text = LocalString();
                         /*-----------*/
                         Expanded(
                           flex: 1,
-                          child: custom.text(bookingController.status.value == "Pending"
-                              ? text.Pending.tr
-                              : bookingController.status.value == "Cancel"
-                              ? text.Cancel.tr
-                              : bookingController.status.value == "Complete"
-                              ?text.Complete.tr
-                              : text.Upcoming.tr,
-                              11.0, FontWeight.w400, Colors.black),
+                          child: custom.text(
+                              bookingController.status.value == "Pending"
+                                  ? text.Pending.tr
+                                  : bookingController.status.value == "Cancel"
+                                      ? text.Cancel.tr
+                                      : bookingController.status.value ==
+                                              "Complete"
+                                          ? text.Complete.tr
+                                          : text.Upcoming.tr,
+                              11.0,
+                              FontWeight.w400,
+                              Colors.black),
                         ),
                         Expanded(
                           flex: 1,
@@ -549,9 +605,9 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.paymentInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -572,9 +628,9 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.fees.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -604,7 +660,7 @@ LocalString text = LocalString();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             text.address.tr,
                             style: const TextStyle(
                                 color: Colors.grey,
@@ -634,20 +690,18 @@ LocalString text = LocalString();
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            custom.acceptRejectButton(
-                                context,
-                                text.reject.tr,
+                            custom.acceptRejectButton(context, text.reject.tr,
                                 () {
-                                  bookingController
-                                      .bookingAppointmentReject(context, id, () {
-                                    bookingController.bookingAppointment(
-                                        context, "Pending", "");
-                                    Get.back();
-                                  });
-                                },
-                                MyColor.midgray,
+                              bookingController
+                                  .bookingAppointmentReject(context, id, () {
+                                bookingController.bookingAppointment(
+                                    context, "Pending", "");
+                                Get.back();
+                              });
+                            }, MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
-                            custom.acceptRejectButton(context, text.accept.tr, () {
+                            custom.acceptRejectButton(context, text.accept.tr,
+                                () {
                               acceptPopUp(context, id);
                             }, MyColor.primary,
                                 const TextStyle(color: MyColor.white))
@@ -664,7 +718,8 @@ LocalString text = LocalString();
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    custom.callButton(context, text.call.tr, () {
+                                    custom.callButton(context, text.call.tr,
+                                        () {
                                       UrlLauncher.launchUrl(Uri.parse(
                                           'tel:${bookingController.contact.value}'));
                                     },
@@ -675,7 +730,8 @@ LocalString text = LocalString();
                                           fontSize: 16,
                                         ),
                                         Icons.call),
-                                    custom.callButton(context, text.chat.tr, () {
+                                    custom.callButton(context, text.chat.tr,
+                                        () {
                                       var patientId = {
                                         "ID": bookingController.userId.value,
                                         "userName":
@@ -707,8 +763,8 @@ LocalString text = LocalString();
                               ),
                               Row(
                                 children: [
-                                  custom.callButton(context, text.prescription.tr,
-                                      () {
+                                  custom.callButton(
+                                      context, text.prescription.tr, () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -726,7 +782,8 @@ LocalString text = LocalString();
                                         fontSize: 14,
                                       ),
                                       Icons.medical_information_outlined),
-                                  custom.callButton(context, text.Complete.tr, () {
+                                  custom.callButton(context, text.Complete.tr,
+                                      () {
                                     bookingController.bookingAppointmentDone(
                                         context, id, () {
                                       Get.back();
@@ -748,9 +805,9 @@ LocalString text = LocalString();
                                     onPressed: () {
                                       cancelPopUp(context, id, userid);
                                     },
-                                    child:  Text(
-                                     text.cancelAppointment.tr,
-                                      style: TextStyle(
+                                    child: Text(
+                                      text.cancelAppointment.tr,
+                                      style: const TextStyle(
                                           decoration: TextDecoration.underline,
                                           color: Colors.red,
                                           fontSize: 13.0,
@@ -762,35 +819,35 @@ LocalString text = LocalString();
                             ],
                           )
                         : Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            text.cancelReason.tr,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.cancelReason.tr,
+                                      style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 11.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(bookingController.reasonCancel.value,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                            fontFamily: "Poppins")),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(bookingController.reasonCancel.value,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontFamily: "Poppins")),
-                        ],
-                      ),
-                    ),
-                  ],
+                const Divider(
+                  height: 20.0,
                 ),
-            const Divider(
-              height: 20.0,
-            ),
               ],
             ),
           );
@@ -967,11 +1024,8 @@ LocalString text = LocalString();
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text(
-                               text.AcceptVisitLine.tr,
-                                12,
-                                FontWeight.w400,
-                                Colors.black),
+                            child: custom.text(text.AcceptVisitLine.tr, 12,
+                                FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -983,9 +1037,8 @@ LocalString text = LocalString();
                                   flex: 1,
                                   child: TextButton(
                                     onPressed: () {
-                                       Get.back();
-                                       Get.back();
-
+                                      Get.back();
+                                      Get.back();
                                     },
                                     child: custom.text(text.Dismiss.tr, 14.0,
                                         FontWeight.w400, MyColor.grey),
@@ -995,7 +1048,7 @@ LocalString text = LocalString();
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
                                         context,
-                                       text.Yes_accept.tr,
+                                        text.Yes_accept.tr,
                                         () {
                                           bookingController
                                               .bookingAppointmentAccept(

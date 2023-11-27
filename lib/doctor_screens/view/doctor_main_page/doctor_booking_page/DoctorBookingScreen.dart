@@ -34,6 +34,7 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 108,
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.white24,
@@ -41,33 +42,45 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: MyColor.primary.withOpacity(0.60)),
         elevation: 0,
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
-            child: custom.searchField(
-                context,
-                searchCtr,
-                text.searchAppointment.tr,
-                TextInputType.text,
-                const Text(""),
-                const Icon(Icons.search_rounded), () {
-              Get.toNamed(RouteHelper.DSearchAppointment());
-            }, () {}),
-          ),
+        title: Column(
+          children: [
+            Image(
+              image: AssetImage("assets/images/runlogo.png"),
+              height: 40,
+              width: 40,
+            ),
+            Center(
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
+                child: custom.searchField(
+                    context,
+                    searchCtr,
+                    text.searchAppointment.tr,
+                    TextInputType.text,
+                    const Text(""),
+                    const Icon(Icons.search_rounded), () {
+                  Get.toNamed(RouteHelper.DSearchAppointment());
+                }, () {}),
+              ),
+            ),
+          ],
         ),
         // centerTitle: true,
         bottom: TabBar(
+          labelColor: MyColor.red,
           controller: tabController,
-          indicatorColor: Colors.black,
+          indicatorColor: MyColor.red,
           indicatorWeight: 2,
           tabs: [
             Tab(
-              child: custom.text(text.pending.tr, 14, FontWeight.w500, MyColor.black),
+              child: custom.text(
+                  text.pending.tr, 14, FontWeight.w500, MyColor.black),
             ),
             Tab(
               child: Tab(
-                child:
-                    custom.text(text.upcoming.tr, 14, FontWeight.w500, MyColor.black),
+                child: custom.text(
+                    text.upcoming.tr, 14, FontWeight.w500, MyColor.black),
               ),
             ),
             Tab(

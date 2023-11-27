@@ -147,7 +147,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                               children: [
                                  Text(
                                   text.date.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),
@@ -172,7 +172,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                               children: [
                                  Text(
                                   text.slot.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),
@@ -198,7 +198,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                               children: [
                                  Text(
                                   text.bookingID.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),

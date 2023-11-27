@@ -1,40 +1,110 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:medica/firebase_service/firebase_options.dart';
-import 'package:medica/language_translator/LanguageTranslate.dart';
+import 'package:prophysio/ZegoCallService/ZegoCallService.dart';
+import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
+
 
 import 'Helper/RoutHelper/RoutHelper.dart';
 import 'firebase_service/NotificationService.dart';
+import 'firebase_service/firebase_options.dart';
+import 'language_translator/LanguageTranslate.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-
+SharedPreferenceProvider sp = SharedPreferenceProvider();
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initialize(flutterLocalNotificationsPlugin);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  runApp(const MyApp());
+  /// 1.1.2: set navigator key to ZegoUIKitPrebuiltCallInvitationService
+  final navigatorKey = GlobalKey<NavigatorState>();
+
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
+  ZegoUIKit().initLog().then((value) {
+    ///  Call the `useSystemCallingUI` method
+    ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+      [ZegoUIKitSignalingPlugin()],
+    );
+  });
+
+  runApp( MyApp(navigatorKey: navigatorKey));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+  const MyApp({super.key, required this.navigatorKey});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String userID = "";
+  String drID = "";
+  String dName = "";
+  String name = "";
+  String dSurname = "";
+  String surname = "";
+// CallController callController= CallController();
+  void getValue() async {
+    userID = (await sp.getStringValue(sp.PATIENT_ID_KEY)).toString();
+    name = (await sp.getStringValue(sp.PATIENT_NAME_KEY)).toString();
+    surname = (await sp.getStringValue(sp.PATIENT_SURE_NAME_KEY)).toString();
+
+    drID = (await sp.getStringValue(sp.DOCTOR_ID_KEY)).toString();
+    dName = (await sp.getStringValue(sp.DOCTOR_NAME_KEY)).toString();
+    dSurname = (await sp.getStringValue(sp.DOCTOR_SURE_NAME_KEY)).toString();
+
+
+    log('userId--------$userID');
+    log('drID--------$drID');
+    log('name--------$name');
+    log('surname--------$surname');
+    log('DR name--------$dName');
+    log('DR surname--------$dSurname');
+    if(userID != null){
+      log('userID START ---');
+      onUserLogin(userID.toString(), "$name $surname","user");
+    }else if(drID != null){
+      log('drID START ----');
+      onUserLogin(drID.toString(), "$dName $dSurname","doctor");
+    }else{
+      log('NOTHING');
+
+    }
+
+  }
+
+  @override
+  void initState() {
+    getValue();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: widget.navigatorKey,
       translations: LocalString(),
-      locale:const Locale('en','US') ,
+      locale: const Locale('en', 'US'),
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey
-      ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
+              .copyWith(background: Colors.white)),
       debugShowCheckedModeBanner: false,
-      title: 'Medica',
+      title: 'Pro-Physio',
       initialRoute: RouteHelper.getSplashScreen(),
       getPages: RouteHelper.routes,
     );

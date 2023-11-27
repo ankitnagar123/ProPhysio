@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
+import '../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../helper/CustomView/CustomView.dart';
+import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
 
 class DoctorSignUpOtp extends StatefulWidget {
@@ -18,7 +18,7 @@ class DoctorSignUpOtp extends StatefulWidget {
 
 class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   DoctorSignUpCtr doctorSignUpCtr = DoctorSignUpCtr();
-LocalString text = LocalString();
+  LocalString text = LocalString();
 
   late Timer _timer;
   int _countdownSeconds = 60;
@@ -27,7 +27,7 @@ LocalString text = LocalString();
   void _startTimer() {
     if (!_timerRunning) {
       _timerRunning = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setState(() {
           if (_countdownSeconds > 0) {
             _countdownSeconds--;
@@ -47,7 +47,7 @@ LocalString text = LocalString();
   }
 
   void _handleResendOtp() {
-    doctorSignUpCtr.doctorSignupOtp(context, code,phoneno,email);
+    doctorSignUpCtr.doctorSignupOtp(context, code, phoneno, email);
     // Replace this with your logic to resend OTP
     // For demonstration, we'll just print a message here
     print('Resending OTP...');
@@ -65,8 +65,6 @@ LocalString text = LocalString();
     _stopTimer(); // Cancel the timer when the widget is disposed
     super.dispose();
   }
-
-
 
   var name = "";
   var surname = "";
@@ -91,6 +89,16 @@ LocalString text = LocalString();
   var graduationDate = "";
   var qualificationDate = "";
   var flag = "";
+
+  /*prophysio*/
+  var age = "";
+
+  var experience = "";
+
+  var description = "";
+
+  var firstService = "";
+  var branch = "";
 
   @override
   void initState() {
@@ -124,9 +132,15 @@ LocalString text = LocalString();
     qualificationDate = Get.parameters["qualificationDate"].toString();
     flag = Get.parameters["flag"].toString();
 
-    /*OTP  API*/
-    doctorSignUpCtr.doctorSignupOtp(context, code,phoneno,email);
+/*new*/
+    age = Get.parameters["age"].toString();
+    experience = Get.parameters["experience"].toString();
+    description = Get.parameters["description"].toString();
+    firstService = Get.parameters["firstService"].toString();
+    branch = Get.parameters["branch"].toString();
 
+    /*OTP  API*/
+    doctorSignUpCtr.doctorSignupOtp(context, code, phoneno, email);
   }
 
   TextEditingController optctr = TextEditingController();
@@ -171,12 +185,17 @@ LocalString text = LocalString();
                     registerOfBelonging,
                     gender,
                     graduationDate,
-                    qualificationDate, () {
+                    qualificationDate,
+                    age,
+                    experience,
+                    description,
+                    firstService,
+                    branch, () {
                   Get.offAllNamed(RouteHelper.getLoginScreen());
                 });
               }
             },
-                MyColor.primary,
+                MyColor.red,
                 const TextStyle(
                     fontSize: 16, color: MyColor.white, fontFamily: "Poppins"));
           }),
@@ -187,29 +206,27 @@ LocalString text = LocalString();
             child: Column(
               children: [
                 SizedBox(height: height * 0.09),
-                 Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: InkWell(
                       onTap: () {
                         Get.back();
                       },
-                      child: Icon(Icons.arrow_back_ios)),
+                      child: const Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
                   height: height * 0.02,
                 ),
-                custom.text(text.Verification.tr, 23, FontWeight.w700, MyColor.black),
-                SizedBox(height: height * 0.02),
                 custom.text(
-                    text.SignupOtpVerifiy.tr,
-                    12,
-                    FontWeight.normal,
+                    text.Verification.tr, 23, FontWeight.w700, MyColor.black),
+                SizedBox(height: height * 0.02),
+                custom.text(text.SignupOtpVerifiy.tr, 12, FontWeight.normal,
                     MyColor.primary1),
                 SizedBox(height: height * 0.07),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_otp.tr, 13, FontWeight.w600,
-                      MyColor.primary1),
+                  child: custom.text(
+                      text.Enter_otp.tr, 13, FontWeight.w600, MyColor.primary1),
                 ),
                 SizedBox(
                   height: height * 0.01,
@@ -226,10 +243,12 @@ LocalString text = LocalString();
                         MyColor.primary1),
                     GestureDetector(
                       onTap: () {
-                        _timerRunning ? null :_handleButtonPress();
+                        _timerRunning ? null : _handleButtonPress();
                       },
-                      child:  Text(
-                        _countdownSeconds > 0 ? '${text.Resend_OTP_in.tr} $_countdownSeconds ${text.seconds.tr}' : text.SendNewOtp.tr,
+                      child: Text(
+                        _countdownSeconds > 0
+                            ? '${text.Resend_OTP_in.tr} $_countdownSeconds ${text.seconds.tr}'
+                            : text.SendNewOtp.tr,
                         style: const TextStyle(
                           decoration: TextDecoration.underline,
                           color: MyColor.primary1,
@@ -265,7 +284,7 @@ LocalString text = LocalString();
       print("Correct OTP");
       return true;
     } else {
-      custom.massenger(context,  text.Invalid.tr);
+      custom.massenger(context, text.Invalid.tr);
       return false;
     }
     return false;

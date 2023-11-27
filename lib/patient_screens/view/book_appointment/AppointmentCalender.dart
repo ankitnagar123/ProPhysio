@@ -7,18 +7,21 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:medica/patient_screens/controller/appointment_controller/AppointmentController.dart';
-import 'package:medica/patient_screens/view/book_appointment/AppointmentTimeSlot.dart';
 
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
+import '../../controller/appointment_controller/AppointmentController.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
+import 'AppointmentTimeSlot.dart';
 
 class calender extends StatefulWidget {
-  String centerId;
+  String centerId,firstConslt;
    calender({Key? key,
-   required this.centerId}) : super(key: key);
+
+   required this.centerId,
+   required this.firstConslt
+   }) : super(key: key);
 
   @override
   State<calender> createState() => _calenderState();
@@ -39,6 +42,16 @@ class _calenderState extends State<calender> {
   String doctorId = "";
   String centerId = "";
 
+
+  int? lMonth;
+  int? lDay;
+  int? lYear;
+
+  int? sMonth;
+  int? sDay;
+  int? sYear;
+
+
   @override
   void initState() {
     centerId = widget.centerId;
@@ -57,7 +70,7 @@ class _calenderState extends State<calender> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: percent < 50
-              ? const Color(0xffC4DEF2)
+              ? Color(0xffC4DEF2)
               : percent == 100
                   ? Colors.red
                   : const Color(0xffDAA558),
@@ -93,8 +106,23 @@ class _calenderState extends State<calender> {
             icon: _presentIcon(appointmentController.dateList[i].day,
                 int.parse(appointmentController.dateList[i].percent)),
           ));
+
+      sDay = int.parse(appointmentController.dateList[0].day);
+      sMonth = int.parse(appointmentController.dateList[0].month);
+      sYear = int.parse(appointmentController.dateList[0].year);
+      log("first date****$sDay $sMonth $sYear");
+
+      lDay = int.parse(
+          appointmentController.dateList[appointmentController.dateList.length - 1].day);
+      lMonth = int.parse(
+          appointmentController.dateList[appointmentController.dateList.length - 1].month);
+      lYear = int.parse(
+          appointmentController.dateList[appointmentController.dateList.length - 1].year);
+      log("last date******$lDay $lMonth $lYear");
     }
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
+     minSelectedDate:   sDay == null?DateTime.now():DateTime(sYear!, sMonth!, sDay!),
+      maxSelectedDate:lDay == null?DateTime.now():DateTime(lYear!, lMonth!, lDay!),
       onDayPressed: (DateTime selectDay, event) {
         setState(() {
           selectedDay = selectDay;
@@ -104,26 +132,28 @@ class _calenderState extends State<calender> {
           var month = DateFormat("MM").format(selectDay);
           var year = DateFormat("yyyy").format(selectDay);
 
-          print("final date$finalDate");
+          /*print("final date$finalDate");
           if( appointmentController.dateList.isEmpty){
             return custom.MySnackBar(context, text.noTimeSlotDate.tr);
           }else{
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AppointmentTimeSlot(
-                      date: finalDate,
-                      day: day,
-                      month: month,
-                      year: year,
-                      centerId: centerId,
-                    )));
-          }
 
+          }*/
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AppointmentTimeSlot(
+                    date: finalDate,
+                    day: day,
+                    month: month,
+                    year: year,
+                    centerId: centerId, firstConslt: widget.firstConslt,
+
+                  )));
           // focusedDay = event;
         });
         print(selectDay);
       },
+
       weekdayTextStyle: const TextStyle(color: Colors.black),
       height: MediaQuery.of(context).size.height,
       rightButtonIcon:
@@ -240,7 +270,7 @@ class _calenderState extends State<calender> {
                 appointmentController.dateList.isEmpty
                     ?  Center(
                         child: Text(text.noTimeSlotAvailableMoment.tr))
-                    :Text(""),
+                    :const Text(""),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: _calendarCarouselNoHeader,

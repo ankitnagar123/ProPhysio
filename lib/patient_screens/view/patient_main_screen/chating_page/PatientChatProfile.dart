@@ -45,8 +45,8 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, text.Message.tr, () {
-              Get.back();
+            customView.callButton(context, "Video Call", () {
+              // Get.back();
             },
                 MyColor.primary,
                 const TextStyle(
@@ -54,7 +54,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
-                Icons.chat_bubble_outline_outlined)
+                Icons.video_call)
           ],
         ),
       ),
@@ -92,7 +92,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                 borderRadius: BorderRadius.circular(120.0),
                 child: FadeInImage.assetNetwork(
                   imageErrorBuilder: (context, error, stackTrace) =>
-                      Image.asset("assets/images/dummyprofile.jpg",
+                      Image.asset("assets/images/dummyprofile.png",
                           width: 90, height: 90, fit: BoxFit.cover),
                   width: 100.0,
                   height: 100.0,

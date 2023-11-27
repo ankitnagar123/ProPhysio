@@ -7,14 +7,14 @@ import 'package:geocoding/geocoding.dart' as geoCoding;
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:medica/patient_screens/view/patient_filters_sceen/set_location/PatinetSetLoaction.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:prophysio/patient_screens/view/patient_filters_sceen/set_location/PatinetSetLoaction.dart';
 import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/AppConst.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
+import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/filter_controller/PatientFilterController.dart';
 
@@ -130,7 +130,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
         padding: const EdgeInsets.only(bottom: 10),
         child: custom.MyButton(context, text.Submit.tr, () {
           Get.offNamed(RouteHelper.getFilterScreen());
-        }, MyColor.primary,
+        }, MyColor.red,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
       ),
       body: SingleChildScrollView(

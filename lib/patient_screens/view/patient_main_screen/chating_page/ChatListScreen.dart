@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/doctor_list_ctr/DoctorListController.dart';
+import '../../../controller/patinet_chat_controller/PatinetChatController.dart';
 import "../../../model/Chat Model's/PatinetChatListModel.dart";
 
 class ChatListScreen extends StatefulWidget {
@@ -60,7 +60,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
     final widht = MediaQuery.of(context).size.width;
     final list = _getFilteredList();
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 75,
         elevation: 0.0,
         backgroundColor: Colors.white,
         centerTitle: isMultiSelectionEnabled ? false : true,
@@ -73,9 +75,18 @@ class _ChatListScreenState extends State<ChatListScreen> {
             },
             icon: const Icon(Icons.close,color: Colors.black,))
             : null,
-        title: Text(isMultiSelectionEnabled
-            ? getSelectedItemCount()
-            : text.chat.tr,style: const TextStyle(color: Colors.black)),
+        title: Column(
+          children: [
+            const Image(
+              image: AssetImage("assets/images/runlogo.png"),
+              height: 40,
+              width: 40,
+            ),
+            Text(isMultiSelectionEnabled
+                ? getSelectedItemCount()
+                : text.chat.tr,style: const TextStyle(color: Colors.black)),
+          ],
+        ),
         actions: [
           Visibility(
               visible: selectedItem.isNotEmpty,
@@ -123,10 +134,11 @@ class _ChatListScreenState extends State<ChatListScreen> {
           return loadingShimmer();
         }
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             children: [
-              const SizedBox(height: 12.0,),
+              Divider(),
+              const SizedBox(height: 5.0,),
               SizedBox(
                 width: widht,
                 child: TextFormField(
@@ -144,15 +156,15 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   cursorColor: Colors.black,
                   controller: searchCtr,
                   decoration:  InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: MyColor.primary1,
-                    contentPadding: EdgeInsets.only(top: 3, left: 20),
+                    prefixIcon: const Icon(Icons.search),
+                    prefixIconColor: MyColor.white,
+                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
                     hintText: text.searchBetweenYourChats.tr,
                     hintStyle:
-                    TextStyle(fontSize: 12, color: MyColor.primary1),
+                    TextStyle(fontSize: 12, color: MyColor.white),
                     fillColor: MyColor.lightcolor,
                     filled: true,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
@@ -186,12 +198,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
                         Get.toNamed(RouteHelper.getChatScreen(),arguments:data);
                       },*/
                       child: Card(
+                        color: Colors.grey.shade100,
                           borderOnForeground: false,
                           elevation: 2,
                           margin: const EdgeInsets.only(
                               left: 3, right: 3, top: 3, bottom: 3),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(7)),
                           child: Container(
                             margin: const EdgeInsets.only(
                                 left: 10, right: 10, top: 10, bottom: 10),
@@ -242,7 +255,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                                       stackTrace) =>
                                                   const Image(
                                                       image: AssetImage(
-                                                          "assets/images/dummyprofile.jpg"),
+                                                          "assets/images/dummyprofile.png"),
                                                       height: 70.0,
                                                       width: 70.0),
                                               width: 70.0,

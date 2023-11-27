@@ -7,11 +7,11 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:medica/patient_screens/controller/appointment_controller/AppointmentController.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../../patient_screens/controller/appointment_controller/AppointmentController.dart';
 import '../../../../../../patient_screens/controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorViewTimeSlots.dart';
 
@@ -39,6 +39,15 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
 
   // String doctorId = "";
   String centerId = "";
+
+
+  int? lMonth;
+  int? lDay;
+  int? lYear;
+
+  int? sMonth;
+  int? sDay;
+  int? sYear;
 
   @override
   void initState() {
@@ -92,8 +101,23 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
              icon: _presentIcon(appointmentController.dateList[i].day,
                  int.parse(appointmentController.dateList[i].percent)),
            ));
+
+       sDay = int.parse(appointmentController.dateList[0].day);
+       sMonth = int.parse(appointmentController.dateList[0].month);
+       sYear = int.parse(appointmentController.dateList[0].year);
+       log("first date****$sDay $sMonth $sYear");
+
+       lDay = int.parse(
+           appointmentController.dateList[appointmentController.dateList.length - 1].day);
+       lMonth = int.parse(
+           appointmentController.dateList[appointmentController.dateList.length - 1].month);
+       lYear = int.parse(
+           appointmentController.dateList[appointmentController.dateList.length - 1].year);
+       log("last date******$lDay $lMonth $lYear");
      }
      _calendarCarouselNoHeader = CalendarCarousel<Event>(
+       minSelectedDate: sYear == null?DateTime.now():DateTime(sYear!, sMonth!, sDay!),
+       maxSelectedDate:lYear ==null?DateTime.now(): DateTime(lYear!, lMonth!, lDay!),
        onDayPressed: (DateTime selectDay, event) {
          setState(() {
            selectedDay = selectDay;

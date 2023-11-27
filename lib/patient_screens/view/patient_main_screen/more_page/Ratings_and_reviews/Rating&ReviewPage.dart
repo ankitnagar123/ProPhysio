@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/booking_controller_list/PBookingController.dart';
 import 'Rate&ReviewDetial.dart';
@@ -125,7 +126,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 children: [
                                    Text(
                                     text.date.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
@@ -150,7 +151,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 children: [
                                    Text(
                                     text.slot.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),
@@ -177,7 +178,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                                 children: [
                                    Text(
                                     text.bookingID.tr,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10.0,
                                         fontFamily: "Poppins"),

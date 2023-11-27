@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
+
+import '../../../../helper/mycolor/mycolor.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
+import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 import '../../../model/DoctorChatListModel.dart';
 
 class DoctorChatListScreen extends StatefulWidget {
@@ -62,6 +63,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
             : null,
       ),*/
       appBar: AppBar(
+        toolbarHeight: 73,
         leading: isMultiSelectionEnabled
             ? IconButton(
             onPressed: () {
@@ -75,9 +77,18 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
         elevation: 0.0,
         automaticallyImplyLeading: false,
         centerTitle: true == isMultiSelectionEnabled ? false : true,
-        title: Text(isMultiSelectionEnabled
-            ? getSelectedItemCount()
-            : text.chat.tr,style: const TextStyle(color: Colors.black)),
+        title: Column(
+          children: [
+            const Image(
+              image: AssetImage("assets/images/runlogo.png"),
+              height: 40,
+              width: 40,
+            ),
+            Text(isMultiSelectionEnabled
+                ? getSelectedItemCount()
+                : text.chat.tr,style: const TextStyle(color: Colors.black)),
+          ],
+        ),
         actions: [
           Visibility(
               visible: selectedItem.isNotEmpty,
@@ -117,15 +128,15 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                   cursorColor: Colors.black,
                   controller: searchCtr,
                   decoration:  InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: MyColor.primary1,
-                    contentPadding: EdgeInsets.only(top: 3, left: 20),
+                    prefixIcon: const Icon(Icons.search),
+                    prefixIconColor: MyColor.white,
+                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
                     hintText: text.searchBetweenYourChats.tr,
                     hintStyle:
-                        TextStyle(fontSize: 12, color: MyColor.primary1),
+                        const TextStyle(fontSize: 12, color: MyColor.white),
                     fillColor: MyColor.lightcolor,
                     filled: true,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
@@ -190,7 +201,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                                     stackTrace) =>
                                                 const Image(
                                                     image: AssetImage(
-                                                        "assets/images/dummyprofile.jpg"),
+                                                        "assets/images/dummyprofile.png"),
                                                     height: 70.0,
                                                     width: 70.0),
                                             width: 70.0,

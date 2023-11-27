@@ -11,9 +11,9 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:medica/doctor_screens/controller/DoctorSignUpController.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
+import '../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../helper/AppConst.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
@@ -45,14 +45,19 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   /*new*/
   TextEditingController birthDateController = TextEditingController();
   TextEditingController birthplaceController = TextEditingController();
-  TextEditingController universityAttendedCtr = TextEditingController();
-  TextEditingController dateOfEnrollmentCtr = TextEditingController();
-  TextEditingController registerOfBelongingCtr = TextEditingController();
+  // TextEditingController universityAttendedCtr = TextEditingController();
+  // TextEditingController dateOfEnrollmentCtr = TextEditingController();
+  // TextEditingController registerOfBelongingCtr = TextEditingController();
   String _selectedGender = '';
-  TextEditingController dateOfQualification = TextEditingController();
-  TextEditingController dateOfGraduation = TextEditingController();
+  String _selectedService = '';
+  // TextEditingController dateOfQualification = TextEditingController();
+  // TextEditingController dateOfGraduation = TextEditingController();
 
   TextEditingController destinationController = TextEditingController();
+
+  TextEditingController ageController = TextEditingController();
+  TextEditingController experienceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   String location = '';
 
   final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
@@ -63,13 +68,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   CustomView custom = CustomView();
   PageController controller = PageController();
-  String code = '+39';
-  String flag = 'IT';
+  String code = '+91';
+  String flag = 'IN';
   bool _isHidden = true;
   int _curr = 1;
   final int _numpage = 2;
 
   String? slectedCategory;
+  String? selectedBranch;
 
   List<dynamic> slectedCat = [].toList();
   List<dynamic> slectedCatid = [].toList();
@@ -92,11 +98,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   List subCatNameArray = [];
   List subCatIdArrayFinal = [];
 
+  String radioButtonItem = 'Free';
+  int selectedOption = 1;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       doctorSignUpCtr.DoctorCategory();
+      doctorSignUpCtr.branchListApi();
     });
   }
 
@@ -125,7 +134,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       MyColor.primary1),
                    Text(
                     text.SIGN_IN.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: MyColor.primary1,
                         fontWeight: FontWeight.w700,
                         decoration: TextDecoration.underline),
@@ -163,7 +172,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, text.Go_On.tr, () {
-                    print("${_curr} +${_numpage}");
+                    print("$_curr +$_numpage");
 
                     print("My latitude AppCont : -- ${AppConst.LATITUDE}");
                     print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
@@ -182,9 +191,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           /*new added*/
                           "birthDate": birthDateController.text,
                           "birthPlace": birthplaceController.text,
-                          "universityAttended": universityAttendedCtr.text,
+                        /*  "universityAttended": universityAttendedCtr.text,
                           "dateOfEnrol": dateOfEnrollmentCtr.text,
-                          "registerOfBelonging": registerOfBelongingCtr.text,
+                          "registerOfBelonging": registerOfBelongingCtr.text,*/
                           /*********/
                           "category": slectedCategory.toString(),
                           "imagename": degreefilename.toString(),
@@ -196,8 +205,15 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           "longitude": AppConst.LONGITUDE,
                           "subcat": subCatIdArray.join(','),
                           'gender': _selectedGender,
-                          "graduationDate": dateOfGraduation.text,
-                          "qualificationDate": dateOfQualification.text,
+                         /* "graduationDate": dateOfGraduation.text,
+                          "qualificationDate": dateOfQualification.text,*/
+                          "age": ageController.text,
+                          "experience": experienceController.text,
+                          "description": descriptionController.text,
+                          "firstService": _selectedService,
+                          "branch": selectedBranch.toString(),
+
+
                         };
                         print("my data$data");
                         _curr == 1 + _numpage
@@ -250,7 +266,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       // });
                     }
                   },
-                      MyColor.primary,
+                      MyColor.red,
                       const TextStyle(
                           color: MyColor.white, fontFamily: "Poppins"));
                 }),
@@ -274,7 +290,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Enter_Name.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Enter_Name.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -285,7 +301,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -298,7 +314,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -311,7 +327,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(  text.Enter_Email.tr, 13.0, FontWeight.w600,
+              child: custom.text(  text.Enter_Email.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -325,7 +341,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Phone_Number.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Phone_Number.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -339,9 +355,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   counterText: '',
                   filled: true,
                   fillColor: Colors.white,
-                  constraints: BoxConstraints.expand(),
+                  constraints: const BoxConstraints.expand(),
                   labelText: text.Phone_Number.tr,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
@@ -368,7 +384,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Create_Passsword.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Create_Passsword.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -424,13 +440,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Date_of_Birth.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             Container(
                 height: 45.0,
                 width: MediaQuery.of(context).size.width / 0.9,
-                padding:  EdgeInsets.only(left: 10.0, bottom: 5),
-                margin:  EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                padding:  const EdgeInsets.only(left: 10.0, bottom: 5),
+                margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey),
@@ -445,9 +461,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   controller: birthDateController,
                   decoration:  InputDecoration(
                     hintText: text.Select_Date.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                        Icon(Icons.calendar_month, color: MyColor.primary),
+                        const Icon(Icons.calendar_month, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -459,7 +475,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Place_of_Birth.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Place_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -469,22 +485,50 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 16,
             ),
+            /*---------------*new field*----------------------------------------------------*/
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w600,
+              child: custom.text(
+                  text.Age.tr, 13.0, FontWeight.w500, MyColor.primary1),
+            ),
+            const SizedBox(
+              height: 3.0,
+            ),
+            custom.myField(context, ageController, text.Age.tr,
+                TextInputType.text),
+            const SizedBox(
+              height: 16,
+            ),
+
+            Align(
+              alignment: Alignment.topLeft,
+              child: custom.text(
+                  text.experience.tr, 13.0, FontWeight.w500, MyColor.primary1),
+            ),
+            const SizedBox(
+              height: 3.0,
+            ),
+            custom.myField(context, experienceController, text.experience.tr,
+                TextInputType.text), const SizedBox(
+              height: 16,
+            ),
+
+        /*    Align(
+              alignment: Alignment.topLeft,
+              child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(context, universityAttendedCtr,
-                text.University_Attended.tr, TextInputType.text),
-            const SizedBox(
+                text.University_Attended.tr, TextInputType.text),*/
+           /* const SizedBox(
               height: 16,
-            ),
-            Align(
+            ),*/
+           /* Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             Container(
@@ -507,21 +551,21 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   controller: dateOfEnrollmentCtr,
                   decoration:  InputDecoration(
                     hintText: text.Select_Date.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                        Icon(Icons.calendar_month, color: MyColor.primary),
+                        const Icon(Icons.calendar_month, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                   ),
-                )),
-            const SizedBox(
+                )),*/
+           /* const SizedBox(
               height: 16,
-            ),
+            ),*/
             /**/
-            Align(
+          /*  Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             Container(
@@ -544,9 +588,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   controller: dateOfQualification,
                   decoration:  InputDecoration(
                     hintText: text.Select_Date.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                        Icon(Icons.calendar_month, color: MyColor.primary),
+                        const Icon(Icons.calendar_month, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -554,10 +598,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 )),
             const SizedBox(
               height: 16,
-            ),
-            Align(
+            ),*/
+          /*const SizedBox(
+            height: 16,
+          ),*/
+           /* Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             Container(
@@ -580,9 +627,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   controller: dateOfGraduation,
                   decoration:  InputDecoration(
                     hintText: text.Select_Date.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                        Icon(Icons.calendar_month, color: MyColor.primary),
+                        const Icon(Icons.calendar_month, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -590,10 +637,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 )),
             const SizedBox(
               height: 16,
-            ),
-            Align(
+            ),*/
+           /* Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -603,11 +650,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 text.Register_of_Belonging.tr, TextInputType.text),
             const SizedBox(
               height: 16,
-            ),
+            ),*/
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
-                  text.Gender.tr, 13.0, FontWeight.w600, MyColor.primary1),
+                  text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -671,17 +718,27 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Category.tr, 13.0,
-                  FontWeight.w600, MyColor.primary1),
+              child: custom.text(text.Select_Branch.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
             ),
-            category(),
+            branch(),
             const SizedBox(
               height: 17.0,
             ),
             Align(
               alignment: Alignment.topLeft,
+              child: custom.text(text.Select_Category.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
+            ),
+            category(),
+            const SizedBox(
+              height: 17.0,
+            ),
+
+            Align(
+              alignment: Alignment.topLeft,
               child: custom.text(text.Select_Sub_Category.tr, 13.0,
-                  FontWeight.w600, MyColor.primary1),
+                  FontWeight.w500, MyColor.primary1),
             ),
             InkWell(
               child: Container(
@@ -853,7 +910,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             // Text("$subCatIdArrayFinal"),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Upload_your_Degree.tr, 13.0, FontWeight.w600,
+              child: custom.text(text.Upload_your_Degree.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
             ),
             const SizedBox(
@@ -895,7 +952,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.Select_Address.tr, 13.0,
-                  FontWeight.w600, MyColor.primary1),
+                  FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 5.0,
@@ -983,6 +1040,91 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             //         ),
             //       )),
             // ),
+            SizedBox(
+              height: 6,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: custom.text(
+                  text.enterDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
+            ),
+            const SizedBox(
+              height: 3.0,
+            ),
+            custom.myField(context, descriptionController, text.enterDescription.tr,
+                TextInputType.text),
+            const SizedBox(
+              height: 16,
+            ),
+             Align(
+                 alignment: Alignment.topLeft,
+                 child: custom.text(text.firstConsultation, 13, FontWeight.w500, MyColor.primary1)),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
+                    leading: Radio<String>(
+                      activeColor: MyColor.red,
+                      value: 'Free',
+                      groupValue: _selectedService,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedService = value!;
+                          print(_selectedService);
+                        });
+                      },
+                    ),
+                    title:  custom.text("Free", 14, FontWeight.w500, MyColor.primary1)
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
+                    leading: Radio<String>(
+                      activeColor: MyColor.red,
+                      value: 'Paid',
+                      groupValue: _selectedService,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedService = value!;
+                          print(_selectedService);
+                        });
+                      },
+                    ),
+                    title:    custom.text("Paid", 14, FontWeight.w500, MyColor.primary1)
+                  ),
+                ),
+
+                /*Transform.scale(
+                  scale: 0.9,
+                  child: Radio(
+                    value: 1,
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                        setState(() {
+                          radioButtonItem = 'Free';
+                      });
+                    },
+                  ),
+                ),
+                Radio(
+                  value: 2,
+                  groupValue: selectedOption,
+                  onChanged: (val) {
+                    setState(() {
+                      radioButtonItem = 'Paid';
+                    });
+                  },
+                ),*/
+              ],
+            ),
           ],
         ),
       ),
@@ -1014,9 +1156,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Password should be 6 digit");
     } else if (birthDateController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter birth date");
-    } else if (birthplaceController.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter birthplace");
-    } else if (universityAttendedCtr.text.toString().isEmpty) {
+    } else if (ageController.text.toString().isEmpty) {
+      custom.MySnackBar(context, "Enter age");
+    } else if (experienceController.text.toString().isEmpty) {
+      custom.MySnackBar(context, "Enter year of experience");
+    }/* else if (universityAttendedCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter university attended");
     } else if (dateOfEnrollmentCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter date of enrollment");
@@ -1026,7 +1170,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Enter date of graduation");
     } else if (registerOfBelongingCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter register of belonging");
-    } else if (_selectedGender.isEmpty) {
+    }*/ else if (_selectedGender.isEmpty) {
       custom.MySnackBar(context, "Select gender");
     } else if (slectedCategory == null) {
       custom.MySnackBar(context, "Select your specialization");
@@ -1036,7 +1180,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Upload your degree");
     } else if (AppConst.LOCATION.isEmpty) {
       custom.MySnackBar(context, "Add your address");
-    } else {
+    } else if (descriptionController.text.isEmpty) {
+      custom.MySnackBar(context, "Enter description about specialization");
+    }  else if (_selectedService == "") {
+      custom.MySnackBar(context, "Select first consultation fee");
+    }else {
       return true;
     }
     return false;
@@ -1092,55 +1240,52 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     );
   }
 
-// Widget subcategory() {
-//   final height = MediaQuery.of(context).size.height;
-//   final widht = MediaQuery.of(context).size.width;
-//   return StatefulBuilder(
-//     builder: (context, StateSetter stateSetter1) => Align(
-//       alignment: AlignmentDirectional.centerEnd,
-//       child: Center(
-//         child:doctorListCtr.categoryLoadingSub.value?const Text("loading..."): Container(
-//           height: height * 0.06,
-//           width: widht*0.9,
-//           padding: EdgeInsets.all(10),
-//           margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-//           decoration: BoxDecoration(
-//               color: MyColor.white,
-//               borderRadius: BorderRadius.circular(8.0),
-//               border: Border.all(color: MyColor.grey)),
-//           child: DropdownButtonHideUnderline(
-//             child: DropdownButton(
-//               menuMaxHeight: MediaQuery.of(context).size.height / 3,
-//               // Initial Value
-//               value: slectedSubCategory,
-//               // Down Arrow Icon
-//               icon: const Icon(Icons.keyboard_arrow_down,
-//                   color: MyColor.primary),
-//               // Array list of items
-//               items: doctorListCtr.subCategory.map((items) {
-//                 return DropdownMenuItem(
-//                   value: items.subcatId,
-//                   child: Text(items.subcatName),
-//                 );
-//               }).toList(),
-//               hint: const Text("Select Sub-Category"),
-//               // After selecting the desired option,it will
-//               // change button value to selected value
-//               onChanged: (newValue) {
-//                 stateSetter1(() {
-//                   slectedSubCategory = newValue;
-//                   print(slectedSubCategory);
-//
-//                 });
-//               },
-//             ),
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }
-//  for Aadhar ID //
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 0.9,
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint:  Text(text.Select_Branch.tr),
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY selected Branch>>>$selectedBranch');
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   /*----------UPLOAD DEGREE-----------*/
   File? degreefilePath;

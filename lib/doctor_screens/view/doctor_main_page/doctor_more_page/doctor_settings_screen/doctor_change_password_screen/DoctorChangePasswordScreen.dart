@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/DoctorChangePasswordCtr.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:medica/language_translator/LanguageTranslate.dart';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
+
+import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../controller/DoctorChangePasswordCtr.dart';
 
 class DoctorChangePasswordScreen extends StatefulWidget {
   const DoctorChangePasswordScreen({Key? key}) : super(key: key);

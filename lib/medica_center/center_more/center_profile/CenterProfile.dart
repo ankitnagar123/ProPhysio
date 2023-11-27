@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
 
+
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
+import '../../center_controller/CenterAuthController.dart';
 
 class CenterProfile extends StatefulWidget {
   const CenterProfile({Key? key}) : super(key: key);
@@ -173,7 +174,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                             child: FadeInImage.assetNetwork(
                                               imageErrorBuilder: (c, o, s) =>
                                                   Image.asset(
-                                                      "assets/images/dummyprofile.jpg",
+                                                      "assets/images/dummyprofile.png",
                                                       width: 120,
                                                       height: 120,
                                                       fit: BoxFit.cover),
@@ -215,7 +216,7 @@ class _CenterProfileState extends State<CenterProfile> {
                                                         },
                                                         child:  Row(
                                                           children: [
-                                                            Icon(Icons.image,
+                                                            const Icon(Icons.image,
                                                                 size: 20),
                                                             const SizedBox(
                                                               width: 10,
@@ -241,14 +242,14 @@ class _CenterProfileState extends State<CenterProfile> {
                                                         },
                                                         child:  Row(
                                                           children: [
-                                                            Icon(Icons
+                                                            const Icon(Icons
                                                                 .camera_alt),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 10,
                                                             ),
                                                             Text(
                                                               text.imageFromCamra.tr,
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   fontSize: 16,
                                                                   fontWeight:
                                                                       FontWeight

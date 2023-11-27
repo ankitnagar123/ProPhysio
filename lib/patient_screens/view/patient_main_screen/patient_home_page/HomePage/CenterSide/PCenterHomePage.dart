@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/controller/patinet_center_controller/PCenterController.dart';
 
+import '../../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../controller/patinet_center_controller/PCenterController.dart';
 import 'CenterMapView/PcenterList.dart';
 import 'CenterMapView/PcenterMapViewList.dart';
 
@@ -110,8 +110,8 @@ class _PCenterHomeScreenState extends State<PCenterHomeScreen>
                   children: [
                     IndexedStack(
                       index: _selectedIndex,
-                      children: [
-                        const PCenterListView(),
+                      children: const [
+                        PCenterListView(),
                         CenterMapViewScreen()
                         /* MapView(
                           catId: widget.catId.toString(),

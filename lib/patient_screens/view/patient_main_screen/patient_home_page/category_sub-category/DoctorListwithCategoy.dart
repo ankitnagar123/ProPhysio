@@ -1,24 +1,31 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/patient_screens/model/DoctorListModel.dart';
 
+import '../../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/Shimmer/ChatShimmer.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
+import '../../../../model/DoctorListModel.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import 'DoctorMapScreen.dart';
 
 class DoctorListWithCategory extends StatefulWidget {
-  String catId, subCatId, rating,startPrice,EndPrice;
+  String catId, subCatId, rating, startPrice, EndPrice;
 
   DoctorListWithCategory(
-      {Key? key, required this.catId, required this.subCatId,required this.rating,required this.startPrice,required this.EndPrice})
+      {Key? key,
+      required this.catId,
+      required this.subCatId,
+      required this.rating,
+      required this.startPrice,
+      required this.EndPrice})
       : super(key: key);
 
   @override
@@ -30,6 +37,8 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   CustomView customView = CustomView();
   LocalString text = LocalString();
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
+
   TextEditingController searchCtr = TextEditingController();
   TabController? tabController;
 
@@ -37,25 +46,35 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   bool _isListView = true;
   String? catId;
   String? subCatId;
- String rating = "";
-String startTime = "";
+  String rating = "";
+  String startTime = "";
   String endTime = "";
 
   @override
   void initState() {
     super.initState();
+
     rating = widget.rating;
     startTime = widget.startPrice;
     endTime = widget.EndPrice;
     tabController = TabController(vsync: this, length: 2);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      doctorSignUpCtr.branchListApi();
+
       catId = widget.catId;
       subCatId = widget.subCatId;
 
       print("category$catId");
       print(subCatId);
-      doctorListCtr.doctorlistfetch(context, catId.toString(),
-          subCatId.toString(), startTime.toString(), endTime.toString(), rating, '', '', '');
+      doctorListCtr.doctorlistfetch(
+        context,
+        catId.toString(),
+        subCatId.toString(),
+        startTime.toString(),
+        endTime.toString(),
+        rating,
+        "",
+      );
     });
 
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -76,7 +95,7 @@ String startTime = "";
                   height: 38.0,
                   width: widht * 0.40,
                   decoration: BoxDecoration(
-                      color: MyColor.primary,
+                      color: MyColor.primary1,
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
                     child: GestureDetector(
@@ -162,12 +181,15 @@ class DoctorList extends StatefulWidget {
 
 class _DoctorListState extends State<DoctorList> {
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
 
   TextEditingController searchCtr = TextEditingController();
+
   CustomView customView = CustomView();
   LocalString text = LocalString();
   TabController? tabController;
   String _keyword = '';
+  String? selectedBranch;
 
   List<DoctorListModel> _getFilteredList() {
     if (_keyword.isEmpty) {
@@ -188,7 +210,6 @@ class _DoctorListState extends State<DoctorList> {
   @override
   Widget build(BuildContext context) {
     final list = _getFilteredList();
-    print("Doctor LIST");
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
@@ -212,10 +233,11 @@ class _DoctorListState extends State<DoctorList> {
                 onTap: () {},
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.name,
-                cursorColor: Colors.black,
+                cursorColor: Colors.white,
                 controller: searchCtr,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white),
                   prefixIconColor: MyColor.primary1,
                   suffixIcon: InkWell(
                       onTap: () {
@@ -228,11 +250,11 @@ class _DoctorListState extends State<DoctorList> {
                             parameters: data);
                       },
                       child: const Icon(Icons.filter_list_alt)),
-                  suffixIconColor: MyColor.primary1,
+                  suffixIconColor: MyColor.white,
                   contentPadding: const EdgeInsets.only(top: 3, left: 20),
                   hintText: text.Search_Doctorby_Name.tr,
                   hintStyle:
-                      const TextStyle(fontSize: 12, color: MyColor.primary1),
+                      const TextStyle(fontSize: 12, color: MyColor.white),
                   fillColor: MyColor.lightcolor,
                   filled: true,
                   border: const OutlineInputBorder(
@@ -244,12 +266,17 @@ class _DoctorListState extends State<DoctorList> {
                 ),
               ),
             ),
+            SizedBox(height: height * 0.02),
+            Align(
+                alignment: Alignment.topRight,
+                child: branch()
+            ),
             /*----------------------Doctor List--------------------------*/
             Obx(() {
               if (doctorListCtr.loadingFetch.value) {
                 return Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 5.0, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
                   child: Column(
                     children: [
                       categorysubShimmerEffect(context),
@@ -288,8 +315,8 @@ class _DoctorListState extends State<DoctorList> {
                               child: Card(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 7, vertical: 6.0),
-                                color: MyColor.midgray,
-                                elevation: 2.2,
+                                color: MyColor.white,
+                                elevation: 1.4,
                                 child: Row(
                                   children: [
                                     SizedBox(
@@ -298,9 +325,9 @@ class _DoctorListState extends State<DoctorList> {
                                       // margin: const EdgeInsets.all(6),
                                       child: FadeInImage.assetNetwork(
                                           placeholder:
-                                              "assets/images/drsymbol.gif",
-                                          placeholderCacheHeight: 20,
-                                          placeholderCacheWidth: 20,
+                                              "assets/images/loading.gif",
+                                          // placeholderCacheHeight: 20,
+                                          // placeholderCacheWidth: 20,
                                           /*"assets/images/YlWC.gif",*/
                                           alignment: Alignment.center,
                                           image: list[index]
@@ -324,12 +351,60 @@ class _DoctorListState extends State<DoctorList> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         customView.text(
-                                            list[index].name.toString(),
+                                            list[index].name.toUpperCase(),
                                             13,
-                                            FontWeight.w600,
-                                            MyColor.black),
+                                            FontWeight.w500,
+                                            MyColor.primary1),
                                         const SizedBox(
                                           height: 3,
+                                        ),
+                                        SizedBox(
+                                            width: widht * 0.50,
+                                            child: customView.text(
+                                                list[index]
+                                                    .subcategory
+                                                    .toString(),
+                                                12,
+                                                FontWeight.w500,
+                                                MyColor.black)),
+                                        list[index].serviceStatus == "Free"
+                                            ? Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.local_hospital,
+                                                    color: Colors.red,
+                                                    size: 19,
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: customView.text(
+                                                        "FIRST CONSULTANT FREE",
+                                                        12,
+                                                        FontWeight.normal,
+                                                        Colors.green),
+                                                  ),
+                                                ],
+                                              )
+                                            : Row(
+                                                children: [
+                                                  const Icon(
+                                                      Icons.monetization_on,
+                                                      size: 18),
+                                                  const SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  customView.text(
+                                                      list[index]
+                                                          .fees
+                                                          .toString(),
+                                                      12,
+                                                      FontWeight.normal,
+                                                      MyColor.grey),
+                                                ],
+                                              ),
+                                        const SizedBox(
+                                          height: 2,
                                         ),
                                         Row(
                                           children: [
@@ -347,37 +422,13 @@ class _DoctorListState extends State<DoctorList> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: const TextStyle(
-                                                    fontSize: 12,
+                                                    fontSize: 11,
                                                     fontFamily: "Poppins",
                                                     color: MyColor.grey,
                                                   ),
                                                 )),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 2,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.monetization_on,
-                                                size: 18),
-                                            const SizedBox(
-                                              width: 3,
-                                            ),
-                                            customView.text(
-                                                list[index].fees.toString(),
-                                                12,
-                                                FontWeight.normal,
-                                                MyColor.grey),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                            width: widht * 0.50,
-                                            child: customView.text(
-                                                list[index].category.toString(),
-                                                12,
-                                                FontWeight.w500,
-                                                MyColor.black)),
                                         RatingBar(
                                           ignoreGestures: true,
                                           itemSize: 17,
@@ -388,18 +439,18 @@ class _DoctorListState extends State<DoctorList> {
                                           itemCount: 5,
                                           ratingWidget: RatingWidget(
                                               full: const Icon(Icons.star,
-                                                  color: MyColor.primary),
+                                                  color: Colors.orange),
                                               half: const Icon(Icons.star_half,
-                                                  color: MyColor.primary),
+                                                  color: Colors.orange),
                                               empty: const Icon(
                                                   Icons
                                                       .star_border_purple500_outlined,
-                                                  color: MyColor.primary)),
+                                                  color: Colors.orange)),
                                           itemPadding:
                                               const EdgeInsets.symmetric(
                                                   horizontal: 2.0),
                                           onRatingUpdate: (rating) {
-                                            print(rating);
+                                            log("$rating");
                                           },
                                         ),
                                       ],
@@ -413,7 +464,57 @@ class _DoctorListState extends State<DoctorList> {
                 );
               }
             }),
+            SizedBox(height: height * 0.04),
           ],
+        ),
+      ),
+    );
+  }
+
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Container(
+        height: height * 0.05,
+        width: widht * 0.5,
+        padding: const EdgeInsets.all(3),
+        // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+        decoration: BoxDecoration(
+            color: MyColor.white,
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(color: MyColor.grey)),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            menuMaxHeight: MediaQuery.of(context).size.height / 3,
+            // Initial Value
+            value: selectedBranch,
+            // Down Arrow Icon
+            icon: const Icon(Icons.keyboard_arrow_down, color: MyColor.primary),
+            // Array list of items
+            items: doctorSignUpCtr.branchList.map((items) {
+              return DropdownMenuItem(
+                value: items.branchId,
+                child: Text(items.branchName),
+              );
+            }).toList(),
+            hint: Text(text.Select_Branch.tr),
+            onChanged: (newValue) {
+              stateSetter(() {
+                selectedBranch = newValue;
+                log('MY selected Branch>>>$selectedBranch');
+                doctorListCtr.doctorlistfetch(
+                    context,
+                    widget.cat.toString(),
+                    widget.subcat.toString(),
+                    "",
+                    "",
+                    "",
+                    selectedBranch.toString());
+              });
+            },
+          ),
         ),
       ),
     );

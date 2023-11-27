@@ -1,12 +1,18 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:prophysio/AgoraCall/callScreen.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
+import '../../../../AgoraCall/call_controller.dart';
+import '../../../../ZegoCallService/ZegoCallService.dart';
+import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../controller/patinet_chat_controller/PatinetChatController.dart';
@@ -22,8 +28,18 @@ class PatientChatScreen extends StatefulWidget {
 }
 
 class _PatientChatScreenState extends State<PatientChatScreen> {
+  final appId = '94a17beb94774769a4372f873bc053ee';
+  final appCertificate = '79717ca6faa94fb5acc061beb699ed93';
+
+
+
+  final expirationInSeconds = 3600;
+  final currentTimestamp = DateTime
+      .now()
+      .millisecondsSinceEpoch ~/ 1000;
+
   TextEditingController messageCtr = TextEditingController();
-LocalString text = LocalString();
+  LocalString text = LocalString();
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   ChatController chatController = Get.put(ChatController());
 
@@ -41,15 +57,14 @@ LocalString text = LocalString();
 
   @override
   void initState() {
-    if(Get.arguments["chatList"] =="listData"){
+    if (Get.arguments["chatList"] == "listData") {
       doctorId = Get.arguments["doctorId"];
       doctorName = Get.arguments["drName"];
       doctorAddress = Get.arguments["drAddress"];
       doctorImg = Get.arguments["drImg"];
       doctorSurname = Get.arguments["drSurname"];
       // doctorContact = Get.arguments["contact"];
-    }else
-               {
+    } else {
       doctorId = Get.arguments["doctorId"];
       doctorName = Get.arguments["drName"];
       doctorAddress = Get.arguments["drAddress"];
@@ -58,11 +73,10 @@ LocalString text = LocalString();
       doctorContact = Get.arguments["contact"];
     }
 
-
     print("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
-      _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);
       });
     });
@@ -85,17 +99,42 @@ LocalString text = LocalString();
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.topLeft,
-                    colors: <Color>[MyColor.primary1, MyColor.secondary]),
+                    colors: <Color>[MyColor.primary, MyColor.primary1]),
               ),
             ),
             toolbarHeight: 75.0,
             actions: [
+                ZegoSendCallInvitationButton(
+                  isVideoCall: true,
+                  invitees: getInvitesFromTextCtrl(doctorId,"$doctorName $doctorSurname"),
+                  resourceID: 'zego_data',
+                  iconSize: const Size(40, 40),
+                  buttonSize: const Size(40, 40),
+                  onPressed: onSendCallInvitationFinished,
+                  icon: ButtonIcon(icon: const Icon(Icons.video_call,color: Colors.white,),),
+                ),
+              SizedBox(
+                width: 5,
+              ),
+                ZegoSendCallInvitationButton(
+                  isVideoCall: false,
+                  invitees: getInvitesFromTextCtrl(doctorId,"$doctorName $doctorSurname"),
+                  resourceID: 'zego_data',
+                  iconSize: const Size(40, 40),
+                  buttonSize: const Size(40, 40),
+                  onPressed: onSendCallInvitationFinished,
+                  icon: ButtonIcon(icon: const Icon(Icons.call,color: Colors.white,),),
+                ),
+              SizedBox(
+                width: 8,
+              ),
               InkWell(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PatientChatProfile(
+                            builder: (context) =>
+                                PatientChatProfile(
                                   name: doctorName,
                                   surname: doctorSurname,
                                   address: doctorAddress,
@@ -109,7 +148,7 @@ LocalString text = LocalString();
               )
             ],
             systemOverlayStyle:
-                const SystemUiOverlayStyle(statusBarColor: MyColor.primary),
+            const SystemUiOverlayStyle(statusBarColor: MyColor.primary),
             leading: InkWell(
                 onTap: () {
                   if (_timer != null) {
@@ -126,15 +165,16 @@ LocalString text = LocalString();
                 )),
             elevation: 0,
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(120.0),
+                 ClipRRect(
+                  borderRadius: BorderRadius.circular(100.0),
                   child: FadeInImage.assetNetwork(
                     imageErrorBuilder: (context, error, stackTrace) =>
-                        Image.asset("assets/images/dummyprofile.jpg",
+                        Image.asset("assets/images/dummyprofile.png",
                             width: 50, height: 50, fit: BoxFit.cover),
-                    width: 56,
-                    height: 56,
+                    width: 50,
+                    height: 50,
                     fit: BoxFit.cover,
                     placeholder: "assets/images/loading.gif",
                     image: doctorImg,
@@ -142,21 +182,16 @@ LocalString text = LocalString();
                   ),
                 ),
                 const SizedBox(
-                  width: 9.0,
+                  width: 12.0,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "$doctorName $doctorSurname",
-                      style:
-                          const TextStyle(fontFamily: "Poppins", fontSize: 17),
-                    ),
-                    /* const Text(
-                      "online",
-                      style: TextStyle(fontFamily: "Poppins", fontSize: 12),
-                    )*/
-                  ],
+                SizedBox(
+                  width: 70,
+                  child: Text(
+                    "$doctorName",
+                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16),
+                  ),
                 ),
+
               ],
             ),
             centerTitle: true,
@@ -169,77 +204,80 @@ LocalString text = LocalString();
           children: [
             Expanded(
                 child: SizedBox(
-              height: 300,
-              child: chatController.receivedMsgList.isEmpty
-                  ? const SizedBox()
-                  : ilaod == true
+                  height: 300,
+                  child: chatController.receivedMsgList.isEmpty
+                      ? const SizedBox()
+                      : ilaod == true
                       ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
+                    child: CircularProgressIndicator(),
+                  )
                       : ListView.builder(
-                          reverse: true,
-                          itemCount: chatController.receivedMsgList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var reversedList = chatController
-                                .receivedMsgList.reversed
-                                .toList();
-                            return Row(
-                              mainAxisAlignment:
-                                  doctorId == reversedList[index].id
-                                      ? MainAxisAlignment.start
-                                      : MainAxisAlignment.end,
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxWidth:
-                                        MediaQuery.of(context).size.width - 45,
-                                  ),
-                                  child: Card(
-                                    elevation: 1,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    color: patientId == reversedList[index].id
-                                        ? MyColor.chatColor
-                                        : MyColor.white,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 5),
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 10,
-                                            right: 30,
-                                            top: 5,
-                                            bottom: 20,
-                                          ),
-                                          child: view.text(
-                                              reversedList[index]
-                                                  .message
-                                                  .toString(),
-                                              15,
-                                              FontWeight.w400,
-                                              MyColor.black),
-                                        ),
-                                        Positioned(
-                                          bottom: 2,
-                                          right: 3,
-                                          child: view.text(
-                                              reversedList[index]
-                                                  .sentat
-                                                  .toString(),
-                                              8,
-                                              FontWeight.w400,
-                                              MyColor.grey),
-                                        ),
-                                      ],
+                    reverse: true,
+                    itemCount: chatController.receivedMsgList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var reversedList = chatController
+                          .receivedMsgList.reversed
+                          .toList();
+                      return Row(
+                        mainAxisAlignment:
+                        doctorId == reversedList[index].id
+                            ? MainAxisAlignment.start
+                            : MainAxisAlignment.end,
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth:
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width - 45,
+                            ),
+                            child: Card(
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              color: patientId == reversedList[index].id
+                                  ? MyColor.chatColor
+                                  : MyColor.white,
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 10,
+                                      right: 30,
+                                      top: 5,
+                                      bottom: 20,
                                     ),
+                                    child: view.text(
+                                        reversedList[index]
+                                            .message
+                                            .toString(),
+                                        15,
+                                        FontWeight.w400,
+                                        MyColor.black),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-            )),
+                                  Positioned(
+                                    bottom: 2,
+                                    right: 3,
+                                    child: view.text(
+                                        reversedList[index]
+                                            .sentat
+                                            .toString(),
+                                        8,
+                                        FontWeight.w400,
+                                        MyColor.grey),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -248,7 +286,7 @@ LocalString text = LocalString();
                     child: Container(
                       decoration: BoxDecoration(
                           color: MyColor.lightcolor,
-                          border: Border.all(color: Colors.black38),
+                          // border: Border.all(color: Colors.black38),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
                         style: const TextStyle(decorationThickness: 0),
@@ -256,12 +294,12 @@ LocalString text = LocalString();
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: 3,
-                        decoration:  InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.all(12),
+                            contentPadding: const EdgeInsets.all(12),
                             hintText: text.enterMessage.tr,
-                            hintStyle: TextStyle(
-                                color: MyColor.primary1,
+                            hintStyle: const TextStyle(
+                                color: MyColor.white,
                                 fontSize: 12,
                                 letterSpacing: 1.0)),
                       ),
@@ -278,9 +316,11 @@ LocalString text = LocalString();
                           ),
                           minimumSize: const Size(55, 55)),
                       onPressed: () {
-                        if (messageCtr.text.trim().isNotEmpty) {
+                        if (messageCtr.text
+                            .trim()
+                            .isNotEmpty) {
                           chatController.sendingMsgApi(context, doctorId,
-                              "Text", messageCtr.text,"User",() {});
+                              "Text", messageCtr.text, "User", () {});
                         } else {
                           print('filed');
                         }
@@ -300,5 +340,10 @@ LocalString text = LocalString();
     patientId = (await sp.getStringValue(sp.PATIENT_ID_KEY.toString()))!;
     print("user------------>:${await sp.getStringValue(sp.PATIENT_ID_KEY)}");
     return null;
+  }
+
+  Future<void> _handleCameraAndMic(Permission permission) async {
+    final status = await permission.request();
+    print(status);
   }
 }

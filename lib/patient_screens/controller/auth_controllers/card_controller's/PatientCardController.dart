@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
 import '../../../../Network/ApiService.dart';
 import '../../../../Network/Apis.dart';
+import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +39,7 @@ class CardCtr extends GetxController {
     print("card Parameter$cardPeramert");
     final response = await apiService.postData(MyAPI.addCard, cardPeramert);
     try {
-      log("response of Patient Card :-${response.body}");
+      log("response of Patient  Card :-${response.body}");
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       loadingAdd.value = false;

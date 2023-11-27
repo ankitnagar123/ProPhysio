@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:medica/medica_center/center_controller/CenterAuthController.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../helper/CustomView/CustomView.dart';
+import '../../helper/mycolor/mycolor.dart';
+import '../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../language_translator/LanguageTranslate.dart';
+import '../center_controller/CenterAuthController.dart';
 
 class CenterMorePage extends StatefulWidget {
   const CenterMorePage({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _CenterMorePageState extends State<CenterMorePage> {
                             .size
                             .shortestSide / 3.2,
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
+                          gradient:  LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
                             colors: [MyColor.primary, MyColor.secondary],

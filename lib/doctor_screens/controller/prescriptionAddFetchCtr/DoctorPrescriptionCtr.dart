@@ -3,15 +3,15 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:medica/Network/ApiService.dart';
-import 'package:medica/Network/Apis.dart';
-import 'package:medica/doctor_screens/model/DPrescriptionModel.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 
+import '../../../Network/ApiService.dart';
+import '../../../Network/Apis.dart';
+import '../../../helper/CustomView/CustomView.dart';
+import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../../patient_screens/model/MedicinsListModel.dart';
 import '../../../patient_screens/model/PatinetPrescriptionModel.dart';
+import '../../model/DPrescriptionModel.dart';
 import '../../model/MedicineModel/AddFetchMedicneList.dart';
 import '../../model/MedicineModel/MedicineAllListModel.dart';
 import '../../model/QrPresciptionList.dart';

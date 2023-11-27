@@ -134,7 +134,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                               children: [
                                  Text(
                                   text.date.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),
@@ -158,7 +158,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                               children: [
                                  Text(
                                   text.slot.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),
@@ -187,7 +187,7 @@ class _DoctorEarningState extends State<DoctorEarning> {
                               children: [
                                  Text(
                                   text.fees.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10.0,
                                       fontFamily: "Poppins"),

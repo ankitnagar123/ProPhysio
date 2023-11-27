@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../controller/rating_controller/PatinetRatingController.dart';
 
@@ -71,17 +71,17 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                       MyColor.primary),
                   RatingBar(
                     ignoreGestures: true,
-                    itemSize: 30,
+                    itemSize: 28,
                     initialRating: double.parse(
                         patientRatingCtr.address.value.aveRating.toString()),
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
                     ratingWidget: RatingWidget(
-                        full: const Icon(Icons.star, color: MyColor.primary),
-                        half: const Icon(Icons.star_half, color: MyColor.primary),
+                        full: const Icon(Icons.star, color:Colors.orange),
+                        half: const Icon(Icons.star_half, color:Colors.orange),
                         empty: const Icon(Icons.star_border_purple500_outlined,
-                            color: MyColor.primary)),
+                            color: Colors.orange)),
                     itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
                     onRatingUpdate: (rating) {
                     },
@@ -136,13 +136,13 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                               allowHalfRating: true,
                               itemCount: 5,
                               ratingWidget: RatingWidget(
-                                  full:
-                                      const Icon(Icons.star, color: MyColor.primary),
-                                  half: const Icon(Icons.star_half,
-                                      color: MyColor.primary),
-                                  empty: const Icon(
-                                      Icons.star_border_purple500_outlined,
-                                      color: MyColor.primary)),
+                                full:
+                                const Icon(Icons.star, color:Colors.orange),
+                                half: const Icon(Icons.star_half,
+                                    color: Colors.orange),
+                                empty: const Icon(
+                                    Icons.star_border_purple500_outlined,
+                                    color: Colors.orange)),
                               itemPadding:
                                   const EdgeInsets.symmetric(horizontal: 2.0),
                               onRatingUpdate: (rating) {
@@ -157,7 +157,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                                     .address.value.users[index].userName,
                                 15,
                                 FontWeight.normal,
-                                MyColor.lightblue),
+                                MyColor.primary),
                           ],
                         ),
                         custom.text(

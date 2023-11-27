@@ -4,17 +4,18 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 import '../../controller/appointment_controller/AppointmentController.dart';
 import '../../controller/auth_controllers/PatientProfileController.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
-import 'HealthCardScreen.dart';
+import '../patient_payment_screen/PatientCheckOutCard.dart';
 
 class AppointmentTimeSlot extends StatefulWidget {
-  String date, day, month, year, centerId;
+  String date, day, month, year, centerId, firstConslt;
 
   AppointmentTimeSlot({
     Key? key,
@@ -23,6 +24,7 @@ class AppointmentTimeSlot extends StatefulWidget {
     required this.month,
     required this.year,
     required this.centerId,
+    required this.firstConslt,
   }) : super(key: key);
 
   @override
@@ -68,39 +70,44 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
-          appointmentController.seletedtime.value.toString(), centerId);
-      appointmentController.doctorVisitChargefetch(id.toString());
+              appointmentController.seletedtime.value.toString(), centerId);
+      widget.firstConslt == ""
+      ?  appointmentController.doctorVisitChargefetch(id.toString()) : null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return Obx(() {
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: custom.MyButton(context,text.confirmAppointment.tr, () {
-            if (time == null) {
-              custom.MySnackBar(context, text.selectTime.tr);
-            } else if (fee == null) {
-              custom.MySnackBar(context,text.selectVisitCharge.tr);
+          child: custom.MyButton(context, text.confirmAppointment.tr, () {
+            if (widget.firstConslt == "Free") {
+              appointmentController.bookingAppointment(
+                  context,
+                  doctorListCtr.doctorid.toString(),
+                  "",
+                  time.toString(),
+                  price.toString(),
+                  appointmentController.seletedtime.value.toString(),
+                  "",widget.firstConslt ,() {
+                Get.offNamed(RouteHelper.getBookingSuccess());
+              });
             } else {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HealthCardScreen(
-                            timeid: time.toString(),
-                            price: fee.toString(),
+                      builder: (context) => PatientCheckOutCard(
+                            price: price.toString(),
+                            time: time.toString(),
                             date: appointmentController.seletedtime.value
                                 .toString(),
                             centerId: centerId,
                           )));
             }
-
-            // Get.back();
           }, MyColor.primary,
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
@@ -136,7 +143,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                         DateTime.now(),
                         initialSelectedDate: DateTime(int.parse(widget.year),
                             int.parse(widget.month), int.parse(widget.day)),
-                        selectionColor: MyColor.iconColor,
+                        selectionColor: MyColor.primary,
                         selectedTextColor: Colors.white,
                         onDateChange: (date) {
                           // New date selected
@@ -167,7 +174,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                       appointmentController.loadingFetchTime.value
                           ? custom.MyIndicator()
                           : appointmentController.timeList.isEmpty
-                              ?  Text(text.noTimeSlotDate.tr)
+                              ? Text(text.noTimeSlotDate.tr)
                               : GridView.builder(
                                   padding: const EdgeInsets.all(0),
                                   physics: const NeverScrollableScrollPhysics(),
@@ -242,51 +249,73 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                         height: 10,
                       ),
                       const Divider(height: 50),
-                      Align(
+                      widget.firstConslt == "Free" ? SizedBox(): Align(
                           alignment: Alignment.topLeft,
                           child: custom.text(text.visitCharges.tr, 16,
                               FontWeight.w500, MyColor.black)),
-                      appointmentController.visitCharge.isEmpty
-                          ?  Center(
-                              heightFactor: 5,
-                              child: Text(text.noVisitChargesDoctor.tr),
+                      widget.firstConslt == "Free"
+                          ? Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.local_hospital,
+                                    color: Colors.red,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: custom.text(
+                                        "YOUR FIRST CONSULTANT FREE",
+                                        14,
+                                        FontWeight.normal,
+                                        Colors.green),
+                                  ),
+                                ],
+                              ),
                             )
-                          : appointmentController.loadingFetch.value
-                              ? custom.MyIndicator()
-                              : ListView.builder(
-                                  padding: const EdgeInsets.only(bottom: 40),
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      appointmentController.visitCharge.length,
-                                  itemBuilder: (context, index) {
-                                    var list = appointmentController
-                                        .visitCharge[index];
-                                    return ListTile(
-                                      subtitle: Text(list.price.toString()),
-                                      horizontalTitleGap: 20,
-                                      visualDensity: const VisualDensity(
-                                          horizontal: 3, vertical: -4),
-                                      leading: const Icon(
-                                          Icons.arrow_circle_right,
-                                          size: 20,
-                                          color: MyColor.lightblue),
-                                      title: Text(list.name.toString()),
-                                      trailing: Radio<String>(
-                                        value: index.toString(),
-                                        groupValue: price,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            price = value!;
-                                            print("....$price");
-                                            fee = list.price.toString();
-                                            print('fee----------$fee');
-                                            print('price----------$price');
-                                          });
-                                        },
-                                      ),
-                                    );
-                                  })
+                          : appointmentController.visitCharge.isEmpty
+                              ? Center(
+                                  heightFactor: 5,
+                                  child: Text(text.noVisitChargesDoctor.tr),
+                                )
+                              : appointmentController.loadingFetch.value
+                                  ? custom.MyIndicator()
+                                  : ListView.builder(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 40),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: appointmentController
+                                          .visitCharge.length,
+                                      itemBuilder: (context, index) {
+                                        var list = appointmentController
+                                            .visitCharge[index];
+                                        return ListTile(
+                                          subtitle: Text(list.price.toString()),
+                                          horizontalTitleGap: 20,
+                                          visualDensity: const VisualDensity(
+                                              horizontal: 3, vertical: -4),
+                                          leading: const Icon(
+                                              Icons.arrow_circle_right,
+                                              size: 20,
+                                              color: MyColor.primary1),
+                                          title: Text(list.name.toString()),
+                                          trailing: Radio<String>(
+                                            value: index.toString(),
+                                            groupValue: price,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                price = value!;
+                                                print("....$price");
+                                                fee = list.price.toString();
+                                                print('fee----------$fee');
+                                                print('price----------$price');
+                                              });
+                                            },
+                                          ),
+                                        );
+                                      })
                     ],
                   ),
                 ),

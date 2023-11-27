@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:medica/doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/pdf_viewer_page.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import '../../../../../doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/AddMedicines/PDF/medicinePDFVIew.dart';
 
 class PatientViewMedicinesPdf extends StatefulWidget {
@@ -66,7 +65,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                     onTap: () async {
                       var url ="${doctorPrescriptionCtr.fetchMedicineList.value?.pdf}";
                       final file = await loadPdfFromNetwork(url);
-                      openPdf(context, file, url);
+                      // openPdf(context, file, url);
                     },
                     child: Card(
                       child: Padding(
@@ -171,7 +170,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                           children: [
                             Text(
                               text.medicinesInformation.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -195,7 +194,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                           children: [
                             Text(
                               text.slot.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -228,7 +227,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                         children: [
                           Text(
                             text.timingTake.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -290,7 +289,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
                         children: [
                           Text(
                             text.description.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -349,7 +348,7 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
   //final file = File('example.pdf');
   //await file.writeAsBytes(await pdf.save());
 
-  void openPdf(BuildContext context, File file, String url) =>
+/*  void openPdf(BuildContext context, File file, String url) =>
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PdfViewerPage(
@@ -357,5 +356,5 @@ class _PatientViewMedicinesPdfState extends State<PatientViewMedicinesPdf> {
             url: url,
           ),
         ),
-      );
+      );*/
 }

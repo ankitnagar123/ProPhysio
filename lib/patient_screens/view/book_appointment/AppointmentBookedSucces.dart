@@ -36,7 +36,7 @@ LocalString text = LocalString();
                       end: Alignment.bottomLeft,
                       colors: [
                         MyColor.primary,
-                        MyColor.secondary
+                        MyColor.primary1
                       ]
                   ),
                 ),
@@ -48,14 +48,14 @@ LocalString text = LocalString();
                         height: height*0.1,
                       ),
                       Image(
-                        image: const AssetImage('assets/images/MEDICAlogo.png'),
-                        height: height*0.2,
-                        width: widht*0.4,
+                        image: AssetImage("assets/images/prologo.png"),
+                        // height: 100,
+                        // width: 130,
                       ),
                       SizedBox(height: height*0.04,),
                       Align(
                           alignment: Alignment.center,
-                          child: custom.text(text.appointmentCorrectlySaved.tr, 17, FontWeight.w500, MyColor.white)),
+                          child: custom.text(text.appointmentCorrectlySaved.tr, 18, FontWeight.w500, MyColor.white)),
                       SizedBox(height: height*0.01,),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -69,7 +69,7 @@ LocalString text = LocalString();
                       custom.MyButton(context, text.letGo.tr, () {
                         Get.offAllNamed(RouteHelper.getBottomNavigation());
                       }, MyColor.white,
-                          const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
+                          const TextStyle(color: MyColor.primary1,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
                     ],
                   ),
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 
+import '../../../helper/CustomView/CustomView.dart';
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class ViewCertificateScreen extends StatefulWidget {
@@ -63,7 +63,7 @@ class _ViewCertificateScreenState extends State<ViewCertificateScreen> {
                   width: double.infinity,
                   imageErrorBuilder: (context, error, stackTrace) {
                     return Image.asset(
-                      'assets/images/MEDICAlogo.png',
+                      'assets/images/logo.png',
                       fit: BoxFit.contain,
                     );
                   }),

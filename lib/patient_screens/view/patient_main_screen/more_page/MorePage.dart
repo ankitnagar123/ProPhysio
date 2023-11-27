@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
-import 'package:medica/patient_screens/view/patient_main_screen/more_page/term_condition_page/PatientTermCondition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../../ZegoCallService/ZegoCallService.dart';
+import '../../../../helper/CustomView/CustomView.dart';
+import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/auth_controllers/PatientProfileController.dart';
 import "../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import 'Ratings_and_reviews/Rating&ReviewPage.dart';
-import 'about_page/PatinetAboutPage.dart';
 import 'my_past_chekup/PatientPastChekups.dart';
 import 'my_past_chekup/PatientQRCodeShow.dart';
 
@@ -49,13 +48,22 @@ class _MorePageState extends State<MorePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+                Align(
+                  alignment: Alignment.center,
+                  child: Image(
+                    image: AssetImage("assets/images/runlogo.png"),
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
                 customView.text(
                     "${text.hii.tr} @${patientProfileCtr.name.value}",
                     17.0,
                     FontWeight.w500,
                     Colors.black),
                 const SizedBox(
-                  height: 15.0,
+                  height: 8.0,
                 ),
                 cardCtr.cardList.isEmpty
                     ? Container(
@@ -69,21 +77,21 @@ class _MorePageState extends State<MorePage> {
                                 RouteHelper.getPatientAddNewCardScreen());
                           },
                           title: customView.text(text.addCreditCard.tr, 16,
-                              FontWeight.w500, MyColor.primary1),
+                              FontWeight.w500, MyColor.white),
                           subtitle: Row(
                             children: [
                               Text(text.goto.tr,
-                                  style: TextStyle(color: MyColor.primary1)),
+                                  style: TextStyle(color: MyColor.white)),
                               Text(text.payment.tr,
                                   style: const TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: MyColor.primary1,
                                       fontWeight: FontWeight.w500)),
-                              SizedBox(
+                              const SizedBox(
                                 width: 4,
                               ),
                               Text(text.toCompleteIt.tr,
-                                  style: TextStyle(color: MyColor.primary1)),
+                                  style: TextStyle(color: MyColor.white)),
                             ],
                           ),
                           trailing: const Icon(
@@ -110,7 +118,7 @@ class _MorePageState extends State<MorePage> {
                             gradient: const LinearGradient(
                               begin: Alignment.topRight,
                               end: Alignment.bottomLeft,
-                              colors: [MyColor.primary, MyColor.secondary],
+                              colors: [MyColor.primary, MyColor.primary1],
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -153,7 +161,7 @@ class _MorePageState extends State<MorePage> {
                             gradient: const LinearGradient(
                               begin: Alignment.topRight,
                               end: Alignment.bottomLeft,
-                              colors: [MyColor.primary, MyColor.secondary],
+                              colors: [MyColor.primary, MyColor.primary1],
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -420,8 +428,11 @@ class _MorePageState extends State<MorePage> {
                                     SharedPreferences preferences =
                                         await SharedPreferences.getInstance();
                                     preferences.remove("LOGIN_KEY");
+                                    preferences.remove("PATIENT_ID_KEY");
                                     print(preferences.remove("LOGIN_KEY"));
+                                    sp.clearSharedPreference();
                                     sp.setBoolValue(sp.ON_BOARDING_KEY, true);
+                                    onUserLogout();
 
                                     Get.offAllNamed(
                                         RouteHelper.getLoginScreen());

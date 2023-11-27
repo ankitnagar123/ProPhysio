@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
+import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import 'PatinetViewPdfMedcines.dart';
 
@@ -37,7 +37,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
           child: Column(
         children: [
           doctorPrescriptionCtr.patientFetchMedicineList.isEmpty
-              ? Text('')
+              ? const Text('')
               : Align(
                   alignment: Alignment.topLeft,
                   child: Card(
@@ -49,14 +49,14 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                     ),
                   ),
                 ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           doctorPrescriptionCtr.pLoadingMedicineFetch.value
               ? Center(heightFactor: 13, child: custom.MyIndicator())
               : doctorPrescriptionCtr.patientFetchMedicineList.isEmpty
                   ? Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Center(
                           heightFactor: 15,
                           child: Text(text.noMedicinesRightKnow.tr)),
@@ -141,7 +141,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                         children: [
                           Text(
                             text.medicinesInformation.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -164,7 +164,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                         children: [
                           Text(
                             text.slot.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -196,7 +196,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                         children: [
                           Text(
                             text.timingTake.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -226,7 +226,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                         children: [
                           Text(
                             text.submittedBy.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),
@@ -256,7 +256,7 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                         children: [
                           Text(
                             text.description.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 11.0,
                                 fontFamily: "Poppins"),

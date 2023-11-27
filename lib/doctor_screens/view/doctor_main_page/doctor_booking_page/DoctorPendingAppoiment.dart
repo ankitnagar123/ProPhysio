@@ -241,7 +241,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   children: [
                                      Text(
                                       text.slot.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -266,7 +266,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   children: [
                                      Text(
                                       text.bookingID.tr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 10.0,
                                           fontFamily: "Poppins"),
@@ -330,7 +330,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                               text.patient.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -353,7 +353,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                               text.PatientId.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -385,7 +385,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                              text.bookingInformation.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -426,7 +426,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                             flex: 1,
                             child: Text(
                              text.bookingID.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -477,7 +477,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                               text.paymentInformation.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -500,7 +500,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                               text.fees.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -532,7 +532,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           children: [
                              Text(
                               text.address.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),

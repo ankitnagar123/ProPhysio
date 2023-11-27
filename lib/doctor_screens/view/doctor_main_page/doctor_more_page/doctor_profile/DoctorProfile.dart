@@ -9,7 +9,6 @@ import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import '../../../../../singup_screen/doctor_signup_page/DoctorSelectAddress.dart';
 import '../../../../controller/DoctorProfileController.dart';
 
 class DoctorProfileScreen extends StatefulWidget {
@@ -143,7 +142,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                 () {
 
                 },
-                MyColor.primary,
+                MyColor.red,
                 const TextStyle(fontFamily: "Poppins", color: Colors.white),
               ),
             ),

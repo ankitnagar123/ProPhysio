@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
+import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 
 class CenterEarningCalculate extends StatefulWidget {
@@ -124,9 +124,9 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                   controller: startDateController,
                   decoration:  InputDecoration(
                     hintText: text.Select_Date.tr,
-                    hintStyle: TextStyle(fontSize: 15),
+                    hintStyle: const TextStyle(fontSize: 15),
                     suffixIcon:
-                    Icon(Icons.calendar_month, color: MyColor.primary),
+                    const Icon(Icons.calendar_month, color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -166,7 +166,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       hintText: text.Select_Date.tr,
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.calendar_month,
                         color: MyColor.primary,
                       )),
@@ -198,7 +198,7 @@ class _CenterEarningCalculateState extends State<CenterEarningCalculate> {
               },
               child:  Text(
                 text.resetRangeDate.tr,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.red,
                     fontFamily: "Poppins",
                     decoration: TextDecoration.underline,

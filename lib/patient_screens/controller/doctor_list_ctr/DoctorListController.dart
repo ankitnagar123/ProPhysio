@@ -3,12 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../helper/CustomView/CustomView.dart';
 import '../../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 import '../../model/DoctorListModel.dart';
 import '../../model/DoctorSubCateogryList.dart';
@@ -45,17 +45,25 @@ class DoctorListCtr extends GetxController {
 
 
   /*------------------Doctor list  Fetch Api----------------*/
-  Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId, String priceRangeStart, String priceRangeEnd, String rating, String filterLatitude, String filterLongitude, String filterDistance,) async {
+  Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId, String priceRangeStart,
+      String priceRangeEnd, String rating,String branchId,
+     /* String filterLatitude,
+      String filterLongitude,
+      String filterDistance,*/
+      ) async {
     final Map<String, dynamic> cardPeramert = {
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "cat_id":categoryId,
       "subcat_id":subCatId,
       "price_start":priceRangeStart,
       "price_end":priceRangeEnd,
       "rating":rating,
-      "latitude":filterLatitude,
-      "longitude":filterLongitude,
-      "distance":filterDistance,
+      "branch_id":branchId,
+
+      // "latitude":filterLatitude,
+      // "longitude":filterLongitude,
+      // "distance":filterDistance,
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
 
     };
@@ -195,9 +203,12 @@ print(doctorList);
   var latitude = "".obs;
   var longitude= "".obs;
 var category = "".obs;
+var branchName = "".obs;
+var serviceStatus = "".obs;
 
   void doctorDetialsfetch(String id) async {
     final Map<String, dynamic> Peramert = {
+      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "doctor_id": id,
     };
@@ -227,6 +238,8 @@ print("cate..........${category.value}");
         doctorid.value = jsonResponse["doctor_id"].toString();
         latitude.value = jsonResponse["latitude"].toString();
         longitude.value = jsonResponse["longitude"].toString();
+        branchName.value = jsonResponse["branch_name"].toString();
+        serviceStatus.value = jsonResponse["service_status"].toString();
 
        /* image.value = img;
         // category.value = jsonResponse["category"].toString();

@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:medica/Helper/RoutHelper/RoutHelper.dart';
-import 'package:medica/helper/Shimmer/ChatShimmer.dart';
-import 'package:medica/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
+import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../helper/CustomView/CustomView.dart';
+import '../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
 import '../../../../signin_screen/signin_controller/SignInController.dart';
@@ -42,6 +42,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    // callController.initilize(id.toString());
+
 /*    chatController.doctorReceivedMsgListFetch(
         context, bookingController.userId.value);*/
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -51,15 +54,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     });
   }
 
+
   String? cancelId = '';
   String? cancelReason = '';
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
@@ -68,7 +69,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: height * 0.04,
+                height: height * 0.045,
+              ),
+              Image(
+                image: AssetImage("assets/images/runlogo.png"),
+                height: 40,
+                width: 40,
               ),
               Obx(() {
                 return Align(
@@ -96,7 +102,10 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   text.SearchAppointment.tr,
                   TextInputType.text,
                   const Text(""),
-                  const Icon(Icons.search_rounded), () {
+                  const Icon(
+                    Icons.search_rounded,
+                    color: Colors.white,
+                  ), () {
                 Get.toNamed(RouteHelper.DSearchAppointment());
               }, () {}),
               SizedBox(
@@ -119,169 +128,177 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget showList() {
     return SingleChildScrollView(
       child: bookingController.booking.isEmpty
-          ?  Center(
-        heightFactor: 15,
-        child: Text(text.No_Appointments_moment.tr),
-      )
+          ? Center(
+              heightFactor: 15,
+              child: Text(text.No_Appointments_moment.tr),
+            )
           : ListView.builder(
-          shrinkWrap: true,
-          itemCount: bookingController.booking.length,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            var bookingId =
-            bookingController.booking[index].bookingId.toString();
-            var userid = bookingController.booking[index].id.toString();
-            log("user id$userid");
-            log("booking id$id");
+              shrinkWrap: true,
+              itemCount: bookingController.booking.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                var bookingId =
+                    bookingController.booking[index].bookingId.toString();
+                var userid = bookingController.booking[index].id.toString();
+                log("user id$userid");
+                log("booking id$id");
 
-            var list = bookingController.booking[index];
-            var status = bookingController.booking[index].status!;
-            return InkWell(
-              onTap: () {
-                bookingController.bookingAppointmentDetails(
-                    context,
-                    bookingId,
-                    bookingController.booking[index].status.toString(), () {
-                  showBottomSheet(bookingId, userid, status);
-                });
-              },
-              child: Card(
-                color: MyColor.midgray,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 7.0, vertical: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                var list = bookingController.booking[index];
+                var status = bookingController.booking[index].status!;
+                return InkWell(
+                  onTap: () {
+                    bookingController.bookingAppointmentDetails(
+                        context,
+                        bookingId,
+                        bookingController.booking[index].status.toString(), () {
+                      showBottomSheet(bookingId, userid, status);
+                    });
+                  },
+                  child: Card(
+                    color: MyColor.midgray,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 7.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            flex: 0,
-                            child: Container(
-                              height: 10.0,
-                              width: 10.0,
-                              decoration: BoxDecoration(
-                                color: list.status == "Pending"
-                                    ? MyColor.statusYellow
-                                    : list.status == "Cancel"
-                                    ? Colors.red
-                                    : Colors.green,
-                                borderRadius: BorderRadius.circular(10.0),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 0,
+                                child: Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                    color: list.status == "Pending"
+                                        ? MyColor.statusYellow
+                                        : list.status == "Cancel"
+                                            ? Colors.red
+                                            : Colors.green,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
                               ),
-                            ),
+                              const SizedBox(
+                                width: 7.0,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: custom.text(
+                                    /*list.status.toString()*/
+                                    list.status == "Pending"
+                                        ? text.Pending.tr
+                                        : list.status == "Cancel"
+                                            ? text.Cancel.tr
+                                            : text.Upcoming.tr,
+                                    11.0,
+                                    FontWeight.w400,
+                                    Colors.black),
+                              ),
+                              const Expanded(
+                                flex: 1,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 18.0,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                           const SizedBox(
-                            width: 7.0,
+                            height: 8.0,
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: custom.text(/*list.status.toString()*/list.status == "Pending"?text.Pending.tr:list.status == "Cancel"?text.Cancel.tr:text.Upcoming.tr, 11.0,
-                                FontWeight.w400, Colors.black),
+                          custom.text(list.name.toString(), 14.0,
+                              FontWeight.w500, Colors.black),
+                          const SizedBox(
+                            height: 10.0,
                           ),
-                          const Expanded(
-                            flex: 1,
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 18.0,
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.date.tr,
+                                      style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(list.bookingDate.toString(),
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12.0,
+                                            fontFamily: "Poppins")),
+                                  ],
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.slot.tr,
+                                      style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(
+                                      list.time.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      text.bookingID.tr,
+                                      style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 10.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                    const SizedBox(
+                                      height: 2.0,
+                                    ),
+                                    Text(
+                                      list.bookID.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12.0,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      custom.text(list.name.toString(), 14.0,
-                          FontWeight.w500, Colors.black),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                 Text(
-                                  text.date.tr,
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                Text(list.bookingDate.toString(),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12.0,
-                                        fontFamily: "Poppins")),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                 Text(
-                                  text.slot.tr,
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                Text(
-                                  list.time.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                 Text(
-                                  text.bookingID.tr,
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                Text(
-                                  list.bookID.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.0,
-                                      fontFamily: "Poppins"),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          }),
+                );
+              }),
     );
   }
 
@@ -302,7 +319,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                  custom.text(
+                      text.details.tr, 17.0, FontWeight.w500, Colors.black),
                   const SizedBox(
                     height: 7.0,
                   ),
@@ -313,9 +331,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.patient.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -336,9 +354,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.PatientId.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -368,7 +386,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.bookingInformation.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
@@ -379,8 +397,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               height: 2.0,
                             ),
                             Text(
-                                "${bookingController.bookingDate
-                                    .value}   ${bookingController.time.value}",
+                                "${bookingController.bookingDate.value}   ${bookingController.time.value}",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -408,11 +425,11 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   fontFamily: "Poppins"),
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 1,
                             child: Text(
                               text.bookingID.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -432,8 +449,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               color: status == "Pending"
                                   ? MyColor.statusYellow
                                   : status == "Cancel"
-                                  ? Colors.red
-                                  : Colors.green,
+                                      ? Colors.red
+                                      : Colors.green,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
@@ -443,8 +460,15 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           /*-----------*/
                           Expanded(
                             flex: 1,
-                            child: custom.text(bookingController.status.value == "Pending"?text.Pending.tr:bookingController.status.value == "Cancel"?text.Cancel.tr:text.Upcoming.tr,
-                                11.0, FontWeight.w400, Colors.black),
+                            child: custom.text(
+                                bookingController.status.value == "Pending"
+                                    ? text.Pending.tr
+                                    : bookingController.status.value == "Cancel"
+                                        ? text.Cancel.tr
+                                        : text.Upcoming.tr,
+                                11.0,
+                                FontWeight.w400,
+                                Colors.black),
                           ),
                           Expanded(
                             flex: 1,
@@ -465,9 +489,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.paymentInformation.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -488,9 +512,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.fees.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -520,9 +544,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.address.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
                                   fontFamily: "Poppins"),
@@ -545,162 +569,173 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   ),
                   status == "Pending"
                       ? Padding(
-                    padding: const EdgeInsets.only(
-                        left: 8.0, right: 8.0, bottom: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        custom.acceptRejectButton(context, text.reject.tr, () {
-                          bookingController
-                              .bookingAppointmentReject(context, id, () {
-                            bookingController.bookingAppointment(
-                                context, "", "");
-                            Get.back();
-                          });
-                        }, MyColor.midgray,
-                            const TextStyle(color: MyColor.primary)),
-                        custom.acceptRejectButton(context, text.accept.tr, () {
-                          acceptPopUp(context, id);
-                        }, MyColor.primary,
-                            const TextStyle(color: MyColor.white))
-                      ],
-                    ),
-                  )
-                      : status == "Confirmed"
-                      ? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8.0, right: 8.0),
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            custom.callButton(context, text.call.tr, () {
-                              UrlLauncher.launchUrl(Uri.parse(
-                                  'tel:${bookingController.contact.value}'));
-                            },
-                                MyColor.primary,
-                                const TextStyle(
-                                  color: MyColor.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-                                Icons.call),
-                            custom.callButton(context, text.chat.tr, () {
-                              var patientId = {
-                                "ID": bookingController.userId.value,
-                                "userName": bookingController.username.value,
-                                "userProfile": bookingController.userPic.value,
-                                "userLocation": bookingController.location
-                                    .value,
-                                "userContact": bookingController.contact.value,
-                                "surName": bookingController.surname.value,
-                                "name": bookingController.name.value,
-                                "bookingSide": "booking",
-                              };
-                              Get.toNamed(RouteHelper.DChatScreen(),
-                                  arguments: patientId);
-                              chatController.doctorReceivedMsgListFetch(
-                                  context,
-                                  bookingController.userId.value);
-                            },
-                                MyColor.primary,
-                                const TextStyle(
-                                  color: MyColor.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-                                Icons.chat_bubble_outline_outlined)
-                          ],
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          custom.callButton(
-                              context, text.prescription.tr, () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        PrescriptionMedicalTab(
-                                          patientId: userid,
-                                          patientName: bookingController.name
-                                              .value,
-                                        )));
-                          },
-                              MyColor.primary,
-                              const TextStyle(
-                                color: MyColor.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              ),
-                              Icons.medical_information_outlined),
-                          custom.callButton(context, text.Complete.tr, () {
-                            bookingController.bookingAppointmentDone(
-                                context, id, () {
-                              bookingController.bookingAppointment(
-                                  context, "", "");
-                              Get.back();
-                            });
-                          },
-                              MyColor.primary,
-                              const TextStyle(
-                                color: MyColor.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                              ),
-                              Icons.done),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              cancelPopUp(context, id, userid);
-                            },
-                            child:  Text(
-                              text.cancelAppointment.tr,
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.red,
-                                  fontSize: 13.0,
-                                  fontFamily: "Poppins"),
-                            ),
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              custom.acceptRejectButton(context, text.reject.tr,
+                                  () {
+                                bookingController
+                                    .bookingAppointmentReject(context, id, () {
+                                  bookingController.bookingAppointment(
+                                      context, "", "");
+                                  Get.back();
+                                });
+                              }, MyColor.midgray,
+                                  const TextStyle(color: MyColor.primary)),
+                              custom.acceptRejectButton(context, text.accept.tr,
+                                  () {
+                                acceptPopUp(context, id);
+                              }, MyColor.primary,
+                                  const TextStyle(color: MyColor.white))
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  )
-                      :
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                             Text(
-                             text.cancelReason.tr,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
+                        )
+                      : status == "Confirmed"
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      custom.callButton(context, text.call.tr,
+                                          () {
+                                        UrlLauncher.launchUrl(Uri.parse(
+                                            'tel:${bookingController.contact.value}'));
+                                      },
+                                          MyColor.primary,
+                                          const TextStyle(
+                                            color: MyColor.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                          ),
+                                          Icons.call),
+                                      custom.callButton(context, text.chat.tr,
+                                          () {
+                                        var patientId = {
+                                          "ID": bookingController.userId.value,
+                                          "userName":
+                                              bookingController.username.value,
+                                          "userProfile":
+                                              bookingController.userPic.value,
+                                          "userLocation":
+                                              bookingController.location.value,
+                                          "userContact":
+                                              bookingController.contact.value,
+                                          "surName":
+                                              bookingController.surname.value,
+                                          "name": bookingController.name.value,
+                                          "bookingSide": "booking",
+                                        };
+                                        Get.toNamed(RouteHelper.DChatScreen(),
+                                            arguments: patientId);
+                                        chatController
+                                            .doctorReceivedMsgListFetch(context,
+                                                bookingController.userId.value);
+                                      },
+                                          MyColor.primary,
+                                          const TextStyle(
+                                            color: MyColor.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                          ),
+                                          Icons.chat_bubble_outline_outlined)
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    custom.callButton(
+                                        context, text.prescription.tr, () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PrescriptionMedicalTab(
+                                                    patientId: userid,
+                                                    patientName:
+                                                        bookingController
+                                                            .name.value,
+                                                  )));
+                                    },
+                                        MyColor.primary,
+                                        const TextStyle(
+                                          color: MyColor.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                        ),
+                                        Icons.medical_information_outlined),
+                                    custom.callButton(context, text.Complete.tr,
+                                        () {
+                                      bookingController.bookingAppointmentDone(
+                                          context, id, () {
+                                        bookingController.bookingAppointment(
+                                            context, "", "");
+                                        Get.back();
+                                      });
+                                    },
+                                        MyColor.primary,
+                                        const TextStyle(
+                                          color: MyColor.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                        ),
+                                        Icons.done),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        cancelPopUp(context, id, userid);
+                                      },
+                                      child: Text(
+                                        text.cancelAppointment.tr,
+                                        style: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: Colors.red,
+                                            fontSize: 13.0,
+                                            fontFamily: "Poppins"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        text.cancelReason.tr,
+                                        style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 11.0,
+                                            fontFamily: "Poppins"),
+                                      ),
+                                      const SizedBox(
+                                        height: 2.0,
+                                      ),
+                                      Text(bookingController.reasonCancel.value,
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14.0,
+                                              fontFamily: "Poppins")),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(bookingController.reasonCancel.value,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                   const Divider(
                     height: 20.0,
                   ),
@@ -717,17 +752,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Card(
@@ -747,7 +777,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(text.cancelAppointment.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
@@ -756,7 +786,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(
                                 text.areYouSureYouWantCancelAppointment.tr,
                                 12,
@@ -809,22 +839,22 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 child: bookingController.loadingCancel.value
                                     ? custom.MyIndicator()
                                     : custom.mysButton(
-                                  context,
-                                 text.cancelAppointment.tr,
-                                      () {
-                                    bookingController
-                                        .bookingAppointmentCancel(
-                                        context, id, cancelId!, () {
-                                      Get.offNamed(RouteHelper
-                                          .DCancelAppointSucces());
-                                    });
-                                  },
-                                  Colors.red,
-                                  const TextStyle(
-                                    fontSize: 13.0,
-                                    color: MyColor.white,
-                                  ),
-                                ),
+                                        context,
+                                        text.cancelAppointment.tr,
+                                        () {
+                                          bookingController
+                                              .bookingAppointmentCancel(
+                                                  context, id, cancelId!, () {
+                                            Get.offNamed(RouteHelper
+                                                .DCancelAppointSucces());
+                                          });
+                                        },
+                                        Colors.red,
+                                        const TextStyle(
+                                          fontSize: 13.0,
+                                          color: MyColor.white,
+                                        ),
+                                      ),
                               ),
                             ],
                           )
@@ -845,17 +875,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Card(
@@ -875,7 +900,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: custom.text(text.AcceptVisit.tr, 17,
                                 FontWeight.w500, Colors.black),
                           ),
@@ -884,12 +909,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text(
-                                text.AcceptVisitLine.tr,
-                                12,
-                                FontWeight.w400,
-                                Colors.black),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text(text.AcceptVisitLine.tr, 12,
+                                FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -911,32 +933,32 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   child: bookingController.loadingAccept.value
                                       ? Center(child: custom.MyIndicator())
                                       : custom.mysButton(
-                                    context,
-                                    text.Yes_accept.tr,
-                                        () {
-                                      bookingController
-                                          .bookingAppointmentAccept(
-                                          context, bookingId.toString(),
-                                              () {
+                                          context,
+                                          text.Yes_accept.tr,
+                                          () {
                                             bookingController
-                                                .bookingAppointment(
-                                                context, "", "");
-                                            Get.back();
-                                            Get.back();
-                                          });
+                                                .bookingAppointmentAccept(
+                                                    context,
+                                                    bookingId.toString(), () {
+                                              bookingController
+                                                  .bookingAppointment(
+                                                      context, "", "");
+                                              Get.back();
+                                              Get.back();
+                                            });
 
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //         const CancelAppointmentSuccess()));
-                                    },
-                                    MyColor.primary,
-                                    const TextStyle(
-                                      fontSize: 13.0,
-                                      color: MyColor.white,
-                                    ),
-                                  ),
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //         const CancelAppointmentSuccess()));
+                                          },
+                                          MyColor.primary,
+                                          const TextStyle(
+                                            fontSize: 13.0,
+                                            color: MyColor.white,
+                                          ),
+                                        ),
                                 ),
                               ],
                             );

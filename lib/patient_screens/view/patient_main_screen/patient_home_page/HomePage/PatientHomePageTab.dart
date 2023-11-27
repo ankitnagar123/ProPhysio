@@ -1,14 +1,15 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
+
+import '../../../../../AgoraCall/call_controller.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import "../../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
-
-import 'CenterSide/PCenterHomePage.dart';
 import 'PDoctorTab.dart';
 
 class PatientHomePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PatientHomePageState extends State<PatientHomePage>
     doctorSignUpCtr.DoctorCategory();
     cardCtr.cardFetch();
     print("doctor length${doctorListCtr.doctorList.length}");
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 1, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -52,20 +53,21 @@ class _PatientHomePageState extends State<PatientHomePage>
         .size
         .width;*/
     return Scaffold(
+
         body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
             child: Column(children: [
               Container(
-                constraints: const BoxConstraints.expand(height: 60),
+                constraints: const BoxConstraints.expand(height: 95),
                 child: TabBar(
-                  // indicatorPadding: EdgeInsets.only(bottom: 0),
-                  physics: const NeverScrollableScrollPhysics(),
+                    // indicatorPadding: EdgeInsets.only(bottom: 0),
+                    physics: const NeverScrollableScrollPhysics(),
                     onTap: (value) {
-                      print(value);
+                      log("$value");
                     },
                     controller: tabController,
-                    indicatorColor: MyColor.primary,
-                    labelColor: MyColor.primary,
+                    indicatorColor: Colors.white54,
+                    labelColor: MyColor.primary1,
                     labelStyle: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -75,17 +77,31 @@ class _PatientHomePageState extends State<PatientHomePage>
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    tabs:  [
-                      Tab(text: text.doctor.tr),
-                      Tab(text: text.Medical_Center.tr),
+                    tabs: const [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Image(
+                              image: AssetImage("assets/images/prologo1.png"),
+                              width: 150,
+                            ),
+                          ),
+                          // Tab(text: "SPECIALIZATION"),
+                        ],
+                      ),
+                      // Tab(text: text.Medical_Center.tr),
                     ]),
               ),
               Expanded(
                 child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),controller: tabController, children: const [
-                  HomeView(),
-                  PCenterHomeScreen()
-                ]),
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: tabController,
+                    children: const [
+                      HomeView(),
+                      // PCenterHomeScreen()
+                    ]),
               ),
             ])));
   }

@@ -8,9 +8,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:medica/helper/CustomView/CustomView.dart';
-import 'package:medica/helper/mycolor/mycolor.dart';
 
+
+import '../../../../../helper/CustomView/CustomView.dart';
+import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientProfileController.dart';
 
@@ -46,7 +47,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   String flag = '';
   String _selectedGender = '';
 
-  final bool _isHidden = true;
   File? file;
   final picker = ImagePicker();
   String baseimage = "";
@@ -74,35 +74,37 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized();
-    print(" latitude $latitude");
-    profileCtr.patientProfile(context);
-    nameCtrl.text = profileCtr.name.value;
-    print("my name${profileCtr.name.value}");
-    userNameCtrl.text = profileCtr.username.value;
-    sureNameCtrl.text = profileCtr.surename.value;
-    emailCtrl.text = profileCtr.Email.value;
-    healthCardCtrl.text = profileCtr.healthCard.value;
-    phoneNumberCtrl.text = profileCtr.phone.value;
-    addressCtrl.text = profileCtr.address.value;
-    files = profileCtr.image.value;
-    qRCode = profileCtr.qrCode.value;
-    flag = profileCtr.flag.value;
-    code = profileCtr.code.value;
-    _selectedGender = profileCtr.gender.value;
-    /*--new filed added--*/
-    ageCtr.text = profileCtr.age.value;
-    heightCtr.text = profileCtr.height.value;
-    weightCtr.text = profileCtr.weight.value;
-    taxCtr.text = profileCtr.taxCode.value;
-    birthPlaceCtr.text = profileCtr.birthplace.value;
-    genderCtr.text = profileCtr.gender.value;
     super.initState();
+      profileCtr.patientProfile(context);
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    return Obx( () {
+      if (profileCtr.resultVar.value == 1) {
+        profileCtr.resultVar.value = 0;
+
+        nameCtrl.text = profileCtr.name.value;
+        print("my name${profileCtr.name.value}");
+        userNameCtrl.text = profileCtr.username.value;
+        sureNameCtrl.text = profileCtr.surename.value;
+        emailCtrl.text = profileCtr.Email.value;
+        phoneNumberCtrl.text = profileCtr.phone.value;
+        addressCtrl.text = profileCtr.address.value;
+        files = profileCtr.image.value;
+        qRCode = profileCtr.qrCode.value;
+        flag = profileCtr.flag.value;
+        code = profileCtr.code.value;
+        _selectedGender = profileCtr.gender.value;
+        /*--new filed added--*/
+        ageCtr.text = profileCtr.age.value;
+        heightCtr.text = profileCtr.height.value;
+        weightCtr.text = profileCtr.weight.value;
+        taxCtr.text = profileCtr.taxCode.value;
+        birthPlaceCtr.text = profileCtr.birthplace.value;
+        genderCtr.text = profileCtr.gender.value;
+      }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -146,7 +148,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                               },
                               child: FadeInImage.assetNetwork(
                                 imageErrorBuilder: (c, o, s) => Image.asset(
-                                    "assets/images/dummyprofile.jpg",
+                                    "assets/images/dummyprofile.png",
                                     width: 120,
                                     height: 120,
                                     fit: BoxFit.cover),
@@ -182,13 +184,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           },
                                           child:  Row(
                                             children: [
-                                              Icon(Icons.image, size: 20),
-                                              SizedBox(
+                                              const Icon(Icons.image, size: 20),
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 text.imageFromgallary.tr,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -205,13 +207,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                           },
                                           child:  Row(
                                             children: [
-                                              Icon(Icons.camera_alt),
-                                              SizedBox(
+                                              const Icon(Icons.camera_alt),
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                   text.imageFromCamra.tr,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -239,17 +241,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               SizedBox(
                 height: height * 0.03,
-              ),
-              customView.text(
-                  text.H_Enter_Username.tr, 10.0, FontWeight.w600, MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(
-                  context, userNameCtrl, text.H_Enter_Username.tr, TextInputType.text),
-              const Divider(
-                thickness: 2.0,
-                height: 50.0,
               ),
               Row(
                 children: [
@@ -298,17 +289,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               customView.myField(
                   context, emailCtrl, text.enterEmail.tr, TextInputType.text),
-              const Divider(
-                thickness: 2.0,
-                height: 50.0,
-              ),
-              customView.text(text.yourHealthCardCode.tr, 10.0, FontWeight.w600,
-                  MyColor.black),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              customView.myField(context, healthCardCtrl,
-                  text.enterHealthCardCode.tr, TextInputType.text),
+
               SizedBox(
                 height: height * 0.03,
               ),
@@ -329,9 +310,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     counterText: '',
                     filled: true,
                     fillColor: Colors.white,
-                    constraints: BoxConstraints.expand(),
+                    constraints: const BoxConstraints.expand(),
                     labelText: text.Phone_Number.tr,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.all(
                         Radius.circular(5),
@@ -368,24 +349,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(
-                           text.yourGender.tr, 10.0, FontWeight.w600, MyColor.black),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        customView.myField(
-                            context, genderCtr,  text.yourGender.tr, TextInputType.text),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
+
                   Expanded(
                     flex: 1,
                     child: Column(
@@ -454,12 +418,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customView.text(
-                            text.taxCode.tr, 10.0, FontWeight.w600, MyColor.black),
+                            text.TRM.tr, 10.0, FontWeight.w600, MyColor.black),
                         SizedBox(
                           height: height * 0.01,
                         ),
                         customView.myField(
-                            context, taxCtr, text.taxCode.tr, TextInputType.text),
+                            context, taxCtr, text.TRM.tr, TextInputType.text),
                       ],
                     ),
                   ),
@@ -541,7 +505,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: AnimatedButton(
           text: text.saveProfile.tr,
-          color: MyColor.primary,
+          color: MyColor.red,
           pressEvent: ()async {
             if(await latLong(addressCtrl.text)){
               profileCtr.patientProfileUpdate(
@@ -550,7 +514,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   sureNameCtrl.text,
                   userNameCtrl.text,
                   emailCtrl.text,
-                  healthCardCtrl.text,
+                  // healthCardCtrl.text,
                   addressCtrl.text,
                   phoneNumberCtrl.text,
                   code,
@@ -591,6 +555,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       ),
     );
   }
+   );}
 
   Widget myField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {
@@ -630,9 +595,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       return false;
     }
   }
-
-
-
 
   void imagePopUp(BuildContext context, String image) {
     showGeneralDialog(
