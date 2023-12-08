@@ -167,15 +167,17 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                     });
                   },
                   child: Card(
-                    color: MyColor.midgray,
+
+                    elevation: 1,
+                   surfaceTintColor: Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7.0, vertical: 10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(completeList.name.toString(), 14.0,
-                              FontWeight.w500, Colors.black),
+                          customView.text(completeList.name.toString().toUpperCase(), 14.0,
+                              FontWeight.w400, Colors.black),
                           const SizedBox(
                             height: 10.0,
                           ),

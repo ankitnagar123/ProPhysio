@@ -210,7 +210,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                             ],
                           ),
                         ),
-                        const Divider(),
+                         const Divider(color: Colors.grey),
                         custom.text(text.information.tr, 15,
                             FontWeight.w500, MyColor.black),
                         SizedBox(

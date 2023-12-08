@@ -81,7 +81,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   }
 
   void _choose(ImageSource source) async {
-    final pickedFile = await picker.getImage(
+    final pickedFile = await picker.pickImage(
       source: source,
       imageQuality: 100,
     );

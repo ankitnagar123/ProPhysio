@@ -94,7 +94,7 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     children: <Widget>[
-                      const Divider(),
+                       const Divider(color: Colors.grey),
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(

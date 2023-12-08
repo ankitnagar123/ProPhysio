@@ -88,6 +88,8 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                           },
                           // onTap: () => showBottomSheet(medicineName.toString(),medicineSlot.toString(),medicineTime.toString(),medicineDrName.toString(),medicineDrSurname.toString(),medicineDisc.toString()),
                           child: Card(
+                            surfaceTintColor: Colors.grey,
+
                             color: MyColor.midgray,
                             child: ListTile(
                               trailing: const Icon(Icons.arrow_forward_ios,

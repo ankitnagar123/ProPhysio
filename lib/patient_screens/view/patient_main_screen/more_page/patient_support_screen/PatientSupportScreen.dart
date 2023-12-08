@@ -79,7 +79,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Divider(),
+                   const Divider(color: Colors.grey),
                   customView.text(text.ContactSupport.tr, 14.0,
                       FontWeight.w500, Colors.black),
                   SizedBox(

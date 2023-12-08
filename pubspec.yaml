@@ -35,16 +35,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  geolocator: ^9.0.2
+  geolocator: ^10.1.0
   firebase_core: ^2.10.0
   firebase_messaging: ^14.4.1
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^16.2.0
 #  flutter_pdfview: ^1.2.2
   path_provider: ^2.0.10
 #  pdf: ^3.1.0
   #  path: ^1.8.0
   permission_handler:
-  dio: ^4.0.6
+  dio: ^5.4.0
   intl:
   zego_uikit_prebuilt_call: ^3.14.0
   zego_uikit_signaling_plugin: ^2.5.0
@@ -58,30 +58,30 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
   get: ^4.6.5
   printing: ^5.11.0
   custom_info_window: ^1.0.1
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
-  image_picker: ^0.8.6
+  image_picker: ^1.0.4
   file_picker:
   open_file: ^3.2.1
   shared_preferences: ^2.0.17
   intl_phone_field: ^3.1.0
   date_picker_timeline: ^1.2.3
-  shimmer: ^2.0.0
+  shimmer: ^3.0.0
   google_maps_flutter: ^2.2.5
   url_launcher: ^6.1.10
   flutter_google_places: ^0.3.0
   geocoding: ^2.0.5
   uuid: ^3.0.7
-  flutter_map: ^0.13.1
+  flutter_map: ^4.0.0
   flutter_calendar_carousel:
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.4.2
   awesome_dialog: ^3.0.2
-  connectivity_plus: ^3.0.3
+  connectivity_plus: ^5.0.2
   mobile_scanner: ^3.2.0
 #  agora_rtc_engine: ^6.2.2
   wakelock:

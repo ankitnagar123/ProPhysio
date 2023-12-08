@@ -142,6 +142,8 @@ class PatientSignUpCtr extends GetxController {
       String height,
       String taxCode,
       String gender,
+      String dob,
+      String branchId,
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
@@ -160,6 +162,8 @@ class PatientSignUpCtr extends GetxController {
       "height": height,
       "tax_code": taxCode,
       "gender": gender,
+      "dob": dob,
+      "branch_id": branchId,
     };
     print("Signup-Parameter$signupPerameter");
     final response = await http.post(

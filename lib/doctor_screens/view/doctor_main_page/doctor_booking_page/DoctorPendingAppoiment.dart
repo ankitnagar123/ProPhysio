@@ -157,7 +157,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                     });
                   },
                   child: Card(
-                    color: MyColor.midgray,
+                    color: Colors.grey,
+                    elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7.0, vertical: 10.0),
@@ -204,8 +205,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           const SizedBox(
                             height: 8.0,
                           ),
-                          custom.text(pendingList.name.toString(), 14.0,
-                              FontWeight.w500, Colors.black),
+                          custom.text(pendingList.name.toString().toUpperCase(), 14.0,
+                              FontWeight.w400, Colors.black),
                           const SizedBox(
                             height: 10.0,
                           ),

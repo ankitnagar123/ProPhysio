@@ -55,16 +55,18 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
           SizedBox(
             height: 50,
             child: TabBar(
+              indicatorSize: TabBarIndicatorSize.tab,
               padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
               labelPadding: const EdgeInsets.all(7.0),
               indicatorColor: MyColor.red,
-              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.3),borderRadius: BorderRadius.circular(25),),
+              labelColor: Colors.white,
+              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
               unselectedLabelColor: Colors.black,
               controller: tabController,
               // indicatorWeight: 0,
               tabs:  [
                 Tab(
-                    child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
+                    child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins",),)
                 ),
                 Tab(
                   child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),

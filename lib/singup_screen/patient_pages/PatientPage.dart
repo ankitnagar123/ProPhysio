@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../Helper/RoutHelper/RoutHelper.dart';
+import '../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
@@ -20,6 +23,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
   /*-----------Get-x Controller initialize----------------*/
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
 
   //*************Controllers*************//
   TextEditingController nameCtr = TextEditingController();
@@ -27,15 +31,24 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
   TextEditingController emailCtr = TextEditingController();
   TextEditingController phoneCtr = TextEditingController();
-
   TextEditingController weightCtr = TextEditingController();
   TextEditingController ageCtr = TextEditingController();
   TextEditingController heightCtr = TextEditingController();
   TextEditingController trmCtr = TextEditingController();
   TextEditingController birthPlaceCtr = TextEditingController();
+  TextEditingController birthDateCtr = TextEditingController();
+  String? selectedBranch;
 
+  DateTime? startDate;
+
+  String _displayText(DateTime? date) {
+    if (date != null) {
+      return date.toString().split(' ')[0];
+    } else {
+      return '';
+    }
+  }
   TextEditingController passwordCtr = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
 
   bool _isHidden = true;
 
@@ -47,7 +60,11 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
 
   String _selectedGender = '';
-
+@override
+  void initState() {
+    super.initState();
+    doctorSignUpCtr.branchListApi();
+}
   @override
   Widget build(BuildContext context) {
     final widht = MediaQuery.of(context).size.width;
@@ -93,8 +110,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Enter_Name.tr, 12.0,
-                            FontWeight.w600, MyColor.primary1),
+                        customView.text(text.Enter_Name.tr, 13.0,
+                            FontWeight.w500, MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
                         ),
@@ -110,8 +127,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Enter_Surname.tr, 12.0,
-                            FontWeight.w600, MyColor.primary1),
+                        customView.text(text.Enter_Surname.tr, 13.0,
+                            FontWeight.w500, MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
                         ),
@@ -135,7 +152,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               height: 17.0,
             ),*/
             customView.text(
-                text.Enter_Email.tr, 12.0, FontWeight.w600, MyColor.primary1),
+                text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
@@ -151,7 +168,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Age.tr, 12.0, FontWeight.w600,
+                        customView.text(text.Age.tr, 13.0, FontWeight.w500,
                             MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
@@ -173,7 +190,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Weight.tr, 12.0, FontWeight.w600,
+                        customView.text(text.Weight.tr, 13.0, FontWeight.w500,
                             MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
@@ -190,7 +207,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Height.tr, 12.0, FontWeight.w600,
+                        customView.text(text.Height.tr, 13.0, FontWeight.w500,
                             MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
@@ -213,7 +230,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.TRM.tr, 12.0, FontWeight.w600,
+                        customView.text(text.TRM.tr, 13.0, FontWeight.w500,
                             MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
@@ -230,8 +247,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        customView.text(text.Birth_Place.tr, 12.0,
-                            FontWeight.w600, MyColor.primary1),
+                        customView.text(text.Birth_Place.tr, 13.0,
+                            FontWeight.w500, MyColor.primary1),
                         const SizedBox(
                           height: 3.0,
                         ),
@@ -241,12 +258,59 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     ))
               ],
             ),
-
+            const SizedBox(
+              height: 17.0,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: customView.text(
+                  text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
+            ),
+            Container(
+                height: 45.0,
+                width: MediaQuery.of(context).size.width / 0.9,
+                padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
+                margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(7)),
+                child: TextFormField(
+                  onTap: () async {
+                    startDate = await pickDate();
+                    birthDateCtr.text = _displayText(startDate);
+                    setState(() {});
+                  },
+                  readOnly: true,
+                  controller: birthDateCtr,
+                  decoration:  InputDecoration(
+                    hintText: text.Select_Date.tr,
+                    hintStyle: const TextStyle(fontSize: 15),
+                    suffixIcon:
+                    const Icon(Icons.calendar_month, color: MyColor.primary),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                  ),
+                )),
              const SizedBox(
               height: 17.0,
             ),
+
+            Align(
+              alignment: Alignment.topLeft,
+              child: customView.text(text.Select_Branch.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            branch(),
+            const SizedBox(
+              height: 17.0,
+            ),
             customView.text(
-                text.Gender.tr, 12.0, FontWeight.w600, MyColor.primary1),
+                text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
@@ -296,7 +360,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               height: 22.0,
             ),
             customView.text(
-                text.Phone_Number.tr, 12.0, FontWeight.w600, MyColor.primary1),
+                text.Phone_Number.tr, 13.0, FontWeight.w500, MyColor.primary1),
             const SizedBox(
               height: 3.0,
             ),
@@ -338,7 +402,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
             const SizedBox(
               height: 15.0,
             ),
-            customView.text(text.Create_Passsword.tr, 12.0, FontWeight.w600,
+            customView.text(text.Create_Passsword.tr, 13.0, FontWeight.w500,
                 MyColor.primary1),
             const SizedBox(
               height: 3.0,
@@ -393,6 +457,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       'birthPlace': birthPlaceCtr.text,
                       'age': ageCtr.text,
                       'gender': _selectedGender,
+                      'dob': birthDateCtr.text,
+                      'branchId': selectedBranch.toString(),
                     };
                     if (_sendDataToVerificationScrn(context)) {
                       patientSignUpCtr.PatientSignupOtpVerification(
@@ -457,5 +523,80 @@ class _PatientSignUpState extends State<PatientSignUp> {
       return true;
     }
     return false;
+  }
+
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.065,
+            width: widht * 1.1,
+            padding: const EdgeInsets.all(10),
+            // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint:  Text(text.Select_Branch.tr),
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY selected Branch>>>$selectedBranch');
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  Future<DateTime?> pickDate() async {
+    return await showDatePicker(
+      keyboardType: const TextInputType.numberWithOptions(),
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2999),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: MyColor.primary, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.brown, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: MyColor.primary, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
   }
 }

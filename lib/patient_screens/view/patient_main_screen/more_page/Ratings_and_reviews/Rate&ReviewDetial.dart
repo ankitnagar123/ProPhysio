@@ -75,7 +75,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(

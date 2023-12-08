@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 
+import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
@@ -25,6 +26,8 @@ class PatientProfileScreen extends StatefulWidget {
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
   CustomView customView = CustomView();
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
+
   LocalString text = LocalString();
 
   TextEditingController userNameCtrl = TextEditingController();
@@ -39,8 +42,18 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   TextEditingController heightCtr = TextEditingController();
   TextEditingController taxCtr = TextEditingController();
   TextEditingController birthPlaceCtr = TextEditingController();
-  TextEditingController genderCtr = TextEditingController();
+  TextEditingController birthDateCtr = TextEditingController();
+  String? selectedBranch;
 
+  DateTime? startDate;
+
+  String _displayText(DateTime? date) {
+    if (date != null) {
+      return date.toString().split(' ')[0];
+    } else {
+      return '';
+    }
+  }
   String qRCode = "";
   String files = "";
   String code = '';
@@ -76,6 +89,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   void initState() {
     super.initState();
       profileCtr.patientProfile(context);
+    doctorSignUpCtr.branchListApi();
+
   }
 
   @override
@@ -103,7 +118,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         weightCtr.text = profileCtr.weight.value;
         taxCtr.text = profileCtr.taxCode.value;
         birthPlaceCtr.text = profileCtr.birthplace.value;
-        genderCtr.text = profileCtr.gender.value;
+        birthDateCtr.text = profileCtr.dob.value;
+        selectedBranch = profileCtr.branchId.value;
       }
     return Scaffold(
       appBar: AppBar(
@@ -450,6 +466,57 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               SizedBox(
                 height: height * 0.03,
               ),
+              const SizedBox(
+                height: 17.0,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: customView.text(
+                    text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              ),
+              Container(
+                  height: 45.0,
+                  width: MediaQuery.of(context).size.width / 0.9,
+                  padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
+                  margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(7)),
+                  child: TextFormField(
+                    onTap: () async {
+                      startDate = await pickDate();
+                      birthDateCtr.text = _displayText(startDate);
+                      setState(() {});
+                    },
+                    readOnly: true,
+                    controller: birthDateCtr,
+                    decoration:  InputDecoration(
+                      hintText: text.Select_Date.tr,
+                      hintStyle: const TextStyle(fontSize: 15),
+                      suffixIcon:
+                      const Icon(Icons.calendar_month, color: MyColor.primary),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                    ),
+                  )),
+              const SizedBox(
+                height: 17.0,
+              ),
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: customView.text(text.Select_Branch.tr, 13.0,
+                    FontWeight.w500, MyColor.primary1),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              branch(),
+              const SizedBox(
+                height: 17.0,
+              ),
               customView.text(
                   text.yourGender.tr, 10.0, FontWeight.w600, MyColor.black),
               SizedBox(
@@ -476,6 +543,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       title:  Text(text.Male.tr),
                     ),
                   ),
+
                   Expanded(
                     flex: 1,
                     child: ListTile(
@@ -521,14 +589,16 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   flag,
                   imagename,
                   baseimage,
-                  genderCtr.text,
+                  _selectedGender.toString(),
                   latitude,
                   longitude,
                   ageCtr.text,
                   weightCtr.text,
                   heightCtr.text,
                   birthPlaceCtr.text,
-                  taxCtr.text, () {
+                  taxCtr.text,
+                      birthDateCtr.text,selectedBranch.toString(),
+                      () {
                 AwesomeDialog(
                   context: context,
                   animType: AnimType.leftSlide,
@@ -556,6 +626,85 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     );
   }
    );}
+
+
+
+  Future<DateTime?> pickDate() async {
+    return await showDatePicker(
+      keyboardType: const TextInputType.numberWithOptions(),
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2999),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: MyColor.primary, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.brown, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: MyColor.primary, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+  }
+
+
+
+
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.065,
+            width: widht * 1.1,
+            padding: const EdgeInsets.all(10),
+            // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint:  Text(text.Select_Branch.tr),
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY selected Branch>>>$selectedBranch');
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget myField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {

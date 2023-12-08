@@ -111,7 +111,7 @@ centerAuthCtr.centerDetails(context, centerId.toString());
                         ],
                       ),
 
-                      const Divider(),
+                       const Divider(color: Colors.grey),
                       Align(
                         alignment: Alignment.topLeft,
                         child: custom.text(text.Centerward.tr, 15,

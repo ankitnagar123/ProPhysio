@@ -42,7 +42,7 @@ class _CenterProfileState extends State<CenterProfile> {
   String long = "";
 
   void _choose(ImageSource source) async {
-    final pickedFile = await picker.getImage(
+    final pickedFile = await picker.pickImage(
       source: source,
       imageQuality: 100,
     );

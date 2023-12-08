@@ -170,7 +170,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     });
                   },
                   child: Card(
-                    color: MyColor.midgray,
+                    color: Colors.grey,
+                    elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7.0, vertical: 10.0),
@@ -217,8 +218,8 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           const SizedBox(
                             height: 8.0,
                           ),
-                          custom.text(upcomingList.name.toString(), 14.0,
-                              FontWeight.w500, Colors.black),
+                          custom.text(upcomingList.name.toString().toUpperCase(), 14.0,
+                              FontWeight.w400, Colors.black),
                           const SizedBox(
                             height: 10.0,
                           ),
@@ -345,7 +346,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                           const SizedBox(
                             height: 2.0,
                           ),
-                          Text(bookingController.name.value,
+                          Text(bookingController.name.value.toUpperCase(),
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14.0,

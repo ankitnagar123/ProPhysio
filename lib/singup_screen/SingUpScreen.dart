@@ -33,6 +33,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             ),
           ),
           bottom:  TabBar(
+            indicatorSize:  TabBarIndicatorSize.tab,
             padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
             labelPadding: const EdgeInsets.all(7.0),
             indicatorColor: MyColor.red,

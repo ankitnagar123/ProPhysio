@@ -97,7 +97,7 @@ print("cat$cat");
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
+             const Divider(color: Colors.grey),
             SizedBox(
               height: height * 0.03,
             ),

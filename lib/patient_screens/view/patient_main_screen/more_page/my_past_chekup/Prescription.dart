@@ -152,7 +152,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
 
             const Divider(
               height: 50,
-              thickness: 2,
+
             ),
             Align(
               alignment: Alignment.topLeft,
@@ -174,7 +174,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                       .length,
                   itemBuilder: (context, index) {
                     return Card(
-                      color: MyColor.midgray,
+                      surfaceTintColor: Colors.grey,
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(10),
                         title: custom.text(
@@ -271,7 +271,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
   String filename = "";
 
   void _chooseDegree() async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 100,);
     setState(() {

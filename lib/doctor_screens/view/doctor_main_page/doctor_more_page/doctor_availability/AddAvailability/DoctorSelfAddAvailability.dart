@@ -77,7 +77,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                 ),
               ),
             ),
-            const Divider(),
+             const Divider(color: Colors.grey),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Align(
@@ -183,7 +183,7 @@ class _MyAvailabilityState extends State<MyAvailability> {
                         fontFamily: 'Heebo',
                         letterSpacing: 0.8)):const Text(""),
 
-            const Divider(),
+             const Divider(color: Colors.grey),
             Padding(
               padding: const EdgeInsets.only(left: 20.0,),
               child: Align(

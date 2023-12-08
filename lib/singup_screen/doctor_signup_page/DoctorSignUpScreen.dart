@@ -445,7 +445,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             Container(
                 height: 45.0,
                 width: MediaQuery.of(context).size.width / 0.9,
-                padding:  const EdgeInsets.only(left: 10.0, bottom: 5),
+                padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
                 margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -1294,7 +1294,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   String degreefilename = "";
 
   void _chooseDegree() async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 100,
        );

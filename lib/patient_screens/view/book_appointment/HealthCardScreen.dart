@@ -99,7 +99,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
             children: [
-            const Divider(),
+             const Divider(color: Colors.grey),
             SizedBox(
             height: height * 0.02,
             ),

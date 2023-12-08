@@ -52,7 +52,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 custom.text(
                     text.forgot_Password.tr, 23, FontWeight.w700, MyColor.black),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 SizedBox(height: height * 0.02),
                 custom.text(
                     text.forgot_line.tr,

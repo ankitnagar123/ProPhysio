@@ -92,7 +92,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   custom.text(cdate1, 19, FontWeight.w600, MyColor.black),
                 ],
               ),
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.02,
               ),

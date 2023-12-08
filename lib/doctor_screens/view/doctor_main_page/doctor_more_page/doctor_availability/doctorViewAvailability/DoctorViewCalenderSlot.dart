@@ -256,7 +256,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
 
-                const Divider(),
+                 const Divider(color: Colors.grey),
 
                 appointmentController.dateList.isEmpty
                     ?  Center(
@@ -266,7 +266,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
                         margin: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: _calendarCarouselNoHeader,
                       ),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 //
               ],
             ),

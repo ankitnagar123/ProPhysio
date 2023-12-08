@@ -67,7 +67,7 @@ class _BookingPageState extends State<BookingPage> {
               const SizedBox(
                 height: 7.0,
               ),
-              const Divider(),
+              const Divider(color: Colors.grey),
               showList(),
             ],
           ),

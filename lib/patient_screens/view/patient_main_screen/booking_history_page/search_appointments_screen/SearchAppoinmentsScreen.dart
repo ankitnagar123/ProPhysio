@@ -112,7 +112,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ),
                 ),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 Row(
                   children: [
                     Expanded(
@@ -202,7 +202,7 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     });
                   },
                   child: Card(
-                    color: MyColor.midgray,
+                  surfaceTintColor: Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7.0, vertical: 10.0),

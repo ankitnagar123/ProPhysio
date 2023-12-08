@@ -138,31 +138,34 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     children: <Widget>[
-                      const Divider(),
-                      DatePicker(
-                        DateTime.now(),
-                        initialSelectedDate: DateTime(int.parse(widget.year),
-                            int.parse(widget.month), int.parse(widget.day)),
-                        selectionColor: MyColor.primary,
-                        selectedTextColor: Colors.white,
-                        onDateChange: (date) {
-                          // New date selected
-                          setState(() {
-                            appointmentController.seletedtime.value =
-                                DateFormat("yyyy-MM-dd").format(date);
-                            /*-------doctor Time Slots Fetch API Hit-------*/
-                            // print(_selectedValue);
-                            _selectedValue = date;
-                            print(formateddate);
-                            appointmentController.doctorTimeSlotsFetch(
-                                id.toString(),
-                                appointmentController.seletedtime.value
-                                    .toString(),
-                                centerId);
-                          });
-                        },
+                       const Divider(color: Colors.grey),
+                      SizedBox(
+                        height: 90,
+                        child: DatePicker(
+                          DateTime.now(),
+                          initialSelectedDate: DateTime(int.parse(widget.year),
+                              int.parse(widget.month), int.parse(widget.day)),
+                          selectionColor: MyColor.primary,
+                          selectedTextColor: Colors.white,
+                          onDateChange: (date) {
+                            // New date selected
+                            setState(() {
+                              appointmentController.seletedtime.value =
+                                  DateFormat("yyyy-MM-dd").format(date);
+                              /*-------doctor Time Slots Fetch API Hit-------*/
+                              // print(_selectedValue);
+                              _selectedValue = date;
+                              print(formateddate);
+                              appointmentController.doctorTimeSlotsFetch(
+                                  id.toString(),
+                                  appointmentController.seletedtime.value
+                                      .toString(),
+                                  centerId);
+                            });
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(

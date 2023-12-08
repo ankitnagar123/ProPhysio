@@ -57,7 +57,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           }
           return Column(
             children: [
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.022,
               ),
@@ -94,7 +94,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
               SizedBox(
                 height: height * 0.1,
               ),
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.022,
               ),

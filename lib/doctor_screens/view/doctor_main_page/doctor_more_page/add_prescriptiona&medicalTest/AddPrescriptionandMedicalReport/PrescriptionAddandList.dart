@@ -423,7 +423,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
   String filename = "";
 
   void _chooseDegree() async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 100,);
     setState(() {

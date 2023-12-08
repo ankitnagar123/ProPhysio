@@ -121,8 +121,9 @@ class _calenderState extends State<calender> {
       log("last date******$lDay $lMonth $lYear");
     }
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
-     minSelectedDate:   sDay == null?DateTime.now():DateTime(sYear!, sMonth!, sDay!),
-      maxSelectedDate:lDay == null?DateTime.now():DateTime(lYear!, lMonth!, lDay!),
+
+     // minSelectedDate:   DateTime.now(),
+      // maxSelectedDate:lDay == null?DateTime.now():DateTime(lYear!, lMonth!, lDay!),
       onDayPressed: (DateTime selectDay, event) {
         setState(() {
           selectedDay = selectDay;
@@ -169,7 +170,7 @@ class _calenderState extends State<calender> {
       todayButtonColor: MyColor.midgray,
       todayTextStyle: const TextStyle(color: Colors.black),
       todayBorderColor: Colors.black,
-      markedDatesMap: _markedDateMap,
+      // markedDatesMap: _markedDateMap,
       markedDateShowIcon: true,
       markedDateIconMargin: 0.0,
       customGridViewPhysics: const BouncingScrollPhysics(),
@@ -266,7 +267,7 @@ class _calenderState extends State<calender> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 appointmentController.dateList.isEmpty
                     ?  Center(
                         child: Text(text.noTimeSlotAvailableMoment.tr))
@@ -275,7 +276,7 @@ class _calenderState extends State<calender> {
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: _calendarCarouselNoHeader,
                 ),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 //
               ],
             ),

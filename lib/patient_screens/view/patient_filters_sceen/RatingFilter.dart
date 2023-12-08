@@ -79,7 +79,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.02,
               ),

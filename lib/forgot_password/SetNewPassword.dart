@@ -79,7 +79,7 @@ var userType = "";
                 ),
                 custom.text(text.Create_New_One.tr, 23, FontWeight.w700,
                     MyColor.black),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 SizedBox(
                     height: height * 0.02
                 ),

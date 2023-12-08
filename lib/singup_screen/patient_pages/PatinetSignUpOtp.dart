@@ -60,9 +60,6 @@ LocalString text = LocalString();
     }
   }
 
-
-
-
   TextEditingController optctr = TextEditingController();
   CustomView custom = CustomView();
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
@@ -79,6 +76,10 @@ LocalString text = LocalString();
   var age = "";
   var gender = "";
 var flag ="";
+var dob ="";
+var branchId ="";
+
+
   @override
   void initState() {
     super.initState();
@@ -97,10 +98,12 @@ var flag ="";
     taxCode = Get.parameters['tax'].toString();
     age = Get.parameters['age'].toString();
     flag = Get.parameters['flag'].toString();
-    print(email);
-    print(password);
-    print(code);
-    print(healthCode);
+    dob = Get.parameters['dob'].toString();
+    branchId = Get.parameters['branchId'].toString();
+    log(email);
+    log(password);
+    log(code);
+    log(healthCode);
     patientSignUpCtr.PatientSignupOtp(context,code,phone,email,);
 
   }
@@ -197,7 +200,7 @@ var flag ="";
                           weight,
                           heightp,
                           taxCode,
-                          gender, () {
+                          gender,dob,branchId, () {
                         custom.massenger(context, text.SignUPSuccess.tr);
                         Get.offAllNamed(RouteHelper.getLoginScreen());
                        /* Navigator.pushReplacement(

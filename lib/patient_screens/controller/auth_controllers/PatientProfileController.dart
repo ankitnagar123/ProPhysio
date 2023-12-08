@@ -41,6 +41,8 @@ class PatientProfileCtr extends GetxController {
   var birthplace = "".obs;
   var qrCode = "".obs;
   var flag = "".obs;
+  var dob = "".obs;
+  var branchId = "".obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
@@ -86,6 +88,8 @@ class PatientProfileCtr extends GetxController {
         height.value = jsonResponse["height"].toString();
         birthplace.value = jsonResponse["birth_place"].toString();
         taxCode.value = jsonResponse["tax_code"].toString();
+        dob.value = jsonResponse["dob"].toString();
+        branchId.value = jsonResponse["branch_id"].toString();
         resultVar.value = 1;
       } else {
         resultVar.value = 2;
@@ -122,6 +126,8 @@ class PatientProfileCtr extends GetxController {
       String height,
       String birthplace,
       String taxcode,
+      String dob,
+      String branchId,
       VoidCallback callback) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
@@ -146,6 +152,8 @@ class PatientProfileCtr extends GetxController {
       "height": height,
       "birth_place": birthplace,
       "tax_code": taxcode,
+      "dob": dob,
+      "branch_id": branchId,
     };
     print("Patient Profile Update Parameter$profileUpdatePerameter");
 

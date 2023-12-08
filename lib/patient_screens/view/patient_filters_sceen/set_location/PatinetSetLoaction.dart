@@ -76,7 +76,7 @@ class _PatientSetLocationState extends State<PatientSetLocation> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             children: [
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.03,
               ),

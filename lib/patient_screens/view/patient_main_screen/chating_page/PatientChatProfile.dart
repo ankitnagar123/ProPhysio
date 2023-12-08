@@ -80,7 +80,7 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Divider(),
+             const Divider(color: Colors.grey),
             const SizedBox(
               height: 20,
             ),

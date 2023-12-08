@@ -138,7 +138,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -279,7 +279,7 @@ class _LocationDistanceFilterState extends State<LocationDistanceFilter> {
                       ),
                     );
                   }),*/
-              const Divider(),
+               const Divider(color: Colors.grey),
               SizedBox(
                 height: height * 0.035,
               ),

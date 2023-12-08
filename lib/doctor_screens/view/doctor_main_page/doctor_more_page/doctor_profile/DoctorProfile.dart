@@ -295,7 +295,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   String degreefilename = "";
 
   void _chooseDegree() async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 50,
         maxHeight: 200,
@@ -315,7 +315,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   }
 
   void _choose(ImageSource source) async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: source, imageQuality: 50, maxHeight: 500, maxWidth: 500);
     setState(() {
       if (pickedFile != null) {

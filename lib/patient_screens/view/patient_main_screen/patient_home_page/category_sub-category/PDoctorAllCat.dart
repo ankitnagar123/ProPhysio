@@ -66,7 +66,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
             }else{
               return Column(
                 children: [
-                  const Divider(),
+                   const Divider(color: Colors.grey),
                   Expanded(
                     child: GridView.count(
                       shrinkWrap: true,

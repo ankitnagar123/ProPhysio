@@ -149,7 +149,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
             }, MyColor.primary, const TextStyle(color: MyColor.white)),
             const Divider(
               height: 50,
-              thickness: 2,
+
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,7 +181,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                 doctorPrescriptionCtr.patientPrescriptionList.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: MyColor.midgray,
+                    surfaceTintColor: Colors.grey,
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(10),
                       title: custom.text(
@@ -274,7 +274,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
   String filename = "";
 
   void _chooseDegree() async {
-    final pickedFile = await degreepicker.getImage(
+    final pickedFile = await degreepicker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 100,);
     setState(() {

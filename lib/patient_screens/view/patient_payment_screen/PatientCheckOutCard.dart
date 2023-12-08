@@ -99,7 +99,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
               ? cardLoadingShimmer(width)
               : Column(
                   children: [
-                    const Divider(),
+                     const Divider(color: Colors.grey),
                     SizedBox(
                       height: height * 0.02,
                     ),

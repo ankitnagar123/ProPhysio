@@ -167,7 +167,7 @@ class _HomeViewState extends State<HomeView> {
                             placeholderFit: BoxFit.cover,
                           ),
                         ),
-const Divider(),
+ const Divider(color: Colors.grey),
                         const SizedBox(
                           width: 15,
                         ),

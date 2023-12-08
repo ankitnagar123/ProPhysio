@@ -60,7 +60,7 @@ LocalString text = LocalString();
             }
             return Column(
               children: [
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 SizedBox(
                   height: height * 0.022,
                 ),
@@ -157,7 +157,7 @@ LocalString text = LocalString();
                 SizedBox(
                   height: height * 0.022,
                 ),
-                const Divider(),
+                 const Divider(color: Colors.grey),
                 SizedBox(
                   height: height * 0.022,
                 ),

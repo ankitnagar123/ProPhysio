@@ -1,6 +1,6 @@
 # medica
 
-A new Flutter project.
+EMR ProPhysio project 
 
 ## Getting Started
 

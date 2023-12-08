@@ -81,7 +81,7 @@ class _DoctorCenterAddAvailabilityState
                 ),
               ),
             ),
-            const Divider(),
+             const Divider(color: Colors.grey),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Align(
@@ -204,7 +204,7 @@ class _DoctorCenterAddAvailabilityState
                       fontFamily: 'Heebo',
                       letterSpacing: 0.8)),
             ) : const Text(""),
-            const Divider(),
+             const Divider(color: Colors.grey),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 10.0),
               child: Align(
