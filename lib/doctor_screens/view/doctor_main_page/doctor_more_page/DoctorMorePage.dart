@@ -13,6 +13,7 @@ import '../../../controller/CenterRequestCtr.dart';
 import '../../../controller/DoctorProfileController.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/AddAvailability/AddAvailabilityTab.dart';
+import 'doctor_availability/doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
 class DoctorMorePage extends StatefulWidget {
   const DoctorMorePage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
     return Obx(() {
       return Scaffold(
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,8 +56,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   width: 40,
                 ),
               ),
-              customView.text("${text.hii.tr} @${doctorProfileCtr.name.value}", 17.0,
-                  FontWeight.w500, Colors.black),
+              customView.text("${text.hii.tr} @${doctorProfileCtr.name.value}",
+                  17.0, FontWeight.w500, Colors.black),
               const SizedBox(
                 height: 20.0,
               ),
@@ -71,7 +72,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                       child: Container(
                         height: MediaQuery.of(context).size.shortestSide / 3.2,
                         decoration: BoxDecoration(
-                          gradient:  LinearGradient(
+                          gradient: LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
                             colors: [MyColor.primary, MyColor.primary1],
@@ -91,8 +92,11 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: customView.text(text.ProfileSettings.tr,
-                                      12.0, FontWeight.w400, Colors.black)),
+                                  child: customView.text(
+                                      text.ProfileSettings.tr,
+                                      12.0,
+                                      FontWeight.w400,
+                                      Colors.black)),
                             )),
                       ),
                     ),
@@ -113,7 +117,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           gradient: const LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
-                            colors: [MyColor.primary, MyColor.primary1  ],
+                            colors: [MyColor.primary, MyColor.primary1],
                           ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -138,7 +142,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   ),
                 ],
               ),
-              const Divider(
+              Divider(
+                color: MyColor.grey.withOpacity(0.5),
                 height: 30.0,
               ),
               ListTile(
@@ -148,44 +153,47 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddAvailabilityTab()));
+                          builder: (context) => const DoctorViewCalender(centerId: ""),));
                   // Get.toNamed(RouteHelper.DSettingScreen());
                 },
                 leading: const Icon(
                   Icons.event_available,
                   color: Colors.black,
                 ),
-                title: customView.text(
-                    text.addAvailability.tr, 14.0, FontWeight.w500, Colors.black),
+                title: customView.text(text.addAvailability.tr, 14.0,
+                    FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 20.0,
                 ),
               ),
-              ListTile(
-                subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
-                    11.0, FontWeight.w400, Colors.black),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const CompleteAppointPrescription()));
-                  // Get.toNamed(RouteHelper.DSettingScreen());
-                },
-                leading: const Icon(
-                  Icons.medical_information,
-                  color: Colors.black,
-                ),
-                title: customView.text(
-                    text.reports.tr, 13.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
+
+              /*prescription*/
+              // ListTile(
+              //   subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
+              //       11.0, FontWeight.w400, Colors.black),
+              //   onTap: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) =>
+              //                 const CompleteAppointPrescription()));
+              //     // Get.toNamed(RouteHelper.DSettingScreen());
+              //   },
+              //   leading: const Icon(
+              //     Icons.medical_information,
+              //     color: Colors.black,
+              //   ),
+              //   title: customView.text(
+              //       text.reports.tr, 13.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
+
               // ListTile(
               //   subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
               //       FontWeight.w400, Colors.black),
@@ -208,14 +216,15 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               //     size: 20.0,
               //   ),
               // ),
+
               ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DSettingScreen());
                 },
-                  leading: const Icon(
-                    Icons.settings,
-                    color: Colors.black,
-                  ),
+                leading: const Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
                 title: customView.text(
                     text.Settings.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
@@ -224,7 +233,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-             /* ListTile(
+              ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DTandCScreen());
                 },
@@ -256,24 +265,25 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
-                onTap: () {
-                  Get.toNamed(RouteHelper.DSupportScreen());
-                },
-                leading: const Icon(
-                  Icons.person_outline,
-                  color: Colors.black,
-                ),
-                title: customView.text(
-                    text.Support.tr, 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),*/
-              const Divider(
-                height: 30.0,
+              // ListTile(
+              //   onTap: () {
+              //     Get.toNamed(RouteHelper.DSupportScreen());
+              //   },
+              //   leading: const Icon(
+              //     Icons.person_outline,
+              //     color: Colors.black,
+              //   ),
+              //   title: customView.text(
+              //       text.Support.tr, 14.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
+              Divider(
+                color: MyColor.grey.withOpacity(0.5),
+                height: 20.0,
               ),
               SizedBox(
                 width: double.infinity,
@@ -323,8 +333,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text(
-                                text.Logout.tr, 17, FontWeight.w500, Colors.black),
+                            child: customView.text(text.Logout.tr, 17,
+                                FontWeight.w500, Colors.black),
                           ),
                           const SizedBox(
                             height: 14.0,
@@ -332,11 +342,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: customView.text(
-                                text.AreyouSureExit.tr,
-                                13,
-                                FontWeight.w400,
-                                Colors.black),
+                            child: customView.text(text.AreyouSureExit.tr, 13,
+                                FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -351,8 +358,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: customView.text(text.Dismiss.tr, 14.0,
-                                        FontWeight.w500, MyColor.grey),
+                                    child: customView.text(text.Dismiss.tr,
+                                        14.0, FontWeight.w500, MyColor.grey),
                                   )),
                               Expanded(
                                 child: customView.mysButton(

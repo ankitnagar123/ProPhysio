@@ -440,9 +440,10 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -470,9 +471,10 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -501,9 +503,10 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -563,9 +566,10 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -618,9 +622,10 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 patientBookingController.status.value == "Cancel"?
                 Row(
                   children: [

@@ -155,7 +155,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                     });
                   },
                   child: Card(
-                    color: MyColor.midgray,
+                    color: MyColor.white,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7.0, vertical: 10.0),
@@ -376,7 +376,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -407,7 +408,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Column(
@@ -479,7 +481,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -534,7 +537,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -564,8 +568,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                  const Divider(
-                    height: 25.0,
+                Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 25,
                   ),
                   status == "Pending"
                       ? Padding(
@@ -736,8 +741,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 ),
                               ],
                             ),
-                  const Divider(
-                    height: 20.0,
+                 Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 20,
                   ),
                 ],
               );

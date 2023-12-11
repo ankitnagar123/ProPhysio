@@ -4,6 +4,7 @@ import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
+import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
 import 'DoctorCenterAddAvailability.dart';
 import 'DoctorSelfAddAvailability.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,8 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
             TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController, children: const [
-              MyAvailability(),
+              DoctorViewCalender(centerId: ""),
+              // MyAvailability(),
               // DoctorCenterAddAvailability(),
             ]),
           ])),

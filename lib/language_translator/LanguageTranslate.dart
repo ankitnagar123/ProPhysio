@@ -205,8 +205,8 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /// ********************DOCTOR SIDE********************** ///
   /* DOCTOR SIDE MORE PAGE */
-  String addAvailabilitySelfCenter = "add availability and check";
-  String addAvailability = "Add Availability";
+  String addAvailabilitySelfCenter = "View availability and check";
+  String addAvailability = "View Availability";
   String prescriptionAndMedicalReports = "prescription and medical reports";
   String reports = "Reports";
   String viewYourMedicalRequest = "View your medical request";
@@ -775,8 +775,8 @@ String NoWardAddedCenter = "No ward added by center";
           ChangeLanguage: "Change language",
 
           /* DOCTOR SIDE MORE PAGE */
-          addAvailabilitySelfCenter: "add availability and check",
-          addAvailability: "Add Availability",
+          addAvailabilitySelfCenter: "View availability and check",
+          addAvailability: "View Availability",
           prescriptionAndMedicalReports: "prescription and medical reports",
           reports: "Reports",
           viewYourMedicalRequest: "View your medical request",

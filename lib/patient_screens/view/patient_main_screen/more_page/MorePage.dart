@@ -187,9 +187,10 @@ class _MorePageState extends State<MorePage> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 ListTile(
                   subtitle: customView.text(text.rateAppointmentYouDid.tr, 10.0,
                       FontWeight.w500, Colors.black),

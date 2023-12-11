@@ -61,22 +61,22 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
-                },
-                leading: const Icon(
-                  Icons.language,
-                  color: Colors.black,
-                ),
-                title: customView.text(
-                    text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
+              //   },
+              //   leading: const Icon(
+              //     Icons.language,
+              //     color: Colors.black,
+              //   ),
+              //   title: customView.text(
+              //       text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
               ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DSupportScreen());

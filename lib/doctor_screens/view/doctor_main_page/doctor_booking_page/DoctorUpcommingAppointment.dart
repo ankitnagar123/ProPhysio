@@ -170,7 +170,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     });
                   },
                   child: Card(
-                    color: Colors.grey,
+                    color: Colors.white,
                     elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -381,9 +381,10 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -412,9 +413,10 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -473,9 +475,10 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -528,9 +531,10 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(

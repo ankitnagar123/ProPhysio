@@ -487,9 +487,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -518,9 +519,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -595,9 +597,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -650,9 +653,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(

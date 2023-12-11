@@ -273,9 +273,10 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -303,9 +304,10 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -334,9 +336,10 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -389,9 +392,10 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
               ],
             ),
           );

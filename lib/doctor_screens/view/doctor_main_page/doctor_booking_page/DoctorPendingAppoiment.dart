@@ -157,7 +157,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                     });
                   },
                   child: Card(
-                    color: Colors.grey,
+                    color: Colors.white,
                     elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -374,7 +374,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -405,7 +406,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Column(
@@ -466,7 +468,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -521,7 +524,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                  const Divider(
+                   Divider(
+                    color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
                   Row(
@@ -551,8 +555,9 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                  const Divider(
-                    height: 25.0,
+                Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 25,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),

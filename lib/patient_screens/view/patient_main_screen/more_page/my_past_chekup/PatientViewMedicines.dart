@@ -186,9 +186,10 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -216,9 +217,10 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -246,9 +248,10 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
                 Row(
                   children: [
                     Expanded(
@@ -276,9 +279,10 @@ class _PatientViewMedicinesState extends State<PatientViewMedicines> {
                     ),
                   ],
                 ),
-                const Divider(
-                  height: 30.0,
-                ),
+               Divider(
+                    color: MyColor.grey.withOpacity(0.5),
+                    height: 30,
+                  ),
               ],
             ),
           );
