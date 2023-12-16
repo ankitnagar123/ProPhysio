@@ -13,7 +13,7 @@ class MyAPI {
   static const String forgotPassword = "get_user_forgot_password";
   static const String setNewPassword = "user_reset_pass";
 
-  /*twilio api for OTP*/
+  /*twilio api for OTP want to change URL */
   static const String send_otp_twiliosms =
       "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 

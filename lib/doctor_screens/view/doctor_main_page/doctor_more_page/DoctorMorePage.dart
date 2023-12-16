@@ -169,7 +169,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
 
-              /*prescription*/
+              /*----------------prescription----------------*/
               // ListTile(
               //   subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
               //       11.0, FontWeight.w400, Colors.black),
@@ -216,7 +216,6 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               //     size: 20.0,
               //   ),
               // ),
-
               ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DSettingScreen());

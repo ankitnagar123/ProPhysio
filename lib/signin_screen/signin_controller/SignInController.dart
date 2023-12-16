@@ -43,6 +43,7 @@ LocalString text =  LocalString();
         String usertype = jsonResponse['user_type'].toString();
         String id = jsonResponse['id'].toString();
         String name = jsonResponse['name'].toString();
+
         String surname = jsonResponse['surname'].toString();
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
@@ -53,7 +54,7 @@ LocalString text =  LocalString();
           if (usertype == "Doctor") {
             loading.value = false;
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
-            log("name..............${sp.DOCTOR_NAME_KEY}-----$surname");
+            log(" name..............${sp.DOCTOR_NAME_KEY}-----$surname");
 
             // sp.setStringValue(keyString, valueString)
 
@@ -71,7 +72,7 @@ LocalString text =  LocalString();
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
 
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-            print(" Patient login ID${id.toString()}");
+            log(" Patient login ID${id.toString()}");
              onUserLogin(id.toString(),id.toString(),"user");
             Get.offAndToNamed(RouteHelper.getBottomNavigation());
           } else if (usertype == "Medical") {
@@ -132,11 +133,12 @@ LocalString text =  LocalString();
     await apiService.postData(MyAPI.updateToken,UpdatePerameter);
     try {
       log("response of Device Update :-${response.body}");
+
       var jsonResponse = jsonDecode(response.body);
       print(jsonResponse);
       if (response.statusCode == 200) {
       } else {
-        print("error");
+        log("error");
       }
     } catch (e) {
       log("exception$e");
