@@ -269,6 +269,8 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
       }),
     );
   }
+
+
   String getSelectedItemCount() {
     return selectedItem.isNotEmpty
         ? text.deleteChat.tr

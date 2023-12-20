@@ -137,7 +137,8 @@ class _BookingPageState extends State<BookingPage> {
                 },
                 child: patientBookingController.booking[index].status ==
                         "Cancel"
-                    ? Card(
+                    ?
+                Card(
                         borderOnForeground: true,
                         shadowColor: Colors.red,
                         shape: const RoundedRectangleBorder(
@@ -317,7 +318,7 @@ class _BookingPageState extends State<BookingPage> {
                         ),
                       )
                     : Card(
-                        color: MyColor.midgray,
+                        surfaceTintColor: Colors.grey,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 7.0, vertical: 10.0),

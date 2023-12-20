@@ -58,25 +58,21 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
   }
 
 /*---Show Icon on Calender custom---*/
-  static Widget _presentIcon(String day, int percent) => Container(
+  static Widget _presentIcon(String day, String status) => Container(
         height: 50.0,
         width: 50.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: percent < 50
+          color: status== "inactive"
               ? const Color(0xffC4DEF2)
-              : percent == 100
-                  ? Colors.red
                   : const Color(0xffDAA558),
         ),
         child: Center(
           child: Text(
             day,
             style: TextStyle(
-              color: percent < 50
-                  ? MyColor.primary1
-                  : percent == 100
-                      ? Colors.white
+              color:status== "inactive"
+                  ? const Color(0xffC4DEF2)
                       : Colors.white,
             ),
           ),
@@ -99,7 +95,7 @@ class _DoctorViewCalenderState extends State<DoctorViewCalender> {
              location: "available",
              date: DateTime(year, month, day),
              icon: _presentIcon(appointmentController.dateList[i].day,
-                 int.parse(appointmentController.dateList[i].percent)),
+                 appointmentController.dateList[i].status),
            ));
 
        sDay = int.parse(appointmentController.dateList[0].day);

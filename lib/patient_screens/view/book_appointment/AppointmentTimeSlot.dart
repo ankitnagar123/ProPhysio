@@ -70,7 +70,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
-              appointmentController.seletedtime.value.toString(), centerId);
+              appointmentController.seletedtime.value.toString(),);
       widget.firstConslt == ""
       ?  appointmentController.doctorVisitChargefetch(id.toString()) : null;
     });
@@ -159,8 +159,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                               appointmentController.doctorTimeSlotsFetch(
                                   id.toString(),
                                   appointmentController.seletedtime.value
-                                      .toString(),
-                                  centerId);
+                                      .toString(),);
                             });
                           },
                         ),
@@ -209,7 +208,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                       },
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                         children: [
                                           Container(
                                             // margin: EdgeInsets.all(10),

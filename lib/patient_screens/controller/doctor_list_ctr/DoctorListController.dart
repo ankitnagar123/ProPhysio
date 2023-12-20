@@ -205,6 +205,10 @@ print(doctorList);
 var category = "".obs;
 var branchName = "".obs;
 var serviceStatus = "".obs;
+var branchId = "".obs;
+
+
+  var resultVar = RxnInt(0);
 
   void doctorDetialsfetch(String id) async {
     final Map<String, dynamic> Peramert = {
@@ -214,9 +218,10 @@ var serviceStatus = "".obs;
     };
     try {
       loadingFetchD.value = true;
+      resultVar.value = 0;
       final response =
           await apiService.postData(MyAPI.pDoctorDetails, Peramert);
-      print("doctor Detail=============${response.body}");
+      log("doctor Detail=============${response.body}");
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse["result"].toString();
       if (result == "Success") {
@@ -224,8 +229,8 @@ var serviceStatus = "".obs;
         String img = jsonResponse["Doctor_document"].toString();
         String location = jsonResponse["location"].toString();
 // category.value = jsonResponse["cat"].jsonResponse["category_name"].toString();
-print("cate..........${category.value}");
-        print(img);
+        log("cate..........${category.value}");
+        log(img);
         fee.value = jsonResponse["fees"].toString();
         doctorname.value = jsonResponse["name"].toString();
         drSurname.value = jsonResponse["surname"].toString();
@@ -240,18 +245,19 @@ print("cate..........${category.value}");
         longitude.value = jsonResponse["longitude"].toString();
         branchName.value = jsonResponse["branch_name"].toString();
         serviceStatus.value = jsonResponse["service_status"].toString();
+        branchId.value = jsonResponse["branch_id"].toString();
+        resultVar.value = 1;
 
-       /* image.value = img;
-        // category.value = jsonResponse["category"].toString();
-        address.value = jsonResponse["location"].toString();
-        // */
       } else {
         loadingFetchD.value = false;
-        print("error");
+        resultVar.value = 2;
+
+        log("error");
       }
     } catch (e) {
       loadingFetchD.value = false;
-      print("exception$e");
+      resultVar.value = 2;
+      log("exception$e");
     }
   }
 

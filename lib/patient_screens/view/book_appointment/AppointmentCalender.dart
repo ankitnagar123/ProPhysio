@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -16,10 +17,10 @@ import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'AppointmentTimeSlot.dart';
 
 class calender extends StatefulWidget {
-  String centerId,firstConslt;
+  String branchId,firstConslt;
    calender({Key? key,
 
-   required this.centerId,
+   required this.branchId,
    required this.firstConslt
    }) : super(key: key);
 
@@ -37,61 +38,63 @@ class _calenderState extends State<calender> {
   DateTime focusedDay = DateTime.now();
   DateTime selectedDay = DateTime.now();
   final EventList<Event> _markedDateMap = EventList<Event>(events: {});
-  late CalendarCarousel _calendarCarouselNoHeader;
+   CalendarCarousel? _calendarCarouselNoHeader;
+  final List<String> bookDate = <String>[];
+
 
   String doctorId = "";
-  String centerId = "";
+  String branchId = "";
 
 
-  int? lMonth;
+/*  int? lMonth;
   int? lDay;
   int? lYear;
 
   int? sMonth;
   int? sDay;
-  int? sYear;
+  int? sYear;*/
+  bool loader = true;
 
 
   @override
   void initState() {
-    centerId = widget.centerId;
-    print("center id $centerId");
+    branchId = widget.branchId;
+    print("center id $branchId");
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorId = doctorListCtr.doctorid.value;
-      appointmentController.dateCalender(doctorId,centerId);
+      appointmentController.dateCalender(doctorId,branchId);
+
+    Timer(const Duration(seconds: 5), () {
+      loader = false;
+      setState(() {
+        getDate();
+      });
     });
   }
 
+
 /*---Show Icon on Calender custom---*/
-  static Widget _presentIcon(String day, int percent) => Container(
-        height: 50.0,
-        width: 50.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: percent < 50
-              ? Color(0xffC4DEF2)
-              : percent == 100
-                  ? Colors.red
-                  : const Color(0xffDAA558),
-        ),
-        child: Center(
-          child: Text(
-            day,
-            style: TextStyle(
-              color: percent < 50
-                  ? MyColor.primary1
-                  : percent == 100
-                      ? Colors.white
-                      : Colors.white,
-            ),
-          ),
-        ),
-      );
+
+  static Widget _presentIcon(String day, String status) => Container(
+
+    height: 50.0,
+    width: 50.0,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: status == "inactive" ? Colors.red : MyColor.primary),
+    child: Center(
+      child: Text(
+        day,
+        style: TextStyle(
+            color: status == "inactive" ? Colors.white : Colors.white),
+      ),
+    ),
+  );
+
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < appointmentController.dateList.length; i++) {
+/*    for (int i = 0; i < appointmentController.dateList.length; i++) {
       int day = int.parse(appointmentController.dateList[i].day);
       int month = int.parse(appointmentController.dateList[i].month);
       int year = int.parse(appointmentController.dateList[i].year);
@@ -104,8 +107,8 @@ class _calenderState extends State<calender> {
             location: "available",
             date: DateTime(year, month, day),
             icon: _presentIcon(appointmentController.dateList[i].day,
-                int.parse(appointmentController.dateList[i].percent)),
-          ));
+                appointmentController.dateList[i].status)),
+          );
 
       sDay = int.parse(appointmentController.dateList[0].day);
       sMonth = int.parse(appointmentController.dateList[0].month);
@@ -133,12 +136,12 @@ class _calenderState extends State<calender> {
           var month = DateFormat("MM").format(selectDay);
           var year = DateFormat("yyyy").format(selectDay);
 
-          /*print("final date$finalDate");
+          *//*print("final date$finalDate");
           if( appointmentController.dateList.isEmpty){
             return custom.MySnackBar(context, text.noTimeSlotDate.tr);
           }else{
 
-          }*/
+          }*//*
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -147,7 +150,7 @@ class _calenderState extends State<calender> {
                     day: day,
                     month: month,
                     year: year,
-                    centerId: centerId, firstConslt: widget.firstConslt,
+                    centerId: branchId, firstConslt: widget.firstConslt,
 
                   )));
           // focusedDay = event;
@@ -181,7 +184,7 @@ class _calenderState extends State<calender> {
       markedDateIconBuilder: (event) {
         return event.icon;
       },
-    );
+    );*/
     return Obx(() {
       return Scaffold(
           appBar: AppBar(
@@ -282,5 +285,96 @@ class _calenderState extends State<calender> {
             ),
           ));
     });
+  }
+  void getDate() {
+    Timer(const Duration(seconds: 2), () {
+      setState(() {
+        for (int i = 0; i < appointmentController.dateList.length; i++) {
+          int day = int.parse(appointmentController.dateList[i].day);
+          int month = int.parse(appointmentController.dateList[i].month);
+          int year = int.parse(appointmentController.dateList[i].year);
+          _markedDateMap.add(
+              DateTime(
+                  int.parse(appointmentController.dateList[i].year),
+                  int.parse(appointmentController.dateList[i].month),
+                  int.parse(appointmentController.dateList[i].day)),
+              Event(
+                location: "available",
+                date: DateTime(
+                    int.parse(appointmentController.dateList[i].year),
+                    int.parse(appointmentController.dateList[i].month),
+                    int.parse(appointmentController.dateList[i].day)),
+                icon: _presentIcon(
+                    appointmentController.dateList[i].day, appointmentController.dateList[i].status),
+              ));
+
+          if (appointmentController.dateList[i].status == "inactive") {
+            bookDate.add(
+                "${appointmentController.dateList[i].year}-${appointmentController.dateList[i].month}-${appointmentController.dateList[i].day}");
+          }
+          /*   sDay = int.parse(controller.checkAvl[0].day);
+          sMonth = int.parse(controller.checkAvl[0].month);
+          sYear = int.parse(controller.checkAvl[0].year);
+          log("first date****$sDay $sMonth $sYear");*/
+
+          /* lDay = int.parse(
+              controller.checkAvl[controller.checkAvl.length - 1].day);
+          lMonth = int.parse(
+              controller.checkAvl[controller.checkAvl.length - 1].month);
+          lYear = int.parse(
+              controller.checkAvl[controller.checkAvl.length - 1].year);
+          log("last date******$lDay $lMonth $lYear");*/
+        }
+
+        _calendarCarouselNoHeader = CalendarCarousel<Event>(
+          minSelectedDate: focusedDay,
+          // maxSelectedDate: DateTime(2025-05-22),
+          onDayPressed: (DateTime selectDay, event) {
+            var finalDate = DateFormat("yyyy-MM-dd").format(selectDay);
+            var day = DateFormat("dd").format(selectDay);
+            var month = DateFormat("MM").format(selectDay);
+            var year = DateFormat("yyyy").format(selectDay);
+            log(finalDate);
+            if (bookDate.contains(finalDate)) {
+              custom.MySnackBar(context, "Doctor not available on this date");
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AppointmentTimeSlot(
+                        date: finalDate,
+                        day: day,
+                        month: month,
+                        year: year,
+                        centerId: branchId, firstConslt: widget.firstConslt,
+                      )));
+            }
+            setState(() {});
+          },
+          weekdayTextStyle: const TextStyle(color: Colors.black),
+          height: MediaQuery.of(context).size.height,
+          rightButtonIcon: const Icon(Icons.arrow_circle_right, color: MyColor.primary),
+          leftButtonIcon: const Icon(Icons.arrow_circle_left, color: MyColor.primary),
+          headerMargin: const EdgeInsets.only(bottom: 20, top: 10.0),
+          headerTextStyle: const TextStyle(color: MyColor.primary, fontSize: 18, fontFamily: "Lato"),
+          weekendTextStyle: const TextStyle(
+            color: Colors.black,
+          ),
+          todayButtonColor: Colors.white,
+          todayTextStyle: const TextStyle(color: Colors.black),
+
+          markedDatesMap: _markedDateMap,
+          markedDateShowIcon: true,
+          markedDateIconMargin: 0.0,
+          customGridViewPhysics: const BouncingScrollPhysics(),
+          markedDateIconMaxShown: 1,
+          markedDateMoreShowTotal: null,
+          // null for not showing hidden events indicator
+          markedDateIconBuilder: (event) {
+            return event.icon;
+          },
+        );});
+    });
+    setState(() {});
   }
 }

@@ -76,7 +76,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
     print("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
-      _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);
       });
     });
@@ -113,7 +113,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                   onPressed: onSendCallInvitationFinished,
                   icon: ButtonIcon(icon: const Icon(Icons.video_call,color: Colors.white,),),
                 ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
                 ZegoSendCallInvitationButton(
@@ -168,7 +168,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                  ClipRRect(
-                  borderRadius: BorderRadius.circular(100.0),
+                  borderRadius: BorderRadius.circular(30.0),
                   child: FadeInImage.assetNetwork(
                     imageErrorBuilder: (context, error, stackTrace) =>
                         Image.asset("assets/images/dummyprofile.png",
@@ -182,13 +182,13 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                   ),
                 ),
                 const SizedBox(
-                  width: 12.0,
+                  width: 8.0,
                 ),
                 SizedBox(
                   width: 70,
                   child: Text(
-                    "$doctorName",
-                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16),
+                    doctorName,
+                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16,color: Colors.white70),
                   ),
                 ),
 

@@ -43,6 +43,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   String doc = "";
   String latitude = "";
   String longitude = "";
+  String branchId = "";
 
   @override
   void initState() {
@@ -51,25 +52,31 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     CenterId = widget.centerId.toString();
     log("doctor my  id$doctorId");
     log("center id ${widget.centerId} ==$CenterId");
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    appointmentController.dateCalender(doctorId,branchId);
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
       patientRatingCtr.fetchRating(doctorId);
       doctorListCtr.doctorDetialsfetch(doctorId);
-      appointmentController.dateCalender(doctorId, CenterId);
       doctorSpecializationCtr.specializationFetch(doctorId);
-    });
-    img = doctorListCtr.image.value.toString();
-    doc = doctorListCtr.doc.value.toString();
-    log("doctor =img${doctorListCtr.image.value.toString()}");
-    log("doctor =doc${doctorListCtr.doc.value.toString()}");
-    latitude = doctorListCtr.latitude.value.toString();
-    longitude = doctorListCtr.longitude.value.toString();
-    address = doctorListCtr.address.value;
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Obx(() {
+      if(doctorListCtr.resultVar.value == 1){
+        doctorListCtr.resultVar.value = 0;
+
+        img = doctorListCtr.image.value.toString();
+        doc = doctorListCtr.doc.value.toString();
+        log("doctor =img${doctorListCtr.image.value.toString()}");
+        log("doctor =doc${doctorListCtr.doc.value.toString()}");
+        latitude = doctorListCtr.latitude.value.toString();
+        longitude = doctorListCtr.longitude.value.toString();
+        branchId = doctorListCtr.branchId.value.toString();
+        log("branchId my  id$branchId");
+        address = doctorListCtr.address.value;
+      }
       return Scaffold(
         body: doctorListCtr.loadingFetchD.value
             ? Center(heightFactor: 16, child: custom.MyIndicator())
@@ -198,7 +205,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => calender(
-                                              centerId: CenterId,
+                                              branchId:branchId,
                                               firstConslt: doctorListCtr.serviceStatus.toString(),
                                             )));
                                   },

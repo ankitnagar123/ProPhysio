@@ -39,12 +39,13 @@ var bookingId = "".obs;
   CustomView custom = CustomView();
 
   /*------------------Doctor date show on calender  list Fetch Api----------------*/
-  Future<void> dateCalender(String id,String centerId) async {
+  Future<void> dateCalender(String id,String branchId) async {
     loadingFetchDate.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": id,
-      "center_id":centerId,
+      "branch_id":branchId,
     };
+    log("dateCalender${paremert}");
     try {
       final response = await apiService.postData(MyAPI.pCalenderDate, paremert);
       log("calendar list of date's.....${response.body}");
@@ -115,13 +116,13 @@ var bookingId = "".obs;
   }
 
   /*------------------Doctor time slots list Fetch Api----------------*/
-  Future<void> doctorTimeSlotsFetch(String id, String date,centerId) async {
+  Future<void> doctorTimeSlotsFetch(String id, String date,) async {
     loadingFetchTime.value = true;
     final Map<String, dynamic> Peramert = {
-      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
+      // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "doctor_id": id,
       "date": date,
-      "center_id":centerId,
+      // "center_id":centerId,
     };
     try {
       final response =

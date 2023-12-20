@@ -8,6 +8,7 @@ class SharedPreferenceProvider{
   String CURRENT_DEVICE_KEY = 'CURRENT_DEVICE_KEY';
 
   String LOGIN_KEY_TYP = 'LOGIN_KEY_TYP';
+  String USER_TYPE = 'USER_TYPE';
 
   String PATIENT_LOGIN_KEY = 'LOGIN_KEY';
   String PATIENT_ID_KEY = 'PATIENT_ID_KEY';

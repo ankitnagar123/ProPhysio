@@ -9,29 +9,29 @@ List<CalenderDateShowModel> calenderDateShowModelFromJson(String str) => List<Ca
 String calenderDateShowModelToJson(List<CalenderDateShowModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CalenderDateShowModel {
-  CalenderDateShowModel({
-    required this.percent,
-    required this.day,
-    required this.month,
-    required this.year,
-  });
-
-  String percent;
   String day;
   String month;
   String year;
+  String status;
+
+  CalenderDateShowModel({
+    required this.day,
+    required this.month,
+    required this.year,
+    required this.status,
+  });
 
   factory CalenderDateShowModel.fromJson(Map<String, dynamic> json) => CalenderDateShowModel(
-    percent: json["percent"],
     day: json["day"],
     month: json["month"],
     year: json["year"],
+    status: json["status"],
   );
 
   Map<String, dynamic> toJson() => {
-    "percent": percent,
     "day": day,
     "month": month,
     "year": year,
+    "status": status,
   };
 }

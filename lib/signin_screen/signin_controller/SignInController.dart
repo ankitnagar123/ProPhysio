@@ -43,11 +43,12 @@ LocalString text =  LocalString();
         String usertype = jsonResponse['user_type'].toString();
         String id = jsonResponse['id'].toString();
         String name = jsonResponse['name'].toString();
-
         String surname = jsonResponse['surname'].toString();
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
+
           sp.setStringValue(sp.DOCTOR_NAME_KEY, name);
+          sp.setStringValue(sp.USER_TYPE, usertype);
           sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
           log("name surname $name$surname");
           custom.massenger(context, text.Login_successfully.tr);
@@ -121,7 +122,7 @@ LocalString text =  LocalString();
       String deviceID,
       String deviceTyp,
       ) async {
-    final Map<String, dynamic>UpdatePerameter = {
+    final Map<String,dynamic>UpdatePerameter = {
       "user_id": id,
       "device_id": deviceID,
       "device_status": deviceTyp,
@@ -132,7 +133,7 @@ LocalString text =  LocalString();
     final response =
     await apiService.postData(MyAPI.updateToken,UpdatePerameter);
     try {
-      log("response of Device Update :-${response.body}");
+      log("response of Device Update:-${response.body}");
 
       var jsonResponse = jsonDecode(response.body);
       print(jsonResponse);

@@ -86,6 +86,8 @@ dev_dependencies:
 #  agora_rtc_engine: ^6.2.2
   wakelock:
 #  agora_token_service: ^0.1.2
+  socket_io_client: ^2.0.3+1
+
 
 
 

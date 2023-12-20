@@ -8,6 +8,7 @@ import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
 
+import '../../../ChatWithSocket/ChatList.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
@@ -25,11 +26,12 @@ class PatientMainScreen extends StatefulWidget {
 }
 
 class _PatientMainScreenState extends State<PatientMainScreen> {
-  PatientBookingController patientBookingController = Get.put(
-      PatientBookingController());
+  PatientBookingController patientBookingController =
+      Get.put(PatientBookingController());
   MyRoute myRoute = Get.put(MyRoute());
   LocalString text = LocalString();
-CustomView view = CustomView();
+  CustomView view = CustomView();
+
   @override
   void initState() {
     patientBookingController.bookingAppointment("");
@@ -37,58 +39,92 @@ CustomView view = CustomView();
   }
 
   final int _selectedIndex = 0;
-  List screens =  [
+  List screens = [
     const HomeView(),
     const BookingPage(),
     const ChatListScreen(),
+    /*for learning*/
+    // const ChatHomePage(),
     const MorePage(),
     const PDrAllCategory(),
-    PDrSubCategory(categoryId: '',),
-    DoctorListWithCategory(catId: '', subCatId: '', rating: '', startPrice: '', EndPrice: '',)
+    PDrSubCategory(
+      categoryId: '',
+    ),
+    DoctorListWithCategory(
+      catId: '',
+      subCatId: '',
+      rating: '',
+      startPrice: '',
+      EndPrice: '',
+    )
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
-    return Obx((){
+    return Obx(() {
       return WillPopScope(
-        onWillPop: () async{
-          if(myRoute.pageIndex == 0){
-            final value =await showDialog<bool>(
+        onWillPop: () async {
+          if (myRoute.pageIndex == 0) {
+            final value = await showDialog<bool>(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title:   Text(text.Exit_App.tr,style: const TextStyle(fontFamily: 'Poppins',fontSize: 16.0,color: Colors.black,fontWeight: FontWeight.w600),),
-                  content:   Text(text.Want_To_Exist.tr,style: const TextStyle(fontFamily: "Poppins",fontSize: 13.0,fontWeight: FontWeight.w500,color: Colors.black),),
+                  title: Text(
+                    text.Exit_App.tr,
+                    style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  content: Text(
+                    text.Want_To_Exist.tr,
+                    style: const TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
                   actions: [
-                    ElevatedButton(onPressed: (){
-                      Navigator.of(context).pop(false);
-                    },
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
                       style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(Colors.white)
-                      ), child:   Text(text.No.tr,style: const TextStyle(color: Colors.black,fontFamily: 'Poppins'),),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.white)),
+                      child: Text(
+                        text.No.tr,
+                        style: const TextStyle(
+                            color: Colors.black, fontFamily: 'Poppins'),
+                      ),
                     ),
-                    ElevatedButton(onPressed: (){
-                      SystemNavigator.pop();
-                    },
-                      style:  const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(MyColor.red)
-                      ), child:   Text(text.Yes.tr,style: const TextStyle(fontFamily: 'Poppins',color: Colors.white),),
+                    ElevatedButton(
+                      onPressed: () {
+                        SystemNavigator.pop();
+                      },
+                      style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(MyColor.red)),
+                      child: Text(
+                        text.Yes.tr,
+                        style: const TextStyle(
+                            fontFamily: 'Poppins', color: Colors.white),
+                      ),
                     ),
                   ],
                 );
-              },);
-            if(value!=null){
+              },
+            );
+            if (value != null) {
               return Future.value(value);
-            } else{
+            } else {
               return Future.value(false);
             }
-          }else {
-            if(myRoute.pageIndex.value ==3){
+          } else {
+            if (myRoute.pageIndex.value == 3) {
               myRoute.setValue(0);
-            }
-            else{
+            } else {
               myRoute.setValue(0);
             }
           }
@@ -97,16 +133,18 @@ CustomView view = CustomView();
         child: Scaffold(
           bottomNavigationBar: myBottomNavigationBar(),
           backgroundColor: Colors.white,
-          body:screens[myRoute.pageIndex.value],
+          body: screens[myRoute.pageIndex.value],
         ),
       );
     });
   }
-  Widget myBottomNavigationBar(){
+
+  Widget myBottomNavigationBar() {
     return Container(
-      height:MediaQuery.of(context).size.width/7.4,
+      height: MediaQuery.of(context).size.width / 7.4,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(5), topRight: Radius.circular(5)),
         color: Colors.white24,
       ),
       child: IconTheme(
@@ -115,7 +153,7 @@ CustomView view = CustomView();
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     myRoute.pageIndex.value = 0;
                   });
@@ -123,39 +161,63 @@ CustomView view = CustomView();
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(height: 20,
+                    SizedBox(
+                        height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
-
-Icon(Icons.home_outlined,color: MyColor.red,size: 27,) :Icon(Icons.home_outlined,color: MyColor.grey,)
-                    ),
-                    view.text(text.Home.tr, 12, FontWeight.normal,
-                      myRoute.pageIndex.value ==0||myRoute.pageIndex.value ==4?
-                      MyColor.red:MyColor.grey,)
-
+                        child: myRoute.pageIndex.value == 0 ||
+                                myRoute.pageIndex.value == 4
+                            ? Icon(
+                                Icons.home_outlined,
+                                color: MyColor.red,
+                                size: 27,
+                              )
+                            : Icon(
+                                Icons.home_outlined,
+                                color: MyColor.grey,
+                              )),
+                    view.text(
+                      text.Home.tr,
+                      12,
+                      FontWeight.normal,
+                      myRoute.pageIndex.value == 0 ||
+                              myRoute.pageIndex.value == 4
+                          ? MyColor.red
+                          : MyColor.grey,
+                    )
                   ],
                 )),
-
             InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     myRoute.pageIndex.value = 1;
                   });
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-
                   children: [
-                    SizedBox(height: 20,
+                    SizedBox(
+                        height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==1?
-                        Icon(Icons.book_outlined,color: MyColor.red,size: 27,) :Icon(Icons.book_outlined,color: MyColor.grey,)                     ),
-                    view.text(text.Booking.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==1?MyColor.red:MyColor.grey,)
-
+                        child: myRoute.pageIndex.value == 1
+                            ? Icon(
+                                Icons.book_outlined,
+                                color: MyColor.red,
+                                size: 27,
+                              )
+                            : Icon(
+                                Icons.book_outlined,
+                                color: MyColor.grey,
+                              )),
+                    view.text(
+                      text.Booking.tr,
+                      12,
+                      FontWeight.normal,
+                      myRoute.pageIndex.value == 1 ? MyColor.red : MyColor.grey,
+                    )
                   ],
                 )),
             InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     myRoute.pageIndex.value = 2;
                   });
@@ -163,18 +225,29 @@ Icon(Icons.home_outlined,color: MyColor.red,size: 27,) :Icon(Icons.home_outlined
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(height: 20,
+                    SizedBox(
+                        height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==2?
-                        Icon(Icons.chat_rounded,color: MyColor.red,size: 27,) :Icon(Icons.chat_rounded,color: MyColor.grey,)
-                    ),
-                    view.text(text.chat.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==2? MyColor.red:MyColor.grey,)
-
+                        child: myRoute.pageIndex.value == 2
+                            ? Icon(
+                                Icons.chat_rounded,
+                                color: MyColor.red,
+                                size: 27,
+                              )
+                            : Icon(
+                                Icons.chat_rounded,
+                                color: MyColor.grey,
+                              )),
+                    view.text(
+                      text.chat.tr,
+                      12,
+                      FontWeight.normal,
+                      myRoute.pageIndex.value == 2 ? MyColor.red : MyColor.grey,
+                    )
                   ],
                 )),
-
             InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     myRoute.pageIndex.value = 3;
                   });
@@ -182,13 +255,25 @@ Icon(Icons.home_outlined,color: MyColor.red,size: 27,) :Icon(Icons.home_outlined
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(height: 20,
+                    SizedBox(
+                        height: 20,
                         width: 30,
-                        child:myRoute.pageIndex.value ==3?
-                        Icon(Icons.list_outlined,color: MyColor.red,size: 27,) :Icon(Icons.list_outlined,color: MyColor.grey,)
-                    ),
-                    view.text(text.More.tr, 12, FontWeight.normal, myRoute.pageIndex.value ==3? MyColor.red: MyColor.grey,)
-
+                        child: myRoute.pageIndex.value == 3
+                            ? Icon(
+                                Icons.list_outlined,
+                                color: MyColor.red,
+                                size: 27,
+                              )
+                            : Icon(
+                                Icons.list_outlined,
+                                color: MyColor.grey,
+                              )),
+                    view.text(
+                      text.More.tr,
+                      12,
+                      FontWeight.normal,
+                      myRoute.pageIndex.value == 3 ? MyColor.red : MyColor.grey,
+                    )
                   ],
                 )),
           ],
