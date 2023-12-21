@@ -669,7 +669,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         child: Center(
           child: Container(
             height: height * 0.065,
-            width: widht * 1.1,
+            // width: widht * 1,
             padding: const EdgeInsets.all(10),
             // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
             decoration: BoxDecoration(
@@ -678,7 +678,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 border: Border.all(color: MyColor.grey)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
-                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // menuMaxHeight: MediaQuery.of(context).size.height / 3,
                 // Initial Value
                 value: selectedBranch,
                 // Down Arrow Icon

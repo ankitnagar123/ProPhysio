@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:prophysio/ChatWithSocket/SocketController.dart';
 import 'package:prophysio/helper/mycolor/mycolor.dart';
 
-import '../Helper/RoutHelper/RoutHelper.dart';
 class ChatHomePage extends StatefulWidget {
   const ChatHomePage({super.key});
 
@@ -21,16 +19,8 @@ class _ChatHomePageState extends State<ChatHomePage> {
   @override
   void initState() {
     super.initState();
-    SocketIo.userConnect();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // SocketIo.socket.disconnect();
-    // SocketIo.socket.dispose();
-
-  }
 
   @override
   Widget build(BuildContext context) {

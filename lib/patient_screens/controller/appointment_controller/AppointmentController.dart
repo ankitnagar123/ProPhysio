@@ -90,10 +90,10 @@ var bookingId = "".obs;
   }
 
   /*------------------Doctor visit charge list Fetch Api----------------*/
-  Future<void> doctorVisitChargefetch(String id) async {
+  Future<void> doctorVisitChargefetch(String catId,String subCat) async {
     final Map<String, dynamic> Peramert = {
-      "doctor_id": id,
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+      "cat_id": catId,
+      "sub_cat_id": subCat,
     };
     print(Peramert);
     try {

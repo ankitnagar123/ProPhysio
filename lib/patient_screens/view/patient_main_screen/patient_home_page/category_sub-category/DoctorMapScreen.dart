@@ -68,7 +68,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
                                   centerId: '',
                                   drImg: doctorListCtr
                                       .doctorList[i].doctorProfile
-                                      .toString(),
+                                      .toString(), cat: widget.catId, subCat: widget.subCatID,
                                 )));
                   },
                   child: Card(

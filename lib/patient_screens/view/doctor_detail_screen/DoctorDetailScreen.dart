@@ -15,9 +15,9 @@ import '../../controller/rating_controller/PatinetRatingController.dart';
 import '../book_appointment/AppointmentCalender.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
-  final String id, centerId,drImg;
+  final String id, centerId,drImg,cat,subCat;
 
-  const DoctorDetailScreen({Key? key, required this.id, required this.centerId, required this.drImg})
+  const DoctorDetailScreen({Key? key, required this.id, required this.centerId, required this.drImg, required this.cat, required this.subCat})
       : super(key: key);
 
   @override
@@ -206,7 +206,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         MaterialPageRoute(
                                             builder: (context) => calender(
                                               branchId:branchId,
-                                              firstConslt: doctorListCtr.serviceStatus.toString(),
+                                              firstConslt: doctorListCtr.serviceStatus.toString(), cat: widget.cat, subCat: widget.subCat,
                                             )));
                                   },
                                   MyColor.primary,

@@ -379,7 +379,7 @@ class _HomeViewState extends State<HomeView> {
                                         centerId: '',
                                         drImg: list[index]
                                             .doctorProfile
-                                            .toString(),
+                                            .toString(), cat: '', subCat: '',
                                       )));
                           // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                         },
@@ -438,7 +438,7 @@ class _HomeViewState extends State<HomeView> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
-                                  list[index].serviceStatus == "Free"
+                               /*   list[index].serviceStatus == "Free"
                                       ? Row(
                                     children: [
                                       const Icon(
@@ -459,9 +459,9 @@ class _HomeViewState extends State<HomeView> {
                                   )
                                       : Row(
                                     children: [
-                                      /*  const Icon(
+                                      *//*  const Icon(
                                           Icons.monetization_on,
-                                          size: 18),*/
+                                          size: 18),*//*
                                       const SizedBox(
                                         width: 3,
                                       ),
@@ -471,7 +471,7 @@ class _HomeViewState extends State<HomeView> {
                                           FontWeight.w500,
                                           MyColor.grey),
                                     ],
-                                  ),
+                                  ),*/
                                   Row(
                                     children: [
                                       const Icon(

@@ -53,7 +53,6 @@ class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
   @override
   void initState() {
     super.initState();
-
     rating = widget.rating;
     startTime = widget.startPrice;
     endTime = widget.EndPrice;
@@ -302,19 +301,15 @@ class _DoctorListState extends State<DoctorList> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             DoctorDetailScreen(
-                                              id: list[index]
-                                                  .doctorId
-                                                  .toString(),
+                                              id: list[index].doctorId.toString(),
                                               centerId: '',
-                                              drImg: list[index]
-                                                  .doctorProfile
-                                                  .toString(),
+                                              drImg: list[index].doctorProfile.toString(), cat: widget.cat, subCat: widget.subcat,
                                             )));
                                 // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                               },
                               child: Card(
                                 margin: const EdgeInsets.symmetric(
-                                    horizontal: 7, vertical: 6.0),
+                                    horizontal: 5, vertical: 6.0),
                                 color: MyColor.white,
                                 elevation: 1.4,
                                 child: Row(
@@ -351,7 +346,7 @@ class _DoctorListState extends State<DoctorList> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         customView.text(
-                                            list[index].name.toUpperCase(),
+                                            "${list[index].name.toUpperCase()} ${list[index].surname.toUpperCase()}",
                                             13,
                                             FontWeight.w500,
                                             MyColor.primary1),
@@ -367,7 +362,7 @@ class _DoctorListState extends State<DoctorList> {
                                                 12,
                                                 FontWeight.w500,
                                                 MyColor.black)),
-                                        list[index].serviceStatus == "Free"
+                                     /*   list[index].serviceStatus == "Free"
                                             ? Row(
                                                 children: [
                                                   const Icon(
@@ -402,32 +397,9 @@ class _DoctorListState extends State<DoctorList> {
                                                       FontWeight.normal,
                                                       MyColor.grey),
                                                 ],
-                                              ),
+                                              ),*/
                                         const SizedBox(
-                                          height: 2,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                                Icons.location_on_outlined,
-                                                size: 18),
-                                            SizedBox(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width /
-                                                        1.9,
-                                                child: Text(
-                                                  list[index].location,
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    fontSize: 11,
-                                                    fontFamily: "Poppins",
-                                                    color: MyColor.grey,
-                                                  ),
-                                                )),
-                                          ],
+                                          height: 3,
                                         ),
                                         RatingBar(
                                           ignoreGestures: true,
@@ -452,6 +424,32 @@ class _DoctorListState extends State<DoctorList> {
                                           onRatingUpdate: (rating) {
                                             log("$rating");
                                           },
+                                        ),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                                Icons.location_on_outlined,
+                                                size: 18),
+                                            SizedBox(
+                                                width:
+                                                MediaQuery.sizeOf(context)
+                                                    .width /
+                                                    1.9,
+                                                child: Text(
+                                                  list[index].location.toUpperCase(),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily: "Poppins",
+                                                    color: MyColor.grey,
+                                                  ),
+                                                )),
+                                          ],
                                         ),
                                       ],
                                     )
@@ -478,7 +476,7 @@ class _DoctorListState extends State<DoctorList> {
     return StatefulBuilder(
       builder: (context, StateSetter stateSetter) => Container(
         height: height * 0.05,
-        width: widht * 0.5,
+        width: widht * 1,
         padding: const EdgeInsets.all(3),
         // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
         decoration: BoxDecoration(
@@ -487,6 +485,7 @@ class _DoctorListState extends State<DoctorList> {
             border: Border.all(color: MyColor.grey)),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
+
             menuMaxHeight: MediaQuery.of(context).size.height / 3,
             // Initial Value
             value: selectedBranch,

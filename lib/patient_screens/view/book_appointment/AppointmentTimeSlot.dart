@@ -15,7 +15,7 @@ import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../patient_payment_screen/PatientCheckOutCard.dart';
 
 class AppointmentTimeSlot extends StatefulWidget {
-  String date, day, month, year, centerId, firstConslt;
+  String date, day, month, year, centerId, firstConslt,cat,subCat;
 
   AppointmentTimeSlot({
     Key? key,
@@ -25,6 +25,8 @@ class AppointmentTimeSlot extends StatefulWidget {
     required this.year,
     required this.centerId,
     required this.firstConslt,
+    required this.cat,
+    required this.subCat,
   }) : super(key: key);
 
   @override
@@ -71,8 +73,8 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
               appointmentController.seletedtime.value.toString(),);
-      widget.firstConslt == ""
-      ?  appointmentController.doctorVisitChargefetch(id.toString()) : null;
+     /* widget.firstConslt == ""
+      ? */ appointmentController.doctorVisitChargefetch(widget.cat,widget.subCat); /*: null;*/
     });
   }
 

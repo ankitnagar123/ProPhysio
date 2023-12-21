@@ -11,7 +11,6 @@ String doctorListModelToJson(List<DoctorListModel> data) => json.encode(List<dyn
 class DoctorListModel {
   String branch;
   String result;
-  String fees;
   String rating;
   String distance;
   String userId;
@@ -27,15 +26,14 @@ class DoctorListModel {
   String latitude;
   String longitude;
   String password;
-  List<String?> category;
-  List<String?> subcategory;
+  String category;
+  List<String> subcategory;
   String doctorProfile;
   String doctorDocument;
 
   DoctorListModel({
     required this.branch,
     required this.result,
-    required this.fees,
     required this.rating,
     required this.distance,
     required this.userId,
@@ -59,13 +57,12 @@ class DoctorListModel {
 
   factory DoctorListModel.fromJson(Map<String, dynamic> json) => DoctorListModel(
     branch: json["branch"].toString(),
-    result:json["result"].toString(),
-    fees: json["fees"].toString(),
+    result: json["result"].toString(),
     rating: json["rating"].toString(),
     distance: json["distance"].toString(),
     userId: json["user_id"].toString(),
     doctorId: json["doctor_id"].toString(),
-    serviceStatus:json["service_status"].toString(),
+    serviceStatus: json["service_status"].toString(),
     name: json["name"].toString(),
     surname: json["surname"].toString(),
     username: json["username"].toString(),
@@ -76,8 +73,8 @@ class DoctorListModel {
     latitude: json["latitude"].toString(),
     longitude: json["longitude"].toString(),
     password: json["password"].toString(),
-    category: List<String?>.from(json["category"].map((x) => x)),
-    subcategory: List<String?>.from(json["subcategory"].map((x) => x)),
+    category: json["category"].toString(),
+    subcategory: List<String>.from(json["subcategory"].map((x) => x)),
     doctorProfile: json["Doctor_profile"].toString(),
     doctorDocument: json["Doctor_document"].toString(),
   );
@@ -85,12 +82,11 @@ class DoctorListModel {
   Map<String, dynamic> toJson() => {
     "branch": branch,
     "result": result,
-    "fees": fees,
     "rating": rating,
     "distance": distance,
     "user_id": userId,
     "doctor_id": doctorId,
-    "service_status":serviceStatus,
+    "service_status": serviceStatus,
     "name": name,
     "surname": surname,
     "username": username,
@@ -101,39 +97,9 @@ class DoctorListModel {
     "latitude": latitude,
     "longitude": longitude,
     "password": password,
-    "category": List<dynamic>.from(category.map((x) => x)),
+    "category": category,
     "subcategory": List<dynamic>.from(subcategory.map((x) => x)),
     "Doctor_profile": doctorProfile,
     "Doctor_document": doctorDocument,
   };
-}
-
-enum Result {
-  SUCCESS
-}
-
-final resultValues = EnumValues({
-  "Success": Result.SUCCESS
-});
-
-enum ServiceStatus {
-  EMPTY,
-  FREE
-}
-
-final serviceStatusValues = EnumValues({
-  "": ServiceStatus.EMPTY,
-  "Free": ServiceStatus.FREE
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

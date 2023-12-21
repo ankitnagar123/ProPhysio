@@ -17,11 +17,13 @@ import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'AppointmentTimeSlot.dart';
 
 class calender extends StatefulWidget {
-  String branchId,firstConslt;
+  String branchId,firstConslt,cat,subCat;
    calender({Key? key,
 
    required this.branchId,
-   required this.firstConslt
+   required this.firstConslt,
+   required this.cat,
+   required this.subCat
    }) : super(key: key);
 
   @override
@@ -290,9 +292,7 @@ class _calenderState extends State<calender> {
     Timer(const Duration(seconds: 2), () {
       setState(() {
         for (int i = 0; i < appointmentController.dateList.length; i++) {
-          int day = int.parse(appointmentController.dateList[i].day);
-          int month = int.parse(appointmentController.dateList[i].month);
-          int year = int.parse(appointmentController.dateList[i].year);
+
           _markedDateMap.add(
               DateTime(
                   int.parse(appointmentController.dateList[i].year),
@@ -347,6 +347,7 @@ class _calenderState extends State<calender> {
                         month: month,
                         year: year,
                         centerId: branchId, firstConslt: widget.firstConslt,
+                        cat: widget.cat,subCat: widget.subCat,
                       )));
             }
             setState(() {});
@@ -362,7 +363,6 @@ class _calenderState extends State<calender> {
           ),
           todayButtonColor: Colors.white,
           todayTextStyle: const TextStyle(color: Colors.black),
-
           markedDatesMap: _markedDateMap,
           markedDateShowIcon: true,
           markedDateIconMargin: 0.0,

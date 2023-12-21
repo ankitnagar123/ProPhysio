@@ -60,7 +60,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   TextEditingController descriptionController = TextEditingController();
   String location = '';
 
-  final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
+  // final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
+  final kGoogleApiKey = "AIzaSyDqyr7DbFRLoNkYFxsMtwoNo973uNhd440";
 
 /*----------API CONTROLLER INITIALIZATION---------*/
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
