@@ -94,7 +94,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                   children: [
                                     ClipRRect(
                                         clipBehavior: Clip.antiAlias,
-                                        borderRadius: BorderRadius.circular(13.0),
+                                        // borderRadius: BorderRadius.circular(13.0),
                                         child: FadeInImage.assetNetwork(
                                           imageErrorBuilder: (c, o, s) =>
                                               Image.asset(
@@ -103,8 +103,8 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                                   width: 70,
                                                   height: 70,
                                                   fit: BoxFit.cover),
-                                          width: 80,
-                                          height: 80,
+                                          width: 78,
+                                          height: 78,
                                           fit: BoxFit.cover,
                                           placeholder:
                                           "assets/images/loading.gif",
@@ -117,10 +117,10 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
                                         alignment: Alignment.center,
                                         child: Text(
                                           doctorSignUpCtr.category[index]
-                                              .categoryName,
+                                              .categoryName.toUpperCase(),
                                           style: const TextStyle(fontSize: 11,fontWeight: FontWeight.w500),
                                           softWrap: false,
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

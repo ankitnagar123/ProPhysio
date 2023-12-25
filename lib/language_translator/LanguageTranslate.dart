@@ -561,7 +561,7 @@ String NoWardAddedCenter = "No ward added by center";
   String appointmentWith = "Appointment with ";
   String freeSlot = "Free slot";
   String fewSlot = "Few slot";
-  String fullSlot = "full slot";
+  String fullSlot = "Not Available Doctor";
   String noTimeSlotAvailableMoment = "No time slot's available at the moment!";
   String selectTime = "Select time";
   String selectVisitCharge = "Select visit charge's";
@@ -1116,7 +1116,7 @@ String NoWardAddedCenter = "No ward added by center";
           appointmentWith: "Appointment with ",
           freeSlot: "Free slot",
           fewSlot: "Few slot",
-          fullSlot: "full slot",
+          fullSlot: "Not Available Doctor",
           noTimeSlotAvailableMoment: "No time slot's available at the moment!",
           selectTime: "Select time",
           selectVisitCharge: "Select visit charge's",

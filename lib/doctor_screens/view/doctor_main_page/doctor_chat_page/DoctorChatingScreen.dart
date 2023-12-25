@@ -83,12 +83,12 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
     }
 
     print("doctor Id==>>>>$patientId");
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+ /*   WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.doctorReceivedMsgListFetch(context, patientId);
       });
-    });
+    });*/
     getData();
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
@@ -137,7 +137,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 // clickableBackgroundColor: Colors.white,
                 icon: ButtonIcon(icon: const Icon(Icons.video_call_sharp,color: Colors.white,fill: CircularProgressIndicator.strokeAlignOutside),),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               ZegoSendCallInvitationButton(
@@ -167,7 +167,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         parameters: patientInfo);
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientChatProfile()));
                   },
-                  child: const Icon(Icons.more_vert)),
+                  child: const Icon(Icons.more_vert,color: Colors.white,)),
               const SizedBox(
                 width: 10.0,
               ),
@@ -187,6 +187,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 child: const Icon(
                   Icons.arrow_back_ios,
                   size: 18.0,
+                  color: Colors.white70,
                 )),
             elevation: 0,
             title: Row(
@@ -218,7 +219,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   width: 70,
                   child: Text(
                     patientName,
-                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16),
+                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16,color: Colors.white),
                   ),
                 ),
               ],
@@ -311,7 +312,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: MyColor.lightcolor,
                           // border: Border.all(color: Colors.black38),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
@@ -321,58 +322,58 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         minLines: 1,
                         maxLines: 3,
                         decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(25.0),
-                                        ),
-                                      ),
-                                      backgroundColor: Colors.grey.shade200,
-                                      // <-- SEE HERE
-                                      builder: (context) {
-                                        return SizedBox(
-                                          height: 100,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                result = await FilePicker
-                                                    .platform
-                                                    .pickFiles(
-                                                        allowMultiple: true);
-                                                if (result == null) {
-                                                  log("No file selected");
-                                                } else {
-                                                  setState(() {});
-                                                  for (var element in result!.files) {
-                                                    log("pdf ko naam-------${element.name}==${element.path}==${element.bytes}");
-                                                  }
-                                                }
-                                              },
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  view.text(
-                                                      "Select Patient Prescription and Invoices file to send",
-                                                      13,
-                                                      FontWeight.w500,
-                                                      MyColor.primary1),
-                                                  const Icon(Icons.file_present,
-                                                      size: 31,
-                                                      color: MyColor.primary1),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: const Icon(Icons.file_upload_outlined,
-                                    color: MyColor.primary1)),
+                            // suffixIcon: InkWell(
+                            //     onTap: () {
+                            //       showModalBottomSheet(
+                            //           context: context,
+                            //           shape: const RoundedRectangleBorder(
+                            //             borderRadius: BorderRadius.vertical(
+                            //               top: Radius.circular(25.0),
+                            //             ),
+                            //           ),
+                            //           backgroundColor: Colors.grey.shade200,
+                            //           // <-- SEE HERE
+                            //           builder: (context) {
+                            //             return SizedBox(
+                            //               height: 100,
+                            //               child: Padding(
+                            //                 padding: const EdgeInsets.all(10.0),
+                            //                 child: InkWell(
+                            //                   onTap: () async {
+                            //                     result = await FilePicker
+                            //                         .platform
+                            //                         .pickFiles(
+                            //                             allowMultiple: true);
+                            //                     if (result == null) {
+                            //                       log("No file selected");
+                            //                     } else {
+                            //                       setState(() {});
+                            //                       for (var element in result!.files) {
+                            //                         log("pdf ko naam-------${element.name}==${element.path}==${element.bytes}");
+                            //                       }
+                            //                     }
+                            //                   },
+                            //                   child: Column(
+                            //                     crossAxisAlignment:
+                            //                         CrossAxisAlignment.center,
+                            //                     children: [
+                            //                       view.text(
+                            //                           "Select Patient Prescription and Invoices file to send",
+                            //                           13,
+                            //                           FontWeight.w500,
+                            //                           MyColor.primary1),
+                            //                       const Icon(Icons.file_present,
+                            //                           size: 31,
+                            //                           color: MyColor.primary1),
+                            //                     ],
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           });
+                            //     },
+                            //     child: const Icon(Icons.file_upload_outlined,
+                            //         color: MyColor.primary1)),
                             border: InputBorder.none,
                             contentPadding: const EdgeInsets.all(12),
                             hintText: text.enterMassage.tr,
@@ -386,7 +387,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                   const SizedBox(
                     width: 5,
                   ),
-                  ElevatedButton(
+                  TextButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: MyColor.primary1,
                           shape: RoundedRectangleBorder(
@@ -403,7 +404,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                         }
                         messagectr.clear();
                       },
-                      child: const Icon(Icons.send))
+                      child: const Icon(Icons.send,color: Colors.white,))
                 ],
               ),
             )

@@ -12,9 +12,8 @@ void onUserLogin(String Id ,String name,String type) async {
 
   /// 4/5. initialized ZegoUIKitPrebuiltCallInvitationService when account is logged in or re-logged in
   ZegoUIKitPrebuiltCallInvitationService().init(
-    appID: 481183641, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
-    appSign: "3fc1f80b3b59d50c3a6158aafccddf7acaf8c9667ab29c86202ddd781789aeae", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
-
+    appID: 875917085,
+    appSign: "c744b2792333aa2e88768f7c20afd139441fa7890513e090c7d82e3557311aab",
     userID:  Id,
     userName: name,
     notifyWhenAppRunningInBackgroundOrQuit: false,
@@ -64,7 +63,6 @@ List<ZegoUIKitUser> getInvitesFromTextCtrl(String textCtrlText ,String username)
       name: username,
     ));
   });
-
   return invitees;
 }
 

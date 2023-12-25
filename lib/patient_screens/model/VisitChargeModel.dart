@@ -9,21 +9,25 @@ List<VisitChargeModel> visitChargeModelFromJson(String str) => List<VisitChargeM
 String visitChargeModelToJson(List<VisitChargeModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class VisitChargeModel {
+  String title;
+  String description;
+  String price;
+
   VisitChargeModel({
-    required this.name,
+    required this.title,
+    required this.description,
     required this.price,
   });
 
-  String name;
-  String price;
-
   factory VisitChargeModel.fromJson(Map<String, dynamic> json) => VisitChargeModel(
-    name: json["name"],
-    price: json["price"],
+    title: json["title"].toString(),
+    description: json["description"].toString(),
+    price: json["price"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
+    "title": title,
+    "description": description,
     "price": price,
   };
 }

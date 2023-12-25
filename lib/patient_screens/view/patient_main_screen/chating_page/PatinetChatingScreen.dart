@@ -74,12 +74,12 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
     }
 
     print("doctor Id==>>>>$doctorId");
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+/*    WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);
       });
-    });
+    });*/
     getData();
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
@@ -142,7 +142,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                                   contact: doctorContact,
                                 )));
                   },
-                  child: const Icon(Icons.more_vert)),
+                  child: const Icon(Icons.more_vert,color: Colors.white,)),
               const SizedBox(
                 width: 10.0,
               )
@@ -162,6 +162,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                 child: const Icon(
                   Icons.arrow_back_ios,
                   size: 18.0,
+                  color: Colors.white70,
                 )),
             elevation: 0,
             title: Row(
@@ -188,7 +189,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                   width: 70,
                   child: Text(
                     doctorName,
-                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16,color: Colors.white70),
+                    style: const TextStyle(fontFamily: "Poppins", fontSize: 16,color: Colors.white),
                   ),
                 ),
 
@@ -308,7 +309,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                   const SizedBox(
                     width: 5,
                   ),
-                  ElevatedButton(
+                  TextButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: MyColor.primary1,
                           shape: RoundedRectangleBorder(
@@ -326,7 +327,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                         }
                         messageCtr.clear();
                       },
-                      child: const Icon(Icons.send))
+                      child: const Icon(Icons.send,color: Colors.white,))
                 ],
               ),
             )

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -371,10 +373,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                                     preferences.remove("DOCTOR_ID_KEY");
                                     sp.clearSharedPreference();
                                     onUserLogout();
-                                    print(
-                                        preferences.remove("DOCTOR_LOGIN_KEY"));
+                                    log("${preferences.remove("DOCTOR_LOGIN_KEY")}");
                                     sp.setBoolValue(sp.ON_BOARDING_KEY, true);
-
                                     Get.offAllNamed(
                                         RouteHelper.getLoginScreen());
                                   },

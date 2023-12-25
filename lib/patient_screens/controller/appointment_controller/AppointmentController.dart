@@ -256,7 +256,7 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
       "center_id":centerId,
       "type":type,
     };
-    print("card Parameter$Peramert");
+    print("appointment Parameter$Peramert");
     final response =
         await apiService.postData(MyAPI.pBookingAppointment, Peramert);
     try {
@@ -265,18 +265,17 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
       var result = jsonResponse['result'].toString();
       if (result == "success") {
         loadingAdd.value = false;
-        String id = jsonResponse["booking_id"].toString();
-        String reciverid = jsonResponse["reciver_id"].toString();
+        String id = jsonResponse["bookID"].toString();
+        // String reciverid = jsonResponse["reciver_id"].toString();
         log("id----------------->:$id");
-        log("booking id${bookingId.value}");
         log("my Appointment $result");
-        if(type == "Paid"){
-          paymentAppointment(context,  id,reciverid ,() {
+   /*     if(type == "Paid"){
+          paymentAppointment(context,id,reciver,() {
             callback();
           });
         }else{
           callback();
-        }
+        }*/
         custom.massenger(context, text.appointmentPayment.tr);
       } else {
         loadingAdd.value = false;

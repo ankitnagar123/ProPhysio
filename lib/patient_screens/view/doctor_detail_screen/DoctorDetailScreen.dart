@@ -34,8 +34,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       Get.put(DoctorSpecializationCtr());
   CustomView custom = CustomView();
   String doctorId = '';
-  String CenterId = '';
-
   String img = "";
   String address = "";
   String fee = "";
@@ -49,15 +47,13 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   void initState() {
     super.initState();
     doctorId = widget.id.toString();
-    CenterId = widget.centerId.toString();
     log("doctor my  id$doctorId");
-    log("center id ${widget.centerId} ==$CenterId");
-    appointmentController.dateCalender(doctorId,branchId);
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
+     WidgetsBinding.instance.addPostFrameCallback((_) {
       patientRatingCtr.fetchRating(doctorId);
       doctorListCtr.doctorDetialsfetch(doctorId);
       doctorSpecializationCtr.specializationFetch(doctorId);
-    // });
+
+     });
   }
 
   @override
@@ -76,6 +72,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
         branchId = doctorListCtr.branchId.value.toString();
         log("branchId my  id$branchId");
         address = doctorListCtr.address.value;
+        appointmentController.dateCalender(doctorId,branchId);
+
       }
       return Scaffold(
         body: doctorListCtr.loadingFetchD.value

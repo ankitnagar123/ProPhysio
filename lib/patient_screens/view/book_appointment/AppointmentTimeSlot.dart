@@ -37,7 +37,6 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   AppointmentController appointmentController =
       Get.put(AppointmentController());
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
-  PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
   LocalString text = LocalString();
 
   CustomView custom = CustomView();
@@ -64,11 +63,10 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
 
       day = widget.day;
       appointmentController.seletedtime.value = widget.date;
-      profileCtr.patientProfile(context);
       centerId = widget.centerId;
-      print("center id $centerId");
+      log("center id $centerId");
       id = doctorListCtr.doctorid.value;
-      print("doctor id$id");
+      log("doctor id$id");
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
@@ -87,7 +85,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.confirmAppointment.tr, () {
-            if (widget.firstConslt == "Free") {
+       /*     if (widget.firstConslt == "Free") {
               appointmentController.bookingAppointment(
                   context,
                   doctorListCtr.doctorid.toString(),
@@ -98,18 +96,18 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                   "",widget.firstConslt ,() {
                 Get.offNamed(RouteHelper.getBookingSuccess());
               });
-            } else {
+            } else*/
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PatientCheckOutCard(
-                            price: price.toString(),
+                            price: fee.toString(),
                             time: time.toString(),
                             date: appointmentController.seletedtime.value
                                 .toString(),
                             centerId: centerId,
                           )));
-            }
+
           }, MyColor.primary,
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
@@ -304,7 +302,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                               Icons.arrow_circle_right,
                                               size: 20,
                                               color: MyColor.primary1),
-                                          title: Text(list.name.toString()),
+                                          title: Text(list.title.toString()),
                                           trailing: Radio<String>(
                                             value: index.toString(),
                                             groupValue: price,

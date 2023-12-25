@@ -46,50 +46,41 @@ LocalString text =  LocalString();
         String surname = jsonResponse['surname'].toString();
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
-
-          sp.setStringValue(sp.DOCTOR_NAME_KEY, name);
           sp.setStringValue(sp.USER_TYPE, usertype);
-          sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
-          log("name surname $name$surname");
+          log("user type $usertype");
           custom.massenger(context, text.Login_successfully.tr);
           if (usertype == "Doctor") {
             loading.value = false;
+            sp.setStringValue(sp.DOCTOR_NAME_KEY, name);
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
-            log(" name..............${sp.DOCTOR_NAME_KEY}-----$surname");
-
+            sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
+            log("Doctor details..............${sp.DOCTOR_NAME_KEY}-----$surname");
             // sp.setStringValue(keyString, valueString)
-
             sp.setBoolValue(sp.DOCTOR_LOGIN_KEY, true);
             log(sp.DOCTOR_LOGIN_KEY);
             log("${sp.getStringValue(sp.DOCTOR_ID_KEY)}");
-             onUserLogin(id.toString(),id.toString(),"Doctor");
+
+             onUserLogin(id.toString(),"${name} ${surname}","doctor");
             log("Doctor login ID${id.toString()}");
+
             Get.offAndToNamed(RouteHelper.DHomePage());
           } else if (usertype == "User") {
             loading.value = false;
-
             sp.setStringValue(sp.PATIENT_ID_KEY, id);
             sp.setStringValue(sp.PATIENT_NAME_KEY, name);
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
-
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-            log(" Patient login ID${id.toString()}");
-             onUserLogin(id.toString(),id.toString(),"user");
+
+            log(" Patient login ID -- ${id.toString()}");
+             onUserLogin(id.toString(),"${name} ${surname}","user");
+
             Get.offAndToNamed(RouteHelper.getBottomNavigation());
-          } else if (usertype == "Medical") {
-            loading.value = false;
-            sp.setStringValue(sp.CENTER_ID_KEY, id);
-            sp.setBoolValue(sp.CENTER_LOGIN_KEY, true);
-            print(" MEDICAL CENTER login ID${id.toString()}");
-            Get.offAndToNamed(RouteHelper.CBottomNavigation());
           }else {
             loading.value = false;
             if(result =="Wait for admin Approve"){
               custom.massenger(context, text.WaitforadminApprove.tr);
-
             }else{
               custom.massenger(context, text.Invalidemailpassword.tr);
-
             }
           }
         } else {

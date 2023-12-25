@@ -143,7 +143,8 @@ class _calenderState extends State<calender> {
             return custom.MySnackBar(context, text.noTimeSlotDate.tr);
           }else{
 
-          }*//*
+          }*/
+    /*
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -217,7 +218,7 @@ class _calenderState extends State<calender> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Wrap(
+                  /*  Wrap(
                       children: [
                         Container(
                             height: 20.0,
@@ -246,7 +247,7 @@ class _calenderState extends State<calender> {
                         custom.text(
                             text.fewSlot.tr, 13, FontWeight.w400, MyColor.black)
                       ],
-                    ),
+                    ),*/
                     Wrap(
                       children: [
                         Container(
@@ -273,10 +274,10 @@ class _calenderState extends State<calender> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                  const Divider(color: Colors.grey),
-                appointmentController.dateList.isEmpty
+             /*   appointmentController.dateList.isEmpty
                     ?  Center(
                         child: Text(text.noTimeSlotAvailableMoment.tr))
-                    :const Text(""),
+                    :const Text(""),*/
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: _calendarCarouselNoHeader,

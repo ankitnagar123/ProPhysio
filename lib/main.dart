@@ -12,8 +12,9 @@ import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 
 import 'Helper/RoutHelper/RoutHelper.dart';
-import 'firebase_service/NotificationService.dart';
 import 'firebase_service/firebase_options.dart';
+import 'firebase_service/NotificationService.dart';
+
 import 'language_translator/LanguageTranslate.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -68,22 +69,22 @@ class _MyAppState extends State<MyApp> {
     dName = (await sp.getStringValue(sp.DOCTOR_NAME_KEY)).toString();
     dSurname = (await sp.getStringValue(sp.DOCTOR_SURE_NAME_KEY)).toString();
 
+    log('doctor ID--------$drID');
+    log('patient userId--------$userID');
 
-    log('userId--------$userID');
-    log('drID--------$drID');
-    log('name--------$name');
-    log('surname--------$surname');
-    log('DR name--------$dName');
-    log('DR surname--------$dSurname');
-    if(userID != null){
+
+    if(await sp.getStringValue(sp.PATIENT_ID_KEY) != null){
       log('userID START ---');
+      log('patient userId--------$userID');
+      log(' patient name--------$name');
+      log('patient surname--------$surname');
       onUserLogin(userID.toString(), "$name $surname","user");
-    }else if(drID != null){
+    }else {
       log('drID START ----');
+      log('doctor ID--------$drID');
+      log('DR name--------$dName');
+      log('DR surname--------$dSurname');
       onUserLogin(drID.toString(), "$dName $dSurname","doctor");
-    }else{
-      log('NOTHING');
-
     }
 
   }
