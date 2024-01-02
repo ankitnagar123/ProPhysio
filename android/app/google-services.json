@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "890620673366",
+    "project_id": "prophysio-80697",
+    "storage_bucket": "prophysio-80697.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890620673366:android:bece2c9f85da2dfc492af7",
+        "android_client_info": {
+          "package_name": "com.ciss.prophysio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVFkI9UV53nadMlmqUjcxFsQ-He7-gEtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
