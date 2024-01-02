@@ -28,10 +28,6 @@ class PatientChatScreen extends StatefulWidget {
 }
 
 class _PatientChatScreenState extends State<PatientChatScreen> {
-  final appId = '94a17beb94774769a4372f873bc053ee';
-  final appCertificate = '79717ca6faa94fb5acc061beb699ed93';
-
-
 
   final expirationInSeconds = 3600;
   final currentTimestamp = DateTime
@@ -63,6 +59,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
       doctorAddress = Get.arguments["drAddress"];
       doctorImg = Get.arguments["drImg"];
       doctorSurname = Get.arguments["drSurname"];
+      log("doctorName---${doctorName} ${doctorSurname}");
       // doctorContact = Get.arguments["contact"];
     } else {
       doctorId = Get.arguments["doctorId"];
@@ -71,10 +68,12 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
       doctorImg = Get.arguments["drImg"];
       doctorSurname = Get.arguments["drSurname"];
       doctorContact = Get.arguments["contact"];
+      log("doctorName---${doctorName} ${doctorSurname}");
+
     }
 
     print("doctor Id==>>>>$doctorId");
-/*    WidgetsBinding.instance.addPostFrameCallback((_) {
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);

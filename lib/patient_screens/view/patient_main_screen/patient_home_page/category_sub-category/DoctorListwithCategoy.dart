@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
+import '../../../../../helper/AppConst.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
@@ -16,158 +18,7 @@ import '../../../../model/DoctorListModel.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import 'DoctorMapScreen.dart';
 
-class DoctorListWithCategory extends StatefulWidget {
-  String catId, subCatId, rating, startPrice, EndPrice;
 
-  DoctorListWithCategory(
-      {Key? key,
-      required this.catId,
-      required this.subCatId,
-      required this.rating,
-      required this.startPrice,
-      required this.EndPrice})
-      : super(key: key);
-
-  @override
-  State<DoctorListWithCategory> createState() => _DoctorListWithCategoryState();
-}
-
-class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
-    with SingleTickerProviderStateMixin {
-  CustomView customView = CustomView();
-  LocalString text = LocalString();
-  DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
-  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
-
-  TextEditingController searchCtr = TextEditingController();
-  TabController? tabController;
-
-  int _selectedIndex = 0;
-  bool _isListView = true;
-  String? catId;
-  String? subCatId;
-  String rating = "";
-  String startTime = "";
-  String endTime = "";
-
-  @override
-  void initState() {
-    super.initState();
-    rating = widget.rating;
-    startTime = widget.startPrice;
-    endTime = widget.EndPrice;
-    tabController = TabController(vsync: this, length: 2);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      doctorSignUpCtr.branchListApi();
-
-      catId = widget.catId;
-      subCatId = widget.subCatId;
-
-      print("category$catId");
-      print(subCatId);
-      doctorListCtr.doctorlistfetch(
-        context,
-        catId.toString(),
-        subCatId.toString(),
-        startTime.toString(),
-        endTime.toString(),
-        rating,
-        "",
-      );
-    });
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    // });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final widht = MediaQuery.of(context).size.width;
-    return Obx(() {
-      return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: doctorListCtr.doctorList.isEmpty
-            ? const Text("")
-            : Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Container(
-                  height: 38.0,
-                  width: widht * 0.40,
-                  decoration: BoxDecoration(
-                      color: MyColor.primary1,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (_selectedIndex < 1) {
-                            _selectedIndex++;
-                            _isListView = true;
-                          } else {
-                            _isListView = false;
-                            _selectedIndex = 0;
-                          }
-                        });
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            child: customView.text(
-                                _isListView
-                                    ? text.ListView.tr
-                                    : text.MapView.tr,
-                                13,
-                                FontWeight.w500,
-                                MyColor.white),
-                          ),
-                          const SizedBox(
-                            width: 3.0,
-                          ),
-                          const Icon(
-                            Icons.view_agenda_outlined,
-                            color: MyColor.white,
-                            size: 20,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: tabController,
-                  children: [
-                    IndexedStack(
-                      index: _selectedIndex,
-                      children: [
-                        DoctorList(cat: widget.catId, subcat: widget.subCatId),
-                        MapViewScreen(
-                            catId: widget.catId.toString(),
-                            subCatID: widget.subCatId.toString()),
-                        /* MapView(
-                          catId: widget.catId.toString(),
-                          subCatID: widget.subCatId.toString()),*/
-                      ],
-                    ),
-                  ]),
-            ),
-          ],
-        ),
-      );
-    });
-  }
-}
-
-/*----------Doctor List Screen--------------------*/
 class DoctorList extends StatefulWidget {
   String cat, subcat;
 
@@ -189,6 +40,7 @@ class _DoctorListState extends State<DoctorList> {
   TabController? tabController;
   String _keyword = '';
   String? selectedBranch;
+  String ratings = "";
 
   List<DoctorListModel> _getFilteredList() {
     if (_keyword.isEmpty) {
@@ -239,21 +91,91 @@ class _DoctorListState extends State<DoctorList> {
                   prefixIcon: const Icon(Icons.search, color: Colors.white),
                   prefixIconColor: MyColor.primary1,
                   suffixIcon: InkWell(
-                      onTap: () {
+                     onTap: ()=> showModalBottomSheet(
+                       backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 200,
+                        color: Colors.white,
+                        child:Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: height * 0.02,
+                              ),
+                              customView.text(
+                                  text.Select_Branch.tr, 14, FontWeight.w400, MyColor.black),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: branch(),
+
+                              ),
+                              customView.text(
+                                  text.selectRatingRange.tr, 14, FontWeight.w400, MyColor.black),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              RatingBar(
+                                itemSize: 23,
+                                initialRating: 0.0 /*double.parse(
+                                            patientRatingCtr.address.value.aveRating.toString())*/,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                ratingWidget: RatingWidget(
+                                    full: const Icon(Icons.star, color: MyColor.primary),
+                                    half: const Icon(Icons.star_half, color: MyColor.primary),
+                                    empty: const Icon(Icons.star_border_purple500_outlined,
+                                        color: MyColor.primary)),
+                                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                onRatingUpdate: (rating) {
+                                  //   log(">>>>> $rating");
+                                  // doctorListCtr.location.value = rating.toString();
+                                  /*=================*/
+                                  setState(() {
+                                    ratings = rating.toString();
+                                    doctorListCtr.doctorlistfetch(
+                                        context,
+                                        widget.cat.toString(),
+                                        widget.subcat.toString(),
+                                        "",
+                                        "",
+                                        ratings,
+                                        selectedBranch.toString());
+                                    Get.back();
+                                  });
+
+
+                                  log(" app const = ${AppConst.rating}");
+                                },
+                              ),
+                            ],
+                          ),
+                        )
+                      );
+                    },
+                  ),
+                    /*  onTap: () {
+
                         var data = {
                           "category": widget.cat,
                           "subCat": widget.subcat,
                           "type": "goFilter",
                         };
+
                         Get.toNamed(RouteHelper.getFilterScreen(),
                             parameters: data);
-                      },
+                      },*/
                       child: const Icon(Icons.filter_list_alt)),
                   suffixIconColor: MyColor.white,
                   contentPadding: const EdgeInsets.only(top: 3, left: 20),
                   hintText: text.Search_Doctorby_Name.tr,
                   hintStyle:
-                      const TextStyle(fontSize: 12, color: MyColor.white),
+                  const TextStyle(fontSize: 12, color: MyColor.white),
                   fillColor: MyColor.lightcolor,
                   filled: true,
                   border: const OutlineInputBorder(
@@ -266,16 +188,16 @@ class _DoctorListState extends State<DoctorList> {
               ),
             ),
             SizedBox(height: height * 0.02),
-            Align(
+           /* Align(
                 alignment: Alignment.topRight,
                 child: branch()
-            ),
+            ),*/
             /*----------------------Doctor List--------------------------*/
             Obx(() {
               if (doctorListCtr.loadingFetch.value) {
                 return Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
+                  const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
                   child: Column(
                     children: [
                       categorysubShimmerEffect(context),
@@ -287,82 +209,82 @@ class _DoctorListState extends State<DoctorList> {
                   physics: const BouncingScrollPhysics(),
                   child: doctorListCtr.doctorList.isEmpty
                       ? Center(
-                          heightFactor: 10,
-                          child: Text(text.Doctor_Not_Available.tr))
+                      heightFactor: 10,
+                      child: Text(text.Doctor_Not_Available.tr))
                       : ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: list.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DoctorDetailScreen(
-                                              id: list[index].doctorId.toString(),
-                                              centerId: '',
-                                              drImg: list[index].doctorProfile.toString(), cat: widget.cat, subCat: widget.subcat,
-                                            )));
-                                // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
-                              },
-                              child: Card(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 6.0),
-                                color: MyColor.white,
-                                elevation: 1.4,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 100.0,
-                                      height: 100.0,
-                                      // margin: const EdgeInsets.all(6),
-                                      child: FadeInImage.assetNetwork(
-                                          placeholder:
-                                              "assets/images/loading.gif",
-                                          // placeholderCacheHeight: 20,
-                                          // placeholderCacheWidth: 20,
-                                          /*"assets/images/YlWC.gif",*/
-                                          alignment: Alignment.center,
-                                          image: list[index]
-                                              .doctorProfile
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DoctorDetailScreen(
+                                        id: list[index].doctorId.toString(),
+                                        centerId: '',
+                                        drImg: list[index].doctorProfile.toString(), cat: widget.cat, subCat: widget.subcat,
+                                      )));
+                          // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
+                        },
+                        child: Card(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 6.0),
+                          color: MyColor.white,
+                          elevation: 1.4,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 100.0,
+                                height: 100.0,
+                                // margin: const EdgeInsets.all(6),
+                                child: FadeInImage.assetNetwork(
+                                    placeholder:
+                                    "assets/images/loading.gif",
+                                    // placeholderCacheHeight: 20,
+                                    // placeholderCacheWidth: 20,
+                                    /*"assets/images/YlWC.gif",*/
+                                    alignment: Alignment.center,
+                                    image: list[index]
+                                        .doctorProfile
+                                        .toString(),
+                                    fit: BoxFit.fitWidth,
+                                    width: double.infinity,
+                                    imageErrorBuilder:
+                                        (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/images/noimage.png',
+                                        fit: BoxFit.cover,
+                                      );
+                                    }),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  customView.text(
+                                      "${list[index].name.toUpperCase()} ${list[index].surname.toUpperCase()}",
+                                      13,
+                                      FontWeight.w500,
+                                      MyColor.primary1),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  SizedBox(
+                                      width: widht * 0.50,
+                                      child: customView.text(
+                                          list[index]
+                                              .subcategory
                                               .toString(),
-                                          fit: BoxFit.fitWidth,
-                                          width: double.infinity,
-                                          imageErrorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                              'assets/images/noimage.png',
-                                              fit: BoxFit.cover,
-                                            );
-                                          }),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        customView.text(
-                                            "${list[index].name.toUpperCase()} ${list[index].surname.toUpperCase()}",
-                                            13,
-                                            FontWeight.w500,
-                                            MyColor.primary1),
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        SizedBox(
-                                            width: widht * 0.50,
-                                            child: customView.text(
-                                                list[index]
-                                                    .subcategory
-                                                    .toString(),
-                                                12,
-                                                FontWeight.w500,
-                                                MyColor.black)),
-                                     /*   list[index].serviceStatus == "Free"
+                                          12,
+                                          FontWeight.w500,
+                                          MyColor.black)),
+                                  /*   list[index].serviceStatus == "Free"
                                             ? Row(
                                                 children: [
                                                   const Icon(
@@ -398,67 +320,67 @@ class _DoctorListState extends State<DoctorList> {
                                                       MyColor.grey),
                                                 ],
                                               ),*/
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        RatingBar(
-                                          ignoreGestures: true,
-                                          itemSize: 17,
-                                          initialRating: double.parse(
-                                              list[index].rating.toString()),
-                                          direction: Axis.horizontal,
-                                          allowHalfRating: true,
-                                          itemCount: 5,
-                                          ratingWidget: RatingWidget(
-                                              full: const Icon(Icons.star,
-                                                  color: Colors.orange),
-                                              half: const Icon(Icons.star_half,
-                                                  color: Colors.orange),
-                                              empty: const Icon(
-                                                  Icons
-                                                      .star_border_purple500_outlined,
-                                                  color: Colors.orange)),
-                                          itemPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 2.0),
-                                          onRatingUpdate: (rating) {
-                                            log("$rating");
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          height: 4,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                                Icons.location_on_outlined,
-                                                size: 18),
-                                            SizedBox(
-                                                width:
-                                                MediaQuery.sizeOf(context)
-                                                    .width /
-                                                    1.9,
-                                                child: Text(
-                                                  list[index].location.toUpperCase(),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    fontSize: 11,
-                                                    fontFamily: "Poppins",
-                                                    color: MyColor.grey,
-                                                  ),
-                                                )),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  RatingBar(
+                                    ignoreGestures: true,
+                                    itemSize: 17,
+                                    initialRating: double.parse(
+                                        list[index].rating.toString()),
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                        full: const Icon(Icons.star,
+                                            color: Colors.orange),
+                                        half: const Icon(Icons.star_half,
+                                            color: Colors.orange),
+                                        empty: const Icon(
+                                            Icons
+                                                .star_border_purple500_outlined,
+                                            color: Colors.orange)),
+                                    itemPadding:
+                                    const EdgeInsets.symmetric(
+                                        horizontal: 2.0),
+                                    onRatingUpdate: (rating) {
+                                      log("$rating");
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                          Icons.location_on_outlined,
+                                          size: 18),
+                                      SizedBox(
+                                          width:
+                                          MediaQuery.sizeOf(context)
+                                              .width /
+                                              1.9,
+                                          child: Text(
+                                            list[index].location.toUpperCase(),
+                                            maxLines: 1,
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontFamily: "Poppins",
+                                              color: MyColor.grey,
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
+                      );
+                    },
+                  ),
                 );
               }
             }),
@@ -512,6 +434,7 @@ class _DoctorListState extends State<DoctorList> {
                     "",
                     selectedBranch.toString());
               });
+              Get.back();
             },
           ),
         ),
@@ -554,7 +477,7 @@ class _DoctorListState extends State<DoctorList> {
                     const Padding(
                       padding: EdgeInsets.only(right: 8.0),
                       child:
-                          Icon(Icons.check_outlined, color: MyColor.lightblue),
+                      Icon(Icons.check_outlined, color: MyColor.lightblue),
                     )
                   ],
                 ),
@@ -593,3 +516,185 @@ class _DoctorListState extends State<DoctorList> {
     );
   }
 }
+
+/*
+class DoctorListWithCategory extends StatefulWidget {
+  String catId, subCatId, rating, startPrice, EndPrice;
+
+  DoctorListWithCategory(
+      {Key? key,
+      required this.catId,
+      required this.subCatId,
+      required this.rating,
+      required this.startPrice,
+      required this.EndPrice})
+      : super(key: key);
+
+  @override
+  State<DoctorListWithCategory> createState() => _DoctorListWithCategoryState();
+}
+
+class _DoctorListWithCategoryState extends State<DoctorListWithCategory>
+    with SingleTickerProviderStateMixin {
+  CustomView customView = CustomView();
+  LocalString text = LocalString();
+  DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
+
+  TextEditingController searchCtr = TextEditingController();
+  TabController? tabController;
+
+  int _selectedIndex = 0;
+  bool _isListView = true;
+  String? catId;
+  String? subCatId;
+  String rating = "";
+  String startTime = "";
+  String endTime = "";
+
+  @override
+  void initState() {
+    super.initState();
+    rating = widget.rating;
+    startTime = widget.startPrice;
+    endTime = widget.EndPrice;
+    tabController = TabController(vsync: this, length: 2);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      doctorSignUpCtr.branchListApi();
+
+      catId = widget.catId;
+      subCatId = widget.subCatId;
+
+      print("category$catId");
+      print(subCatId);
+  */
+/*    doctorListCtr.doctorlistfetch(
+        context,
+        catId.toString(),
+        subCatId.toString(),
+        startTime.toString(),
+        endTime.toString(),
+        rating,
+        "",
+      );*//*
+
+    });
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final widht = MediaQuery.of(context).size.width;
+    return Obx(() {
+      return Scaffold(
+        bottomNavigationBar:doctorListCtr.doctorList.isEmpty
+            ? const Text("")
+            : BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'List',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: 'Map',
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          selectedItemColor: MyColor.primary1, // Set the color for the selected tab
+          unselectedItemColor: Colors.grey, // Set the color for unselected tabs
+        ),
+       */
+/* floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: doctorListCtr.doctorList.isEmpty
+            ? const Text("")
+            : Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Container(
+                  height: 38.0,
+                  width: widht * 0.40,
+                  decoration: BoxDecoration(
+                      color: MyColor.primary1,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (_selectedIndex < 1) {
+                            _selectedIndex++;
+                            _isListView = true;
+                          } else {
+                            _isListView = false;
+                            _selectedIndex = 0;
+                          }
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: customView.text(
+                                _isListView
+                                    ? text.ListView.tr
+                                    : text.MapView.tr,
+                                13,
+                                FontWeight.w500,
+                                MyColor.white),
+                          ),
+                          const SizedBox(
+                            width: 3.0,
+                          ),
+                          const Icon(
+                            Icons.view_agenda_outlined,
+                            color: MyColor.white,
+                            size: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),*//*
+
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  DoctorList(cat: widget.catId, subcat: widget.subCatId),
+                  MapViewScreen(
+                      catId: widget.catId.toString(),
+                      subCatID: widget.subCatId.toString()),
+                  */
+/* MapView(
+                    catId: widget.catId.toString(),
+                    subCatID: widget.subCatId.toString()),*//*
+
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+}
+*/
+
+
+
+
+/*----------Doctor List Screen--------------------*/
+

@@ -54,7 +54,7 @@ class NotificationService {
         );
 
         var androidNotificationDetails = const AndroidNotificationDetails(
-            "notifications", "medica",
+            "notifications", "prophysio",
             enableLights: true,
             priority: Priority.max,
             importance: Importance.max);

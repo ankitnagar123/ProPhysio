@@ -5,6 +5,7 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
+import 'DoctorListTab.dart';
 import 'DoctorListwithCategoy.dart';
 
 class PDrSubCategory extends StatefulWidget {
@@ -79,12 +80,9 @@ class _PDrSubCategoryState extends State<PDrSubCategory> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DoctorListWithCategory(
+                                  builder: (context) => DoctorListTab(
                                         catId: widget.categoryId,
-                                        subCatId: subCategoryId.toString(),
-                                    EndPrice: "",
-                                    startPrice: "",
-                                    rating: "",
+                                        SubCatId: subCategoryId.toString(),
                                       )));
                         },
                         child: Card(

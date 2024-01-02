@@ -24,15 +24,13 @@ class MapViewScreen extends StatefulWidget {
 class _MapViewScreenState extends State<MapViewScreen> {
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
-  CustomInfoWindowController customInfoWindowController =
-      CustomInfoWindowController();
+  CustomInfoWindowController customInfoWindowController = CustomInfoWindowController();
   CustomView customView = CustomView();
   late GoogleMapController controller;
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
   List latlang = [];
-
   Future<void> _onMapCreated(GoogleMapController controller) async {
     var markerIcon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size.fromHeight(10.0)),

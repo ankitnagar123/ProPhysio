@@ -58,7 +58,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.Submit.tr, () {
-            Navigator.pushReplacement(
+        /*    Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => DoctorListWithCategory(
@@ -66,7 +66,7 @@ class _RatingFilterScreenState extends State<RatingFilterScreen> {
                       subCatId: subCat,
                       startPrice: "",
                       EndPrice:  "", rating: ratings,
-                    )));
+                    )));*/
            // Get.offNamed(RouteHelper.getFilterScreen());
           }, MyColor.red, const TextStyle(
               color: MyColor.white,

@@ -71,6 +71,8 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
       patientUsername = Get.arguments["userName"];
       patientAddress = Get.arguments["userLocation"];
       patientContact = Get.arguments["userContact"];
+      log("patientName---${patientName} ${patientSurname}");
+
     } else {
       patientId = Get.arguments["ID"];
       patientName = Get.arguments["name"];
@@ -78,17 +80,19 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
       patientSurname = Get.arguments["surname"];
       patientUsername = Get.arguments["username"];
       patientAddress = Get.arguments["address"];
-      print("chat side address $patientAddress");
+      log("chat side address $patientAddress");
+      log("patientName---${patientName} ${patientSurname}");
+
       // patientContact = Get.arguments["userContact"];
     }
 
     print("doctor Id==>>>>$patientId");
- /*   WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.doctorReceivedMsgListFetch(context, patientId);
       });
-    });*/
+    });
     getData();
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {

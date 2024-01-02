@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PDoctorTab.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
+import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListTab.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
@@ -50,12 +51,10 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
     PDrSubCategory(
       categoryId: '',
     ),
-    DoctorListWithCategory(
+    DoctorListTab(
       catId: '',
-      subCatId: '',
-      rating: '',
-      startPrice: '',
-      EndPrice: '',
+      SubCatId: '',
+
     )
   ];
 

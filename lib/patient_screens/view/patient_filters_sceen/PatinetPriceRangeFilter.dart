@@ -71,7 +71,7 @@ String endRange = "";
               "",
               "",
               "");*/
-          Navigator.pushReplacement(
+          /*Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => DoctorListWithCategory(
@@ -79,7 +79,7 @@ String endRange = "";
                     subCatId: subCat,
                     startPrice: startRange,
                     EndPrice:  endRange, rating: '',
-                  )));
+                  )));*/
           // Get.offNamed(RouteHelper.getFilterScreen());
         }, MyColor.red,
             const TextStyle(color: MyColor.white, fontFamily: "Poppins")),

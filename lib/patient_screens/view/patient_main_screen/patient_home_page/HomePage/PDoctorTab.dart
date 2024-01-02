@@ -17,6 +17,7 @@ import '../../../../controller/auth_controllers/PatientProfileController.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../../model/DoctorListModel.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
+import '../category_sub-category/DoctorListTab.dart';
 import '../category_sub-category/DoctorListwithCategoy.dart';
 import '../category_sub-category/PDoctorSubCat.dart';
 
@@ -617,15 +618,12 @@ class _HomeViewState extends State<HomeView> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DoctorListWithCategory(
+                                              DoctorListTab(
                                                 catId: catWithSubCatId
                                                     .toString(),
-                                                subCatId:
+                                                SubCatId:
                                                 subCategoryId
                                                     .toString(),
-                                                rating: '',
-                                                startPrice: '',
-                                                EndPrice: '',
                                               )));
                                 },
                                 child: Padding(
