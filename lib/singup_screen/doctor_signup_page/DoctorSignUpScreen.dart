@@ -1231,7 +1231,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     slectedCategory = newValue;
                     log('MY CATEGORY>>>$slectedCategory');
                   });
-                  doctorListCtr.subCatList(slectedCategory!);
+                  /*doctorListCtr.subCatList(slectedCategory!);*/
                 },
               ),
             ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,14 +13,14 @@ import "../../controller/auth_controllers/card_controller's/PatientCardControlle
 import '../../controller/doctor_list_ctr/DoctorListController.dart';
 
 class PatientCheckOutCard extends StatefulWidget {
-  String price, time, date, centerId;
+  String price, time, date, branchId;
 
   PatientCheckOutCard(
       {Key? key,
       required this.price,
       required this.time,
       required this.date,
-      required this.centerId})
+      required this.branchId})
       : super(key: key);
 
   @override
@@ -33,26 +35,24 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
   CardCtr cardCtr = Get.put(CardCtr());
   String? price;
   String? time;
-  String? healthCard;
   String? doctorid;
   String? date;
   String centerId = "";
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorid = doctorListCtr.doctorid.value;
       price = widget.price;
       time = widget.time;
       date = widget.date;
-      centerId = widget.centerId;
-      print("center id$centerId");
-      print(healthCard);
-      print(time);
-      print(price);
+      centerId = widget.branchId;
+      log("center id$centerId");
+      log("time slot--$time");
+      log("price----$price");
       cardCtr.cardFetch();
     });
-    super.initState();
   }
 
   String? payment = '';

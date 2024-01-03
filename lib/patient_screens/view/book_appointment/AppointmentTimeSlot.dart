@@ -15,7 +15,7 @@ import '../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../patient_payment_screen/PatientCheckOutCard.dart';
 
 class AppointmentTimeSlot extends StatefulWidget {
-  String date, day, month, year, centerId, firstConslt,cat,subCat;
+  String date, day, month, year, branchId, cat;
 
   AppointmentTimeSlot({
     Key? key,
@@ -23,10 +23,8 @@ class AppointmentTimeSlot extends StatefulWidget {
     required this.day,
     required this.month,
     required this.year,
-    required this.centerId,
-    required this.firstConslt,
+    required this.branchId,
     required this.cat,
-    required this.subCat,
   }) : super(key: key);
 
   @override
@@ -42,9 +40,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   CustomView custom = CustomView();
   DateTime _selectedValue = DateTime.now();
   String? id;
-  String centerId = "";
+  String branchId = "";
   String? time;
-  String? price;
+  String price =  "0";
   String? fee;
   String? formateddate;
   int selectedCard = -1;
@@ -53,26 +51,24 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      print("final date...................${widget.date}");
-      print("day...................${widget.day}");
-      print("moth...................${widget.month}");
-      print("year...................${widget.year}");
-      print("CENTER ID...................${widget.centerId}");
+      log("final date...................${widget.date}");
+      log("day...................${widget.day}");
+      log("moth...................${widget.month}");
+      log("year...................${widget.year}");
+      log("CENTER ID...................${widget.branchId}");
 
       day = widget.day;
       appointmentController.seletedtime.value = widget.date;
-      centerId = widget.centerId;
-      log("center id $centerId");
+      branchId = widget.branchId;
+      log("center id $branchId");
       id = doctorListCtr.doctorid.value;
       log("doctor id$id");
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
               appointmentController.seletedtime.value.toString(),);
-     /* widget.firstConslt == ""
-      ? */ appointmentController.doctorVisitChargefetch(widget.cat,widget.subCat); /*: null;*/
+    appointmentController.doctorVisitChargefetch(widget.cat,widget.branchId);
     });
   }
 
@@ -85,18 +81,6 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.confirmAppointment.tr, () {
-       /*     if (widget.firstConslt == "Free") {
-              appointmentController.bookingAppointment(
-                  context,
-                  doctorListCtr.doctorid.toString(),
-                  "",
-                  time.toString(),
-                  price.toString(),
-                  appointmentController.seletedtime.value.toString(),
-                  "",widget.firstConslt ,() {
-                Get.offNamed(RouteHelper.getBookingSuccess());
-              });
-            } else*/
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -105,7 +89,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                             time: time.toString(),
                             date: appointmentController.seletedtime.value
                                 .toString(),
-                            centerId: centerId,
+                        branchId: branchId,
                           )));
 
           }, MyColor.primary,
@@ -251,31 +235,11 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                         height: 10,
                       ),
                       const Divider(height: 50),
-                      widget.firstConslt == "Free" ? SizedBox(): Align(
+                      Align(
                           alignment: Alignment.topLeft,
                           child: custom.text(text.visitCharges.tr, 16,
                               FontWeight.w500, MyColor.black)),
-                      widget.firstConslt == "Free"
-                          ? Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.local_hospital,
-                                    color: Colors.red,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: custom.text(
-                                        "YOUR FIRST CONSULTANT FREE",
-                                        14,
-                                        FontWeight.normal,
-                                        Colors.green),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : appointmentController.visitCharge.isEmpty
+                      appointmentController.visitCharge.isEmpty
                               ? Center(
                                   heightFactor: 5,
                                   child: Text(text.noVisitChargesDoctor.tr),
@@ -302,17 +266,17 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                               Icons.arrow_circle_right,
                                               size: 20,
                                               color: MyColor.primary1),
-                                          title: Text(list.title.toString()),
+                                          title: Text(list.categoryName.toString()),
                                           trailing: Radio<String>(
                                             value: index.toString(),
                                             groupValue: price,
                                             onChanged: (value) {
                                               setState(() {
                                                 price = value!;
-                                                print("....$price");
+                                                log("....$price");
                                                 fee = list.price.toString();
-                                                print('fee----------$fee');
-                                                print('price----------$price');
+                                                log('fee----------$fee');
+                                                log('price----------$price');
                                               });
                                             },
                                           ),

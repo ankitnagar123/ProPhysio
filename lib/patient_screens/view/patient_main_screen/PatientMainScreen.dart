@@ -27,8 +27,8 @@ class PatientMainScreen extends StatefulWidget {
 }
 
 class _PatientMainScreenState extends State<PatientMainScreen> {
-  PatientBookingController patientBookingController =
-      Get.put(PatientBookingController());
+
+
   MyRoute myRoute = Get.put(MyRoute());
   LocalString text = LocalString();
   CustomView view = CustomView();

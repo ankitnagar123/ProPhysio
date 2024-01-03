@@ -66,7 +66,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
                                   centerId: '',
                                   drImg: doctorListCtr
                                       .doctorList[i].doctorProfile
-                                      .toString(), cat: widget.catId, subCat: widget.subCatID,
+                                      .toString(), cat: widget.catId,
                                 )));
                   },
                   child: Card(
@@ -202,8 +202,8 @@ class _MapViewScreenState extends State<MapViewScreen> {
             },
             initialCameraPosition: CameraPosition(
               target: doctorListCtr.doctorList.isEmpty?LatLng(
-                double.parse("20.5937"),
-                double.parse("78.9629"),
+                double.parse("21.7679"),
+                double.parse("78.8718"),
               ):LatLng(
                 double.parse(doctorListCtr.doctorList[0].latitude.toString()),
                 double.parse(doctorListCtr.doctorList[0].longitude.toString()),

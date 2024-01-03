@@ -33,7 +33,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
   String? price;
   String? time;
   String? date;
-  String centerId = "";
+  String branchId = "";
   CustomView custom = CustomView();
 
   @override
@@ -44,9 +44,9 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
     price = widget.price;
     time = widget.timeid;
     date = widget.date;
-    centerId = widget.centerId;
+    branchId = widget.centerId;
 
-    log("center id $centerId");
+    log("center id $branchId");
     log("date$date");
     log("price$price");
     log("time slot$time");
@@ -73,7 +73,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   price: price.toString(),
                   time: time.toString(),
                   date: date.toString(),
-                  centerId: centerId,
+                  branchId: branchId,
                 ),
               ),
             );

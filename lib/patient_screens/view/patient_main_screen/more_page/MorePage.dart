@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/helper/AppConst.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
@@ -58,7 +59,7 @@ class _MorePageState extends State<MorePage> {
                   ),
                 ),
                 customView.text(
-                    "${text.hii.tr} @${patientProfileCtr.name.value}",
+                    "${text.hii.tr} @${AppConst.Patient_Name}",
                     17.0,
                     FontWeight.w500,
                     Colors.black),

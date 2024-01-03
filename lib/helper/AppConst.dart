@@ -24,6 +24,7 @@ class AppConst {
   /*-----Patient Info-------*/
 static String Patient_Name = "";
 static String Patinet_Surname = "";
+static String Patinet_Profile = "";
 
 // static  String SERVICE_NAME = "";
 // static  String NO_OF_PROFESSINOAL = "";

@@ -106,7 +106,7 @@ String centerId = "";
                               MaterialPageRoute(
                                   builder: (context) =>
                                       DoctorDetailScreen(
-                                        id:   centerHomeCtr.selectedDoctorList[index].doctorId, centerId:centerId, drImg: centerHomeCtr.selectedDoctorList[index].doctorProfile, cat: '', subCat: '',
+                                        id:   centerHomeCtr.selectedDoctorList[index].doctorId, centerId:centerId, drImg: centerHomeCtr.selectedDoctorList[index].doctorProfile, cat: '',
                                       )));
                         },
                         child: Card(
@@ -122,7 +122,7 @@ String centerId = "";
                                 // margin: const EdgeInsets.all(6),
                                 child: FadeInImage.assetNetwork(
                                     placeholder:
-                                    "assets/images/YlWC.gif",
+                                    "assets/images/loading.gif",
                                     alignment: Alignment.center,
                                     image: centerHomeCtr
                                         .selectedDoctorList[
@@ -132,7 +132,7 @@ String centerId = "";
                                     imageErrorBuilder: (context,
                                         error, stackTrace) {
                                       return Image.asset(
-                                        'assets/images/noimage.png',
+                                        'assets/images/dummyprofile.png',
                                         fit: BoxFit.cover,
                                       );
                                     }),

@@ -70,7 +70,7 @@ class _NavigateMapViewScreenState extends State<NavigateMapViewScreen> {
                         height: 80,
                         // margin: const EdgeInsets.all(6),
                         child: FadeInImage.assetNetwork(
-                            placeholder: "assets/images/YlWC.gif",
+                            placeholder: "assets/images/loading.gif",
                             alignment: Alignment.center,
                             image: img,
                             fit: BoxFit.fitWidth,

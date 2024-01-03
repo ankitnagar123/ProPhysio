@@ -15,24 +15,27 @@ import '../../controller/rating_controller/PatinetRatingController.dart';
 import '../book_appointment/AppointmentCalender.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
-  final String id, centerId,drImg,cat,subCat;
+  final String id, centerId;
 
-  const DoctorDetailScreen({Key? key, required this.id, required this.centerId, required this.drImg, required this.cat, required this.subCat})
-      : super(key: key);
+  const DoctorDetailScreen({super.key, required this.id, required this.centerId, required String drImg, required String cat});
 
   @override
   State<DoctorDetailScreen> createState() => _DoctorDetailScreenState();
 }
 
 class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
+
+  /*---------API GetX Controller initialize-------*/
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   PatientRatingCtr patientRatingCtr = Get.put(PatientRatingCtr());
-  LocalString text = LocalString();
-  AppointmentController appointmentController =
-      Get.put(AppointmentController());
-  DoctorSpecializationCtr doctorSpecializationCtr =
-      Get.put(DoctorSpecializationCtr());
+  AppointmentController appointmentController = Get.put(AppointmentController());
+  DoctorSpecializationCtr doctorSpecializationCtr = Get.put(DoctorSpecializationCtr());
+
+  /*---------My Custom Items-------*/
   CustomView custom = CustomView();
+  LocalString text = LocalString();
+
+  /*-----Variables-----*/
   String doctorId = '';
   String img = "";
   String address = "";
@@ -48,11 +51,14 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     super.initState();
     doctorId = widget.id.toString();
     log("doctor my  id$doctorId");
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-      patientRatingCtr.fetchRating(doctorId);
-      doctorListCtr.doctorDetialsfetch(doctorId);
-      doctorSpecializationCtr.specializationFetch(doctorId);
 
+    // Using WidgetsBinding to execute code after the first frame is displayed
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+
+       // Calling methods on controllers to fetch data
+       patientRatingCtr.fetchRating(doctorId);
+      doctorListCtr.doctorDetialsfetch(doctorId);
+      // doctorSpecializationCtr.specializationFetch(doctorId);
      });
   }
 
@@ -63,6 +69,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       if(doctorListCtr.resultVar.value == 1){
         doctorListCtr.resultVar.value = 0;
 
+        /*set value </>*/
         img = doctorListCtr.image.value.toString();
         doc = doctorListCtr.doc.value.toString();
         log("doctor =img${doctorListCtr.image.value.toString()}");
@@ -73,7 +80,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
         log("branchId my  id$branchId");
         address = doctorListCtr.address.value;
         appointmentController.dateCalender(doctorId,branchId);
-
       }
       return Scaffold(
         body: doctorListCtr.loadingFetchD.value
@@ -91,7 +97,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                 background: FadeInImage.assetNetwork(
                     placeholder: 'assets/images/runlogo.png',
                     alignment: Alignment.center,
-                    image: widget.drImg,
+                    image: doctorListCtr.drProfile.value.toString(),
                      fit: BoxFit.fitWidth,
 
                     imageErrorBuilder: (context, error, stackTrace) {
@@ -137,15 +143,35 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                     MyColor.grey)),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: custom.text(
-                              "BRANCH : ${doctorListCtr.branchName.value.toUpperCase()}",
-                              13,
-                              FontWeight.normal,
-                              MyColor.grey),
+                        Row(
+                          children: [
+                            Icon(Icons.medical_services_outlined,color: MyColor.grey,size: 19,),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: custom.text(
+                                  "BRANCH : ${doctorListCtr.branchName.value.toUpperCase()}",
+                                  13,
+                                  FontWeight.normal,
+                                  MyColor.grey),
+                            ),
+                          ],
                         ),
-                        doctorListCtr.serviceStatus =="Free"?   Padding(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.location_on_outlined,
+                                size: 20, color: MyColor.primary1),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width *
+                                    0.80,
+                                child: custom.text(
+                                    "Branch Address : ${doctorListCtr.branchAddress.value}",
+                                    11,
+                                    FontWeight.normal,
+                                    MyColor.grey)),
+                          ],
+                        ),
+                     /*   doctorListCtr.serviceStatus =="Free"?   Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Row(
                             children: [
@@ -160,7 +186,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         ):SizedBox(),
                         SizedBox(
                           height: height * 0.01,
-                        ),
+                        ),*/
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0,right: 8.0),
                           child: Row(
@@ -204,7 +230,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         MaterialPageRoute(
                                             builder: (context) => calender(
                                               branchId:branchId,
-                                              firstConslt: doctorListCtr.serviceStatus.toString(), cat: widget.cat, subCat: widget.subCat,
+                                             cat:doctorListCtr.categoryId.value,
                                             )));
                                   },
                                   MyColor.primary,
@@ -348,7 +374,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         SizedBox(
                           height: height * 0.02,
                         ),
-                        custom.text(text.specializations.tr, 15,
+                    /*    custom.text(text.specializations.tr, 15,
                             FontWeight.w500, MyColor.primary1),
                         doctorSpecializationCtr.category.isEmpty
                             ?  SizedBox(
@@ -415,7 +441,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                   )),
                             );
                           },
-                        ),
+                        ),*/
                       ],
                     ),
                   );

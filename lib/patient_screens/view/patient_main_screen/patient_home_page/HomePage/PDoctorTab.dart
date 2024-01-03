@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ import '../category_sub-category/DoctorListTab.dart';
 
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -46,20 +47,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    profileCtr.patientProfile(context);
+    var data = sp.getStringValue(sp.PATIENT_PROFILE);
+    log("profile-$data");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getValuee();
-      // doctorListCtr.catSubCatList();
       doctorSignUpCtr.DoctorCategory();
-      doctorListCtr.doctorlistfetch(
-        context,
-        "114",
-        "",
-        "",
-        "",
-        "",
-        "",
-      );
     });
   }
 
@@ -94,58 +86,57 @@ class _HomeViewState extends State<HomeView> {
           children: [
             SizedBox(height: height * 0.05),
             Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Obx(() {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Wrap(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(80.0),
-                          child: FadeInImage.assetNetwork(
-                            imageErrorBuilder: (c, o, s) =>
-                                Image.asset(
-                                    "assets/images/dummyprofile.png",
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover),
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/loading.gif",
-                            image: profileCtr.image.value,
-                            placeholderFit: BoxFit.cover,
-                          ),
+              padding: const EdgeInsets.only(left: 12.0,right: 12.0,top: 12.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Wrap(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(80.0),
+                        child: FadeInImage.assetNetwork(
+                          imageErrorBuilder: (c, o, s) =>
+                              Image.asset(
+                                  "assets/images/dummyprofile.png",
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover),
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                          placeholder: "assets/images/loading.gif",
+                          image: AppConst.Patinet_Profile,
+                          placeholderFit: BoxFit.cover,
                         ),
- const Divider(color: Colors.grey),
-                        const SizedBox(
-                          width: 15,
+                      ),
+                      const Divider(color: Colors.grey),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            customView.text("Good $timeOfDay ☺", 13,
+                                FontWeight.normal, MyColor.grey),
+                            customView.text(
+                                "${AppConst.Patient_Name} ${AppConst.Patinet_Surname}".toUpperCase(), 14,
+                                FontWeight.w500, MyColor.primary1)
+                          ],
                         ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              customView.text("Good $timeOfDay ☺", 13,
-                                  FontWeight.normal, MyColor.grey),
-                              customView.text(
-                                  "${AppConst.Patient_Name} ${AppConst.Patinet_Surname}".toUpperCase(), 14,
-                                  FontWeight.w500, MyColor.primary1)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Icon(
-                      Icons.notifications_none_outlined,
-                      color: Colors.black54,
-                    )
-                  ],
-                );
-              }),
+                      ),
+                    ],
+                  ),
+                /*  const Icon(
+                    Icons.notifications_none_outlined,
+                    color: Colors.black54,
+                  )*/
+                ],
+              ),
             ),
+            Divider(),
             SizedBox(height: height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

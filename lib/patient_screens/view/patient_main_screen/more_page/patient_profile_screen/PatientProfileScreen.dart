@@ -8,6 +8,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:prophysio/helper/AppConst.dart';
 
 
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
@@ -120,6 +121,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         birthPlaceCtr.text = profileCtr.birthplace.value;
         birthDateCtr.text = profileCtr.dob.value;
         selectedBranch = profileCtr.branchId.value;
+
+/*set local */
+        AppConst.Patinet_Profile = files;
+        AppConst.Patient_Name = nameCtrl.text;
+        AppConst.Patinet_Surname = sureNameCtrl.text;
+
       }
     return Scaffold(
       appBar: AppBar(

@@ -224,8 +224,7 @@ class _DoctorListState extends State<DoctorList> {
                                   builder: (context) =>
                                       DoctorDetailScreen(
                                         id: list[index].doctorId.toString(),
-                                        centerId: '',
-                                        drImg: list[index].doctorProfile.toString(), cat: widget.cat, subCat: widget.subcat,
+                                        centerId: '', drImg: '', cat: '',
                                       )));
                           // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                         },
@@ -278,8 +277,7 @@ class _DoctorListState extends State<DoctorList> {
                                   SizedBox(
                                       width: widht * 0.50,
                                       child: customView.text(
-                                          list[index]
-                                              .subcategory
+                                          list[index].category
                                               .toString(),
                                           12,
                                           FontWeight.w500,

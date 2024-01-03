@@ -60,11 +60,13 @@ class _MyAppState extends State<MyApp> {
   String name = "";
   String dSurname = "";
   String surname = "";
+  String profile = "";
 // CallController callController= CallController();
   void getValue() async {
     userID = (await sp.getStringValue(sp.PATIENT_ID_KEY)).toString();
     name = (await sp.getStringValue(sp.PATIENT_NAME_KEY)).toString();
     surname = (await sp.getStringValue(sp.PATIENT_SURE_NAME_KEY)).toString();
+    profile = (await sp.getStringValue(sp.PATIENT_PROFILE)).toString();
 
     drID = (await sp.getStringValue(sp.DOCTOR_ID_KEY)).toString();
     dName = (await sp.getStringValue(sp.DOCTOR_NAME_KEY)).toString();
@@ -79,8 +81,10 @@ class _MyAppState extends State<MyApp> {
       log('patient userId--------$userID');
       log(' patient name--------$name');
       log('patient surname--------$surname');
+      log('patient profile--------$profile');
       AppConst.Patient_Name = name;
       AppConst.Patinet_Surname = surname;
+      AppConst.Patinet_Profile = profile;
       onUserLogin(userID.toString(), "$name $surname","user");
     }else {
       log('drID START ----');

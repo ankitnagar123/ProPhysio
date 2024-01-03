@@ -45,6 +45,8 @@ LocalString text =  LocalString();
         String id = jsonResponse['id'].toString();
         String name = jsonResponse['name'].toString();
         String surname = jsonResponse['surname'].toString();
+        String userProfile = jsonResponse['user_profile'].toString();
+
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
           sp.setStringValue(sp.USER_TYPE, usertype);
@@ -70,9 +72,12 @@ LocalString text =  LocalString();
             sp.setStringValue(sp.PATIENT_ID_KEY, id);
             sp.setStringValue(sp.PATIENT_NAME_KEY, name);
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
+            sp.setStringValue(sp.PATIENT_PROFILE, userProfile);
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
 AppConst.Patient_Name = name;
 AppConst.Patinet_Surname= surname;
+AppConst.Patinet_Profile= userProfile;
+
             log("Patient login ID -- ${id.toString()}");
             log("Patient name -- ${sp.PATIENT_NAME_KEY}");
             log("Patient surname -- ${sp.PATIENT_SURE_NAME_KEY}");

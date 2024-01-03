@@ -90,28 +90,28 @@ var bookingId = "".obs;
   }
 
   /*------------------Doctor visit charge list Fetch Api----------------*/
-  Future<void> doctorVisitChargefetch(String catId,String subCat) async {
+  Future<void> doctorVisitChargefetch(String catId,String branchId) async {
     final Map<String, dynamic> Peramert = {
       "cat_id": catId,
-      "sub_cat_id": subCat,
+      "branch_id": branchId,
     };
-    print(Peramert);
+    log("Peramert$Peramert");
     try {
       loadingFetch.value = true;
       final response =
           await apiService.postData(MyAPI.pDoctorVisitCharge, Peramert);
-      print("doctor visit charge list=============${response.body}");
+      log("doctor visit charge list-----${response.body}");
       if (response.statusCode == 200) {
         loadingFetch.value = false;
         visitCharge.value = visitChargeModelFromJson(response.body);
-        print(visitCharge.toString());
+        log(visitCharge.toString());
       } else {
         loadingFetch.value = false;
-        print("error");
+        log("error");
       }
     } catch (e) {
       loadingFetch.value = false;
-      print("exception$e");
+      log("exception$e");
     }
   }
 
@@ -124,11 +124,12 @@ var bookingId = "".obs;
       "date": date,
       // "center_id":centerId,
     };
+    log("parameter------$Peramert");
     try {
       final response =
           await apiService.postData(MyAPI.pDoctorTimeSlot, Peramert);
-      print(Peramert);
-      print("doctor time list=============${response.body}");
+      log("$Peramert");
+      log("doctor time list=============${response.body}");
       if (response.statusCode == 200) {
         loadingFetchTime.value = false;
         List<DoctorTimeListModelpatinet> list = jsonDecode(response.body)
@@ -137,14 +138,14 @@ var bookingId = "".obs;
             .cast<DoctorTimeListModelpatinet>();
         timeList.clear();
         timeList.addAll(list);
-        print(timeList.toString());
+        log(timeList.toString());
       } else {
         loadingFetchTime.value = false;
-        print("error");
+        log("error");
       }
     } catch (e) {
       loadingFetchTime.value = false;
-      print("exception$e");
+      log("exception$e");
     }
   }
 

@@ -51,7 +51,7 @@ class DoctorListCtr extends GetxController {
       String filterLongitude,
       String filterDistance,*/
       ) async {
-    final Map<String, dynamic> cardPeramert = {
+    final Map<String, dynamic> Paramert = {
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
       "cat_id":categoryId,
@@ -67,17 +67,19 @@ class DoctorListCtr extends GetxController {
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
 
     };
-    log("doctor list parameter=============$cardPeramert");
+    log("doctor list parameter=============$Paramert");
 
     bool connection = await  checkInternetConnection();
   if(connection){
     try {
       loadingFetch.value = true;
-      final response = await apiService.postData(MyAPI.pDoctorList,cardPeramert);
+      final response = await apiService.postData(MyAPI.pDoctorList,Paramert);
       print("doctor list=============${response.body}");
       if (response.statusCode == 200) {
         loadingFetch.value = false;
-        var jsonString = response.body;
+        doctorList.value = doctorListModelFromJson(response.body);
+
+   /*     var jsonString = response.body;
         print(jsonString);
         List<DoctorListModel> listdoctor = jsonDecode(response.body)
             .map((item) => DoctorListModel.fromJson(item))
@@ -86,7 +88,7 @@ class DoctorListCtr extends GetxController {
         doctorList.clear();
         doctorList.addAll(listdoctor);
 print(doctorList);
-        print(listdoctor);
+        print(listdoctor);*/
       } else {
         loadingFetch.value = false;
         print("error");
@@ -118,7 +120,8 @@ print(doctorList);
 
   }
 
-/*  *//*------------------Doctor list  Fetch Api with filter----------------*//*
+/*  *//*------------------Doctor list  Fetch Api with filter----------------*/
+/*
   Future<void> doctorlistfetch(BuildContext context,String categoryId,String subCatId,
       String priceStart,
       String priceEnd,
@@ -197,15 +200,18 @@ print(doctorList);
   var doctorid = "".obs;
  var doctorname = "".obs;
  var drSurname = "".obs;
- var drContact = "".obs;
  var biography ="".obs;
   var fee ="".obs;
   var latitude = "".obs;
   var longitude= "".obs;
 var category = "".obs;
+var categoryId = "".obs;
 var branchName = "".obs;
-var serviceStatus = "".obs;
+var branchAddress = "".obs;
+var branchLat = "".obs;
+var branchLong = "".obs;
 var branchId = "".obs;
+var drProfile = "".obs;
 
 
   var resultVar = RxnInt(0);
@@ -234,24 +240,25 @@ var branchId = "".obs;
         fee.value = jsonResponse["fees"].toString();
         doctorname.value = jsonResponse["name"].toString();
         drSurname.value = jsonResponse["surname"].toString();
-        drContact.value = jsonResponse["contact"].toString();
         image.value = img;
         address.value = location;
         biography.value = jsonResponse["biography"].toString();
+        categoryId.value = jsonResponse["category_id"].toString();
         image.value = jsonResponse["Doctor_profile"].toString();
         doc.value = jsonResponse["Doctor_document"].toString();
         doctorid.value = jsonResponse["doctor_id"].toString();
         latitude.value = jsonResponse["latitude"].toString();
         longitude.value = jsonResponse["longitude"].toString();
         branchName.value = jsonResponse["branch_name"].toString();
-        serviceStatus.value = jsonResponse["service_status"].toString();
         branchId.value = jsonResponse["branch_id"].toString();
+        branchAddress.value = jsonResponse["branch_address"].toString();
+        branchLong.value = jsonResponse["branch_long"].toString();
+        branchLat.value = jsonResponse["branch_lat"].toString();
+        drProfile.value = jsonResponse["Doctor_profile"].toString();
         resultVar.value = 1;
-
       } else {
         loadingFetchD.value = false;
         resultVar.value = 2;
-
         log("error");
       }
     } catch (e) {
