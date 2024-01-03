@@ -169,54 +169,69 @@ class _MapViewScreenState extends State<MapViewScreen> {
   Widget build(BuildContext context) {
     print("Doctor MAP");
     return Obx(() {
-
-      return Stack(children: [
-        GoogleMap(
-          mapType: MapType.normal,
-          myLocationButtonEnabled: false,
-          scrollGesturesEnabled: true,
-          myLocationEnabled: true,
-          zoomGesturesEnabled: true,
-          padding: const EdgeInsets.all(0),
-          buildingsEnabled: true,
-          cameraTargetBounds: CameraTargetBounds.unbounded,
-          minMaxZoomPreference: MinMaxZoomPreference.unbounded,
-          rotateGesturesEnabled: true,
-          tiltGesturesEnabled: true,
-          trafficEnabled: false,
-          onTap: (position) {
-            customInfoWindowController.hideInfoWindow!();
-          },
-          onCameraMove: (position) {
-            customInfoWindowController.onCameraMove!();
-          },
-          initialCameraPosition: CameraPosition(
-            target: LatLng(
-              double.parse(doctorListCtr.doctorList[0].latitude.toString()),
-              double.parse(doctorListCtr.doctorList[0].longitude.toString()),
-            ),
-            zoom: 15.0,
+      if (doctorListCtr.loadingFetch.value) {
+        return Padding(
+          padding:
+          const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
+          child: Column(
+            children: [
+              customView.MyIndicator(),
+            ],
           ),
-          // onMapCreated: _onMapCreated,
-          onMapCreated: (GoogleMapController controllers) async {
-            setState(() {
-              _onMapCreated(controllers);
-            });
-            customInfoWindowController.googleMapController = controllers;
-            controller = controllers;
-            for (var marker in markers.values) {
-              controller.showMarkerInfoWindow(marker.markerId);
-            }
-          },
-          markers: markers.values.toSet(),
-        ),
-        CustomInfoWindow(
-          controller: customInfoWindowController,
-          height: 100,
-          width: 300,
-          offset: 50,
-        ),
-      ]);
+        );
+      }else{
+        return Stack(children: [
+          GoogleMap(
+            mapType: MapType.normal,
+            myLocationButtonEnabled: false,
+            scrollGesturesEnabled: true,
+            myLocationEnabled: true,
+            zoomGesturesEnabled: true,
+            padding: const EdgeInsets.all(0),
+            buildingsEnabled: true,
+            cameraTargetBounds: CameraTargetBounds.unbounded,
+            minMaxZoomPreference: MinMaxZoomPreference.unbounded,
+            rotateGesturesEnabled: true,
+            tiltGesturesEnabled: true,
+            trafficEnabled: false,
+            onTap: (position) {
+              customInfoWindowController.hideInfoWindow!();
+            },
+            onCameraMove: (position) {
+              customInfoWindowController.onCameraMove!();
+            },
+            initialCameraPosition: CameraPosition(
+              target: doctorListCtr.doctorList.isEmpty?LatLng(
+                double.parse("20.5937"),
+                double.parse("78.9629"),
+              ):LatLng(
+                double.parse(doctorListCtr.doctorList[0].latitude.toString()),
+                double.parse(doctorListCtr.doctorList[0].longitude.toString()),
+              ),
+              zoom: 15.0,
+            ),
+            // onMapCreated: _onMapCreated,
+            onMapCreated: (GoogleMapController controllers) async {
+              setState(() {
+                _onMapCreated(controllers);
+              });
+              customInfoWindowController.googleMapController = controllers;
+              controller = controllers;
+              for (var marker in markers.values) {
+                controller.showMarkerInfoWindow(marker.markerId);
+              }
+            },
+            markers: markers.values.toSet(),
+          ),
+          CustomInfoWindow(
+            controller: customInfoWindowController,
+            height: 100,
+            width: 300,
+            offset: 50,
+          ),
+        ]);
+      }
+
     });
   }
 }

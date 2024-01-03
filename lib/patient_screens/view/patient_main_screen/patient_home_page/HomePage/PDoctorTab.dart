@@ -1,25 +1,20 @@
-import 'dart:developer';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/helper/AppConst.dart';
 
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../doctor_screens/controller/RoutCtr.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
-import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../signin_screen/signin_controller/SignInController.dart';
 import '../../../../controller/auth_controllers/PatientProfileController.dart';
 import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
-import '../../../../model/DoctorListModel.dart';
-import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 import '../category_sub-category/DoctorListTab.dart';
-import '../category_sub-category/DoctorListwithCategoy.dart';
-import '../category_sub-category/PDoctorSubCat.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -38,68 +33,28 @@ class _HomeViewState extends State<HomeView> {
 
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
-  TextEditingController searchCtr = TextEditingController();
   PatientProfileCtr profileCtr = Get.put(PatientProfileCtr());
 
   TabController? tabController;
   String? categoryId;
-  String? subCategoryId;
-  String? catWithSubCatId;
 
   String? id;
   String? userTyp;
   String? deviceId;
   String? deviceTyp;
 
-  String _keyword = '';
-
-  PageController _pageController = PageController();
-  List<String> images = [
-    'assets/images/sp1.jpg',
-    'assets/images/sp2.jpg',
-    'assets/images/sp3.jpg',
-
-  ];
-  int _currentPage = 0;
-
-  List<DoctorListModel> _getFilteredList() {
-    if (_keyword.isEmpty) {
-      return doctorListCtr.doctorList;
-    }
-    return doctorListCtr.doctorList
-        .where(
-            (user) => user.name.toLowerCase().contains(_keyword.toLowerCase()))
-        .toList();
-  }
-
-  var name = "";
-  var surname = "";
-
-  void getData() async {
-    name = (await sp.getStringValue(sp.DOCTOR_NAME_KEY)).toString();
-    surname = (await sp.getStringValue(sp.DOCTOR_SURE_NAME_KEY)).toString();
-  }
-
   @override
   void initState() {
     super.initState();
-    getData();
     profileCtr.patientProfile(context);
-    _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page?.round() ?? 0;
-      });
-    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // callController.initilize(id.toString());
-
       getValuee();
-      doctorListCtr.catSubCatList();
+      // doctorListCtr.catSubCatList();
       doctorSignUpCtr.DoctorCategory();
       doctorListCtr.doctorlistfetch(
         context,
         "114",
-        "46",
+        "",
         "",
         "",
         "",
@@ -124,15 +79,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     String timeOfDay = getTimeOfDay(now);
-    final list = _getFilteredList();
     final height = MediaQuery
         .of(context)
         .size
         .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(() {
@@ -180,14 +131,14 @@ class _HomeViewState extends State<HomeView> {
                               customView.text("Good $timeOfDay ☺", 13,
                                   FontWeight.normal, MyColor.grey),
                               customView.text(
-                                  "$name $surname".toUpperCase(), 14,
+                                  "${AppConst.Patient_Name} ${AppConst.Patinet_Surname}".toUpperCase(), 14,
                                   FontWeight.w500, MyColor.primary1)
                             ],
                           ),
                         ),
                       ],
                     ),
-                    Icon(
+                    const Icon(
                       Icons.notifications_none_outlined,
                       color: Colors.black54,
                     )
@@ -195,13 +146,13 @@ class _HomeViewState extends State<HomeView> {
                 );
               }),
             ),
-            SizedBox(height: height * 0.03),
+            SizedBox(height: height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding:
-                  const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 3),
+                  const EdgeInsets.only(left: 10.0, top: 5.0,),
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: customView.text(
@@ -210,32 +161,32 @@ class _HomeViewState extends State<HomeView> {
                           FontWeight.w500,
                           MyColor.primary1)),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => PrintScreen(),));
-                    myRoute.setValue(4);
-                    log("object");
-                    /*Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => const PDrAllCategory()));*/
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 8.0,
-                    ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "${text.SeeAll.tr}>>",
-                          style: const TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: MyColor.primary1),
-                        )),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     // Navigator.push(context, MaterialPageRoute(builder: (context) => PrintScreen(),));
+                //     myRoute.setValue(4);
+                //     log("object");
+                //     /*Navigator.push(context, MaterialPageRoute(
+                //         builder: (context) => const PDrAllCategory()));*/
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(
+                //       right: 8.0,
+                //     ),
+                //     child: Align(
+                //         alignment: Alignment.centerLeft,
+                //         child: Text(
+                //           "${text.SeeAll.tr}>>",
+                //           style: const TextStyle(
+                //               decoration: TextDecoration.underline,
+                //               color: MyColor.primary1),
+                //         )),
+                //   ),
+                // ),
               ],
             ),
             /*  doctorSignUpCtr.categoryloding.value?customView.MyIndicator():*/
-            doctorSignUpCtr.categoryloding.value
+        /*    doctorSignUpCtr.categoryloding.value
                 ? categoryShimmerEffect(context)
                 : SizedBox(
               height: MediaQuery
@@ -330,12 +281,106 @@ class _HomeViewState extends State<HomeView> {
                   );
                 },
               ),
-            ),
+            ),*/
+            doctorSignUpCtr.categoryloding.value?Center(
+            heightFactor: 16,
+        child: customView.MyIndicator(),
+        ):doctorSignUpCtr.category.isEmpty?Center(
+            heightFactor: 10.0,
+        child: customView.text(
+        text.NoCat.tr, 15, FontWeight.w400, MyColor.primary1),
+        ):GridView.count(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          crossAxisCount: 3,
+          children: List.generate(
+              doctorSignUpCtr.category.length, (index) {
+            return GestureDetector(
+              onTap: () {
+                categoryId =
+                    doctorSignUpCtr.category[index].categoryId;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DoctorListTab(
+                          catId: categoryId,
+                          SubCatId: "",
+                        )));
+              },
+              child: Container(
+                margin: const EdgeInsets.all(6),
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: MyColor.primary1,
+                      offset: Offset(0, 0),
+                      blurRadius: 1,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      ClipRRect(
+                          clipBehavior: ui.Clip.antiAlias,
+                          child: FadeInImage.assetNetwork(
+                            imageErrorBuilder: (c, o, s) =>
+                                Image.asset(
+                                    color: MyColor.midgray,
+                                    "assets/images/noimage.png",
+                                    width: 65,
+                                    height: 65,
+                                    fit: BoxFit.cover),
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                            placeholder:
+                            "assets/images/loading.gif",
+                            image: doctorSignUpCtr
+                                .category[index].catImg,
+                            placeholderFit: BoxFit.cover,
+                          )),
+                      const SizedBox(
+                        height: 3,
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+
+                            doctorSignUpCtr
+                                .category[index].categoryName
+                                .toUpperCase(),
+                            style: const TextStyle(fontSize: 10,
+                              fontFamily: "Poppins",
+                            ),
+                            softWrap: false,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
+        ),
             Divider(thickness: 2,
                 color: MyColor.primary1.withOpacity(0.1),
                 height: 30),
 
-            Padding(
+       /*     Padding(
               padding: const EdgeInsets.only(left: 8.0, bottom: 0),
               child: Align(
                   alignment: Alignment.centerLeft,
@@ -400,7 +445,7 @@ class _HomeViewState extends State<HomeView> {
                                     "assets/images/loading.gif",
                                     // placeholderCacheHeight: 20,
                                     // placeholderCacheWidth: 20,
-                                    /*"assets/images/YlWC.gif",*/
+                                    *//*"assets/images/YlWC.gif",*//*
                                     alignment: Alignment.center,
                                     image: list[index]
                                         .doctorProfile
@@ -439,7 +484,7 @@ class _HomeViewState extends State<HomeView> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
-                               /*   list[index].serviceStatus == "Free"
+                               *//*   list[index].serviceStatus == "Free"
                                       ? Row(
                                     children: [
                                       const Icon(
@@ -460,9 +505,9 @@ class _HomeViewState extends State<HomeView> {
                                   )
                                       : Row(
                                     children: [
-                                      *//*  const Icon(
+                                      *//**//*  const Icon(
                                           Icons.monetization_on,
-                                          size: 18),*//*
+                                          size: 18),*//**//*
                                       const SizedBox(
                                         width: 3,
                                       ),
@@ -472,7 +517,7 @@ class _HomeViewState extends State<HomeView> {
                                           FontWeight.w500,
                                           MyColor.grey),
                                     ],
-                                  ),*/
+                                  ),*//*
                                   Row(
                                     children: [
                                       const Icon(
@@ -532,8 +577,11 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 );
               }
-            }),
-            Divider(thickness: 2,
+            }),*/
+
+
+            /*----------------------------------------------------------------------------------*/
+          /*  Divider(thickness: 2,
                 color: MyColor.primary1.withOpacity(0.1),
                 height: 30),
             Padding(
@@ -670,7 +718,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 );
               },
-            ),
+            ),*/
           ],
         );
       }),
@@ -682,11 +730,10 @@ class _HomeViewState extends State<HomeView> {
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-
     loginCtr.updateToken(context, id!, "User", deviceId!, deviceTyp!);
   }
 
-  Widget pageView() {
+/*  Widget pageView() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -705,5 +752,5 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
-  }
+  }*/
 }

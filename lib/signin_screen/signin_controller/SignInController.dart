@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/helper/AppConst.dart';
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../Network/ApiService.dart';
@@ -70,8 +71,11 @@ LocalString text =  LocalString();
             sp.setStringValue(sp.PATIENT_NAME_KEY, name);
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-
-            log(" Patient login ID -- ${id.toString()}");
+AppConst.Patient_Name = name;
+AppConst.Patinet_Surname= surname;
+            log("Patient login ID -- ${id.toString()}");
+            log("Patient name -- ${sp.PATIENT_NAME_KEY}");
+            log("Patient surname -- ${sp.PATIENT_SURE_NAME_KEY}");
              onUserLogin(id.toString(),"${name} ${surname}","user");
 
             Get.offAndToNamed(RouteHelper.getBottomNavigation());

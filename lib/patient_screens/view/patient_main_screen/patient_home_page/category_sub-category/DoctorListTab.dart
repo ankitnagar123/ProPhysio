@@ -28,58 +28,50 @@ class _DoctorListTabState extends State<DoctorListTab>with  SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Get.back();
-      //     },
-      //     icon: const Icon(
-      //       Icons.arrow_back_ios,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   title: custom.text(text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
-      //   centerTitle: true,
-      //   elevation: 0.0,
-      //   backgroundColor: Colors.white,
-      // ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 50,
-            child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
-              labelPadding: const EdgeInsets.all(7.0),
-              indicatorColor: MyColor.red,
-              labelColor: Colors.white,
-              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
-              unselectedLabelColor: Colors.black,
-              controller: tabController,
-              // indicatorWeight: 0,
-              tabs:  [
-                Tab(
-                    child: Text(text.ListView,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins",),)
-                ),
-                Tab(
-                  child: Text(text.MapView.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
-                ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 8.0),
+              child: SizedBox(
+                height: 48,
+                child: TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
+                  labelPadding: const EdgeInsets.all(7.0),
+                  indicatorColor: MyColor.red,
+                  labelColor: Colors.white,
+                  indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
+                  unselectedLabelColor: Colors.black,
 
-              ],
+                  controller: tabController,
+                  // indicatorWeight: 0,
+                  tabs:  [
+                    Tab(
+                        child: Text(text.ListView,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins",),)
+                    ),
+                    Tab(
+                      child: Text(text.MapView.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                    ),
+
+                  ],
+                ),
+              ),
             ),
-          ),
-          Expanded(child:  Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: tabController,
-                children:  [
-                  DoctorList(cat: widget.catId, subcat: widget.SubCatId,),
-                  MapViewScreen(catId: widget.catId, subCatID: widget.SubCatId,)
-                ]),
-          ),),
+            Expanded(child:  Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: TabBarView(
 
-        ],
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: tabController,
+                  children:  [
+                    DoctorList(cat: widget.catId, subcat: widget.SubCatId,),
+                    MapViewScreen(catId: widget.catId, subCatID: widget.SubCatId,)
+                  ]),
+            ),),
+
+          ],
+        ),
       ),
     );
   }

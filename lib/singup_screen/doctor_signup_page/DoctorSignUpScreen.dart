@@ -88,16 +88,16 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   double? lat;
 
   //select date's
-  var selectedIndexes = [];
-  var selectedIndexes1 = [];
+  // var selectedIndexes = [];
+  // var selectedIndexes1 = [];
 
 
 
-  List subDummyCatIdArray = [];
+  // List subDummyCatIdArray = [];
 
-  List subCatIdArray = [];
-  List subCatNameArray = [];
-  List subCatIdArrayFinal = [];
+  // List subCatIdArray = [];
+  // List subCatNameArray = [];
+  // List subCatIdArrayFinal = [];
 
   String radioButtonItem = 'Free';
   int selectedOption = 1;
@@ -204,7 +204,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           "flag": flag,
                           "lat": AppConst.LATITUDE,
                           "longitude": AppConst.LONGITUDE,
-                          "subcat": subCatIdArray.join(','),
+                          "subcat": "",//subCatIdArray.join(','),
                           'gender': _selectedGender,
                          /* "graduationDate": dateOfGraduation.text,
                           "qualificationDate": dateOfQualification.text,*/
@@ -732,16 +732,16 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   FontWeight.w500, MyColor.primary1),
             ),
             category(),
-            const SizedBox(
-              height: 17.0,
-            ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Sub_Category.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            InkWell(
+
+            // Align(
+            //   alignment: Alignment.topLeft,
+            //   child: custom.text(text.Select_Sub_Category.tr, 13.0,
+            //       FontWeight.w500, MyColor.primary1),
+            // ),
+
+
+          /*  InkWell(
               child: Container(
                 decoration: BoxDecoration(
                   color: MyColor.white,
@@ -873,7 +873,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                      semanticContainer: true,
                     color: MyColor.lightcolor,child: Text(subDummyCatIdArray[index]));
               },
-            ),
+            ),*/
             const SizedBox(
               height: 15,
             ),
@@ -1175,9 +1175,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Select gender");
     } else if (slectedCategory == null) {
       custom.MySnackBar(context, "Select your specialization");
-    } else if (subCatIdArray.isEmpty) {
+    }/* else if (subCatIdArray.isEmpty) {
       custom.MySnackBar(context, "Select your sub-specialization");
-    } else if (degreefilePath == null) {
+    }*/ else if (degreefilePath == null) {
       custom.MySnackBar(context, "Upload your degree");
     } else if (AppConst.LOCATION.isEmpty) {
       custom.MySnackBar(context, "Add your address");
@@ -1252,7 +1252,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
           child: Container(
             height: height * 0.06,
             width: widht * 0.9,
-            padding: const EdgeInsets.all(10),
+             padding: const EdgeInsets.only(left: 10),
             margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
             decoration: BoxDecoration(
                 color: MyColor.white,

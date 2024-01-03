@@ -21,6 +21,10 @@ class AppConst {
   static String cat = "";
   static String subCat = "";
 
+  /*-----Patient Info-------*/
+static String Patient_Name = "";
+static String Patinet_Surname = "";
+
 // static  String SERVICE_NAME = "";
 // static  String NO_OF_PROFESSINOAL = "";
 // static  String TOTAL_NO_HOURS = "";

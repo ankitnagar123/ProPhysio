@@ -35,7 +35,6 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
 
   @override
   void initState() {
-    patientBookingController.bookingAppointment("");
     super.initState();
   }
 
@@ -140,10 +139,12 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
 
   Widget myBottomNavigationBar() {
     return Container(
-      height: MediaQuery.of(context).size.width / 7.4,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+      height: MediaQuery.of(context).size.width / 7,
+      decoration:  BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(11), topRight: Radius.circular(11)),
         color: Colors.white24,
       ),
       child: IconTheme(

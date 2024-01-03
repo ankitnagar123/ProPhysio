@@ -6,13 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:prophysio/ZegoCallService/ZegoCallService.dart';
+import 'package:prophysio/helper/AppConst.dart';
 import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 
 import 'Helper/RoutHelper/RoutHelper.dart';
-import 'firebase_service/firebase_options.dart';
+import 'firebase_options.dart';
 import 'firebase_service/NotificationService.dart';
 
 import 'language_translator/LanguageTranslate.dart';
@@ -78,6 +79,8 @@ class _MyAppState extends State<MyApp> {
       log('patient userId--------$userID');
       log(' patient name--------$name');
       log('patient surname--------$surname');
+      AppConst.Patient_Name = name;
+      AppConst.Patinet_Surname = surname;
       onUserLogin(userID.toString(), "$name $surname","user");
     }else {
       log('drID START ----');

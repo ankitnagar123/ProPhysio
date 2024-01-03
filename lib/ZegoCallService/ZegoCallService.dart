@@ -5,16 +5,16 @@ import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 ZegoUIKitPrebuiltCallController? callController;
 
 /// on user login
-void onUserLogin(String Id ,String name,String type) async {
-  log("onUserLogin$Id");
-  log("type --------------------$type");
+void onUserLogin(String id ,String name,String type) async {
+  log("onUserLogin-----$id");
+  log("type-----$type");
   callController ??= ZegoUIKitPrebuiltCallController();
 
   /// 4/5. initialized ZegoUIKitPrebuiltCallInvitationService when account is logged in or re-logged in
   ZegoUIKitPrebuiltCallInvitationService().init(
     appID: 875917085,
     appSign: "c744b2792333aa2e88768f7c20afd139441fa7890513e090c7d82e3557311aab",
-    userID:  Id,
+    userID:  id,
     userName: name,
     notifyWhenAppRunningInBackgroundOrQuit: false,
     plugins: [ZegoUIKitSignalingPlugin()],

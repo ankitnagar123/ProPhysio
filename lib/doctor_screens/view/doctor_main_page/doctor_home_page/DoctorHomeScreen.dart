@@ -985,7 +985,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-
     loginCtr.updateToken(context, id!, "Doctor", deviceId!, deviceTyp!);
   }
 }

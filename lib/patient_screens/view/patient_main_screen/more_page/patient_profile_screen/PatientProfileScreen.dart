@@ -670,7 +670,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
           child: Container(
             height: height * 0.065,
             // width: widht * 1,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(left: 10),
             // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
             decoration: BoxDecoration(
                 color: MyColor.white,

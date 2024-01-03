@@ -52,12 +52,12 @@ class _DoctorListState extends State<DoctorList> {
         .toList();
   }
 
-  /*@override
+  @override
   void initState() {
     super.initState();
-    doctorListCtr.doctorlistfetch(context, widget.cat.toString(), widget.subcat.toString(),'','','','','','');
-    doctorListCtr.catSubCatList();
-  }*/
+    doctorSignUpCtr.branchListApi();
+    doctorListCtr.doctorlistfetch(context, widget.cat.toString(), /*widget.subcat.toString()*/'','','','','');
+  }
   @override
   Widget build(BuildContext context) {
     final list = _getFilteredList();
@@ -69,7 +69,7 @@ class _DoctorListState extends State<DoctorList> {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
-            SizedBox(height: height * 0.04),
+            SizedBox(height: height * 0.02),
             SizedBox(
               width: widht,
               child: TextFormField(
@@ -176,7 +176,7 @@ class _DoctorListState extends State<DoctorList> {
                   hintText: text.Search_Doctorby_Name.tr,
                   hintStyle:
                   const TextStyle(fontSize: 12, color: MyColor.white),
-                  fillColor: MyColor.lightcolor,
+                  fillColor: MyColor.grey.withOpacity(0.2),
                   filled: true,
                   border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
