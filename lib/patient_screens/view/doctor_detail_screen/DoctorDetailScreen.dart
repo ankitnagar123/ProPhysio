@@ -93,9 +93,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
               floating: true,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-
                 background: FadeInImage.assetNetwork(
-                    placeholder: 'assets/images/runlogo.png',
+                    placeholder: 'assets/images/loading.gif',
                     alignment: Alignment.center,
                     image: doctorListCtr.drProfile.value.toString(),
                      fit: BoxFit.fitWidth,
@@ -128,7 +127,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                 FontWeight.w500,
                                 MyColor.primary1),
                        ),
-                        Row(
+                     /*   Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Icon(Icons.location_on_outlined,
@@ -142,10 +141,10 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                     FontWeight.normal,
                                     MyColor.grey)),
                           ],
-                        ),
+                        ),*/
                         Row(
                           children: [
-                            Icon(Icons.medical_services_outlined,color: MyColor.grey,size: 19,),
+                            Icon(Icons.medical_services_outlined,color: MyColor.primary1,size: 19,),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: custom.text(
@@ -165,12 +164,13 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                 width: MediaQuery.of(context).size.width *
                                     0.80,
                                 child: custom.text(
-                                    "Branch Address : ${doctorListCtr.branchAddress.value}",
+                                    "${doctorListCtr.branchAddress.value}",
                                     11,
                                     FontWeight.normal,
                                     MyColor.grey)),
                           ],
                         ),
+                     SizedBox(height: 3,),
                      /*   doctorListCtr.serviceStatus =="Free"?   Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Row(

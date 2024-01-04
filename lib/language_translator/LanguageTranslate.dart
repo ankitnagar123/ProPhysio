@@ -541,7 +541,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   /*PATIENT SIDE DETAIL SCREEN*/
   String bookAppointment = "Book Appointment";
   String information = "Information";
-  String mediumPrice = "Medium price";
+  String mediumPrice = "Appointment fee";
   String viewCertificate = "View certificate";
   String noSpecializationAddedDoctor = "No Specialization Added by Doctor";
   String averageRating = "Average rating";
@@ -1098,7 +1098,7 @@ String NoWardAddedCenter = "No ward added by center";
 
           bookAppointment: "Book Appointment",
           information: "Information",
-          mediumPrice: "Medium price",
+          mediumPrice: "Appointment fee",
           viewCertificate: "View certificate",
           noSpecializationAddedDoctor: "No Specialization Added by Doctor",
           averageRating: "Average rating",

@@ -41,9 +41,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
   DateTime _selectedValue = DateTime.now();
   String? id;
   String branchId = "";
-  String? time;
+  String time ="";
   String price =  "0";
-  String? fee;
+  String fee = "";
   String? formateddate;
   int selectedCard = -1;
   String day = "";
@@ -81,16 +81,23 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.confirmAppointment.tr, () {
+            if(time ==""){
+              custom.massenger(context, "Please select time slot");
+            }else if(fee == ""){
+              custom.massenger(context, "Please select fee");
+            }else{
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => PatientCheckOutCard(
-                            price: fee.toString(),
-                            time: time.toString(),
-                            date: appointmentController.seletedtime.value
-                                .toString(),
+                        price: fee.toString(),
+                        time: time.toString(),
+                        date: appointmentController.seletedtime.value
+                            .toString(),
                         branchId: branchId,
-                          )));
+                      )));
+            }
+
 
           }, MyColor.primary,
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
@@ -257,6 +264,8 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                       itemBuilder: (context, index) {
                                         var list = appointmentController
                                             .visitCharge[index];
+                                         fee = appointmentController
+                                            .visitCharge[index].price.toString();
                                         return ListTile(
                                           subtitle: Text(list.price.toString()),
                                           horizontalTitleGap: 20,

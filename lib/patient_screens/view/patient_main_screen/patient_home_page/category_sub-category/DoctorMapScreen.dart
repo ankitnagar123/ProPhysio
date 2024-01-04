@@ -38,11 +38,11 @@ class _MapViewScreenState extends State<MapViewScreen> {
     );
     setState(() {
       for (int i = 0; i < doctorListCtr.doctorList.length; i++) {
-        log("seeee${double.parse(doctorListCtr.doctorList[i].latitude.toString())},${double.parse(doctorListCtr.doctorList[i].latitude.toString())}");
+        log("lat-long${double.parse(doctorListCtr.doctorList[i].branchLat.toString())},${double.parse(doctorListCtr.doctorList[i].branchLong.toString())}");
         latlang.clear();
         latlang.add(
-          LatLng(double.parse(doctorListCtr.doctorList[i].latitude.toString()),
-              double.parse(doctorListCtr.doctorList[i].longitude.toString())),
+          LatLng(double.parse(doctorListCtr.doctorList[i].branchLat.toString()),
+              double.parse(doctorListCtr.doctorList[i].branchLong.toString())),
         );
         log("my lat longs in new lat-long list=> $latlang");
       }
@@ -55,91 +55,9 @@ class _MapViewScreenState extends State<MapViewScreen> {
           position: latlang[i],
           onTap: () {
             customInfoWindowController.addInfoWindow!(
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorDetailScreen(
-                                  id: doctorListCtr.doctorList[i].doctorId
-                                      .toString(),
-                                  centerId: '',
-                                  drImg: doctorListCtr
-                                      .doctorList[i].doctorProfile
-                                      .toString(), cat: widget.catId,
-                                )));
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 7, vertical: 6.0),
-                    color: MyColor.white,
-                    elevation: 2.2,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          height: 80,
-                          // margin: const EdgeInsets.all(6),
-                          child: FadeInImage.assetNetwork(
-                              placeholder: "assets/images/loading.gif",
-                              alignment: Alignment.center,
-                              image: doctorListCtr.doctorList[i].doctorProfile
-                                  .toString(),
-                              fit: BoxFit.fitWidth,
-                              width: double.infinity,
-                              imageErrorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  'assets/images/noimage.png',
-                                  fit: BoxFit.cover,
-                                );
-                              }),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            customView.text(
-                                doctorListCtr.doctorList[i].name.toString(),
-                                13,
-                                FontWeight.w600,
-                                MyColor.black),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.location_on_outlined,
-                                    size: 18),
-                                SizedBox(
-                                    width: 150,
-                                    child: Text(
-                                      doctorListCtr.doctorList[i].location
-                                          .toString(),
-                                      maxLines: 2,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                    )),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            SizedBox(
-                                child: customView.text(
-                                    doctorListCtr.doctorList[i].category
-                                        .toString(),
-                                    12,
-                                    FontWeight.w500,
-                                    MyColor.black)),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                latlang[i]);
+              buildInfoWindowContent(i),
+              latlang[i],
+            );
           },
         );
         setState(() {
@@ -151,12 +69,13 @@ class _MapViewScreenState extends State<MapViewScreen> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       doctorListCtr.doctorlistfetch(
-          context, widget.catId, widget.subCatID, "", "", "", "");
+          context, widget.catId,"", "", "", "", "");
+      log("MAP page");
     });
 
-    super.initState();
   }
 
   @override
@@ -167,7 +86,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("Doctor MAP");
+    log("Doctor MAP");
     return Obx(() {
       if (doctorListCtr.loadingFetch.value) {
         return Padding(
@@ -205,10 +124,10 @@ class _MapViewScreenState extends State<MapViewScreen> {
                 double.parse("21.7679"),
                 double.parse("78.8718"),
               ):LatLng(
-                double.parse(doctorListCtr.doctorList[0].latitude.toString()),
-                double.parse(doctorListCtr.doctorList[0].longitude.toString()),
+                double.parse(doctorListCtr.doctorList[0].branchLat.toString()),
+                double.parse(doctorListCtr.doctorList[0].branchLong.toString()),
               ),
-              zoom: 15.0,
+              zoom: 20.0,
             ),
             // onMapCreated: _onMapCreated,
             onMapCreated: (GoogleMapController controllers) async {
@@ -234,6 +153,98 @@ class _MapViewScreenState extends State<MapViewScreen> {
 
     });
   }
+
+  Widget buildInfoWindowContent(int i) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DoctorDetailScreen(
+                  id: doctorListCtr.doctorList[i].doctorId
+                      .toString(),
+                  centerId: '',
+                  drImg: doctorListCtr
+                      .doctorList[i].doctorProfile
+                      .toString(), cat: widget.catId,
+                )));
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(
+            horizontal: 7, vertical: 6.0),
+        color: MyColor.white,
+        elevation: 2.2,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 70,
+              height: 70,
+              // margin: const EdgeInsets.all(6),
+              child: FadeInImage.assetNetwork(
+                  placeholder: "assets/images/loading.gif",
+                  alignment: Alignment.center,
+                  image: doctorListCtr.doctorList[i].doctorProfile
+                      .toString(),
+                  fit: BoxFit.fitWidth,
+                  width: double.infinity,
+                  imageErrorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/images/noimage.png',
+                      fit: BoxFit.cover,
+                    );
+                  }),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 12,
+                ),
+                customView.text(
+                    "${doctorListCtr.doctorList[i].name.toString()} ${doctorListCtr.doctorList[i].surname.toString()}",
+                    13,
+                    FontWeight.w500,
+                    MyColor.black),
+                const SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.location_on_outlined,
+                        size: 18,color: MyColor.primary1,),
+                    SizedBox(
+                        width: 150,
+                        child: Text(
+                          doctorListCtr.doctorList[i].branchAddress
+                              .toString(),
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                SizedBox(
+                    child: customView.text(
+                        doctorListCtr.doctorList[i].category
+                            .toString(),
+                        12,
+                        FontWeight.w500,
+                        MyColor.black)),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+
 }
 /* Positioned(
           top: 25,

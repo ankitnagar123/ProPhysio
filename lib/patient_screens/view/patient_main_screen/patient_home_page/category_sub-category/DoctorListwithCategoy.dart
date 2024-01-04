@@ -359,7 +359,7 @@ class _DoctorListState extends State<DoctorList> {
                                               .width /
                                               1.9,
                                           child: Text(
-                                            list[index].location.toUpperCase(),
+                                            list[index].branchAddress.toUpperCase(),
                                             maxLines: 1,
                                             overflow:
                                             TextOverflow.ellipsis,

@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
     int hour = currentTime.hour;
 
     if (hour >= 5 && hour < 12) {
-      return 'Morning';
+      return 'Morning 🌞';
     } else if (hour >= 12 && hour < 17) {
       return 'Afternoon';
     } else {
@@ -75,13 +75,12 @@ class _HomeViewState extends State<HomeView> {
         .of(context)
         .size
         .height;
-
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(() {
-        if (doctorListCtr.categoryLoading.value) {
+        /*if (doctorListCtr.categoryLoading.value) {
           customView.MyIndicator();
-        }
+        }*/
         return Column(
           children: [
             SizedBox(height: height * 0.05),
@@ -121,6 +120,7 @@ class _HomeViewState extends State<HomeView> {
                           children: [
                             customView.text("Good $timeOfDay ☺", 13,
                                 FontWeight.normal, MyColor.grey),
+                            SizedBox(height: 3,),
                             customView.text(
                                 "${AppConst.Patient_Name} ${AppConst.Patinet_Surname}".toUpperCase(), 14,
                                 FontWeight.w500, MyColor.primary1)
@@ -137,7 +137,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Divider(),
-            SizedBox(height: height * 0.01),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -176,6 +176,8 @@ class _HomeViewState extends State<HomeView> {
                 // ),
               ],
             ),
+            SizedBox(height: height * 0.02),
+
             /*  doctorSignUpCtr.categoryloding.value?customView.MyIndicator():*/
         /*    doctorSignUpCtr.categoryloding.value
                 ? categoryShimmerEffect(context)
@@ -274,13 +276,14 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),*/
             doctorSignUpCtr.categoryloding.value?Center(
-            heightFactor: 16,
+            heightFactor: 13,
         child: customView.MyIndicator(),
         ):doctorSignUpCtr.category.isEmpty?Center(
             heightFactor: 10.0,
         child: customView.text(
         text.NoCat.tr, 15, FontWeight.w400, MyColor.primary1),
         ):GridView.count(
+              padding: EdgeInsets.all(0),
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
           crossAxisCount: 3,
@@ -315,10 +318,10 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SizedBox(
-                        height: 4,
+                        height: 5,
                       ),
                       ClipRRect(
                           clipBehavior: ui.Clip.antiAlias,
@@ -342,24 +345,25 @@ class _HomeViewState extends State<HomeView> {
                       const SizedBox(
                         height: 3,
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
+                      Text(
 
-                            doctorSignUpCtr
-                                .category[index].categoryName
-                                .toUpperCase(),
-                            style: const TextStyle(fontSize: 10,
-                              fontFamily: "Poppins",
-                            ),
-                            softWrap: false,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-
-                          ),
+                        doctorSignUpCtr
+                            .category[index].categoryName
+                            .toUpperCase(),
+                        style: const TextStyle(
+                            color: MyColor.grey,
+                            fontSize: 10,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w500
                         ),
+                        softWrap: false,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+
                       ),
+                      const SizedBox(
+                        height: 0,
+                      )
                     ],
                   ),
                 ),
@@ -367,9 +371,7 @@ class _HomeViewState extends State<HomeView> {
             );
           }),
         ),
-            Divider(thickness: 2,
-                color: MyColor.primary1.withOpacity(0.1),
-                height: 30),
+
 
        /*     Padding(
               padding: const EdgeInsets.only(left: 8.0, bottom: 0),
@@ -436,7 +438,9 @@ class _HomeViewState extends State<HomeView> {
                                     "assets/images/loading.gif",
                                     // placeholderCacheHeight: 20,
                                     // placeholderCacheWidth: 20,
-                                    *//*"assets/images/YlWC.gif",*//*
+                                    */
+            /*"assets/images/YlWC.gif",*/
+            /*
                                     alignment: Alignment.center,
                                     image: list[index]
                                         .doctorProfile
@@ -475,7 +479,8 @@ class _HomeViewState extends State<HomeView> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
-                               *//*   list[index].serviceStatus == "Free"
+                               */
+            /*   list[index].serviceStatus == "Free"
                                       ? Row(
                                     children: [
                                       const Icon(
@@ -496,7 +501,8 @@ class _HomeViewState extends State<HomeView> {
                                   )
                                       : Row(
                                     children: [
-                                      *//**//*  const Icon(
+                                      */
+            /**//*  const Icon(
                                           Icons.monetization_on,
                                           size: 18),*//**//*
                                       const SizedBox(

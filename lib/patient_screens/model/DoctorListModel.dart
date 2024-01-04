@@ -11,6 +11,11 @@ String doctorListModelToJson(List<DoctorListModel> data) => json.encode(List<dyn
 class DoctorListModel {
   String result;
   String rating;
+  String branchId;
+  String branchName;
+  String branchAddress;
+  String branchLat;
+  String branchLong;
   String userId;
   String doctorId;
   String name;
@@ -21,11 +26,15 @@ class DoctorListModel {
   String longitude;
   String category;
   String doctorProfile;
-  String doctorDocument;
 
   DoctorListModel({
     required this.result,
     required this.rating,
+    required this.branchId,
+    required this.branchName,
+    required this.branchAddress,
+    required this.branchLat,
+    required this.branchLong,
     required this.userId,
     required this.doctorId,
     required this.name,
@@ -36,12 +45,16 @@ class DoctorListModel {
     required this.longitude,
     required this.category,
     required this.doctorProfile,
-    required this.doctorDocument,
   });
 
   factory DoctorListModel.fromJson(Map<String, dynamic> json) => DoctorListModel(
     result: json["result"].toString(),
     rating: json["rating"].toString(),
+    branchId: json["branch_id"].toString(),
+    branchName: json["branch_name"].toString(),
+    branchAddress: json["branch_address"].toString(),
+    branchLat: json["branch_lat"].toString(),
+    branchLong: json["branch_long"].toString(),
     userId: json["user_id"].toString(),
     doctorId: json["doctor_id"].toString(),
     name: json["name"].toString(),
@@ -52,12 +65,16 @@ class DoctorListModel {
     longitude: json["longitude"].toString(),
     category: json["category"].toString(),
     doctorProfile: json["Doctor_profile"].toString(),
-    doctorDocument: json["Doctor_document"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
     "result": result,
     "rating": rating,
+    "branch_id": branchId,
+    "branch_name": branchName,
+    "branch_address": branchAddress,
+    "branch_lat": branchLat,
+    "branch_long": branchLong,
     "user_id": userId,
     "doctor_id": doctorId,
     "name": name,
@@ -68,6 +85,5 @@ class DoctorListModel {
     "longitude": longitude,
     "category": category,
     "Doctor_profile": doctorProfile,
-    "Doctor_document": doctorDocument,
   };
 }

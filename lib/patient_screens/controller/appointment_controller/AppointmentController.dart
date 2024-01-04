@@ -265,6 +265,7 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       if (result == "success") {
+        callback();
         loadingAdd.value = false;
         String id = jsonResponse["bookID"].toString();
         // String reciverid = jsonResponse["reciver_id"].toString();
