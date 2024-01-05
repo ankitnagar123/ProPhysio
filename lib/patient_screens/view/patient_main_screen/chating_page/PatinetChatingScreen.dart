@@ -73,12 +73,12 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
     }
 
     print("doctor Id==>>>>$doctorId");
-    /*WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         chatController.receivedMsgListFetch(context, doctorId);
       });
-    });*/
+    });
     getData();
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
