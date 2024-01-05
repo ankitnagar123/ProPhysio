@@ -8,7 +8,7 @@ import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorPendingAppointment extends StatefulWidget {
-  const DoctorPendingAppointment({Key? key}) : super(key: key);
+  const DoctorPendingAppointment({super.key});
 
   @override
   State<DoctorPendingAppointment> createState() =>
@@ -161,7 +161,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                     elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 7.0, vertical: 10.0),
+                          horizontal: 7.0, vertical: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -299,9 +299,11 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   /*------------Booking PENDING List Details--------------*/
   showBottomSheet(String id) {
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(

@@ -62,41 +62,45 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 13),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              SizedBox(
-                height: height * 0.045,
-              ),
-              Image(
-                image: AssetImage("assets/images/runlogo.png"),
-                height: 40,
-                width: 40,
-              ),
-              Obx(() {
-                return Align(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              height: height * 0.045,
+            ),
+            Image(
+              image: AssetImage("assets/images/runlogo.png"),
+              height: 40,
+              width: 40,
+            ),
+            Obx(() {
+              return Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
                       "${bookingController.booking.length} ${text.meetings.tr}",
                       12,
                       FontWeight.normal,
                       MyColor.grey.withOpacity(0.70)),
-                );
-              }),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  custom.text(cdate1, 19, FontWeight.w600, MyColor.black),
-                ],
+                ),
+              );
+            }),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: custom.text(cdate1, 19, FontWeight.w500, MyColor.black),
               ),
-               const Divider(color: Colors.grey),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              custom.searchField(
+            ),
+             const Divider(color: Colors.grey),
+            SizedBox(
+              height: height * 0.015,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              child: custom.searchField(
                   context,
                   searchCtr,
                   text.SearchAppointment.tr,
@@ -104,21 +108,21 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   const Text(""),
                   const Icon(
                     Icons.search_rounded,
-                    color: Colors.white,
+                    color: Colors.black,
                   ), () {
                 Get.toNamed(RouteHelper.DSearchAppointment());
               }, () {}),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              Obx(() {
-                if (bookingController.loading.value) {
-                  return categorysubShimmerEffect(context);
-                }
-                return showList();
-              }),
-            ],
-          ),
+            ),
+            Obx(() {
+              if (bookingController.loading.value) {
+                return categorysubShimmerEffect(context);
+              }
+              return Padding(
+                padding: const EdgeInsets.only(left: 4.0,right: 4.0),
+                child: showList(),
+              );
+            }),
+          ],
         ),
       ),
     );
@@ -158,7 +162,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                     color: MyColor.white,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 7.0, vertical: 10.0),
+                          horizontal: 7.0, vertical: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -182,6 +186,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               const SizedBox(
                                 width: 7.0,
                               ),
+
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
@@ -304,12 +309,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
   /*------------Booking List Details--------------*/
   showBottomSheet(String id, String userid, String status) {
-    print("object$userid");
+    log("object$userid");
     showModalBottomSheet(
-
+      isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(
@@ -742,10 +748,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 ),
                               ],
                             ),
-                 Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 20,
-                  ),
                 ],
               );
             }),

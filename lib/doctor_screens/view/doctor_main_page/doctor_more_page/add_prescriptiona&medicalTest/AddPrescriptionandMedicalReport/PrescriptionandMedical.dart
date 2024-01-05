@@ -31,7 +31,7 @@ LocalString text = LocalString();
     pId = widget.patientId;
     // TODO: implement initState
     super.initState();
-    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
   TextEditingController searchCtr = TextEditingController();
@@ -59,17 +59,18 @@ LocalString text = LocalString();
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.grey.shade100,
-            child:  TabBar(
-              labelPadding: const EdgeInsets.all(8),
-              indicator: const BoxDecoration(
-                color: MyColor.primary,
-              ),
+          SizedBox(
+            height: 48,
+            child: TabBar(
+              indicatorSize: TabBarIndicatorSize.tab,
+              padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
+              labelPadding: const EdgeInsets.all(7.0),
+              indicatorColor: MyColor.red,
               labelColor: Colors.white,
+              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
               unselectedLabelColor: Colors.black,
+
               controller: tabController,
-              indicatorWeight: 0,
                   tabs:  [
                     Tab(
                       child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),)
@@ -77,9 +78,9 @@ LocalString text = LocalString();
                     Tab(
                       child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                     ),
-                    Tab(
+                    /*Tab(
                       child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
-                    ),
+                    ),*/
                   ],
                 ),
           ),
@@ -92,7 +93,7 @@ LocalString text = LocalString();
                       controller: tabController, children: [
                     PrescriptionAddAndList(patientId: pId),
                     MedicalAddAndList(patientId: pId),
-                    AddMedicinesTab(patientId: pId,),
+                    // AddMedicinesTab(patientId: pId,),
                   ]),
                 ])),
           ),

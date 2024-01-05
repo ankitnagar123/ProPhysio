@@ -42,7 +42,7 @@ class CustomView {
     return Text(
       text,
       style: TextStyle(
-        letterSpacing: 0.6,
+        letterSpacing: 0.8,
           color: color,
           fontSize: size,
           fontFamily: "Poppins",
@@ -321,22 +321,15 @@ class CustomView {
             controller: controller,
             decoration: InputDecoration(
               prefixIcon: icon1,
-              prefixIconColor: MyColor.white,
+              prefixIconColor: MyColor.black,
               suffixIcon: icon,
-                 suffixIconColor: MyColor.white,
+                 suffixIconColor: MyColor.black,
               contentPadding: const EdgeInsets.only(top: 3, left: 20),
               hintText: hintText,
-              hintStyle: const TextStyle(fontSize: 12,color: MyColor.white),
-              labelStyle: const TextStyle(fontSize: 12,color: MyColor.white),
+              hintStyle: const TextStyle(fontSize: 12,color: MyColor.black),
+              labelStyle: const TextStyle(fontSize: 12,color: MyColor.black),
 
-              fillColor: MyColor.lightcolor,
-              filled: true,
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
+              border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
             ),
           ),
     );

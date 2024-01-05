@@ -172,7 +172,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                    surfaceTintColor: Colors.grey,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 7.0, vertical: 10.0),
+                          horizontal: 7.0, vertical: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -269,9 +269,11 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
 
   showBottomSheet(String id) {
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(

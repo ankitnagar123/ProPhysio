@@ -53,8 +53,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
   bool _isHidden = true;
 
   CustomView customView = CustomView();
-  String code = '+39';
-  String flag = 'IT';
+  String code = '+1876';
+  String flag = 'JM';
 
 
 
@@ -387,13 +387,13 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 onChanged: (phone) {
                   // var flag = phone.countryISOCode;
                   flag = phone.countryISOCode;
-                  print(flag);
+                  log(flag);
                   code = phone.countryCode;
-                  print(phone.completeNumber);
+                  log(phone.completeNumber);
                 },
                 onCountryChanged: (cod) {
                   flag = cod.code;
-                  print(flag);
+                  log(flag);
                   code = cod.code;
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -535,8 +535,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
         child: Center(
           child: Container(
             height: height * 0.065,
-            width: widht * 1.1,
-            padding: const EdgeInsets.all(10),
+            width: widht * 1,
+            padding: const EdgeInsets.only(left: 8),
             // margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
             decoration: BoxDecoration(
                 color: MyColor.white,

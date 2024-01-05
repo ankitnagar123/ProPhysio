@@ -92,13 +92,13 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
         //   ),
         // ),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          // padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
-              Image(
+              const Image(
                 image: AssetImage("assets/images/runlogo.png"),
                 height: 45,
                 width: 45,
@@ -121,41 +121,42 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                 ],
               ),
               Divider(color: Colors.black54),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: widht,
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      _keyword = value;
-                    });
-                    print(value);
-                  },
-                  cursorWidth: 0.0,
-                  cursorHeight: 0.0,
-                  onTap: () {},
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.name,
-                  cursorColor: Colors.black,
-                  controller: searchCtr,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    prefixIconColor: MyColor.white,
-                    suffixIconColor: MyColor.white,
-                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                    hintText: text.searchYourAppointments.tr,
-                    hintStyle:
-                        const TextStyle(fontSize: 12, color: MyColor.white),
-                    labelStyle:
-                        const TextStyle(fontSize: 12, color: MyColor.white),
-                    fillColor: MyColor.lightcolor,
-                    filled: true,
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: widht,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        _keyword = value;
+                      });
+                      print(value);
+                    },
+                    cursorWidth: 0.0,
+                    cursorHeight: 0.0,
+                    onTap: () {},
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    cursorColor: Colors.black,
+                    controller: searchCtr,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      prefixIconColor: MyColor.white,
+                      suffixIconColor: MyColor.white,
+                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
+                      hintText: text.searchYourAppointments.tr,
+                      hintStyle:
+                          const TextStyle(fontSize: 12, color: MyColor.white),
+                      labelStyle:
+                          const TextStyle(fontSize: 12, color: MyColor.white),
+                      fillColor: MyColor.lightcolor,
+                      filled: true,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
                   ),
@@ -225,7 +226,11 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                   ),
                 ],
               ),
-              showList(),
+              SizedBox(height: 5,),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: showList(),
+              ),
             ],
           ),
         ),
@@ -248,6 +253,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
       }
       return SingleChildScrollView(
         child: ListView.builder(
+          padding: EdgeInsets.all(0),
             shrinkWrap: true,
             itemCount: list.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -263,7 +269,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                   });
                 },
                 child: Card(
-                  color: MyColor.midgray,
+                  elevation: 1.5,
+                  color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 7.0, vertical: 10.0),
@@ -415,12 +422,18 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   }
 
   /*------------Booking List Details--------------*/
-  showBottomSheet(String id, String userid, String status) {
+  showBottomSheet(
+      String id,
+      String userid,
+      String status
+      ) {
     print("object$userid");
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(
@@ -849,9 +862,6 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                               ),
                             ],
                           ),
-                const Divider(
-                  height: 20.0,
-                ),
               ],
             ),
           );

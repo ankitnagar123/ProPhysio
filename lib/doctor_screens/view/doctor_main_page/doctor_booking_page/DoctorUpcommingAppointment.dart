@@ -174,7 +174,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                     elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 7.0, vertical: 10.0),
+                          horizontal: 7.0, vertical: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -313,9 +313,11 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
   showBottomSheet(String id, String userid) {
     print("object$userid");
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(

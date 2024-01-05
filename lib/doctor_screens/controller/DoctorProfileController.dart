@@ -52,7 +52,8 @@ class DoctorProfileCtr extends GetxController {
   var experience ="".obs;
   var description ="".obs;
   var firstService ="".obs;
-  var branch ="".obs;
+  var branchId ="".obs;
+  var slectedCategory ="".obs;
 
   var resultVar = RxnInt(0);
 
@@ -112,7 +113,8 @@ class DoctorProfileCtr extends GetxController {
         experience.value = jsonResponse["experience"];
         description.value = jsonResponse["description"];
         firstService.value = jsonResponse["first_Service"];
-        branch.value = jsonResponse["branch_name"];
+         branchId.value = jsonResponse["branch_id"];
+         slectedCategory.value = jsonResponse["category_id"];
         resultVar.value = 1;
 
         // Massenger(context, 'My Profile');
@@ -161,6 +163,10 @@ class DoctorProfileCtr extends GetxController {
     String Description,
     String FristFee,
       String flag,
+      String branchId,
+      String slectedCategory,
+      String doc,
+      String docStr,
       VoidCallback callback,
   ) async {
     loadingU.value = true;
@@ -196,6 +202,10 @@ class DoctorProfileCtr extends GetxController {
       "experience":Experience,
       "description":Description,
       "first_Service":FristFee,
+      "branch_id":branchId,
+      "category_id":slectedCategory,
+      "doc": doc,
+      "doc_str": docStr,
     };
     print(" Doctor Profile Update Parameter$profileUpdatePerameter");
 

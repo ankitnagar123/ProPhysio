@@ -86,9 +86,10 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
   }
   Widget myBottomNavigationBar(){
     return Container(
-      height:MediaQuery.of(context).size.width/7.4,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5)),
+      height:MediaQuery.of(context).size.width/7.2,
+      decoration:  BoxDecoration(
+        border:  Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
         color: Colors.white24,
       ),
       child: IconTheme(

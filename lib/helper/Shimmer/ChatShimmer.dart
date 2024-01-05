@@ -132,57 +132,24 @@ Widget categorysubShimmerEffect(BuildContext context) {
       period: const Duration(seconds: 1),
       child: Padding(
           padding: const EdgeInsets.only(bottom: 15.0),
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.18,
-                width: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: 6,
+            itemBuilder: (context, index) {
+              return  Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  width: MediaQuery.of(context).size.height,
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  padding: const EdgeInsets.all(8),
                 ),
-                padding: const EdgeInsets.all(8),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10,bottom: 10),
-                height: MediaQuery.of(context).size.height * 0.18,
-                width: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                padding: const EdgeInsets.all(8),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.18,
-                width: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                padding: const EdgeInsets.all(8),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                height: MediaQuery.of(context).size.height * 0.18,
-                width: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                padding: const EdgeInsets.all(8),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                height: MediaQuery.of(context).size.height * 0.18,
-                width: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                padding: const EdgeInsets.all(8),
-              ),
-            ],
+              );
+            },
+
           )));
 }
 

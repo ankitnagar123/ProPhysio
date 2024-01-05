@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
- import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geocoding/geocoding.dart' as geoCoding;
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -30,7 +30,6 @@ class DoctorSignUpScreen extends StatefulWidget {
 }
 
 class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
-
   LocalString text = LocalString();
 
   /*---------TEXT-FIELD CONTROLLER'S----------*/
@@ -45,11 +44,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   /*new*/
   TextEditingController birthDateController = TextEditingController();
   TextEditingController birthplaceController = TextEditingController();
+
   // TextEditingController universityAttendedCtr = TextEditingController();
   // TextEditingController dateOfEnrollmentCtr = TextEditingController();
   // TextEditingController registerOfBelongingCtr = TextEditingController();
   String _selectedGender = '';
   String _selectedService = '';
+
   // TextEditingController dateOfQualification = TextEditingController();
   // TextEditingController dateOfGraduation = TextEditingController();
 
@@ -69,11 +70,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   CustomView custom = CustomView();
   PageController controller = PageController();
-  String code = '+91';
-  String flag = 'IN';
+  String code = '+1876';
+  String flag = 'JM';
   bool _isHidden = true;
   int _curr = 1;
-  final int _numpage = 2;
+  final int _numpage = 1;
 
   String? slectedCategory;
   String? selectedBranch;
@@ -91,8 +92,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   // var selectedIndexes = [];
   // var selectedIndexes1 = [];
 
-
-
   // List subDummyCatIdArray = [];
 
   // List subCatIdArray = [];
@@ -101,6 +100,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   String radioButtonItem = 'Free';
   int selectedOption = 1;
+
   @override
   void initState() {
     super.initState();
@@ -133,7 +133,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 children: [
                   custom.text(text.have_an_account.tr, 11, FontWeight.normal,
                       MyColor.primary1),
-                   Text(
+                  Text(
                     text.SIGN_IN.tr,
                     style: const TextStyle(
                         color: MyColor.primary1,
@@ -173,15 +173,25 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     return custom.MyIndicator();
                   }
                   return custom.MyButton(context, text.Go_On.tr, () {
-                    print("$_curr +$_numpage");
+                    log("$_curr $_numpage");
 
                     print("My latitude AppCont : -- ${AppConst.LATITUDE}");
                     print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
                     print("My Location AppCont : -- ${AppConst.LOCATION}");
+                    // controller.jumpToPage(_curr);
+                    if (validation1(context)||validation2(context)) {
+                      controller.jumpToPage(_curr);
+                    }else{
+                      print("lolo");
+                    }
+                    /*else if (validation2(context)) {
+                      //controller.jumpToPage(_curr);
 
-                    if (validation(context)) {
-                      doctorSignUpCtr.doctorSignupOtpVerification(context,code,phoneCtr.text,emailCtr.text,() {
-                        print("gender dekho$_selectedGender");
+                    } else {
+
+                      doctorSignUpCtr.doctorSignupOtpVerification(
+                          context, code, phoneCtr.text, emailCtr.text, () {
+                        log("gender$_selectedGender");
                         var data = {
                           "name": nameCtr.text,
                           "surmane": surnameCtr.text,
@@ -189,13 +199,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           "email": emailCtr.text,
                           "phone": phoneCtr.text,
                           "password": passwordCtr.text,
-                          /*new added*/
+                          *//*new added*//*
                           "birthDate": birthDateController.text,
                           "birthPlace": birthplaceController.text,
-                        /*  "universityAttended": universityAttendedCtr.text,
+                          *//*  "universityAttended": universityAttendedCtr.text,
                           "dateOfEnrol": dateOfEnrollmentCtr.text,
-                          "registerOfBelonging": registerOfBelongingCtr.text,*/
-                          /*********/
+                          "registerOfBelonging": registerOfBelongingCtr.text,*//*
+                          *//*********//*
                           "category": slectedCategory.toString(),
                           "imagename": degreefilename.toString(),
                           "imagebase": degreebaseimage.toString(),
@@ -204,68 +214,28 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           "flag": flag,
                           "lat": AppConst.LATITUDE,
                           "longitude": AppConst.LONGITUDE,
-                          "subcat": "",//subCatIdArray.join(','),
+                          "subcat": "", //subCatIdArray.join(','),
                           'gender': _selectedGender,
-                         /* "graduationDate": dateOfGraduation.text,
-                          "qualificationDate": dateOfQualification.text,*/
+                          *//* "graduationDate": dateOfGraduation.text,
+                          "qualificationDate": dateOfQualification.text,*//*
                           "age": ageController.text,
                           "experience": experienceController.text,
                           "description": descriptionController.text,
                           "firstService": _selectedService,
                           "branch": selectedBranch.toString(),
-
-
                         };
-                        print("my data$data");
+                      }
+
+                        *//*   print("my data$data");
                         _curr == 1 + _numpage
                             ? Get.toNamed(RouteHelper.DSignUpOtp(),
                             parameters: data)
                             : controller.nextPage(
                             duration: const Duration(milliseconds: 200),
-                            curve: Curves.bounceIn);
-                      },);
-                      // doctorSignUpCtr
-                      //     .doctorSignupOtp(context, code,phoneCtr.text,emailCtr.text)
-                      //     .then((value) {
-                      //   if (value != "") {
-                      //     print("gender dekho$_selectedGender");
-                      //     var data = {
-                      //       "name": nameCtr.text,
-                      //       "surmane": surnameCtr.text,
-                      //       "username": usernameCtr.text,
-                      //       "email": emailCtr.text,
-                      //       "phone": phoneCtr.text,
-                      //       "password": passwordCtr.text,
-                      //       /*new added*/
-                      //       "birthDate": birthDateController.text,
-                      //       "birthPlace": birthplaceController.text,
-                      //       "universityAttended": universityAttendedCtr.text,
-                      //       "dateOfEnrol": dateOfEnrollmentCtr.text,
-                      //       "registerOfBelonging": registerOfBelongingCtr.text,
-                      //       /*********/
-                      //       "category": slectedCategory.toString(),
-                      //       "imagename": degreefilename.toString(),
-                      //       "imagebase": degreebaseimage.toString(),
-                      //       "address": AppConst.LOCATION,
-                      //       "code": code,
-                      //       "flag": flag,
-                      //       "lat": AppConst.LATITUDE,
-                      //       "longitude": AppConst.LONGITUDE,
-                      //       "subcat": subCatIdArray.join(','),
-                      //       'gender': _selectedGender,
-                      //       "graduationDate": dateOfGraduation.text,
-                      //       "qualificationDate": dateOfQualification.text,
-                      //     };
-                      //     print("my data$data");
-                      //     _curr == 1 + _numpage
-                      //         ? Get.toNamed(RouteHelper.DSignUpOtp(),
-                      //             parameters: data, arguments: value)
-                      //         : controller.nextPage(
-                      //             duration: const Duration(milliseconds: 200),
-                      //             curve: Curves.bounceIn);
-                      //   } else {}
-                      // });
-                    }
+                            curve: Curves.bounceIn);*//*
+
+                      );
+                    }*/
                   },
                       MyColor.red,
                       const TextStyle(
@@ -296,7 +266,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, nameCtr,text.H_Enter_Name.tr, TextInputType.text),
+            custom.myField(
+                context, nameCtr, text.H_Enter_Name.tr, TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
@@ -308,8 +279,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(
-                context, surnameCtr,text.H_Enter_Surname.tr, TextInputType.text),
+            custom.myField(context, surnameCtr, text.H_Enter_Surname.tr,
+                TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
@@ -321,28 +292,28 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(
-                context, usernameCtr,text.H_Enter_Username.tr, TextInputType.text),
+            custom.myField(context, usernameCtr, text.H_Enter_Username.tr,
+                TextInputType.text),
             const SizedBox(
               height: 16.0,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(  text.Enter_Email.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
+              child: custom.text(
+                  text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
             custom.myField(
-                context, emailCtr,  text.H_Enter_Email.tr, TextInputType.text),
+                context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
             const SizedBox(
               height: 17,
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Phone_Number.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Phone_Number.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -352,7 +323,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               width: MediaQuery.of(context).size.width * 1,
               child: IntlPhoneField(
                 controller: phoneCtr,
-                decoration:  InputDecoration(
+                decoration: InputDecoration(
                   counterText: '',
                   filled: true,
                   fillColor: Colors.white,
@@ -365,7 +336,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     ),
                   ),
                 ),
-                initialCountryCode: 'IT',
+                initialCountryCode: flag,
                 onChanged: (phone) {
                   code = phone.countryCode;
                   log(phone.completeNumber);
@@ -384,8 +355,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Create_Passsword.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Create_Passsword.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
@@ -440,14 +411,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Date_of_Birth.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             Container(
                 height: 45.0,
                 width: MediaQuery.of(context).size.width / 0.9,
-                padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
-                margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                padding: const EdgeInsets.only(left: 10.0, bottom: 2),
+                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey),
@@ -460,11 +431,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   },
                   readOnly: true,
                   controller: birthDateController,
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     hintText: text.Select_Date.tr,
                     hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon:
-                        const Icon(Icons.calendar_month, color: MyColor.primary),
+                    suffixIcon: const Icon(Icons.calendar_month,
+                        color: MyColor.primary),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -475,14 +446,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Place_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Place_of_Birth.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, birthplaceController, text.Place_of_Birth.tr,
-                TextInputType.text),
+            custom.myField(context, birthplaceController,
+                text.Place_of_Birth.tr, TextInputType.text),
             const SizedBox(
               height: 16,
             ),
@@ -495,12 +466,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, ageController, text.Age.tr,
-                TextInputType.text),
+            custom.myField(
+                context, ageController, text.Age.tr, TextInputType.text),
             const SizedBox(
               height: 16,
             ),
-
             Align(
               alignment: Alignment.topLeft,
               child: custom.text(
@@ -510,11 +480,12 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
               height: 3.0,
             ),
             custom.myField(context, experienceController, text.experience.tr,
-                TextInputType.text), const SizedBox(
+                TextInputType.text),
+            const SizedBox(
               height: 16,
             ),
 
-        /*    Align(
+            /*    Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
@@ -524,10 +495,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             custom.myField(context, universityAttendedCtr,
                 text.University_Attended.tr, TextInputType.text),*/
-           /* const SizedBox(
+            /* const SizedBox(
               height: 16,
             ),*/
-           /* Align(
+            /* Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
@@ -560,11 +531,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     enabledBorder: InputBorder.none,
                   ),
                 )),*/
-           /* const SizedBox(
+            /* const SizedBox(
               height: 16,
             ),*/
             /**/
-          /*  Align(
+            /*  Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
@@ -600,10 +571,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 16,
             ),*/
-          /*const SizedBox(
+            /*const SizedBox(
             height: 16,
           ),*/
-           /* Align(
+            /* Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
@@ -639,7 +610,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             const SizedBox(
               height: 16,
             ),*/
-           /* Align(
+            /* Align(
               alignment: Alignment.topLeft,
               child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w500,
                   MyColor.primary1),
@@ -678,7 +649,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         });
                       },
                     ),
-                    title:  Text(text.Male.tr),
+                    title: Text(text.Male.tr),
                   ),
                 ),
                 Expanded(
@@ -697,7 +668,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         });
                       },
                     ),
-                    title:  Text(text.Female.tr),
+                    title: Text(text.Female.tr),
                   ),
                 ),
               ],
@@ -719,8 +690,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Branch.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             branch(),
             const SizedBox(
@@ -728,11 +699,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Category.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Select_Category.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             category(),
-
 
             // Align(
             //   alignment: Alignment.topLeft,
@@ -740,8 +710,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             //       FontWeight.w500, MyColor.primary1),
             // ),
 
-
-          /*  InkWell(
+            /*  InkWell(
               child: Container(
                 decoration: BoxDecoration(
                   color: MyColor.white,
@@ -911,8 +880,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             // Text("$subCatIdArrayFinal"),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Upload_your_Degree.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
+              child: custom.text(text.Upload_your_Degree.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 5.0,
@@ -952,8 +921,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Address.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.Select_Address.tr, 13.0, FontWeight.w500,
+                  MyColor.primary1),
             ),
             const SizedBox(
               height: 5.0,
@@ -1046,18 +1015,18 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.enterDescription.tr, 13.0, FontWeight.w500, MyColor.primary1),
+              child: custom.text(text.enterDescription.tr, 13.0,
+                  FontWeight.w500, MyColor.primary1),
             ),
             const SizedBox(
               height: 3.0,
             ),
-            custom.myField(context, descriptionController, text.enterDescription.tr,
-                TextInputType.text),
+            custom.myField(context, descriptionController,
+                text.enterDescription.tr, TextInputType.text),
             const SizedBox(
               height: 16,
             ),
-             Align(
+            /*  Align(
                  alignment: Alignment.topLeft,
                  child: custom.text(text.firstConsultation, 13, FontWeight.w500, MyColor.primary1)),
             Row(
@@ -1103,7 +1072,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   ),
                 ),
 
-                /*Transform.scale(
+                */
+            /*Transform.scale(
                   scale: 0.9,
                   child: Radio(
                     value: 1,
@@ -1123,9 +1093,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       radioButtonItem = 'Paid';
                     });
                   },
-                ),*/
+                ),*/ /*
               ],
-            ),
+            ),*/
           ],
         ),
       ),
@@ -1133,7 +1103,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   }
 
 /*-------Validation----------*/
-  bool validation(
+  bool validation1(
     BuildContext context,
   ) {
     if (nameCtr.text.toString().isEmpty) {
@@ -1155,13 +1125,27 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Password is required");
     } else if (passwordCtr.text.toString().length < 6) {
       custom.MySnackBar(context, "Password should be 6 digit");
-    } else if (birthDateController.text.toString().isEmpty) {
+    }
+    /* else if (_selectedService == "") {
+      custom.MySnackBar(context, "Select first consultation fee");
+    }*/
+    else {
+      return true;
+    }
+    return false;
+  }
+
+  bool validation2(
+    BuildContext context,
+  ) {
+    if (birthDateController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter birth date");
     } else if (ageController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter age");
     } else if (experienceController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter year of experience");
-    }/* else if (universityAttendedCtr.text.toString().isEmpty) {
+    }
+    /* else if (universityAttendedCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter university attended");
     } else if (dateOfEnrollmentCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter date of enrollment");
@@ -1171,27 +1155,37 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Enter date of graduation");
     } else if (registerOfBelongingCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter register of belonging");
-    }*/ else if (_selectedGender.isEmpty) {
+    }*/
+    else if (_selectedGender.isEmpty) {
       custom.MySnackBar(context, "Select gender");
-    } else if (slectedCategory == null) {
-      custom.MySnackBar(context, "Select your specialization");
-    }/* else if (subCatIdArray.isEmpty) {
-      custom.MySnackBar(context, "Select your sub-specialization");
-    }*/ else if (degreefilePath == null) {
-      custom.MySnackBar(context, "Upload your degree");
-    } else if (AppConst.LOCATION.isEmpty) {
-      custom.MySnackBar(context, "Add your address");
-    } else if (descriptionController.text.isEmpty) {
-      custom.MySnackBar(context, "Enter description about specialization");
-    }  else if (_selectedService == "") {
-      custom.MySnackBar(context, "Select first consultation fee");
-    }else {
+    } else {
       return true;
     }
     return false;
   }
 
-/*---------SELECT MULTIPLE CATEGORY-----*/
+  bool validation3(
+    BuildContext context,
+  ) {
+    if (slectedCategory == null) {
+      custom.MySnackBar(context, "Select your specialization");
+    }
+    /* else if (subCatIdArray.isEmpty) {
+      custom.MySnackBar(context, "Select your sub-specialization");
+    }*/
+    else if (degreefilePath == null) {
+      custom.MySnackBar(context, "Upload your degree");
+    } else if (AppConst.LOCATION.isEmpty) {
+      custom.MySnackBar(context, "Add your address");
+    } else if (descriptionController.text.isEmpty) {
+      custom.MySnackBar(context, "Enter description about specialization");
+    } else {
+      return true;
+    }
+    return false;
+  }
+
+/*---------SELECT  CATEGORY-----*/
   Widget category() {
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
@@ -1223,7 +1217,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.categoryName),
                   );
                 }).toList(),
-                hint:  Text(text.Select_Category.tr),
+                hint: Text(text.Select_Category.tr),
                 // After selecting the desired option,it will
                 // change button value to selected value
                 onChanged: (newValue) {
@@ -1241,7 +1235,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     );
   }
 
-  /*---------SELECT BRANCH-----*/
+/*---------SELECT BRANCH-----*/
   Widget branch() {
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
@@ -1252,7 +1246,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
           child: Container(
             height: height * 0.06,
             width: widht * 0.9,
-             padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
             decoration: BoxDecoration(
                 color: MyColor.white,
@@ -1273,7 +1267,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.branchName),
                   );
                 }).toList(),
-                hint:  Text(text.Select_Branch.tr),
+                hint: Text(text.Select_Branch.tr),
                 onChanged: (newValue) {
                   stateSetter(() {
                     selectedBranch = newValue;
@@ -1288,7 +1282,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     );
   }
 
-  /*----------UPLOAD DEGREE-----------*/
+/*----------UPLOAD DEGREE-----------*/
   File? degreefilePath;
   final degreepicker = ImagePicker();
   String degreebaseimage = "";
@@ -1296,9 +1290,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   void _chooseDegree() async {
     final pickedFile = await degreepicker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 100,
-       );
+      source: ImageSource.gallery,
+      imageQuality: 100,
+    );
     setState(() {
       if (pickedFile != null) {
         degreefilePath = File(pickedFile.path);
@@ -1313,7 +1307,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     });
   }
 
-  //*******date strt end************//
+//*******date start end************//
   Future<DateTime?> pickDate() async {
     return await showDatePicker(
       keyboardType: const TextInputType.numberWithOptions(),
@@ -1341,7 +1335,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     );
   }
 
-  /*-----------Google Search------------------*/
+/*-----------Google Search------------------*/
   Future<Prediction?> showGoogleAutoComplete(BuildContext context) async {
     Prediction? p = await PlacesAutocomplete.show(
       offset: 0,
@@ -1357,11 +1351,5 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       hint: text.SearchAddress.tr,
     );
     return p;
-  }
-
-  Future<latLng.LatLng> buildLatLngFromAddress(dynamic place) async {
-    List<geoCoding.Location> locations =
-        await geoCoding.locationFromAddress(place);
-    return latLng.LatLng(locations.first.latitude, locations.first.longitude);
   }
 }

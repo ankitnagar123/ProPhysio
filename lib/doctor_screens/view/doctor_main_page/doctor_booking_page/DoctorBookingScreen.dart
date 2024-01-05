@@ -52,7 +52,7 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
             Center(
               child: Padding(
                 padding:
-                    const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
+                    const EdgeInsets.only(left: 3.0, right: 3.0, top: 10.0),
                 child: custom.searchField(
                     context,
                     searchCtr,
@@ -93,7 +93,7 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 17),
           child: Stack(children: [
             TabBarView(
                 physics: const NeverScrollableScrollPhysics(),

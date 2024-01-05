@@ -50,7 +50,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               const SizedBox(
                 height: 10.0,
               ),
-              Align(
+              const Align(
                 alignment: Alignment.center,
                 child: Image(
                   image: AssetImage("assets/images/runlogo.png"),

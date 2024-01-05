@@ -37,7 +37,7 @@ class _CancelAppointmentSuccessState extends State<CancelAppointmentSuccess> {
               end: Alignment.bottomLeft,
               colors: [
                 MyColor.primary,
-                MyColor.secondary
+                MyColor.primary1
               ]
           ),
         ),
@@ -47,11 +47,11 @@ class _CancelAppointmentSuccessState extends State<CancelAppointmentSuccess> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: const AssetImage('assets/images/medicalogo2.png'),
-                height: height*0.2,
-                width: widht*0.4,
+                image: AssetImage("assets/images/prologo.png"),
+                 height: 100,
+                // width: 130,
               ),
-              SizedBox(height: height*0.04,),
+              SizedBox(height: height*0.08,),
               Padding(
                 padding: const EdgeInsets.only(left: 32.0),
                 child: Align(
