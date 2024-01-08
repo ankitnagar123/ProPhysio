@@ -43,6 +43,7 @@ LocalString text =  LocalString();
         String result = jsonResponse['result'].toString();
         String usertype = jsonResponse['user_type'].toString();
         String id = jsonResponse['id'].toString();
+        String branchId = jsonResponse['branch_id'].toString();
         String name = jsonResponse['name'].toString();
         String surname = jsonResponse['surname'].toString();
         String userProfile = jsonResponse['user_profile'].toString();
@@ -56,6 +57,7 @@ LocalString text =  LocalString();
             loading.value = false;
             sp.setStringValue(sp.DOCTOR_NAME_KEY, name);
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
+            sp.setStringValue(sp.DOCTOR_BRANCH_ID_KEY, branchId);
             sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
             log("Doctor details..............${sp.DOCTOR_NAME_KEY}-----$surname");
             // sp.setStringValue(keyString, valueString)

@@ -1,17 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../../patient_screens/controller/patinet_center_controller/PCenterController.dart';
 import '../doctorViewAvailability/DoctorViewCalenderSlot.dart';
-import 'DoctorCenterAddAvailability.dart';
-import 'DoctorSelfAddAvailability.dart';
-import 'package:get/get.dart';
+
 class AddAvailabilityTab extends StatefulWidget {
   const AddAvailabilityTab({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<AddAvailabilityTab> createState() => _AddAvailabilityTabState();
@@ -21,11 +22,14 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   PCenterCtr pCenterCtr = PCenterCtr();
+  SharedPreferenceProvider sp =SharedPreferenceProvider();
   LocalString text = LocalString();
-
+String? branchId;
   @override
   void initState() {
     super.initState();
+    getBranch();
+    log("message$branchId");
     tabController = TabController(length: 1, vsync: this, initialIndex: 0);
   }
 
@@ -67,5 +71,8 @@ class _AddAvailabilityTabState extends State<AddAvailabilityTab>
             ]),
           ])),
     );
+  }
+  getBranch()async{
+   branchId = await sp.getStringValue(sp.DOCTOR_BRANCH_ID_KEY);
   }
 }

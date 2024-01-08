@@ -79,11 +79,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   String? slectedCategory;
   String? selectedBranch;
 
-  List<dynamic> slectedCat = [].toList();
-  List<dynamic> slectedCatid = [].toList();
-  List<String> listOFSelectedItem = [];
-
-  String selectedText = "";
+  // List<dynamic> slectedCat = [].toList();
+  // List<dynamic> slectedCatid = [].toList();
 
   String? catid;
   double? lat;
@@ -175,14 +172,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   return custom.MyButton(context, text.Go_On.tr, () {
                     log("$_curr $_numpage");
 
-                    print("My latitude AppCont : -- ${AppConst.LATITUDE}");
-                    print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
-                    print("My Location AppCont : -- ${AppConst.LOCATION}");
                     // controller.jumpToPage(_curr);
                     if (validation1(context)||validation2(context)) {
                       controller.jumpToPage(_curr);
                     }else{
-                      print("lolo");
+
                     }
                     /*else if (validation2(context)) {
                       //controller.jumpToPage(_curr);

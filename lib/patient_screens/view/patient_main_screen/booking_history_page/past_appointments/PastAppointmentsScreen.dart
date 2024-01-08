@@ -204,9 +204,11 @@ class _PastAppointmentsScreenState extends State<PastAppointmentsScreen> {
 
   showBottomSheet(String id) {
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return SingleChildScrollView(

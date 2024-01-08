@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 
-import '../../doctor_screens/view/doctor_main_page/DoctorMainPage.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/DoctorMainPage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_booking_page/doctor_search_appointments/DoctorSearchAppoinmentsScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatProfile.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatingScreen.dart';

@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../../helper/CustomView/CustomView.dart';
-import '../../../helper/mycolor/mycolor.dart';
-import '../../../language_translator/LanguageTranslate.dart';
-import '../../../patient_screens/controller/Navigator/RouterCtr.dart';
-import 'doctor_booking_page/DoctorBookingScreen.dart';
-import 'doctor_chat_page/DoctorChatListPage.dart';
-import 'doctor_home_page/DoctorHomeScreen.dart';
-import 'doctor_more_page/DoctorMorePage.dart';
+import '../../../../helper/CustomView/CustomView.dart';
+import '../../../../helper/mycolor/mycolor.dart';
+import '../../../../language_translator/LanguageTranslate.dart';
+import '../../../../patient_screens/controller/Navigator/RouterCtr.dart';
+import '../doctor_booking_page/DoctorBookingScreen.dart';
+import '../doctor_chat_page/DoctorChatListPage.dart';
+import '../doctor_home_page/DoctorHomeScreen.dart';
+import 'DoctorMorePage.dart';
 
 class DoctorMainScreen extends StatefulWidget {
   const DoctorMainScreen({Key? key}) : super(key: key);

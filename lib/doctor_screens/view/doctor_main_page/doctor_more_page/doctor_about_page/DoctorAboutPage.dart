@@ -93,7 +93,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://cisswork.com/Android/Medica/Apis/about.php'));
+          'https://cisswork.com/Android/emrIntegrateDoctor/api/about.php'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

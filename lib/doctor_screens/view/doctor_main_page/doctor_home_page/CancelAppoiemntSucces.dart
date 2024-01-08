@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../helper/CustomView/CustomView.dart';
 import '../../../../helper/mycolor/mycolor.dart';
-import '../DoctorMainPage.dart';
+import '../doctor_more_page/DoctorMainPage.dart';
 
 class CancelAppointmentSuccess extends StatefulWidget {
   const CancelAppointmentSuccess({Key? key}) : super(key: key);

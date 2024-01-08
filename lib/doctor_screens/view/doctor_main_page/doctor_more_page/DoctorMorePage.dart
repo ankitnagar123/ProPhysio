@@ -13,12 +13,11 @@ import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/CenterRequestCtr.dart';
 import '../../../controller/DoctorProfileController.dart';
-import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
-import 'doctor_availability/AddAvailability/AddAvailabilityTab.dart';
+import 'LerningManagement/learningManage.dart';
 import 'doctor_availability/doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
 class DoctorMorePage extends StatefulWidget {
-  const DoctorMorePage({Key? key}) : super(key: key);
+  const DoctorMorePage({super.key});
 
   @override
   State<DoctorMorePage> createState() => _DoctorMorePageState();
@@ -35,6 +34,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
   void initState() {
     doctorProfileCtr.doctorProfile(context);
     centerRequest.CenterRequestListApi(context);
+
     super.initState();
   }
 
@@ -170,7 +170,28 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-
+              ListTile(
+                // subtitle: customView.text(text.LMS.tr,
+                //     11.0, FontWeight.w400, Colors.black),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LearningManage()));
+                  // Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.check_box,
+                  color: Colors.black,
+                ),
+                title: customView.text(text.LMS.tr, 14.0,
+                    FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
               /*----------------prescription----------------*/
               // ListTile(
               //   subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
@@ -234,7 +255,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
+             /* ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DTandCScreen());
                 },
@@ -265,7 +286,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   color: Colors.black,
                   size: 20.0,
                 ),
-              ),
+              ),*/
               // ListTile(
               //   onTap: () {
               //     Get.toNamed(RouteHelper.DSupportScreen());

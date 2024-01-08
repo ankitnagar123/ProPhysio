@@ -32,6 +32,7 @@ class MyAPI {
   static const String cardRemove = "remove_card";
 
   /*-----Doctor List API-------*/
+
   static const String pDoctorList = "doctor_list";
   static const String pDoctorDetails = "fetch_doctor";
 
@@ -143,6 +144,9 @@ class MyAPI {
   static const String dCenterRequestAcceptReject = "accept_ward_doctor_request";
 
   static const String updateToken = "android_update_userdevice_id";
+  /*-----------NEW--------------*/
+  static const String dLearningManageType = "learning_management";
+  static const String dLearningManageList = "learning_management_single";
 
 /*-------------Medical Center side api---------------------*/
 

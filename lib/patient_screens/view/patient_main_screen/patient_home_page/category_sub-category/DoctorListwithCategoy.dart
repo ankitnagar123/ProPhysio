@@ -86,9 +86,9 @@ class _DoctorListState extends State<DoctorList> {
                 keyboardType: TextInputType.name,
                 cursorColor: Colors.white,
                 controller: searchCtr,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search, color: Colors.white),
+                  prefixIcon: const Icon(Icons.search, color: Colors.black),
                   prefixIconColor: MyColor.primary1,
                   suffixIcon: InkWell(
                      onTap: ()=> showModalBottomSheet(
@@ -171,15 +171,14 @@ class _DoctorListState extends State<DoctorList> {
                             parameters: data);
                       },*/
                       child: const Icon(Icons.filter_list_alt)),
-                  suffixIconColor: MyColor.white,
+                  suffixIconColor: MyColor.black,
                   contentPadding: const EdgeInsets.only(top: 3, left: 20),
                   hintText: text.Search_Doctorby_Name.tr,
                   hintStyle:
-                  const TextStyle(fontSize: 12, color: MyColor.white),
-                  fillColor: MyColor.grey.withOpacity(0.2),
-                  filled: true,
+                  const TextStyle(fontSize: 12, color: MyColor.black),
+                 /* fillColor: MyColor.,
+                  filled: true,*/
                   border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),

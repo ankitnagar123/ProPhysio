@@ -24,6 +24,7 @@ class SharedPreferenceProvider{
   /*--------Doctor side------*/
 String DOCTOR_LOGIN_KEY = 'DOCTOR_LOGIN_KEY';
 String DOCTOR_ID_KEY = 'DOCTOR_ID_KEY';
+String DOCTOR_BRANCH_ID_KEY = 'DOCTOR_BRANCH_ID_KEY';
 String DOCTOR_NAME_KEY ="DOCTOR_NAME_KEY";
 String DOCTOR_SURE_NAME_KEY ="DOCTOR_SURE_NAME_KEY";
 

@@ -94,7 +94,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://sicparvismagna.it/Medica/Apis/terms_conditions.php'));
+          'https://cisswork.com/Android/emrIntegrateDoctor/api/terms_conditions.php'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

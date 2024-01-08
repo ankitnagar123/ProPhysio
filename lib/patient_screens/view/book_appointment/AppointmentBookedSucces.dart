@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Helper/RoutHelper/RoutHelper.dart';
+import '../../../doctor_screens/controller/RoutCtr.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
+import '../patient_main_screen/PatientMainScreen.dart';
+import '../patient_main_screen/booking_history_page/PBookingPageHistory.dart';
 class AppointmentBookedSucces extends StatefulWidget {
   const AppointmentBookedSucces({Key? key}) : super(key: key);
 
@@ -15,12 +18,17 @@ class AppointmentBookedSucces extends StatefulWidget {
 class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
   CustomView custom = CustomView();
 LocalString text = LocalString();
+  MyRoute myRoute = Get.put(MyRoute());
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async{
+        setState(() {
+          myRoute.pageIndex.value = 1;
+        });
         return await Get.toNamed(RouteHelper.getBottomNavigation());
       },
       child: Scaffold(
@@ -45,12 +53,12 @@ LocalString text = LocalString();
 
                     children: [
                       SizedBox(
-                        height: height*0.1,
+                        height: height*0.2,
                       ),
                       Image(
                         image: AssetImage("assets/images/prologo.png"),
-                        // height: 100,
-                        // width: 130,
+                        height: 100,
+
                       ),
                       SizedBox(height: height*0.04,),
                       Align(
@@ -67,8 +75,14 @@ LocalString text = LocalString();
                         height: height*0.25,
                       ),
                       custom.MyButton(context, text.letGo.tr, () {
-                        Get.offAllNamed(RouteHelper.getBottomNavigation());
-                      }, MyColor.white,
+                        setState(() {
+                          myRoute.pageIndex.value = 1;
+                        });
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PatientMainScreen()));                      }, MyColor.white,
                           const TextStyle(color: MyColor.primary1,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
                     ],
                   ),

@@ -41,7 +41,7 @@ class _DoctorListTabState extends State<DoctorListTab>with  SingleTickerProvider
                   labelPadding: const EdgeInsets.all(7.0),
                   indicatorColor: MyColor.red,
                   labelColor: Colors.white,
-                  indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
+                  indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.8),borderRadius: BorderRadius.circular(25),),
                   unselectedLabelColor: Colors.black,
 
                   controller: tabController,

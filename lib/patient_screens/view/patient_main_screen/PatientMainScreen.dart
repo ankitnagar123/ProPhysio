@@ -3,18 +3,13 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PDoctorTab.dart';
-import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/HomePage/PatientHomePageTab.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListTab.dart';
-import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/DoctorListwithCategoy.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorAllCat.dart';
 import 'package:prophysio/patient_screens/view/patient_main_screen/patient_home_page/category_sub-category/PDoctorSubCat.dart';
-
-import '../../../ChatWithSocket/ChatList.dart';
 import '../../../doctor_screens/controller/RoutCtr.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
-import '../../controller/booking_controller_list/PBookingController.dart';
 import 'booking_history_page/PBookingPageHistory.dart';
 import 'chating_page/ChatListScreen.dart';
 import 'more_page/MorePage.dart';

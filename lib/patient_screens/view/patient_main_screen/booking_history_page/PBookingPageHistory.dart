@@ -495,9 +495,11 @@ class _BookingPageState extends State<BookingPage> {
 
   showBottomSheet(String id, String idDr) {
     showModalBottomSheet(
+        isScrollControlled: true,
         isDismissible: true,
+        backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(7.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
         context: context,
         builder: (BuildContext context) {
           return /* patientBookingController.loadingd.value?customView.MyIndicator():*/ SingleChildScrollView(

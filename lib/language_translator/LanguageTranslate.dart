@@ -205,6 +205,8 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /// ********************DOCTOR SIDE********************** ///
   /* DOCTOR SIDE MORE PAGE */
+  String LMS = "Learning Management";
+  String LMSTYPE = "Select learning type";
   String addAvailabilitySelfCenter = "View availability and check";
   String addAvailability = "View Availability";
   String prescriptionAndMedicalReports = "prescription and medical reports";
@@ -776,7 +778,10 @@ String NoWardAddedCenter = "No ward added by center";
 
           /* DOCTOR SIDE MORE PAGE */
           addAvailabilitySelfCenter: "View availability and check",
-          addAvailability: "View Availability",
+   LMS : "Learning Management",
+  LMSTYPE :"Select learning type",
+
+  addAvailability: "View Availability",
           prescriptionAndMedicalReports: "prescription and medical reports",
           reports: "Reports",
           viewYourMedicalRequest: "View your medical request",

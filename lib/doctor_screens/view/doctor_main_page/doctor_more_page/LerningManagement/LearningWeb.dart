@@ -10,14 +10,15 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 
-class DoctorTermCondition extends StatefulWidget {
-  const DoctorTermCondition({Key? key}) : super(key: key);
+class LearningWeb extends StatefulWidget {
+  final id;
+  const LearningWeb({super.key, this.id});
 
   @override
-  State<DoctorTermCondition> createState() => _DoctorTermConditionState();
+  State<LearningWeb> createState() => _LearningWebState();
 }
 
-class _DoctorTermConditionState extends State<DoctorTermCondition> {
+class _LearningWebState extends State<LearningWeb> {
   CustomView custom = CustomView();
   late final WebViewController _controller;
   bool loding = true;
@@ -93,7 +94,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://cisswork.com/Android/emrIntegrateDoctor/api/terms_conditions.php'));
+          'https://cisswork.com/Android/emrIntegrateDoctor/api/learning_system.php?lid=${widget.id}'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
@@ -119,7 +120,7 @@ Page resource error:
         elevation: 0,
         centerTitle: true,
         title:
-        custom.text(text.TermCondition.tr, 17, FontWeight.w500, MyColor.black),
+        custom.text(text.LMS.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: loding == true
           ? Center(

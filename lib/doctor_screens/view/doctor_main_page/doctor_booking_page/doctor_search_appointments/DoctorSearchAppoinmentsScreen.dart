@@ -8,7 +8,7 @@ import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/booking_list_model.dart';
-import '../../DoctorMainPage.dart';
+import '../../doctor_more_page/DoctorMainPage.dart';
 import '../../doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
 
 class DoctorSearchAppointments extends StatefulWidget {
