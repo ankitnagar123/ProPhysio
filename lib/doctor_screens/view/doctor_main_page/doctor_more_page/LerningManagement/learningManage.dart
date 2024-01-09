@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prophysio/doctor_screens/controller/LearningManagemnet/learningManagController.dart';
+import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
@@ -10,9 +11,7 @@ import '../../../../../language_translator/LanguageTranslate.dart';
 import 'LearningWeb.dart';
 
 class LearningManage extends StatefulWidget {
-  const LearningManage({
-    super.key,
-  });
+  const LearningManage({super.key,});
 
   @override
   State<LearningManage> createState() => _LearningManageState();
@@ -28,9 +27,10 @@ class _LearningManageState extends State<LearningManage> {
   void initState() {
     super.initState();
     learningManageCtr.learningManageTypeFetch(context).then((value) => {
-        learningManageCtr.learningManageList(context, learningManageCtr.learningType[0].learningType),
-      selectLearningType = learningManageCtr.learningType[0].learningType,
-    });
+          learningManageCtr.learningManageList(
+              context, learningManageCtr.learningType[0].learningType),
+          selectLearningType = learningManageCtr.learningType[0].learningType,
+        });
   }
 
   @override
@@ -91,13 +91,11 @@ class _LearningManageState extends State<LearningManage> {
                                         .learningTypeList[index];
                                     return GestureDetector(
                                       onTap: () {
-                                         Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LearningWeb(
-                                              id: list.trainingId,
-                                            )));
+                                        var data = {
+                                          "id":list.trainingId,
+                                        };
+                                        Get.toNamed(RouteHelper.DLearningManageWebView(),parameters: data);
+
                                         // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                                       },
                                       child: Card(
@@ -111,11 +109,9 @@ class _LearningManageState extends State<LearningManage> {
                                               width: 60,
                                               height: 60,
                                               child: ClipRRect(
-
                                                 borderRadius:
                                                     BorderRadius.circular(50.0),
                                                 child: FadeInImage.assetNetwork(
-
                                                   imageErrorBuilder: (context,
                                                           error, stackTrace) =>
                                                       const Image(
@@ -128,8 +124,7 @@ class _LearningManageState extends State<LearningManage> {
                                                   fit: BoxFit.cover,
                                                   placeholder:
                                                       "assets/images/loading.gif",
-                                                  image:
-                                                      list.bannerImg,
+                                                  image: list.bannerImg,
                                                   placeholderFit: BoxFit.cover,
                                                 ),
                                               ),
@@ -162,19 +157,16 @@ class _LearningManageState extends State<LearningManage> {
                                                                     .width /
                                                                 1.9,
                                                         child: Text(
-                                                          list.date
-                                                              .toString(),
+                                                          list.date.toString(),
                                                           maxLines: 1,
-                                                          overflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style:
                                                               const TextStyle(
                                                             fontSize: 11,
                                                             fontFamily:
                                                                 "Poppins",
-                                                            color:
-                                                                MyColor.grey,
+                                                            color: MyColor.grey,
                                                           ),
                                                         )),
                                                   ],

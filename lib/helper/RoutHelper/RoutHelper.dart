@@ -8,6 +8,9 @@ import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatin
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
 
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/Center_request/DCenterRequest.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/LearningWeb.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/learningManage.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/MyTask/MyTask.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_about_page/DoctorAboutPage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorAddSpecialization.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorPersonalData.dart';
@@ -134,6 +137,10 @@ class RouteHelper {
   static const String dCenterRequest = '/dCenterRequest';
 
   static const String dSupport = '/dSupport';
+
+  static const String myTask = '/myTask';
+  static const String learningManage = '/learningManage';
+  static const String learningManageWebView = '/learningManageWebView';
 
 
 
@@ -303,6 +310,9 @@ class RouteHelper {
   static String DCenterRequest() => dCenterRequest;
 
   static String DSupportScreen() => dSupport;
+  static String DMyTask() => myTask;
+  static String DLearningManage() => learningManage;
+  static String DLearningManageWebView() => learningManageWebView;
 
 /*------------Medical Center Screen------------------*/
   static String CSignUpOtp() => cSignUpOtp;
@@ -388,6 +398,14 @@ class RouteHelper {
     GetPage(name: dAbout, page: () => const DoctorAboutScreen()),
      GetPage(name: dCenterRequest, page: () => const DCenterRequests()),
     GetPage(name: dSupport, page: () => const DoctorSupportScreen()),
+    GetPage(name: myTask, page: () => const DoctorTask()),
+    GetPage(name: learningManage, page: () => const LearningManage()),
+    GetPage(name: learningManageWebView, page: () => const LearningWeb()),
+
+
+
+
+
 
 
 

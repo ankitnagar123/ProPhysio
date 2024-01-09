@@ -207,6 +207,11 @@ String PasswordChangedSuccess = "Password changed successfully!";
   /* DOCTOR SIDE MORE PAGE */
   String LMS = "Learning Management";
   String LMSTYPE = "Select learning type";
+  String MYTASK = "My Task";
+  String NoTask = "No Task Available";
+  String TaskDisc = "Task Description";
+  String TASKVIEW = "View Pending, Upcoming, Complete task";
+  String TASKSEARCH = "Search task";
   String addAvailabilitySelfCenter = "View availability and check";
   String addAvailability = "View Availability";
   String prescriptionAndMedicalReports = "prescription and medical reports";
@@ -267,6 +272,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String noDataOnParticularDate = "No data on this particular date";
   String date = "Date";
   String slot = "Slot";
+  String Time = "Time";
   String fees = "Fees";
 
   /*DOCTOR SIDE ADD AVAILABILITY*/
@@ -480,6 +486,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String patient = "Patient";
   String you = "You";
   String bookingInformation = "Booking information";
+  String taskInformation = "Task information";
   String status = "Status";
   String address = "Address";
   String paymentInformation = "Payment information";
@@ -780,7 +787,13 @@ String NoWardAddedCenter = "No ward added by center";
           addAvailabilitySelfCenter: "View availability and check",
    LMS : "Learning Management",
   LMSTYPE :"Select learning type",
+          MYTASK : "My Task",
 
+          NoTask : "No Task Available",
+
+          TaskDisc : "Task Description",
+  TASKVIEW : "View Pending, Upcoming, Complete task",
+          TASKSEARCH : "Search task",
   addAvailability: "View Availability",
           prescriptionAndMedicalReports: "prescription and medical reports",
           reports: "Reports",
@@ -840,6 +853,7 @@ String NoWardAddedCenter = "No ward added by center";
           noDataOnParticularDate: "No data on this particular date",
           date: "Date",
           slot: "Slot",
+          Time: "Time",
           fees: "Fees",
           /*DOCTOR SIDE ADD AVAILABILITY*/
           self: "Add Availability",
@@ -1052,6 +1066,7 @@ String NoWardAddedCenter = "No ward added by center";
           patient: "Patient",
           you: "You",
           bookingInformation: "Booking information",
+          taskInformation: "Task information",
           status: "Status",
           address: "Address",
           paymentInformation: "Payment information",

@@ -174,10 +174,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 // subtitle: customView.text(text.LMS.tr,
                 //     11.0, FontWeight.w400, Colors.black),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LearningManage()));
+                  Get.toNamed(RouteHelper.DLearningManage());
+
                   // Get.toNamed(RouteHelper.DSettingScreen());
                 },
                 leading: const Icon(
@@ -239,6 +237,27 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               //     size: 20.0,
               //   ),
               // ),
+
+              ListTile(
+                onTap: () {
+
+                  Get.toNamed(RouteHelper.DMyTask());
+                },
+                leading: const Icon(
+                  Icons.task_alt,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.MYTASK.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+                subtitle: customView.text(
+                    text.TASKVIEW.tr, 10.0, FontWeight.normal, Colors.black),
+              ),
+
               ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DSettingScreen());
@@ -255,6 +274,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   size: 20.0,
                 ),
               ),
+
              /* ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DTandCScreen());

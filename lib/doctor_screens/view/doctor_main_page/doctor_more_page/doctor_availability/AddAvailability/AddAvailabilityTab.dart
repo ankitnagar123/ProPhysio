@@ -73,6 +73,6 @@ String? branchId;
     );
   }
   getBranch()async{
-   branchId = await sp.getStringValue(sp.DOCTOR_BRANCH_ID_KEY);
+    branchId = await sp.getStringValue(sp.DOCTOR_BRANCH_ID_KEY);
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +10,9 @@ import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 
 class LearningWeb extends StatefulWidget {
-  final id;
-  const LearningWeb({super.key, this.id});
+  const LearningWeb({
+    super.key,
+  });
 
   @override
   State<LearningWeb> createState() => _LearningWebState();
@@ -24,11 +24,12 @@ class _LearningWebState extends State<LearningWeb> {
   bool loding = true;
   LocalString text = LocalString();
 
+  String learningId = '';
 
   @override
   void initState() {
     super.initState();
-
+    learningId = Get.parameters["id"].toString();
     // #docregion platform_features
     late final PlatformWebViewControllerCreationParams params;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
@@ -41,7 +42,7 @@ class _LearningWebState extends State<LearningWeb> {
     }
 
     final WebViewController controller =
-    WebViewController.fromPlatformCreationParams(params);
+        WebViewController.fromPlatformCreationParams(params);
     // #enddocregion platform_features
 
     controller
@@ -94,7 +95,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://cisswork.com/Android/emrIntegrateDoctor/api/learning_system.php?lid=${widget.id}'));
+          'https://cisswork.com/Android/emrIntegrateDoctor/api/learning_system.php?lid=$learningId'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
@@ -119,16 +120,15 @@ Page resource error:
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title:
-        custom.text(text.LMS.tr, 17, FontWeight.w500, MyColor.black),
+        title: custom.text(text.LMS.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: loding == true
           ? Center(
-        child: custom.MyIndicator(),
-      )
+              child: custom.MyIndicator(),
+            )
           : WebViewWidget(
-        controller: _controller,
-      ),
+              controller: _controller,
+            ),
     );
   }
 }

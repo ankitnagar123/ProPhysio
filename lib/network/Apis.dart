@@ -148,6 +148,11 @@ class MyAPI {
   static const String dLearningManageType = "learning_management";
   static const String dLearningManageList = "learning_management_single";
 
+  /*-------------Task Management*/
+  static const String dTaskManageList = "fetch_doctor_task";
+  static const String dTaskStatusChange = "update_doctor_task_status";
+
+
 /*-------------Medical Center side api---------------------*/
 
   static const String CSignUpOtp = "medical_otp_signup";
