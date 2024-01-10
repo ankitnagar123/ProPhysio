@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prophysio/doctor_screens/controller/TaskManageCtr/TaskManagementCtr.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-
-import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import '../../../../controller/DocotorBookingController.dart';
 import '../../../../model/TaskManageModel.dart';
-import '../../../../model/booking_list_model.dart';
 import '../../doctor_more_page/DoctorMainPage.dart';
 
 class DoctorTask extends StatefulWidget {
-  const DoctorTask({Key? key}) : super(key: key);
+  const DoctorTask({super.key});
 
   @override
   State<DoctorTask> createState() => _DoctorTaskState();
@@ -44,186 +39,174 @@ class _DoctorTaskState extends State<DoctorTask> {
 
   @override
   void initState() {
+    super.initState();
     taskManageCtr.taskManageList(
       context,
       "",
     );
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     var listData = _getFilteredList();
     final widht = MediaQuery.of(context).size.width;
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const DoctorMainScreen()));
-        await taskManageCtr.taskManageList(
-          context,
-          "",
-        );
-        return true;
-        /*Pending*/
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.white24,
-          title: custom.text(text.MYTASK.tr, 15, FontWeight.w500, Colors.black),
-        ),
-        body: SingleChildScrollView(
-          // padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(7.0),
-                child: SizedBox(
-                  width: widht,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      setState(() {
-                        _keyword = value;
-                      });
-                      print(value);
-                    },
-                    cursorWidth: 0.0,
-                    cursorHeight: 0.0,
-                    onTap: () {},
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    cursorColor: Colors.black,
-                    controller: searchCtr,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      prefixIconColor: MyColor.white,
-                      suffixIconColor: MyColor.white,
-                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                      hintText: text.TASKSEARCH.tr,
-                      hintStyle:
-                          const TextStyle(fontSize: 12, color: MyColor.white),
-                      labelStyle:
-                          const TextStyle(fontSize: 12, color: MyColor.white),
-                      fillColor: MyColor.lightcolor,
-                      filled: true,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: const Icon(Icons.arrow_back_ios_new)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white24,
+        title: custom.text(text.MYTASK.tr, 15, FontWeight.w500, Colors.black),
+      ),
+      body: SingleChildScrollView(
+        // padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: SizedBox(
+                width: widht,
+                child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _keyword = value;
+                    });
+                    print(value);
+                  },
+                  cursorWidth: 0.0,
+                  cursorHeight: 0.0,
+                  onTap: () {},
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.name,
+                  cursorColor: Colors.black,
+                  controller: searchCtr,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    prefixIconColor: MyColor.white,
+                    suffixIconColor: MyColor.white,
+                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
+                    hintText: text.TASKSEARCH.tr,
+                    hintStyle:
+                        const TextStyle(fontSize: 12, color: MyColor.white),
+                    labelStyle:
+                        const TextStyle(fontSize: 12, color: MyColor.white),
+                    fillColor: MyColor.lightcolor,
+                    filled: true,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.upcoming.tr,
-                      () {
-                        setState(() {
-                          selectedCard = 0;
-                        });
-                        taskManageCtr.taskManageList(
-                          context,
-                          "Confirmed",
-                        );
-                      },
-                      selectedCard == 0 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontSize: 11,
-                          fontFamily: "Poppins",
-                          color: selectedCard == 0
-                              ? MyColor.white
-                              : MyColor.primary1),
-                    ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: custom.mysButton(
+                    context,
+                    text.upcoming.tr,
+                    () {
+                      setState(() {
+                        selectedCard = 0;
+                      });
+                      taskManageCtr.taskManageList(
+                        context,
+                        "Confirmed",
+                      );
+                    },
+                    selectedCard == 0 ? MyColor.primary : MyColor.white,
+                    TextStyle(
+                        fontSize: 11,
+                        fontFamily: "Poppins",
+                        color: selectedCard == 0
+                            ? MyColor.white
+                            : MyColor.primary1),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.pending.tr,
-                      () {
-                        setState(() {
-                          selectedCard = 1;
-                        });
-                        taskManageCtr.taskManageList(
-                          context,
-                          "Pending",
-                        );
-                      },
-                      selectedCard == 1 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontSize: 11,
-                          fontFamily: "Poppins",
-                          color: selectedCard == 1
-                              ? MyColor.white
-                              : MyColor.primary1),
-                    ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: custom.mysButton(
+                    context,
+                    text.pending.tr,
+                    () {
+                      setState(() {
+                        selectedCard = 1;
+                      });
+                      taskManageCtr.taskManageList(
+                        context,
+                        "Pending",
+                      );
+                    },
+                    selectedCard == 1 ? MyColor.primary : MyColor.white,
+                    TextStyle(
+                        fontSize: 11,
+                        fontFamily: "Poppins",
+                        color: selectedCard == 1
+                            ? MyColor.white
+                            : MyColor.primary1),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.Complete.tr,
-                      () {
-                        setState(() {
-                          selectedCard = 2;
-                        });
-                        taskManageCtr.taskManageList(
-                          context,
-                          "Complete",
-                        );
-                      },
-                      selectedCard == 2 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontSize: 11,
-                          fontFamily: "Poppins",
-                          color: selectedCard == 2
-                              ? MyColor.white
-                              : MyColor.primary1),
-                    ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: custom.mysButton(
+                    context,
+                    text.Complete.tr,
+                    () {
+                      setState(() {
+                        selectedCard = 2;
+                      });
+                      taskManageCtr.taskManageList(
+                        context,
+                        "Complete",
+                      );
+                    },
+                    selectedCard == 2 ? MyColor.primary : MyColor.white,
+                    TextStyle(
+                        fontSize: 11,
+                        fontFamily: "Poppins",
+                        color: selectedCard == 2
+                            ? MyColor.white
+                            : MyColor.primary1),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.cancel.tr,
-                      () {
-                        setState(() {
-                          selectedCard = 3;
-                        });
-                        taskManageCtr.taskManageList(context, "Cancel");
-                      },
-                      selectedCard == 3 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontSize: 11,
-                          fontFamily: "Poppins",
-                          color: selectedCard == 3
-                              ? MyColor.white
-                              : MyColor.primary1),
-                    ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: custom.mysButton(
+                    context,
+                    text.cancel.tr,
+                    () {
+                      setState(() {
+                        selectedCard = 3;
+                      });
+                      taskManageCtr.taskManageList(context, "Cancel");
+                    },
+                    selectedCard == 3 ? MyColor.primary : MyColor.white,
+                    TextStyle(
+                        fontSize: 11,
+                        fontFamily: "Poppins",
+                        color: selectedCard == 3
+                            ? MyColor.white
+                            : MyColor.primary1),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: showList(),
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: showList(),
+            ),
+          ],
         ),
       ),
     );
@@ -499,7 +482,7 @@ class _DoctorTaskState extends State<DoctorTask> {
                             const SizedBox(
                               height: 2.0,
                             ),
-                            Text("${date}   ${time}",
+                            Text("$date   $time",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14.0,
@@ -509,7 +492,7 @@ class _DoctorTaskState extends State<DoctorTask> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   status == "Pending"
@@ -525,6 +508,10 @@ class _DoctorTaskState extends State<DoctorTask> {
                                       context, text.reject.tr, () {
                                       taskManageCtr.taskStatusChange(
                                           context, taskId, "Cancel", () {
+                                        taskManageCtr.taskManageList(
+                                          context,
+                                          "Cancel",
+                                        );
                                         Get.back();
                                       });
                                     }, MyColor.midgray,
@@ -534,7 +521,11 @@ class _DoctorTaskState extends State<DoctorTask> {
                                   : custom.acceptRejectButton(
                                       context, text.accept.tr, () {
                                       taskManageCtr.taskStatusChange(
-                                          context, taskId, "Complete", () {
+                                          context, taskId, "Confirmed", () {
+                                        taskManageCtr.taskManageList(
+                                          context,
+                                          "Pending",
+                                        );
                                         Get.back();
                                       });
                                     }, MyColor.primary,
@@ -548,7 +539,11 @@ class _DoctorTaskState extends State<DoctorTask> {
                               : custom.callButton(context, text.Complete.tr,
                                   () {
                                   taskManageCtr.taskStatusChange(
-                                      context, taskId, "Confirmed", () {
+                                      context, taskId, "Complete", () {
+                                    taskManageCtr.taskManageList(
+                                      context,
+                                      "Complete",
+                                    );
                                     Get.back();
                                   });
                                 },
@@ -559,7 +554,9 @@ class _DoctorTaskState extends State<DoctorTask> {
                                     fontSize: 16,
                                   ),
                                   Icons.done)
-                          : Text("")
+                          : taskManageCtr.loadingstatusAccept.value
+                      ? custom.MyIndicator()
+                      :const Text("")
                 ],
               ),
             ),

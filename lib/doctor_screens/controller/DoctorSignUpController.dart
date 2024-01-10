@@ -86,7 +86,7 @@ class DoctorSignUpCtr extends GetxController {
 
 
 
-/*-----------Doctor SignUp Otp Verification Api----------*/
+/*-----------Doctor SignUp Otp Verification Api----------*//*
   Future<String> doctorSignupOtpVerification(
       BuildContext context,
       String countryCode,
@@ -133,7 +133,7 @@ class DoctorSignUpCtr extends GetxController {
       return '';
     }
     return '';
-  }
+  }*/
 
 
 

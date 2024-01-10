@@ -76,9 +76,9 @@ class TaskManageCtr extends GetxController {
       log("my id $Perameter");
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['msg'].toString();
-      if (result == "success") {
+      if (response.statusCode == 200) {
         callback();
-        taskManageList(context, status);
+        // taskManageList(context, status);
         loadingstatusAccept.value = false;
 
         loadingstatusReject.value = false;

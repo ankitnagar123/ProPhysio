@@ -13,9 +13,9 @@ class MyAPI {
   static const String forgotPassword = "get_user_forgot_password";
   static const String setNewPassword = "user_reset_pass";
 
-  /*twilio api for OTP want to change URL */
+  /*twilio api for OTP want to change URL for Doctor Patainet */
   static const String send_otp_twiliosms =
-      "https://sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
+      "https://www.sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 
   static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/a.php";
   static const String PSignUpOtp = "signup_email_otp";
@@ -85,7 +85,7 @@ class MyAPI {
   static const String subcategoryList = "subcategory_list";
   static const String DCategorySignUp = "category_list";
   static const String DBranchList = "fetch_branch";
-  static const String DSignUpOtp = "doctor_otp_signup";
+  // static const String DSignUpOtp = "doctor_otp_signup";
   static const String DSignUp = "doctor_signup";
   static const String DFetchProfile = "fetch_doctor_profile";
   static const String DUpdateProfile = "update_Doctor_profile";

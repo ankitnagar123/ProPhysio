@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:prophysio/helper/CustomView/CustomView.dart';
 import 'package:prophysio/singup_screen/patient_pages/PatientPage.dart';
 import '../helper/mycolor/mycolor.dart';
 import '../language_translator/LanguageTranslate.dart';
@@ -15,6 +16,7 @@ class SingUpScreen extends StatefulWidget {
 
 class _SingUpScreenState extends State<SingUpScreen> {
   LocalString text = LocalString();
+  CustomView view = CustomView();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 88,
+          // toolbarHeight: 80,
           leading: IconButton(
             onPressed: () {
               Get.back();
@@ -34,18 +36,18 @@ class _SingUpScreenState extends State<SingUpScreen> {
           ),
           bottom:  TabBar(
             indicatorSize:  TabBarIndicatorSize.tab,
-            padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
+            padding: EdgeInsets.only(left: 3,right: 3),
             labelPadding: const EdgeInsets.all(7.0),
             indicatorColor: MyColor.red,
-            indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.3),borderRadius: BorderRadius.circular(25),),
+            indicator:  BoxDecoration(color: Colors.grey.shade200,borderRadius: BorderRadius.circular(25),),
             tabs: [
               Text(
                 text.I_Patinet.tr,
-                style: TextStyle(color: MyColor.red,fontSize: 18),
+                style: TextStyle(color: MyColor.red,fontSize: 17),
               ),
               Text(
                 text.I_Doctor.tr,
-                style: TextStyle(color:  MyColor.red,fontSize: 18),
+                style: TextStyle(color:  MyColor.red,fontSize: 17),
               ),
              /* Text(
                 text.I_Center.tr,
@@ -53,21 +55,18 @@ class _SingUpScreenState extends State<SingUpScreen> {
               ),*/
             ],
           ),
-          title:  Column(
+          title:               view.text(text.Create_An_Account.tr, 15, FontWeight.w500, Colors.black,),
+          /*Column(
             children: [
               SizedBox(height: 3,),
               const Image(
                 image: AssetImage("assets/images/runlogo.png"),
-                height: 45,
-                width: 45,
+                height: 40,
+                width: 40,
               ),
-              Text(
-                text.Create_An_Account.tr,
-                style:
-                    const TextStyle(color: Colors.black, fontWeight: FontWeight.w600  ),
-              ),
+
             ],
-          ),
+          ),*/
           centerTitle: true,
           backgroundColor: Colors.white,
           elevation: 0.0,

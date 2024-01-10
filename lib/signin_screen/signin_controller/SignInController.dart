@@ -16,7 +16,7 @@ import '../../network/Internet_connectivity_checker/InternetConnectivity.dart';
 
 class LoginCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
-LocalString text =  LocalString();
+  LocalString text = LocalString();
   CustomView custom = CustomView();
   ApiService apiService = ApiService();
   var loading = false.obs;
@@ -65,7 +65,7 @@ LocalString text =  LocalString();
             log(sp.DOCTOR_LOGIN_KEY);
             log("${sp.getStringValue(sp.DOCTOR_ID_KEY)}");
 
-             onUserLogin(id.toString(),"${name} ${surname}","doctor");
+            onUserLogin(id.toString(), "${name} ${surname}", "doctor");
             log("Doctor login ID${id.toString()}");
 
             Get.offAndToNamed(RouteHelper.DHomePage());
@@ -76,31 +76,29 @@ LocalString text =  LocalString();
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
             sp.setStringValue(sp.PATIENT_PROFILE, userProfile);
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-AppConst.Patient_Name = name;
-AppConst.Patinet_Surname= surname;
-AppConst.Patinet_Profile= userProfile;
+            AppConst.Patient_Name = name;
+            AppConst.Patinet_Surname = surname;
+            AppConst.Patinet_Profile = userProfile;
 
             log("Patient login ID -- ${id.toString()}");
             log("Patient name -- ${sp.PATIENT_NAME_KEY}");
             log("Patient surname -- ${sp.PATIENT_SURE_NAME_KEY}");
-             onUserLogin(id.toString(),"${name} ${surname}","user");
+            onUserLogin(id.toString(), "${name} ${surname}", "user");
 
             Get.offAndToNamed(RouteHelper.getBottomNavigation());
-          }else {
+          } else {
             loading.value = false;
-            if(result =="Wait for admin Approve"){
+            if (result == "Wait for admin Approve") {
               custom.massenger(context, text.WaitforadminApprove.tr);
-            }else{
+            } else {
               custom.massenger(context, text.Invalidemailpassword.tr);
             }
           }
         } else {
-          if(result =="Wait for admin Approve"){
+          if (result == "Wait for admin Approve") {
             custom.massenger(context, text.WaitforadminApprove.tr);
-
-          }else{
+          } else {
             custom.massenger(context, text.Invalidemailpassword.tr);
-
           }
           loading.value = false;
         }
@@ -115,16 +113,15 @@ AppConst.Patinet_Profile= userProfile;
     }
   }
 
-
   /*----------Update Device  API-----------*/
   void updateToken(
-      BuildContext context,
-      String id,
-      String userTyp,
-      String deviceID,
-      String deviceTyp,
-      ) async {
-    final Map<String,dynamic>UpdatePerameter = {
+    BuildContext context,
+    String id,
+    String userTyp,
+    String deviceID,
+    String deviceTyp,
+  ) async {
+    final Map<String, dynamic> UpdatePerameter = {
       "user_id": id,
       "device_id": deviceID,
       "device_status": deviceTyp,
@@ -133,7 +130,7 @@ AppConst.Patinet_Profile= userProfile;
     log(" Update Parameter$UpdatePerameter");
 
     final response =
-    await apiService.postData(MyAPI.updateToken,UpdatePerameter);
+        await apiService.postData(MyAPI.updateToken, UpdatePerameter);
     try {
       log("response of Device Update:-${response.body}");
 
