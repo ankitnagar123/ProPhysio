@@ -17,7 +17,7 @@ class MyAPI {
   static const String send_otp_twiliosms =
       "https://www.sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
 
-  static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/a.php";
+  static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_signup.php";
   static const String PSignUpOtp = "signup_email_otp";
 
   static const String PFetchProfile = "fetch_user_profile";

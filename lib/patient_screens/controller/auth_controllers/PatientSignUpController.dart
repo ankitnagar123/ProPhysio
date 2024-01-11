@@ -127,15 +127,14 @@ class PatientSignUpCtr extends GetxController {
 
   void patientSignup(
       BuildContext context,
+      String title,
       String name,
       String surname,
-      // String username,
       String email,
       String countrycode,
       String mobileNo,
       String flag,
       String password,
-      // String healthCard,
       String age,
       String weight,
       String birthplace,
@@ -144,18 +143,56 @@ class PatientSignUpCtr extends GetxController {
       String gender,
       String dob,
       String branchId,
+      /*---New---*/
+      String idType,
+      String idNumber,
+
+      String kinName,
+      String kinContact,
+
+      String homeTitle1,
+      String homeTitle2,
+      String homeAddress,
+      String homeState,
+      String homePostalCode,
+      String homeCountry,
+      String homePhone,
+
+      String officeTitle1,
+      String officeTitle2,
+      String employmentStatus,
+      String occupation,
+      String employer,
+      String officeAddress,
+      String officeState,
+      String officePostalCode,
+      String officeCountry,
+      String officePhone,
+
+      String medicalTitle1,
+      String medicalTitle2,
+      String medicalName,
+      String medicalPracticeName,
+      String medicalAddress,
+      String medicalState,
+      String medicalPostalCode,
+      String medicalCountry,
+      String medicalPhone,
+
+      String aboutUs,
       VoidCallback callback) async {
     loading.value = true;
-    final Map<String, dynamic> signupPerameter = {
+    final Map<String, dynamic> signupParameter = {
+      "title": title,
       "name": name,
       "surname": surname,
-      // "username": username,
       "email": email,
       "code": countrycode,
       "contact": mobileNo,
       "flag": flag,
       "password": password,
-      // "health_card": healthCard,
+      "health_card":"",
+      "username":"",
       "age": age,
       "weight": weight,
       "birth_place": birthplace,
@@ -164,13 +201,49 @@ class PatientSignUpCtr extends GetxController {
       "gender": gender,
       "dob": dob,
       "branch_id": branchId,
+      /*-----NEW--------*/
+      "id_type": idType,
+      "id_number": idNumber,
+
+      "kin_name": kinName,
+      "kin_phone": kinContact,
+
+      "home_line1": homeTitle1,
+      "home_line2": homeTitle2,
+      "home_city": homeAddress,
+      "home_state": homeState,
+      "home_postal_code": homePostalCode,
+      "home_country": homeCountry,
+      "home_phone": homePhone,
+
+      "employment_status": employmentStatus,
+      "occupation": occupation,
+      "employer": employer,
+      "employer_line1": officeTitle1,
+      "employer_line2": officeTitle2,
+      "employer_city": officeAddress,
+      "employer_state": officeState,
+      "employer_postal_code": officePostalCode,
+      "employer_country": officeCountry,
+      "employer_phone": officePhone,
+
+      "doctor_name": medicalName,
+      "doctor_practice_name": medicalPracticeName,
+      "doctor_line1": medicalTitle1,
+      "doctor_line2": medicalTitle2,
+      "doctor_city": medicalAddress,
+      "doctor_state": medicalState,
+      "doctor_postal_code": medicalPostalCode,
+      "doctor_country": medicalCountry,
+      "doctor_phone": medicalPhone,
+      "about_us":aboutUs,
     };
-    print("Signup-Parameter$signupPerameter");
+    log("PatientSignup-Parameter----$signupParameter");
     final response = await http.post(
         Uri.parse(
           MyAPI.PSignUp,
         ),
-        body: signupPerameter);
+        body: signupParameter);
     // final response = await apiService.postData("https://cisswork.com/Android/Medica/Apis/a.php", signupPerameter);
     try {
       log("response of Patient Signup :-${response.body}");

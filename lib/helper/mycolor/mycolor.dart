@@ -22,7 +22,7 @@ class MyColor {
   static const Color blue = Color(0xff0e324c);
   static const Color lightblue = Color(0xff5376AA);
   static const Color chatColor = Color(0xffC4DEF2);
-  static const Color red = Color(0xffB22724);
+  static const Color red = Color(0xffab2e2c);
 
 
   static const Color bcolor = Color(0xffF5F5F5);

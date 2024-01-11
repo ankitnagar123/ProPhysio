@@ -240,6 +240,33 @@ class CustomView {
     );
   }
 
+  Widget myFieldExpand(BuildContext context, TextEditingController controller,
+      String hintText, TextInputType inputType) {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return
+      SizedBox(
+        width: widht,
+        child: TextFormField(
+          minLines: 1,
+          maxLines: 3,
+          keyboardType: inputType,
+          cursorColor: Colors.black,
+          controller: controller,
+          decoration: InputDecoration(
+
+            contentPadding: const EdgeInsets.only(top: 3, left: 20),
+            hintText: hintText,
+            hintStyle: const TextStyle(fontSize: 12),
+            filled: true,
+            fillColor: MyColor.white,
+            border: const OutlineInputBorder(),
+
+          ),
+        ),
+      );
+  }
+
   Widget PasswordField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType, Widget widget, bool) {
     final height = MediaQuery.of(context).size.height;

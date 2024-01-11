@@ -30,7 +30,10 @@ Future<void> main() async {
   await NotificationService.initialize(flutterLocalNotificationsPlugin);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    // statusBarIconBrightness: Brightness.light,
+    statusBarColor: Colors.transparent,
+  ));
   /// 1.1.2: set navigator key to ZegoUIKitPrebuiltCallInvitationService
   final navigatorKey = GlobalKey<NavigatorState>();
 

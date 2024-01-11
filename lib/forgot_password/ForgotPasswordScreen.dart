@@ -22,8 +22,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   CustomView custom = CustomView();
   LocalString text = LocalString();
-  String code = '';
-  String flag = '';
+  String code = '+1876';
+  String flag = 'JM';
 
   @override
   Widget build(BuildContext context) {

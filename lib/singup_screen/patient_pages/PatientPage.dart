@@ -12,7 +12,7 @@ import '../../language_translator/LanguageTranslate.dart';
 import '../../patient_screens/controller/auth_controllers/PatientSignUpController.dart';
 
 class PatientSignUp extends StatefulWidget {
-  const PatientSignUp({Key? key}) : super(key: key);
+  const PatientSignUp({super.key});
 
   @override
   State<PatientSignUp> createState() => _PatientSignUpState();
@@ -26,13 +26,14 @@ class _PatientSignUpState extends State<PatientSignUp> {
   PatientSignUpCtr patientSignUpCtr = PatientSignUpCtr();
   DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
 
+  String dropdownvalue = "Mr";
+
+  var items = [
+    "Mr", "Ms", "Miss", "Mrs",
+  ];
   //*************Controllers*************//
   TextEditingController nameCtr = TextEditingController();
-
   TextEditingController surnameCtr = TextEditingController();
-
-  TextEditingController emailCtr = TextEditingController();
-  TextEditingController phoneCtr = TextEditingController();
   TextEditingController passwordCtr = TextEditingController();
   TextEditingController weightCtr = TextEditingController();
   TextEditingController ageCtr = TextEditingController();
@@ -40,6 +41,10 @@ class _PatientSignUpState extends State<PatientSignUp> {
   TextEditingController trmCtr = TextEditingController();
   TextEditingController birthPlaceCtr = TextEditingController();
   TextEditingController birthDateCtr = TextEditingController();
+
+  TextEditingController emailCtr = TextEditingController();
+  TextEditingController phoneCtr = TextEditingController();
+
   String? selectedBranch;
   DateTime? startDate;
   String _selectedGender = '';
@@ -80,6 +85,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
 /*----------------Medical Doctor Information-------------------*/
   TextEditingController medicalTitle1Ctr = TextEditingController();
   TextEditingController medicalTitle2Ctr = TextEditingController();
+  TextEditingController medicalNameCtr = TextEditingController();
   TextEditingController medicalPracticeNameCtr = TextEditingController();
   TextEditingController medicalAddressCtr = TextEditingController();
   TextEditingController medicalPostalCtr = TextEditingController();
@@ -117,31 +123,138 @@ class _PatientSignUpState extends State<PatientSignUp> {
   Widget build(BuildContext context) {
     final widht = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomNavigationBar: Container(
-          height: 35.0,
-          decoration: const BoxDecoration(color: MyColor.midgray),
-          child: Center(
-            child: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  customView.text(text.have_an_account.tr, 11,
-                      FontWeight.normal, MyColor.primary1),
-                  Text(
-                    text.SIGN_IN.tr,
-                    style: TextStyle(
-                        color: MyColor.primary1,
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline),
-                  )
-                ],
-              ),
-            ),
-          )),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(top: 4.0),
+        child: Container(
+            height: 95.0,
+            decoration:  BoxDecoration(color: Colors.grey.shade50,
+            border: Border.all(color: MyColor.primary1.withOpacity(0.2)),
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(14),topRight: Radius.circular(14))),
+            child: Column(
+              children: [
+                customView.text("$_curr/6", 13.0, FontWeight.w500, Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                  child: Obx(() {
+                    if (patientSignUpCtr.loadingotp.value) {
+                      return Center(child: customView.MyIndicator());
+                    }
+                    return customView.MyButton(
+                      context,
+                      text.Sign_UP.tr,
+                          () {
+                        var data = {
+                          'title': dropdownvalue.toString(),
+                          'name': nameCtr.text,
+                          'surname': surnameCtr.text,
+                          'phone': phoneCtr.text,
+                          "flag": flag,
+                          'email': emailCtr.text,
+                          'password': passwordCtr.text,
+                          'code': code,
+                          'weight': weightCtr.text,
+                          'height': heightCtr.text,
+                          'tax': trmCtr.text,
+                          'birthPlace': birthPlaceCtr.text,
+                          'age': ageCtr.text,
+                          'gender': _selectedGender,
+                          'dob': birthDateCtr.text,
+                          'branchId': selectedBranch.toString(),
+
+                          /*-----------------New Field Added*-----------------*/
+                          /*-----Identification Document-------*/
+                          'idType': idTypeCtr.text,
+                          'idNumber': idNumberCtr.text,
+
+                          /*-----kin-------*/
+                          "kinName":kinNameCtr.text,
+                          "kinContact":kinContactCtr.text,
+
+                          /*-----Home Address-------*/
+                          "homeTitle1":homeTitle1Ctr.text,
+                          "homeTitle2":homeTitle2Ctr.text,
+                          "homeAddress":homeAddressCtr.text,
+                          "homeState":homeStateCtr.text,
+                          "homePostalCode":homePostalCodeCtr.text,
+                          "homeCountry":homeCountryCtr.text,
+                          "homePhone":homePhoneCtr.text,
+
+                          /*-----Office Address-------*/
+                          "officeTitle1":officeTitle1Ctr.text,
+                          "officeTitle2":officeTitle2Ctr.text,
+                          "employmentStatus":employmentStatusCtr.text,
+                          "occupation":occupationCtr.text,
+                          "employer":employerCtr.text,
+                          "officeAddress":officeAddressCtr.text,
+                          "officeState":officeStateCtr.text,
+                          "officePostalCode":officePostalCtr.text,
+                          "officeCountry":officeCountryCtr.text,
+                          "officePhone":officePhoneCtr.text,
+
+                          /*-----Medical Doctor INfo-------*/
+                          "medicalTitle1":medicalTitle1Ctr.text,
+                          "medicalTitle2":medicalTitle2Ctr.text,
+                          "medicalName":medicalNameCtr.text,
+                          "medicalPracticeName":medicalPracticeNameCtr.text,
+                          "medicalAddress":medicalAddressCtr.text,
+                          "medicalState":medicalStateCtr.text,
+                          "medicalPostalCode":medicalPostalCtr.text,
+                          "medicalCountry":medicalCountryCtr.text,
+                          "medicalPhone":medicalPhoneCtr.text,
+                          "aboutUs":aboutUsCtr.text,
+
+                        };
+                        if (_sendDataToVerificationScrn(context)) {
+                          patientSignUpCtr.PatientSignupOtpVerification(
+                              context, code, phoneCtr.text, emailCtr.text, () {
+                            Get.toNamed(
+                              RouteHelper.getSingUpOtpScreen(),
+                              parameters: data,
+                            );
+                          });
+                          /* patientSignUpCtr.PatientSignupOtp(context,code,phoneCtr.text,emailCtr.text,)
+                          .then((value) {
+                        if (value != "") {
+                          Get.toNamed(
+                              RouteHelper.getSingUpOtpScreen(),
+                              parameters: data, arguments: value);
+                        } else {}
+                      });*/
+                        }
+                      },
+                      MyColor.red,
+                      const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          fontFamily: "Poppins"),
+                    );
+                  }),
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        customView.text(text.have_an_account.tr, 11,
+                            FontWeight.normal, MyColor.primary1),
+                        Text(
+                          text.SIGN_IN.tr,
+                          style: TextStyle(
+                              color: MyColor.primary1,
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.underline),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )),
+      ),
       body: Column(
         children: [
           Expanded(child: PageView(
@@ -162,70 +275,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               signUp6(),
             ],
           ),),
-          SizedBox(
-           height: 70,
 
-            child: Column(
-
-              children: [
-                customView.text("$_curr/3", 13.0, FontWeight.w500, Colors.black),
-
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Obx(() {
-                    if (patientSignUpCtr.loadingotp.value) {
-                      return Center(child: customView.MyIndicator());
-                    }
-                    return customView.MyButton(
-                      context,
-                      text.Sign_UP.tr,
-                          () {
-                        var data = {
-                          'name': nameCtr.text,
-                          'surname': surnameCtr.text,
-                          'phone': phoneCtr.text,
-                          "flag": flag,
-                          'email': emailCtr.text,
-                          'password': passwordCtr.text,
-                          'code': code,
-                          'weight': weightCtr.text,
-                          'height': heightCtr.text,
-                          'tax': trmCtr.text,
-                          'birthPlace': birthPlaceCtr.text,
-                          'age': ageCtr.text,
-                          'gender': _selectedGender,
-                          'dob': birthDateCtr.text,
-                          'branchId': selectedBranch.toString(),
-                        };
-                        if (_sendDataToVerificationScrn(context)) {
-                          patientSignUpCtr.PatientSignupOtpVerification(
-                              context, code, phoneCtr.text, emailCtr.text, () {
-                            Get.toNamed(
-                              RouteHelper.getSingUpOtpScreen(),
-                              parameters: data,
-                            );
-                          });
-                          /* patientSignUpCtr.PatientSignupOtp(context,code,phoneCtr.text,emailCtr.text,)
-                              .then((value) {
-                            if (value != "") {
-                              Get.toNamed(
-                                  RouteHelper.getSingUpOtpScreen(),
-                                  parameters: data, arguments: value);
-                            } else {}
-                          });*/
-                        }
-                      },
-                      MyColor.red,
-                      const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontFamily: "Poppins"),
-                    );
-                  }),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -317,8 +367,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
       keyboardType: const TextInputType.numberWithOptions(),
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2999),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -341,7 +391,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
 
   /*------Select MR MS etc*/
-  Widget _buildDropDownButton(String genderCategory) {
+  Widget _buildDropDownButton() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -356,8 +406,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
               color: Colors.black,
             ),
             dropdownColor: Colors.grey.shade300,
-            value: genderCategory,
-            items: ['Mr', 'Ms', 'Miss', 'Mrs']
+            value: dropdownvalue,
+            items:items
                 .map((String value) => DropdownMenuItem(
               value: value,
               child: Row(
@@ -370,8 +420,11 @@ class _PatientSignUpState extends State<PatientSignUp> {
               ),
             ))
                 .toList(),
-            onChanged: (value) {
+            onChanged: (String? newValue) {
+setState(() {
+  dropdownvalue = newValue!;
 
+});
             },
           ),
         ),
@@ -384,238 +437,257 @@ class _PatientSignUpState extends State<PatientSignUp> {
   /*------------------sign-Up 1----------------*/
 Widget signUp1(){
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+    padding: const EdgeInsets.symmetric(horizontal: 7.0),
     child: SingleChildScrollView(
-      child: Column(
-        children: [
-           Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [   const SizedBox(
-                        height: 8.0,
-                      ),
-                        customView.text("Demographics Info", 15.0,
-                            FontWeight.w600, MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.text(text.Enter_Name.tr, 13.0,
-                            FontWeight.w500, MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                                flex: 0,
-                                child: _buildDropDownButton('Mr')),
-                            Expanded(
-                              flex: 1, child: customView.myField(context, nameCtr,
-                                text.H_Enter_Name.tr, TextInputType.text),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )),
-              ],
-            ),
-
-            const SizedBox(
-              height: 15.0,
-            ),
-            customView.text(text.Enter_Surname.tr, 13.0,
-                FontWeight.w500, MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            customView.myField(context, surnameCtr,
-                text.H_Enter_Surname.tr, TextInputType.text),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(text.Age.tr, 13.0, FontWeight.w500,
-                            MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.myField(
-                            context, ageCtr, text.Age.tr, TextInputType.number),
-                      ],
-                    ))
-              ],
-            ),
-            const SizedBox(
-              height: 17.0,
-            ),
-
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(text.Weight.tr, 13.0, FontWeight.w500,
-                            MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.myField(context, weightCtr, text.Weight.tr,
-                            TextInputType.number),
-                      ],
-                    )),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(text.Height.tr, 13.0, FontWeight.w500,
-                            MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.myField(context, heightCtr, text.Height.tr,
-                            TextInputType.number),
-                      ],
-                    ))
-              ],
-            ),
-
-            const SizedBox(
-              height: 15.0,
-            ),
-
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(text.TRM.tr, 13.0, FontWeight.w500,
-                            MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.myField(context, trmCtr, text.TRM.tr,
-                            TextInputType.text),
-                      ],
-                    )),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customView.text(text.Birth_Place.tr, 13.0,
-                            FontWeight.w500, MyColor.primary1),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        customView.myField(context, birthPlaceCtr,
-                            text.Birth_Place.tr, TextInputType.text),
-                      ],
-                    ))
-              ],
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            customView.text(
-                text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      value: 'male',
-                      groupValue: _selectedGender,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGender = value!;
-                          print(_selectedGender);
-                        });
-                      },
-                    ),
-                    title: Text(text.Male.tr),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      value: 'female',
-                      groupValue: _selectedGender,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGender = value!;
-                          print(_selectedGender);
-                        });
-                      },
-                    ),
-                    title: Text(text.Female.tr),
-                  ),
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text(
-                  text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            Container(
-                height: 45.0,
-                width: MediaQuery.of(context).size.width / 0.9,
-                padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
-                margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7)),
-                child: TextFormField(
-                  onTap: () async {
-                    startDate = await pickDate();
-                    birthDateCtr.text = _displayText(startDate);
-                    setState(() {});
-                  },
-                  readOnly: true,
-                  controller: birthDateCtr,
-                  decoration:  InputDecoration(
-                    hintText: text.Select_Date.tr,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon:
-                    const Icon(Icons.calendar_month, color: MyColor.primary),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: customView.text("Demographics Info", 15.0,
+                      FontWeight.w600, MyColor.primary1),
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: customView.text(text.Enter_Name.tr, 13.0,
+                    FontWeight.w500, MyColor.primary1),
+              ),
+              const SizedBox(
+                height: 3.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 0,
+                      child: _buildDropDownButton()),
+                  SizedBox(
+                    width: 2,
                   ),
-                )),
-        ]
+                  Expanded(
+                    flex: 1, child: customView.myField(context, nameCtr,
+                      text.H_Enter_Name.tr, TextInputType.text),
+                  ),
+                ],
+              ),
+
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(text.Enter_Surname.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                customView.myField(context, surnameCtr,
+                    text.H_Enter_Surname.tr, TextInputType.text),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            customView.text(text.Age.tr, 13.0, FontWeight.w500,
+                                MyColor.primary1),
+                            const SizedBox(
+                              height: 3.0,
+                            ),
+                            customView.myField(
+                                context, ageCtr, text.Age.tr, TextInputType.number),
+                          ],
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 17.0,
+                ),
+
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            customView.text(text.Weight.tr, 13.0, FontWeight.w500,
+                                MyColor.primary1),
+                            const SizedBox(
+                              height: 3.0,
+                            ),
+                            customView.myField(context, weightCtr, text.Weight.tr,
+                                TextInputType.number),
+                          ],
+                        )),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            customView.text(text.Height.tr, 13.0, FontWeight.w500,
+                                MyColor.primary1),
+                            const SizedBox(
+                              height: 3.0,
+                            ),
+                            customView.myField(context, heightCtr, text.Height.tr,
+                                TextInputType.number),
+                          ],
+                        ))
+                  ],
+                ),
+
+                const SizedBox(
+                  height: 15.0,
+                ),
+
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            customView.text(text.TRM.tr, 13.0, FontWeight.w500,
+                                MyColor.primary1),
+                            const SizedBox(
+                              height: 3.0,
+                            ),
+                            customView.myField(context, trmCtr, text.TRM.tr,
+                                TextInputType.text),
+                          ],
+                        )),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            customView.text(text.Birth_Place.tr, 13.0,
+                                FontWeight.w500, MyColor.primary1),
+                            const SizedBox(
+                              height: 3.0,
+                            ),
+                            customView.myField(context, birthPlaceCtr,
+                                text.Birth_Place.tr, TextInputType.text),
+                          ],
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(
+                      text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          value: 'male',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                              print(_selectedGender);
+                            });
+                          },
+                        ),
+                        title: Text(text.Male.tr),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          value: 'female',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                              log(_selectedGender);
+                            });
+                          },
+                        ),
+                        title: Text(text.Female.tr),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(
+                      text.Date_of_Birth.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                Container(
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width / 0.9,
+                    padding:  const EdgeInsets.only(left: 10.0, bottom: 2),
+                    margin:  const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: TextFormField(
+                      onTap: () async {
+                        startDate = await pickDate();
+                        birthDateCtr.text = _displayText(startDate);
+                        setState(() {});
+                      },
+                      readOnly: true,
+                      controller: birthDateCtr,
+                      decoration:  InputDecoration(
+                        hintText: text.Select_Date.tr,
+                        hintStyle: const TextStyle(fontSize: 15),
+                        suffixIcon:
+                        const Icon(Icons.calendar_month, color: MyColor.primary),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    )),
+            ]
+          ),
+        ),
       ),
     ),
   );
@@ -626,114 +698,141 @@ Widget signUp1(){
   Widget signUp2(){
     final widht = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-            children:[
-                   customView.text(
-                "Contact Information", 15.0, FontWeight.w600, MyColor.primary1),
-            const SizedBox(
-              height: 15.0,
-            ),
-            customView.text(
-                text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            customView.myField(
-                context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children:[
+                       Container(
+                         decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(5),
+                             border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                         ),
+                         child: Padding(
+                           padding: const EdgeInsets.all(3.0),
+                           child: customView.text(
+                                               "Contact Information", 15.0, FontWeight.w600, MyColor.primary1),
+                         ),
+                       ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(
+                      text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                customView.myField(
+                    context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
 
-            const SizedBox(
-              height: 15.0,
-            ),
-            customView.text(
-                text.Phone_Number.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            SizedBox(
-              height: 50,
-              width: widht * 1,
-              child: IntlPhoneField(
-                controller: phoneCtr,
-                decoration: InputDecoration(
-                  // focusedErrorBorder: InputBorder.none,
-                  counterText: '',
-                  filled: true,
-                  fillColor: Colors.white,
-                  constraints: const BoxConstraints.expand(),
-                  labelText: text.Phone_Number.tr,
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(
+                      text.Phone_Number.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: widht * 1,
+                  child: IntlPhoneField(
+                    controller: phoneCtr,
+                    decoration: InputDecoration(
+                      // focusedErrorBorder: InputBorder.none,
+                      counterText: '',
+                      filled: true,
+                      fillColor: Colors.white,
+                      constraints: const BoxConstraints.expand(),
+                      labelText: text.Phone_Number.tr,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
                     ),
+                    initialCountryCode: flag,
+                    onChanged: (phone) {
+                      // var flag = phone.countryISOCode;
+                      flag = phone.countryISOCode;
+                      log(flag);
+                      code = phone.countryCode;
+                      log(phone.completeNumber);
+                    },
+                    onCountryChanged: (cod) {
+                      flag = cod.code;
+                      log(flag);
+                      code = cod.code;
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                initialCountryCode: flag,
-                onChanged: (phone) {
-                  // var flag = phone.countryISOCode;
-                  flag = phone.countryISOCode;
-                  log(flag);
-                  code = phone.countryCode;
-                  log(phone.completeNumber);
-                },
-                onCountryChanged: (cod) {
-                  flag = cod.code;
-                  log(flag);
-                  code = cod.code;
-                },
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-              ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(text.Create_Passsword.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                customView.PasswordField(
+                    context,
+                    passwordCtr,
+                    text.H_Create_Passsword.tr,
+                    TextInputType.text,
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
+                        child: _isHidden
+                            ? const Icon(
+                          Icons.visibility_off,
+                          color: MyColor.primary1,
+                          size: 18,
+                        )
+                            : const Icon(
+                          Icons.visibility,
+                          color: MyColor.primary1,
+                          size: 18,
+                        )),
+                    _isHidden),
+
+                const SizedBox(
+                  height: 15.0,
+                ),
+
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                branch(),
+                ]
             ),
-
-
-
-
-            const SizedBox(
-              height: 15.0,
-            ),
-
-            customView.text(text.Create_Passsword.tr, 13.0, FontWeight.w500,
-                MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            customView.PasswordField(
-                context,
-                passwordCtr,
-                text.H_Create_Passsword.tr,
-                TextInputType.text,
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isHidden = !_isHidden;
-                      });
-                    },
-                    child: _isHidden
-                        ? const Icon(
-                      Icons.visibility_off,
-                      color: MyColor.primary1,
-                      size: 18,
-                    )
-                        : const Icon(
-                      Icons.visibility,
-                      color: MyColor.primary1,
-                      size: 18,
-                    )),
-                _isHidden),
-
-            const SizedBox(
-              height: 15.0,
-            ),
-
-            customView.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
-                MyColor.primary1),
-            const SizedBox(
-              height: 3.0,
-            ),
-            branch(),
-            ]
+          ),
         ),
       ),
     );
@@ -744,80 +843,108 @@ Widget signUp1(){
   Widget signUp3(){
     final widht = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-            children:[
-                      const SizedBox(
-              height: 17.0,
-            ),
-            /*-------------------Identification Document-----------------*/
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children:[
+                          const SizedBox(
+                  height: 17.0,
+                ),
+                /*-------------------Identification Document-----------------*/
 
-            customView.text("Identification Document", 15.0,
-                FontWeight.w600, MyColor.primary1),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text("Identification Document", 15.0,
+                        FontWeight.w600, MyColor.primary1),
+                  ),
+                ),
 
 
-            SizedBox(
-              height: 15,
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("ID Type", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, idTypeCtr, "Enter ID Type", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("ID Number", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, idNumberCtr, "Enter ID Number", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text("Next of Kin", 15.0,
+                        FontWeight.w600, MyColor.primary1),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Name", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, kinNameCtr, "Enter Name", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Phone", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, kinContactCtr, "Enter Phone", TextInputType.number),
+                SizedBox(
+                  height: 15,
+                ),
+                ]
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("ID Type", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, idTypeCtr, "Enter ID Type", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("ID Number", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, idNumberCtr, "Enter ID Number", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            customView.text("Next of Kin", 15.0,
-                FontWeight.w600, MyColor.primary1),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Name", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, kinNameCtr, "Enter Name", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Phone", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, kinContactCtr, "Enter Phone", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            ]
+          ),
         ),
       ),
     );
@@ -828,83 +955,128 @@ Widget signUp1(){
   Widget signUp4(){
     final widht = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-            children:[
-                 /*----------------------Home Address--------------------*/
-            customView.text("Home Address", 15.0,
-                FontWeight.w600, MyColor.primary1),
-            SizedBox(
-              height: 5,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Home Address", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, homeAddressCtr, "Enter Full Address", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("State", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, homeStateCtr, "Enter State/Province/Parish", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Postal Code", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, homePostalCodeCtr, "Enter Postal Code", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Country", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, homeCountryCtr, "Enter Country", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children:[
+                     /*----------------------Home Address--------------------*/
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text("Home Address", 15.0,
+                        FontWeight.w600, MyColor.primary1),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 1", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, homeTitle1Ctr, "Enter Title 1", TextInputType.text),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 2", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, homeTitle2Ctr, "Enter Title 2", TextInputType.multiline),
+                  const  SizedBox(
+                    height: 15,
+                  ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Home Address", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myFieldExpand(
+                    context, homeAddressCtr, "Enter Full Address", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("State", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, homeStateCtr, "Enter State/Province/Parish", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Postal Code", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, homePostalCodeCtr, "Enter Postal Code", TextInputType.number),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Country", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, homeCountryCtr, "Enter Country", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Home Phone", 13.0,
-                  FontWeight.w500, MyColor.primary1),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Home Phone", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, homePhoneCtr, "Enter phone", TextInputType.number),
+                SizedBox(
+                  height: 15,
+                ),
+                ]
             ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, homeCountryCtr, "Enter phone", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            ]
+          ),
         ),
       ),
     );
@@ -916,123 +1088,168 @@ Widget signUp1(){
   Widget signUp5(){
     final widht = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-            children:[
-               /*---------------------------Employment Information--------------------*/
-            customView.text("Employment Status", 15.0,
-                FontWeight.w600, MyColor.primary1),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Employment Status", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, employmentStatusCtr, "Enter Employment Status", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children:[
+                   /*---------------------------Employment Information--------------------*/
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text("Employment Status", 15.0,
+                        FontWeight.w600, MyColor.primary1),
+                  ),
+                ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 1", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, officeTitle1Ctr, "Enter Title 1", TextInputType.text),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 2", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, officeTitle2Ctr, "Enter Title 2", TextInputType.multiline),
+                  const  SizedBox(
+                    height: 15,
+                  ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Employment Status", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, employmentStatusCtr, "Enter Employment Status", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Occupation", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, occupationCtr, "Enter Occupation", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Occupation", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, occupationCtr, "Enter Occupation", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Employer", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, employerCtr, "Enter Employer", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Employer", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, employerCtr, "Enter Employer", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Office Address", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, officeAddressCtr, "Enter Full Address", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("State", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, officeStateCtr, "Enter State/Province/Parish", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Postal Code", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, officePostalCtr, "Enter Postal Code", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Country", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, officeCountryCtr, "Enter Country", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Office Address", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myFieldExpand(
+                    context, officeAddressCtr, "Enter Full Address", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("State", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, officeStateCtr, "Enter State/Province/Parish", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Postal Code", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, officePostalCtr, "Enter Postal Code", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Country", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, officeCountryCtr, "Enter Country", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Office Phone", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, officePhoneCtr, "Enter phone", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Office Phone", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, officePhoneCtr, "Enter phone", TextInputType.number),
+                SizedBox(
+                  height: 15,
+                ),
 
-            ]
+                ]
+            ),
+          ),
         ),
       ),
     );
@@ -1041,112 +1258,159 @@ Widget signUp1(){
 
   /*------------------sign-Up 6----------------*/
   Widget signUp6(){
-    final widht = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13.0),
       child: SingleChildScrollView(
-        child: Column(
-            children:[
-            /*--------------Medical Doctor Information----------------------------*/
-            customView.text("Medical Doctor Information", 15.0,
-                FontWeight.w600, MyColor.primary1),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Name", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalPracticeNameCtr, "Enter Name", TextInputType.text),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children:[
+                /*--------------Medical Doctor Information----------------------------*/
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text("Medical Doctor Information", 15.0,
+                        FontWeight.w600, MyColor.primary1),
+                  ),
+                ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 1", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, medicalTitle1Ctr, "Enter Title 1", TextInputType.text),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("Title 2", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, medicalTitle2Ctr, "Enter Title 2", TextInputType.multiline),
+                  const  SizedBox(
+                    height: 15,
+                  ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Name", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalNameCtr, "Enter Name", TextInputType.text),
 
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Practice Name", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalPracticeNameCtr, "Enter Practice Name", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Practice Name", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalPracticeNameCtr, "Enter Practice Name", TextInputType.text),
 
 
-            SizedBox(
-              height: 5,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Medical Address", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalAddressCtr, "Enter Full Address", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("State", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalStateCtr, "Enter State/Province/Parish", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Postal Code", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalPostalCtr, "Enter Postal Code", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Country", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalCountryCtr, "Enter Country", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                SizedBox(
+                  height: 5,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Medical Address", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalAddressCtr, "Enter Full Address", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("State", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalStateCtr, "Enter State/Province/Parish", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Postal Code", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalPostalCtr, "Enter Postal Code", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Country", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalCountryCtr, "Enter Country", TextInputType.text),
+                SizedBox(
+                  height: 15,
+                ),
 
-            Align(
-              alignment: Alignment.topLeft,
-              child: customView.text("Office Phone", 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            customView.myField(
-                context, medicalPhoneCtr, "Enter phone", TextInputType.text),
-            SizedBox(
-              height: 15,
-            ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: customView.text("Medical Phone", 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                customView.myField(
+                    context, medicalPhoneCtr, "Enter phone", TextInputType.number),
+                SizedBox(
+                  height: 15,
+                ),
 
-            ]
+                ]
+            ),
+          ),
         ),
       ),
     );
