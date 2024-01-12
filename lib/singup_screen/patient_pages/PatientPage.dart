@@ -126,7 +126,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(top: 4.0),
         child: Container(
-            height: 95.0,
+            height: 75.0,
             decoration:  BoxDecoration(color: Colors.grey.shade50,
             border: Border.all(color: MyColor.primary1.withOpacity(0.2)),
             borderRadius: const BorderRadius.only(topLeft: Radius.circular(14),topRight: Radius.circular(14))),
@@ -204,7 +204,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                           "aboutUs":aboutUsCtr.text,
 
                         };
-                        if (_sendDataToVerificationScrn(context)) {
+                        if (validation1(context)) {
                           patientSignUpCtr.PatientSignupOtpVerification(
                               context, code, phoneCtr.text, emailCtr.text, () {
                             Get.toNamed(
@@ -230,28 +230,28 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     );
                   }),
                 ),
-                Center(
-                  child: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        customView.text(text.have_an_account.tr, 11,
-                            FontWeight.normal, MyColor.primary1),
-                        Text(
-                          text.SIGN_IN.tr,
-                          style: TextStyle(
-                              color: MyColor.primary1,
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.underline),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: InkWell(
+                //     onTap: () {
+                //       Get.back();
+                //     },
+                //     child: Row(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         customView.text(text.have_an_account.tr, 11,
+                //             FontWeight.normal, MyColor.primary1),
+                //         Text(
+                //           text.SIGN_IN.tr,
+                //           style: TextStyle(
+                //               color: MyColor.primary1,
+                //               fontWeight: FontWeight.w700,
+                //               decoration: TextDecoration.underline),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             )),
       ),
@@ -281,16 +281,12 @@ class _PatientSignUpState extends State<PatientSignUp> {
     );
   }
 
-  bool _sendDataToVerificationScrn(BuildContext context) {
+  bool validation1(BuildContext context) {
     if (nameCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Name is required");
     } else if (surnameCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Surname is required");
-    } else if (emailCtr.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Email ID is required");
-    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
-      customView.MySnackBar(context, "Enter valid email");
-    }  else if (ageCtr.text.toString().isEmpty) {
+    } else if (ageCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Age is required");
     } else if (weightCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Weight is required");
@@ -302,17 +298,124 @@ class _PatientSignUpState extends State<PatientSignUp> {
       customView.MySnackBar(context, "Birthplace is required");
     } else if (_selectedGender == "") {
       customView.MySnackBar(context, "Select gender");
-    } else if (phoneCtr.text.toString().isEmpty) {
+    }  else if (birthDateCtr.text.isEmpty) {
+      customView.MySnackBar(context, "Enter DOB");
+    }else {
+      return true;
+    }
+    return false;
+  }
+
+  bool validation2(BuildContext context) {
+    if (emailCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Email ID is required");
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
+      customView.MySnackBar(context, "Enter valid email");
+    }  else if (phoneCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Phone no. is required");
-    } else if (passwordCtr.text.toString().isEmpty) {
+    }else if (passwordCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Password is required");
     } else if (passwordCtr.text.toString().length < 6) {
       customView.MySnackBar(context, "Password should be 6 digit");
+    }else if (selectedBranch ==null){
+      customView.MySnackBar(context, "Select your Branch");
     } else {
       return true;
     }
     return false;
   }
+
+  bool validation3(BuildContext context) {
+    if (idTypeCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "ID type is required");
+    } else if (idNumberCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter Id number");
+    }  else if (kinNameCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter kin Name");
+    }else if (kinContactCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter kin phone no");
+    }  else {
+      return true;
+    }
+    return false;
+  }
+
+
+  bool validation4(BuildContext context) {
+    if (homeTitle1Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home title 1");
+    } else if (homeTitle2Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home title 2");
+    }  else if (homeAddressCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home address");
+    }else if (homeStateCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home state");
+    } else if (homePostalCodeCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home postal code");
+    } else if (homeCountryCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home country");
+    } else if (homePhoneCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter home contact");
+    }else {
+      return true;
+    }
+    return false;
+  }
+
+  bool validation5(BuildContext context) {
+    if (officeTitle1Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office title 1");
+    } else if (officeTitle2Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office title 2");
+    }else if (employmentStatusCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter employment status");
+    } else if (occupationCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter occupation");
+    } else if (employerCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter employer");
+    }   else if (officeAddressCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office address");
+    }else if (officeStateCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office state");
+    } else if (officePostalCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office postal code");
+    } else if (officeCountryCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office country");
+    } else if (officePhoneCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter office contact");
+    }else {
+      return true;
+    }
+    return false;
+  }
+
+
+  bool validation6(BuildContext context) {
+    if (medicalTitle1Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical title 1");
+    } else if (medicalTitle2Ctr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical title 2");
+    }else if (medicalNameCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical name");
+    } else if (medicalPracticeNameCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter practice name");
+    } else if (medicalAddressCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical Address");
+    }   else if (medicalStateCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical state");
+    }else if (medicalPostalCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical postal code");
+    } else if (medicalCountryCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical country");
+    } else if (medicalPhoneCtr.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter medical contact");
+    } else {
+      return true;
+    }
+    return false;
+  }
+
+
 
   /*---------SELECT BRANCH-----*/
   Widget branch() {

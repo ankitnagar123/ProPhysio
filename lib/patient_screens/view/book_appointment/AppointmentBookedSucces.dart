@@ -29,7 +29,11 @@ LocalString text = LocalString();
         setState(() {
           myRoute.pageIndex.value = 1;
         });
-        return await Get.toNamed(RouteHelper.getBottomNavigation());
+        return await     Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                const PatientMainScreen()));
       },
       child: Scaffold(
         body: Column(
