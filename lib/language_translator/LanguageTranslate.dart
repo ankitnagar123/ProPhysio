@@ -74,6 +74,7 @@ class LocalString extends Translations {
   String Select_Category = "Select your specializations";
   String Select_Branch = "Select your Branch";
   String Select_Sub_Category = "Select your sub-specializations";
+  String Select_Services = "Select Services";
   String Upload_your_Degree = "Upload your degree";
   String Select_Address = "Select your address";
   String SearchAddress = "Search City";
@@ -664,6 +665,7 @@ String NoWardAddedCenter = "No ward added by center";
           Select_Category: "Select your specializations",
           Select_Branch: "Select your Branch",
           Select_Sub_Category: "Select your sub-specializations",
+  Select_Services : "Select Services",
           Upload_your_Degree: "Upload your degree",
           Select_Address: "Select your address or offices",
           SearchAddress: "Search City",

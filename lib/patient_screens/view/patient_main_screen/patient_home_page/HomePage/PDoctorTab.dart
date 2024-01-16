@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
     log("profile-$data");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getValuee();
-      doctorSignUpCtr.DoctorCategory();
+      doctorSignUpCtr.doctorCategory();
     });
   }
 
@@ -275,7 +275,7 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),*/
-            doctorSignUpCtr.categoryloding.value?Center(
+            doctorSignUpCtr.categoryLoading.value?Center(
             heightFactor: 13,
         child: customView.MyIndicator(),
         ):doctorSignUpCtr.category.isEmpty?Center(

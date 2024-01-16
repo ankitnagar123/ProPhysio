@@ -1510,6 +1510,19 @@ Widget signUp1(){
                 SizedBox(
                   height: 15,
                 ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text("About", 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  customView.myFieldExpand(
+                      context, aboutUsCtr, "Enter about", TextInputType.text),
+                  SizedBox(
+                    height: 15,
+                  ),
 
                 ]
             ),

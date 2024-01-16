@@ -15,13 +15,14 @@ class MyAPI {
 
   /*twilio api for OTP want to change URL for Doctor Patainet */
   static const String send_otp_twiliosms =
-      "https://www.sicparvismagna.it/Medica/Apis/twilio/send_otp.php";
+      "https://cisswork.com/Android/emrIntegrateDoctor/api/twiliosms/send_otp.php";
 
   static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_signup.php";
   static const String PSignUpOtp = "signup_email_otp";
 
-  static const String PFetchProfile = "fetch_user_profile";
-  static const String PUpdateProfile = "update_user_profile";
+  static const String PFetchProfile = "fetch_patient_profile";
+  /*changes*/
+  static const String PUpdateProfile = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_update_profile.php";
   static const String PChangePassword = "user_change_pass";
   static const String PDeleteAccount = "delete_user_account";
   static const String pSupport = "user_support";
@@ -84,8 +85,9 @@ class MyAPI {
   static const String catSubcategoryList = "fetch_all_sub_category";
   static const String subcategoryList = "subcategory_list";
   static const String DCategorySignUp = "category_list";
+  static const String DServicesSignUp = "service_list";
   static const String DBranchList = "fetch_branch";
-  // static const String DSignUpOtp = "doctor_otp_signup";
+   static const String DSignUpOtp = "doctor_otp_signup";
   static const String DSignUp = "doctor_signup";
   static const String DFetchProfile = "fetch_doctor_profile";
   static const String DUpdateProfile = "update_Doctor_profile";

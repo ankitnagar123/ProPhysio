@@ -71,75 +71,63 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   var username = "";
   var email = "";
   var phoneno = "";
+  var code = "";
+  var flag = "";
   var password = "";
-  var category = "";
+
+  var birthDate = "";
+  var birthPlace = "";
+  var gender = "";
+  var age = "";
+  var experience = "";
+  var description = "";
   var imagename = "";
   var imagebase = "";
   var address = "";
-  var code = "";
   var lat = "";
   var long = "";
-  var subcat = "";
-  var birthDate = "";
-  var birthPlace = "";
-  var universityAttended = "";
-  var dateOfEnrol = "";
-  var registerOfBelonging = "";
-  var gender = "";
-  var graduationDate = "";
-  var qualificationDate = "";
-  var flag = "";
 
-  /*prophysio*/
-  var age = "";
-
-  var experience = "";
-
-  var description = "";
-
-  var firstService = "";
+  /*prophysio new*/
   var branch = "";
+  var category = "";
+  var services = "";
+  var workingDays = "";
+  var startTime = "";
+  var endTime = "";
 
   @override
   void initState() {
     super.initState();
-
     gender = Get.parameters["gender"].toString();
-    subcat = Get.parameters["subcat"].toString();
     category = Get.parameters["category"].toString();
-    print("doctor selcet category$category");
     name = Get.parameters["name"].toString();
-    surname = Get.parameters["surmane"].toString();
+    surname = Get.parameters["surname"].toString();
     username = Get.parameters["username"].toString();
     email = Get.parameters["email"].toString();
     phoneno = Get.parameters["phone"].toString();
+    code = Get.parameters["code"].toString();
+    flag = Get.parameters["flag"].toString();
     password = Get.parameters["password"].toString();
-    // category = Get.parameters["category"]!;
+
     imagename = Get.parameters["imagename"].toString();
     imagebase = Get.parameters["imagebase"].toString();
     address = Get.parameters["address"].toString();
-    code = Get.parameters["code"].toString();
     lat = Get.parameters["lat"].toString();
     long = Get.parameters["longitude"].toString();
-
     birthDate = Get.parameters["birthDate"].toString();
     birthPlace = Get.parameters["birthPlace"].toString();
-    universityAttended = Get.parameters["universityAttended"].toString();
-    dateOfEnrol = Get.parameters["dateOfEnrol"].toString();
-    registerOfBelonging = Get.parameters["registerOfBelonging"].toString();
-
-    graduationDate = Get.parameters["graduationDate"].toString();
-    qualificationDate = Get.parameters["qualificationDate"].toString();
-    flag = Get.parameters["flag"].toString();
-
-/*new*/
     age = Get.parameters["age"].toString();
     experience = Get.parameters["experience"].toString();
     description = Get.parameters["description"].toString();
-    firstService = Get.parameters["firstService"].toString();
-    branch = Get.parameters["branch"].toString();
 
-    /*OTP  API*/
+    branch = Get.parameters["branch"].toString();
+    category = Get.parameters["category"].toString();
+    services = Get.parameters["services"].toString();
+    workingDays = Get.parameters["workingDays"].toString();
+    startTime = Get.parameters["startTime"].toString();
+    endTime = Get.parameters["endTime"].toString();
+
+    /*-------OTP  API-------------*/
     doctorSignUpCtr.doctorSignupOtp(context, code, phoneno, email);
   }
 
@@ -171,30 +159,59 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                     phoneno,
                     flag,
                     password,
-                    category,
-                    imagename,
-                    imagebase,
-                    address,
-                    lat,
-                    long,
-                    subcat,
                     birthDate,
                     birthPlace,
-                    universityAttended,
-                    dateOfEnrol,
-                    registerOfBelonging,
                     gender,
-                    graduationDate,
-                    qualificationDate,
                     age,
                     experience,
                     description,
-                    firstService,
-                    branch, () {
+                    address,
+                    lat,
+                    long,
+                    branch,
+                    category,
+                    services,
+                    workingDays,
+                    startTime,
+                    endTime,
+                    imagename,
+                    imagebase, () {
                   Get.offAllNamed(RouteHelper.getLoginScreen());
                 });
+                // doctorSignUpCtr.doctorSignup(
+                //     context,
+                //     name,
+                //     surname,
+                //     username,
+                //     email,
+                //     code,
+                //     phoneno,
+                //     flag,
+                //     password,
+                //     category,
+                //     imagename,
+                //     imagebase,
+                //     address,
+                //     lat,
+                //     long,
+                //     subcat,
+                //     birthDate,
+                //     birthPlace,
+                //     universityAttended,
+                //     dateOfEnrol,
+                //     registerOfBelonging,
+                //     gender,
+                //     graduationDate,
+                //     qualificationDate,
+                //     age,
+                //     experience,
+                //     description,
+                //     firstService,
+                //     branch, () {
+                // });
               }
             },
+                //
                 MyColor.red,
                 const TextStyle(
                     fontSize: 16, color: MyColor.white, fontFamily: "Poppins"));

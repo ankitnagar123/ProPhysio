@@ -33,7 +33,7 @@ class _PatientHomePageState extends State<PatientHomePage>
   @override
   void initState() {
     super.initState();
-    doctorSignUpCtr.DoctorCategory();
+    doctorSignUpCtr.doctorCategory();
     cardCtr.cardFetch();
     print("doctor length${doctorListCtr.doctorList.length}");
     tabController = TabController(length: 1, vsync: this, initialIndex: 0);

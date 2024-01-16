@@ -5,7 +5,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:geocoding/geocoding.dart' as geoCoding;
 import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,7 +48,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   // TextEditingController dateOfEnrollmentCtr = TextEditingController();
   // TextEditingController registerOfBelongingCtr = TextEditingController();
   String _selectedGender = '';
-  String _selectedService = '';
 
   // TextEditingController dateOfQualification = TextEditingController();
   // TextEditingController dateOfGraduation = TextEditingController();
@@ -60,6 +58,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   TextEditingController experienceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   String location = '';
+  String latitude = '';
+  String longitude = '';
 
   // final kGoogleApiKey = "AIzaSyAA838tqJK4u1_Rzef1Qv2FtqFwm3T9bEA";
   final kGoogleApiKey = "AIzaSyDqyr7DbFRLoNkYFxsMtwoNo973uNhd440";
@@ -70,17 +70,28 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   CustomView custom = CustomView();
   PageController controller = PageController();
+
   String code = '+1876';
   String flag = 'JM';
   bool _isHidden = true;
   int _curr = 1;
   final int _numpage = 1;
 
-  String? slectedCategory;
   String? selectedBranch;
+  String? slectedCategory;
 
-  // List<dynamic> slectedCat = [].toList();
-  // List<dynamic> slectedCatid = [].toList();
+  /*multiple services*/
+  bool isDropdownOpen = false;
+  List serviceIdArray = [];
+  List serviceNameArray = [];
+
+/*working day*/
+  List<String> selectedDays = [];
+  String selectedDaysList = "";
+
+  /*Doctor Timing*/
+  String? _StartTime;
+  String? _endTime;
 
   String? catid;
   double? lat;
@@ -94,16 +105,15 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   // List subCatIdArray = [];
   // List subCatNameArray = [];
   // List subCatIdArrayFinal = [];
-
-  String radioButtonItem = 'Free';
   int selectedOption = 1;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      doctorSignUpCtr.DoctorCategory();
+      doctorSignUpCtr.doctorCategory();
       doctorSignUpCtr.branchListApi();
+      // doctorSignUpCtr.doctorServices();
     });
   }
 
@@ -171,65 +181,46 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   }
                   return custom.MyButton(context, text.Go_On.tr, () {
                     log("$_curr $_numpage");
+                    var data = {
+                      "name": nameCtr.text,
+                      "surname": surnameCtr.text,
+                      "username": usernameCtr.text,
+                      "email": emailCtr.text,
+                      "phone": phoneCtr.text,
+                      "code": code,
+                      "flag": flag,
+                      "password": passwordCtr.text,
 
-                    // controller.jumpToPage(_curr);
-                    if (validation1(context)||validation2(context)) {
-                      controller.jumpToPage(_curr);
-                    }else{
+                      "birthDate": birthDateController.text,
+                      "birthPlace": birthplaceController.text,
+                      "age": ageController.text,
+                      "experience": experienceController.text,
+                      'gender': _selectedGender,
+                      "address": location,
+                      "lat": AppConst.LATITUDE,
+                      "longitude": AppConst.LONGITUDE,
+                      "description": descriptionController.text,
 
-                    }
-                    /*else if (validation2(context)) {
-                      //controller.jumpToPage(_curr);
+                      "branch": selectedBranch.toString(),
+                      "category": slectedCategory.toString(),
+                      "services": serviceIdArray.join(','),
+                      "workingDays": selectedDaysList.toString(),
+                      "startTime": _StartTime.toString(),
+                      "endTime": _endTime.toString(),
+                      "imagename": degreefilename.toString(),
+                      "imagebase": degreebaseimage.toString(),
 
-                    } else {
-
-                      doctorSignUpCtr.doctorSignupOtpVerification(
-                          context, code, phoneCtr.text, emailCtr.text, () {
-                        log("gender$_selectedGender");
-                        var data = {
-                          "name": nameCtr.text,
-                          "surmane": surnameCtr.text,
-                          "username": usernameCtr.text,
-                          "email": emailCtr.text,
-                          "phone": phoneCtr.text,
-                          "password": passwordCtr.text,
-                          *//*new added*//*
-                          "birthDate": birthDateController.text,
-                          "birthPlace": birthplaceController.text,
-                          *//*  "universityAttended": universityAttendedCtr.text,
-                          "dateOfEnrol": dateOfEnrollmentCtr.text,
-                          "registerOfBelonging": registerOfBelongingCtr.text,*//*
-                          *//*********//*
-                          "category": slectedCategory.toString(),
-                          "imagename": degreefilename.toString(),
-                          "imagebase": degreebaseimage.toString(),
-                          "address": AppConst.LOCATION,
-                          "code": code,
-                          "flag": flag,
-                          "lat": AppConst.LATITUDE,
-                          "longitude": AppConst.LONGITUDE,
-                          "subcat": "", //subCatIdArray.join(','),
-                          'gender': _selectedGender,
-                          *//* "graduationDate": dateOfGraduation.text,
-                          "qualificationDate": dateOfQualification.text,*//*
-                          "age": ageController.text,
-                          "experience": experienceController.text,
-                          "description": descriptionController.text,
-                          "firstService": _selectedService,
-                          "branch": selectedBranch.toString(),
-                        };
-                      }
-
-                        *//*   print("my data$data");
-                        _curr == 1 + _numpage
-                            ? Get.toNamed(RouteHelper.DSignUpOtp(),
-                            parameters: data)
-                            : controller.nextPage(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.bounceIn);*//*
-
-                      );
-                    }*/
+                    };
+                    doctorSignUpCtr.doctorSignupOtpVerification(
+                        context, code, phoneCtr.text, emailCtr.text, () {
+                      log("gender$_selectedGender");
+                      /*_curr == 1 + _numpage
+                          ?*/ Get.toNamed(RouteHelper.DSignUpOtp(),
+                              parameters: data);
+                         /* : controller.nextPage(
+                              duration: const Duration(milliseconds: 0),
+                              curve: Curves.bounceIn);*/
+                    });
                   },
                       MyColor.red,
                       const TextStyle(
@@ -245,140 +236,150 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   Widget signUp1() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 18.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Enter_Name.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(
-                context, nameCtr, text.H_Enter_Name.tr, TextInputType.text),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, surnameCtr, text.H_Enter_Surname.tr,
-                TextInputType.text),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, usernameCtr, text.H_Enter_Username.tr,
-                TextInputType.text),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(
-                context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
-            const SizedBox(
-              height: 17,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Phone_Number.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width * 1,
-              child: IntlPhoneField(
-                controller: phoneCtr,
-                decoration: InputDecoration(
-                  counterText: '',
-                  filled: true,
-                  fillColor: Colors.white,
-                  constraints: const BoxConstraints.expand(),
-                  labelText: text.Phone_Number.tr,
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 18.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      text.Enter_Name.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(
+                    context, nameCtr, text.H_Enter_Name.tr, TextInputType.text),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, surnameCtr, text.H_Enter_Surname.tr,
+                    TextInputType.text),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, usernameCtr, text.H_Enter_Username.tr,
+                    TextInputType.text),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(
+                    context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
+                const SizedBox(
+                  height: 17,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Phone_Number.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: IntlPhoneField(
+                    controller: phoneCtr,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      filled: true,
+                      fillColor: Colors.white,
+                      constraints: const BoxConstraints.expand(),
+                      labelText: text.Phone_Number.tr,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
                     ),
+                    initialCountryCode: flag,
+                    onChanged: (phone) {
+                      code = phone.countryCode;
+                      log(phone.completeNumber);
+                      flag = phone.countryISOCode;
+                      log(flag);
+                    },
+                    onCountryChanged: (cod) {
+                      code = cod.dialCode;
+                      flag = cod.code;
+                      log(flag);
+                    },
                   ),
                 ),
-                initialCountryCode: flag,
-                onChanged: (phone) {
-                  code = phone.countryCode;
-                  log(phone.completeNumber);
-                  flag = phone.countryISOCode;
-                  log(flag);
-                },
-                onCountryChanged: (cod) {
-                  code = cod.dialCode;
-                  flag = cod.code;
-                  log(flag);
-                },
-              ),
+                const SizedBox(
+                  height: 17.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Create_Passsword.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.PasswordField(
+                    context,
+                    passwordCtr,
+                    text.H_Create_Passsword.tr,
+                    TextInputType.text,
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
+                        child: _isHidden
+                            ? const Icon(
+                                Icons.visibility_off,
+                                color: MyColor.primary,
+                                size: 20,
+                              )
+                            : const Icon(
+                                Icons.visibility,
+                                color: MyColor.primary,
+                                size: 20,
+                              )),
+                    _isHidden),
+              ],
             ),
-            const SizedBox(
-              height: 17.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Create_Passsword.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.PasswordField(
-                context,
-                passwordCtr,
-                text.H_Create_Passsword.tr,
-                TextInputType.text,
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isHidden = !_isHidden;
-                      });
-                    },
-                    child: _isHidden
-                        ? const Icon(
-                            Icons.visibility_off,
-                            color: MyColor.primary,
-                            size: 20,
-                          )
-                        : const Icon(
-                            Icons.visibility,
-                            color: MyColor.primary,
-                            size: 20,
-                          )),
-                _isHidden),
-          ],
+          ),
         ),
       ),
     );
@@ -396,278 +397,531 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   Widget signUp2() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Birth.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            Container(
-                height: 45.0,
-                width: MediaQuery.of(context).size.width / 0.9,
-                padding: const EdgeInsets.only(left: 10.0, bottom: 2),
-                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7)),
-                child: TextFormField(
-                  onTap: () async {
-                    startDate = await pickDate();
-                    birthDateController.text = _displayText(startDate);
-                    setState(() {});
-                  },
-                  readOnly: true,
-                  controller: birthDateController,
-                  decoration: InputDecoration(
-                    hintText: text.Select_Date.tr,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon: const Icon(Icons.calendar_month,
-                        color: MyColor.primary),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                  ),
-                )),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Place_of_Birth.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, birthplaceController,
-                text.Place_of_Birth.tr, TextInputType.text),
-            const SizedBox(
-              height: 16,
-            ),
-            /*---------------*new field*----------------------------------------------------*/
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Age.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(
-                context, ageController, text.Age.tr, TextInputType.text),
-            const SizedBox(
-              height: 16,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.experience.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, experienceController, text.experience.tr,
-                TextInputType.text),
-            const SizedBox(
-              height: 16,
-            ),
-
-            /*    Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, universityAttendedCtr,
-                text.University_Attended.tr, TextInputType.text),*/
-            /* const SizedBox(
-              height: 16,
-            ),*/
-            /* Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            Container(
-                height: 45.0,
-                width: MediaQuery.of(context).size.width / 0.9,
-                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7)),
-                child: TextFormField(
-                  onTap: () async {
-                    startDate = await pickDate();
-                    dateOfEnrollmentCtr.text = _displayText(startDate);
-                    setState(() {});
-                    print(dateOfEnrollmentCtr.text);
-                  },
-                  readOnly: true,
-                  controller: dateOfEnrollmentCtr,
-                  decoration:  InputDecoration(
-                    hintText: text.Select_Date.tr,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon:
-                        const Icon(Icons.calendar_month, color: MyColor.primary),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                  ),
-                )),*/
-            /* const SizedBox(
-              height: 16,
-            ),*/
-            /**/
-            /*  Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            Container(
-                height: 45.0,
-                width: MediaQuery.of(context).size.width / 0.9,
-                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7)),
-                child: TextFormField(
-                  onTap: () async {
-                    startDate = await pickDate();
-                    dateOfQualification.text = _displayText(startDate);
-                    setState(() {});
-                    print(dateOfQualification.text);
-                  },
-                  readOnly: true,
-                  controller: dateOfQualification,
-                  decoration:  InputDecoration(
-                    hintText: text.Select_Date.tr,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon:
-                        const Icon(Icons.calendar_month, color: MyColor.primary),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                  ),
-                )),
-            const SizedBox(
-              height: 16,
-            ),*/
-            /*const SizedBox(
-            height: 16,
-          ),*/
-            /* Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            Container(
-                height: 45.0,
-                width: MediaQuery.of(context).size.width / 0.9,
-                padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7)),
-                child: TextFormField(
-                  onTap: () async {
-                    startDate = await pickDate();
-                    dateOfGraduation.text = _displayText(startDate);
-                    setState(() {});
-                    print(dateOfGraduation.text);
-                  },
-                  readOnly: true,
-                  controller: dateOfGraduation,
-                  decoration:  InputDecoration(
-                    hintText: text.Select_Date.tr,
-                    hintStyle: const TextStyle(fontSize: 15),
-                    suffixIcon:
-                        const Icon(Icons.calendar_month, color: MyColor.primary),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                  ),
-                )),
-            const SizedBox(
-              height: 16,
-            ),*/
-            /* Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, registerOfBelongingCtr,
-                text.Register_of_Belonging.tr, TextInputType.text),
-            const SizedBox(
-              height: 16,
-            ),*/
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(
-                  text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            Row(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                        const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      value: 'Male',
-                      groupValue: _selectedGender,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGender = value!;
-                          print(_selectedGender);
-                        });
-                      },
-                    ),
-                    title: Text(text.Male.tr),
-                  ),
+                const SizedBox(
+                  height: 25.0,
                 ),
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                        const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      value: 'Female',
-                      groupValue: _selectedGender,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGender = value!;
-                          print(_selectedGender);
-                        });
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Date_of_Birth.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                Container(
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width / 0.9,
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 2),
+                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: TextFormField(
+                      onTap: () async {
+                        startDate = await pickDate();
+                        birthDateController.text = _displayText(startDate);
+                        setState(() {});
                       },
+                      readOnly: true,
+                      controller: birthDateController,
+                      decoration: InputDecoration(
+                        hintText: text.Select_Date.tr,
+                        hintStyle: const TextStyle(fontSize: 15),
+                        suffixIcon: const Icon(Icons.calendar_month,
+                            color: MyColor.primary),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    )),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Place_of_Birth.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, birthplaceController,
+                    text.Place_of_Birth.tr, TextInputType.text),
+                const SizedBox(
+                  height: 16,
+                ),
+                /*---------------*new field*----------------------------------------------------*/
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      text.Age.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(
+                    context, ageController, text.Age.tr, TextInputType.text),
+                const SizedBox(
+                  height: 16,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      text.experience.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, experienceController, text.experience.tr,
+                    TextInputType.text),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                /*    Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, universityAttendedCtr,
+                    text.University_Attended.tr, TextInputType.text),*/
+                /* const SizedBox(
+                  height: 16,
+                ),*/
+                /* Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                Container(
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width / 0.9,
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: TextFormField(
+                      onTap: () async {
+                        startDate = await pickDate();
+                        dateOfEnrollmentCtr.text = _displayText(startDate);
+                        setState(() {});
+                        print(dateOfEnrollmentCtr.text);
+                      },
+                      readOnly: true,
+                      controller: dateOfEnrollmentCtr,
+                      decoration:  InputDecoration(
+                        hintText: text.Select_Date.tr,
+                        hintStyle: const TextStyle(fontSize: 15),
+                        suffixIcon:
+                            const Icon(Icons.calendar_month, color: MyColor.primary),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    )),*/
+                /* const SizedBox(
+                  height: 16,
+                ),*/
+                /**/
+                /*  Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                Container(
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width / 0.9,
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: TextFormField(
+                      onTap: () async {
+                        startDate = await pickDate();
+                        dateOfQualification.text = _displayText(startDate);
+                        setState(() {});
+                        print(dateOfQualification.text);
+                      },
+                      readOnly: true,
+                      controller: dateOfQualification,
+                      decoration:  InputDecoration(
+                        hintText: text.Select_Date.tr,
+                        hintStyle: const TextStyle(fontSize: 15),
+                        suffixIcon:
+                            const Icon(Icons.calendar_month, color: MyColor.primary),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    )),
+                const SizedBox(
+                  height: 16,
+                ),*/
+                /*const SizedBox(
+                height: 16,
+              ),*/
+                /* Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                Container(
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width / 0.9,
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: TextFormField(
+                      onTap: () async {
+                        startDate = await pickDate();
+                        dateOfGraduation.text = _displayText(startDate);
+                        setState(() {});
+                        print(dateOfGraduation.text);
+                      },
+                      readOnly: true,
+                      controller: dateOfGraduation,
+                      decoration:  InputDecoration(
+                        hintText: text.Select_Date.tr,
+                        hintStyle: const TextStyle(fontSize: 15),
+                        suffixIcon:
+                            const Icon(Icons.calendar_month, color: MyColor.primary),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    )),
+                const SizedBox(
+                  height: 16,
+                ),*/
+                /* Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myField(context, registerOfBelongingCtr,
+                    text.Register_of_Belonging.tr, TextInputType.text),
+                const SizedBox(
+                  height: 16,
+                ),*/
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                            const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          value: 'Male',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                              print(_selectedGender);
+                            });
+                          },
+                        ),
+                        title: Text(text.Male.tr),
+                      ),
                     ),
-                    title: Text(text.Female.tr),
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                            const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          value: 'Female',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                              print(_selectedGender);
+                            });
+                          },
+                        ),
+                        title: Text(text.Female.tr),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      "Select Timing", 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: _Starttime,
+                        child: Container(
+                          height: 47,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 07,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: MyColor.black),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.timer_outlined,
+                                color: MyColor.primary1,
+                              ),
+                              const VerticalDivider(
+                                width: 18,
+                                color: Colors.black38,
+                                thickness: 1,
+                              ),
+                              custom.text(
+                                  _StartTime != null ? _StartTime! : 'start time',
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: _endtime,
+                        child: Container(
+                          height: 47,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 07,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: MyColor.black),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.timer_outlined,
+                                color: MyColor.primary1,
+                              ),
+                              const VerticalDivider(
+                                width: 18,
+                                color: Colors.black38,
+                                thickness: 1,
+                              ),
+                              custom.text(_endTime != null ? _endTime! : 'end time',
+                                  14, FontWeight.w400, MyColor.black),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Upload_your_Degree.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: MyColor.white,
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                        color: Colors.black38,
+                      ),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 45,
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Icon(Icons.upload),
+                        ),
+                        Text(
+                          degreefilename.toString(),
+                          style:
+                          const TextStyle(fontSize: 10, color: Colors.black45),
+                        ),
+                      ],
+                    ),
                   ),
+                  onTap: () {
+                    // AdharIdCtr.toString();
+                    _chooseDegree();
+                  },
+                ),
+                const SizedBox(
+                  height: 17.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Select_Address.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                  child: custom.searchField(
+                      context,
+                      destinationController,
+                      location,
+                      TextInputType.text,
+                      const Text(""),
+                      const Icon(Icons.search_rounded), () async {
+                    var place = await PlacesAutocomplete.show(
+                        context: context,
+                        apiKey: kGoogleApiKey,
+                        mode: Mode.overlay,
+                        types: [],
+                        strictbounds: false,
+                        components: [],
+                        onError: (err) {
+                          print(err);
+                        });
+                    if (place != null) {
+                      setState(() {
+                        location = place.description.toString();
+                      });
+
+                      final plist = GoogleMapsPlaces(
+                        apiKey: kGoogleApiKey,
+                        // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                      );
+                      String placeId = place.placeId ?? "0";
+                      final detail = await plist.getDetailsByPlaceId(placeId);
+                      final geometry = detail.result.geometry!;
+                      final lat = geometry.location.lat;
+                      final lang = geometry.location.lng;
+                      var newlatlang = latLng.LatLng(lat, lang);
+                      log(newlatlang.latitude.toString());
+                      log(newlatlang.longitude.toString());
+                      log(">>>>>>>>>>>>>>>>>>", error: location);
+                      try {
+                        AppConst.LATITUDE = newlatlang.latitude.toString();
+                        AppConst.LONGITUDE = newlatlang.longitude.toString();
+                        AppConst.LOCATION = location.toString();
+                      } catch (e) {
+                        print("Exception :-- ${e.toString()}");
+                      }
+                      print("My latitude AppCont : -- ${AppConst.LATITUDE}");
+                      print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
+                      print("My latitude AppCont : -- ${AppConst.LOCATION}");
+                    }
+                  }, () {}),
+                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Get.toNamed(RouteHelper.DSearchLocation());
+                //     setState(() {});
+                //     // Get.toNamed(RouteHelper.getViewCertificateScreen());
+                //   },
+                //   child: Container(
+                //       height: 50.0,
+                //       margin: const EdgeInsets.symmetric(
+                //           horizontal: 10.0, vertical: 2.0),
+                //       decoration: BoxDecoration(
+                //         color: MyColor.midgray,
+                //         borderRadius: BorderRadius.circular(10.0),
+                //       ),
+                //       child: Padding(
+                //         padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           children: [
+                //             SizedBox(
+                //               width: MediaQuery.of(context).size.width * 0.7,
+                //               child: custom.text(AppConst.LOCATION, 12.0,
+                //                   FontWeight.w500, MyColor.black),
+                //             ),
+                //             const Icon(
+                //               Icons.arrow_forward,
+                //               size: 20.0,
+                //               color: MyColor.black,
+                //             ),
+                //           ],
+                //         ),
+                //       )),
+                // ),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.enterDescription.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myFieldExpand(context, descriptionController,
+                    text.enterDescription.tr, TextInputType.text),
+                const SizedBox(
+                  height: 5,
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -675,422 +929,281 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   Widget signUp3() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            branch(),
-            const SizedBox(
-              height: 17.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Category.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            category(),
-
-            // Align(
-            //   alignment: Alignment.topLeft,
-            //   child: custom.text(text.Select_Sub_Category.tr, 13.0,
-            //       FontWeight.w500, MyColor.primary1),
-            // ),
-
-            /*  InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: MyColor.white,
-                  borderRadius: BorderRadius.circular(7),
-                  border: Border.all(
-                    color: Colors.black38,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 45,
-                child:  Center(
-                  child: Text(text.Select_Sub_Category.tr),
-                ),
-              ),
-              onTap: () {
-                showDialog(
-                  barrierDismissible: false,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: SizedBox(
-                          height: 300,
-                          width: double.maxFinite,
-                          child: Obx(() {
-                            return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  InkWell(
-                                      onTap: () {
-                                        setState(() {
-
-                                        });
-                                        Get.back();
-                                      },
-                                      child: const Align(
-                                          alignment: Alignment.topRight,
-                                          child: Icon(Icons.close_outlined))),
-                                  doctorListCtr.subCategory.isEmpty
-                                      ? const Padding(
-                                          padding: EdgeInsets.all(17.0),
-                                          child: Text("No Sub-Category"),
-                                        )
-                                      : doctorListCtr.categoryLoadingSub.value
-                                          ? custom.MyIndicator()
-                                          : Expanded(
-                                              child: ListView.builder(
-                                              itemCount: doctorListCtr
-                                                  .subCategory.length,
-                                              itemBuilder: (context, index) {
-                                                return StatefulBuilder(
-                                                  builder: (context,
-                                                      StateSetter setState) {
-                                                    return Card(
-                                                      elevation: 0.8,
-                                                      child: CheckboxListTile(
-                                                        tristate: true,
-                                                        activeColor:
-                                                            MyColor.primary,
-                                                        dense: true,
-                                                        title: Text(
-                                                            doctorListCtr
-                                                                .subCategory[
-                                                                    index]
-                                                                .subcatName),
-                                                        value: selectedIndexes
-                                                            .contains(index),
-                                                        onChanged: (vale) {
-                                                          setState(() {
-                                                            if (selectedIndexes
-                                                                .contains(
-                                                                    index)) {
-                                                              selectedIndexes
-                                                                  .remove(
-                                                                      index);
-                                                              subCatIdArray.remove(
-                                                                  doctorListCtr
-                                                                      .subCategory[
-                                                                          index]
-                                                                      .subcatId);
-                                                              subDummyCatIdArray.remove(
-                                                                  doctorListCtr
-                                                                      .subCategory[
-                                                                  index]
-                                                                      .subcatName);
-                                                              // unselect
-                                                            } else {
-                                                              selectedIndexes
-                                                                  .add(index);
-                                                              subCatIdArray.add(
-                                                                  doctorListCtr
-                                                                      .subCategory[
-                                                                          index]
-                                                                      .subcatId);
-                                                              log(".............$subCatIdArray");
-
-                                                              subDummyCatIdArray.add(
-                                                                  doctorListCtr
-                                                                      .subCategory[
-                                                                  index]
-                                                                      .subcatName);
-                                                            }
-                                                          });
-                                                          log("Temp$selectedIndexes");
-                                                          log("Temp$subCatIdArray");
-                                                        },
-                                                        controlAffinity:
-                                                            ListTileControlAffinity
-                                                                .trailing,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              shrinkWrap: true,
-                                            ))
-                                ]);
-                          }),
-                        ),
-                      );
-                    });
-              },
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: subDummyCatIdArray.length,
-              itemBuilder: (context, index) {
-                return Card(
-                   elevation: 1.0,
-                     semanticContainer: true,
-                    color: MyColor.lightcolor,child: Text(subDummyCatIdArray[index]));
-              },
-            ),*/
-            const SizedBox(
-              height: 15,
-            ),
-            // Align(
-            //   alignment: Alignment.topLeft,
-            //   child: GestureDetector(
-            //     onTap: () {
-            //       subCatIdArray.addAll(subCatIdArrayFinal);
-            //       log("Tem$subCatIdArray");
-            //       log("Final$subCatIdArrayFinal");
-            //       subCatIdArray.clear();
-            //     },
-            //     child: Container(
-            //         height: 25.0,
-            //         width: 70.0,
-            //         decoration: BoxDecoration(
-            //           color: MyColor.primary,
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         child: Center(
-            //           child: Row(
-            //                mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //               children: const [
-            //             Text("Add more",
-            //                 style: TextStyle(color: MyColor.white, fontSize: 10)),
-            //             Icon(
-            //               Icons.add,
-            //               color: MyColor.white,
-            //               size: 18,
-            //             )
-            //           ]),
-            //         )),
-            //   ),
-            // ),
-            // Text("$subCatIdArrayFinal"),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Upload_your_Degree.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: MyColor.white,
-                  borderRadius: BorderRadius.circular(7),
-                  border: Border.all(
-                    color: Colors.black38,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 45,
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 5),
-                      child: Icon(Icons.upload),
-                    ),
-                    Text(
-                      degreefilename.toString(),
-                      style:
-                          const TextStyle(fontSize: 10, color: Colors.black45),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                // AdharIdCtr.toString();
-                _chooseDegree();
-              },
-            ),
-            const SizedBox(
-              height: 17.0,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.Select_Address.tr, 13.0, FontWeight.w500,
-                  MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-              child: custom.searchField(
-                  context,
-                  destinationController,
-                  location,
-                  TextInputType.text,
-                  const Text(""),
-                  const Icon(Icons.search_rounded), () async {
-                var place = await PlacesAutocomplete.show(
-                    context: context,
-                    apiKey: kGoogleApiKey,
-                    mode: Mode.overlay,
-                    types: [],
-                    strictbounds: false,
-                    components: [],
-                    onError: (err) {
-                      print(err);
-                    });
-                if (place != null) {
-                  setState(() {
-                    location = place.description.toString();
-                  });
-
-                  final plist = GoogleMapsPlaces(
-                    apiKey: kGoogleApiKey,
-                    // apiHeaders: await const GoogleApiHeaders().getHeaders(),
-                  );
-                  String placeId = place.placeId ?? "0";
-                  final detail = await plist.getDetailsByPlaceId(placeId);
-                  final geometry = detail.result.geometry!;
-                  final lat = geometry.location.lat;
-                  final lang = geometry.location.lng;
-                  var newlatlang = latLng.LatLng(lat, lang);
-                  log(newlatlang.latitude.toString());
-                  log(newlatlang.longitude.toString());
-                  log(">>>>>>>>>>>>>>>>>>", error: location);
-                  try {
-                    AppConst.LATITUDE = newlatlang.latitude.toString();
-                    AppConst.LONGITUDE = newlatlang.longitude.toString();
-                    AppConst.LOCATION = location.toString();
-                  } catch (e) {
-                    print("Exception :-- ${e.toString()}");
-                  }
-                  print("My latitude AppCont : -- ${AppConst.LATITUDE}");
-                  print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
-                  print("My latitude AppCont : -- ${AppConst.LOCATION}");
-                }
-              }, () {}),
-            ),
-            // GestureDetector(
-            //   onTap: () {
-            //     Get.toNamed(RouteHelper.DSearchLocation());
-            //     setState(() {});
-            //     // Get.toNamed(RouteHelper.getViewCertificateScreen());
-            //   },
-            //   child: Container(
-            //       height: 50.0,
-            //       margin: const EdgeInsets.symmetric(
-            //           horizontal: 10.0, vertical: 2.0),
-            //       decoration: BoxDecoration(
-            //         color: MyColor.midgray,
-            //         borderRadius: BorderRadius.circular(10.0),
-            //       ),
-            //       child: Padding(
-            //         padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.start,
-            //           children: [
-            //             SizedBox(
-            //               width: MediaQuery.of(context).size.width * 0.7,
-            //               child: custom.text(AppConst.LOCATION, 12.0,
-            //                   FontWeight.w500, MyColor.black),
-            //             ),
-            //             const Icon(
-            //               Icons.arrow_forward,
-            //               size: 20.0,
-            //               color: MyColor.black,
-            //             ),
-            //           ],
-            //         ),
-            //       )),
-            // ),
-            SizedBox(
-              height: 6,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: custom.text(text.enterDescription.tr, 13.0,
-                  FontWeight.w500, MyColor.primary1),
-            ),
-            const SizedBox(
-              height: 3.0,
-            ),
-            custom.myField(context, descriptionController,
-                text.enterDescription.tr, TextInputType.text),
-            const SizedBox(
-              height: 16,
-            ),
-            /*  Align(
-                 alignment: Alignment.topLeft,
-                 child: custom.text(text.firstConsultation, 13, FontWeight.w500, MyColor.primary1)),
-            Row(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      activeColor: MyColor.red,
-                      value: 'Free',
-                      groupValue: _selectedService,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedService = value!;
-                          print(_selectedService);
-                        });
-                      },
-                    ),
-                    title:  custom.text("Free", 14, FontWeight.w500, MyColor.primary1)
-                  ),
+                const SizedBox(
+                  height: 10.0,
                 ),
-                Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                    leading: Radio<String>(
-                      activeColor: MyColor.red,
-                      value: 'Paid',
-                      groupValue: _selectedService,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedService = value!;
-                          print(_selectedService);
-                        });
-                      },
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                branch(),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Select_Category.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                category(),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Select_Services.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
+                ),
+                selectServiceList(),
+                if (isDropdownOpen)
+                  Card(
+                    color: Colors.white,
+                    elevation: 2,
+                    margin: EdgeInsets.zero,
+                    child: SizedBox(
+                      height: 250,
+                      width: double.maxFinite,
+                      child: Obx(() {
+                        return Column(children: [
+                          doctorSignUpCtr.services.isEmpty
+                              ? const Padding(
+                                  padding: EdgeInsets.all(17.0),
+                                  child: Text("No Services"),
+                                )
+                              : doctorSignUpCtr.serviceLoading.value
+                                  ? custom.MyIndicator()
+                                  : Expanded(
+                                      child: ListView.builder(
+                                      itemCount: doctorSignUpCtr.services.length,
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (serviceIdArray.contains(
+                                                  doctorSignUpCtr
+                                                      .services[index].serviceId)) {
+                                                serviceIdArray.remove(
+                                                    doctorSignUpCtr
+                                                        .services[index].serviceId);
+                                                serviceNameArray.remove(
+                                                    doctorSignUpCtr.services[index]
+                                                        .serviceName);
+                                              } else {
+                                                serviceIdArray.add(doctorSignUpCtr
+                                                    .services[index].serviceId);
+                                                serviceNameArray.add(doctorSignUpCtr
+                                                    .services[index].serviceName);
+                                              }
+                                              log("Service-Id-Array -${serviceIdArray.join(",")}");
+                                              log("Service-Name-Array-${serviceNameArray.join(",")}");
+                                            });
+                                          },
+                                          child: Card(
+                                            color: Colors.white,
+                                            elevation: 0.8,
+                                            child: ListTile(
+                                              leading: ClipRRect(
+                                                child: FadeInImage.assetNetwork(
+                                                  imageErrorBuilder: (c, o, s) =>
+                                                      Image.asset(
+                                                          "assets/images/noimage.png",
+                                                          width: 40,
+                                                          height: 40,
+                                                          fit: BoxFit.cover),
+                                                  width: 45,
+                                                  height: 45,
+                                                  fit: BoxFit.cover,
+                                                  placeholder:
+                                                      "assets/images/loading.gif",
+                                                  image: doctorSignUpCtr
+                                                      .services[index].image
+                                                      .toString(),
+                                                  placeholderFit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              trailing: serviceIdArray.contains(
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceId)
+                                                  ? const Icon(
+                                                      Icons.task_alt,
+                                                      color: MyColor.primary1,
+                                                    )
+                                                  : null,
+                                              title: serviceIdArray.contains(
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceId)
+                                                  ? custom.text(
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceName
+                                                          .toUpperCase(),
+                                                      12,
+                                                      FontWeight.w500,
+                                                      MyColor.primary1)
+                                                  : custom.text(
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceName
+                                                          .toUpperCase(),
+                                                      11,
+                                                      FontWeight.w500,
+                                                      MyColor.black),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      shrinkWrap: true,
+                                    ))
+                        ]);
+                      }),
                     ),
-                    title:    custom.text("Paid", 14, FontWeight.w500, MyColor.primary1)
                   ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                  itemCount: serviceNameArray.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      margin: EdgeInsets.all(4),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: custom.text(
+                            "${index + 1}. ${serviceNameArray[index]}",
+                            12,
+                            FontWeight.w400,
+                            MyColor.black),
+                      ),
+                    );
+                  },
                 ),
 
-                */
-            /*Transform.scale(
-                  scale: 0.9,
-                  child: Radio(
-                    value: 1,
-                    groupValue: selectedOption,
-                    onChanged: (value) {
-                        setState(() {
-                          radioButtonItem = 'Free';
-                      });
-                    },
-                  ),
+                const SizedBox(
+                  height: 15,
                 ),
-                Radio(
-                  value: 2,
-                  groupValue: selectedOption,
-                  onChanged: (val) {
-                    setState(() {
-                      radioButtonItem = 'Paid';
-                    });
-                  },
-                ),*/ /*
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: custom.text("Select working days:", 13, FontWeight.w500,
+                        MyColor.primary1)),
+                for (String day in [
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                  'Saturday',
+                  'Sunday'
+                ])
+                  Card(
+                    child: CheckboxListTile.adaptive(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.all(0),
+                      activeColor: MyColor.primary1,
+                      checkColor: Colors.white,
+                      title: custom.text(day, 13, FontWeight.w500, MyColor.black),
+                      value: selectedDays.contains(day),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          if (value != null && value) {
+                            selectedDays.add(day);
+                            selectedDaysList = jsonEncode(selectedDays);
+                            log("days---$selectedDaysList");
+                          } else {
+                            selectedDays.remove(day);
+                            selectedDaysList = jsonEncode(selectedDays);
+                            log("days--$selectedDaysList");
+                          }
+                        });
+                      },
+                    ),
+                  ),
+
+
+                /*  Align(
+                     alignment: Alignment.topLeft,
+                     child: custom.text(text.firstConsultation, 13, FontWeight.w500, MyColor.primary1)),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          activeColor: MyColor.red,
+                          value: 'Free',
+                          groupValue: _selectedService,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedService = value!;
+                              print(_selectedService);
+                            });
+                          },
+                        ),
+                        title:  custom.text("Free", 14, FontWeight.w500, MyColor.primary1)
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        visualDensity:
+                        const VisualDensity(horizontal: -4, vertical: -4),
+                        leading: Radio<String>(
+                          activeColor: MyColor.red,
+                          value: 'Paid',
+                          groupValue: _selectedService,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedService = value!;
+                              print(_selectedService);
+                            });
+                          },
+                        ),
+                        title:    custom.text("Paid", 14, FontWeight.w500, MyColor.primary1)
+                      ),
+                    ),
+
+                    */
+                /*Transform.scale(
+                      scale: 0.9,
+                      child: Radio(
+                        value: 1,
+                        groupValue: selectedOption,
+                        onChanged: (value) {
+                            setState(() {
+                              radioButtonItem = 'Free';
+                          });
+                        },
+                      ),
+                    ),
+                    Radio(
+                      value: 2,
+                      groupValue: selectedOption,
+                      onChanged: (val) {
+                        setState(() {
+                          radioButtonItem = 'Paid';
+                        });
+                      },
+                    ),*/
               ],
-            ),*/
-          ],
+            ),
+          ),
         ),
       ),
     );
@@ -1179,6 +1292,55 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     return false;
   }
 
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 0.9,
+            padding: const EdgeInsets.only(left: 4),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint: Text(text.Select_Branch.tr,style: TextStyle(fontSize: 13),),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY CATEGORY>>>$selectedBranch');
+                  });
+                  },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 /*---------SELECT  CATEGORY-----*/
   Widget category() {
     final height = MediaQuery.of(context).size.height;
@@ -1211,7 +1373,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.categoryName),
                   );
                 }).toList(),
-                hint: Text(text.Select_Category.tr),
+                hint: Text(text.Select_Category.tr,style: TextStyle(fontSize: 13),),
                 // After selecting the desired option,it will
                 // change button value to selected value
                 onChanged: (newValue) {
@@ -1219,6 +1381,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     slectedCategory = newValue;
                     log('MY CATEGORY>>>$slectedCategory');
                   });
+                  doctorSignUpCtr.doctorServices(slectedCategory.toString());
+                  serviceNameArray.clear();
+                  serviceIdArray.clear();
+                  log("this for clear service Id Array---${serviceIdArray.join(",")}");
+                  log("this for clear service Name Array---${serviceNameArray.join(',')}");
+                  setState(() {});
+
                   /*doctorListCtr.subCatList(slectedCategory!);*/
                 },
               ),
@@ -1229,48 +1398,58 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
     );
   }
 
-/*---------SELECT BRANCH-----*/
-  Widget branch() {
+  /*---------SELECT Services Multiple-----*/
+  Widget selectServiceList() {
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return StatefulBuilder(
       builder: (context, StateSetter stateSetter) => Align(
-        alignment: AlignmentDirectional.centerEnd,
-        child: Center(
-          child: Container(
-            height: height * 0.06,
-            width: widht * 0.9,
-            padding: const EdgeInsets.only(left: 10),
-            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-            decoration: BoxDecoration(
-                color: MyColor.white,
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: MyColor.grey)),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                menuMaxHeight: MediaQuery.of(context).size.height / 3,
-                // Initial Value
-                value: selectedBranch,
-                // Down Arrow Icon
-                icon: const Icon(Icons.keyboard_arrow_down,
-                    color: MyColor.primary),
-                // Array list of items
-                items: doctorSignUpCtr.branchList.map((items) {
-                  return DropdownMenuItem(
-                    value: items.branchId,
-                    child: Text(items.branchName),
-                  );
-                }).toList(),
-                hint: Text(text.Select_Branch.tr),
-                onChanged: (newValue) {
-                  stateSetter(() {
-                    selectedBranch = newValue;
-                    log('MY selected Branch>>>$selectedBranch');
-                  });
-                },
-              ),
-            ),
-          ),
+        alignment: AlignmentDirectional.center,
+        child: Obx(
+          () => doctorSignUpCtr.serviceLoading.value
+              ? custom.MyIndicator()
+              : Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDropdownOpen = !isDropdownOpen;
+                      });
+                    },
+                    child: Container(
+                        height: height * 0.06,
+                        width: widht * 1,
+                        padding: const EdgeInsets.only(left: 10),
+                        margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+                        decoration: BoxDecoration(
+                            color: MyColor.white,
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(color: MyColor.grey)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                    child: Text(
+                                      serviceNameArray.isNotEmpty
+                                          ? "${serviceNameArray.length.toString()} Service selected"
+                                          : text.Select_Services.tr,
+                                      style: TextStyle(fontSize: 13),
+                                    )),
+                                Icon(
+                                    isDropdownOpen
+                                        ? Icons.keyboard_arrow_up
+                                        : Icons.keyboard_arrow_down,
+                                    color: MyColor.primary1),
+                              ],
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
         ),
       ),
     );
@@ -1308,7 +1487,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),
-      lastDate: DateTime(2999),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -1327,6 +1506,64 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
         );
       },
     );
+  }
+
+  Future<void> _Starttime() async {
+    final TimeOfDay? result = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: MyColor.primary1,
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.brown, // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(backgroundColor: Colors.white),
+              ),
+            ),
+            child: child!,
+          ),
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        _StartTime = result.format(context);
+        log("$_StartTime");
+      });
+    }
+  }
+
+  Future<void> _endtime() async {
+    final TimeOfDay? result = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: MyColor.primary1,
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.brown, // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(backgroundColor: Colors.white),
+              ),
+            ),
+            child: child!,
+          );
+        });
+    if (result != null) {
+      setState(() {
+        _endTime = result.format(context);
+        log("$_endTime");
+      });
+    }
   }
 
 /*-----------Google Search------------------*/

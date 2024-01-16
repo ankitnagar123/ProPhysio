@@ -84,7 +84,7 @@ dev_dependencies:
   connectivity_plus: ^5.0.2
   mobile_scanner: ^3.2.0
 #  agora_rtc_engine: ^6.2.2
-  wakelock:
+#  wakelock:
 #  agora_token_service: ^0.1.2
 #  socket_io_client: ^2.0.3+1
 

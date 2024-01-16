@@ -12,6 +12,7 @@ import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
 import '../model/BranchModel.dart';
 import '../model/DSignUpCategoryModel.dart';
+import '../model/DoctorServicesModel.dart';
 
 class DoctorSignUpCtr extends GetxController {
   CustomView custom = CustomView();
@@ -24,7 +25,8 @@ class DoctorSignUpCtr extends GetxController {
   var loading = false.obs;
   var loadingotp = false.obs;
 
-  var categoryloding = false.obs;
+  var categoryLoading = false.obs;
+  var serviceLoading = false.obs;
   var branchLoading = false.obs;
   var otp = ''.obs;
   var msg = ''.obs;
@@ -33,28 +35,54 @@ class DoctorSignUpCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   var category = <AllCategoryModel>[].obs;
+  var services = <DoctorServicesModel>[].obs;
   var branchList = <BranchModel>[].obs;
 
   /*---------Doctor All Category --------*/
-  Future<void> DoctorCategory() async {
+  Future<void> doctorCategory() async {
     final Map<String, dynamic> parameter = {
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
     };
-    print("parameter$parameter");
+    log("doctor Category parameter$parameter");
     try {
-      categoryloding.value = true;
+      categoryLoading.value = true;
       final response = await apiService.postData(MyAPI.DCategorySignUp,parameter);
-      print(" Category =============${response.body}");
+      log(" Category =============${response.body}");
       if (response.statusCode == 200) {
-        categoryloding.value = false;
+        categoryLoading.value = false;
         category.value = allCategoryModelFromJson(response.body.toString());
         log(category.toString());
       } else {
-        categoryloding.value = false;
+        categoryLoading.value = false;
         log("error");
       }
     } catch (e) {
-      categoryloding.value = false;
+      categoryLoading.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*---------Doctor All Services behalf of category --------*/
+  Future<void> doctorServices(String category) async {
+    final Map<String, dynamic> parameter = {
+      "category_id":category,
+    };
+    print("parameter$parameter");
+    try {
+      serviceLoading.value = true;
+      final response = await apiService.postData(MyAPI.DServicesSignUp,parameter);
+      print(" Doctor Services =============${response.body}");
+      if (response.statusCode == 200) {
+        serviceLoading.value = false;
+        services.value = doctorServicesModelFromJson(response.body.toString());
+        log(services.toString());
+      } else {
+        serviceLoading.value = false;
+        log("error");
+      }
+    } catch (e) {
+      serviceLoading.value = false;
       log("exception$e");
     }
   }
@@ -86,7 +114,7 @@ class DoctorSignUpCtr extends GetxController {
 
 
 
-/*-----------Doctor SignUp Otp Verification Api----------*//*
+/*-----------Doctor SignUp Otp Verification Api----------*/
   Future<String> doctorSignupOtpVerification(
       BuildContext context,
       String countryCode,
@@ -129,15 +157,15 @@ class DoctorSignUpCtr extends GetxController {
       loadingotp.value = false;
       custom.massenger(context, text.SomthingWentWrong.tr);
 
-      log("exception$e");
+      log("exception------$e");
       return '';
     }
     return '';
-  }*/
+  }
 
 
 
-/*-----------Doctor SignUp Otp Api----------*/
+/*-----------Doctor SignUp Otp Api send_otp_twiliosms----------*/
   Future<String> doctorSignupOtp(
     BuildContext context,
       String countryCode,
@@ -199,27 +227,25 @@ class DoctorSignUpCtr extends GetxController {
       String mobileNo,
       String flag,
       String password,
-      String category,
-      String imgString,
-      String imgBase,
-      String address,
-      String lat,
-      String lang,
-      String subcat,
+
       String birthDate,
       String birthPlace,
-      String universityAttended,
-      String enrollmentDate,
-      String registerOfBelonging,
       String gender,
-      String graducationDate,
-      String qualificationDate,
       String age,
       String experience,
       String description,
-      String first_Service,
-      String branch,
+      String address,
+      String lat,
+      String lang,
 
+      String branch,
+      String category,
+      String service,
+      String workingDays,
+      String startTime,
+      String endTime,
+      String imgString,
+      String imgBase,
       VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> signupPerameter = {
@@ -231,42 +257,36 @@ class DoctorSignUpCtr extends GetxController {
       "contact": mobileNo,
       "flag":flag,
       "password": password,
-      "doc_pdf": imgString,
-      "docimg_str": imgBase,
+
       "location": address,
-      "category": category,
       "latitude": lat,
       "longitude": lang,
-      "subcategory": subcat,
       "birth_date":birthDate,
       "birth_place":birthPlace,
-      "university_attended":universityAttended,
-      "enrollment_date":enrollmentDate,
-      "register_of_belonging":registerOfBelonging,
       "gender":gender,
-      "graduation_date":graducationDate,
-      "qualification_date":qualificationDate,
-
       "age":age,
       "experience":experience,
       "description":description,
-      "first_Service":first_Service,
-      "branch":branch,
-    };
-    print("Signup Parameter$signupPerameter");
-    print(gender);
+      "doc_pdf": imgString,
+      "docimg_str": imgBase,
 
+      "branch":branch,
+      "category": category,
+      "service_ids": service,
+      "total_day": workingDays,
+      "start_time": startTime,
+      "end_time": endTime,
+    };
+    log("Signup Parameter$signupPerameter");
      final response = await apiService.postData(MyAPI.DSignUp, signupPerameter);
     try {
        log("response of Doctor Signup :-${response.body}");
       loading.value = false;
       var jsonResponse = jsonDecode(response.body);
        String result = jsonResponse['result'];
-      if (result == "Success") {
+      if (response.statusCode ==200) {
         callback();
         loading.value = false;
-         // sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
-         //  Get.toNamed(RouteHelper.getVerification());
          custom.massenger(context, text.SignUPSuccess.tr);
       } else {
         custom.massenger(context, result);

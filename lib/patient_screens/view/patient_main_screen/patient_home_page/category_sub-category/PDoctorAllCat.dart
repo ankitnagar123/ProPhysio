@@ -23,7 +23,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
   @override
   void initState() {
     super.initState();
-    doctorSignUpCtr.DoctorCategory();
+    doctorSignUpCtr.doctorCategory();
   }
 
   String? categoryId;
@@ -52,7 +52,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
           child: Obx(() {
-            if(doctorSignUpCtr.categoryloding.value){
+            if(doctorSignUpCtr.categoryLoading.value){
               return Center(
                 heightFactor: 16,
                 child: customView.MyIndicator(),

@@ -86,7 +86,7 @@ class _DoctorListState extends State<DoctorList> {
                 keyboardType: TextInputType.name,
                 cursorColor: Colors.white,
                 controller: searchCtr,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search, color: Colors.black),
                   prefixIconColor: MyColor.primary1,

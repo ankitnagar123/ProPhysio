@@ -139,7 +139,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorProfileCtr.doctorProfile(context);
       doctorSignUpCtr.branchListApi();
-      doctorSignUpCtr.DoctorCategory();
+      doctorSignUpCtr.doctorCategory();
     });
   }
 

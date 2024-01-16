@@ -31,15 +31,13 @@ class calender extends StatefulWidget {
 
 class _calenderState extends State<calender> {
   DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
-  LocalString text = LocalString();
-  AppointmentController appointmentController =
-      Get.put(AppointmentController());
+  AppointmentController appointmentController = Get.put(AppointmentController());
+
   CustomView custom = CustomView();
+  LocalString text = LocalString();
 
   DateTime focusedDay = DateTime.now();
-  DateTime selectedDay = DateTime.now();
   final EventList<Event> _markedDateMap = EventList<Event>(events: {});
-  CalendarCarousel? _calendarCarouselNoHeader;
   final List<String> bookDate = <String>[];
 
   String doctorId = "";
@@ -56,9 +54,9 @@ class _calenderState extends State<calender> {
 
   @override
   void initState() {
+    super.initState();
     branchId = widget.branchId;
     print("center id $branchId");
-    super.initState();
     doctorId = doctorListCtr.doctorid.value;
     appointmentController.dateCalender(doctorId, branchId);
 
