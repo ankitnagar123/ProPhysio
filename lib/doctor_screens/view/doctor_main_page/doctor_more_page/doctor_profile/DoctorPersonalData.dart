@@ -34,7 +34,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   LocalString text = LocalString();
 
   TextEditingController userNameCtrl = TextEditingController();
-  TextEditingController bioCtrl = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController surename = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
@@ -61,9 +60,26 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
   String flag = '';
   String _selectedGender = '';
   String _selectedService = '';
-
+  bool isDropdownOpen = false;
+  List serviceIdArray = [];
+  List serviceNameArray = [];
   String? selectedBranch;
   String? slectedCategory;
+
+  List<String> allDays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  List backendDays = [];
+  String selectedDaysList = "";
+  Map<String, bool> checkboxValues = {}; // Map to store checkbox states
+  String? _StartTime;
+  String? _endTime;
 
 /*------FOR PROFILE------*/
   File? file;
@@ -81,9 +97,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         file = File(pickedFile.path);
         List<int> imageBytes = file!.readAsBytesSync();
         baseimage = base64Encode(imageBytes);
-        imagename = 'image_${DateTime
-            .now()
-            .millisecondsSinceEpoch}_.jpg';
+        imagename = 'image_${DateTime.now().millisecondsSinceEpoch}_.jpg';
         Get.back();
       } else {
         print('No image selected.');
@@ -107,9 +121,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         dFile = File(pickedFile1.path);
         List<int> imageBytes = dFile!.readAsBytesSync();
         dBaseImage = base64Encode(imageBytes);
-        dImageName = 'image_${DateTime
-            .now()
-            .millisecondsSinceEpoch}_.jpg';
+        dImageName = 'image_${DateTime.now().millisecondsSinceEpoch}_.jpg';
         Get.back();
       } else {
         print('No image selected.');
@@ -130,9 +142,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     }
   }
 
-
-
-
   @override
   void initState() {
     super.initState();
@@ -145,10 +154,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final height = MediaQuery.of(context).size.height;
     return Obx(() {
       if (doctorProfileCtr.resultVar.value == 1) {
         doctorProfileCtr.resultVar.value = 0;
@@ -156,8 +162,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         print("user ka email===-${doctorProfileCtr.Email.value}");
         emailCtrl.text = doctorProfileCtr.Email.value;
         name.text = doctorProfileCtr.name.value;
-        bioCtrl.text = doctorProfileCtr.bio.value;
-        print("user ka bio${bioCtrl.text}");
+        descriptionCtr.text = doctorProfileCtr.description.value;
         files = doctorProfileCtr.image.value.toString();
         dFiles = doctorProfileCtr.degree.value.toString();
         surename.text = doctorProfileCtr.surename.value;
@@ -169,31 +174,50 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
         birthDateController.text = doctorProfileCtr.dateOfBirth.value;
         birthplaceController.text = doctorProfileCtr.placeOfBirth.value;
-        /*universityAttendedCtr.text = doctorProfileCtr.universityAttended.value;
-        dateOfEnrollmentCtr.text = doctorProfileCtr.dateOfEnrollment.value;
-        registerOfBelongingCtr.text =
-            doctorProfileCtr.registerOfBelonging.value;
-        dateOfQualification.text = doctorProfileCtr.dateOfQualification.value;
-        dateOfGraduation.text = doctorProfileCtr.dateOfGraduation.value;*/
-        flag = doctorProfileCtr.flag.value;
 
+        flag = doctorProfileCtr.flag.value;
         age.text = doctorProfileCtr.age.value;
         experience.text = doctorProfileCtr.experience.value;
         descriptionCtr.text = doctorProfileCtr.description.value;
         _selectedService = doctorProfileCtr.firstService.value;
         selectedBranch = doctorProfileCtr.branchId.value;
         slectedCategory = doctorProfileCtr.slectedCategory.value;
-        print("date  q======${doctorProfileCtr.dateOfQualification.value}");
+
+        /*API*/
+        doctorSignUpCtr.doctorServices(slectedCategory.toString());
+        _StartTime = doctorProfileCtr.sTime.value;
+        _endTime = doctorProfileCtr.eTime.value;
+
+        serviceIdArray =
+            doctorProfileCtr.profileDetails.value!.service.map((serviceId) {
+          return serviceId.id;
+        }).toList();
+        log("service ids${serviceIdArray.join(",")}");
+        /*service name'''''*/
+        serviceNameArray =
+            doctorProfileCtr.profileDetails.value!.service.map((serviceId) {
+          return serviceId.naam;
+        }).toList();
+        log("service name${serviceNameArray.join(",")}");
+
+        backendDays =
+            doctorProfileCtr.profileDetails.value!.totalDay.map((serviceId) {
+          return serviceId.day;
+        }).toList();
+        log("Days ids${backendDays.join(",")}");
+        for (String day in allDays) {
+          checkboxValues[day] = backendDays.contains(day);
+        }
 
         print("date of birth======${doctorProfileCtr.dateOfBirth.value}");
       }
       return Obx(() {
         return Scaffold(
           appBar: AppBar(
-              bottom: const PreferredSize(
-                  child: Divider(color: MyColor.midgray),
-                  preferredSize: Size.fromHeight(4.0)),
-        /*    actions: [
+            bottom: const PreferredSize(
+                child: Divider(color: MyColor.midgray),
+                preferredSize: Size.fromHeight(4.0)),
+            /*    actions: [
               InkWell(
                   onTap: () {
                     Get.toNamed(RouteHelper.DProfile());
@@ -227,375 +251,404 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
             child: doctorProfileCtr.loading.value
                 ? Center(heightFactor: 13.0, child: customView.MyIndicator())
                 : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                Center(
-                  child: Stack(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(120.0),
-                        child: file == null
-                            ? InkWell(
-                          onTap: () {
-                            imagePopUp(context, files);
-                          },
-                          child: FadeInImage.assetNetwork(
-                            imageErrorBuilder: (c, o, s) =>
-                                Image.asset(
-                                    "assets/images/dummyprofile.png",
-                                    width: 120,
-                                    height: 120,
-                                    fit: BoxFit.cover),
-                            width: 110,
-                            height: 110,
-                            fit: BoxFit.cover,
-                            placeholder:
-                            "assets/images/loading.gif",
-                            image: files,
-                            placeholderFit: BoxFit.cover,
-                          ),
-                        )
-                            : Image.file(file!,
-                            width: 120,
-                            height: 120,
-                            fit: BoxFit.fill),
-                      ),
-                      Positioned(
-                        bottom: -10.0,
-                        right: -5.0,
-                        child: IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      backgroundColor: Colors.white,
-                                      content: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              _choose(
-                                                  ImageSource.gallery);
-                                            },
-                                            child: const Row(
-                                              children: [
-                                                Icon(Icons.image,
-                                                    size: 20),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  "Image from gallery",
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                      FontWeight
-                                                          .w600),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              _choose(ImageSource.camera);
-                                            },
-                                            child: const Row(
-                                              children: [
-                                                Icon(Icons.camera_alt),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  "Image from camera",
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                      FontWeight
-                                                          .w600),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                      Center(
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(120.0),
+                              child: file == null
+                                  ? InkWell(
+                                      onTap: () {
+                                        imagePopUp(context, files);
+                                      },
+                                      child: FadeInImage.assetNetwork(
+                                        imageErrorBuilder: (c, o, s) =>
+                                            Image.asset(
+                                                "assets/images/dummyprofile.png",
+                                                width: 120,
+                                                height: 120,
+                                                fit: BoxFit.cover),
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                        placeholder:
+                                            "assets/images/loading.gif",
+                                        image: files,
+                                        placeholderFit: BoxFit.cover,
                                       ),
-                                    );
-                                  });
-                            },
-                            icon: const CircleAvatar(
-                              radius: 13,
-                              backgroundColor: MyColor.iconColor,
-                              child: Icon(
-                                Icons.camera_alt,
-                                size: 13.0,
-                                color: MyColor.white,
-                              ),
-                            )),
+                                    )
+                                  : Image.file(file!,
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.fill),
+                            ),
+                            Positioned(
+                              bottom: -10.0,
+                              right: -5.0,
+                              child: IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            backgroundColor: Colors.white,
+                                            content: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    _choose(
+                                                        ImageSource.gallery);
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.image,
+                                                          size: 20),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Image from gallery",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    _choose(ImageSource.camera);
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(Icons.camera_alt),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Image from camera",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  icon: const CircleAvatar(
+                                    radius: 13,
+                                    backgroundColor: MyColor.iconColor,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 13.0,
+                                      color: MyColor.white,
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.03,
-                ),
-                customView.text(text.H_Enter_Username.tr, 10.0,
-                    FontWeight.w600, MyColor.black),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                customView.myField(context, userNameCtrl,
-                    text.H_Enter_Username.tr, TextInputType.text),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                customView.text(text.yourbio.tr, 10.0, FontWeight.w600,
-                    MyColor.black),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                customView.myField(context, bioCtrl, text.yourbio.tr,
-                    TextInputType.text),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          customView.text(text.H_Enter_Name.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          customView.myField(context, name,
-                              text.H_Enter_Name.tr, TextInputType.text),
-                        ],
+                      SizedBox(
+                        height: height * 0.03,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          customView.text(text.H_Enter_Surname.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          customView.myField(
-                              context,
-                              surename,
-                              text.H_Enter_Surname.tr,
-                              TextInputType.text),
-                        ],
+                      customView.text(text.H_Enter_Username.tr, 10.0,
+                          FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                customView.text(text.yourUsernameEmail.tr, 10.0,
-                    FontWeight.w600, MyColor.black),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                customView.myField(context, emailCtrl,
-                    text.yourUsernameEmail.tr, TextInputType.text),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                customView.text(text.yourAddres.tr, 10.0, FontWeight.w600,
-                    MyColor.black),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                  child: customView.searchField(
-                      context,
-                      addressCtrl,
-                      "Enter address",
-                      TextInputType.text,
-                      const Text(""),
-                      const Icon(Icons.search_rounded), () async {
-                    var place = await PlacesAutocomplete.show(
-                        context: context,
-                        apiKey: kGoogleApiKey,
-                        mode: Mode.overlay,
-                        types: [],
-                        strictbounds: false,
-                        components: [],
-                        onError: (err) {
-                          print(err);
-                        });
-                    if (place != null) {
-                      setState(() {
-                        location = place.description.toString();
-                      });
+                      customView.myField(context, userNameCtrl,
+                          text.H_Enter_Username.tr, TextInputType.text),
 
-                      final plist = GoogleMapsPlaces(
-                        apiKey: kGoogleApiKey,
-                        // apiHeaders: await const GoogleApiHeaders().getHeaders(),
-                      );
-                      String placeId = place.placeId ?? "0";
-                      final detail =
-                      await plist.getDetailsByPlaceId(placeId);
-                      final geometry = detail.result.geometry!;
-                      final lat = geometry.location.lat;
-                      final lang = geometry.location.lng;
-                      var newlatlang = latLng.LatLng(lat, lang);
-                      log(newlatlang.latitude.toString());
-                      log(newlatlang.longitude.toString());
-                      log(">>>>>>>>>>>>>>>>>>", error: location);
-                      try {
-                        latitude = newlatlang.latitude.toString();
-                        longitude = newlatlang.longitude.toString();
-                        addressCtrl.text = location.toString();
-                      } catch (e) {
-                        print("Exception :-- ${e.toString()}");
-                      }
-                      print("My latitude AppCont : -- $latitude");
-                      print("My LONGITUDE AppCont : -- $longitude");
-                      print(
-                          "My address AppCont : -- ${addressCtrl.text}");
-                    }
-                  }, () {}),
-                ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Row(
                         children: [
-                          customView.text(text.Date_of_Birth.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          Container(
-                              height: 48.0,
-                              width:
-                              MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 2.3,
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, bottom: 5),
-                              margin: const EdgeInsets.fromLTRB(
-                                  0.0, 5.0, 0.0, 0.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(7)),
-                              child: TextFormField(
-                                onTap: () async {
-                                  startDate = await pickDate();
-                                  birthDateController.text =
-                                      _displayText(startDate);
-                                },
-                                readOnly: true,
-                                controller: birthDateController,
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                  const EdgeInsets.only(top: 8),
-                                  hintText: text.Select_Date.tr,
-                                  hintStyle:
-                                  const TextStyle(fontSize: 12),
-                                  suffixIcon: const Icon(Icons.calendar_month,
-                                      color: MyColor.primary),
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.H_Enter_Name.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
                                 ),
-                              )),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          customView.text(text.yourBirthplace.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.01,
+                                customView.myField(context, name,
+                                    text.H_Enter_Name.tr, TextInputType.text),
+                              ],
+                            ),
                           ),
-                          customView.myField(
-                              context,
-                              birthplaceController,
-                              text.yourBirthplace.tr,
-                              TextInputType.text),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.H_Enter_Surname.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(
+                                    context,
+                                    surename,
+                                    text.H_Enter_Surname.tr,
+                                    TextInputType.text),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      customView.text(text.yourUsernameEmail.tr, 10.0,
+                          FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      customView.myField(context, emailCtrl,
+                          text.yourUsernameEmail.tr, TextInputType.text),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      customView.text(text.yourContact.tr, 10.0,
+                          FontWeight.w600, MyColor.black),
+                      SizedBox(
+                        height: height * 0.012,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: IntlPhoneField(
+                          controller: phoneNumberCtrl,
+                          decoration: InputDecoration(
+                            counterText: '',
+                            filled: true,
+                            fillColor: Colors.white,
+                            constraints: const BoxConstraints.expand(),
+                            labelText: text.Phone_Number.tr,
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
+                          ),
+                          initialCountryCode: flag,
+                          onChanged: (phone) {
+                            flag = phone.countryISOCode;
+                            log(flag);
+                            code = phone.countryCode;
+                            log("code$code");
+                            log(phone.completeNumber);
+                          },
+                          onCountryChanged: (cod) {
+                            flag = cod.code;
+                            log(flag);
+                            code = cod.dialCode;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      customView.text(text.yourAddres.tr, 10.0, FontWeight.w600,
+                          MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                        child: customView.searchField(
+                            context,
+                            addressCtrl,
+                            "Enter address",
+                            TextInputType.text,
+                            const Text(""),
+                            const Icon(Icons.search_rounded), () async {
+                          var place = await PlacesAutocomplete.show(
+                              context: context,
+                              apiKey: kGoogleApiKey,
+                              mode: Mode.overlay,
+                              types: [],
+                              strictbounds: false,
+                              components: [],
+                              onError: (err) {
+                                print(err);
+                              });
+                          if (place != null) {
+                            setState(() {
+                              location = place.description.toString();
+                            });
+
+                            final plist = GoogleMapsPlaces(
+                              apiKey: kGoogleApiKey,
+                              // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                            );
+                            String placeId = place.placeId ?? "0";
+                            final detail =
+                                await plist.getDetailsByPlaceId(placeId);
+                            final geometry = detail.result.geometry!;
+                            final lat = geometry.location.lat;
+                            final lang = geometry.location.lng;
+                            var newlatlang = latLng.LatLng(lat, lang);
+                            log(newlatlang.latitude.toString());
+                            log(newlatlang.longitude.toString());
+                            log(">>>>>>>>>>>>>>>>>>", error: location);
+                            try {
+                              latitude = newlatlang.latitude.toString();
+                              longitude = newlatlang.longitude.toString();
+                              addressCtrl.text = location.toString();
+                            } catch (e) {
+                              print("Exception :-- ${e.toString()}");
+                            }
+                            print("My latitude AppCont : -- $latitude");
+                            print("My LONGITUDE AppCont : -- $longitude");
+                            print(
+                                "My address AppCont : -- ${addressCtrl.text}");
+                          }
+                        }, () {}),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.Date_of_Birth.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.005,
+                                ),
+                                Container(
+                                    height: 48.0,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, bottom: 5),
+                                    margin: const EdgeInsets.fromLTRB(
+                                        0.0, 5.0, 0.0, 0.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(7)),
+                                    child: TextFormField(
+                                      onTap: () async {
+                                        startDate = await pickDate();
+                                        birthDateController.text =
+                                            _displayText(startDate);
+                                      },
+                                      readOnly: true,
+                                      controller: birthDateController,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.only(top: 8),
+                                        hintText: text.Select_Date.tr,
+                                        hintStyle:
+                                            const TextStyle(fontSize: 12),
+                                        suffixIcon: const Icon(
+                                            Icons.calendar_month,
+                                            color: MyColor.primary),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.yourBirthplace.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(
+                                    context,
+                                    birthplaceController,
+                                    text.yourBirthplace.tr,
+                                    TextInputType.text),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
 /*-new-*/
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Row(
                         children: [
-                          customView.text(text.yourAge.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.01,
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.yourAge.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(context, age, text.Age.tr,
+                                    TextInputType.number),
+                              ],
+                            ),
                           ),
-                          customView.myField(context, age, text.Age.tr,
-                              TextInputType.number),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                customView.text(text.experience.tr, 10.0,
+                                    FontWeight.w600, MyColor.black),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                customView.myField(context, experience,
+                                    text.experience.tr, TextInputType.text),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          customView.text(text.experience.tr, 10.0,
-                              FontWeight.w600, MyColor.black),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          customView.myField(context, experience,
-                              text.experience.tr, TextInputType.text),
-                        ],
+                      SizedBox(
+                        height: height * 0.02,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                /* Row(
+                      /* Row(
                         children: [
                           Expanded(
                             flex: 1,
@@ -699,295 +752,457 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.03,
                       ),*/
-                customView.text(text.Select_Branch.tr, 10.0,
-                    FontWeight.w600, MyColor.black),
-                branch(),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                customView.text(text.category.tr, 10.0,
-                    FontWeight.w600, MyColor.black),
-                category(),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                customView.text(text.yourContact.tr, 10.0,
-                    FontWeight.w600, MyColor.black),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 1,
-                  child: IntlPhoneField(
-                    controller: phoneNumberCtrl,
-                    decoration: InputDecoration(
-                      counterText: '',
-                      filled: true,
-                      fillColor: Colors.white,
-                      constraints: const BoxConstraints.expand(),
-                      labelText: text.Phone_Number.tr,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5),
-                        ),
-                      ),
-                    ),
-                    initialCountryCode: flag,
-                    onChanged: (phone) {
-                      flag = phone.countryISOCode;
-                      log(flag);
-                      code = phone.countryCode;
-                      log("code$code");
-                      log(phone.completeNumber);
-                    },
-                    onCountryChanged: (cod) {
-                      flag = cod.code;
-                      log(flag);
-                      code = cod.dialCode;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.02,
-                ),
-                /*-new-*/
-                customView.text(text.yourGender.tr, 10.0, FontWeight.w600,
-                    MyColor.black),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        visualDensity: const VisualDensity(
-                            horizontal: -4, vertical: -4),
-                        leading: Radio<String>(
-                          value: 'male',
-                          groupValue: _selectedGender,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedGender = value!;
-                              print(_selectedGender);
-                            });
-                          },
-                        ),
-                        title: Text(text.Male.tr),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        visualDensity: const VisualDensity(
-                            horizontal: -4, vertical: -4),
-                        leading: Radio<String>(
-                          value: 'female',
-                          groupValue: _selectedGender,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedGender = value!;
-                              print(_selectedGender);
-                            });
-                          },
-                        ),
-                        title: Text(text.Female.tr),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: customView.text(
-                      text.certificates.tr, 13.0, FontWeight.w500, Colors.black),
-                ),
-                Stack(
-                  children:[
-                    InkWell(
-                    onTap:  () {
-                      imagePopUp(context,dFiles);
-                    },
-                    child: Card(
-                      child: dFile == null
-                          ?FadeInImage.assetNetwork(
-                        imageErrorBuilder: (c, o, s) =>
-                            Image.asset(
-                                "assets/images/dummyprofile.png",
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover),
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        placeholder:
-                        "assets/images/loading.gif",
-                        image: dFiles,
-                        placeholderFit: BoxFit.cover,
-                      ) : Image.file(dFile!,
-                        width: 120,
-                        height: 120,
-                        fit: BoxFit.fill),
-                    ),
-                  ),
-                    Positioned(
-                      bottom: -10.0,
-                      right: -10.0,
-                      child: IconButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    backgroundColor: Colors.white,
-                                    content: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            _chooseDegree(
-                                                ImageSource.gallery);
-                                          },
-                                          child: const Row(
-                                            children: [
-                                              Icon(Icons.image,
-                                                  size: 20),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                "Image from gallery",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _chooseDegree(ImageSource.camera);
-                                          },
-                                          child: const Row(
-                                            children: [
-                                              Icon(Icons.camera_alt),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                "Image from camera",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                });
-                          },
-                          icon: const CircleAvatar(
-                            radius: 13,
-                            backgroundColor: MyColor.iconColor,
-                            child: Icon(
-                              Icons.camera_alt,
-                              size: 13.0,
-                              color: MyColor.white,
-                            ),
-                          )),
-                    ),
-                        ]
-                ),
-                /* customView.text(text.firstConsultation.tr, 10.0,
+                      customView.text(text.Select_Branch.tr, 10.0,
                           FontWeight.w600, MyColor.black),
+                      branch(),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      customView.text(text.category.tr, 10.0, FontWeight.w600,
+                          MyColor.black),
+                      category(),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: customView.text(text.Select_Services.tr, 10.0,
+                            FontWeight.w600, MyColor.black),
+                      ),
+                      selectServiceList(),
+                      if (isDropdownOpen)
+                        Card(
+                          color: Colors.white,
+                          elevation: 2,
+                          margin: EdgeInsets.zero,
+                          child: SizedBox(
+                            height: 250,
+                            width: double.maxFinite,
+                            child: Obx(() {
+                              return Column(children: [
+                                doctorSignUpCtr.services.isEmpty
+                                    ? const Padding(
+                                        padding: EdgeInsets.all(17.0),
+                                        child: Text("No Services"),
+                                      )
+                                    : doctorSignUpCtr.serviceLoading.value
+                                        ? customView.MyIndicator()
+                                        : Expanded(
+                                            child: ListView.builder(
+                                            itemCount:
+                                                doctorSignUpCtr.services.length,
+                                            itemBuilder: (context, index) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (serviceIdArray.contains(
+                                                        doctorSignUpCtr
+                                                            .services[index]
+                                                            .serviceId)) {
+                                                      serviceIdArray.remove(
+                                                          doctorSignUpCtr
+                                                              .services[index]
+                                                              .serviceId);
+                                                      serviceNameArray.remove(
+                                                          doctorSignUpCtr
+                                                              .services[index]
+                                                              .serviceName);
+                                                    } else {
+                                                      serviceIdArray.add(
+                                                          doctorSignUpCtr
+                                                              .services[index]
+                                                              .serviceId);
+                                                      serviceNameArray.add(
+                                                          doctorSignUpCtr
+                                                              .services[index]
+                                                              .serviceName);
+                                                    }
+                                                    log("Service-Id-Array -${serviceIdArray.join(",")}");
+                                                    log("Service-Name-Array-${serviceNameArray.join(",")}");
+                                                  });
+                                                },
+                                                child: Card(
+                                                  color: Colors.white,
+                                                  elevation: 0.8,
+                                                  child: ListTile(
+                                                    // leading: ClipRRect(
+                                                    //   child: FadeInImage.assetNetwork(
+                                                    //     imageErrorBuilder: (c, o, s) =>
+                                                    //         Image.asset(
+                                                    //             "assets/images/noimage.png",
+                                                    //             width: 40,
+                                                    //             height: 40,
+                                                    //             fit: BoxFit.cover),
+                                                    //     width: 45,
+                                                    //     height: 45,
+                                                    //     fit: BoxFit.cover,
+                                                    //     placeholder:
+                                                    //         "assets/images/loading.gif",
+                                                    //     image: doctorSignUpCtr
+                                                    //         .services[index].image
+                                                    //         .toString(),
+                                                    //     placeholderFit: BoxFit.cover,
+                                                    //   ),
+                                                    // ),
+                                                    trailing:
+                                                        serviceIdArray.contains(
+                                                                doctorSignUpCtr
+                                                                    .services[
+                                                                        index]
+                                                                    .serviceId)
+                                                            ? const Icon(
+                                                                Icons.task_alt,
+                                                                color: MyColor
+                                                                    .primary1,
+                                                              )
+                                                            : null,
+                                                    title: serviceIdArray
+                                                            .contains(
+                                                                doctorSignUpCtr
+                                                                    .services[
+                                                                        index]
+                                                                    .serviceId)
+                                                        ? customView.text(
+                                                            "${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
+                                                            12,
+                                                            FontWeight.w500,
+                                                            MyColor.primary1)
+                                                        : customView.text(
+                                                            "${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
+                                                            11,
+                                                            FontWeight.w500,
+                                                            MyColor.black),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            shrinkWrap: true,
+                                          ))
+                              ]);
+                            }),
+                          ),
+                        ),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: serviceNameArray.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            margin: EdgeInsets.all(4),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: customView.text(
+                                  "${index + 1}. ${serviceNameArray[index]}",
+                                  12,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: customView.text("Working days:", 10,
+                              FontWeight.w600, MyColor.black)),
+                      Column(
+                        children: allDays.map((day) {
+                          return Card(
+                            child: CheckboxListTile(
+                              visualDensity: VisualDensity.compact,
+                              activeColor: MyColor.primary1,
+                              checkColor: MyColor.white,
+                              controlAffinity: ListTileControlAffinity.platform,
+                              title: customView.text(
+                                  day, 12.0, FontWeight.w500, MyColor.black),
+                              value: checkboxValues[day],
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  checkboxValues[day] = value!;
+                                  List<String> selectedDays = [];
+                                  checkboxValues.forEach((day, isSelected) {
+                                    if (isSelected ?? false) {
+                                      selectedDays.add(day);
+                                      selectedDaysList =
+                                          jsonEncode(selectedDays);
+                                      log("days1---$selectedDaysList");
+                                    }
+                                  });
+                                  log('Selected Days: ${selectedDays.join(',')}');
+                                });
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: customView.text(
+                            "Timing", 10.0, FontWeight.w600, MyColor.black),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: _Starttime,
+                              child: Container(
+                                height: 47,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 07,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: MyColor.black),
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.timer_outlined,
+                                      color: MyColor.primary1,
+                                    ),
+                                    const VerticalDivider(
+                                      width: 18,
+                                      color: Colors.black38,
+                                      thickness: 1,
+                                    ),
+                                    customView.text(
+                                        _StartTime != null
+                                            ? _StartTime!
+                                            : 'start time',
+                                        14,
+                                        FontWeight.w400,
+                                        MyColor.black),
+                                    const SizedBox(
+                                      width: 2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: _endtime,
+                              child: Container(
+                                height: 47,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 07,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: MyColor.black),
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.timer_outlined,
+                                      color: MyColor.primary1,
+                                    ),
+                                    const VerticalDivider(
+                                      width: 18,
+                                      color: Colors.black38,
+                                      thickness: 1,
+                                    ),
+                                    customView.text(
+                                        _endTime != null
+                                            ? _endTime!
+                                            : 'end time',
+                                        14,
+                                        FontWeight.w400,
+                                        MyColor.black),
+                                    const SizedBox(
+                                      width: 2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      /*-new-*/
+                      customView.text(text.yourGender.tr, 10.0, FontWeight.w600,
+                          MyColor.black),
                       Row(
                         children: [
                           Expanded(
                             flex: 1,
                             child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                visualDensity: const VisualDensity(
-                                    horizontal: -4, vertical: -4),
-                                leading: Radio<String>(
-                                  activeColor: MyColor.red,
-                                  value: 'Free',
-                                  groupValue: _selectedService,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedService = value!;
-                                      print(_selectedService);
-                                    });
-                                  },
-                                ),
-                                title: customView.text("Free", 14,
-                                    FontWeight.w500, MyColor.primary1)),
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: -4),
+                              leading: Radio<String>(
+                                activeColor: MyColor.primary1,
+                                value: 'Male',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                    print(_selectedGender);
+                                  });
+                                },
+                              ),
+                              title: Text(text.Male.tr),
+                            ),
                           ),
                           Expanded(
                             flex: 1,
                             child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                visualDensity: const VisualDensity(
-                                    horizontal: -4, vertical: -4),
-                                leading: Radio<String>(
-                                  activeColor: MyColor.red,
-                                  value: 'Paid',
-                                  groupValue: _selectedService,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedService = value!;
-                                      print(_selectedService);
-                                    });
-                                  },
-                                ),
-                                title: customView.text("Paid", 14,
-                                    FontWeight.w500, MyColor.primary1)),
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: -4),
+                              leading: Radio<String>(
+                                activeColor: MyColor.primary1,
+                                value: 'Female',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                    print(_selectedGender);
+                                  });
+                                },
+                              ),
+                              title: Text(text.Female.tr),
+                            ),
                           ),
-
-                          */
-                /*Transform.scale(
-                  scale: 0.9,
-                  child: Radio(
-                    value: 1,
-                    groupValue: selectedOption,
-                    onChanged: (value) {
-                        setState(() {
-                          radioButtonItem = 'Free';
-                      });
-                    },
-                  ),
-                ),
-                Radio(
-                  value: 2,
-                  groupValue: selectedOption,
-                  onChanged: (val) {
-                    setState(() {
-                      radioButtonItem = 'Paid';
-                    });
-                  },
-                ),*/
-                /*
                         ],
-                      ),*/
-              ],
-
-            ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: customView.text(text.certificates.tr, 13.0,
+                            FontWeight.w500, Colors.black),
+                      ),
+                      Stack(children: [
+                        InkWell(
+                          onTap: () {
+                            imagePopUp(context, dFiles);
+                          },
+                          child: Card(
+                            child: dFile == null
+                                ? FadeInImage.assetNetwork(
+                                    imageErrorBuilder: (c, o, s) => Image.asset(
+                                        "assets/images/dummyprofile.png",
+                                        width: 80,
+                                        height: 80,
+                                        fit: BoxFit.cover),
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                    placeholder: "assets/images/loading.gif",
+                                    image: dFiles,
+                                    placeholderFit: BoxFit.cover,
+                                  )
+                                : Image.file(dFile!,
+                                    width: 120, height: 120, fit: BoxFit.fill),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -10.0,
+                          right: -10.0,
+                          child: IconButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor: Colors.white,
+                                        content: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                _chooseDegree(
+                                                    ImageSource.gallery);
+                                              },
+                                              child: const Row(
+                                                children: [
+                                                  Icon(Icons.image, size: 20),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    "Image from gallery",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                _chooseDegree(
+                                                    ImageSource.camera);
+                                              },
+                                              child: const Row(
+                                                children: [
+                                                  Icon(Icons.camera_alt),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    "Image from camera",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              },
+                              icon: const CircleAvatar(
+                                radius: 13,
+                                backgroundColor: MyColor.iconColor,
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 13.0,
+                                  color: MyColor.white,
+                                ),
+                              )),
+                        ),
+                      ]),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      customView.text("Your description", 10.0, FontWeight.w600,
+                          MyColor.black),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      customView.myFieldExpand(context, descriptionCtr, text.yourbio.tr,
+                          TextInputType.text),
+                    ],
+                  ),
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
@@ -996,55 +1211,96 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
               text: text.saveProfile.tr,
               color: MyColor.primary,
               pressEvent: () {
+        List<String> selectedDays = [];
+        checkboxValues.forEach((day, isSelected) {
+          if (isSelected ?? false) {
+            selectedDays.add(day);
+            selectedDaysList =
+                jsonEncode(selectedDays);
+            log("days1---$selectedDaysList");
+          }
+        }
+        );
                 doctorProfileCtr.doctorProfileUpdate(
-                  context,
-                  name.text,
-                  surename.text,
-                  userNameCtrl.text,
-                  bioCtrl.text,
-                  location,
-                  latitude,
-                  longitude,
-                  code,
-                  emailCtrl.text,
-                  phoneNumberCtrl.text,
-                  imagename,
-                  baseimage,
-                  _selectedGender,
-                  birthDateController.text,
-                  birthplaceController.text,
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  age.text,
-                  experience.text,
-                  descriptionCtr.text,
-                  _selectedService.toString(),
-                  flag,
-                  selectedBranch.toString(),
-                  slectedCategory.toString(),
-                      "doc","docstr",
-                      () {
-                    AwesomeDialog(
-                      context: context,
-                      animType: AnimType.leftSlide,
-                      headerAnimationLoop: false,
-                      dialogType: DialogType.success,
-                      showCloseIcon: true,
-                      title: text.success.tr,
-                      desc: text.ProfileUpdateSuccessfully.tr,
-                      btnOkOnPress: () {
-                        debugPrint('OnClick');
-                      },
-                      btnOkIcon: Icons.check_circle,
-                      onDismissCallback: (type) {
-                        debugPrint('Dialog Dismiss from callback $type');
-                      },
-                    ).show();
-                  },
-                );
+                    context,
+                    selectedBranch.toString(),
+                    name.text,
+                    surename.text,
+                    userNameCtrl.text,
+                    emailCtrl.text,
+                    slectedCategory.toString(),
+                    serviceIdArray.join(','),
+                    flag,
+                    code,
+                    phoneNumberCtrl.text,
+                    "",
+                    _selectedGender.toString(),
+                    location,
+                    latitude,
+                    longitude,
+                    birthDateController.text,
+                    birthplaceController.text,
+                    age.text,
+                    descriptionCtr.text,
+                    experience.text,
+                    _StartTime.toString(),
+                    _endTime.toString(),
+                    dImageName,
+                    dBaseImage,
+                    selectedDaysList,
+                    imagename,
+                    baseimage, () {
+                  AwesomeDialog(
+                    context: context,
+                    animType: AnimType.leftSlide,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.success,
+                    showCloseIcon: true,
+                    title: text.success.tr,
+                    desc: text.ProfileUpdateSuccessfully.tr,
+                    btnOkOnPress: () {
+                      debugPrint('OnClick');
+                    },
+                    btnOkIcon: Icons.check_circle,
+                    onDismissCallback: (type) {
+                      debugPrint('Dialog Dismiss from callback $type');
+                    },
+                  ).show();
+                });
+                // doctorProfileCtr.doctorProfileUpdate(
+                //   context,
+                //   name.text,
+                //   surename.text,
+                //   userNameCtrl.text,
+                //   bioCtrl.text,
+                //   location,
+                //   latitude,
+                //   longitude,
+                //   code,
+                //   emailCtrl.text,
+                //   phoneNumberCtrl.text,
+                //   imagename,
+                //   baseimage,
+                //   _selectedGender,
+                //   birthDateController.text,
+                //   birthplaceController.text,
+                //   "",
+                //   "",
+                //   "",
+                //   "",
+                //   "",
+                //   age.text,
+                //   experience.text,
+                //   descriptionCtr.text,
+                //   _selectedService.toString(),
+                //   flag,
+                //   selectedBranch.toString(),
+                //   slectedCategory.toString(),
+                //       "doc","docstr",
+                //       () {
+                //
+                //   },
+                // );
                 /* doctorProfileCtr.doctorProfileUpdate(
                   context,
                   name.text,
@@ -1092,15 +1348,11 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                   },
                 );*/
               },
-            )
-            ,
-          )
-          ,
+            ),
+          ),
         );
       });
-    }
-
-    );
+    });
   }
 
 //*******date strt end************//
@@ -1136,17 +1388,12 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Padding(
@@ -1164,14 +1411,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             return const Image(
                                 image: AssetImage("assets/images/noimage.png"));
                           },
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.5,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.5,
                           fit: BoxFit.cover,
                           placeholder: "assets/images/loading.gif",
                           image: image,
@@ -1189,118 +1430,223 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
 /*---------SELECT BRANCH-----*/
   Widget branch() {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
     return StatefulBuilder(
-      builder: (context, StateSetter stateSetter) =>
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Center(
-              child: Container(
-                height: height * 0.06,
-                width: widht * 1,
-                padding: const EdgeInsets.only(left: 10),
-                margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-                decoration: BoxDecoration(
-                    color: MyColor.white,
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(color: MyColor.grey)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    menuMaxHeight: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 3,
-                    // Initial Value
-                    value: selectedBranch,
-                    // Down Arrow Icon
-                    icon: const Icon(Icons.keyboard_arrow_down,
-                        color: MyColor.primary),
-                    // Array list of items
-                    items: doctorSignUpCtr.branchList.map((items) {
-                      return DropdownMenuItem(
-                        value: items.branchId,
-                        child: Text(items.branchName),
-                      );
-                    }).toList(),
-                    hint: Text(text.Select_Branch.tr),
-                    onChanged: (newValue) {
-                      stateSetter(() {
-                        selectedBranch = newValue;
-                        log('MY selected Branch>>>$selectedBranch');
-                      });
-                    },
-                  ),
-                ),
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 1,
+            padding: const EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint: Text(text.Select_Branch.tr),
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY selected Branch>>>$selectedBranch');
+                  });
+                },
               ),
             ),
           ),
+        ),
+      ),
     );
   }
 
 /*---------SELECT  CATEGORY-----*/
   Widget category() {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final widht = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
     return StatefulBuilder(
-      builder: (context, StateSetter stateSetter) =>
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Center(
-              child: Container(
-                height: height * 0.06,
-                width: widht * 1,
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
-                decoration: BoxDecoration(
-                    color: MyColor.white,
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(color: MyColor.grey)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    menuMaxHeight: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 3,
-                    // Initial Value
-                    value: slectedCategory,
-                    // Down Arrow Icon
-                    icon: const Icon(Icons.keyboard_arrow_down,
-                        color: MyColor.primary),
-                    // Array list of items
-                    items: doctorSignUpCtr.category.map((items) {
-                      return DropdownMenuItem(
-                        value: items.categoryId,
-                        child: Text(items.categoryName),
-                      );
-                    }).toList(),
-                    hint: Text(text.Select_Category.tr),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (newValue) {
-                      stateSetter(() {
-                        slectedCategory = newValue;
-                        log('MY CATEGORY>>>$slectedCategory');
-                      });
-                      /*doctorListCtr.subCatList(slectedCategory!);*/
-                    },
-                  ),
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 0.9,
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: slectedCategory,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.category.map((items) {
+                  return DropdownMenuItem(
+                    value: items.categoryId,
+                    child: Text(items.categoryName),
+                  );
+                }).toList(),
+                hint: Text(
+                  text.Select_Category.tr,
+                  style: TextStyle(fontSize: 13),
                 ),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    slectedCategory = newValue;
+                    log('MY CATEGORY>>>$slectedCategory');
+                  });
+                  doctorSignUpCtr.doctorServices(slectedCategory.toString());
+                  serviceNameArray.clear();
+                  serviceIdArray.clear();
+                  log("this for clear service Id Array---${serviceIdArray.join(",")}");
+                  log("this for clear service Name Array---${serviceNameArray.join(',')}");
+                  setState(() {});
+
+                  /*doctorListCtr.subCatList(slectedCategory!);*/
+                },
               ),
             ),
           ),
+        ),
+      ),
     );
+  }
+
+  /*---------SELECT Services Multiple-----*/
+  Widget selectServiceList() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.center,
+        child: Obx(
+          () => doctorSignUpCtr.serviceLoading.value
+              ? customView.MyIndicator()
+              : Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDropdownOpen = !isDropdownOpen;
+                      });
+                    },
+                    child: Container(
+                        height: height * 0.06,
+                        width: widht * 1,
+                        padding: const EdgeInsets.only(left: 10),
+                        margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+                        decoration: BoxDecoration(
+                            color: MyColor.white,
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(color: MyColor.grey)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width / 2.1,
+                                    child: Text(
+                                      serviceNameArray.isNotEmpty
+                                          ? "${serviceNameArray.length.toString()} Service selected"
+                                          : text.Select_Services.tr,
+                                      style: TextStyle(fontSize: 13),
+                                    )),
+                                Icon(
+                                    isDropdownOpen
+                                        ? Icons.keyboard_arrow_up
+                                        : Icons.keyboard_arrow_down,
+                                    color: MyColor.primary1),
+                              ],
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _Starttime() async {
+    final TimeOfDay? result = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: MyColor.primary1,
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.brown, // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(backgroundColor: Colors.white),
+              ),
+            ),
+            child: child!,
+          ),
+        );
+      },
+    );
+    if (result != null) {
+      setState(() {
+        _StartTime = result.format(context);
+        log("$_StartTime");
+      });
+    }
+  }
+
+  Future<void> _endtime() async {
+    final TimeOfDay? result = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: MyColor.primary1,
+                onPrimary: Colors.white, // header text color
+                onSurface: Colors.brown, // body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(backgroundColor: Colors.white),
+              ),
+            ),
+            child: child!,
+          );
+        });
+    if (result != null) {
+      setState(() {
+        _endTime = result.format(context);
+        log("$_endTime");
+      });
+    }
   }
 }

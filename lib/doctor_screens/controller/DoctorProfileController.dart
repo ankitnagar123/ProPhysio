@@ -9,13 +9,15 @@ import '../../../Network/Apis.dart';
 import '../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../language_translator/LanguageTranslate.dart';
+import '../model/DoctorProfileModel.dart';
 
 class DoctorProfileCtr extends GetxController {
   CustomView custom = CustomView();
   LocalString text = LocalString();
 
-
   ApiService apiService = ApiService();
+  var profileDetails = Rxn<DoctorProfileModel>();
+
   var loading = false.obs;
   var loadingU = false.obs;
 
@@ -38,22 +40,21 @@ class DoctorProfileCtr extends GetxController {
   var bio = "".obs;
   var image = "".obs;
   var gender = "".obs;
+
   /*new*/
   var dateOfBirth = "".obs;
   var placeOfBirth = "".obs;
-  var universityAttended = "".obs;
-  var dateOfEnrollment = "".obs;
-  var registerOfBelonging = "".obs;
-  var dateOfQualification = "".obs;
-  var dateOfGraduation = "".obs;
-  var flag ="".obs;
 
-  var age ="".obs;
-  var experience ="".obs;
-  var description ="".obs;
-  var firstService ="".obs;
-  var branchId ="".obs;
-  var slectedCategory ="".obs;
+  var flag = "".obs;
+
+  var age = "".obs;
+  var experience = "".obs;
+  var description = "".obs;
+  var firstService = "".obs;
+  var branchId = "".obs;
+  var slectedCategory = "".obs;
+  var sTime = "".obs;
+  var eTime = "".obs;
 
   var resultVar = RxnInt(0);
 
@@ -64,8 +65,8 @@ class DoctorProfileCtr extends GetxController {
     loading.value = true;
     resultVar.value = 0;
     final Map<String, dynamic> ProfilePerameter = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "language": await sp.getStringValue(sp.LANGUAGE) ?? "",
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
     };
     print("Doctor Profile Parameter$ProfilePerameter");
 
@@ -77,6 +78,8 @@ class DoctorProfileCtr extends GetxController {
 
       loading.value = false;
       if (response.statusCode == 200) {
+        profileDetails.value = doctorProfileModelFromJson(response.body);
+        log("profileDetails-------${profileDetails.value}");
         var jsonResponse = jsonDecode(response.body);
         String result = jsonResponse['result'].toString();
         String biography = jsonResponse['biography'].toString();
@@ -87,7 +90,7 @@ class DoctorProfileCtr extends GetxController {
         name.value = jsonResponse["name"].toString();
         surename.value = jsonResponse["surname"].toString();
         gender.value = jsonResponse["gender"].toString();
-        // bio.value = jsonResponse["biography"];
+        bio.value = jsonResponse["description"];
         username.value = jsonResponse["username"].toString();
         location.value = jsonResponse["location"].toString();
         Email.value = jsonResponse["email"].toString();
@@ -100,24 +103,17 @@ class DoctorProfileCtr extends GetxController {
         lat.value = jsonResponse["latitude"].toString();
         lang.value = jsonResponse["longitude"].toString();
         degree.value = jsonResponse["Doctor_document"].toString();
+        dateOfBirth.value = jsonResponse["birth_date"].toString();
+        placeOfBirth.value = jsonResponse["birth_place"].toString();
         /*-new-*/
-        dateOfBirth.value = jsonResponse["birth_date"];
-        placeOfBirth.value = jsonResponse["birth_place"];
-        universityAttended.value = jsonResponse["university_attended"];
-        dateOfEnrollment.value = jsonResponse["enrollment_date"];
-        registerOfBelonging.value = jsonResponse["register_of_belonging"];
-        dateOfGraduation.value = jsonResponse["graduation_date"];
-        dateOfQualification.value = jsonResponse["qualification_date"];
-
         age.value = jsonResponse["age"];
         experience.value = jsonResponse["experience"];
         description.value = jsonResponse["description"];
-        firstService.value = jsonResponse["first_Service"];
-         branchId.value = jsonResponse["branch_id"];
-         slectedCategory.value = jsonResponse["category_id"];
+        branchId.value = jsonResponse["branch_id"];
+        slectedCategory.value = jsonResponse["category_id"];
+        sTime.value = jsonResponse["start_time"];
+        eTime.value = jsonResponse["end_time"];
         resultVar.value = 1;
-
-        // Massenger(context, 'My Profile');
       } else {
         resultVar.value = 2;
 
@@ -134,88 +130,72 @@ class DoctorProfileCtr extends GetxController {
 /*----------Update Doctor Profile API-----------*/
   void doctorProfileUpdate(
     BuildContext context,
+    String branch,
     String name,
     String surname,
     String username,
-    String bio,
-      String location,
-    String lat,
-        String long ,
-    // String docImg,
-    // String docBase,
-    String code,
     String email,
-    String phone,
-    // String password,
-    String image,
-    String baseImage,
+    String category,
+    String serviceIds,
+    String flag,
+    String code,
+    String contact,
+    String password,
     String gender,
-    String dateOfBirth,
-    String placeOfBirth,
-    String universityAttended,
-    String dateOfEnrollment,
-    String registerOfBelonging,
-    String dateOfQualification,
-    String dateOfGraduation,
+    String location,
+    String latitude,
+    String longitude,
+    String birthDate,
+    String birthPlace,
+    String age,
+    String description,
+    String experience,
+    String startTime,
 
-    String Age,
-    String Experience,
-    String Description,
-    String FristFee,
-      String flag,
-      String branchId,
-      String slectedCategory,
-      String doc,
-      String docStr,
-      VoidCallback callback,
+    String endTime,
+    String docPdf,
+    String docimgStr,
+    String totalDay,
+    String image,
+    String imgStr,
+
+    VoidCallback callback,
   ) async {
     loadingU.value = true;
     final Map<String, dynamic> profileUpdatePerameter = {
-      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "name": name,
-      "surname": surname,
-      "username": username,
-      "biography": bio,
-      "email": email,
-      // "category":category,
-       "location":location,
-      "latitude":lat,
-      "longitude":long,
-      "code": code,
-      "contact": phone,
+      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "branch":branch,
+      "name":name,
+      "surname":surname,
+      "username":username,
+      "email":email,
+      "category":category,
+      "service_ids":serviceIds,
       "flag":flag,
-      // "password": password,
-      // "doc_pdf": docImg,
-      // "docimg_str":docBase,
-      "image": image,
-      "img_str": baseImage,
-      "gender": gender,
-      "birth_date": dateOfBirth,
-      "birth_place": placeOfBirth,
-      "university_attended": universityAttended,
-      "enrollment_date": dateOfEnrollment,
-      "register_of_belonging": registerOfBelonging,
-      "graduation_date": dateOfGraduation,
-      "qualification_date": dateOfQualification,
-      /*new*/
-      "age":Age,
-      "experience":Experience,
-      "description":Description,
-      "first_Service":FristFee,
-      "branch_id":branchId,
-      "category_id":slectedCategory,
-      "doc": doc,
-      "doc_str": docStr,
+      "code":code,
+      "contact":contact,
+      "password":password,
+      "gender":gender,
+      "location":location,
+      "latitude":latitude,
+      "longitude":longitude,
+      "birth_date":birthDate,
+      "birth_place":birthPlace,
+      "age":age,
+      "description":description,
+      "experience":experience,
+      "start_time":startTime,
+      "end_time":endTime,
+      "doc_pdf":docPdf,
+      "docimg_str":docimgStr,
+      "total_day":totalDay,
+      "image":image,
+      "img_str":imgStr,
+
     };
     print(" Doctor Profile Update Parameter$profileUpdatePerameter");
 
-    final response =/*await http.post(
-        Uri.parse(
-          // MyAPI.DUpdateProfile,
-          "https://sicparvismagna.it/Medica/Apis/process.php?action=update_Doctor_profile"
-        ),
-        body: profileUpdatePerameter);*/
-        await apiService.postData(MyAPI.DUpdateProfile, profileUpdatePerameter);
+    final response = await apiService.postData(MyAPI.DUpdateProfile, profileUpdatePerameter);
     try {
       log("response of Doctor Profile Update :-${response.body}");
       loadingU.value = false;

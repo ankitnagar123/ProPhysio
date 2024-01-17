@@ -11,23 +11,19 @@ String doctorServicesModelToJson(List<DoctorServicesModel> data) => json.encode(
 class DoctorServicesModel {
   String serviceId;
   String serviceName;
-  String image;
 
   DoctorServicesModel({
     required this.serviceId,
     required this.serviceName,
-    required this.image,
   });
 
   factory DoctorServicesModel.fromJson(Map<String, dynamic> json) => DoctorServicesModel(
     serviceId: json["service_id"].toString(),
     serviceName: json["service_name"].toString(),
-    image: json["Image"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
     "service_id": serviceId,
     "service_name": serviceName,
-    "Image": image,
   };
 }

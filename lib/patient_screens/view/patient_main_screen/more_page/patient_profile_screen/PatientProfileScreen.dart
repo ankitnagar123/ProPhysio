@@ -35,7 +35,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   String dropdownvalue = "";
 
   var items = [
-    "Mr.", "Ms", "Miss", "Mrs",
+    "Mr", "Ms", "Miss", "Mrs",
   ];
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController nameCtrl = TextEditingController();
@@ -141,14 +141,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   void initState() {
     super.initState();
-      profileCtr.patientProfile(context);
+    profileCtr.patientProfile(context);
     doctorSignUpCtr.branchListApi();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Obx( () {
       if (profileCtr.resultVar.value == 1) {
         profileCtr.resultVar.value = 0;
@@ -943,6 +942,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+
                 children: [
                   Container(
                     decoration: BoxDecoration(

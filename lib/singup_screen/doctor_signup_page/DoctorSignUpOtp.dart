@@ -91,7 +91,7 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
   var branch = "";
   var category = "";
   var services = "";
-  var workingDays = "";
+  // var workingDays = "";
   var startTime = "";
   var endTime = "";
 
@@ -123,7 +123,7 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
     branch = Get.parameters["branch"].toString();
     category = Get.parameters["category"].toString();
     services = Get.parameters["services"].toString();
-    workingDays = Get.parameters["workingDays"].toString();
+    // workingDays = Get.parameters["workingDays"].toString();
     startTime = Get.parameters["startTime"].toString();
     endTime = Get.parameters["endTime"].toString();
 
@@ -171,7 +171,6 @@ class _DoctorSignUpOtpState extends State<DoctorSignUpOtp> {
                     branch,
                     category,
                     services,
-                    workingDays,
                     startTime,
                     endTime,
                     imagename,

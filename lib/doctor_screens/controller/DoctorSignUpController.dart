@@ -241,7 +241,7 @@ class DoctorSignUpCtr extends GetxController {
       String branch,
       String category,
       String service,
-      String workingDays,
+      // String workingDays,
       String startTime,
       String endTime,
       String imgString,
@@ -273,7 +273,7 @@ class DoctorSignUpCtr extends GetxController {
       "branch":branch,
       "category": category,
       "service_ids": service,
-      "total_day": workingDays,
+      // "total_day": workingDays,
       "start_time": startTime,
       "end_time": endTime,
     };

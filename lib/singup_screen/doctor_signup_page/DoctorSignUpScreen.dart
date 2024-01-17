@@ -86,8 +86,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   List serviceNameArray = [];
 
 /*working day*/
-  List<String> selectedDays = [];
-  String selectedDaysList = "";
+  // List<String> selectedDays = [];
+  // String selectedDaysList = "";
 
   /*Doctor Timing*/
   String? _StartTime;
@@ -204,7 +204,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       "branch": selectedBranch.toString(),
                       "category": slectedCategory.toString(),
                       "services": serviceIdArray.join(','),
-                      "workingDays": selectedDaysList.toString(),
+                      // "workingDays": selectedDaysList.toString(),
                       "startTime": _StartTime.toString(),
                       "endTime": _endTime.toString(),
                       "imagename": degreefilename.toString(),
@@ -487,145 +487,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-
-                /*    Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.University_Attended.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myField(context, universityAttendedCtr,
-                    text.University_Attended.tr, TextInputType.text),*/
-                /* const SizedBox(
-                  height: 16,
-                ),*/
-                /* Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Date_of_Enrollment.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
-                ),
-                Container(
-                    height: 45.0,
-                    width: MediaQuery.of(context).size.width / 0.9,
-                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(7)),
-                    child: TextFormField(
-                      onTap: () async {
-                        startDate = await pickDate();
-                        dateOfEnrollmentCtr.text = _displayText(startDate);
-                        setState(() {});
-                        print(dateOfEnrollmentCtr.text);
-                      },
-                      readOnly: true,
-                      controller: dateOfEnrollmentCtr,
-                      decoration:  InputDecoration(
-                        hintText: text.Select_Date.tr,
-                        hintStyle: const TextStyle(fontSize: 15),
-                        suffixIcon:
-                            const Icon(Icons.calendar_month, color: MyColor.primary),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                      ),
-                    )),*/
-                /* const SizedBox(
-                  height: 16,
-                ),*/
-                /**/
-                /*  Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
-                ),
-                Container(
-                    height: 45.0,
-                    width: MediaQuery.of(context).size.width / 0.9,
-                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(7)),
-                    child: TextFormField(
-                      onTap: () async {
-                        startDate = await pickDate();
-                        dateOfQualification.text = _displayText(startDate);
-                        setState(() {});
-                        print(dateOfQualification.text);
-                      },
-                      readOnly: true,
-                      controller: dateOfQualification,
-                      decoration:  InputDecoration(
-                        hintText: text.Select_Date.tr,
-                        hintStyle: const TextStyle(fontSize: 15),
-                        suffixIcon:
-                            const Icon(Icons.calendar_month, color: MyColor.primary),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                      ),
-                    )),
-                const SizedBox(
-                  height: 16,
-                ),*/
-                /*const SizedBox(
-                height: 16,
-              ),*/
-                /* Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Date_of_Qualification.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
-                ),
-                Container(
-                    height: 45.0,
-                    width: MediaQuery.of(context).size.width / 0.9,
-                    padding: const EdgeInsets.only(left: 10.0, bottom: 5),
-                    margin: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(7)),
-                    child: TextFormField(
-                      onTap: () async {
-                        startDate = await pickDate();
-                        dateOfGraduation.text = _displayText(startDate);
-                        setState(() {});
-                        print(dateOfGraduation.text);
-                      },
-                      readOnly: true,
-                      controller: dateOfGraduation,
-                      decoration:  InputDecoration(
-                        hintText: text.Select_Date.tr,
-                        hintStyle: const TextStyle(fontSize: 15),
-                        suffixIcon:
-                            const Icon(Icons.calendar_month, color: MyColor.primary),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                      ),
-                    )),
-                const SizedBox(
-                  height: 16,
-                ),*/
-                /* Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Register_of_Belonging.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myField(context, registerOfBelongingCtr,
-                    text.Register_of_Belonging.tr, TextInputType.text),
-                const SizedBox(
-                  height: 16,
-                ),*/
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
@@ -679,133 +540,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 SizedBox(
                   height: 3,
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(
-                      "Select Timing", 13.0, FontWeight.w500, MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: _Starttime,
-                        child: Container(
-                          height: 47,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 07,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: MyColor.black),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.timer_outlined,
-                                color: MyColor.primary1,
-                              ),
-                              const VerticalDivider(
-                                width: 18,
-                                color: Colors.black38,
-                                thickness: 1,
-                              ),
-                              custom.text(
-                                  _StartTime != null ? _StartTime! : 'start time',
-                                  14,
-                                  FontWeight.w400,
-                                  MyColor.black),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: _endtime,
-                        child: Container(
-                          height: 47,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 07,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: MyColor.black),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.timer_outlined,
-                                color: MyColor.primary1,
-                              ),
-                              const VerticalDivider(
-                                width: 18,
-                                color: Colors.black38,
-                                thickness: 1,
-                              ),
-                              custom.text(_endTime != null ? _endTime! : 'end time',
-                                  14, FontWeight.w400, MyColor.black),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Upload_your_Degree.tr, 13.0,
-                      FontWeight.w500, MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: MyColor.white,
-                      borderRadius: BorderRadius.circular(7),
-                      border: Border.all(
-                        color: Colors.black38,
-                      ),
-                    ),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: 45,
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Icon(Icons.upload),
-                        ),
-                        Text(
-                          degreefilename.toString(),
-                          style:
-                          const TextStyle(fontSize: 10, color: Colors.black45),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    // AdharIdCtr.toString();
-                    _chooseDegree();
-                  },
-                ),
+
+
                 const SizedBox(
                   height: 17.0,
                 ),
@@ -900,25 +636,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 //         ),
                 //       )),
                 // ),
-                SizedBox(
-                  height: 15,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.enterDescription.tr, 13.0,
-                      FontWeight.w500, MyColor.primary1),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myFieldExpand(context, descriptionController,
-                    text.enterDescription.tr, TextInputType.text),
-                const SizedBox(
-                  height: 5,
-                ),
+
               ],
             ),
           ),
@@ -941,9 +659,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 10.0,
-                ),
+
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
@@ -1015,51 +731,35 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                             color: Colors.white,
                                             elevation: 0.8,
                                             child: ListTile(
-                                              leading: ClipRRect(
-                                                child: FadeInImage.assetNetwork(
-                                                  imageErrorBuilder: (c, o, s) =>
-                                                      Image.asset(
-                                                          "assets/images/noimage.png",
-                                                          width: 40,
-                                                          height: 40,
-                                                          fit: BoxFit.cover),
-                                                  width: 45,
-                                                  height: 45,
-                                                  fit: BoxFit.cover,
-                                                  placeholder:
-                                                      "assets/images/loading.gif",
-                                                  image: doctorSignUpCtr
-                                                      .services[index].image
-                                                      .toString(),
-                                                  placeholderFit: BoxFit.cover,
-                                                ),
-                                              ),
+                                              // leading: ClipRRect(
+                                              //   child: FadeInImage.assetNetwork(
+                                              //     imageErrorBuilder: (c, o, s) =>
+                                              //         Image.asset(
+                                              //             "assets/images/noimage.png",
+                                              //             width: 40,
+                                              //             height: 40,
+                                              //             fit: BoxFit.cover),
+                                              //     width: 45,
+                                              //     height: 45,
+                                              //     fit: BoxFit.cover,
+                                              //     placeholder:
+                                              //         "assets/images/loading.gif",
+                                              //     image: doctorSignUpCtr
+                                              //         .services[index].image
+                                              //         .toString(),
+                                              //     placeholderFit: BoxFit.cover,
+                                              //   ),
+                                              // ),
                                               trailing: serviceIdArray.contains(
-                                                      doctorSignUpCtr
-                                                          .services[index]
-                                                          .serviceId)
-                                                  ? const Icon(
-                                                      Icons.task_alt,
-                                                      color: MyColor.primary1,
-                                                    )
-                                                  : null,
+                                                  doctorSignUpCtr.services[index].serviceId)
+                                                  ? const Icon(Icons.task_alt, color: MyColor.primary1,) : null,
                                               title: serviceIdArray.contains(
-                                                      doctorSignUpCtr
-                                                          .services[index]
-                                                          .serviceId)
-                                                  ? custom.text(
-                                                      doctorSignUpCtr
-                                                          .services[index]
-                                                          .serviceName
-                                                          .toUpperCase(),
+                                                      doctorSignUpCtr.services[index].serviceId)
+                                                  ? custom.text("${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
                                                       12,
                                                       FontWeight.w500,
                                                       MyColor.primary1)
-                                                  : custom.text(
-                                                      doctorSignUpCtr
-                                                          .services[index]
-                                                          .serviceName
-                                                          .toUpperCase(),
+                                                  : custom.text("${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
                                                       11,
                                                       FontWeight.w500,
                                                       MyColor.black),
@@ -1095,7 +795,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Align(
+              /*  Align(
                     alignment: Alignment.topLeft,
                     child: custom.text("Select working days:", 13, FontWeight.w500,
                         MyColor.primary1)),
@@ -1130,77 +830,154 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         });
                       },
                     ),
-                  ),
-
-
-                /*  Align(
-                     alignment: Alignment.topLeft,
-                     child: custom.text(text.firstConsultation, 13, FontWeight.w500, MyColor.primary1)),
+                  ),*/
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(
+                      "Select Timing", 13.0, FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     Expanded(
                       flex: 1,
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        visualDensity:
-                        const VisualDensity(horizontal: -4, vertical: -4),
-                        leading: Radio<String>(
-                          activeColor: MyColor.red,
-                          value: 'Free',
-                          groupValue: _selectedService,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedService = value!;
-                              print(_selectedService);
-                            });
-                          },
+                      child: InkWell(
+                        onTap: _Starttime,
+                        child: Container(
+                          height: 47,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 07,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: MyColor.black),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.timer_outlined,
+                                color: MyColor.primary1,
+                              ),
+                              const VerticalDivider(
+                                width: 18,
+                                color: Colors.black38,
+                                thickness: 1,
+                              ),
+                              custom.text(
+                                  _StartTime != null ? _StartTime! : 'start time',
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                            ],
+                          ),
                         ),
-                        title:  custom.text("Free", 14, FontWeight.w500, MyColor.primary1)
                       ),
+                    ),
+                    SizedBox(
+                      width: 8,
                     ),
                     Expanded(
                       flex: 1,
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        visualDensity:
-                        const VisualDensity(horizontal: -4, vertical: -4),
-                        leading: Radio<String>(
-                          activeColor: MyColor.red,
-                          value: 'Paid',
-                          groupValue: _selectedService,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedService = value!;
-                              print(_selectedService);
-                            });
-                          },
+                      child: InkWell(
+                        onTap: _endtime,
+                        child: Container(
+                          height: 47,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 07,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: MyColor.black),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.timer_outlined,
+                                color: MyColor.primary1,
+                              ),
+                              const VerticalDivider(
+                                width: 18,
+                                color: Colors.black38,
+                                thickness: 1,
+                              ),
+                              custom.text(_endTime != null ? _endTime! : 'end time',
+                                  14, FontWeight.w400, MyColor.black),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                            ],
+                          ),
                         ),
-                        title:    custom.text("Paid", 14, FontWeight.w500, MyColor.primary1)
                       ),
-                    ),
+                    )
+                  ],
+                ),
 
-                    */
-                /*Transform.scale(
-                      scale: 0.9,
-                      child: Radio(
-                        value: 1,
-                        groupValue: selectedOption,
-                        onChanged: (value) {
-                            setState(() {
-                              radioButtonItem = 'Free';
-                          });
-                        },
+                const SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.Upload_your_Degree.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: MyColor.white,
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                        color: Colors.black38,
                       ),
                     ),
-                    Radio(
-                      value: 2,
-                      groupValue: selectedOption,
-                      onChanged: (val) {
-                        setState(() {
-                          radioButtonItem = 'Paid';
-                        });
-                      },
-                    ),*/
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 45,
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Icon(Icons.upload),
+                        ),
+                        Text(
+                          degreefilename.toString(),
+                          style:
+                          const TextStyle(fontSize: 10, color: Colors.black45),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    // AdharIdCtr.toString();
+                    _chooseDegree();
+                  },
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: custom.text(text.enterDescription.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                const SizedBox(
+                  height: 3.0,
+                ),
+                custom.myFieldExpand(context, descriptionController,
+                    text.enterDescription.tr, TextInputType.text),
+                const SizedBox(
+                  height: 5,
+                ),
               ],
             ),
           ),
