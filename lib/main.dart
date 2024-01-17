@@ -45,7 +45,7 @@ Future<void> main() async {
     );
   });
 
-  runApp( MyApp(navigatorKey: navigatorKey));
+  runApp(MyApp(navigatorKey: navigatorKey));
 }
 
 class MyApp extends StatefulWidget {
@@ -118,6 +118,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Pro-Physio',
       initialRoute: RouteHelper.getSplashScreen(),
       getPages: RouteHelper.routes,
+
     );
   }
 }

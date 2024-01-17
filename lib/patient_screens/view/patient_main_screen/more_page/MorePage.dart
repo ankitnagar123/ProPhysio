@@ -11,6 +11,7 @@ import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/auth_controllers/PatientProfileController.dart';
 import "../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
+import '../../IntakeForm/intake_form_screen.dart';
 import 'Ratings_and_reviews/Rating&ReviewPage.dart';
 import 'my_past_chekup/PatientPastChekups.dart';
 import 'my_past_chekup/PatientQRCodeShow.dart';
@@ -243,6 +244,35 @@ class _MorePageState extends State<MorePage> {
                     size: 20.0,
                   ),
                 ),
+
+                ListTile(
+                  visualDensity: VisualDensity.compact,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const IntakeFormScreen()));
+                    // Get.toNamed(RouteHelper.getPatientSupportScreen());
+                  },
+                  leading: const Icon(
+                    Icons.file_copy_outlined,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      "Intake Form", 14.0, FontWeight.w500, Colors.black),
+                  subtitle: customView.text(
+                      "Intake form for general details",
+                      10.0,
+                      FontWeight.w500,
+                      Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+
                 ListTile(
                   visualDensity: VisualDensity.compact,
                   onTap: () {
