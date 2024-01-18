@@ -578,12 +578,12 @@ String NoWardAddedCenter = "No ward added by center";
   String noTimeSlotDate = "No Time Slot's on this date";
   String visitCharges = "Visit Charges";
   String DoctorTimeSlots = "Doctor Time Slots";
-  String noVisitChargesDoctor = "No visit Charges added by Doctor";
+  String noVisitChargesDoctor = "No visit charges added by Admin";
   String weNeedYourHealthCardCode =
       "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.";
 
   /*API response text*/
-  String CheckInternetconnection = "Check your Internet connection";
+  String CheckInternetconnection = "Check your Internet Connection";
   String Login_successfully = "Login successfully";
   String AddDateSucces = "Date add successfully";
   String SomthingWentWrong = "Something went wrong";
@@ -591,9 +591,9 @@ String NoWardAddedCenter = "No ward added by center";
   String WaitforadminApprove = "Wait for admin Approve";
   String Success = "Success";
   String Invalid = "Invalid";
-  String DeleteaccountSuccess = "Account delete Successfully";
-  String SignUPSuccess = "Signup successfully";
-  String Changed_Pass_Successfully = "Change password successfully";
+  String DeleteaccountSuccess = "Account Delete Successfully";
+  String SignUPSuccess = "Signup Successfully";
+  String Changed_Pass_Successfully = "Change Password Successfully";
 
   /*Signup OTP verification screen texts*/
   String Verification = "Verification";
@@ -1145,13 +1145,13 @@ String NoWardAddedCenter = "No ward added by center";
           noTimeSlotDate: "No Time Slot's on this date",
           visitCharges: "Visit Charges",
           DoctorTimeSlots: "Doctor Time Slots",
-          noVisitChargesDoctor: "No visit Charges added by Doctor",
+          noVisitChargesDoctor: "No visit charges added by Admin",
           weNeedYourHealthCardCode:
               "We need your health card code to confirm your reservation. Select your code or enter the one of the person you are booking the visit to.",
 
 
 /*api respone*/
-   CheckInternetconnection : "Check your Internet connection",
+   CheckInternetconnection : "Check your Internet Connection",
    Login_successfully : "Login successfully",
           AddDateSucces: "Date add successfully",
           SomthingWentWrong: "Something went wrong",
@@ -1159,9 +1159,9 @@ String NoWardAddedCenter = "No ward added by center";
   WaitforadminApprove : "Wait for admin Approve",
           Success: "Success",
           Invalid: "Invalid",
-          DeleteaccountSuccess: "Account delete Successfully",
-          SignUPSuccess: "Signup successfully",
-          Changed_Pass_Successfully: "Change password successfully",
+          DeleteaccountSuccess: "Account Delete Successfully",
+          SignUPSuccess: "Signup Successfully",
+          Changed_Pass_Successfully: "Change Password Successfully",
 
           /*Signup OTP verification screen texts*/
           Verification: "Verification",

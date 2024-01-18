@@ -51,15 +51,15 @@ class _ViewCertificateScreenState extends State<ViewCertificateScreen> {
 
               panEnabled: true,
               // Set it to false
-              boundaryMargin: const EdgeInsets.all(100),
+              boundaryMargin: EdgeInsets.all(20.0),
               minScale: 0.5,
-              maxScale: 2,
+              maxScale: 4.0,
               child: FadeInImage.assetNetwork(
                   placeholder: 'assets/images/loading.gif',
                   alignment: Alignment.center,
                   image: doctorListCtr.doc.value,
                   fit: BoxFit.contain,
-                  height: 500,
+                  height: 600,
                   width: double.infinity,
                   imageErrorBuilder: (context, error, stackTrace) {
                     return Image.asset(

@@ -25,7 +25,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
   TextEditingController searchCtr = TextEditingController();
@@ -71,9 +71,9 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
                 Tab(
                   child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
                 ),
-                Tab(
-                  child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
-                ),
+                // Tab(
+                //   child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                // ),
               ],
             ),
           ),
@@ -85,7 +85,7 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
                 children: const [
                   PatientPrescription(),
                   PatientMedicalReport(),
-                  PatientViewMedicines(),
+                  // PatientViewMedicines(),
                 ]),
           ),),
 

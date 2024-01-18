@@ -216,7 +216,6 @@ class CustomView {
 //*********** main TextField********//
   Widget myField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return
         SizedBox(
@@ -242,12 +241,12 @@ class CustomView {
 
   Widget myFieldExpand(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return
       SizedBox(
         width: widht,
         child: TextFormField(
+          autofocus: false,
           minLines: 1,
           maxLines: 3,
           keyboardType: inputType,
@@ -269,7 +268,6 @@ class CustomView {
 
   Widget PasswordField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType, Widget widget, bool) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return SizedBox(
       width: widht,
@@ -296,7 +294,6 @@ class CustomView {
 
   Widget HField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType,) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return SizedBox(
       width: widht *1,
@@ -322,7 +319,6 @@ class CustomView {
 
   Widget searchField(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType, Widget icon, Widget icon1,VoidCallback newScreen,VoidCallback search,) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return
         SizedBox(
@@ -364,7 +360,6 @@ class CustomView {
 
   Widget searchFieldnew(BuildContext context, TextEditingController controller,
       String hintText, TextInputType inputType, Widget icon, Widget icon1,VoidCallback newScreen,VoidCallback search,bool) {
-    final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.width;
     return
       SizedBox(

@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../helper/mycolor/mycolor.dart';
@@ -63,7 +61,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
       branchId = widget.branchId;
       log("center id $branchId");
       id = doctorListCtr.doctorid.value;
-      log("doctor id$id");
+      log("doctor id--------$id");
 
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
@@ -81,7 +79,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: custom.MyButton(context, text.confirmAppointment.tr, () {
-            if(time ==""){
+            if(time == ""){
               custom.massenger(context, "Please select time slot");
             }else if(fee == ""){
               custom.massenger(context, "Please select fee");
@@ -146,11 +144,9 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                               /*-------doctor Time Slots Fetch API Hit-------*/
                               // print(_selectedValue);
                               _selectedValue = date;
-                              print(formateddate);
-                              appointmentController.doctorTimeSlotsFetch(
-                                  id.toString(),
-                                  appointmentController.seletedtime.value
-                                      .toString(),);
+                              log("formatted-date-----$formateddate");
+                              appointmentController.doctorTimeSlotsFetch(id.toString(),
+                                  appointmentController.seletedtime.value.toString(),);
                             });
                           },
                         ),

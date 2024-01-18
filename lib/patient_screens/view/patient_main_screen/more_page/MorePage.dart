@@ -74,6 +74,7 @@ class _MorePageState extends State<MorePage> {
                             color: MyColor.lightcolor,
                             borderRadius: BorderRadius.circular(15)),
                         child: ListTile(
+                          visualDensity: VisualDensity.compact,
                           onTap: () {
                             Get.toNamed(
                                 RouteHelper.getPatientAddNewCardScreen());
@@ -83,7 +84,8 @@ class _MorePageState extends State<MorePage> {
                           subtitle: Row(
                             children: [
                               Text(text.goto.tr,
-                                  style: TextStyle(color: MyColor.white)),
+                                  style: const TextStyle(color: MyColor.white)),
+                              SizedBox(width: 2,),
                               Text(text.payment.tr,
                                   style: const TextStyle(
                                       decoration: TextDecoration.underline,
@@ -124,26 +126,46 @@ class _MorePageState extends State<MorePage> {
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.shortestSide /
-                                        8,
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: MyColor.midgray,
-                                  borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(10.0),
-                                  ),
-                                ),
-                                child: Center(
-                                    child: customView.text(
-                                        text.ProfileSettings.tr,
-                                        12.0,
-                                        FontWeight.w400,
-                                        Colors.black)),
-                              )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                               Column(
+                                 children: [
+                                   Padding(
+                                    padding: EdgeInsets.only(top: 18.0),
+                                    child: Container(
+                                        width: 35,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          borderRadius:  BorderRadius.circular(20),
+                                          border: Border.all(color: Colors.white)
+                                        ),
+                                        child: Icon(Icons.person_outline_sharp,color: Colors.white)),
+                                                                 ),
+                                 ],
+                               ),
+                              Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.shortestSide /
+                                            8,
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: MyColor.midgray,
+                                      borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(10.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                        child: customView.text(
+                                            text.ProfileSettings.tr,
+                                            12.0,
+                                            FontWeight.w400,
+                                            Colors.black)),
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -167,23 +189,40 @@ class _MorePageState extends State<MorePage> {
                             ),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height:
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 18.0),
+                                child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                        borderRadius:  BorderRadius.circular(20),
+                                        border: Border.all(color: Colors.white)
+                                    ),
+                                    child: Icon(Icons.payment,color: Colors.white)),
+                              ),
+                              Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    height:
                                     MediaQuery.of(context).size.shortestSide /
                                         8,
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: MyColor.midgray,
-                                  borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(10.0),
-                                  ),
-                                ),
-                                child: Center(
-                                    child: customView.text(text.payment.tr,
-                                        12.0, FontWeight.w400, Colors.black)),
-                              )),
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: MyColor.midgray,
+                                      borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(10.0),
+                                      ),
+                                    ),
+                                    child: Center(
+                                        child: customView.text(text.payment.tr,
+                                            12.0, FontWeight.w400, Colors.black)),
+                                  )),
+                            ],
+                          )
+
                         ),
                       ),
                     ),
@@ -273,28 +312,28 @@ class _MorePageState extends State<MorePage> {
                   ),
                 ),
 
-                ListTile(
-                  visualDensity: VisualDensity.compact,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PatientQRShow()));
-                  },
-                  leading: const Icon(
-                    Icons.qr_code_scanner_sharp,
-                    color: Colors.black,
-                  ),
-                  title: customView.text(
-                      text.qrCode.tr, 14.0, FontWeight.w500, Colors.black),
-                  subtitle: customView.text(text.viewYourQrCode.tr, 10.0,
-                      FontWeight.w500, Colors.black),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                    size: 20.0,
-                  ),
-                ),
+                // ListTile(
+                //   visualDensity: VisualDensity.compact,
+                //   onTap: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => const PatientQRShow()));
+                //   },
+                //   leading: const Icon(
+                //     Icons.qr_code_scanner_sharp,
+                //     color: Colors.black,
+                //   ),
+                //   title: customView.text(
+                //       text.qrCode.tr, 14.0, FontWeight.w500, Colors.black),
+                //   subtitle: customView.text(text.viewYourQrCode.tr, 10.0,
+                //       FontWeight.w500, Colors.black),
+                //   trailing: const Icon(
+                //     Icons.arrow_forward_ios,
+                //     color: Colors.black,
+                //     size: 20.0,
+                //   ),
+                // ),
 
                /* ListTile(
                   visualDensity: VisualDensity.compact,

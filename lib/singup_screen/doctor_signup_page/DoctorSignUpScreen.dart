@@ -125,111 +125,206 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Container(
-          height: 35.0,
-          decoration: const BoxDecoration(color: MyColor.midgray),
-          child: Center(
-            child: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+    return WillPopScope(
+      onWillPop: () async {
+        if (_curr == 1) {
+          final value = await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  "Exit from SignUp Form",
+                  style: const TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+                content: const Text(
+                  "Are you sure want to exit",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
+                ),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.white)),
+                    child: Text(
+                      text.No.tr,
+                      style: const TextStyle(
+                          color: Colors.black, fontFamily: 'Poppins'),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(MyColor.red)),
+                    child: Text(
+                      text.Yes.tr,
+                      style: const TextStyle(
+                          fontFamily: 'Poppins', color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+          if (value != null) {
+            return Future.value(value);
+          } else {
+            return Future.value(false);
+          }
+        } else if (_curr == 3) {
+          setState(() {
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 2) {
+          setState(() {
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 1) {
+          setState(() {
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else {}
+        return false;
+      },
+      child: Scaffold(
+        bottomNavigationBar: Container(
+            height: 35.0,
+            decoration: const BoxDecoration(color: MyColor.midgray),
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    custom.text(text.have_an_account.tr, 11, FontWeight.normal,
+                        MyColor.primary1),
+                    Text(
+                      text.SIGN_IN.tr,
+                      style: const TextStyle(
+                          color: MyColor.primary1,
+                          fontWeight: FontWeight.w700,
+                          decoration: TextDecoration.underline),
+                    )
+                  ],
+                ),
+              ),
+            )),
+        body: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                onPageChanged: (value) {
+                  setState(() {
+                    _curr = 1 + value;
+                    log("page index$value");
+                    log("curr index$_curr");
+                  });
+                },
+                controller: controller,
                 children: [
-                  custom.text(text.have_an_account.tr, 11, FontWeight.normal,
-                      MyColor.primary1),
-                  Text(
-                    text.SIGN_IN.tr,
-                    style: const TextStyle(
-                        color: MyColor.primary1,
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline),
-                  )
+                  signUp1(),
+                  signUp2(),
+                  signUp3(),
                 ],
               ),
             ),
-          )),
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-              onPageChanged: (value) {
-                setState(() {
-                  _curr = 1 + value;
-                  print("page index$value");
-                  print("curr index$_curr");
-                });
-              },
-              controller: controller,
-              children: [
-                signUp1(),
-                signUp2(),
-                signUp3(),
-              ],
+            SizedBox(
+              height: 70,
+              child: Column(
+                children: [
+                  custom.text("$_curr/3", 13.0, FontWeight.w500, Colors.black),
+                  Obx(() {
+                    if (doctorSignUpCtr.loadingotp.value) {
+                      return custom.MyIndicator();
+                    }
+                    return custom.MyButton(context, text.Go_On.tr, () {
+                      if (_curr == 1) {
+                        if (validation1(context) == false) {
+                        } else {
+                          controller.nextPage(
+                              duration: const Duration(milliseconds: 10),
+                              curve: Curves.bounceIn);
+                        }
+                      } else if (_curr == 2) {
+                        if (validation2(context) == false) {
+                        } else {
+                          controller.nextPage(
+                              duration: const Duration(milliseconds: 10),
+                              curve: Curves.bounceIn);
+                        }
+                      } else if (_curr == 3) {
+                        if (validation3(context) == false) {
+                        } else {
+                          log("$_curr $_numpage");
+                          var data = {
+                            "name": nameCtr.text,
+                            "surname": surnameCtr.text,
+                            "username": usernameCtr.text,
+                            "email": emailCtr.text,
+                            "phone": phoneCtr.text,
+                            "code": code,
+                            "flag": flag,
+                            "password": passwordCtr.text,
+
+                            "birthDate": birthDateController.text,
+                            "birthPlace": birthplaceController.text,
+                            "age": ageController.text,
+                            "experience": experienceController.text,
+                            'gender': _selectedGender,
+                            "address": location,
+                            "lat":latitude,
+                            "longitude":longitude,
+                            "description": descriptionController.text,
+
+                            "branch": selectedBranch.toString(),
+                            "category": slectedCategory.toString(),
+                            "services": serviceIdArray.join(','),
+                            // "workingDays": selectedDaysList.toString(),
+                            "startTime": _StartTime.toString(),
+                            "endTime": _endTime.toString(),
+                            "imagename": degreefilename.toString(),
+                            "imagebase": degreebaseimage.toString(),
+                          };
+                          doctorSignUpCtr.doctorSignupOtpVerification(
+                              context, code, phoneCtr.text, emailCtr.text, () {
+                            log("gender$_selectedGender");
+                            Get.toNamed(RouteHelper.DSignUpOtp(),
+                                parameters: data);
+                          });
+                        }
+                      }
+                    },
+                        MyColor.red,
+                        const TextStyle(
+                            color: MyColor.white, fontFamily: "Poppins"));
+                  }),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 70,
-            child: Column(
-              children: [
-                custom.text("$_curr/3", 13.0, FontWeight.w500, Colors.black),
-                Obx(() {
-                  if (doctorSignUpCtr.loadingotp.value) {
-                    return custom.MyIndicator();
-                  }
-                  return custom.MyButton(context, text.Go_On.tr, () {
-                    log("$_curr $_numpage");
-                    var data = {
-                      "name": nameCtr.text,
-                      "surname": surnameCtr.text,
-                      "username": usernameCtr.text,
-                      "email": emailCtr.text,
-                      "phone": phoneCtr.text,
-                      "code": code,
-                      "flag": flag,
-                      "password": passwordCtr.text,
-
-                      "birthDate": birthDateController.text,
-                      "birthPlace": birthplaceController.text,
-                      "age": ageController.text,
-                      "experience": experienceController.text,
-                      'gender': _selectedGender,
-                      "address": location,
-                      "lat": AppConst.LATITUDE,
-                      "longitude": AppConst.LONGITUDE,
-                      "description": descriptionController.text,
-
-                      "branch": selectedBranch.toString(),
-                      "category": slectedCategory.toString(),
-                      "services": serviceIdArray.join(','),
-                      // "workingDays": selectedDaysList.toString(),
-                      "startTime": _StartTime.toString(),
-                      "endTime": _endTime.toString(),
-                      "imagename": degreefilename.toString(),
-                      "imagebase": degreebaseimage.toString(),
-
-                    };
-                    doctorSignUpCtr.doctorSignupOtpVerification(
-                        context, code, phoneCtr.text, emailCtr.text, () {
-                      log("gender$_selectedGender");
-                      /*_curr == 1 + _numpage
-                          ?*/ Get.toNamed(RouteHelper.DSignUpOtp(),
-                              parameters: data);
-                         /* : controller.nextPage(
-                              duration: const Duration(milliseconds: 0),
-                              curve: Curves.bounceIn);*/
-                    });
-                  },
-                      MyColor.red,
-                      const TextStyle(
-                          color: MyColor.white, fontFamily: "Poppins"));
-                }),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -242,8 +337,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
-          ),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -253,8 +347,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(
-                      text.Enter_Name.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                  child: custom.text(text.Enter_Name.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
@@ -266,8 +360,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_Surname.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Enter_Surname.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
@@ -279,8 +373,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_Username.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Enter_Username.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
@@ -292,21 +386,21 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(
-                      text.Enter_Email.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                  child: custom.text(text.Enter_Email.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
                 ),
-                custom.myField(
-                    context, emailCtr, text.H_Enter_Email.tr, TextInputType.text),
+                custom.myField(context, emailCtr, text.H_Enter_Email.tr,
+                    TextInputType.text),
                 const SizedBox(
                   height: 17,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Phone_Number.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Phone_Number.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
@@ -403,8 +497,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
-          ),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -414,8 +507,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Date_of_Birth.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Date_of_Birth.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 Container(
                     height: 45.0,
@@ -449,8 +542,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Place_of_Birth.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Place_of_Birth.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
@@ -470,20 +563,20 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   height: 3.0,
                 ),
                 custom.myField(
-                    context, ageController, text.Age.tr, TextInputType.text),
+                    context, ageController, text.Age.tr, TextInputType.number),
                 const SizedBox(
                   height: 16,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(
-                      text.experience.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                  child: custom.text(text.experience.tr, 13.0, FontWeight.w500,
+                      MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 3.0,
                 ),
-                custom.myField(context, experienceController, text.experience.tr,
-                    TextInputType.text),
+                custom.myField(context, experienceController,
+                    text.experience.tr, TextInputType.number),
                 const SizedBox(
                   height: 16,
                 ),
@@ -504,6 +597,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         visualDensity:
                             const VisualDensity(horizontal: -4, vertical: -4),
                         leading: Radio<String>(
+                          activeColor: MyColor.primary1,
                           value: 'Male',
                           groupValue: _selectedGender,
                           onChanged: (value) {
@@ -523,6 +617,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         visualDensity:
                             const VisualDensity(horizontal: -4, vertical: -4),
                         leading: Radio<String>(
+                          activeColor: MyColor.primary1,
+
                           value: 'Female',
                           groupValue: _selectedGender,
                           onChanged: (value) {
@@ -541,14 +637,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   height: 3,
                 ),
 
-
                 const SizedBox(
                   height: 17.0,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Select_Address.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Select_Address.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 const SizedBox(
                   height: 5.0,
@@ -591,52 +686,18 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       log(newlatlang.longitude.toString());
                       log(">>>>>>>>>>>>>>>>>>", error: location);
                       try {
-                        AppConst.LATITUDE = newlatlang.latitude.toString();
-                        AppConst.LONGITUDE = newlatlang.longitude.toString();
-                        AppConst.LOCATION = location.toString();
+                        latitude = newlatlang.latitude.toString();
+                        longitude = newlatlang.longitude.toString();
+                        location = location.toString();
                       } catch (e) {
-                        print("Exception :-- ${e.toString()}");
+                        log("Exception :-- ${e.toString()}");
                       }
-                      print("My latitude AppCont : -- ${AppConst.LATITUDE}");
-                      print("My LONGITUDE AppCont : -- ${AppConst.LONGITUDE}");
-                      print("My latitude AppCont : -- ${AppConst.LOCATION}");
+                      log("My latitude   : -- $latitude");
+                      log("My LONGITUDE  : -- $longitude");
+                      log("My location   : -- $location");
                     }
                   }, () {}),
                 ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.DSearchLocation());
-                //     setState(() {});
-                //     // Get.toNamed(RouteHelper.getViewCertificateScreen());
-                //   },
-                //   child: Container(
-                //       height: 50.0,
-                //       margin: const EdgeInsets.symmetric(
-                //           horizontal: 10.0, vertical: 2.0),
-                //       decoration: BoxDecoration(
-                //         color: MyColor.midgray,
-                //         borderRadius: BorderRadius.circular(10.0),
-                //       ),
-                //       child: Padding(
-                //         padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           children: [
-                //             SizedBox(
-                //               width: MediaQuery.of(context).size.width * 0.7,
-                //               child: custom.text(AppConst.LOCATION, 12.0,
-                //                   FontWeight.w500, MyColor.black),
-                //             ),
-                //             const Icon(
-                //               Icons.arrow_forward,
-                //               size: 20.0,
-                //               color: MyColor.black,
-                //             ),
-                //           ],
-                //         ),
-                //       )),
-                // ),
-
               ],
             ),
           ),
@@ -653,17 +714,15 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: MyColor.primary1.withOpacity(0.3))
-          ),
+              border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Select_Branch.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Select_Branch.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 branch(),
                 const SizedBox(
@@ -671,8 +730,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Select_Category.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Select_Category.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 category(),
                 const SizedBox(
@@ -680,8 +739,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: custom.text(text.Select_Services.tr, 13.0, FontWeight.w500,
-                      MyColor.primary1),
+                  child: custom.text(text.Select_Services.tr, 13.0,
+                      FontWeight.w500, MyColor.primary1),
                 ),
                 selectServiceList(),
                 if (isDropdownOpen)
@@ -703,25 +762,33 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                   ? custom.MyIndicator()
                                   : Expanded(
                                       child: ListView.builder(
-                                      itemCount: doctorSignUpCtr.services.length,
+                                      itemCount:
+                                          doctorSignUpCtr.services.length,
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
                                           onTap: () {
                                             setState(() {
                                               if (serviceIdArray.contains(
                                                   doctorSignUpCtr
-                                                      .services[index].serviceId)) {
+                                                      .services[index]
+                                                      .serviceId)) {
                                                 serviceIdArray.remove(
                                                     doctorSignUpCtr
-                                                        .services[index].serviceId);
+                                                        .services[index]
+                                                        .serviceId);
                                                 serviceNameArray.remove(
-                                                    doctorSignUpCtr.services[index]
+                                                    doctorSignUpCtr
+                                                        .services[index]
                                                         .serviceName);
                                               } else {
-                                                serviceIdArray.add(doctorSignUpCtr
-                                                    .services[index].serviceId);
-                                                serviceNameArray.add(doctorSignUpCtr
-                                                    .services[index].serviceName);
+                                                serviceIdArray.add(
+                                                    doctorSignUpCtr
+                                                        .services[index]
+                                                        .serviceId);
+                                                serviceNameArray.add(
+                                                    doctorSignUpCtr
+                                                        .services[index]
+                                                        .serviceName);
                                               }
                                               log("Service-Id-Array -${serviceIdArray.join(",")}");
                                               log("Service-Name-Array-${serviceNameArray.join(",")}");
@@ -751,15 +818,25 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                               //   ),
                                               // ),
                                               trailing: serviceIdArray.contains(
-                                                  doctorSignUpCtr.services[index].serviceId)
-                                                  ? const Icon(Icons.task_alt, color: MyColor.primary1,) : null,
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceId)
+                                                  ? const Icon(
+                                                      Icons.task_alt,
+                                                      color: MyColor.primary1,
+                                                    )
+                                                  : null,
                                               title: serviceIdArray.contains(
-                                                      doctorSignUpCtr.services[index].serviceId)
-                                                  ? custom.text("${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
+                                                      doctorSignUpCtr
+                                                          .services[index]
+                                                          .serviceId)
+                                                  ? custom.text(
+                                                      "${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
                                                       12,
                                                       FontWeight.w500,
                                                       MyColor.primary1)
-                                                  : custom.text("${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
+                                                  : custom.text(
+                                                      "${index + 1}. ${doctorSignUpCtr.services[index].serviceName.toUpperCase()}",
                                                       11,
                                                       FontWeight.w500,
                                                       MyColor.black),
@@ -773,8 +850,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                       }),
                     ),
                   ),
-                  ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: serviceNameArray.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -791,11 +868,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     );
                   },
                 ),
-
                 const SizedBox(
                   height: 15,
                 ),
-              /*  Align(
+                /*  Align(
                     alignment: Alignment.topLeft,
                     child: custom.text("Select working days:", 13, FontWeight.w500,
                         MyColor.primary1)),
@@ -866,7 +942,9 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                 thickness: 1,
                               ),
                               custom.text(
-                                  _StartTime != null ? _StartTime! : 'start time',
+                                  _StartTime != null
+                                      ? _StartTime!
+                                      : 'start time',
                                   14,
                                   FontWeight.w400,
                                   MyColor.black),
@@ -905,8 +983,11 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                 color: Colors.black38,
                                 thickness: 1,
                               ),
-                              custom.text(_endTime != null ? _endTime! : 'end time',
-                                  14, FontWeight.w400, MyColor.black),
+                              custom.text(
+                                  _endTime != null ? _endTime! : 'end time',
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
                               const SizedBox(
                                 width: 2,
                               ),
@@ -917,7 +998,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     )
                   ],
                 ),
-
                 const SizedBox(
                   height: 15,
                 ),
@@ -948,8 +1028,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                         ),
                         Text(
                           degreefilename.toString(),
-                          style:
-                          const TextStyle(fontSize: 10, color: Colors.black45),
+                          style: const TextStyle(
+                              fontSize: 10, color: Colors.black45),
                         ),
                       ],
                     ),
@@ -1024,25 +1104,18 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   ) {
     if (birthDateController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter birth date");
-    } else if (ageController.text.toString().isEmpty) {
+    } else if (birthplaceController.text.toString().isEmpty) {
+      custom.MySnackBar(context, "Enter birth place");
+    }  else if (ageController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter age");
     } else if (experienceController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter year of experience");
     }
-    /* else if (universityAttendedCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter university attended");
-    } else if (dateOfEnrollmentCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter date of enrollment");
-    } else if (dateOfQualification.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter date of qualification");
-    } else if (dateOfGraduation.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter date of graduation");
-    } else if (registerOfBelongingCtr.text.toString().isEmpty) {
-      custom.MySnackBar(context, "Enter register of belonging");
-    }*/
     else if (_selectedGender.isEmpty) {
       custom.MySnackBar(context, "Select gender");
-    } else {
+    } else if (location.toString().isEmpty) {
+      custom.MySnackBar(context, "Enter location");
+    }else {
       return true;
     }
     return false;
@@ -1051,15 +1124,19 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   bool validation3(
     BuildContext context,
   ) {
-    if (slectedCategory == null) {
+    if (selectedBranch == null) {
+      custom.MySnackBar(context, "Select your branch");
+    }else if (slectedCategory == null) {
       custom.MySnackBar(context, "Select your specialization");
-    }
-    /* else if (subCatIdArray.isEmpty) {
-      custom.MySnackBar(context, "Select your sub-specialization");
-    }*/
-    else if (degreefilePath == null) {
+    }else if (serviceIdArray.length ==0) {
+      custom.MySnackBar(context, "Select your services");
+    }else if (_StartTime == null) {
+      custom.MySnackBar(context, "Select your start timing");
+    }else if (_endTime == null) {
+      custom.MySnackBar(context, "Select your start timing");
+    } else if (degreefilePath == null) {
       custom.MySnackBar(context, "Upload your degree");
-    } else if (AppConst.LOCATION.isEmpty) {
+    } else if (longitude.isEmpty) {
       custom.MySnackBar(context, "Add your address");
     } else if (descriptionController.text.isEmpty) {
       custom.MySnackBar(context, "Enter description about specialization");
@@ -1101,7 +1178,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.branchName),
                   );
                 }).toList(),
-                hint: Text(text.Select_Branch.tr,style: TextStyle(fontSize: 13),),
+                hint: Text(
+                  text.Select_Branch.tr,
+                  style: TextStyle(fontSize: 13),
+                ),
                 // After selecting the desired option,it will
                 // change button value to selected value
                 onChanged: (newValue) {
@@ -1109,7 +1189,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     selectedBranch = newValue;
                     log('MY CATEGORY>>>$selectedBranch');
                   });
-                  },
+                },
               ),
             ),
           ),
@@ -1150,7 +1230,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     child: Text(items.categoryName),
                   );
                 }).toList(),
-                hint: Text(text.Select_Category.tr,style: TextStyle(fontSize: 13),),
+                hint: Text(
+                  text.Select_Category.tr,
+                  style: TextStyle(fontSize: 13),
+                ),
                 // After selecting the desired option,it will
                 // change button value to selected value
                 onChanged: (newValue) {

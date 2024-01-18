@@ -281,42 +281,7 @@ class _DoctorListState extends State<DoctorList> {
                                           12,
                                           FontWeight.w500,
                                           MyColor.black)),
-                                  /*   list[index].serviceStatus == "Free"
-                                            ? Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.local_hospital,
-                                                    color: Colors.red,
-                                                    size: 19,
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.topLeft,
-                                                    child: customView.text(
-                                                        "FIRST CONSULTANT FREE",
-                                                        12,
-                                                        FontWeight.normal,
-                                                        Colors.green),
-                                                  ),
-                                                ],
-                                              )
-                                            : Row(
-                                                children: [
-                                                  const Icon(
-                                                      Icons.monetization_on,
-                                                      size: 18),
-                                                  const SizedBox(
-                                                    width: 3,
-                                                  ),
-                                                  customView.text(
-                                                      list[index]
-                                                          .fees
-                                                          .toString(),
-                                                      12,
-                                                      FontWeight.normal,
-                                                      MyColor.grey),
-                                                ],
-                                              ),*/
+
                                   const SizedBox(
                                     height: 3,
                                   ),
@@ -357,9 +322,8 @@ class _DoctorListState extends State<DoctorList> {
                                           MediaQuery.sizeOf(context)
                                               .width /
                                               1.9,
-                                          child: Text(
-                                            list[index].branchAddress.toUpperCase(),
-                                            maxLines: 1,
+                                          child: Text(list[index].branchAddress.toUpperCase(),
+                                             maxLines: 1,
                                             overflow:
                                             TextOverflow.ellipsis,
                                             style: const TextStyle(

@@ -75,7 +75,7 @@ IntakeController intakeController = Get.put(IntakeController());
         children: [
           Expanded(
             child: PageView(
-              // physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               onPageChanged: (value) {
                 setState(() {
                   _curr = 1 + value;
@@ -448,7 +448,7 @@ IntakeController intakeController = Get.put(IntakeController());
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          customView.text("Please mark the body pain points", 16, FontWeight.w600, Colors.black),
+          customView.text("Please mark the body pain points", 15, FontWeight.w600, Colors.black),
           SizedBox(height: 20,),
           ImagePainter.asset(
             "assets/images/pro_physio_humanbody.jpg",
