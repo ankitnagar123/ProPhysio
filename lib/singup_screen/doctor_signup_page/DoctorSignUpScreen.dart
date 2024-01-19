@@ -294,8 +294,8 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                             "experience": experienceController.text,
                             'gender': _selectedGender,
                             "address": location,
-                            "lat":latitude,
-                            "longitude":longitude,
+                            "lat": latitude,
+                            "longitude": longitude,
                             "description": descriptionController.text,
 
                             "branch": selectedBranch.toString(),
@@ -618,7 +618,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                             const VisualDensity(horizontal: -4, vertical: -4),
                         leading: Radio<String>(
                           activeColor: MyColor.primary1,
-
                           value: 'Female',
                           groupValue: _selectedGender,
                           onChanged: (value) {
@@ -636,7 +635,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 SizedBox(
                   height: 3,
                 ),
-
                 const SizedBox(
                   height: 17.0,
                 ),
@@ -1106,16 +1104,15 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Enter birth date");
     } else if (birthplaceController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter birth place");
-    }  else if (ageController.text.toString().isEmpty) {
+    } else if (ageController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter age");
     } else if (experienceController.text.toString().isEmpty) {
       custom.MySnackBar(context, "Enter year of experience");
-    }
-    else if (_selectedGender.isEmpty) {
+    } else if (_selectedGender.isEmpty) {
       custom.MySnackBar(context, "Select gender");
     } else if (location.toString().isEmpty) {
       custom.MySnackBar(context, "Enter location");
-    }else {
+    } else {
       return true;
     }
     return false;
@@ -1126,13 +1123,13 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   ) {
     if (selectedBranch == null) {
       custom.MySnackBar(context, "Select your branch");
-    }else if (slectedCategory == null) {
+    } else if (slectedCategory == null) {
       custom.MySnackBar(context, "Select your specialization");
-    }else if (serviceIdArray.length ==0) {
+    } else if (serviceIdArray.length == 0) {
       custom.MySnackBar(context, "Select your services");
-    }else if (_StartTime == null) {
+    } else if (_StartTime == null) {
       custom.MySnackBar(context, "Select your start timing");
-    }else if (_endTime == null) {
+    } else if (_endTime == null) {
       custom.MySnackBar(context, "Select your start timing");
     } else if (degreefilePath == null) {
       custom.MySnackBar(context, "Upload your degree");

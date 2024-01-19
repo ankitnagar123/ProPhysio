@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
+import 'dart:js';
 import 'package:get/get.dart';
 import 'package:http/http.dart'as Http;
+import 'package:prophysio/helper/CustomView/CustomView.dart';
+import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 
 import 'IntakeFormQuestionDetailModel.dart';
 import 'answerModel.dart';
@@ -11,13 +15,14 @@ import 'answerModel.dart';
 
 class IntakeController extends GetxController implements GetxService {
 
-  bool _isloading = false;
 
-  bool get isloading => _isloading;
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
+CustomView view = CustomView();
+  var loadingList = false.obs;
+  var loadingListAdd = false.obs;
 
-  bool _isloading1 = false;
 
-  bool get isloading1 => _isloading1;
+
 
 
 
@@ -30,12 +35,13 @@ class IntakeController extends GetxController implements GetxService {
 
 
   /*.....................................Prophysio app fetch intake Form details.....................................*/
-
+/*1*/
   List<IntakeFormQuestionDetailModel> _intakeformqueList=[];
   List<IntakeFormQuestionDetailModel>  get intakeformqueList=>_intakeformqueList;
-
+/*2*/
   List<IntakeFormQuestionDetailModel> _intakmediclehistoryList=[];
   List<IntakeFormQuestionDetailModel>  get intakmediclehistoryList=>_intakmediclehistoryList;
+/*3*/
 
   List<IntakeFormQuestionDetailModel> _intakmedicaltestingList=[];
   List<IntakeFormQuestionDetailModel>  get intakmedicaltestingList=>_intakmedicaltestingList;
@@ -55,7 +61,7 @@ class IntakeController extends GetxController implements GetxService {
 
   Future<void> fetchintakeFormQue(String category_type) async {
 
-    _isloading1 = true;
+    loadingList.value = true;
     update();
 
 
@@ -69,7 +75,7 @@ class IntakeController extends GetxController implements GetxService {
     final data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-
+      loadingList.value = false;
       if(category_type=="pain_rating"){
         List<IntakeFormQuestionDetailModel> _intakeformqueListPage=jsonDecode(response.body).map((item)=>IntakeFormQuestionDetailModel.fromJson(item)).toList().cast<IntakeFormQuestionDetailModel>();
         _intakeformqueList.clear();
@@ -120,7 +126,7 @@ class IntakeController extends GetxController implements GetxService {
 
 
     }
-    _isloading1 = false;
+    loadingList.value = false;
     update();
 
   }
@@ -146,16 +152,16 @@ class IntakeController extends GetxController implements GetxService {
   }
 
 
-  /*..........................................Prophysio  app send data of form ....................................................*/
+  /*..........................................Pro-physio  app send data of form ....................................................*/
 
   Future<String> intakeFormInsertiondata(file) async {
-    _isloading = true;
+    loadingListAdd.value = true;
     update();
     String jsondata = jsonEncode(answerList.map((i) => i.toJson()).toList()).toString();
-    print("this is image=====$file");
-    print("this is data of answerlist=====$json");
+    log("this is image=====$file");
+    log("this is data of answerlist=====$json");
     Map<String, String> map = {
-      "patient_id": '2',
+      "patient_id": await sp.getStringValue(sp.PATIENT_ID_KEY)??'',
       "answers":jsondata,
     };
 
@@ -167,8 +173,10 @@ class IntakeController extends GetxController implements GetxService {
     String result = "";
     if (response.statusCode == 200) {
       result = data["result"];
+      loadingListAdd.value = false;
+   view.MySnackBar(context, result);
     }
-    _isloading = false;
+    loadingListAdd.value = false;
     update();
     return result;
   }
@@ -190,8 +198,8 @@ class IntakeController extends GetxController implements GetxService {
     request.fields.addAll(maps);
 
     print("multipartData request.fields:--- ${maps.toString()}");
-    Http.StreamedResponse _response = await request.send();
-    return _response;
+    Http.StreamedResponse response = await request.send();
+    return response;
   }
 
 }

@@ -72,14 +72,14 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: customView.text(
-                      "Welcome on PRO PHYSIO. Sign in to navigate among the doctors and book all kind of visits you need, for yourself or\n others.",
+                      "Welcome on PRO PHYSIO. Sign in to navigate among the doctors and book all kind of visits you need, for yourself or others.",
                       14,
                       FontWeight.normal,
                       MyColor.primary1),
                 ),
               ),
               const SizedBox(
-                height: 35.0,
+                height: 45.0,
               ),
               customView.MyButton(context, "let's go", () {
                 sp.setBoolValue(sp.ON_BOARDING_KEY, true);

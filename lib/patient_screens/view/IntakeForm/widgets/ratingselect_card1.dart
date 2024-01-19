@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/helper/CustomView/CustomView.dart';
+import 'package:prophysio/language_translator/LanguageTranslate.dart';
 import 'package:prophysio/patient_screens/view/IntakeForm/answerCtr.dart';
 
 import '../../../../helper/mycolor/mycolor.dart';
@@ -23,21 +25,24 @@ class RatingSelectCard1 extends StatefulWidget {
 class _RatingSelectCard1State extends State<RatingSelectCard1> {
   int selectIndex = -1;
 
-
-
+  LocalString text = LocalString();
+  CustomView view = CustomView();
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 4,
+        elevation: 1,
         surfaceTintColor: MyColor.white,
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                  "${widget.intakeFormQuestionDetailModel.questionText}"),
+              view.text("${widget.intakeFormQuestionDetailModel.questionText}",
+                  12, FontWeight.w400, MyColor.black),
+              SizedBox(
+                height: 5,
+              ),
               SizedBox(
                   height: 30,
                   child: ListView.builder(
@@ -51,28 +56,53 @@ class _RatingSelectCard1State extends State<RatingSelectCard1> {
                           child: InkWell(
                               onTap: () {
                                 print(
-                                    "${ widget.intakeFormQuestionDetailModel.answerOptions![index3]},,,,index details,${widget.indexrating},,,,${widget.intakeFormQuestionDetailModel.questionId}");
-                                selectIndex=widget.indexrating;
+                                    "${widget.intakeFormQuestionDetailModel.answerOptions![index3]},,,,index details,${widget.indexrating},,,,${widget.intakeFormQuestionDetailModel.questionId}");
+                                selectIndex = widget.indexrating;
 
-                                selectIndex = int.parse(
-                                    widget.intakeFormQuestionDetailModel.answerOptions![index3]);
+                                selectIndex = int.parse(widget
+                                    .intakeFormQuestionDetailModel
+                                    .answerOptions![index3]);
                                 print("selce index===${selectIndex}");
 
                                 setState(() {
-                                  Get.find<IntakeController>().addAnswer(widget.intakeFormQuestionDetailModel.questionId.toString(), selectIndex.toString(),'','');
+                                  Get.find<IntakeController>().addAnswer(
+                                      widget.intakeFormQuestionDetailModel
+                                          .questionId
+                                          .toString(),
+                                      selectIndex.toString(),
+                                      '',
+                                      '');
                                 });
                               },
-                              child: Card(
-                                surfaceTintColor: MyColor.white,
-                                color: selectIndex ==
-                                        int.parse(widget.intakeFormQuestionDetailModel.answerOptions![index3])
-                                    ? Colors.blue
-                                    : MyColor.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: Text(
-                                  widget.intakeFormQuestionDetailModel.answerOptions![index3],
-                                  textAlign: TextAlign.center,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: selectIndex ==
+                                              int.parse(widget
+                                                  .intakeFormQuestionDetailModel
+                                                  .answerOptions![index3])
+                                          ? MyColor.primary1
+                                          : MyColor.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: MyColor.primary1
+                                              .withOpacity(0.4))),
+                                  child: Center(
+                                    child: Text(
+                                      widget.intakeFormQuestionDetailModel
+                                          .answerOptions![index3],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: selectIndex ==
+                                                int.parse(widget
+                                                    .intakeFormQuestionDetailModel
+                                                    .answerOptions![index3])
+                                            ? MyColor.white
+                                            : MyColor.black,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ))))
                   // customView.text("${cartController.intakeformqueList[index2].questionText}", 14, FontWeight.w400, MyColor.black),
