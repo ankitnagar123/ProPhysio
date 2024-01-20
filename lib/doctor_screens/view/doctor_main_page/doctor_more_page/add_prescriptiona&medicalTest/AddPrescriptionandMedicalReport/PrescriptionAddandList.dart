@@ -16,9 +16,9 @@ class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
 
   PrescriptionAddAndList({
-    Key? key,
+    super.key,
     required this.patientId,
-  }) : super(key: key);
+  });
 
   @override
   State<PrescriptionAddAndList> createState() => _PrescriptionAddAndListState();
@@ -35,8 +35,8 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
 
   @override
   void initState() {
-    doctorPrescriptionCtr.fetchPrescription(widget.patientId, "prescription");
     super.initState();
+    doctorPrescriptionCtr.fetchPrescription(widget.patientId, "prescription");
   }
 
   @override

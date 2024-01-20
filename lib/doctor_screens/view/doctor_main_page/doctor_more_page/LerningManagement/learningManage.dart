@@ -56,12 +56,12 @@ class _LearningManageState extends State<LearningManage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Obx(
-              () => Column(
+              () => learningManageCtr.loadingLearningType.value
+                  ? Center(child: customView.MyIndicator())
+                  : Column(
                 children: [
                   SizedBox(height: height * 0.02),
-                  learningManageCtr.loadingLearningType.value
-                      ? customView.MyIndicator()
-                      : branch(),
+                  branch(),
                   SizedBox(height: height * 0.02),
 
                   /*----------------------Doctor List--------------------------*/
@@ -80,7 +80,7 @@ class _LearningManageState extends State<LearningManage> {
                           child: learningManageCtr.learningTypeList.isEmpty
                               ? Center(
                                   heightFactor: 10,
-                                  child: Text(text.Doctor_Not_Available.tr))
+                                  child: Text("No data"))
                               : ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,

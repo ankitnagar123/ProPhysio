@@ -20,19 +20,14 @@ import 'PatientChatProfile.dart';
 
 class PatientChatScreen extends StatefulWidget {
   const PatientChatScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<PatientChatScreen> createState() => _PatientChatScreenState();
 }
 
 class _PatientChatScreenState extends State<PatientChatScreen> {
-
-  final expirationInSeconds = 3600;
-  final currentTimestamp = DateTime
-      .now()
-      .millisecondsSinceEpoch ~/ 1000;
 
   TextEditingController messageCtr = TextEditingController();
   LocalString text = LocalString();
@@ -53,6 +48,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
 
   @override
   void initState() {
+    super.initState();
     if (Get.arguments["chatList"] == "listData") {
       doctorId = Get.arguments["doctorId"];
       doctorName = Get.arguments["drName"];
@@ -72,7 +68,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
 
     }
 
-    print("doctor Id==>>>>$doctorId");
+    log("doctor Id==>>>>$doctorId");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatController.receivedMsgList.clear();
       _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
@@ -80,7 +76,6 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
       });
     });
     getData();
-    super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         ilaod = false;

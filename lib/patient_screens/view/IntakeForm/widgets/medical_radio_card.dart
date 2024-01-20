@@ -111,7 +111,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                           widget.nestedQuestion,
                           _textEditingController.text);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Answer:-",
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,

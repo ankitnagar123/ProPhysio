@@ -5,21 +5,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:prophysio/AgoraCall/call_controller.dart';
+
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
-import '../../../../AgoraCall/callScreen.dart';
 import '../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../ZegoCallService/ZegoCallService.dart';
 import '../../../../helper/mycolor/mycolor.dart';
 import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../../patient_screens/controller/patinet_chat_controller/PatinetChatController.dart';
-import '../../../../pdfview/print_Invoice.dart';
 import '../../../controller/DocotorBookingController.dart';
-import 'Add_Invoice.dart';
 
 class DoctorChatScreen extends StatefulWidget {
   const DoctorChatScreen({

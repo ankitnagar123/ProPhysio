@@ -32,7 +32,6 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
 
   @override
   void initState() {
-
     super.initState();
     doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
 

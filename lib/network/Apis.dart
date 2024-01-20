@@ -128,6 +128,8 @@ class MyAPI {
 
   static const String fetchPrescription = "fetch_prescription";
 
+
+
   static const String fetchQrPrescription = "fetch_qr_code_prescription";
 
   static const String allMedicineList = "fetch_medicine_list";

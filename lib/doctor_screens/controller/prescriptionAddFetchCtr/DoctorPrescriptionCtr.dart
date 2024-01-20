@@ -145,11 +145,13 @@ class DoctorPrescriptionCtr extends GetxController {
     loadingFetch.value = true;
     Map<String, dynamic> data = {
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "user_id": patientId,
+      "patient_id": patientId,
       "type": type,
     };
+    log("parameter $data");
+
     final response = await apiService.postData(MyAPI.fetchPrescription, data);
-    log("parameter ${response.body}");
+    log("response fetch prescription ${response.body}");
     try {
       if (response.statusCode == 200) {
         loadingFetch.value = false;

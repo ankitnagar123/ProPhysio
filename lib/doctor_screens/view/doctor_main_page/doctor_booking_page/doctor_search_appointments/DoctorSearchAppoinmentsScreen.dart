@@ -834,8 +834,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                 ],
                               ),
                             ],
-                          )
-                        : Row(
+                          ) : status == "Complete"?const Text(""):
+                         Row(
                             children: [
                               Expanded(
                                 flex: 1,
