@@ -66,12 +66,11 @@ class _RatingSelectCard1State extends State<RatingSelectCard1> {
 
                                 setState(() {
                                   Get.find<IntakeController>().addAnswer(
-                                      widget.intakeFormQuestionDetailModel
-                                          .questionId
-                                          .toString(),
+                                      widget.intakeFormQuestionDetailModel.questionId.toString(),
                                       selectIndex.toString(),
                                       '',
-                                      '');
+                                      '',
+                                      '','');
                                 });
                               },
                               child: Padding(

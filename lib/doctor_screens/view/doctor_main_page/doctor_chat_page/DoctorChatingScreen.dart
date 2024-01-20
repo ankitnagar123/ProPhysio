@@ -52,9 +52,6 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
   final appId = '94a17beb94774769a4372f873bc053ee';
   final appCertificate = '79717ca6faa94fb5acc061beb699ed93';
 
-  final expirationInSeconds = 3600;
-  final currentTimestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-
   FilePickerResult? result;
 
   @override

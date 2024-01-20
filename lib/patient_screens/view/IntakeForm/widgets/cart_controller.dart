@@ -1,3 +1,4 @@
+/*
 import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class IntakeController extends GetxController implements GetxService
       }
 
     }
-    answerList.add(AnswerModel(Question: questionId, answer: answer, nestedQuestion:nestedQuestion, nestedAnswer: nestedAnswer));
+    answerList.add(AnswerModel(Question: questionId, answer: answer, nestedQuestion:nestedQuestion, nestedAnswer: nestedAnswer, nestedImg: ''));
     for(int i=0;i<answerList.length;i++)
     {
       print("answer ----${answerList[i].Question} ${answerList[i].answer}");
@@ -69,7 +70,9 @@ class IntakeController extends GetxController implements GetxService
 
 
 
-  /*..........................................Prophysio  app send data of form ....................................................*/
+  */
+/*..........................................Prophysio  app send data of form ....................................................*//*
+
 
   Future<String> intakeFormInsertiondata(file) async {
     _isloading = true;
@@ -118,7 +121,9 @@ class IntakeController extends GetxController implements GetxService
   }
 
 
-  /*.....................................Prophysio app fetch intake Form details.....................................*/
+  */
+/*.....................................Prophysio app fetch intake Form details.....................................*//*
+
 
   List<IntakeFormQuestionDetailModel> _intakeformqueList=[];
   List<IntakeFormQuestionDetailModel>  get intakeformqueList=>_intakeformqueList;
@@ -217,4 +222,4 @@ class IntakeController extends GetxController implements GetxService
 
 
 
-  }
+  }*/

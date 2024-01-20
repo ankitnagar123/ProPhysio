@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart'as Http;
 import 'package:prophysio/helper/CustomView/CustomView.dart';
 import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
@@ -23,7 +26,12 @@ CustomView view = CustomView();
 
 
 
+  var imageFileList = <XFile>[].obs;
 
+  var videoFileList = Rxn<File?>();
+
+  var imagePathList = <String>[].obs;
+  var multipartList = <http.MultipartFile>[].obs;
 
 
   // List<Map<String ,String>> _answerlist=[];
@@ -132,7 +140,7 @@ CustomView view = CustomView();
   }
 
 
-  void addAnswer(String questionId,String answer,String nestedQuestion,String nestedAnswer){
+  void addAnswer(String questionId,String answer,String nestedQuestion,String nestedAnswer,String nestedImg,String nestedImgq){
     for(int i=0;i<answerList.length;i++)
     {
       if(answerList[i].Question==questionId)
@@ -141,7 +149,7 @@ CustomView view = CustomView();
       }
 
     }
-    answerList.add(AnswerModel(Question: questionId, answer: answer, nestedQuestion:nestedQuestion, nestedAnswer: nestedAnswer));
+    answerList.add(AnswerModel(Question: questionId, answer: answer, nestedQuestion:nestedQuestion, nestedAnswer: nestedAnswer, nestedImg: nestedImg,nestedImgq: nestedImgq));
     for(int i=0;i<answerList.length;i++)
     {
       print("answer ----${answerList[i].Question} ${answerList[i].answer}");
