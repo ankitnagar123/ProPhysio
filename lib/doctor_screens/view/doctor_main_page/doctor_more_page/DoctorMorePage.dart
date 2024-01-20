@@ -14,6 +14,7 @@ import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/CenterRequestCtr.dart';
 import '../../../controller/DoctorProfileController.dart';
 import 'LerningManagement/learningManage.dart';
+import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
 class DoctorMorePage extends StatefulWidget {
@@ -63,86 +64,59 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
               const SizedBox(
                 height: 20.0,
               ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.DPersonalData());
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.shortestSide / 3.2,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [MyColor.primary, MyColor.primary1],
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height:
-                                  MediaQuery.of(context).size.shortestSide / 8,
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: MyColor.midgray,
-                                borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(10.0),
-                                ),
-                              ),
-                              child: Center(
-                                  child: customView.text(
-                                      text.ProfileSettings.tr,
-                                      12.0,
-                                      FontWeight.w400,
-                                      Colors.black)),
-                            )),
-                      ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DPersonalData());
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.shortestSide / 3.2,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [MyColor.primary, MyColor.primary1],
                     ),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  const SizedBox(
-                    width: 7.0,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.DEarningCalculate());
-                        // Get.toNamed(RouteHelper.getPatientPaymentScreen());
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.shortestSide / 3.2,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [MyColor.primary, MyColor.primary1],
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height:
-                                  MediaQuery.of(context).size.shortestSide / 8,
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: MyColor.midgray,
-                                borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(10.0),
-                                ),
-                              ),
-                              child: Center(
-                                  child: customView.text(text.Earnings.tr, 12.0,
-                                      FontWeight.w400, Colors.black)),
-                            )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 18.0),
+                        child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                                borderRadius:  BorderRadius.circular(20),
+                                border: Border.all(color: Colors.white)
+                            ),
+                            child: const Icon(Icons.person_outline_sharp,color: Colors.white)),
                       ),
-                    ),
+                      Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            height:
+                                MediaQuery.of(context).size.shortestSide / 8,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: MyColor.midgray,
+                              borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(10.0),
+                              ),
+                            ),
+                            child: Center(
+                                child: customView.text(
+                                    text.ProfileSettings.tr,
+                                    12.0,
+                                    FontWeight.w400,
+                                    Colors.black)),
+                          )),
+                    ],
                   ),
-                ],
+                ),
+              ),
+              const SizedBox(
+                width: 7.0,
               ),
               Divider(
                 color: MyColor.grey.withOpacity(0.5),
@@ -191,52 +165,52 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
               /*----------------prescription----------------*/
-              // ListTile(
-              //   subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
-              //       11.0, FontWeight.w400, Colors.black),
-              //   onTap: () {
-              //     Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) =>
-              //                 const CompleteAppointPrescription()));
-              //     // Get.toNamed(RouteHelper.DSettingScreen());
-              //   },
-              //   leading: const Icon(
-              //     Icons.medical_information,
-              //     color: Colors.black,
-              //   ),
-              //   title: customView.text(
-              //       text.reports.tr, 13.0, FontWeight.w500, Colors.black),
-              //   trailing: const Icon(
-              //     Icons.arrow_forward_ios,
-              //     color: Colors.black,
-              //     size: 20.0,
-              //   ),
-              // ),
+              ListTile(
+                subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
+                    11.0, FontWeight.w400, Colors.black),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const CompleteAppointPrescription()));
+                  // Get.toNamed(RouteHelper.DSettingScreen());
+                },
+                leading: const Icon(
+                  Icons.medical_information,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.reports.tr, 13.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
 
-              // ListTile(
-              //   subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
-              //       FontWeight.w400, Colors.black),
-              //   onTap: () {
-              //     Get.toNamed(RouteHelper.DCenterRequest());
-              //   },
-              //   leading: Badge(
-              //     backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
-              //     label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
-              //     child: const Icon(
-              //       Icons.medical_services_outlined,
-              //       color: Colors.black,
-              //     ),
-              //   ),
-              //   title: customView.text(
-              //       text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
-              //   trailing: const Icon(
-              //     Icons.arrow_forward_ios,
-              //     color: Colors.black,
-              //     size: 20.0,
-              //   ),
-              // ),
+              ListTile(
+                subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
+                    FontWeight.w400, Colors.black),
+                onTap: () {
+                  Get.toNamed(RouteHelper.DCenterRequest());
+                },
+                leading: Badge(
+                  backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
+                  label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
+                  child: const Icon(
+                    Icons.medical_services_outlined,
+                    color: Colors.black,
+                  ),
+                ),
+                title: customView.text(
+                    text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
 
               ListTile(
                 onTap: () {

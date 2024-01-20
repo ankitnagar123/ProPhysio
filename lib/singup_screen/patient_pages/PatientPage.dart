@@ -164,6 +164,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 ElevatedButton(
                   onPressed: () {
                     Get.back();
+                    Get.back();
+
                   },
                   style: const ButtonStyle(
                       backgroundColor:

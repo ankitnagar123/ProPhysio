@@ -165,6 +165,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   ElevatedButton(
                     onPressed: () {
                       Get.back();
+                      Get.back();
                     },
                     style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(MyColor.red)),

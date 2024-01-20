@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
@@ -31,7 +30,6 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
   CustomView custom = CustomView();
   DoctorPrescriptionCtr doctorPrescriptionCtr = Get.put(DoctorPrescriptionCtr());
   String image = "";
-  MobileScannerController mobileScannerController = MobileScannerController();
   LocalString text = LocalString();
 
 

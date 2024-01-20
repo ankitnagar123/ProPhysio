@@ -82,7 +82,7 @@ dev_dependencies:
   webview_flutter: ^4.4.2
   awesome_dialog: ^3.0.2
   connectivity_plus: ^5.0.2
-  mobile_scanner: ^3.2.0
+#  mobile_scanner: ^3.2.0
   image_painter: ^0.6.1
 #  agora_rtc_engine: ^6.2.2
 #  wakelock:

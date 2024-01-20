@@ -113,7 +113,8 @@ class ForgotPassCtr extends GetxController {
     }
     return '';
   }
-/*  *//*-------------Forgot Password OTP--------------*//*
+/*  *//*-------------Forgot Password OTP--------------*/
+/*
   Future<String> forgotPassword(
       BuildContext context,
       String email,

@@ -83,6 +83,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                   const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
         appBar: AppBar(
+          bottom: PreferredSize(child: Divider(),preferredSize: Size.fromHeight(5.0)),
           backgroundColor: Colors.white24,
           leading: InkWell(
               onTap: () {
@@ -99,7 +100,6 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
               ? cardLoadingShimmer(width)
               : Column(
                   children: [
-                     const Divider(color: Colors.grey),
                     SizedBox(
                       height: height * 0.02,
                     ),
@@ -164,7 +164,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
           return SizedBox(
             width: double.infinity,
             child: Card(
-              color: MyColor.midgray,
+              surfaceTintColor: MyColor.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -176,6 +176,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                         custom.text(
                             text.cardType.tr, 15.0, FontWeight.w500, Colors.black),
                         Radio<String>(
+                          activeColor: MyColor.primary1,
                           value: index.toString(),
                           groupValue: payment,
                           onChanged: (value) {
@@ -199,7 +200,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                             custom.text(text.cardNumber.tr, 12.0, FontWeight.w400,
                                 Colors.black),
                             custom.text(cardCtr.cardList[index].cardNumber,
-                                13.0, FontWeight.w400, Colors.black),
+                                10.0, FontWeight.w400, Colors.black),
                           ],
                         ),
                         SizedBox(

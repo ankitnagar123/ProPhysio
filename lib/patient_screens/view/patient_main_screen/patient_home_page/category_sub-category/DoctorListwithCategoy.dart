@@ -145,7 +145,7 @@ class _DoctorListState extends State<DoctorList> {
                                         "",
                                         "",
                                         ratings,
-                                        selectedBranch.toString());
+                                        selectedBranch == null?"":selectedBranch.toString());
                                     Get.back();
                                   });
 

@@ -29,7 +29,7 @@ var loadingFetchDateDr = false.obs;
 var loadingAdd = false.obs;
 
   var visitCharge = <VisitChargeModel>[].obs;
-  var timeList = <DoctorTimeListModelpatinet>[].obs;
+  var timeList = <DoctorTimeSlotModel>[].obs;
   var dateList = <CalenderDateShowModel>[].obs;
   var bookedTimeSlot = <DoctorbookedSlotList>[].obs;
   var seletedtime = "".obs;
@@ -132,13 +132,7 @@ var bookingId = "".obs;
       log("doctor time list=============${response.body}");
       if (response.statusCode == 200) {
         loadingFetchTime.value = false;
-        List<DoctorTimeListModelpatinet> list = jsonDecode(response.body)
-            .map((item) => DoctorTimeListModelpatinet.fromJson(item))
-            .toList()
-            .cast<DoctorTimeListModelpatinet>();
-        timeList.clear();
-        timeList.addAll(list);
-        log(timeList.toString());
+        timeList.value = doctorTimeSlotModelFromJson(response.body);
       } else {
         loadingFetchTime.value = false;
         log("error");
@@ -165,13 +159,7 @@ var bookingId = "".obs;
       print("doctor time list=============${response.body}");
       if (response.statusCode == 200) {
         loadingFetchTime.value = false;
-        List<DoctorTimeListModelpatinet> list = jsonDecode(response.body)
-            .map((item) => DoctorTimeListModelpatinet.fromJson(item))
-            .toList()
-            .cast<DoctorTimeListModelpatinet>();
-        timeList.clear();
-        timeList.addAll(list);
-        print(timeList.toString());
+       timeList.value = doctorTimeSlotModelFromJson(response.body);
       } else {
         loadingFetchTime.value = false;
         print("error");

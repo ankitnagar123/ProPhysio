@@ -34,6 +34,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: const PreferredSize(preferredSize: Size.fromHeight(7),child: Divider()),
         backgroundColor: Colors.white24,
         leading: InkWell(
             onTap: () {
@@ -66,39 +67,39 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
               );
             }),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const QRScannerDoctor()));
-                print("on-tap");
-              },
-              child: Container(
-                  height: 50.0,
-                  margin:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-                  decoration: BoxDecoration(
-                    color: MyColor.lightcolor,
-                    borderRadius: BorderRadius.circular(0.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.qr_code_scanner_sharp,
-                          size: 25.0,
-                          color: MyColor.primary1,
-                        ),
-                        const SizedBox(width: 40.00,),
-                        customView.text(text.scanAndCheckReports.tr, 15.0,
-                            FontWeight.w500, MyColor.primary1),
-
-                      ],
-                    ),
-                  )),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: InkWell(
+          //     onTap: () {
+          //       // Navigator.push(context, MaterialPageRoute(builder: (context)=>const QRScannerDoctor()));
+          //       print("on-tap");
+          //     },
+          //     child: Container(
+          //         height: 50.0,
+          //         margin:
+          //         const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+          //         decoration: BoxDecoration(
+          //           color: MyColor.lightcolor,
+          //           borderRadius: BorderRadius.circular(0.0),
+          //         ),
+          //         child: Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 13.0),
+          //           child: Row(
+          //             children: [
+          //               const Icon(
+          //                 Icons.qr_code_scanner_sharp,
+          //                 size: 25.0,
+          //                 color: MyColor.primary1,
+          //               ),
+          //               const SizedBox(width: 40.00,),
+          //               customView.text(text.scanAndCheckReports.tr, 15.0,
+          //                   FontWeight.w500, MyColor.primary1),
+          //
+          //             ],
+          //           ),
+          //         )),
+          //   ),
+          // ),
         ],
 
       ),
@@ -123,7 +124,8 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
 Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedicalTab(patientId: id,patientName: patientName.toString(),)));
               },
               child: Card(
-                color: MyColor.midgray,
+                elevation: 2,
+                surfaceTintColor: MyColor.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 7.0, vertical: 10.0),

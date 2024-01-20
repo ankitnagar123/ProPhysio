@@ -334,7 +334,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                               customView.MySnackBar(
                                   context, "please answer all the questions");
                             } else {
-                              cartController.intakeFormInsertiondata(_file);
+                              cartController.intakeFormInsertiondata(_file,context);
+
                             }
                           }
 
@@ -442,14 +443,14 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                 ListView.separated(
                     separatorBuilder: (context, index) {
                       return Divider(
-                        color: MyColor.primary1.withOpacity(0.2),
+                        color: MyColor.primary1.withOpacity(0.3),
                       );
                     },
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: cartController.intakmediclehistoryList.length,
                     itemBuilder: (context, index2) => Card(
-                        elevation: 2,
+                        elevation: 1.5,
                         surfaceTintColor: MyColor.white,
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -479,6 +480,79 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
     );
   }
 
+  Widget medicalTestingDetail(IntakeController cartController) {
+    return SingleChildScrollView(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 7.0,
+          ),          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 7,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            color: MyColor.primary1.withOpacity(0.3))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: customView.text("Medical Testing", 16.0,
+                          FontWeight.w600, MyColor.primary1),
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: cartController.intakmedicaltestingList.length,
+                    itemBuilder: (context, index2) => Card(
+                        elevation: 2,
+                        surfaceTintColor: MyColor.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              customView.text(
+                                  "${cartController.intakmedicaltestingList[index2].questionText}",
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                              MedicalRadioCard(
+                                nestedQuestion: cartController
+                                    .intakmediclehistoryList[index2]
+                                    .nestedQuestion
+                                    .toString(),
+                                questionId: cartController
+                                    .intakmedicaltestingList[index2].questionId
+                                    .toString(),
+                              ),
+                            ],
+                          ),
+                        ))),
+                SizedBox(
+                  height: 5,
+                )
+              ],
+            ),
+          )),
+    );
+  }
+
+
   Widget medicalgenralhealthDetail(IntakeController cartController) {
     return SingleChildScrollView(
       child: Padding(
@@ -492,8 +566,24 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                customView.text(
-                    "General Health", 20, FontWeight.w600, Colors.black),
+                SizedBox(
+                  height: 7,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            color: MyColor.primary1.withOpacity(0.3))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: customView.text("General Health", 16.0,
+                          FontWeight.w600, MyColor.primary1),
+                    ),
+                  ),
+                ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -502,7 +592,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cartController.intakegenralList.length,
                     itemBuilder: (context, index2) => Card(
-                        elevation: 4,
+                        elevation: 2,
                         surfaceTintColor: MyColor.white,
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -525,6 +615,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                             ],
                           ),
                         ))),
+                SizedBox(height: 5,)
               ],
             ),
           )),
@@ -534,45 +625,66 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
   Widget medicalworkenvironmentDetail(IntakeController cartController) {
     return SingleChildScrollView(
       child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              customView.text(
-                  "Work Environment", 20, FontWeight.w600, Colors.black),
-              SizedBox(
-                height: 10,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: cartController.intakworkenvironmentList.length,
-                  itemBuilder: (context, index2) => Card(
-                      elevation: 4,
-                      surfaceTintColor: MyColor.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            customView.text(
-                                "${cartController.intakworkenvironmentList[index2].questionText}",
-                                14,
-                                FontWeight.w400,
-                                MyColor.black),
-                            MedicalRadioCard(
-                              nestedQuestion: cartController
-                                  .intakworkenvironmentList[index2]
-                                  .nestedQuestion
-                                  .toString(),
-                              questionId: cartController
-                                  .intakworkenvironmentList[index2].questionId
-                                  .toString(),
-                            )
-                          ],
-                        ),
-                      ))),
-            ],
+          padding: const EdgeInsets.symmetric(
+            horizontal: 7.0,
+          ),          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 7,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            color: MyColor.primary1.withOpacity(0.3))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: customView.text("Work Environment", 16.0,
+                          FontWeight.w600, MyColor.primary1),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cartController.intakworkenvironmentList.length,
+                    itemBuilder: (context, index2) => Card(
+                        elevation: 2,
+                        surfaceTintColor: MyColor.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              customView.text(
+                                  "${cartController.intakworkenvironmentList[index2].questionText}",
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                              MedicalRadioCard(
+                                nestedQuestion: cartController
+                                    .intakworkenvironmentList[index2]
+                                    .nestedQuestion
+                                    .toString(),
+                                questionId: cartController
+                                    .intakworkenvironmentList[index2].questionId
+                                    .toString(),
+                              )
+                            ],
+                          ),
+                        ))),
+              ],
+            ),
           )),
     );
   }
@@ -580,94 +692,73 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
   Widget medicalhomeenvirnmentDetail(IntakeController cartController) {
     return SingleChildScrollView(
       child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              customView.text(
-                  "Home Environment", 20, FontWeight.w600, Colors.black),
-              SizedBox(
-                height: 10,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: cartController.intakehomeenvironmentList.length,
-                  itemBuilder: (context, index2) => Card(
-                      elevation: 4,
-                      surfaceTintColor: MyColor.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            customView.text(
-                                "${cartController.intakehomeenvironmentList[index2].questionText}",
-                                14,
-                                FontWeight.w400,
-                                MyColor.black),
-                            MedicalRadioCard(
-                              nestedQuestion: cartController
-                                  .intakehomeenvironmentList[index2]
-                                  .nestedQuestion
-                                  .toString(),
-                              questionId: cartController
-                                  .intakehomeenvironmentList[index2].questionId
-                                  .toString(),
-                            )
-                          ],
-                        ),
-                      ))),
-            ],
+          padding: const EdgeInsets.symmetric(
+            horizontal: 7.0,
+          ),           child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: MyColor.primary1.withOpacity(0.3))),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 7,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            color: MyColor.primary1.withOpacity(0.3))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: customView.text("Home Environment", 16.0,
+                          FontWeight.w600, MyColor.primary1),
+                    ),
+                  ),
+                ),
+                customView.text(
+                    "", 20, FontWeight.w600, Colors.black),
+                SizedBox(
+                  height: 10,
+                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cartController.intakehomeenvironmentList.length,
+                    itemBuilder: (context, index2) => Card(
+                        elevation: 4,
+                        surfaceTintColor: MyColor.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              customView.text(
+                                  "${cartController.intakehomeenvironmentList[index2].questionText}",
+                                  14,
+                                  FontWeight.w400,
+                                  MyColor.black),
+                              MedicalRadioCard(
+                                nestedQuestion: cartController
+                                    .intakehomeenvironmentList[index2]
+                                    .nestedQuestion
+                                    .toString(),
+                                questionId: cartController
+                                    .intakehomeenvironmentList[index2].questionId
+                                    .toString(),
+                              )
+                            ],
+                          ),
+                        ))),
+              ],
+            ),
           )),
     );
   }
 
-  Widget medicalTestingDetail(IntakeController cartController) {
-    return SingleChildScrollView(
-      child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              customView.text(
-                  "Medical Testing", 20, FontWeight.w600, Colors.black),
-              SizedBox(
-                height: 10,
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: cartController.intakmedicaltestingList.length,
-                  itemBuilder: (context, index2) => Card(
-                      elevation: 4,
-                      surfaceTintColor: MyColor.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            customView.text(
-                                "${cartController.intakmedicaltestingList[index2].questionText}",
-                                14,
-                                FontWeight.w400,
-                                MyColor.black),
-                            MedicalRadioCard(
-                              nestedQuestion: cartController
-                                  .intakmediclehistoryList[index2]
-                                  .nestedQuestion
-                                  .toString(),
-                              questionId: cartController
-                                  .intakmedicaltestingList[index2].questionId
-                                  .toString(),
-                            ),
-                          ],
-                        ),
-                      ))),
-            ],
-          )),
-    );
-  }
 
   Widget imagePickerPage() {
     return Padding(

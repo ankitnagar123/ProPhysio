@@ -75,6 +75,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     'Saturday',
     'Sunday'
   ];
+
   List backendDays = [];
   String selectedDaysList = "";
   Map<String, bool> checkboxValues = {}; // Map to store checkbox states
@@ -220,8 +221,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         return Scaffold(
           appBar: AppBar(
             bottom: const PreferredSize(
-                child: Divider(color: MyColor.midgray),
-                preferredSize: Size.fromHeight(4.0)),
+                preferredSize: Size.fromHeight(4.0),
+                child: Divider(color: MyColor.midgray)),
             leading: IconButton(
               onPressed: () {
                 Get.back();
@@ -899,12 +900,12 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                                 ),
                               ),
                             ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: serviceNameArray.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Card(
-                                  margin: EdgeInsets.all(4),
+                                  margin: const EdgeInsets.all(4),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: customView.text(

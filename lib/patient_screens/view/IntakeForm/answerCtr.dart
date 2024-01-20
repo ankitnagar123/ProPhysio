@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:async';
 import 'dart:io';
-import 'dart:js';
 import 'package:get/get.dart';
 import 'package:http/http.dart'as Http;
 import 'package:prophysio/helper/CustomView/CustomView.dart';
 import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
-
+import 'package:flutter/material.dart';
 import 'IntakeFormQuestionDetailModel.dart';
 import 'answerModel.dart';
 
@@ -154,7 +154,7 @@ CustomView view = CustomView();
 
   /*..........................................Pro-physio  app send data of form ....................................................*/
 
-  Future<String> intakeFormInsertiondata(file) async {
+  Future<String> intakeFormInsertiondata(file, context,) async {
     loadingListAdd.value = true;
     update();
     String jsondata = jsonEncode(answerList.map((i) => i.toJson()).toList()).toString();
@@ -165,13 +165,15 @@ CustomView view = CustomView();
       "answers":jsondata,
     };
 
-    print("this map before response===${map}");
+    print("this map before response===$map");
     final response = await saveIntakeFormData(map, file);
     final data = jsonDecode(await response.stream.bytesToString());
 
     print("this response of login screen===${data.toString()}");
     String result = "";
     if (response.statusCode == 200) {
+      answerList.clear();
+      Navigator.pop(context);
       result = data["result"];
       loadingListAdd.value = false;
    view.MySnackBar(context, result);
@@ -184,7 +186,7 @@ CustomView view = CustomView();
 
 
   Future<Http.StreamedResponse> saveIntakeFormData(Map<String, String> maps,
-      File? file) async {
+      File? file,) async {
     Http.MultipartRequest request =
     Http.MultipartRequest('POST', Uri.parse(
         "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=insert_intake_form_answer"));

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -7,7 +9,6 @@ import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorP
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../../language_translator/LanguageTranslate.dart';
 
@@ -19,7 +20,6 @@ class PatientPrescription extends StatefulWidget {
 }
 
 class _PatientPrescriptionState extends State<PatientPrescription> {
-  MobileScannerController mobileScannerController = MobileScannerController();
 
   TextEditingController titleCtr = TextEditingController();
   TextEditingController discCtr = TextEditingController();
@@ -36,7 +36,6 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorPrescriptionCtr.fetchPatientPrescription("prescription");
     });
-
   }
 
   @override
@@ -280,8 +279,8 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
         List<int> imageBytes = degreefilePath!.readAsBytesSync();
         baseimage = base64Encode(imageBytes);
         filename = DateTime.now().toString() + ".jpeg".toString();
-        print(baseimage);
-        print(filename);
+        log(baseimage);
+        log(filename);
       } else {
         print('No image selected.');
       }

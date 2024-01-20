@@ -1,56 +1,25 @@
-/*
 // To parse this JSON data, do
 //
-//     final doctorPatinetTimeListModel = doctorPatinetTimeListModelFromJson(jsonString);
+//     final doctorTimeSlotModel = doctorTimeSlotModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<DoctorPatinetTimeListModel> doctorPatinetTimeListModelFromJson(String str) => List<DoctorPatinetTimeListModel>.from(json.decode(str).map((x) => DoctorPatinetTimeListModel.fromJson(x)));
+List<DoctorTimeSlotModel> doctorTimeSlotModelFromJson(String str) => List<DoctorTimeSlotModel>.from(json.decode(str).map((x) => DoctorTimeSlotModel.fromJson(x)));
 
-String doctorPatinetTimeListModelToJson(List<DoctorPatinetTimeListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String doctorTimeSlotModelToJson(List<DoctorTimeSlotModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class DoctorPatinetTimeListModel {
-  DoctorPatinetTimeListModel({
-    required this.timeId,
-    required this.from,
-    required this.to,
+class DoctorTimeSlotModel {
+  String timeslot;
+
+  DoctorTimeSlotModel({
+    required this.timeslot,
   });
 
-  String timeId;
-  String from;
-  String to;
-
-  factory DoctorPatinetTimeListModel.fromJson(Map<String, dynamic> json) => DoctorPatinetTimeListModel(
-    timeId: json["time_id"],
-    from: json["From"],
-    to: json["To"],
+  factory DoctorTimeSlotModel.fromJson(Map<String, dynamic> json) => DoctorTimeSlotModel(
+    timeslot: json["Timeslot"],
   );
 
   Map<String, dynamic> toJson() => {
-    "time_id": timeId,
-    "From": from,
-    "To": to,
+    "Timeslot": timeslot,
   };
-}
-*/
-class DoctorTimeListModelpatinet {
-  String? timeId;
-  String? from;
-  String? to;
-
-  DoctorTimeListModelpatinet({this.timeId, this.from, this.to});
-
-  DoctorTimeListModelpatinet.fromJson(Map<String, dynamic> json) {
-    timeId = json['time_id'];
-    from = json['From'];
-    to = json['To'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['time_id'] = timeId;
-    data['From'] = from;
-    data['To'] = to;
-    return data;
-  }
 }

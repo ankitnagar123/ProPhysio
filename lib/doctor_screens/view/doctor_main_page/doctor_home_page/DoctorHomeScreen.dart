@@ -956,8 +956,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                               Get.back();
                                             });
 
-                                            // Navigator.push(
-                                            //     context,
+                                            // Navigator.push(context,
                                             //     MaterialPageRoute(
                                             //         builder: (context) =>
                                             //         const CancelAppointmentSuccess()));

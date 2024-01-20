@@ -96,7 +96,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
             : SizedBox(),
         _selectedOption == "yes" && widget.nestedQuestion != ""
             ? Card(
-                elevation: 4,
+                elevation: 2,
                 surfaceTintColor: MyColor.white,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),

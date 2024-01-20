@@ -101,6 +101,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
               const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
         appBar: AppBar(
+          bottom: const PreferredSize(preferredSize: Size.fromHeight(4.5), child: Divider()),
           backgroundColor: Colors.white24,
           leading: InkWell(
               onTap: () {
@@ -124,14 +125,14 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
             : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: <Widget>[
-                       const Divider(color: Colors.grey),
                       SizedBox(
                         height: 90,
                         child: DatePicker(
-                          DateTime.now(),
+                            DateTime(int.parse(widget.year),
+                                int.parse(widget.month), int.parse(widget.day)),
                           initialSelectedDate: DateTime(int.parse(widget.year),
                               int.parse(widget.month), int.parse(widget.day)),
                           selectionColor: MyColor.primary,
@@ -187,7 +188,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                     return GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          time = slotList.timeId.toString();
+                                          time = slotList.timeslot;
                                           log("time id>$time");
                                           selectedCard = index;
                                           // print(selectedCard);
@@ -218,7 +219,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                             ),
                                             child: Center(
                                                 child: Text(
-                                              '${slotList.from.toString()} - ${slotList.to.toString()}',
+                                              slotList.timeslot,
                                               style: TextStyle(
                                                 fontWeight:
                                                     selectedCard == index
@@ -237,7 +238,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Divider(height: 50),
+                      const Divider(height: 30),
                       Align(
                           alignment: Alignment.topLeft,
                           child: custom.text(text.visitCharges.tr, 16,
@@ -286,7 +287,8 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                             },
                                           ),
                                         );
-                                      })
+                                      }),
+                      SizedBox(height: 10,)
                     ],
                   ),
                 ),
