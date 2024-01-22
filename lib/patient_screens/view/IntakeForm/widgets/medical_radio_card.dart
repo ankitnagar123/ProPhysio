@@ -61,7 +61,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                           widget.questionId,
                           _selectedOption,
                           widget.nestedQuestion,
-                          _textEditingController.text,'','');
+                          _textEditingController.text,[],);
                       log("intakeController.answerList.length${intakeController.answerList.length}");
                     });
                   },
@@ -87,7 +87,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                       _selectedOption = value!;
                       print(_selectedOption);
                       intakeController.addAnswer(
-                          widget.questionId, _selectedOption, '', '','','');
+                          widget.questionId, _selectedOption, '', '',[]);
                     });
                   },
                 ),
@@ -110,6 +110,8 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        // intakeController.answerList.clear();
+                        log("intakeController answer-List${intakeController.answerList.length}");
                         showModalBottomSheet(
                             backgroundColor: Colors.transparent,
                             context: context,
@@ -147,13 +149,13 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                         controller: _textEditingController,
                         maxLines: 2,
                         textInputAction: TextInputAction.newline,
-                        onTapOutside: (val) {
-                          intakeController.addAnswer(
-                              widget.questionId,
-                              _selectedOption,
-                              widget.nestedQuestion,
-                              _textEditingController.text,'','');
-                        },
+                        // onTapOutside: (val) {
+                        //   intakeController.addAnswer(
+                        //       widget.questionId,
+                        //       _selectedOption,
+                        //       widget.nestedQuestion,
+                        //       _textEditingController.text,[]);
+                        // },
                         decoration: const InputDecoration(
                             hintText: "Answer:-",
                             border: InputBorder.none,
@@ -281,39 +283,46 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
   }
 
   void _choose(ImageSource source) async {
-    if(source == ImageSource.gallery){
+    if (source == ImageSource.gallery) {
       final List<XFile> selectedImages = await picker.pickMultiImage(
         imageQuality: 90,
       );
-      setState(() {});
+
       if (selectedImages.isNotEmpty) {
-        setState(() {});
-        intakeController.imagePathList.isEmpty;
-        intakeController.imageFileList.addAll(selectedImages);
+        setState(() {
+          // Clear existing image paths and add the newly selected images
+          intakeController.imagePathList.clear();
+          intakeController.imageFileList.addAll(selectedImages);
 
-        for (int i = 0; i < selectedImages.length; i++) {
-          String stringPath = selectedImages[i].path;
-          intakeController.imagePathList.add(stringPath);
-        }
-        selectedImages.clear();
-        print("path length :-- ${intakeController.imagePathList.length}");
+          for (int i = 0; i < selectedImages.length; i++) {
+            String stringPath = selectedImages[i].path;
+            intakeController.imagePathList.add(stringPath);
+          }
+          log("path length :-- ${intakeController.imagePathList.length}");
+        });
+
+        // Call addAnswer to process the selected images
         intakeController.addAnswer(
-            widget.questionId,
-            _selectedOption,
-            widget.nestedQuestion,
-            _textEditingController.text,selectedImages.toString(),'');
+          widget.questionId,
+          _selectedOption,
+          widget.nestedQuestion,
+          _textEditingController.text,
+          intakeController.imageFileList.toList(), // Convert to a regular List<XFile>
+        );
       }
-    }else{
-      final pickedFile = await picker.pickImage(source: source,imageQuality: 90,);
+    } else {
+      final pickedFile = await picker.pickImage(
+        source: source,
+        imageQuality: 90,
+      );
 
-      if(pickedFile != null){
+      if (pickedFile != null) {
         setState(() {
           intakeController.imageFileList.add(XFile(pickedFile.path));
           intakeController.imagePathList.add(pickedFile.path);
         });
       }
-
     }
-
   }
+
 }

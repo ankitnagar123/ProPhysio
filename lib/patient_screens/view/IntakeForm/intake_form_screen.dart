@@ -225,14 +225,13 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                      intakeController.loadingListAdd.value?customView.MyIndicator():
                      customView.MyButton(
                             context, _curr == 7 ? "SUBMIT" : "NEXT", () {
-                          // _curr == 1 + _curr
-                          //             ? ""
-                          //             :
+
                           if (_curr == 1) {
                             saveImage();
-                          } else if (_curr == 2) {
+                          }
+                          else if (_curr == 2) {
                             log("answerList--${cartController.answerList.length}");
-                            log("intakeformqueList--${cartController.intakeformqueList.length}");
+                            log("intake-form-que-List--${cartController.intakeformqueList.length}");
                             if (cartController.answerList.length <
                                 cartController.intakeformqueList.length) {
                               customView.MySnackBar(
@@ -242,7 +241,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   duration: const Duration(milliseconds: 10),
                                   curve: Curves.bounceIn);
                             }
-                          } else if (_curr == 3) {
+                          }
+                          else if (_curr == 3) {
                             log("answerList--${cartController.answerList.length}");
                             log("intakeformqueList--${cartController.intakeformqueList.length}");
                             log("intakmediclehistoryList--${cartController.intakmediclehistoryList.length}");
@@ -257,7 +257,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   duration: const Duration(milliseconds: 10),
                                   curve: Curves.bounceIn);
                             }
-                          } else if (_curr == 4) {
+                          }
+                          else if (_curr == 4) {
                             log("answerList--${cartController.answerList.length}");
                             log("intake form queList--${cartController.intakeformqueList.length}");
                             log("intake medical historyList--${cartController.intakmediclehistoryList.length}");
@@ -275,7 +276,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   duration: const Duration(milliseconds: 10),
                                   curve: Curves.bounceIn);
                             }
-                          } else if (_curr == 5) {
+                          }
+                          else if (_curr == 5) {
                             log("answerList--${cartController.answerList.length}");
                             log("intake form queList--${cartController.intakeformqueList.length}");
                             log("intake medical historyList--${cartController.intakmediclehistoryList.length}");
@@ -294,7 +296,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   duration: const Duration(milliseconds: 10),
                                   curve: Curves.bounceIn);
                             }
-                          } else if (_curr == 6) {
+                          }
+                          else if (_curr == 6) {
                             log("answerList--${cartController.answerList.length}");
                             log("intake form queList--${cartController.intakeformqueList.length}");
                             log("intake medical historyList--${cartController.intakmediclehistoryList.length}");
@@ -316,7 +319,8 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   duration: const Duration(milliseconds: 10),
                                   curve: Curves.bounceIn);
                             }
-                          } else {
+                          }
+                          else {
                             log("answerList--${cartController.answerList.length}");
                             log("intake form queList--${cartController.intakeformqueList.length}");
                             log("intake medical historyList--${cartController.intakmediclehistoryList.length}");

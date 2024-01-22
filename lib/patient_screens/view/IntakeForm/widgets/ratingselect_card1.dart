@@ -70,7 +70,7 @@ class _RatingSelectCard1State extends State<RatingSelectCard1> {
                                       selectIndex.toString(),
                                       '',
                                       '',
-                                      '','');
+                                      []);
                                 });
                               },
                               child: Padding(
