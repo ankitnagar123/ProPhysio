@@ -43,11 +43,11 @@ class _BookingPageState extends State<BookingPage> {
           children: [
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 7.0),
           child: Column(
             children: [
               SizedBox(
-                height: height * 0.045,
+                height: height * 0.010,
               ),
               const Image(
                 image: AssetImage("assets/images/runlogo.png"),
@@ -128,11 +128,12 @@ class _BookingPageState extends State<BookingPage> {
             itemBuilder: (BuildContext context, int index) {
               var id = patientBookingController.booking[index].bookingId;
               var idDr = patientBookingController.booking[index].doctorId;
+              var status = patientBookingController.booking[index].status;
               return InkWell(
                 onTap: () {
                   patientBookingController.bookingAppointmentDetails(
-                      context, id.toString(), "", () {
-                    showBottomSheet(id.toString(), idDr.toString());
+                      context, id.toString(), status.toString(), () {
+                    showBottomSheet(id.toString(), idDr.toString(),status.toString());
                   });
                 },
                 child: patientBookingController.booking[index].status ==
@@ -493,7 +494,7 @@ class _BookingPageState extends State<BookingPage> {
     });
   }
 
-  showBottomSheet(String id, String idDr) {
+  showBottomSheet(String id, String idDr,String status) {
     showModalBottomSheet(
         isScrollControlled: true,
         isDismissible: true,
@@ -515,23 +516,23 @@ class _BookingPageState extends State<BookingPage> {
                     const Text(""),
                     customView.text(
                         text.details.tr, 17.0, FontWeight.w500, Colors.black),
-                    patientBookingController.status == "Confirmed"
+                   status == "Confirmed"
                         ? GestureDetector(
                             onTap: () {
+                              var doctorImg = patientBookingController.drImg.value;
+                              log("doctorImg$doctorImg");
                               var data = {
                                 "drName": patientBookingController.name.value,
                                 "doctorId": idDr,
-                                "drSurname":
-                                    patientBookingController.surname.value,
-                                "drImg": patientBookingController.drImg.value,
-                                "drAddress":
-                                    patientBookingController.location.value,
-                                "contact":
-                                    patientBookingController.contact.value,
+                                "drSurname": patientBookingController.surname.value,
+                                "doctorImg": patientBookingController.drImg.value,
+                                "drAddress": patientBookingController.location.value,
+                                "contact": patientBookingController.contact.value,
                                 "doctorList": "drListData",
                               };
+                              log("drImg${patientBookingController.drImg.value}");
                               Get.toNamed(RouteHelper.getChatScreen(),
-                                  arguments: data);
+                                  parameters: data);
                             },
                             child: Wrap(
                               children: [
@@ -692,10 +693,10 @@ class _BookingPageState extends State<BookingPage> {
                             height: 10.0,
                             width: 10.0,
                             decoration: BoxDecoration(
-                              color: patientBookingController.status.value ==
+                              color:status ==
                                       "Pending"
                                   ? MyColor.statusYellow
-                                  : patientBookingController.status.value ==
+                                  : status ==
                                           "Confirmed"
                                       ? Colors.green
                                       : Colors.red,
@@ -709,12 +710,12 @@ class _BookingPageState extends State<BookingPage> {
                         Expanded(
                           flex: 1,
                           child: customView.text(
-                              patientBookingController.status.value == "Pending"
+                              status == "Pending"
                                   ? text.Pending.tr
-                                  : patientBookingController.status.value ==
+                                  : status ==
                                           "Confirmed"
                                       ? text.Upcoming.tr
-                                      : patientBookingController.status.value ==
+                                      : status ==
                                               "Reject"
                                           ? text.reject.tr
                                           : text.Cancel.tr,
@@ -786,7 +787,7 @@ class _BookingPageState extends State<BookingPage> {
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30,
                   ),
-                patientBookingController.status.value == "Cancel"?
+                status == "Cancel"?
                 Row(
                   children: [
                     Expanded(
@@ -820,7 +821,7 @@ class _BookingPageState extends State<BookingPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    patientBookingController.status.value == "Pending"
+                    status == "Pending"
                         ? TextButton(
                             onPressed: () {
                               cancelPopUp(context, id, idDr);
@@ -833,7 +834,7 @@ class _BookingPageState extends State<BookingPage> {
                                   fontFamily: "Poppins"),
                             ),
                           )
-                        : patientBookingController.status.value == "Confirmed"
+                        : status == "Confirmed"
                             ? TextButton(
                                 onPressed: () {
                                   cancelPopUp(context, id, idDr);

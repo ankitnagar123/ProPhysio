@@ -106,7 +106,6 @@ class ChatController extends GetxController {
     final Map<String, dynamic> parameter = {
       "sender_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
       "receiver_id":receiverId,
-      // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
     if(connection){

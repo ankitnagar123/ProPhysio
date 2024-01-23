@@ -67,12 +67,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: height * 0.045,
+              height: height * 0.010,
             ),
             Image(
               image: AssetImage("assets/images/runlogo.png"),
-              height: 40,
-              width: 40,
+              height: 45,
+              width: 45,
             ),
             Obx(() {
               return Padding(

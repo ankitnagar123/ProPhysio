@@ -15,9 +15,9 @@ import '../../controller/rating_controller/PatinetRatingController.dart';
 import '../book_appointment/AppointmentCalender.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
-  final String id, centerId;
+  final String id, branchId;
 
-  const DoctorDetailScreen({super.key, required this.id, required this.centerId, required String drImg, required String cat});
+  const DoctorDetailScreen({super.key, required this.id, required this.branchId, required String drImg, required String cat});
 
   @override
   State<DoctorDetailScreen> createState() => _DoctorDetailScreenState();
@@ -50,16 +50,20 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
   void initState() {
     super.initState();
     doctorId = widget.id.toString();
+    branchId = widget.branchId.toString();
+
     log("doctor my  id$doctorId");
+    log("branch Id my  id$branchId");
 
+    patientRatingCtr.fetchRating(doctorId);
+    doctorListCtr.doctorDetialsfetch(doctorId);
     // Using WidgetsBinding to execute code after the first frame is displayed
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-
-       // Calling methods on controllers to fetch data
-       patientRatingCtr.fetchRating(doctorId);
-      doctorListCtr.doctorDetialsfetch(doctorId);
-      // doctorSpecializationCtr.specializationFetch(doctorId);
-     });
+    //  WidgetsBinding.instance.addPostFrameCallback((_) {
+    //
+    //    // Calling methods on controllers to fetch data
+    //
+    //   // doctorSpecializationCtr.specializationFetch(doctorId);
+    //  });
   }
 
   @override
@@ -68,7 +72,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
     return Obx(() {
       if(doctorListCtr.resultVar.value == 1){
         doctorListCtr.resultVar.value = 0;
-
         /*set value </>*/
         img = doctorListCtr.image.value.toString();
         doc = doctorListCtr.doc.value.toString();
@@ -76,8 +79,6 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
         log("doctor =doc${doctorListCtr.doc.value.toString()}");
         latitude = doctorListCtr.latitude.value.toString();
         longitude = doctorListCtr.longitude.value.toString();
-        branchId = doctorListCtr.branchId.value.toString();
-        log("branchId my  id$branchId");
         address = doctorListCtr.address.value;
         appointmentController.dateCalender(doctorId,branchId);
       }

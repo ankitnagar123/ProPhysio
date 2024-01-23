@@ -44,13 +44,10 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
     return Obx(() {
       return Scaffold(
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 10.0,
-              ),
               const Align(
                 alignment: Alignment.center,
                 child: Image(
@@ -189,28 +186,28 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
 
-              ListTile(
-                subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
-                    FontWeight.w400, Colors.black),
-                onTap: () {
-                  Get.toNamed(RouteHelper.DCenterRequest());
-                },
-                leading: Badge(
-                  backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
-                  label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
-                  child: const Icon(
-                    Icons.medical_services_outlined,
-                    color: Colors.black,
-                  ),
-                ),
-                title: customView.text(
-                    text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
+              // ListTile(
+              //   subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
+              //       FontWeight.w400, Colors.black),
+              //   onTap: () {
+              //     Get.toNamed(RouteHelper.DCenterRequest());
+              //   },
+              //   leading: Badge(
+              //     backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
+              //     label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
+              //     child: const Icon(
+              //       Icons.medical_services_outlined,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              //   title: customView.text(
+              //       text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
 
               ListTile(
                 onTap: () {

@@ -63,7 +63,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
             : null,
       ),*/
       appBar: AppBar(
-        toolbarHeight: 73,
+        bottom: PreferredSize(child: Divider(color: Colors.grey),preferredSize:  Size.fromHeight(1)),
         leading: isMultiSelectionEnabled
             ? IconButton(
             onPressed: () {
@@ -77,18 +77,9 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
         elevation: 0.0,
         automaticallyImplyLeading: false,
         centerTitle: true == isMultiSelectionEnabled ? false : true,
-        title: Column(
-          children: [
-            const Image(
-              image: AssetImage("assets/images/runlogo.png"),
-              height: 40,
-              width: 40,
-            ),
-            Text(isMultiSelectionEnabled
-                ? getSelectedItemCount()
-                : text.chat.tr,style: const TextStyle(color: Colors.black)),
-          ],
-        ),
+        title: Text(isMultiSelectionEnabled
+            ? getSelectedItemCount()
+            : text.chat.tr,style: const TextStyle(color: Colors.black,fontFamily: "Poppins",fontSize: 17,fontWeight: FontWeight.w400),),
         actions: [
           Visibility(
               visible: selectedItem.isNotEmpty,
@@ -167,7 +158,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Container(
                           margin: const EdgeInsets.only(
-                              left: 10, right: 10, top: 10, bottom: 10),
+                              left: 4, right: 4, top: 4, bottom: 4),
                           child: InkWell(
                               onTap: () {
                                 var patientId = {
@@ -202,10 +193,10 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                                 const Image(
                                                     image: AssetImage(
                                                         "assets/images/dummyprofile.png"),
-                                                    height: 70.0,
-                                                    width: 70.0),
-                                            width: 70.0,
-                                            height: 70.0,
+                                                    height: 60.0,
+                                                    width: 60.0),
+                                            width: 60.0,
+                                            height: 60.0,
                                             fit: BoxFit.cover,
                                             placeholder:
                                                 "assets/images/loading.gif",
@@ -239,6 +230,7 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
                                     Visibility(
                                       visible: isMultiSelectionEnabled,
                                       child: CheckboxListTile(
+                                        checkColor: Colors.white,
                                         activeColor: MyColor.primary1,
                                         dense: true,
                                         value: selectedItem.contains(index),

@@ -43,6 +43,11 @@ LocalString text = LocalString();
 
     return Scaffold(
       appBar: AppBar(
+        bottom: PreferredSize(
+            child: Divider(
+              color: Colors.grey,
+            ),
+            preferredSize: Size.fromHeight(0)),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -60,7 +65,7 @@ LocalString text = LocalString();
       body: Column(
         children: [
           SizedBox(
-            height: 48,
+            height: 47,
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),

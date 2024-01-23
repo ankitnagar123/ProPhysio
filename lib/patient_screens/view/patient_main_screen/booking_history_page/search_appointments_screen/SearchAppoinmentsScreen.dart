@@ -62,11 +62,15 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            bottom: PreferredSize(
+              child: Divider(),
+              preferredSize: Size.fromHeight(0.5),
+            ),
             centerTitle: true,
             elevation: 0,
             backgroundColor: Colors.white24,
             title: customView.text(
-                text.searchAppointment.tr, 17, FontWeight.bold, MyColor.black),
+                text.searchAppointment.tr, 17, FontWeight.w500, MyColor.black),
             leading: IconButton(
               onPressed: () {
                 patientBookingController.bookingAppointment("");
@@ -112,7 +116,9 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ),
                 ),
-                 const Divider(color: Colors.grey),
+SizedBox(
+  height: 6,
+),
                 Row(
                   children: [
                     Expanded(

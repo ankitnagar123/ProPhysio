@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/AppConst.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
@@ -223,7 +222,7 @@ class _DoctorListState extends State<DoctorList> {
                                   builder: (context) =>
                                       DoctorDetailScreen(
                                         id: list[index].doctorId.toString(),
-                                        centerId: '', drImg: '', cat: '',
+                                        branchId: list[index].branchId.toString(), drImg: '', cat: '',
                                       )));
                           // Get.toNamed(RouteHelper.getDoctorDetailScreen(id),);
                         },

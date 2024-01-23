@@ -49,7 +49,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       context: context,
                       builder: (context) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
+                          padding: const EdgeInsets.only(bottom: 8.0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,

@@ -45,8 +45,8 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontSize: 16,
                 ),
                 Icons.call),
-            customView.callButton(context, "Video Call", () {
-              // Get.back();
+            customView.callButton(context, "Message", () {
+               Get.back();
             },
                 MyColor.primary,
                 const TextStyle(
@@ -54,12 +54,12 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
-                Icons.video_call)
+                Icons.messenger_outline)
           ],
         ),
       ),
       appBar: AppBar(
-        toolbarHeight: 80,
+        bottom: PreferredSize(preferredSize: Size.fromHeight(1),child: Divider(color: Colors.grey,)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
@@ -80,9 +80,9 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             const Divider(color: Colors.grey),
+
             const SizedBox(
-              height: 20,
+              height: 18,
             ),
             InkWell(
               onTap: () {
@@ -118,13 +118,13 @@ class _PatientChatProfileState extends State<PatientChatProfile> {
               children: [
                 const Icon(
                   Icons.location_on_outlined,
-                  size: 19,
+                  size: 21,
                   color: MyColor.primary1,
                 ),
                 Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: customView.text(
                         widget.address, 12, FontWeight.normal, MyColor.grey),
                   ),

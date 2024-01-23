@@ -295,6 +295,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                         _selectedGender.toString(),
                         birthDateCtr.text,
                         selectedBranch.toString(),
+                        imagename.toString(),
+                        baseimage.toString(),
                         idTypeCtr.text,
                         idNumberCtr.text,
                         kinNameCtr.text,

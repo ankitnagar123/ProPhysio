@@ -76,14 +76,13 @@ class _HomeViewState extends State<HomeView> {
         .size
         .height;
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
       child: Obx(() {
         /*if (doctorListCtr.categoryLoading.value) {
           customView.MyIndicator();
         }*/
         return Column(
           children: [
-            SizedBox(height: height * 0.05),
+            SizedBox(height: height * 0.01),
             Padding(
               padding: const EdgeInsets.only(left: 12.0,right: 12.0,top: 12.0),
               child: Row(

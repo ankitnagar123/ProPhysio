@@ -34,6 +34,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          bottom: PreferredSize(preferredSize: Size.fromHeight(5),child: Divider(color: Colors.grey,)),
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white24,
@@ -51,12 +52,21 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
           child: Column(
             children: [
               Center(
-                heightFactor: 5,
-                child: customView.text(
-                    text.rateThoseLastVisitsYouDid.tr,
-                    14.0,
-                    FontWeight.w500,
-                    Colors.black),
+                heightFactor: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border:
+                      Border.all(color: MyColor.primary1.withOpacity(0.3))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: customView.text(
+                        text.rateThoseLastVisitsYouDid.tr,
+                        14.0,
+                        FontWeight.w500,
+                        Colors.black),
+                  ),
+                ),
               ),
               showList(),
             ],
@@ -95,7 +105,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
                               )));
                 },
                 child: Card(
-                  color: MyColor.midgray,
+                  elevation: 1.8,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 7.0, vertical: 10.0),

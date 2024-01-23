@@ -231,7 +231,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
     );
   }
 
-  Widget showMultipleImageView() {
+  Widget showMultipleImageView( ) {
     return Expanded(
       child: SizedBox(
         height: 60,
@@ -291,11 +291,14 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
       if (selectedImages.isNotEmpty) {
         setState(() {
           // Clear existing image paths and add the newly selected images
-          intakeController.imagePathList.clear();
+
+          //intakeController.imagePathList.clear();
+
           intakeController.imageFileList.addAll(selectedImages);
 
           for (int i = 0; i < selectedImages.length; i++) {
             String stringPath = selectedImages[i].path;
+
             intakeController.imagePathList.add(stringPath);
           }
           log("path length :-- ${intakeController.imagePathList.length}");
@@ -309,6 +312,8 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
           _textEditingController.text,
           intakeController.imageFileList.toList(), // Convert to a regular List<XFile>
         );
+    /*    intakeController.imageFileList.clear();
+        intakeController.imagePathList.clear();*/
       }
     } else {
       final pickedFile = await picker.pickImage(
@@ -321,6 +326,9 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
           intakeController.imageFileList.add(XFile(pickedFile.path));
           intakeController.imagePathList.add(pickedFile.path);
         });
+      }else{
+            intakeController.imageFileList.clear();
+        intakeController.imagePathList.clear();
       }
     }
   }

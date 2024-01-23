@@ -208,6 +208,9 @@ class PatientProfileCtr extends GetxController {
       String gender,
       String dob,
       String branchId,
+      String imageName,
+      String imageStr,
+
       /*---New---*/
       String idType,
       String idNumber,
@@ -267,6 +270,8 @@ class PatientProfileCtr extends GetxController {
       "gender": gender,
       "dob": dob,
       "branch_id": branchId,
+      "image_name": imageName,
+      "image_str": imageStr,
       /*-----NEW--------*/
       "id_type": idType,
       "id_number": idNumber,

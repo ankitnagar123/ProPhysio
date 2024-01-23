@@ -8,7 +8,7 @@ import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/DocotorBookingController.dart';
 
 class DoctorChatProfile extends StatefulWidget {
-  const DoctorChatProfile({Key? key}) : super(key: key);
+  const DoctorChatProfile({super.key});
 
   @override
   State<DoctorChatProfile> createState() => _DoctorChatProfileState();
@@ -23,7 +23,6 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
   String patientName = "";
   String patientPic = "";
   String patientSurname = "";
-  String patientUsername = "";
   String patientAddress = "";
 
   @override
@@ -50,7 +49,6 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
     patientName = Get.parameters["name"].toString();
     patientPic = Get.parameters["pic"].toString();
     patientSurname = Get.parameters["surname"].toString();
-    patientUsername = Get.parameters["username"].toString();
     patientAddress = Get.parameters["address"].toString();
     print("profile address user $patientAddress");
   }
@@ -89,12 +87,12 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
         ),
       ),
       appBar: AppBar(
-        toolbarHeight: 80,
+        bottom: PreferredSize(preferredSize: Size.fromHeight(1), child: Divider(color: Colors.grey,)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white24,
         title: customView.text(
-            "@$patientUsername", 17, FontWeight.bold, MyColor.black),
+            "Profile", 17, FontWeight.bold, MyColor.black),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -110,7 +108,6 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             const Divider(color: Colors.grey),
             const SizedBox(
               height: 20,
             ),

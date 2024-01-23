@@ -34,7 +34,7 @@ class PatientRatingCtr extends GetxController {
       "review": review,
       "booking_id":bookingID,
     };
-    print("Rating Parameter$cardPeramert");
+    log("Rating Parameter$cardPeramert");
     final response = await apiService.postData(MyAPI.pAddRating, cardPeramert);
     try {
       log("response of Patient Rating Review :-${response.body}");
@@ -43,9 +43,7 @@ class PatientRatingCtr extends GetxController {
       loadingAdd.value = false;
       if (result == "success") {
         loadingAdd.value = false;
-        print("my patient review $result");
-        // custom.massenger(context, "Rating successfully");
-        print(result.toString());
+        log("my patient review $result");
         callback();
       } else {
         loadingAdd.value = false;
@@ -69,7 +67,7 @@ class PatientRatingCtr extends GetxController {
       loading.value = true;
       final response =
       await apiService.postData(MyAPI.pFetchRating, perameter);
-      print(" Rating Fetch =============${response.body}");
+      log(" Rating Fetch =============${response.body}");
       if (response.statusCode == 200) {
         loading.value = false;
         address(RatingListModel.fromJson(jsonDecode(response.body)));

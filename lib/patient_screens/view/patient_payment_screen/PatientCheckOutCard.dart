@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +17,11 @@ class PatientCheckOutCard extends StatefulWidget {
   String price, time, date, branchId;
 
   PatientCheckOutCard(
-      {Key? key,
+      {super.key,
       required this.price,
       required this.time,
       required this.date,
-      required this.branchId})
-      : super(key: key);
+      required this.branchId});
 
   @override
   State<PatientCheckOutCard> createState() => _PatientCheckOutCardState();
@@ -38,6 +38,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
   String? doctorid;
   String? date;
   String centerId = "";
+  bool remember = false;
 
   @override
   void initState() {
@@ -73,9 +74,19 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
               : custom.MyButton(context, text.confirmAppointment.tr, () {
                   if (cardid == "") {
                     custom.MySnackBar(context, text.selectCard.tr);
+                  }else if (remember == false){
+                    custom.MySnackBar(context, "Accept term condition & cancellation policy");
+
                   } else {
-                    appointmentController.bookingAppointment(context, doctorid.toString(),
-                        cardid.toString(), time.toString(), price.toString(), date.toString(), centerId,"Paid", () {
+                    appointmentController.bookingAppointment(
+                        context,
+                        doctorid.toString(),
+                        cardid.toString(),
+                        time.toString(),
+                        price.toString(),
+                        date.toString(),
+                        centerId,
+                        "Paid", () {
                       Get.offNamed(RouteHelper.getBookingSuccess());
                     });
                   }
@@ -83,7 +94,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                   const TextStyle(color: MyColor.white, fontFamily: "Poppins")),
         ),
         appBar: AppBar(
-          bottom: PreferredSize(child: Divider(),preferredSize: Size.fromHeight(5.0)),
+          bottom: PreferredSize(
+              child: Divider(), preferredSize: Size.fromHeight(5.0)),
           backgroundColor: Colors.white24,
           leading: InkWell(
               onTap: () {
@@ -92,7 +104,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
               child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
           elevation: 0,
           centerTitle: true,
-          title: custom.text(text.checkOut.tr, 17, FontWeight.w500, MyColor.black),
+          title:
+              custom.text(text.checkOut.tr, 17, FontWeight.w500, MyColor.black),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -113,7 +126,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     ),
                     GestureDetector(
                       onTap: () {
-                         Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                        Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
                       },
                       child: Container(
                           height: 50.0,
@@ -143,7 +156,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     SizedBox(
                       height: height * 0.02,
                     ),
-                    Expanded(child: showCardList(width)),
+                    showCardList(width),
+                    MyCheckbox(),
                     SizedBox(
                       height: height * 0.1,
                     ),
@@ -164,6 +178,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
           return SizedBox(
             width: double.infinity,
             child: Card(
+              elevation: 2,
               surfaceTintColor: MyColor.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -173,8 +188,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        custom.text(
-                            text.cardType.tr, 15.0, FontWeight.w500, Colors.black),
+                        custom.text(text.cardType.tr, 15.0, FontWeight.w500,
+                            Colors.black),
                         Radio<String>(
                           activeColor: MyColor.primary1,
                           value: index.toString(),
@@ -197,8 +212,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       children: [
                         Column(
                           children: [
-                            custom.text(text.cardNumber.tr, 12.0, FontWeight.w400,
-                                Colors.black),
+                            custom.text(text.cardNumber.tr, 12.0,
+                                FontWeight.w400, Colors.black),
                             custom.text(cardCtr.cardList[index].cardNumber,
                                 10.0, FontWeight.w400, Colors.black),
                           ],
@@ -208,8 +223,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                         ),
                         Column(
                           children: [
-                            custom.text(
-                                text.expires.tr, 12.0, FontWeight.w400, Colors.black),
+                            custom.text(text.expires.tr, 12.0, FontWeight.w400,
+                                Colors.black),
                             custom.text(
                                 "${cardCtr.cardList[index].expiryMonth}/${cardCtr.cardList[index].expiryYear}",
                                 13.0,
@@ -236,8 +251,8 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        custom.text(
-                            text.cardHolder.tr, 12.0, FontWeight.w400, Colors.black),
+                        custom.text(text.cardHolder.tr, 12.0, FontWeight.w400,
+                            Colors.black),
                         custom.text(cardCtr.cardList[index].cardHolderName,
                             13.0, FontWeight.w400, Colors.black),
                       ],
@@ -250,12 +265,71 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
         });
   }
 
-  bool validation() {
-    if (cardid == null) {
-      custom.MySnackBar(context,text.selectCard.tr);
-    } else {
-      return true;
-    }
-    return false;
+
+
+  Widget MyCheckbox() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Wrap(
+          children: [
+            Checkbox(
+              visualDensity: VisualDensity.compact,
+              activeColor: MyColor.primary1,
+              checkColor: Colors.white,
+              value: remember,
+              onChanged: (newValue) {
+                setState(() {
+                  remember = newValue!;
+                  log("$remember");
+                });
+              },
+            ),
+          ],
+        ),
+        Expanded(
+          flex: 1,
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(
+                RouteHelper.DTandCScreen(),
+              );
+            },
+            child: RichText(
+              // textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: 'Accept',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 11, fontFamily: "Lato"),
+                  children: <TextSpan>[
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(RouteHelper.DTandCScreen());
+                        },
+                      text: ' Terms and Condition ',
+                      style: TextStyle(
+                          color: MyColor.primary1,
+                          fontSize: 12,
+                          fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                      text: 'and ',
+                      style: TextStyle(fontSize: 11, fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(RouteHelper.DTandCScreen());
+                          },
+                        text: 'Cancellation Policy',
+                        style:
+                            TextStyle(color: MyColor.primary1, fontSize: 12)),
+                  ]),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

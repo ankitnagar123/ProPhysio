@@ -62,7 +62,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 75,
+        bottom: PreferredSize(child: Divider(color: Colors.grey),preferredSize:  Size.fromHeight(1)),
+
         elevation: 0.0,
         backgroundColor: Colors.white,
         centerTitle: isMultiSelectionEnabled ? false : true,
@@ -75,18 +76,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
             },
             icon: const Icon(Icons.close,color: Colors.black,))
             : null,
-        title: Column(
-          children: [
-            const Image(
-              image: AssetImage("assets/images/runlogo.png"),
-              height: 40,
-              width: 40,
-            ),
-            Text(isMultiSelectionEnabled
-                ? getSelectedItemCount()
-                : text.chat.tr,style: const TextStyle(color: Colors.black)),
-          ],
-        ),
+        title: Text(isMultiSelectionEnabled
+            ? getSelectedItemCount()
+            : text.chat.tr,style: const TextStyle(color: Colors.black,fontFamily: 'Poppins',fontSize: 17,fontWeight: FontWeight.w400)),
         actions: [
           Visibility(
               visible: selectedItem.isNotEmpty,
@@ -137,7 +129,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             children: [
-              Divider(),
               const SizedBox(height: 5.0,),
               SizedBox(
                 width: widht,
@@ -198,7 +189,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
                         Get.toNamed(RouteHelper.getChatScreen(),arguments:data);
                       },*/
                       child: Card(
-                        color: Colors.grey.shade100,
                           borderOnForeground: false,
                           elevation: 2,
                           margin: const EdgeInsets.only(
@@ -207,7 +197,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                               borderRadius: BorderRadius.circular(7)),
                           child: Container(
                             margin: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10, bottom: 10),
+                                left: 4, right: 4, top: 4, bottom: 4),
                             // height: 80.0,
                             child: InkWell(
                                 onTap: () {
@@ -218,12 +208,11 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                      "doctorId":doctorId,
                                      "drName":list[index].name,
                                      "drSurname":list[index].surname,
-                                     "drImg": list[index].userProfile,
+                                     "doctorImg": list[index].userProfile,
                                      "drAddress":list[index].address,
-                                     "chatList":"listData",
                                    };
                                    log("$data");
-                                    Get.toNamed(RouteHelper.getChatScreen(),arguments:data);
+                                    Get.toNamed(RouteHelper.getChatScreen(),parameters:data);
 
 
                                    // doMultiSelection(chatController);
@@ -256,10 +245,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                                   const Image(
                                                       image: AssetImage(
                                                           "assets/images/dummyprofile.png"),
-                                                      height: 70.0,
-                                                      width: 70.0),
-                                              width: 70.0,
-                                              height: 70.0,
+                                                      height: 60.0,
+                                                      width: 60.0),
+                                              width: 60.0,
+                                              height: 60.0,
                                               fit: BoxFit.cover,
                                               placeholder:
                                                   "assets/images/loading.gif",

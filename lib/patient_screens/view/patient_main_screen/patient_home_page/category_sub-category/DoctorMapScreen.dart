@@ -163,7 +163,8 @@ class _MapViewScreenState extends State<MapViewScreen> {
                 builder: (context) => DoctorDetailScreen(
                   id: doctorListCtr.doctorList[i].doctorId
                       .toString(),
-                  centerId: '',
+                  branchId: doctorListCtr
+                      .doctorList[i].branchId,
                   drImg: doctorListCtr
                       .doctorList[i].doctorProfile
                       .toString(), cat: widget.catId,

@@ -253,7 +253,6 @@ class CustomView {
           cursorColor: Colors.black,
           controller: controller,
           decoration: InputDecoration(
-
             contentPadding: const EdgeInsets.only(top: 3, left: 20),
             hintText: hintText,
             hintStyle: const TextStyle(fontSize: 12),

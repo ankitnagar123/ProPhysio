@@ -36,6 +36,11 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: PreferredSize(
+            child: Divider(
+              color: Colors.grey,
+            ),
+            preferredSize: Size.fromHeight(0)),
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -45,7 +50,8 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
             color: Colors.black,
           ),
         ),
-        title: custom.text(text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
+        title: custom.text(
+            text.yourReport.tr, 15.0, FontWeight.w500, Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -53,23 +59,38 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
       body: Column(
         children: [
           SizedBox(
-            height: 50,
+            height: 47,
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
-              padding: EdgeInsets.only(left: 3,right: 3,bottom: 5),
+              padding: EdgeInsets.only(left: 3, right: 3, bottom: 5),
               labelPadding: const EdgeInsets.all(7.0),
               indicatorColor: MyColor.red,
               labelColor: Colors.white,
-              indicator:  BoxDecoration(color: MyColor.red.withOpacity(0.5),borderRadius: BorderRadius.circular(25),),
+              indicator: BoxDecoration(
+                color: MyColor.red.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(25),
+              ),
               unselectedLabelColor: Colors.black,
               controller: tabController,
               // indicatorWeight: 0,
-              tabs:  [
+              tabs: [
                 Tab(
-                    child: Text(text.prescription.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins",),)
-                ),
+                    child: Text(
+                  text.prescription.tr,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "Poppins",
+                  ),
+                )),
                 Tab(
-                  child: Text(text.medicalTest.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
+                  child: Text(
+                    text.medicalTest.tr,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Poppins"),
+                  ),
                 ),
                 // Tab(
                 //   child: Text(text.medicines.tr,style: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,fontFamily: "Poppins"),),
@@ -77,18 +98,19 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
               ],
             ),
           ),
-          Expanded(child:  Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: tabController,
-                children: const [
-                  PatientPrescription(),
-                  PatientMedicalReport(),
-                  // PatientViewMedicines(),
-                ]),
-          ),),
-
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: tabController,
+                  children: const [
+                    PatientPrescription(),
+                    PatientMedicalReport(),
+                    // PatientViewMedicines(),
+                  ]),
+            ),
+          ),
         ],
       ),
     );

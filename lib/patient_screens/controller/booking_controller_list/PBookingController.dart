@@ -102,7 +102,7 @@ class PatientBookingController extends GetxController {
       loadingRate.value = true;
       final response =
       await apiService.postData(MyAPI.pBookingRatingAppointList, perameter);
-      print(" Category =============${response.body}");
+      log(" Complete coming do rating this list =============${response.body}");
       if (response.statusCode == 200) {
         loadingRate.value = false;
         bookingCompleteRate.value = doctorbooingRatingListFromJson(response.body);
@@ -136,23 +136,29 @@ class PatientBookingController extends GetxController {
     await apiService.postData(MyAPI.pBookingAppointmentDetail, Perameter);
     try {
       log("response of booking Appointment details:-${response.body}");
-      log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
         loadingd.value = false;
         var jsonResponse = jsonDecode(response.body);
 
-        paymentTyp.value = jsonResponse["payment_type"];
-        price.value = jsonResponse["price"];
-        bookingDate.value = jsonResponse["booking_date"];
-        status.value = jsonResponse["status"];
-        time.value = jsonResponse["Time"];
-        location.value = jsonResponse["location"];
-        name.value = jsonResponse["name"];
-        surname.value = jsonResponse["surname"];
-        reasonCancel.value = jsonResponse["cancle_reason"];
-        drImg.value = jsonResponse["doctor_profile"];
-        contact.value = jsonResponse["contact"];
+        paymentTyp.value = jsonResponse["payment_type"].toString();
+        log("doctor_profile${paymentTyp.value}");
+
+        price.value = jsonResponse["price"].toString();
+        bookingDate.value = jsonResponse["booking_date"].toString();
+        status.value = jsonResponse["status"].toString();
+        time.value = jsonResponse["Time"].toString();
+        location.value = jsonResponse["location"].toString();
+        name.value = jsonResponse["name"].toString();
+        surname.value = jsonResponse["surname"].toString();
+        reasonCancel.value = jsonResponse["cancle_reason"].toString();
+
+        drImg.value = jsonResponse["doctor_profile"].toString();
+        log("doctor_profile${drImg.value}");
+        contact.value = jsonResponse["contact"].toString();
+        log("contact${contact.value}");
+
+
 
         bookingId.value = jsonResponse["booking_id"];
       } else {
@@ -161,7 +167,7 @@ class PatientBookingController extends GetxController {
       }
     } catch (e) {
       loadingd.value = false;
-      log("excaption$e");
+      log("excaption-------$e");
     }
   }
 

@@ -156,8 +156,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                       "ID": patientId,
                       "name": patientName,
                       "pic": patientPic,
-                      "surname": patientName,
-                      "username": patientUsername,
+                      "surname": patientSurname,
                       "address": patientAddress,
                     };
                     Get.toNamed(RouteHelper.DChatProfile(),
@@ -184,7 +183,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                 child: const Icon(
                   Icons.arrow_back_ios,
                   size: 18.0,
-                  color: Colors.white70,
+                  color: Colors.white,
                 )),
             elevation: 0,
             title: Row(

@@ -1,7 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +49,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        bottom: PreferredSize(preferredSize:Size.fromHeight(5),child: Divider(color: Colors.grey), ),
         backgroundColor: Colors.white24,
         leading: InkWell(
             onTap: () {
@@ -60,10 +59,10 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
         elevation: 0,
         centerTitle: true,
         title: custom.text(
-            text.ratingsAndReviews.tr, 17, FontWeight.w500, MyColor.black),
+            text.ratingsAndReviews.tr, 16, FontWeight.w500, MyColor.black),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: SingleChildScrollView(
           child: Obx(() {
             if (patientBookingController.loadingd.value) {
@@ -75,13 +74,12 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 const Divider(color: Colors.grey),
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
                       "${text.visitWith.tr} ${patientBookingController.name}",
                       15.0,
-                      FontWeight.bold,
+                      FontWeight.w600,
                       Colors.black),
                 ),
                 SizedBox(
@@ -175,7 +173,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                 TextField(
                   controller: reviewCtr,
                   keyboardType: TextInputType.multiline,
-                  maxLines: 4,
+                  maxLines: 3,
                   decoration:  InputDecoration(
                     contentPadding: const EdgeInsets.only(top: 20, left: 20),
                     hintText: text.yourReview.tr,

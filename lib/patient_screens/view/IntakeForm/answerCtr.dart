@@ -157,51 +157,51 @@ CustomView view = CustomView();
   // }
 
   /*new*/
-  Future<void> addAnswer(
-      String questionId,
-      String answer,
-      String nestedQuestion,
-      String nestedAnswer,
-      List<XFile> nestedImages,
-      ) async {
-    // Remove existing answer with the same questionId
+    Future<void> addAnswer(
+        String questionId,
+        String answer,
+        String nestedQuestion,
+        String nestedAnswer,
+        List<XFile> nestedImages,
+        ) async {
+      // Remove existing answer with the same questionId
 
-    log("umesh question id is here======${questionId}");
-    log("umesh nestted image is  here id is here======${nestedImages}");
-    answerList.removeWhere((element) => element.Question == questionId);
+      log("umesh question id is here======${questionId}");
+      log("umesh nestted image is  here id is here======${nestedImages}");
+      answerList.removeWhere((element) => element.Question == questionId);
 
 
-    // Encode the nested images to base64
-    List<String> nestedImgBase64List = [];
-    for (XFile nestedImg in nestedImages) {
-      List<int> imageBytes = await nestedImg.readAsBytes();
-      String nestedImgBase64 = base64Encode(imageBytes);
-      nestedImgBase64List.add(nestedImgBase64);
+      // Encode the nested images to base64
+      List<String> nestedImgBase64List = [];
+      for (XFile nestedImg in nestedImages) {
+        List<int> imageBytes = await nestedImg.readAsBytes();
+        String nestedImgBase64 = base64Encode(imageBytes);
+        nestedImgBase64List.add(nestedImgBase64);
+      }
+  log("umesh nested box nestddd list image list is here=======${nestedImgBase64List}");
+      // Add the new AnswerModel to the answerList
+      answerList.add(
+        AnswerModel(
+          Question: questionId,
+          answer: answer,
+          nestedQuestion: nestedQuestion,
+          nestedAnswer: nestedAnswer,
+          nestedImgBase64List: nestedImgBase64List,
+        ),
+      );
+
+      // Print the updated list of answers
+      for (int i = 0; i < answerList.length; i++) {
+        print("answer ----${answerList[i].Question} ${answerList[i].answer}");
+      }
+
+      // Convert the list of AnswerModel to JSON
+      String json = jsonEncode(answerList.map((i) => i.toJson()).toList());
+
+      // Log the JSON data
+      debugPrint("this is json response data is here======= $json");
+      log("this is json response data is here log======= $json");
     }
-log("umesh nested box nestddd list image list is here=======${nestedImgBase64List}");
-    // Add the new AnswerModel to the answerList
-    answerList.add(
-      AnswerModel(
-        Question: questionId,
-        answer: answer,
-        nestedQuestion: nestedQuestion,
-        nestedAnswer: nestedAnswer,
-        nestedImgBase64List: nestedImgBase64List,
-      ),
-    );
-
-    // Print the updated list of answers
-    for (int i = 0; i < answerList.length; i++) {
-      print("answer ----${answerList[i].Question} ${answerList[i].answer}");
-    }
-
-    // Convert the list of AnswerModel to JSON
-    String json = jsonEncode(answerList.map((i) => i.toJson()).toList());
-
-    // Log the JSON data
-    debugPrint("this is json response data is here======= $json");
-    log("this is json response data is here log======= $json");
-  }
 
 
   /*..........................................Pro-physio  app send data of form ....................................................*/
