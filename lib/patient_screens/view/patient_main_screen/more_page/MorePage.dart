@@ -14,7 +14,6 @@ import "../../../controller/auth_controllers/card_controller's/PatientCardContro
 import '../../IntakeForm/intake_form_screen.dart';
 import 'Ratings_and_reviews/Rating&ReviewPage.dart';
 import 'my_past_chekup/PatientPastChekups.dart';
-import 'my_past_chekup/PatientQRCodeShow.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);

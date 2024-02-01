@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
@@ -16,11 +19,24 @@ class PatientSupportScreen extends StatefulWidget {
 class _PatientSupportScreenState extends State<PatientSupportScreen> {
   CustomView customView = CustomView();
 
-  PatientSupportCtr patientSupportCtr = PatientSupportCtr();
+  PatientSupportCtr patientSupportCtr = Get.put(PatientSupportCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
+
+
+
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController msgCtrl = TextEditingController();
+  String? selectedBranch;
+
   LocalString text = LocalString();
+
+  @override
+  void initState() {
+    super.initState();
+    doctorSignUpCtr.branchListApi();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +44,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
     return SafeArea(
         child: Scaffold(
           bottomNavigationBar:  Container(
-            margin: const EdgeInsets.symmetric(vertical: 10,horizontal:  15),
+            margin: const EdgeInsets.symmetric(vertical: 10,horizontal:  10),
             height: 58,
             child: Padding(
                 padding: const EdgeInsets.only(bottom: 12),
@@ -42,11 +58,13 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                       text.Sendmessage.tr,
                           () {
                         if(validation()){
+
                           patientSupportCtr.supportApi(context, subjectCtrl.text,
-                              emailCtrl.text, msgCtrl.text, () {
+                              emailCtrl.text, msgCtrl.text,selectedBranch ,() {
                                 subjectCtrl.clear();
                                 emailCtrl.clear();
                                 msgCtrl.clear();
+                                selectedBranch == '';
                               });
                         }
 
@@ -58,24 +76,8 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                   },
                 )),
           ) ,
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
-              ),
-              title: customView.text(
-                  text.Support.tr, 15.0, FontWeight.w500, Colors.black),
-              centerTitle: true,
-              elevation: 0.0,
-              backgroundColor: Colors.white24,
-            ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -84,6 +86,15 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                       FontWeight.w500, Colors.black),
                   SizedBox(
                     height: width * 0.09,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: customView.text(text.Select_Branch.tr, 13.0,
+                        FontWeight.w500, MyColor.primary1),
+                  ),
+                  branch(),
+                  SizedBox(
+                    height: width * 0.02,
                   ),
                   customView.text(
                       text.Subject.tr, 12.0, FontWeight.w500, MyColor.black),
@@ -110,7 +121,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                   SizedBox(
                     height: width * 0.02,
                   ),
-                  customView.myField(
+                  customView.myFieldExpand(
                       context, msgCtrl, text.yourMessage.tr, TextInputType.text),
                   SizedBox(
                     height: width * 0.6,
@@ -119,6 +130,61 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
               ),
             )));
   }
+
+
+
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 0.9,
+            padding: const EdgeInsets.only(left: 4),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint: Text(
+                  text.Select_Branch.tr,
+                  style: TextStyle(fontSize: 13),
+                ),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY CATEGORY>>>$selectedBranch');
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   bool validation() {
     if (subjectCtrl.text.isEmpty) {
       customView.MySnackBar(context, text.enterSubject.tr);

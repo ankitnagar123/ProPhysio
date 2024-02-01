@@ -65,11 +65,11 @@ var bookingId = "".obs;
 
 
   /*------------------For Doctor view date show on calender  list Fetch Api----------------*/
-  Future<void> doctorViewDateCalender(String centerId) async {
+  Future<void> doctorViewDateCalender(String branchId) async {
     loadingFetchDateDr.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "center_id":centerId,
+      "branch_id":branchId,
     };
     try {
       log("calendar list of date's parameter.....$paremert");
@@ -145,12 +145,11 @@ var bookingId = "".obs;
 
 
   /*------------------Center Doctor view  time slots list Fetch Api----------------*/
-  Future<void> doctorViewTimeSlotsFetch(String date,centerId) async {
+  Future<void> doctorViewTimeSlotsFetch(String date,) async {
     loadingFetchTime.value = true;
     final Map<String, dynamic> Peramert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "date": date,
-      "center_id":centerId,
     };
     try {
       final response =
@@ -171,12 +170,11 @@ var bookingId = "".obs;
   }
 
   /*------------------Center Doctor Booked time slots list Fetch Api----------------*/
-  Future<void> doctorBookedTimeSlotsFetch(String date,centerId) async {
+  Future<void> doctorBookedTimeSlotsFetch(String date,) async {
     loadingFetchTimeBooked.value = true;
     final Map<String, dynamic> Peramert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "date": date,
-      "center_id":centerId,
     };
     try {
       final response =

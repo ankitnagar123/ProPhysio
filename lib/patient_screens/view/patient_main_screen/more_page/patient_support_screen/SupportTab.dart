@@ -4,20 +4,20 @@ import 'package:get/get.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import 'MediclaReport.dart';
-import 'Prescription.dart';
+import 'PatientSupportScreen.dart';
+import 'SupportList.dart';
 
-class PPrescriptionMedicalTab extends StatefulWidget {
-  const PPrescriptionMedicalTab({
+class SupportTab extends StatefulWidget {
+  const SupportTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<PPrescriptionMedicalTab> createState() =>
+  State<SupportTab> createState() =>
       _PPrescriptionMedicalTabState();
 }
 
-class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
+class _PPrescriptionMedicalTabState extends State<SupportTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
 
@@ -75,16 +75,16 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
               tabs: [
                 Tab(
                     child: Text(
-                  text.prescription.tr,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                  ),
-                )),
+                      "Add",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Poppins",
+                      ),
+                    )),
                 Tab(
                   child: Text(
-                    text.medicalTest.tr,
+                    "View",
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -104,8 +104,8 @@ class _PPrescriptionMedicalTabState extends State<PPrescriptionMedicalTab>
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: const [
-                    PatientPrescription(),
-                    PatientMedicalReport(),
+                    PatientSupportScreen(),
+                    SupportList(),
                     // PatientViewMedicines(),
                   ]),
             ),

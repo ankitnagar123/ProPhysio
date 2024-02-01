@@ -12,6 +12,8 @@ class MedicalRadioCard extends StatefulWidget {
   String questionId;
   String nestedQuestion;
 
+
+
   MedicalRadioCard(
       {super.key, required this.questionId, required this.nestedQuestion});
 
@@ -24,6 +26,8 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
 
   File? file;
   final picker = ImagePicker();
+
+  var imageFileListnew = <XFile>[];
 
 
   String _selectedOption = '';
@@ -238,7 +242,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
         child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
-            itemCount: intakeController.imageFileList.length,
+            itemCount: imageFileListnew.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
@@ -246,7 +250,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                 child: Stack(
                   children: [
                     Image.file(
-                      File(intakeController.imageFileList[index].path),
+                      File(imageFileListnew[index].path),
                       height: 60.0,
                       width: 60.0,
                       fit: BoxFit.cover,
@@ -293,6 +297,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
           // Clear existing image paths and add the newly selected images
 
           //intakeController.imagePathList.clear();
+          imageFileListnew.addAll(selectedImages);
 
           intakeController.imageFileList.addAll(selectedImages);
 

@@ -25,17 +25,7 @@ import '../../forgot_password/ForgotPasswordScreen.dart';
 import '../../forgot_password/OtpVerificationScreen.dart';
 import '../../forgot_password/SetNewPassword.dart';
 import '../../forgot_password/SetPasswordSuccess.dart';
-import '../../medica_center/add_ward/CenterAddNewWard.dart';
-import '../../medica_center/add_ward/EditWard/AddMoreDrWard.dart';
-import '../../medica_center/add_ward/EditWard/EditWardPage.dart';
-import '../../medica_center/center_home/CenterBottomNavigate.dart';
-import '../../medica_center/center_home/CenterDoctorView.dart';
-import '../../medica_center/center_more/center_earning/CenterEarning.dart';
-import '../../medica_center/center_more/center_earning/CenterEarningList.dart';
-import '../../medica_center/center_more/center_profile/CenterProfile.dart';
-import '../../medica_center/center_more/center_setting/CenterChangePass.dart';
-import '../../medica_center/center_more/center_setting/CenterSetting.dart';
-import '../../medica_center/center_more/center_setting/CenterSupport.dart';
+
 import '../../onboarding_screen/onBoardingScreen.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
 import '../../patient_screens/view/doctor_detail_screen/PNavigateDrScreen.dart';
@@ -51,19 +41,17 @@ import '../../patient_screens/view/patient_main_screen/booking_history_page/Pati
 import '../../patient_screens/view/patient_main_screen/booking_history_page/past_appointments/PastAppointmentsScreen.dart';
 import '../../patient_screens/view/patient_main_screen/booking_history_page/search_appointments_screen/SearchAppoinmentsScreen.dart';
 import '../../patient_screens/view/patient_main_screen/chating_page/PatinetChatingScreen.dart';
-import '../../patient_screens/view/patient_main_screen/patient_home_page/HomePage/CenterSide/PWardDrList.dart';
+import '../../patient_screens/view/patient_main_screen/more_page/patient_support_screen/SupportTab.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/MorePage.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_profile_screen/PatientProfileScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_settings_screen/PatientSettingsScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_settings_screen/patient_change_password_screen/PatientChangePasswordScreen.dart';
-import '../../patient_screens/view/patient_main_screen/more_page/patient_support_screen/PatientSupportScreen.dart';
 import '../../patient_screens/view/patient_payment_screen/PatientPaymentScreen.dart';
 import '../../patient_screens/view/patient_payment_screen/cardWithValidation/CreateCard.dart';
 import '../../signin_screen/SignInScreen.dart';
 import '../../singup_screen/SingUpScreen.dart';
 import '../../singup_screen/doctor_signup_page/DoctorSelectAddress.dart';
 import '../../singup_screen/doctor_signup_page/DoctorSignUpOtp.dart';
-import '../../singup_screen/medical_center_signup/MedicalCenterOtp.dart';
 import '../../singup_screen/patient_pages/PatinetSignUpOtp.dart';
 import '../../splash_screen/SplaceScreen.dart';
 
@@ -368,11 +356,10 @@ class RouteHelper {
      GetPage(name: pChatScreen, page: () =>  const PatientChatScreen()),
     GetPage(name: patientSettingsScreen, page: () => const PatientSettingsScreen()),
     GetPage(name: patientChangePasswordScreen, page: () => const PatientChangePasswordScreen(),),
-    GetPage(name: patientSupportScreen, page: () => const PatientSupportScreen()),
+    GetPage(name: patientSupportScreen, page: () => const SupportTab()),
     GetPage(name: specializationDetailsScreen, page: () => const SpecializationScreen()),
     GetPage(name: pBookingReqSuccess, page: () => const AppointmentBookedSucces()),
     GetPage(name: pCancelAppointSucces, page: () => const PatientBookingCancelSuccess()),
-    GetPage(name: pCenterWardDrList, page: () => const PWardDrListScreen()),
 
 
 /*--------Doctor Side--------*/
@@ -410,20 +397,7 @@ class RouteHelper {
 
 
 /*--------Medical center side Side--------*/
-    GetPage(name: cSignUpOtp, page: () => const MedicalCenterOtp()),
-    GetPage(name: cCenterDoctorViewScreen, page: () => const CenterDoctorViewScreen()),
-    GetPage(name: cCenterAddWard, page: () => const CenterAddWardScreen()),
 
-    GetPage(name: cBottomNavigation, page: () => const CenterMainScreen()),
-    GetPage(name: cEditWard, page: () => const CenterEditWardScreen()),
-    GetPage(name: cProfile, page: () => const CenterProfile()),
-
-    GetPage(name: cEarningCalculate, page: () => const CenterEarningCalculate()),
-    GetPage(name: cEarningList, page: () => const CenterEarningList()),
-    GetPage(name: cSetting, page: () => const CenterSettingsScreen()),
-    GetPage(name: cChangePassword, page: () => const CenterChangePasswordScreen()),
-    GetPage(name: cSupport, page: () => const CenterSupportScreen()),
-    GetPage(name: cAddMoreDr, page: () => const WardAddMoreDoctor()),
 
 
   ];

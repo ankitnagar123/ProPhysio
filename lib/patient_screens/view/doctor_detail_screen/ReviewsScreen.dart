@@ -58,9 +58,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           return Column(
             children: [
                const Divider(color: Colors.grey),
-              SizedBox(
-                height: height * 0.022,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -71,7 +68,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                       MyColor.primary),
                   RatingBar(
                     ignoreGestures: true,
-                    itemSize: 28,
+                    itemSize: 26,
                     initialRating: double.parse(
                         patientRatingCtr.address.value.aveRating.toString()),
                     direction: Axis.horizontal,
@@ -92,11 +89,11 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
               custom.text(
                   "Average rating", 14, FontWeight.normal, MyColor.grey),
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.022,
               ),
                const Divider(color: Colors.grey),
               SizedBox(
-                height: height * 0.022,
+                height: height * 0.005,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),

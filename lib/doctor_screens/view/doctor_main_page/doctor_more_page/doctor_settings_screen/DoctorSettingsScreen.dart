@@ -5,7 +5,6 @@ import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import '../../../../../medica_center/center_more/center_setting/CenterChangeLanguage.dart';
 import '../../../../controller/DoctorChangePasswordCtr.dart';
 
 class DoctorSettingsScreen extends StatefulWidget {

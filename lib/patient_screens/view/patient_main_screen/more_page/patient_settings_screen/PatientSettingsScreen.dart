@@ -5,7 +5,6 @@ import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import '../../../../../medica_center/center_more/center_setting/CenterChangeLanguage.dart';
 import '../../../../controller/auth_controllers/PatientChangePasswordCtr.dart';
 import '../about_page/PatinetAboutPage.dart';
 import '../term_condition_page/PatientTermCondition.dart';
@@ -68,22 +67,22 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                   size: 20.0,
                 ),
               ),
-              ListTile(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
-                },
-                leading: const Icon(
-                  Icons.language,
-                  color: Colors.black,
-                ),
-                title: customView.text(
-                    text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 20.0,
-                ),
-              ),
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
+              //   },
+              //   leading: const Icon(
+              //     Icons.language,
+              //     color: Colors.black,
+              //   ),
+              //   title: customView.text(
+              //       text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
+              //   trailing: const Icon(
+              //     Icons.arrow_forward_ios,
+              //     color: Colors.black,
+              //     size: 20.0,
+              //   ),
+              // ),
               ListTile(
                 visualDensity: VisualDensity.compact,
                 onTap: () {

@@ -13,7 +13,6 @@ import '../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/CenterRequestCtr.dart';
 import '../../../controller/DoctorProfileController.dart';
-import 'LerningManagement/learningManage.dart';
 import 'add_prescriptiona&medicalTest/Past_Appointment_Prescription.dart';
 import 'doctor_availability/doctorViewAvailability/DoctorViewCalenderSlot.dart';
 
@@ -31,16 +30,23 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CenterRequest centerRequest = Get.put(CenterRequest());
 
+  String? branchId;
+
   @override
   void initState() {
     doctorProfileCtr.doctorProfile(context);
     centerRequest.CenterRequestListApi(context);
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      if (doctorProfileCtr.resultVar.value == 1) {
+        doctorProfileCtr.resultVar.value = 0;
+        branchId = doctorProfileCtr.branchId.value;
+
+      }
     return Obx(() {
       return Scaffold(
         body: SingleChildScrollView(
@@ -126,7 +132,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const DoctorViewCalender(centerId: ""),));
+                          builder: (context) =>  DoctorViewCalender(branchId: branchId.toString()),));
                   // Get.toNamed(RouteHelper.DSettingScreen());
                 },
                 leading: const Icon(
@@ -313,6 +319,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
         ),
       );
     });
+      });
   }
 
   void deletePopUp(BuildContext context) {

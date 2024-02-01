@@ -1,10 +1,6 @@
 import 'dart:core';
 
 class MyAPI {
-  // static const String BaseUrl = "https://cisswork.com/Android/Medica/Apis/process.php?action=";
-/*  static const String BaseUrl =
-      "https://sicparvismagna.it/Medica/Apis/process.php?action=";*/
-
 
   static const String BaseUrl =
       "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=";
@@ -26,6 +22,7 @@ class MyAPI {
   static const String PChangePassword = "user_change_pass";
   static const String PDeleteAccount = "delete_user_account";
   static const String pSupport = "user_support";
+  static const String pSupportList = "fetch_user_support_data";
 
   /*----Card API-------*/
   static const String addCard = "user_add_card";
