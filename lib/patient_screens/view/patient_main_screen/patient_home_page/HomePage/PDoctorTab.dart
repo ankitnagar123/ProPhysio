@@ -47,11 +47,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    var data = sp.getStringValue(sp.PATIENT_PROFILE);
-    log("profile-$data");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getValuee();
-      doctorSignUpCtr.doctorCategory();
+      doctorSignUpCtr.patientCategory();
     });
   }
 

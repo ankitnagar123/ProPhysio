@@ -23,6 +23,7 @@ class _PatientTermConditionState extends State<PatientTermCondition> {
   late final WebViewController _controller;
   bool loding = true;
   LocalString text = LocalString();
+  bool rememberme = false;
 
 
   @override
@@ -94,7 +95,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://cisswork.com/Android/emrIntegrateDoctor/api/terms_conditions.php'));
+          'https://cisswork.com/Android/emrIntegrateDoctor/api/patient_terms_conditions.php'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

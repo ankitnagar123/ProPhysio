@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +22,6 @@ class _DoctorTermConditionState extends State<DoctorTermCondition> {
   bool loding = true;
   LocalString text = LocalString();
 
-
   @override
   void initState() {
     super.initState();
@@ -40,7 +38,7 @@ class _DoctorTermConditionState extends State<DoctorTermCondition> {
     }
 
     final WebViewController controller =
-    WebViewController.fromPlatformCreationParams(params);
+        WebViewController.fromPlatformCreationParams(params);
     // #enddocregion platform_features
 
     controller
@@ -118,16 +116,16 @@ Page resource error:
             child: const Icon(Icons.arrow_back_ios, color: MyColor.black)),
         elevation: 0,
         centerTitle: true,
-        title:
-        custom.text(text.TermCondition.tr, 17, FontWeight.w500, MyColor.black),
+        title: custom.text(
+            text.TermCondition.tr, 17, FontWeight.w500, MyColor.black),
       ),
       body: loding == true
           ? Center(
-        child: custom.MyIndicator(),
-      )
+              child: custom.MyIndicator(),
+            )
           : WebViewWidget(
-        controller: _controller,
-      ),
+              controller: _controller,
+            ),
     );
   }
 }

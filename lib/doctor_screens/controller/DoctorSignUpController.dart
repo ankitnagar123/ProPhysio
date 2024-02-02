@@ -39,9 +39,10 @@ class DoctorSignUpCtr extends GetxController {
   var branchList = <BranchModel>[].obs;
 
   /*---------Doctor All Category --------*/
-  Future<void> doctorCategory() async {
+  Future<void> doctorCategory(String branchId) async {
     final Map<String, dynamic> parameter = {
       "language": await sp.getStringValue(sp.LANGUAGE)??"",
+      "branch_id":branchId,
     };
     log("doctor Category parameter$parameter");
     try {
@@ -62,7 +63,29 @@ class DoctorSignUpCtr extends GetxController {
     }
   }
 
-
+  Future<void> patientCategory() async {
+    final Map<String, dynamic> parameter = {
+      "language": await sp.getStringValue(sp.LANGUAGE)??"",
+      "branch_id": await sp.getStringValue(sp.PATIENT_BRANCH),
+    };
+    log("doctor Category parameter$parameter");
+    try {
+      categoryLoading.value = true;
+      final response = await apiService.postData(MyAPI.DCategorySignUp,parameter);
+      log(" Category =============${response.body}");
+      if (response.statusCode == 200) {
+        categoryLoading.value = false;
+        category.value = allCategoryModelFromJson(response.body.toString());
+        log(category.toString());
+      } else {
+        categoryLoading.value = false;
+        log("error");
+      }
+    } catch (e) {
+      categoryLoading.value = false;
+      log("exception$e");
+    }
+  }
   /*---------Doctor All Services behalf of category --------*/
   Future<void> doctorServices(String category) async {
     final Map<String, dynamic> parameter = {
@@ -72,7 +95,7 @@ class DoctorSignUpCtr extends GetxController {
     try {
       serviceLoading.value = true;
       final response = await apiService.postData(MyAPI.DServicesSignUp,parameter);
-      print(" Doctor Services =============${response.body}");
+      log("Doctor Services =============${response.body}");
       if (response.statusCode == 200) {
         serviceLoading.value = false;
         services.value = doctorServicesModelFromJson(response.body.toString());

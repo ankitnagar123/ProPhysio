@@ -78,9 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.offNamed(RouteHelper.getBottomNavigation());
         } else if (doctorLogin == true) {
           Get.offNamed(RouteHelper.DHomePage());
-        } else if (centerLogin == true) {
-          Get.offNamed(RouteHelper.CBottomNavigation());
-        } else {
+        }  else {
           Get.offNamed(RouteHelper.getLoginScreen());
         }
       } else {

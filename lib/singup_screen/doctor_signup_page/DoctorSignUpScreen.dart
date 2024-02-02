@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:get/get.dart';
@@ -48,6 +49,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   // TextEditingController dateOfEnrollmentCtr = TextEditingController();
   // TextEditingController registerOfBelongingCtr = TextEditingController();
   String _selectedGender = '';
+  bool rememberme = false;
 
   // TextEditingController dateOfQualification = TextEditingController();
   // TextEditingController dateOfGraduation = TextEditingController();
@@ -111,7 +113,6 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      doctorSignUpCtr.doctorCategory();
       doctorSignUpCtr.branchListApi();
       // doctorSignUpCtr.doctorServices();
     });
@@ -732,7 +733,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   child: custom.text(text.Select_Category.tr, 13.0,
                       FontWeight.w500, MyColor.primary1),
                 ),
-                category(),
+               Obx(() =>  doctorSignUpCtr.categoryLoading.value?custom.MyIndicator():    category(),),
                 const SizedBox(
                   height: 15.0,
                 ),
@@ -1057,6 +1058,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 const SizedBox(
                   height: 5,
                 ),
+                MyCheckbox(),
               ],
             ),
           ),
@@ -1138,7 +1140,10 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Add your address");
     } else if (descriptionController.text.isEmpty) {
       custom.MySnackBar(context, "Enter description about specialization");
-    } else {
+    } else if (rememberme == false) {
+      custom.MySnackBar(
+          context, "Accept Term Condition and Privacy Policy");
+    }else {
       return true;
     }
     return false;
@@ -1186,6 +1191,14 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   stateSetter(() {
                     selectedBranch = newValue;
                     log('MY CATEGORY>>>$selectedBranch');
+                    doctorSignUpCtr.doctorCategory(selectedBranch.toString());
+
+                  });
+                  serviceNameArray.clear();
+                  serviceIdArray.clear();
+                  doctorSignUpCtr.doctorServices('');
+                  setState(() {
+
                   });
                 },
               ),
@@ -1312,6 +1325,72 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       ),
     );
   }
+
+
+  Widget MyCheckbox() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Wrap(
+          children: [
+            Checkbox(
+              visualDensity: VisualDensity.compact,
+              activeColor: MyColor.primary1,
+              checkColor: Colors.white,
+              value: rememberme,
+              onChanged: (newValue) {
+                setState(() {
+                  rememberme = newValue!;
+                  log("$rememberme");
+                });
+              },
+            ),
+          ],
+        ),
+        Expanded(
+          flex: 1,
+          child: InkWell(
+            onTap: () {},
+            child: RichText(
+              // textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: 'Accept',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 11, fontFamily: "Lato"),
+                  children: <TextSpan>[
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(
+                            RouteHelper.DTandCScreen(),
+                          );
+                        },
+                      text: ' Terms and Condition ',
+                      style: TextStyle(
+                          color: MyColor.primary1,
+                          fontSize: 12,
+                          fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                      text: 'and ',
+                      style: TextStyle(fontSize: 11, fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Get.toNamed(RouteHelper.getPrivacyPolicy());
+                          },
+                        text: ' Privacy Policy',
+                        style:
+                        TextStyle(color: MyColor.primary1, fontSize: 12)),
+                  ]),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
 
 /*----------UPLOAD DEGREE-----------*/
   File? degreefilePath;

@@ -66,7 +66,7 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
       /*-------doctor Time Slots Fetch API Hit-------*/
       appointmentController.doctorTimeSlotsFetch(id.toString(),
               appointmentController.seletedtime.value.toString(),);
-    appointmentController.doctorVisitChargefetch(widget.cat,widget.branchId);
+    appointmentController.doctorVisitChargeFetch(widget.cat,widget.branchId);
     });
   }
 

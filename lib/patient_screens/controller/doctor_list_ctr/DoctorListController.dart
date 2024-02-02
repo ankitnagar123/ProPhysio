@@ -74,21 +74,10 @@ class DoctorListCtr extends GetxController {
     try {
       loadingFetch.value = true;
       final response = await apiService.postData(MyAPI.pDoctorList,Paramert);
-      print("doctor list=============${response.body}");
+      log("doctor list=============${response.body}");
       if (response.statusCode == 200) {
         loadingFetch.value = false;
         doctorList.value = doctorListModelFromJson(response.body);
-
-   /*     var jsonString = response.body;
-        print(jsonString);
-        List<DoctorListModel> listdoctor = jsonDecode(response.body)
-            .map((item) => DoctorListModel.fromJson(item))
-            .toList()
-            .cast<DoctorListModel>();
-        doctorList.clear();
-        doctorList.addAll(listdoctor);
-print(doctorList);
-        print(listdoctor);*/
       } else {
         loadingFetch.value = false;
         print("error");

@@ -23,7 +23,7 @@ class _PDrAllCategoryState extends State<PDrAllCategory> {
   @override
   void initState() {
     super.initState();
-    doctorSignUpCtr.doctorCategory();
+    doctorSignUpCtr.patientCategory();
   }
 
   String? categoryId;

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -52,11 +53,11 @@ class _PatientSignUpState extends State<PatientSignUp> {
   String? selectedBranch;
   DateTime? startDate;
   String _selectedGender = '';
+  bool rememberme = false;
 
   /*------------------------------new field------------------------------------------*/
   PageController controller = PageController();
   int _curr = 1;
-  final int _numpage = 1;
 
   /*--------new Id type field--------*/
   TextEditingController idTypeCtr = TextEditingController();
@@ -125,105 +126,102 @@ class _PatientSignUpState extends State<PatientSignUp> {
   Widget build(BuildContext context) {
     final widht = MediaQuery.of(context).size.width;
     return WillPopScope(
-      onWillPop: ()async {
-      if (_curr == 1) {
-        final value = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "Exit from SignUp Form",
-                style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600),
-              ),
-              content: const Text(
-                "Are you sure want to exit",
-                style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  style: const ButtonStyle(
-                      backgroundColor:
-                      MaterialStatePropertyAll(Colors.white)),
-                  child: Text(
-                    text.No.tr,
-                    style: const TextStyle(
-                        color: Colors.black, fontFamily: 'Poppins'),
-                  ),
+      onWillPop: () async {
+        if (_curr == 1) {
+          final value = await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  "Exit from SignUp Form",
+                  style: const TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.back();
-                    Get.back();
-
-                  },
-                  style: const ButtonStyle(
-                      backgroundColor:
-                      MaterialStatePropertyAll(MyColor.red)),
-                  child: Text(
-                    text.Yes.tr,
-                    style: const TextStyle(
-                        fontFamily: 'Poppins', color: Colors.white),
-                  ),
+                content: const Text(
+                  "Are you sure want to exit",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
-              ],
-            );
-          },
-        );
-        if (value != null) {
-          return Future.value(value);
-        } else {
-          return Future.value(false);
-        }
-      }
-      else if(_curr ==6){
-        setState(() {
-          // _curr =5;
-          controller.previousPage(
-              duration: const Duration(milliseconds: 10),
-          curve: Curves.bounceIn);
-        });
-      } else if(_curr ==5){
-        setState(() {
-          // _curr =5;
-          controller.previousPage(
-              duration: const Duration(milliseconds: 10),
-              curve: Curves.bounceIn);
-        });
-      } else if(_curr ==4){
-        setState(() {
-          // _curr =5;
-          controller.previousPage(
-              duration: const Duration(milliseconds: 10),
-              curve: Curves.bounceIn);
-        });
-      }else if(_curr ==3){
-        setState(() {
-          // _curr =5;
-          controller.previousPage(
-              duration: const Duration(milliseconds: 10),
-              curve: Curves.bounceIn);
-        });
-      }else if(_curr ==2){
-        setState(() {
-          // _curr =5;
-          controller.previousPage(
-              duration: const Duration(milliseconds: 10),
-              curve: Curves.bounceIn);
-        });
-      }else{}
-      return false;
-    },
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.white)),
+                    child: Text(
+                      text.No.tr,
+                      style: const TextStyle(
+                          color: Colors.black, fontFamily: 'Poppins'),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                      Get.back();
+                    },
+                    style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(MyColor.red)),
+                    child: Text(
+                      text.Yes.tr,
+                      style: const TextStyle(
+                          fontFamily: 'Poppins', color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+          if (value != null) {
+            return Future.value(value);
+          } else {
+            return Future.value(false);
+          }
+        } else if (_curr == 6) {
+          setState(() {
+            // _curr =5;
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 5) {
+          setState(() {
+            // _curr =5;
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 4) {
+          setState(() {
+            // _curr =5;
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 3) {
+          setState(() {
+            // _curr =5;
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else if (_curr == 2) {
+          setState(() {
+            // _curr =5;
+            controller.previousPage(
+                duration: const Duration(milliseconds: 10),
+                curve: Curves.bounceIn);
+          });
+        } else {}
+        return false;
+      },
       child: Scaffold(
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(top: 4.0),
@@ -254,8 +252,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                             } else {
                               controller.nextPage(
                                   duration: const Duration(milliseconds: 10),
-                                  curve: Curves.bounceIn
-                              );
+                                  curve: Curves.bounceIn);
                             }
                           } else if (_curr == 2) {
                             if (validation2(context) == false) {
@@ -408,7 +405,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
                 onPageChanged: (value) {
-                  setState((){
+                  setState(() {
                     _curr = 1 + value;
                     log("value page index - $value");
                     log("curr index-$_curr");
@@ -1240,7 +1237,6 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       ))
                 ],
               ),
-
               SizedBox(
                 height: 15,
               ),
@@ -1519,10 +1515,75 @@ class _PatientSignUpState extends State<PatientSignUp> {
               SizedBox(
                 height: 15,
               ),
+              MyCheckbox(),
             ]),
           ),
         ),
       ),
+    );
+  }
+
+  Widget MyCheckbox() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Wrap(
+          children: [
+            Checkbox(
+              visualDensity: VisualDensity.compact,
+              activeColor: MyColor.primary1,
+              checkColor: Colors.white,
+              value: rememberme,
+              onChanged: (newValue) {
+                setState(() {
+                  rememberme = newValue!;
+                  log("$rememberme");
+                });
+              },
+            ),
+          ],
+        ),
+        Expanded(
+          flex: 1,
+          child: InkWell(
+            onTap: () {},
+            child: RichText(
+              // textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: 'Accept',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 11, fontFamily: "Lato"),
+                  children: <TextSpan>[
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(
+                            RouteHelper.DTandCScreen(),
+                          );
+                        },
+                      text: ' Terms and Condition ',
+                      style: TextStyle(
+                          color: MyColor.primary1,
+                          fontSize: 12,
+                          fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                      text: 'and ',
+                      style: TextStyle(fontSize: 11, fontFamily: "Lato"),
+                    ),
+                    TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // Get.toNamed(RouteHelper.getPrivacyPolicy());
+                          },
+                        text: ' Privacy Policy',
+                        style:
+                            TextStyle(color: MyColor.primary1, fontSize: 12)),
+                  ]),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -1652,6 +1713,9 @@ class _PatientSignUpState extends State<PatientSignUp> {
       customView.MySnackBar(context, "Enter medical country");
     } else if (medicalPhoneCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Enter medical contact");
+    } else if (rememberme == false) {
+      customView.MySnackBar(
+          context, "Accept Term Condition and Privacy Policy");
     } else {
       return true;
     }
@@ -1696,7 +1760,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       onChanged: (newValue) {
                         stateSetter(() {
                           selectedBranch = newValue;
-                          log('MY selected Branch>>>$selectedBranch');
+                          log('MY selected Branch----->>>$selectedBranch');
                         });
                       },
                     ),

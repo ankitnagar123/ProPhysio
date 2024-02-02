@@ -9,25 +9,29 @@ List<AllCategoryModel> allCategoryModelFromJson(String str) => List<AllCategoryM
 String allCategoryModelToJson(List<AllCategoryModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AllCategoryModel {
+  String categoryId;
+  String categoryName;
+  String categoryPrice;
+  String catImg;
+
   AllCategoryModel({
     required this.categoryId,
     required this.categoryName,
-    required  this.catImg,
+    required this.categoryPrice,
+    required this.catImg,
   });
 
-  String categoryId;
-  String categoryName;
-  String catImg;
-
   factory AllCategoryModel.fromJson(Map<String, dynamic> json) => AllCategoryModel(
-    categoryId: json["category_id"],
-    categoryName: json["category_name"],
-    catImg: json["cat_img"],
+    categoryId: json["category_id"].toString(),
+    categoryName: json["category_name"].toString(),
+    categoryPrice: json["category_price"].toString(),
+    catImg: json["cat_img"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
     "category_id": categoryId,
     "category_name": categoryName,
+    "category_price": categoryPrice,
     "cat_img": catImg,
   };
 }

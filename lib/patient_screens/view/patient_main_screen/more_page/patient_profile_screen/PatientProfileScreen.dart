@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:prophysio/helper/AppConst.dart';
+import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../../doctor_screens/controller/DoctorSignUpController.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
@@ -17,7 +18,7 @@ import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/auth_controllers/PatientProfileController.dart';
 
 class PatientProfileScreen extends StatefulWidget {
-  const PatientProfileScreen({Key? key}) : super(key: key);
+  const PatientProfileScreen({super.key});
 
   @override
   State<PatientProfileScreen> createState() => _PatientProfileScreenState();
@@ -100,7 +101,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
 /*-----Other Information---------*/
   TextEditingController aboutUsCtr = TextEditingController();
-
+SharedPreferenceProvider sp = SharedPreferenceProvider();
   DateTime? startDate;
 
   String _displayText(DateTime? date) {
@@ -328,6 +329,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                         medicalCountryCtr.text,
                         medicalPhoneCtr.text,
                         aboutUsCtr.text, () {
+                      sp.setStringValue(sp.PATIENT_BRANCH, selectedBranch.toString());
                       AwesomeDialog(
                         context: context,
                         animType: AnimType.leftSlide,

@@ -90,7 +90,7 @@ var bookingId = "".obs;
   }
 
   /*------------------Doctor visit charge list Fetch Api----------------*/
-  Future<void> doctorVisitChargefetch(String catId,String branchId) async {
+  Future<void> doctorVisitChargeFetch(String catId,String branchId) async {
     final Map<String, dynamic> Peramert = {
       "cat_id": catId,
       "branch_id": branchId,

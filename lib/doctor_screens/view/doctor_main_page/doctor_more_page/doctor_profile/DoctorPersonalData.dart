@@ -149,7 +149,6 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       doctorProfileCtr.doctorProfile(context);
       doctorSignUpCtr.branchListApi();
-      doctorSignUpCtr.doctorCategory();
     });
   }
 
@@ -182,15 +181,19 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         experience.text = doctorProfileCtr.experience.value;
         descriptionCtr.text = doctorProfileCtr.description.value;
         _selectedService = doctorProfileCtr.firstService.value;
+
         selectedBranch = doctorProfileCtr.branchId.value;
-        slectedCategory = doctorProfileCtr.slectedCategory.value;
+        /*API*/
+        doctorSignUpCtr.doctorCategory(selectedBranch.toString());
+
 
         location = doctorProfileCtr.location.value;
         latitude = doctorProfileCtr.lat.value;
         longitude = doctorProfileCtr.lang.value;
-
+        slectedCategory = doctorProfileCtr.slectedCategory.value;
         /*API*/
         doctorSignUpCtr.doctorServices(slectedCategory.toString());
+
         _StartTime = doctorProfileCtr.sTime.value;
         _endTime = doctorProfileCtr.eTime.value;
 

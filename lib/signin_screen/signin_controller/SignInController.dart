@@ -47,6 +47,7 @@ class LoginCtr extends GetxController {
         String name = jsonResponse['name'].toString();
         String surname = jsonResponse['surname'].toString();
         String userProfile = jsonResponse['user_profile'].toString();
+        String userBranch = jsonResponse['branch_id'].toString();
 
         // sp.setStringValue(sp.PATIENT_ID_KEY, id);
         if (result == 'Success') {
@@ -75,6 +76,7 @@ class LoginCtr extends GetxController {
             sp.setStringValue(sp.PATIENT_NAME_KEY, name);
             sp.setStringValue(sp.PATIENT_SURE_NAME_KEY, surname);
             sp.setStringValue(sp.PATIENT_PROFILE, userProfile);
+            sp.setStringValue(sp.PATIENT_BRANCH, userBranch);
             sp.setBoolValue(sp.PATIENT_LOGIN_KEY, true);
             AppConst.Patient_Name = name;
             AppConst.Patinet_Surname = surname;

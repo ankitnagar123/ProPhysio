@@ -150,7 +150,7 @@ class RouteHelper {
   // static const String PSetting = '/SettingPage';
   //
   // /*----In Setting Page---------*/
-  // static const String PTermsCondition = '/TermsCondition';
+   static const String PTermsCondition = '/TermsCondition';
   // static const String PChangePassword = '/ChangePassword';
   // static const String PContactUs = '/ContactUs';
   // static const String PDeleteAccount = '/DeleteAccount';
@@ -302,22 +302,7 @@ class RouteHelper {
   static String DLearningManage() => learningManage;
   static String DLearningManageWebView() => learningManageWebView;
 
-/*------------Medical Center Screen------------------*/
-  static String CSignUpOtp() => cSignUpOtp;
-  static String CCenterDoctorViewScreen() => cCenterDoctorViewScreen;
-  static String CCenterAddWardScreen() => cCenterAddWard;
 
-  static String CBottomNavigation() => cBottomNavigation;
-  static String CEditWard() => cEditWard;
-  static String CProfile() => cProfile;
-  static String cEarningCal() => cEarningCalculate;
-  static String cEarningLists() => cEarningList;
-  static String cSettings() => cSetting;
-  static String cChangePass() => cChangePassword;
-  static String cTermCondition() => cTandC;
-  static String cAbouts() => cAbout;
-  static String cSupports() => cSupport;
-  static String cAddMoreDrs() => cAddMoreDr;
 
 
 
