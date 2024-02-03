@@ -217,6 +217,8 @@ class PatientBookingController extends GetxController {
       "booking_id": bookingId,
       "user_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
       "cancle_id":cancelId,
+      "user_type":"Patient"
+
     };
     print("booking Appointment Cancel Parameter$Perameter");
     final response =

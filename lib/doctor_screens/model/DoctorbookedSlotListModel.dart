@@ -9,25 +9,21 @@ List<DoctorbookedSlotList> doctorbookedSlotListFromJson(String str) => List<Doct
 String doctorbookedSlotListToJson(List<DoctorbookedSlotList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DoctorbookedSlotList {
-  String timeId;
-  String from;
-  String to;
+  String From;
+  String To;
 
   DoctorbookedSlotList({
-    required this.timeId,
-    required this.from,
-    required this.to,
+    required this.From,
+    required this.To,
   });
 
   factory DoctorbookedSlotList.fromJson(Map<String, dynamic> json) => DoctorbookedSlotList(
-    timeId: json["time_id"],
-    from: json["From"],
-    to: json["To"],
+    From: json["From"],
+    To: json["To"],
   );
 
   Map<String, dynamic> toJson() => {
-    "time_id": timeId,
-    "From": from,
-    "To": to,
+    "From": From,
+    "To": To,
   };
 }

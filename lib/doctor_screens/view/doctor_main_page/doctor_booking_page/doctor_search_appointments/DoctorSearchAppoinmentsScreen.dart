@@ -59,9 +59,9 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
         return true;
         /*Pending*/
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 Row(
@@ -82,7 +82,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                   ],
                 ),
                 Divider(color: Colors.black54),
-        
+                
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(

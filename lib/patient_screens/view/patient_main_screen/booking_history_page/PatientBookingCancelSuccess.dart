@@ -55,7 +55,7 @@ class _PatientBookingCancelSuccessState
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: const AssetImage('assets/images/medicalogo2.png'),
+                image: const AssetImage('assets/images/prologo.png'),
                 height: height * 0.2,
                 width: widht * 0.4,
               ),

@@ -20,13 +20,15 @@ class DoctorSupportCtr extends GetxController {
 
 /*-------------Doctor Support Api--------------*/
   Future supportApi(BuildContext context, String sub,
-      String email, String msg, VoidCallback callback) async {
+      String email, String msg,String? branchId , VoidCallback callback) async {
     loading.value = true;
     final Map<String, dynamic> psetpass = {
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "subject": sub,
       "email": email,
-      "message": msg
+      "message": msg,
+      "branch_id": branchId.toString(),
+
     };
     print("support parameter Parameter$psetpass");
     final response = await apiService.postData(MyAPI.DSupport, psetpass);

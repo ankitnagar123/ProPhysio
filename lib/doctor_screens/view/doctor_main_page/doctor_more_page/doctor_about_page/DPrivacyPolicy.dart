@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prophysio/Network/Apis.dart';
@@ -11,18 +12,19 @@ import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 
-class DoctorAboutScreen extends StatefulWidget {
-  const DoctorAboutScreen({Key? key}) : super(key: key);
+class DPrivacyPolicy extends StatefulWidget {
+  const DPrivacyPolicy({Key? key}) : super(key: key);
 
   @override
-  State<DoctorAboutScreen> createState() => _DoctorAboutScreenState();
+  State<DPrivacyPolicy> createState() => _DPrivacyPolicyState();
 }
 
-class _DoctorAboutScreenState extends State<DoctorAboutScreen> {
+class _DPrivacyPolicyState extends State<DPrivacyPolicy> {
   CustomView custom = CustomView();
   late final WebViewController _controller;
   bool loding = true;
   LocalString text = LocalString();
+  bool rememberme = false;
 
 
   @override
@@ -93,7 +95,8 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse(MyAPI.urls+MyAPI.About));
+      ..loadRequest(Uri.parse(
+          MyAPI.urls+MyAPI.DPandP));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
@@ -119,7 +122,7 @@ Page resource error:
         elevation: 0,
         centerTitle: true,
         title:
-        custom.text(text.About.tr, 17, FontWeight.w500, MyColor.black),
+        custom.text("Privacy Policy", 17, FontWeight.w500, MyColor.black),
       ),
       body: loding == true
           ? Center(

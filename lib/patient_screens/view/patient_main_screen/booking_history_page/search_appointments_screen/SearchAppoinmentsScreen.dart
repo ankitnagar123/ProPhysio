@@ -59,27 +59,27 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
       await patientBookingController.bookingAppointment("");
      return  true;
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: PreferredSize(
-              child: Divider(),
-              preferredSize: Size.fromHeight(0.5),
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.white24,
-            title: customView.text(
-                text.searchAppointment.tr, 17, FontWeight.w500, MyColor.black),
-            leading: IconButton(
-              onPressed: () {
-                patientBookingController.bookingAppointment("");
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
-            ),
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: PreferredSize(
+            child: Divider(),
+            preferredSize: Size.fromHeight(0.5),
           ),
-          body: SingleChildScrollView(
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.white24,
+          title: customView.text(
+              text.searchAppointment.tr, 17, FontWeight.w500, MyColor.black),
+          leading: IconButton(
+            onPressed: () {
+              patientBookingController.bookingAppointment("");
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios, color: MyColor.black),
+          ),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               children: [
@@ -116,9 +116,9 @@ class _SearchAppointmentScreenState extends State<SearchAppointmentScreen> {
                     ),
                   ),
                 ),
-SizedBox(
-  height: 6,
-),
+                SizedBox(
+          height: 6,
+                ),
                 Row(
                   children: [
                     Expanded(

@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../controller/DoctorSignUpController.dart';
 import '../../../../controller/DoctorSupportController.dart';
 
 class DoctorSupportScreen extends StatefulWidget {
@@ -15,12 +18,15 @@ class DoctorSupportScreen extends StatefulWidget {
 
 class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
   CustomView customView = CustomView();
-  DoctorSupportCtr supportCtr = DoctorSupportCtr();
+  DoctorSupportCtr supportCtr = Get.put(DoctorSupportCtr());
+  DoctorSignUpCtr doctorSignUpCtr = Get.put(DoctorSignUpCtr());
+
   LocalString text= LocalString();
 
   TextEditingController subjectCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController msgCtrl = TextEditingController();
+  String? selectedBranch;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
                       () {
                     if (validation()) {
                       supportCtr.supportApi(context, subjectCtrl.text,
-                          emailCtrl.text, msgCtrl.text, () {
+                          emailCtrl.text, msgCtrl.text,selectedBranch, () {
                         subjectCtrl.clear();
                         emailCtrl.clear();
                         msgCtrl.clear();
@@ -55,21 +61,7 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
               }),
             ),
           ),
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-        ),
-        title: customView.text(text.Support.tr, 15.0, FontWeight.w500, Colors.black),
-        centerTitle: true,
-        elevation: 0.0,
-        backgroundColor: Colors.white24,
-      ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
@@ -80,6 +72,14 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
                 FontWeight.w500, Colors.black),
             SizedBox(
               height: width * 0.09,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: customView.text(text.Select_Branch.tr, 13.0,
+                  FontWeight.w500, MyColor.black),
+            ),
+            Obx(() => doctorSignUpCtr.branchLoading.value?customView.MyIndicator():  branch(),),            SizedBox(
+              height: width * 0.05,
             ),
             customView.text(text.Subject.tr, 12.0, FontWeight.w500, MyColor.black),
             SizedBox(
@@ -112,6 +112,59 @@ class _DoctorSupportScreenState extends State<DoctorSupportScreen> {
         ),
       ),
     ));
+  }
+
+
+  /*---------SELECT BRANCH-----*/
+  Widget branch() {
+    final height = MediaQuery.of(context).size.height;
+    final widht = MediaQuery.of(context).size.width;
+    return StatefulBuilder(
+      builder: (context, StateSetter stateSetter) => Align(
+        alignment: AlignmentDirectional.centerEnd,
+        child: Center(
+          child: Container(
+            height: height * 0.06,
+            width: widht * 0.9,
+            padding: const EdgeInsets.only(left: 4),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5.0, 0.0),
+            decoration: BoxDecoration(
+                color: MyColor.white,
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: MyColor.grey)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                menuMaxHeight: MediaQuery.of(context).size.height / 3,
+                // Initial Value
+                value: selectedBranch,
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: MyColor.primary),
+                // Array list of items
+                items: doctorSignUpCtr.branchList.map((items) {
+                  return DropdownMenuItem(
+                    value: items.branchId,
+                    child: Text(items.branchName),
+                  );
+                }).toList(),
+                hint: Text(
+                  text.Select_Branch.tr,
+                  style: TextStyle(fontSize: 13),
+                ),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (newValue) {
+                  stateSetter(() {
+                    selectedBranch = newValue;
+                    log('MY CATEGORY>>>$selectedBranch');
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   // ******************Support Input filed VALIDATION (IF/ELSE CONDITIONS.)*****************//

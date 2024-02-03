@@ -76,12 +76,12 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
           }
           return false;
         },
-        child: SafeArea(
-          child: Scaffold(
-            bottomNavigationBar: myBottomNavigationBar(),
-            backgroundColor: Colors.white,
-            body:screens[myRoute.pageIndex.value],
-          ),
+        child: Scaffold(
+          bottomNavigationBar: myBottomNavigationBar(),
+          backgroundColor: Colors.white,
+          body:SafeArea(
+            child:screens[myRoute.pageIndex.value] ,
+          )
         ),
       );
     });

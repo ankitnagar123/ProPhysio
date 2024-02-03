@@ -274,6 +274,8 @@ class _AppointmentTimeSlotState extends State<AppointmentTimeSlot> {
                                               color: MyColor.primary1),
                                           title: Text(list.categoryName.toString()),
                                           trailing: Radio<String>(
+                                            activeColor: MyColor.primary1,
+                                            focusColor: MyColor.primary1,
                                             value: index.toString(),
                                             groupValue: price,
                                             onChanged: (value) {

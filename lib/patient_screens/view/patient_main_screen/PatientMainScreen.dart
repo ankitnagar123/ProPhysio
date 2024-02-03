@@ -123,12 +123,10 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
           }
           return false;
         },
-        child: SafeArea(
-          child: Scaffold(
-            bottomNavigationBar: myBottomNavigationBar(),
-            backgroundColor: Colors.white,
-            body: screens[myRoute.pageIndex.value],
-          ),
+        child: Scaffold(
+          bottomNavigationBar: myBottomNavigationBar(),
+          backgroundColor: Colors.white,
+          body: SafeArea(child: screens[myRoute.pageIndex.value],)
         ),
       );
     });

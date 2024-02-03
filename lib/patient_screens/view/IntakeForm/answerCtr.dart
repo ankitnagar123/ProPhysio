@@ -7,9 +7,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart'as Http;
+import 'package:prophysio/Network/Apis.dart';
 import 'package:prophysio/helper/CustomView/CustomView.dart';
 import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 import 'package:flutter/material.dart';
+import '../patient_main_screen/PatientMainScreen.dart';
 import 'IntakeFormQuestionDetailModel.dart';
 import 'answerModel.dart';
 
@@ -71,7 +73,7 @@ CustomView view = CustomView();
 
 
     final response =await Http.post(
-        Uri.parse("https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=intake_form_details"),body: {
+        Uri.parse(MyAPI.BaseUrl+MyAPI.intake_form_details),body: {
       "category_type":category_type
     })
         .timeout(Duration(seconds: 30));
@@ -226,7 +228,11 @@ CustomView view = CustomView();
     String result = "";
     if (response.statusCode == 200) {
       answerList.clear();
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const PatientMainScreen()));
       result = data["result"];
       loadingListAdd.value = false;
    view.MySnackBar(context, result);
@@ -242,7 +248,7 @@ CustomView view = CustomView();
       File? file,) async {
     Http.MultipartRequest request =
     Http.MultipartRequest('POST', Uri.parse(
-        "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=insert_intake_form_answer"));
+        MyAPI.BaseUrl+MyAPI.insert_intake_form_answer));
     if (file != null) {
       request.files.add(Http.MultipartFile(
           'image', file.readAsBytes().asStream(), file.lengthSync(),

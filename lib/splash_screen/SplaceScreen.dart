@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Helper/RoutHelper/RoutHelper.dart';
+import '../LocationCtr/LocationController.dart';
 import '../helper/mycolor/mycolor.dart';
 import '../helper/sharedpreference/SharedPrefrenc.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -17,6 +18,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
+  PermissionController permissionController = Get.put(PermissionController());
+
   bool onBoarding = false;
   bool patientLogin = false;
   bool doctorLogin = false;
@@ -27,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    permissionController.permissionHandle();
     if (GetPlatform.isAndroid) {
       print("isAndroid");
       FirebaseMessaging.instance.getToken().then((value) {

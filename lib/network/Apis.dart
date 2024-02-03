@@ -4,6 +4,24 @@ class MyAPI {
 
   static const String BaseUrl =
       "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=";
+
+
+  static  String urls =
+      "https://cisswork.com/Android/emrIntegrateDoctor/api/";
+  static const String About = "about.php";
+  static const String PFAQ = "patient_faq.php";
+  static const String PTandC = "patient_tandc.php";
+  static const String PPandP = "patient_pandp.php";
+  static const String PCancellationPolicy = "cancelation_policy.php";
+
+  static const String DFAQ = "doctor_faq.php";
+  static const String DTandC = "doctor_tandc.php";
+  static const String DPandP = "doctor_pandp.php";
+
+  static const String intake_form_details = "intake_form_details";
+  static const String insert_intake_form_answer = "insert_intake_form_answer";
+
+
   /*--------Patient Side API-----------*/
   static const String Login = "user_login";
   static const String forgotPassword = "get_user_forgot_password";

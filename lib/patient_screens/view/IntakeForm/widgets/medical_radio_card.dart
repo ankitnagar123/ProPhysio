@@ -150,6 +150,19 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            log("object for medical history index======${widget.questionId},and nested question${widget.nestedQuestion}");
+                            _textEditingController.text = value;
+                            log("_textEditingController.text $value");
+                            intakeController.addAnswer(
+                              widget.questionId,
+                              _selectedOption,
+                              widget.nestedQuestion,
+                              _textEditingController.text,[],);
+                            log("intakeController.answerList.length${intakeController.answerList.length}");
+                          });
+                        },
                         controller: _textEditingController,
                         maxLines: 2,
                         textInputAction: TextInputAction.newline,

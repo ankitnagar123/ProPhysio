@@ -217,7 +217,7 @@ class _DoctorViewTimeSlotState extends State<DoctorViewTimeSlot> {
                                           ),
                                           child: Center(
                                               child: Text(
-                                            '${slotList.from.toString()} - ${slotList.to.toString()}',
+                                            '${slotList.From.toString()} - ${slotList.To.toString()}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               color: MyColor.white,

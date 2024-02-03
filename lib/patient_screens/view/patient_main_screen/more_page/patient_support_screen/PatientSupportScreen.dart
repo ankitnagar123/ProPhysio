@@ -90,9 +90,9 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: customView.text(text.Select_Branch.tr, 13.0,
-                        FontWeight.w500, MyColor.primary1),
+                        FontWeight.w500, MyColor.black),
                   ),
-                  branch(),
+                Obx(() => doctorSignUpCtr.branchLoading.value?customView.MyIndicator():  branch(),),
                   SizedBox(
                     height: width * 0.02,
                   ),

@@ -1557,9 +1557,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.toNamed(
-                            RouteHelper.DTandCScreen(),
-                          );
+                          // Get.toNamed(RouteHelper.DTandCScreen(),);
+                          Get.toNamed(RouteHelper.getPTandC(),);
                         },
                       text: ' Terms and Condition ',
                       style: TextStyle(
@@ -1574,7 +1573,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            // Get.toNamed(RouteHelper.getPrivacyPolicy());
+                             Get.toNamed(RouteHelper.getPPandP());
                           },
                         text: ' Privacy Policy',
                         style:

@@ -23,7 +23,6 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
   PatientChangePassCtr changePassCtr = PatientChangePassCtr();
   bool _isHidden = true;
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,52 +50,32 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
               ListTile(
                 onTap: () {
                   Get.toNamed(
-                      RouteHelper.getPatientChangePasswordScreen(),
-
+                    RouteHelper.getPatientChangePasswordScreen(),
                   );
                 },
                 leading: const Icon(
                   Icons.lock,
                   color: Colors.black,
                 ),
-                title: customView.text(
-                    text.ChangePassword.tr, 14.0, FontWeight.w500, Colors.black),
+                title: customView.text(text.ChangePassword.tr, 14.0,
+                    FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 20.0,
                 ),
               ),
-              // ListTile(
-              //   onTap: () {
-              //     Navigator.push(context, MaterialPageRoute(builder: (context)=>const CenterLanguagePage()));
-              //   },
-              //   leading: const Icon(
-              //     Icons.language,
-              //     color: Colors.black,
-              //   ),
-              //   title: customView.text(
-              //       text.ChangeLanguage.tr, 14.0, FontWeight.w500, Colors.black),
-              //   trailing: const Icon(
-              //     Icons.arrow_forward_ios,
-              //     color: Colors.black,
-              //     size: 20.0,
-              //   ),
-              // ),
               ListTile(
-                visualDensity: VisualDensity.compact,
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const PatientTermCondition()));
+                  Get.toNamed(
+                    RouteHelper.getPFAQ(),
+                  );
                 },
                 leading: const Icon(
-                  Icons.note_alt,
+                  Icons.info_outline,
                   color: Colors.black,
                 ),
-                title: customView.text(text.TermCondition.tr, 14.0,
+                title: customView.text("FAQ", 14.0,
                     FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
@@ -107,10 +86,42 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
               ListTile(
                 visualDensity: VisualDensity.compact,
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PatinetAboutScreen()));
+                  Get.toNamed(RouteHelper.getPTandC(),);
+                },
+                leading: const Icon(
+                  Icons.note_alt,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    text.TermCondition.tr, 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                visualDensity: VisualDensity.compact,
+                onTap: () {
+                  Get.toNamed(RouteHelper.getPPandP(),);
+                },
+                leading: const Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Privacy Policy", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                visualDensity: VisualDensity.compact,
+                onTap: () {
+                  Get.toNamed(RouteHelper.DAboutScreen(),);
+
                 },
                 leading: const Icon(
                   Icons.search,
@@ -146,17 +157,12 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
         context: context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black54,
         pageBuilder: (context, anim1, anim2) {
           return Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
+              width: MediaQuery.of(context).size.width / 1,
               child: StatefulBuilder(
                 builder: (context, StateSetter setState) {
                   return Card(
@@ -175,8 +181,8 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                             height: 10.0,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text("Delete account", 17,
                                 FontWeight.w500, Colors.black),
                           ),
@@ -184,8 +190,8 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                             height: 13.0,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             child: customView.text(
                                 text.AreyouSureDeleteAccount.tr,
                                 12,
@@ -197,37 +203,34 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                           ),
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text(
-                                text.EnterYourPassword.tr, 13, FontWeight.w600,
-                                MyColor.black),
+                            child: customView.text(text.EnterYourPassword.tr,
+                                13, FontWeight.w600, MyColor.black),
                           ),
-                          const SizedBox(
-                              height: 5.0
-                          ),
+                          const SizedBox(height: 5.0),
                           customView.PasswordField(
-                              context, passwordCtr, text.Enter_Password.tr,
-                              TextInputType.text, GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _isHidden = !_isHidden;
-                                });
-                              },
-                              child: _isHidden
-                                  ? const Icon(
-                                Icons.visibility_off,
-                                color: MyColor.primary,
-                                size: 20,
-                              )
-                                  : const Icon(
-                                Icons.visibility,
-                                color: MyColor.primary,
-                                size: 20,
-
-                              )),
+                              context,
+                              passwordCtr,
+                              text.Enter_Password.tr,
+                              TextInputType.text,
+                              GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _isHidden = !_isHidden;
+                                    });
+                                  },
+                                  child: _isHidden
+                                      ? const Icon(
+                                          Icons.visibility_off,
+                                          color: MyColor.primary,
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          Icons.visibility,
+                                          color: MyColor.primary,
+                                          size: 20,
+                                        )),
                               _isHidden),
-                          const SizedBox(
-                              height: 10.0
-                          ),
+                          const SizedBox(height: 10.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -235,27 +238,28 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
                                 onPressed: () {
                                   Get.back();
                                 },
-                                child: customView.text(
-                                    text.Dismiss.tr, 14.0, FontWeight.w500,
-                                    MyColor.grey),
+                                child: customView.text(text.Dismiss.tr, 14.0,
+                                    FontWeight.w500, MyColor.grey),
                               ),
                               Obx(() {
-                                if (changePassCtr.loadingd.value){
+                                if (changePassCtr.loadingd.value) {
                                   return customView.MyIndicator();
                                 }
-                                  return customView.mysButton(
-                                    context,
-                                    text.Deleteaccount.tr,
-                                        () {
-                                    changePassCtr.deleteAccount(context, passwordCtr.text, () {
-                                      Get.offAllNamed(RouteHelper.getLoginScreen());
+                                return customView.mysButton(
+                                  context,
+                                  text.Deleteaccount.tr,
+                                  () {
+                                    changePassCtr.deleteAccount(
+                                        context, passwordCtr.text, () {
+                                      Get.offAllNamed(
+                                          RouteHelper.getLoginScreen());
                                     });
-                                    },
-                                    Colors.red,
-                                    const TextStyle(
-                                      color: MyColor.white,
-                                    ),
-                                  );
+                                  },
+                                  Colors.red,
+                                  const TextStyle(
+                                    color: MyColor.white,
+                                  ),
+                                );
                               }),
                             ],
                           )
@@ -272,9 +276,7 @@ class _PatientSettingsScreenState extends State<PatientSettingsScreen> {
 
 // ******************Delete Account (IF/ELSE CONDITIONS.)*****************//
   bool validation() {
-    if (passwordCtr.text
-        .toString()
-        .isEmpty) {
+    if (passwordCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, text.Enter_Password.tr);
     } else {
       return true;

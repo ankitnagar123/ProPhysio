@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prophysio/Network/Apis.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -95,7 +96,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          'https://cisswork.com/Android/emrIntegrateDoctor/api/patient_terms_conditions.php'));
+          MyAPI.urls+MyAPI.PTandC));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

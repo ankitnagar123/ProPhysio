@@ -58,11 +58,37 @@ class PatientSupportCtr extends GetxController {
 
 
 
-  /*-------------task Manage List view --------------*/
+  /*-------------suppor tList List view PATIENT --------------*/
   Future<void> supportList(BuildContext context,
       String type,) async {
     Map<String,dynamic> parameter = {
       "id":await sp.getStringValue(sp.PATIENT_ID_KEY),
+      "type":type,
+    };
+    log("parameter$parameter");
+    try {
+      supportLoading.value = true;
+      final response = await apiService.postData(MyAPI.pSupportList,parameter);
+      log("p Support List List=============${response.body}");
+      if (response.statusCode == 200) {
+        supportLoading.value = false;
+        supportLists.value = supportListModelFromJson(response.body);
+      } else {
+        supportLoading.value = false;
+        log("error");
+      }
+    }catch (e) {
+      supportLoading.value = false;
+      log("exception$e");
+    }
+  }
+
+
+  /*-------------suppor tList List view DOCTOR --------------*/
+  Future<void> supportListDoctor(BuildContext context,
+      String type,) async {
+    Map<String,dynamic> parameter = {
+      "id":await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type":type,
     };
     log("parameter$parameter");

@@ -110,6 +110,22 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
               ),
               ListTile(
                 onTap: () {
+                  Get.toNamed(RouteHelper.DPrivacyPolicy());
+                },
+                leading: const Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "Privacy Policy", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+              ListTile(
+                onTap: () {
                   Get.toNamed(RouteHelper.DAboutScreen());
                 },
                 leading: const Icon(
@@ -124,6 +140,24 @@ class _DoctorSettingsScreenState extends State<DoctorSettingsScreen> {
                   size: 20.0,
                 ),
               ),
+
+              ListTile(
+                onTap: () {
+                  Get.toNamed(RouteHelper.DFAQ());
+                },
+                leading: const Icon(
+                  Icons.info_outline,
+                  color: Colors.black,
+                ),
+                title: customView.text(
+                    "FAQ", 14.0, FontWeight.w500, Colors.black),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                  size: 20.0,
+                ),
+              ),
+
 
             ],
           ),

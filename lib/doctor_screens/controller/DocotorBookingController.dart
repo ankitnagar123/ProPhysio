@@ -298,6 +298,7 @@ class BookingController extends GetxController {
       "user_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "booking_id": bookingId,
       "cancle_id": cancelId,
+      "user_type":"Doctor"
     };
     print("booking Appointment Cancel Parameter$Perameter");
     final response =

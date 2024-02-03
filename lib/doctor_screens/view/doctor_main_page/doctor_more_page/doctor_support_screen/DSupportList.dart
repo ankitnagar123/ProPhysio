@@ -3,17 +3,17 @@ import 'package:get/get.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import '../../../../controller/auth_controllers/PatientSupportController.dart';
+import '../../../../../patient_screens/controller/auth_controllers/PatientSupportController.dart';
 
 
-class SupportList extends StatefulWidget {
-  const SupportList({super.key});
+class DSupportList extends StatefulWidget {
+  const DSupportList({super.key});
 
   @override
-  State<SupportList> createState() => _SupportListState();
+  State<DSupportList> createState() => _DSupportListState();
 }
 
-class _SupportListState extends State<SupportList> {
+class _DSupportListState extends State<DSupportList> {
   CustomView custom = CustomView();
   TextEditingController searchCtr = TextEditingController();
   PatientSupportCtr patientSupportCtr = Get.put(PatientSupportCtr());
@@ -30,15 +30,14 @@ class _SupportListState extends State<SupportList> {
   @override
   void initState() {
     super.initState();
-    patientSupportCtr.supportList(
+    patientSupportCtr.supportListDoctor(
       context,
-      "User",
+      "Doctor",
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final widht = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         // padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -145,137 +144,137 @@ class _SupportListState extends State<SupportList> {
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  custom.text(
-                      text.details.tr, 17.0, FontWeight.w500, Colors.black),
-                  const SizedBox(
-                    height: 7.0,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Subject",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(task,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Message",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(taskDisc,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      status =="Pending"?SizedBox():  Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Staff",
+              children: [
+                const SizedBox(
+                  height: 10.0,
+                ),
+                custom.text(
+                    text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                const SizedBox(
+                  height: 7.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Subject",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(task,
                               style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(staffName,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
                       ),
-                     Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Status",
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Message",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(taskDisc,
                               style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(status,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
                       ),
-                    ],
-                  ),
-                  Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
+                Row(
+                  children: [
+                    status =="Pending"?SizedBox():  Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Staff",
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(staffName,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Status",
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 11.0,
+                                fontFamily: "Poppins"),
+                          ),
+                          const SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(status,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14.0,
+                                  fontFamily: "Poppins")),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
 
-                ],
-              ),
+              ],
+            ),
 
           );
         });

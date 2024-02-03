@@ -305,7 +305,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.toNamed(RouteHelper.DTandCScreen());
+                          Get.toNamed(RouteHelper.getPTandC(),);
                         },
                       text: ' Terms and Condition ',
                       style: TextStyle(
@@ -320,7 +320,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                     TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Get.toNamed(RouteHelper.DTandCScreen());
+                            Get.toNamed(RouteHelper.getPCancellationPolicy());
                           },
                         text: 'Cancellation Policy',
                         style:

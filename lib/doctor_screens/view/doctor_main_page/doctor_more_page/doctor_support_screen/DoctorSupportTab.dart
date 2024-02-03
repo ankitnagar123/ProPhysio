@@ -4,19 +4,20 @@ import 'package:get/get.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
-import 'PatientSupportScreen.dart';
-import 'SupportList.dart';
+import 'DSupportList.dart';
+import 'DoctorSupportScreen.dart';
 
-class SupportTab extends StatefulWidget {
-  const SupportTab({
-    super.key,
-  });
+
+class DoctorSupportTab extends StatefulWidget {
+  const DoctorSupportTab({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<SupportTab> createState() => _SupportTabState();
+  State<DoctorSupportTab> createState() => _DoctorSupportTabState();
 }
 
-class _SupportTabState extends State<SupportTab>
+class _DoctorSupportTabState extends State<DoctorSupportTab>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
 
@@ -74,13 +75,13 @@ class _SupportTabState extends State<SupportTab>
               tabs: [
                 Tab(
                     child: Text(
-                  "Add",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                  ),
-                )),
+                      "Add",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Poppins",
+                      ),
+                    )),
                 Tab(
                   child: Text(
                     "View",
@@ -103,8 +104,8 @@ class _SupportTabState extends State<SupportTab>
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: const [
-                    PatientSupportScreen(),
-                    SupportList(),
+                    DoctorSupportScreen(),
+                    DSupportList(),
                     // PatientViewMedicines(),
                   ]),
             ),

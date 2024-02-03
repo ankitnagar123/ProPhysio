@@ -12,12 +12,14 @@ import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManag
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/learningManage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/MyTask/MyTask.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_about_page/DoctorAboutPage.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_about_page/DoctorFAQ.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorAddSpecialization.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorPersonalData.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorProfile.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_settings_screen/DoctorSettingsScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_settings_screen/doctor_change_password_screen/DoctorChangePasswordScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_support_screen/DoctorSupportScreen.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_support_screen/DoctorSupportTab.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_term_condition_page/DoctorTermCondition.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/DoctorEarningScreen.dart';
@@ -46,6 +48,10 @@ import '../../patient_screens/view/patient_main_screen/more_page/MorePage.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_profile_screen/PatientProfileScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_settings_screen/PatientSettingsScreen.dart';
 import '../../patient_screens/view/patient_main_screen/more_page/patient_settings_screen/patient_change_password_screen/PatientChangePasswordScreen.dart';
+import '../../patient_screens/view/patient_main_screen/more_page/term_condition_page/PCancellationPolicy.dart';
+import '../../patient_screens/view/patient_main_screen/more_page/term_condition_page/PatientFandQ.dart';
+import '../../patient_screens/view/patient_main_screen/more_page/term_condition_page/PatientTermCondition.dart';
+import '../../patient_screens/view/patient_main_screen/more_page/term_condition_page/PatientprivacyPolicy.dart';
 import '../../patient_screens/view/patient_payment_screen/PatientPaymentScreen.dart';
 import '../../patient_screens/view/patient_payment_screen/cardWithValidation/CreateCard.dart';
 import '../../signin_screen/SignInScreen.dart';
@@ -99,7 +105,10 @@ class RouteHelper {
   static const String pChatScreen = '/ChatScreen';
   static const String pBookingReqSuccess = '/BookingReqSuccess';
   static const String pCancelAppointSucces = '/pCancelAppointSucces';
-  static const String pCenterWardDrList = '/pCenterWardDrList';
+  static const String pTandC = '/pTandC';
+  static const String pPandP = '/pPandP';
+  static const String pFAQ = '/pFAQ';
+  static const String pCancellationPolicy = '/PCancellationPolicy';
 
 
   /*----------Doctor Side Screen's-------------------*/
@@ -120,9 +129,12 @@ class RouteHelper {
   static const String dEarningListScreen = '/dEarningListScreen';
   static const String dSetting = '/dSetting';
   static const String dChangePassword = '/dChangePassword';
+
   static const String dTermCondition = '/dTermCondition';
+  static const String dFAQ = '/dFAQ';
   static const String dAbout = '/dAbout';
-  static const String dCenterRequest = '/dCenterRequest';
+  static const String dPrivacyPolicy = '/dPrivacyPolicy';
+
 
   static const String dSupport = '/dSupport';
 
@@ -130,43 +142,7 @@ class RouteHelper {
   static const String learningManage = '/learningManage';
   static const String learningManageWebView = '/learningManageWebView';
 
-
-
-/*||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-  // static const String SearchScreen = '/searchScreen';
-  //
-  // static const String PDrListCatWise = '/ListCatWise';
-  // static const String PSubcat = '/psubcat';
-  // static const String PDrInformation = '/DrInformation';
-  // static const String PViewCertificate = '/ViewCertificate';
-  // static const String PAppointmentScreen = '/AppointmentScreen';
-  // static const String PHealthCard = '/HealthCard';
-  // static const String PAddNewCard = '/AddNewCard';
-  // static const String PManageCard = '/ManageCard';
-  //
-  // /*------menu---------*/
-  // static const String PProfile = '/ProfileScreen';
-  // static const String PChatContact = '/ChatContact';
-  // static const String PSetting = '/SettingPage';
-  //
-  // /*----In Setting Page---------*/
    static const String PTermsCondition = '/TermsCondition';
-  // static const String PChangePassword = '/ChangePassword';
-  // static const String PContactUs = '/ContactUs';
-  // static const String PDeleteAccount = '/DeleteAccount';
-  // static const String PAbout = '/AboutPage';
-  //
-  // /*--------------------Doctor Side-----------------------------------------*/
-  // static const String DSignup = '/dsignup';
-  // static const String DUploadD = '/duploadd';
-  // static const String DVerification = '/dverification';
-  // static const String Dlogin = '/dlogin';
-  // static const String Dforgotpass = '/dForgotpass';
-  // static const String DSetpass = '/dsetpass';
-  // static const String Dsetpassucces = '/setpassucces';
-  // static const String DHome = '/dhome';
-  // static const String DEarning = '/dearning';
-  // static const String DBooking = '/dbooking';
 
   /*------menu---------*/
   static const String Dmenu = '/dmenu';
@@ -272,7 +248,10 @@ class RouteHelper {
 
   static String getBookingSuccess() => pBookingReqSuccess;
  static String getCancelBookingScreen() => pCancelAppointSucces;
-  static String getCenterWardDrList() => pCenterWardDrList;
+ static String getPTandC() => pTandC;
+ static String getPPandP() => pPandP;
+ static String getPFAQ() => pFAQ;
+ static String getPCancellationPolicy() => pCancellationPolicy;
 
 /*------------Doctor Screen------------------*/
   static String DSignUpOtp() => dSignUpOtp;
@@ -294,8 +273,9 @@ class RouteHelper {
   static String DSettingScreen() => dSetting;
   static String DChangePassScreen() => dChangePassword;
   static String DTandCScreen() => dTermCondition;
+  static String DFAQ() => dFAQ;
   static String DAboutScreen() => dAbout;
-  static String DCenterRequest() => dCenterRequest;
+  static String DPrivacyPolicy() => dPrivacyPolicy;
 
   static String DSupportScreen() => dSupport;
   static String DMyTask() => myTask;
@@ -345,6 +325,10 @@ class RouteHelper {
     GetPage(name: specializationDetailsScreen, page: () => const SpecializationScreen()),
     GetPage(name: pBookingReqSuccess, page: () => const AppointmentBookedSucces()),
     GetPage(name: pCancelAppointSucces, page: () => const PatientBookingCancelSuccess()),
+    GetPage(name: pTandC, page: () => const PatientTermCondition()),
+    GetPage(name: pPandP, page: () => const PatientPrivacyPolicy()),
+    GetPage(name: pFAQ, page: () => const PatientFAQ()),
+    GetPage(name: pCancellationPolicy, page: () => const CancellationPolicy()),
 
 
 /*--------Doctor Side--------*/
@@ -367,9 +351,10 @@ class RouteHelper {
     GetPage(name: dSetting, page: () => const DoctorSettingsScreen()),
     GetPage(name: dChangePassword, page: () => const DoctorChangePasswordScreen()),
     GetPage(name: dTermCondition, page: () => const DoctorTermCondition()),
+    GetPage(name: dFAQ, page: () => const DoctorFAQ()),
     GetPage(name: dAbout, page: () => const DoctorAboutScreen()),
-     GetPage(name: dCenterRequest, page: () => const DCenterRequests()),
-    GetPage(name: dSupport, page: () => const DoctorSupportScreen()),
+    GetPage(name: dPrivacyPolicy, page: () => const DoctorAboutScreen()),
+    GetPage(name: dSupport, page: () => const DoctorSupportTab()),
     GetPage(name: myTask, page: () => const DoctorTask()),
     GetPage(name: learningManage, page: () => const LearningManage()),
     GetPage(name: learningManageWebView, page: () => const LearningWeb()),

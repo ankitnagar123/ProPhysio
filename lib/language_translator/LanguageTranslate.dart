@@ -576,7 +576,7 @@ String NoWardAddedCenter = "No ward added by center";
   String selectTime = "Select time";
   String selectVisitCharge = "Select visit charge's";
   String noTimeSlotDate = "No Time Slot's on this date";
-  String visitCharges = "Visit Charges";
+  String visitCharges = "Visit Charge";
   String DoctorTimeSlots = "Doctor Time Slots";
   String noVisitChargesDoctor = "No visit charges added by Admin";
   String weNeedYourHealthCardCode =
@@ -1143,7 +1143,7 @@ String NoWardAddedCenter = "No ward added by center";
           selectTime: "Select time",
           selectVisitCharge: "Select visit charge's",
           noTimeSlotDate: "No Time Slot's on this date",
-          visitCharges: "Visit Charges",
+          visitCharges: "Visit Charge",
           DoctorTimeSlots: "Doctor Time Slots",
           noVisitChargesDoctor: "No visit charges added by Admin",
           weNeedYourHealthCardCode:
