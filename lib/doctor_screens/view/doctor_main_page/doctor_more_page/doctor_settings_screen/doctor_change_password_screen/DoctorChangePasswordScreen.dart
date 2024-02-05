@@ -152,39 +152,41 @@ class _DoctorChangePasswordScreenState
               SizedBox(
                 height: height*0.2,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: AnimatedButton(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  text: text.savePassword.tr,
-                  color: MyColor.primary,
-                  pressEvent: () {
-                    if (validation()) {
-                      changePassCtr.changePasswordApi(
-                          context,
-                          oldPasswordCtrl.text,
-                          newPasswordCtrl.text,
-                          confirmPasswordCtrl.text, () {
-                        AwesomeDialog(
-                          context: context,
-                          animType: AnimType.leftSlide,
-                          headerAnimationLoop: false,
-                          dialogType: DialogType.success,
-                          showCloseIcon: true,
-                          title: text.success.tr,
-                          desc: text.Changed_Pass_Successfully.tr,
-                          btnOkOnPress: () {
-                            Get.back();
-                            debugPrint('OnClcik');
-                          },
-                          btnOkIcon: Icons.check_circle,
-                          onDismissCallback: (type) {
-                            debugPrint('Dialog Dismiss from callback $type');
-                          },
-                        ).show();
-                      });
-                    }
-                  },
+              Obx(
+                () => Align(
+                  alignment: Alignment.center,
+                  child: changePassCtr.loadingset.value?customView.MyIndicator():  AnimatedButton(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    text: text.savePassword.tr,
+                    color: MyColor.primary,
+                    pressEvent: () {
+                      if (validation()) {
+                        changePassCtr.changePasswordApi(
+                            context,
+                            oldPasswordCtrl.text,
+                            newPasswordCtrl.text,
+                            confirmPasswordCtrl.text, () {
+                          AwesomeDialog(
+                            context: context,
+                            animType: AnimType.leftSlide,
+                            headerAnimationLoop: false,
+                            dialogType: DialogType.success,
+                            showCloseIcon: true,
+                            title: text.success.tr,
+                            desc: text.Changed_Pass_Successfully.tr,
+                            btnOkOnPress: () {
+                              Get.back();
+                              debugPrint('OnClcik');
+                            },
+                            btnOkIcon: Icons.check_circle,
+                            onDismissCallback: (type) {
+                              debugPrint('Dialog Dismiss from callback $type');
+                            },
+                          ).show();
+                        });
+                      }
+                    },
+                  ),
                 ),
               ),
 

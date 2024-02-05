@@ -6,7 +6,7 @@ import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../controller/DocotorBookingController.dart';
 import 'AddPrescriptionandMedicalReport/PrescriptionandMedical.dart';
-import 'QRScannerReports/QRScannerPage.dart';
+
 
 class CompleteAppointPrescription extends StatefulWidget {
   const CompleteAppointPrescription({Key? key}) : super(key: key);

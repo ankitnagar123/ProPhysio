@@ -169,7 +169,7 @@ CustomView view = CustomView();
       // Remove existing answer with the same questionId
 
       log("umesh question id is here======${questionId}");
-      log("umesh nestted image is  here id is here======${nestedImages}");
+      log("umesh nested image is  here id is here======${nestedImages}");
       answerList.removeWhere((element) => element.Question == questionId);
 
 
@@ -180,7 +180,7 @@ CustomView view = CustomView();
         String nestedImgBase64 = base64Encode(imageBytes);
         nestedImgBase64List.add(nestedImgBase64);
       }
-  log("umesh nested box nestddd list image list is here=======${nestedImgBase64List}");
+  log("umesh nested box nestled list image list is here=======${nestedImgBase64List}");
       // Add the new AnswerModel to the answerList
       answerList.add(
         AnswerModel(
@@ -214,7 +214,7 @@ CustomView view = CustomView();
     update();
     String jsondata = jsonEncode(answerList.map((i) => i.toJson()).toList()).toString();
     log("this is image=====$file");
-    log("this is data of answerlist=====$json");
+    log("this is data of answer-list=====$json");
     Map<String, String> map = {
       "patient_id": await sp.getStringValue(sp.PATIENT_ID_KEY)??'',
       "answers":jsondata,
@@ -247,7 +247,7 @@ CustomView view = CustomView();
   Future<Http.StreamedResponse> saveIntakeFormData(Map<String, String> maps,
       File? file,) async {
     Http.MultipartRequest request =
-    Http.MultipartRequest('POST', Uri.parse(
+    Http.MultipartRequest('POST', Uri. parse(
         MyAPI.BaseUrl+MyAPI.insert_intake_form_answer));
     if (file != null) {
       request.files.add(Http.MultipartFile(
@@ -258,7 +258,7 @@ CustomView view = CustomView();
     }
     request.fields.addAll(maps);
 
-    print("multipartData request.fields:--- ${maps.toString()}");
+    log("multipartData request-fields:---${maps.toString()}");
     Http.StreamedResponse response = await request.send();
     return response;
   }

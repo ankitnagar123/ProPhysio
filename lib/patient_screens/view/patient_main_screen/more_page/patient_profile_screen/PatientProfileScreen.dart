@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -274,7 +275,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               customView.text("$_curr/6", 13.0, FontWeight.w500, Colors.black),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-                child: AnimatedButton(
+                child:  profileCtr.loadingU.value?customView.MyIndicator():AnimatedButton(
                   text: text.saveProfile.tr,
                   color: MyColor.red,
                   pressEvent: () async {

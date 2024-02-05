@@ -152,10 +152,13 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
                   size: 18,
                   color: MyColor.grey,
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: customView.text(
-                      patientAddress, 12, FontWeight.normal, MyColor.grey),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width*0.9,
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: customView.text(
+                        patientAddress, 12, FontWeight.normal, MyColor.grey),
+                  ),
                 ),
               ],
             )

@@ -197,8 +197,8 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     var latlong = {
-                                      "lat": doctorListCtr.latitude.value,
-                                      "long": doctorListCtr.longitude.value,
+                                      "lat": doctorListCtr.branchLat.value,
+                                      "long": doctorListCtr.branchLong.value,
                                       "name":doctorListCtr.doctorname.value,
                                       "surname":doctorListCtr.drSurname.value,
                                       "address":address,

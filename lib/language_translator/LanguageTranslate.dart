@@ -82,7 +82,7 @@ class LocalString extends Translations {
 
 
   /*---------new String ------------*/
- String  experience = "Year of Experience";
+ String  experience = "Year's of Experience";
 
 
 
@@ -670,7 +670,7 @@ String NoWardAddedCenter = "No ward added by center";
           Select_Address: "Select your address or offices",
           SearchAddress: "Search City",
           firstConsultation: "Provide first consultation fees",
-          experience: "Year of Experience",
+          experience: "Year's of Experience",
   description : "Enter Description",
           /*medical center signup*/
           MedicalName: "Enter your Medical center name",

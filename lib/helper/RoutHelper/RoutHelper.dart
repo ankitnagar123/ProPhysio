@@ -6,19 +6,14 @@ import '../../doctor_screens/view/doctor_main_page/doctor_booking_page/doctor_se
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatProfile.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatingScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
-
-import '../../doctor_screens/view/doctor_main_page/doctor_more_page/Center_request/DCenterRequest.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/LearningWeb.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/learningManage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/MyTask/MyTask.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_about_page/DoctorAboutPage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_about_page/DoctorFAQ.dart';
-import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorAddSpecialization.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorPersonalData.dart';
-import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_profile/DoctorProfile.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_settings_screen/DoctorSettingsScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_settings_screen/doctor_change_password_screen/DoctorChangePasswordScreen.dart';
-import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_support_screen/DoctorSupportScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_support_screen/DoctorSupportTab.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/doctor_term_condition_page/DoctorTermCondition.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/earning_page/CalculateEarnings.dart';
@@ -122,8 +117,6 @@ class RouteHelper {
   static const String dChatScreen = '/dChatScreen';
   static const String dChatProfile = '/dChatProfile';
   static const String dPersonalData = '/dPersonalData';
-  static const String dProfile = '/dProfile';
-  static const String dAddSpecialization = '/dAddSpecialization';
 
   static const String dEarningCalculate = '/dEarningCalculate';
   static const String dEarningListScreen = '/dEarningListScreen';
@@ -264,8 +257,7 @@ class RouteHelper {
   static String DChatProfile() => dChatProfile;
 
   static String DPersonalData() => dPersonalData;
-  static String DProfile() => dProfile;
-  static String DAddSpecialization() => dAddSpecialization;
+
 
   static String DEarningCalculate() => dEarningCalculate;
   static String DEarningListScreen() => dEarningListScreen;
@@ -342,8 +334,7 @@ class RouteHelper {
     GetPage(name: dChatScreen, page: () =>  const DoctorChatScreen()),
     GetPage(name: dChatProfile, page: () => const DoctorChatProfile()),
     GetPage(name: dPersonalData, page: () => const DoctorPersonalData()),
-    GetPage(name: dProfile, page: () => const DoctorProfileScreen()),
-    GetPage(name: dAddSpecialization, page: () => const DoctorAddSpecialization()),
+
 
     GetPage(name: dEarningCalculate, page: () => const CalculateEarning()),
     GetPage(name: dEarningListScreen, page: () => const DoctorEarning()),

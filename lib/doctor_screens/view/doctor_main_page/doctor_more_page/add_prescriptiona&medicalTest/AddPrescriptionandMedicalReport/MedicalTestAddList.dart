@@ -182,11 +182,15 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 5,),
-                      custom.text(
+                   list.result =="Submitted by Doctor"?  custom.text(
                           "${text.consult_Dr.tr}.${list.doctorName}",
                           12,
                           FontWeight.w400,
-                          MyColor.primary1),
+                          MyColor.primary1):  custom.text(
+                       "${list.result}",
+                       12,
+                       FontWeight.w400,
+                       MyColor.primary1)
                     ],
                   ),
                   trailing: GestureDetector(

@@ -34,7 +34,7 @@ class _PastAppointmentsRatingState extends State<PastAppointmentsRating> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          bottom: PreferredSize(preferredSize: Size.fromHeight(5),child: Divider(color: Colors.grey,)),
+          bottom: const PreferredSize(preferredSize: Size.fromHeight(5),child: Divider(color: Colors.grey,)),
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white24,

@@ -172,13 +172,13 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                   itemCount: doctorPrescriptionCtr.patientPrescriptionList
                       .length,
                   itemBuilder: (context, index) {
+                    var list = doctorPrescriptionCtr.patientPrescriptionList[index];
                     return Card(
                       surfaceTintColor: Colors.grey,
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(10),
                         title: custom.text(
-                            doctorPrescriptionCtr.patientPrescriptionList[index]
-                                .title,
+                            list.title,
                             16, FontWeight.w400, MyColor.primary1),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,9 +188,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                                 fontSize: 12,
                                 fontFamily: "Poppins",
                               ),
-                              doctorPrescriptionCtr
-                                  .patientPrescriptionList[index]
-                                  .description,
+                              list.description,
                               maxLines: 4,
                               overflow: TextOverflow.ellipsis,
 
@@ -199,13 +197,9 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
                               12,
                               FontWeight.w400,
                               MyColor.primary1),*/
-                            custom.text("${doctorPrescriptionCtr
-                                .patientPrescriptionList[index]
-                                .result} ${doctorPrescriptionCtr
-                                .patientPrescriptionList[index].doctorName}",
-                                13,
-                                FontWeight.w400,
-                                MyColor.primary1),
+                            custom.text("${list.result} ${list.doctorName}", 13,
+                                FontWeight.w400, MyColor.primary1
+                            ),
                           ],
                         ),
                         trailing: GestureDetector(

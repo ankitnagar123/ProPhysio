@@ -188,7 +188,7 @@ class _RateAndReviewDetailsState extends State<RateAndReviewDetails> {
                 ),
                 Align(
                   alignment: Alignment.center,
-                  child: AnimatedButton(
+                  child:patientRatingCtr.loadingAdd.value?custom.MyIndicator() :AnimatedButton(
                     width: MediaQuery.of(context).size.width * 0.9,
                     text: text.Submit.tr,
                     color: MyColor.red,

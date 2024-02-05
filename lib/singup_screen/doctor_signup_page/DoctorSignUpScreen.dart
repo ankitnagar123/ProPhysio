@@ -749,7 +749,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     elevation: 2,
                     margin: EdgeInsets.zero,
                     child: SizedBox(
-                      height: 250,
+                      height: 120,
                       width: double.maxFinite,
                       child: Obx(() {
                         return Column(children: [
@@ -762,6 +762,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                   ? custom.MyIndicator()
                                   : Expanded(
                                       child: ListView.builder(
+                                        padding:  EdgeInsets.all(0),
                                       itemCount:
                                           doctorSignUpCtr.services.length,
                                       itemBuilder: (context, index) {
@@ -798,25 +799,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                                             color: Colors.white,
                                             elevation: 0.8,
                                             child: ListTile(
-                                              // leading: ClipRRect(
-                                              //   child: FadeInImage.assetNetwork(
-                                              //     imageErrorBuilder: (c, o, s) =>
-                                              //         Image.asset(
-                                              //             "assets/images/noimage.png",
-                                              //             width: 40,
-                                              //             height: 40,
-                                              //             fit: BoxFit.cover),
-                                              //     width: 45,
-                                              //     height: 45,
-                                              //     fit: BoxFit.cover,
-                                              //     placeholder:
-                                              //         "assets/images/loading.gif",
-                                              //     image: doctorSignUpCtr
-                                              //         .services[index].image
-                                              //         .toString(),
-                                              //     placeholderFit: BoxFit.cover,
-                                              //   ),
-                                              // ),
+
                                               trailing: serviceIdArray.contains(
                                                       doctorSignUpCtr
                                                           .services[index]
