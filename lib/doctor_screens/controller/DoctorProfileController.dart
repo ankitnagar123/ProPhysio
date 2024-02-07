@@ -61,7 +61,7 @@ class DoctorProfileCtr extends GetxController {
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
 /*----------Fetch Doctor Profile Data API-----------*/
-  void doctorProfile(BuildContext context) async {
+  Future doctorProfile(BuildContext context) async {
     loading.value = true;
     resultVar.value = 0;
     final Map<String, dynamic> ProfilePerameter = {

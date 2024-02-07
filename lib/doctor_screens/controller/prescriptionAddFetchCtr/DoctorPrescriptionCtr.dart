@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import '../../../Network/ApiService.dart';
 import '../../../Network/Apis.dart';
 import '../../../helper/CustomView/CustomView.dart';
@@ -36,9 +35,47 @@ class DoctorPrescriptionCtr extends GetxController {
 
   var loadingMedicineFetch = false.obs;
   var pLoadingMedicineFetch = false.obs;
+  var downloadingList = false.obs;
 
 /*---------for doctor*---------*/
   var prescriptionList = Rxn<DPrescriptionListModel>();
+
+
+  // Function to handle download for a specific item using its index
+  void downLoadFileRepost(BuildContext context,String fileurl, String patientName,) async {
+    downloadingList = true.obs;
+    update(); // Notify GetX that the downloading list has changed
+    try {
+      await FileDownloader.downloadFile(
+        url: fileurl,
+        name: "$patientName Prescription Report.pdf",
+        onProgress: (String? fileName, double? progress) {
+          log('FILE fileName HAS PROGRESS $progress');
+        },
+        onDownloadCompleted: (String path) {
+          log('FILE DOWNLOADED TO PATH: $path');
+          downloadingList = false.obs;
+          customView.MySnackBar(context, "$patientName Report Download Successfully");
+          update(); // Notify GetX that the downloading list has changed
+        },
+        onDownloadError: (String error) {
+          log('DOWNLOAD ERROR: $error');
+          downloadingList = false.obs;
+          customView.MySnackBar(context, "Something went wrong ");
+
+          update(); // Notify GetX that the downloading list has changed
+        },
+        notificationType: NotificationType.all,
+      );
+    } catch (e) {
+      log('DOWNLOAD ERROR: $e');
+      downloadingList = false.obs;
+      update(); // Notify GetX that the downloading list has changed
+    }
+  }
+
+
+
 
   /*---------for doctor QR scanning*---------*/
   var prescriptionReportQrList = Rxn<PrescriptionReportQrModel>();

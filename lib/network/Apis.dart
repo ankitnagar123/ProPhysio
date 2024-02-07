@@ -171,32 +171,4 @@ class MyAPI {
   static const String dTaskManageList = "fetch_doctor_task";
   static const String dTaskStatusChange = "update_doctor_task_status";
 
-
-/*-------------Medical Center side api---------------------*/
-
-  static const String CSignUpOtp = "medical_otp_signup";
-  static const String CSignUp = "medical_signup";
-  static const String cAllDoctorList = "medical_center_doctor_list";
-  static const String cAddDoctor = "add_medical_center_doctor";
-
-  static const String cSelectedDoctorWard = "center_ward_name_list";
-
-  static const String cSelectedDoctor = "fetch_medical_center_doctor";
-
-  static const String centerAddMoreDrList = "new_ward_doctor_list";
-
-  static const String cWardRemoveReason = "cancle_ward_reason";
-  static const String cDoctorRemoveReason = "cancle_ward_doctor_reason";
-  static const String cEditWard = "edit_ward";
-  static const String cDeleteWard = "delete_ward";
-  static const String cAddMoreDr = "add_ward_doctor";
-  static const String cChangePassword = "medical_center_change_pass";
-  static const String cCenterProfile = "medical_center_profile";
-  static const String cCenterProfileUpdate = "update_medical_center_profile";
-
-  static const String cCenterDeleteAc = "delete_medical_center_account";
-  static const String cCenterSupport = "medical_center_support";
-
-  /*User Side*/
-  static const String cCenterList = "medical_center_list";
 }

@@ -78,7 +78,7 @@ CustomView view = CustomView();
     })
         .timeout(Duration(seconds: 30));
 
-    print("this response of login screen===${response.body}");
+    print("category_type questions-$category_type===${response.body}");
     final data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {

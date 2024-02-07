@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -472,50 +471,50 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
   }
 
   void imagePopUp(BuildContext context, String image) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: Colors.black54,
-        pageBuilder: (context, anim1, anim2) {
-          return Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 1,
-              child: StatefulBuilder(
-                builder: (context, StateSetter setState) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: InteractiveViewer(
-                      panEnabled: false,
-                      // Set it to false
-                      boundaryMargin: const EdgeInsets.all(100),
-                      minScale: 0.5,
-                      maxScale: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: FadeInImage.assetNetwork(
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return const Image(
-                                image: AssetImage("assets/images/noimage.png"));
-                          },
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/loading.gif",
-                          image: image,
-                          placeholderFit: BoxFit.cover,
-                        ),
-                      ),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: FadeInImage.assetNetwork(
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return const Image(
+                            image: AssetImage("assets/images/noimage.png"));
+                      },
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      fit: BoxFit.cover,
+                      placeholder: "assets/images/loading.gif",
+                      image: image,
+                      placeholderFit: BoxFit.cover,
                     ),
-                  );
-                },
-              ),
-            ),
-          );
-        });
+                  ),
+                ),
+                Positioned(
+                    right:1,
+                    child: InkWell(
+                        onTap:() {
+                          Get.back();
+                        },
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: MyColor.primary1,
+                                borderRadius: BorderRadius.all(Radius.circular(20))
+                            ),
+                            child: const Icon(Icons.close,color: Colors.white,))))
+              ]
+          ),
+        );
+      },
+    );
   }
-
   /*------Select MR MS etc*/
   Widget _buildDropDownButton() {
     return Container(

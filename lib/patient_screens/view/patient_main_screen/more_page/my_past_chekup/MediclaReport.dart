@@ -4,14 +4,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'dart:developer';
 
+
+import 'package:file_picker/file_picker.dart';
 
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 
 class PatientMedicalReport extends StatefulWidget {
   const PatientMedicalReport({Key? key}) : super(key: key);
@@ -28,6 +31,11 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
   DoctorPrescriptionCtr doctorPrescriptionCtr =
   Get.put(DoctorPrescriptionCtr());
   LocalString text = LocalString();
+
+
+  bool isPDF(String url) {
+    return url.contains('.pdf');
+  }
 
   @override
   void initState() {
@@ -136,11 +144,11 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                         titleCtr.text,
                         discCtr.text,
                         filename,
-                        baseimage, () {
+                        baseImage, () {
                       titleCtr.clear();
                       discCtr.clear();
                       filename = "";
-                      baseimage = "";
+                      baseImage = "";
                       degreefilePath = null;
                       doctorPrescriptionCtr.fetchPatientPrescription("medical");
                     });
@@ -213,31 +221,64 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                               MyColor.primary1),
                         ],
                       ),
-                      trailing: GestureDetector(
+                      trailing: isPDF(doctorPrescriptionCtr
+                          .patientPrescriptionList[index].image)
+                        ? InkWell(
                         onTap: () {
-                          image = doctorPrescriptionCtr
-                              .patientPrescriptionList[index].image;
-                          imagePopUp(context, image);
+                          doctorPrescriptionCtr.downLoadFileRepost(
+                              context,doctorPrescriptionCtr
+                              .patientPrescriptionList[index].image,
+                              "medical");
                         },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: FadeInImage.assetNetwork(
-                            imageErrorBuilder:
-                                (context, error, stackTrace) =>
-                            const Image(
-                              image:
-                              AssetImage("assets/images/noimage.png"),
+                        child:  const Icon(
+                          Icons.download_for_offline,
+                          color: MyColor.primary1,
+                        ))
+
+                        :Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            image = doctorPrescriptionCtr
+                                .patientPrescriptionList[index]
+                                .image;
+                            imagePopUp(context, image);
+                          },
+                          child: ClipRRect(
+                            borderRadius:
+                            BorderRadius.circular(8.0),
+                            child: FadeInImage.assetNetwork(
+                              imageErrorBuilder: (context, error,
+                                  stackTrace) => const Image(image: AssetImage(
+                                  "assets/images/noimage.png"),),
+                              width: 80,
+                              height: 100,
+                              fit: BoxFit.cover,
+                              placeholder:
+                              "assets/images/loading.gif",
+                              image: doctorPrescriptionCtr
+                                  .patientPrescriptionList[index]
+                                  .image,
+                              placeholderFit: BoxFit.cover,
                             ),
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/loading.gif",
-                            image: doctorPrescriptionCtr
-                                .patientPrescriptionList[index].image,
-                            placeholderFit: BoxFit.cover,
                           ),
                         ),
-                      ),
+                        Positioned(
+                          right: 2,
+                          child: InkWell(
+                              onTap: () {
+                                doctorPrescriptionCtr.downLoadFileRepost(
+                                    context,doctorPrescriptionCtr
+                                    .patientPrescriptionList[index].image,
+                                    "medical");
+                              },
+                              child:  const Icon(
+                                Icons.download_for_offline,
+                                color: MyColor.primary1,
+                              )),
+                        )                          ],
+
+                    ),
                     ),
                   );
                 },
@@ -255,8 +296,8 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
         .toString()
         .isEmpty) {
       custom.MySnackBar(context, text.enterTitle.tr);
-    } else if (degreefilePath == null) {
-      custom.MySnackBar(context, text.uploadMedicalReport.tr);
+    } else if (baseImage.isEmpty) {
+      custom.MySnackBar(context, text.uploadPrescription.tr);
     } else if (discCtr.text
         .toString()
         .isEmpty) {
@@ -268,79 +309,137 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
   }
 
 
-  File? degreefilePath;
-  final degreepicker = ImagePicker();
-  String baseimage = "";
-  String filename = "";
 
-  void _chooseDegree() async {
-    final pickedFile = await degreepicker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 100,);
-    setState(() {
-      if (pickedFile != null) {
-        degreefilePath = File(pickedFile.path);
-        List<int> imageBytes = degreefilePath!.readAsBytesSync();
-        baseimage = base64Encode(imageBytes);
-        filename = DateTime.now().toString() + ".jpeg".toString();
-        print(baseimage);
-        print(filename);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
 
   void imagePopUp(BuildContext context, String image) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel:
-        MaterialLocalizations
-            .of(context)
-            .modalBarrierDismissLabel,
-        barrierColor: Colors.black54,
-        pageBuilder: (context, anim1, anim2) {
-          return Center(
-            child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1,
-              child: StatefulBuilder(
-                builder: (context, StateSetter setState) {
-                  return  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: InteractiveViewer(
-                      panEnabled: false,
-                      // Set it to false
-                      boundaryMargin: const EdgeInsets.all(100),
-                      minScale: 0.5,
-                      maxScale: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: FadeInImage.assetNetwork(
-                          imageErrorBuilder:
-                              (context, error, stackTrace) {
-                            return const Image(
-                                image: AssetImage(
-                                    "assets/images/noimage.png"));
-                          },
-                          width: MediaQuery.of(context).size.width,
-                          height:
-                          MediaQuery.of(context).size.height * 0.5,
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/loading.gif",
-                          image: image,
-                          placeholderFit: BoxFit.cover,
-                        ),
-                      ),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: FadeInImage.assetNetwork(
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return const Image(
+                            image: AssetImage("assets/images/noimage.png"));
+                      },
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      fit: BoxFit.cover,
+                      placeholder: "assets/images/loading.gif",
+                      image: image,
+                      placeholderFit: BoxFit.cover,
                     ),
-                  );
-                },
-              ),
-            ),
-          );
-        });
+                  ),
+                ),
+                Positioned(
+                    right:1,
+                    child: InkWell(
+                        onTap:() {
+                          Get.back();
+                        },
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: MyColor.primary1,
+                                borderRadius: BorderRadius.all(Radius.circular(20))
+                            ),
+                            child: const Icon(Icons.close,color: Colors.white,))))
+              ]
+          ),
+        );
+      },
+    );
+  }
+
+  File? degreefilePath; // Used to store the selected file
+  String baseImage = ""; // Base64 representation for image
+  String filename = ""; // Filename for the selected file (image or PDF)
+
+// ...
+
+  Future<void> _chooseDegree() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+    );
+
+    if (result != null) {
+      final pickedFile = result.files.first;
+      final filePath = pickedFile.path!;
+      final extension = filePath.split('.').last.toLowerCase();
+
+      // Check if the picked file is a PDF
+      if (extension == 'pdf') {
+        log('Selected file is a PDF');
+
+        try {
+          final file = File(filePath);
+          final fileBytes = await file.readAsBytes();
+
+          if (fileBytes.isNotEmpty) {
+            // Convert the bytes to a base64 string
+            baseImage = base64Encode(fileBytes);
+            filename = "${DateTime.now()}.$extension";
+            setState(() {});
+
+            log('PDF file converted to base64: $baseImage');
+            log('Filename: $filename');
+          } else {
+            log('Error: File bytes are empty');
+          }
+        } catch (e) {
+          log('Error reading PDF file: $e');
+        }
+      } else if (extension == 'jpg' ||
+          extension == 'jpeg' ||
+          extension == 'png') {
+        // If the picked file is an image, process it similarly as before
+        log('Selected file is an image');
+
+        degreefilePath = File(filePath);
+        final fileBytes = degreefilePath!.readAsBytesSync();
+        baseImage = base64Encode(fileBytes);
+        filename = DateTime.now().toString() + ".$extension";
+        setState(() {});
+
+        print('Image file converted to base64: $baseImage');
+        print('Filename: $filename');
+      } else {
+        print('Unsupported file type: $extension');
+      }
+    } else {
+      print('No file selected.');
+    }
+  }
+
+
+  void downLoadFile(String fileurl, String patientName) async {
+    FileDownloader.downloadFile(
+        url: fileurl,
+        name: "$patientName Prescription Report.pdf",
+        //THE FILE NAME AFTER DOWNLOADING,
+        onProgress: (String? fileName, double? progress) {
+          log('FILE fileName HAS PROGRESS $progress');
+        },
+        onDownloadCompleted: (String path) {
+          log('FILE DOWNLOADED TO PATH: $path');
+          // startDate.value = "Select";
+          // endDate.value = "Select";
+          // customSnackBar("file downloaded check download folder");
+          // receiptLoader.value = false;
+        },
+        onDownloadError: (String error) {
+          // startDate.value = "Select";
+          // endDate.value = "Select";
+          log('DOWNLOAD ERROR: $error');
+          // receiptLoader.value = false;
+        },
+        notificationType: NotificationType.all);
   }
 }

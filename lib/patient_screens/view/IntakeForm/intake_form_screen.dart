@@ -353,6 +353,36 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
       ),
     );
   }
+  Widget imagePickerPage() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          customView.text("Please mark the body pain points", 15,
+              FontWeight.w600, Colors.black),
+          SizedBox(
+            height: 20,
+          ),
+          ImagePainter.asset(
+            "assets/images/pro_physio_humanbody.jpg",
+            key: _imageKey,
+            scalable: true,
+            height: context.width,
+            showControls: true,
+            initialStrokeWidth: 4,
+            textDelegate: TextDelegate(),
+            initialColor: Colors.red,
+            initialPaintMode: PaintMode.circle,
+          ),
+          Expanded(child: SizedBox()),
+          // Center(child: customView.mysButton(context, "NEXT", () {
+          //   saveImage();
+          // }, MyColor.primary,TextStyle(color: Colors.white) ) ,)
+        ],
+      ),
+    );
+  }
 
   Widget painratigDetail(IntakeController cartController) {
     return SingleChildScrollView(
@@ -484,6 +514,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
     );
   }
 
+
   Widget medicalTestingDetail(IntakeController cartController) {
     return SingleChildScrollView(
       child: Padding(
@@ -537,7 +568,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                                   MyColor.black),
                               MedicalRadioCard(
                                 nestedQuestion: cartController
-                                    .intakmediclehistoryList[index2]
+                                    .intakmedicaltestingList[index2]
                                     .nestedQuestion
                                     .toString(),
                                 questionId: cartController
@@ -764,36 +795,6 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
   }
 
 
-  Widget imagePickerPage() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          customView.text("Please mark the body pain points", 15,
-              FontWeight.w600, Colors.black),
-          SizedBox(
-            height: 20,
-          ),
-          ImagePainter.asset(
-            "assets/images/pro_physio_humanbody.jpg",
-            key: _imageKey,
-            scalable: true,
-            height: context.width,
-            showControls: true,
-            initialStrokeWidth: 4,
-            textDelegate: TextDelegate(),
-            initialColor: Colors.red,
-            initialPaintMode: PaintMode.circle,
-          ),
-          Expanded(child: SizedBox()),
-          // Center(child: customView.mysButton(context, "NEXT", () {
-          //   saveImage();
-          // }, MyColor.primary,TextStyle(color: Colors.white) ) ,)
-        ],
-      ),
-    );
-  }
 }
 
 class KeepAlivePage extends StatefulWidget {

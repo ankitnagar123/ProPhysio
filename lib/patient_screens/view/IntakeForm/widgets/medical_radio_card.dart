@@ -53,6 +53,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
                   value: 'yes',
                   groupValue: _selectedOption,
                   onChanged: (value) {
+                    log("_selectedOption$_selectedOption");
                     // Get.find<intakeController>().getMaplist({
                     //  "question_id":widget.questionId
                     // },widget.questionId);
@@ -109,7 +110,7 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
             ? Column(
               children: [
                 view.text(
-                    "Select product images", 14, FontWeight.w500, MyColor.primary1),
+                    "Upload Report", 14, FontWeight.w500, MyColor.primary1),
                 Row(
                   children: [
                     GestureDetector(
@@ -193,55 +194,27 @@ class _MedicalRadioCardState extends State<MedicalRadioCard> {
       width: MediaQuery.of(context).size.width,
       child: Card(
         margin: const EdgeInsets.all(18),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    _choose(ImageSource.gallery);
-                    Get.back();
-                  },
-                  child: const CircleAvatar(
-                    backgroundColor: Colors.pinkAccent,
-                    radius: 30,
-                    child: Icon(
-                      Icons.photo_library,
-                      color: Colors.white,
-                    ),
-                  ),
+            InkWell(
+              onTap: () {
+                _choose(ImageSource.gallery);
+                Get.back();
+              },
+              child: const CircleAvatar(
+                backgroundColor: Colors.pinkAccent,
+                radius: 30,
+                child: Icon(
+                  Icons.photo_library,
+                  color: Colors.white,
                 ),
-                const SizedBox(
-                  height: 7,
-                ),
-                const Text("Gallery")
-              ],
+              ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    _choose(ImageSource.camera);
-                    Get.back();
-                  },
-                  child: const CircleAvatar(
-                    backgroundColor: Colors.purple,
-                    radius: 30,
-                    child: Icon(
-                      Icons.camera,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 7,
-                ),
-                const Text("Camera")
-              ],
-            )
+            const SizedBox(
+              height: 7,
+            ),
+            const Text("Gallery")
           ],
         ),
       ),

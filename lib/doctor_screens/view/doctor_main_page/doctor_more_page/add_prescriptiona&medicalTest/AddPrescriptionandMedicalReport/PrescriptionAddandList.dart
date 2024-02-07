@@ -3,14 +3,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
-
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
 
@@ -31,6 +30,10 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
       Get.put(DoctorPrescriptionCtr());
   String image = "";
   LocalString text = LocalString();
+
+  bool isPDF(String url) {
+    return url.contains('.pdf');
+  }
 
   @override
   void initState() {
@@ -345,60 +348,89 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                       var list = doctorPrescriptionCtr
                           .prescriptionList.value!.details[index];
                       return Card(
-                        color: MyColor.midgray,
+                        color: MyColor.white,
                         child: ListTile(
-                          contentPadding: const EdgeInsets.all(12),
-                          title: custom.text(list.title, 16, FontWeight.w400,
-                              MyColor.primary1),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: "Poppins",
+                            contentPadding: const EdgeInsets.all(8),
+                            title: custom.text(list.title, 16, FontWeight.w400,
+                                MyColor.primary1),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: "Poppins",
+                                  ),
+                                  list.description,
+                                  maxLines: 4,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                list.description,
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              list.result == "Submitted by Doctor"
-                                  ? custom.text(
-                                      "${text.consult_Dr.tr}.${list.doctorName}",
-                                      12,
-                                      FontWeight.w400,
-                                      MyColor.primary1)
-                                  : custom.text("${list.result}", 12,
-                                      FontWeight.w400, MyColor.primary1)
-                            ],
-                          ),
-                          trailing: GestureDetector(
-                            onTap: () {
-                              image = list.image;
-                              imagePopUp(context, image);
-                            },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: FadeInImage.assetNetwork(
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) {
-                                  return const Image(
-                                      image: AssetImage(
-                                          "assets/images/noimage.png"));
-                                },
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                                placeholder: "assets/images/loading.gif",
-                                image: list.image,
-                                placeholderFit: BoxFit.cover,
-                              ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                list.result == "Submitted by Doctor"
+                                    ? custom.text(
+                                        "${text.consult_Dr.tr}.${list.doctorName}",
+                                        12,
+                                        FontWeight.w400,
+                                        MyColor.primary1)
+                                    : custom.text("${list.result}", 12,
+                                        FontWeight.w400, MyColor.primary1),
+                              ],
                             ),
-                          ),
-                        ),
+                            trailing: isPDF(list.image)
+                                ? InkWell(
+                                  onTap: () {
+                                      doctorPrescriptionCtr.downLoadFileRepost(
+                                          context,list.image,
+                                          "${details.name} ${details.surname}");
+                                  },
+                                  child:  const Icon(
+                                    Icons.download_for_offline,
+                                    color: MyColor.primary1,
+                                  ))
+
+                                : Stack(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  image = list.image;
+                                  imagePopUp(context, image);
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: FadeInImage.assetNetwork(
+                                    imageErrorBuilder:
+                                        (context, error, stackTrace) {
+                                      return const Image(
+                                          image: AssetImage(
+                                              "assets/images/noimage.png"));
+                                    },
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                    placeholder:
+                                    "assets/images/loading.gif",
+                                    image: list.image,
+                                    placeholderFit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                right: 2,
+                                child: InkWell(
+                                    onTap: () {
+                                      doctorPrescriptionCtr.downLoadFileRepost(
+                                          context,list.image,
+                                          "${details.name} ${details.surname}");
+                                    },
+                                    child:  const Icon(
+                                      Icons.download_for_offline,
+                                      color: MyColor.primary1,
+                                    )),
+                              )
+                            ],
+
+                                )),
                       );
                     },
                   )
@@ -436,7 +468,7 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
           if (fileBytes.isNotEmpty) {
             // Convert the bytes to a base64 string
             baseImage = base64Encode(fileBytes);
-            filename = DateTime.now().toString() + ".$extension";
+            filename = "${DateTime.now()}.$extension";
             setState(() {});
 
             log('PDF file converted to base64: $baseImage');
@@ -470,88 +502,72 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
   }
 
   void imagePopUp(BuildContext context, String image) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: Colors.black54,
-        pageBuilder: (context, anim1, anim2) {
-          return Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 1,
-              child: StatefulBuilder(
-                builder: (context, StateSetter setState) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.0),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: FadeInImage.assetNetwork(
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return const Image(
+                            image: AssetImage("assets/images/noimage.png"));
+                      },
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      fit: BoxFit.contain,
+                      placeholder: "assets/images/loading.gif",
+                      image: image,
+                      placeholderFit: BoxFit.contain,
                     ),
-                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InteractiveViewer(
-                            panEnabled: false,
-                            // Set it to false
-                            boundaryMargin: const EdgeInsets.all(100),
-                            minScale: 0.5,
-                            maxScale: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: FadeInImage.assetNetwork(
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) {
-                                  return const Image(
-                                      image: AssetImage(
-                                          "assets/images/noimage.png"));
-                                },
-                                width: MediaQuery.of(context).size.width,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                                fit: BoxFit.cover,
-                                placeholder: "assets/images/loading.gif",
-                                image: image,
-                                placeholderFit: BoxFit.cover,
-                              ),
+                  ),
+                ),
+                Positioned(
+                    right:1,
+                    child: InkWell(
+                        onTap:() {
+                          Get.back();
+                        },
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: MyColor.primary1,
+                                borderRadius: BorderRadius.all(Radius.circular(20))
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        });
+                            child: const Icon(Icons.close,color: Colors.white,))))
+              ]
+          ),
+        );
+      },
+    );
   }
 
-  // downLoadFile(String fileurl)async{
-  //   FileDownloader.downloadFile(
-  //       url: fileurl,
-  //       name: "Payment History.pdf", //THE FILE NAME AFTER DOWNLOADING,
-  //       onProgress: (String? fileName, double? progress) {
-  //         print('FILE fileName HAS PROGRESS $progress');
-  //       },
-  //       onDownloadCompleted: (String path) {
-  //         print('FILE DOWNLOADED TO PATH: $path');
-  //         startDate.value = "Select";
-  //         endDate.value = "Select";
-  //         customSnackBar("file downloaded check download folder");
-  //         receiptLoader.value = false;
-  //       },
-  //       onDownloadError: (String error) {
-  //         startDate.value = "Select";
-  //         endDate.value = "Select";
-  //         print('DOWNLOAD ERROR: $error');
-  //         receiptLoader.value = false;
-  //
-  //       },
-  //       notificationType: NotificationType.all
-  //   );
-  // }
+  void downLoadFile(String fileurl, String patientName) async {
+    FileDownloader.downloadFile(
+        url: fileurl,
+        name: "$patientName Prescription Report.pdf",
+        //THE FILE NAME AFTER DOWNLOADING,
+        onProgress: (String? fileName, double? progress) {
+          log('FILE fileName HAS PROGRESS $progress');
+        },
+        onDownloadCompleted: (String path) {
+          log('FILE DOWNLOADED TO PATH: $path');
+          // startDate.value = "Select";
+          // endDate.value = "Select";
+          // customSnackBar("file downloaded check download folder");
+          // receiptLoader.value = false;
+        },
+        onDownloadError: (String error) {
+          // startDate.value = "Select";
+          // endDate.value = "Select";
+          log('DOWNLOAD ERROR: $error');
+          // receiptLoader.value = false;
+        },
+        notificationType: NotificationType.all);
+  }
 }

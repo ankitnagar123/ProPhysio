@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../../language_translator/LanguageTranslate.dart';
-import 'AddMedicines/AddMedicinesTab.dart';
 import 'MedicalTestAddList.dart';
 import 'PrescriptionAddandList.dart';
 import 'package:get/get.dart';

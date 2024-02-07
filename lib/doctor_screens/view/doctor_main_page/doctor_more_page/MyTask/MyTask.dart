@@ -524,7 +524,7 @@ class _DoctorTaskState extends State<DoctorTask> {
                                           context, taskId, "Confirmed", () {
                                         taskManageCtr.taskManageList(
                                           context,
-                                          "Pending",
+                                          "Confirmed",
                                         );
                                         Get.back();
                                       });
