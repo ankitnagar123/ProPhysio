@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -66,6 +66,7 @@ class DoctorPrescriptionCtr extends GetxController {
       String imgStr,
       VoidCallback callback) async {
     loadingAdd.value = true;
+
     Map<String, dynamic> data = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "user_id": patientId,
@@ -108,6 +109,7 @@ class DoctorPrescriptionCtr extends GetxController {
       String imgStr,
       VoidCallback callback) async {
     loadingAddP.value = true;
+
     Map<String, dynamic> data = {
       // "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),

@@ -61,13 +61,14 @@ dev_dependencies:
   flutter_lints: ^3.0.1
 
   get: ^4.6.5
-  printing: ^5.11.0
+#  printing: ^5.11.0
   custom_info_window: ^1.0.1
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
   image_picker: ^1.0.4
   file_picker:
   open_file: ^3.2.1
+  flutter_file_downloader: ^1.1.4
   shared_preferences: ^2.0.17
   intl_phone_field: ^3.1.0
   date_picker_timeline: ^1.2.3

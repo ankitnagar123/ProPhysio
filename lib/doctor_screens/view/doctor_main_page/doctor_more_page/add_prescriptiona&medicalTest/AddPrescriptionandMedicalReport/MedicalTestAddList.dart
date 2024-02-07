@@ -127,16 +127,16 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
             }else if(filename.isEmpty){
               custom.MySnackBar(context,text.uploadPrescription.tr);
             }else{
-              doctorPrescriptionCtr.addPrescription(
-                context,
-                widget.patientId,
-                'medical',
-                titleCtr.text,
-                discCtr.text,
-                filename,
-                baseimage,() {
-                doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
-              },);
+              // doctorPrescriptionCtr.addPrescription(
+              //   context,
+              //   widget.patientId,
+              //   'medical',
+              //   titleCtr.text,
+              //   discCtr.text,
+              //   "filename",
+              //   baseimage,() {
+              //   doctorPrescriptionCtr.fetchPrescription(widget.patientId, "medical");
+              // },);
             }
 
                 }, MyColor.primary, const TextStyle(color: MyColor.white)),
