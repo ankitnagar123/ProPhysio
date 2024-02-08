@@ -69,8 +69,9 @@ var bookingId = "".obs;
     loadingFetchDateDr.value = true;
     final Map<String, dynamic> paremert = {
       "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "branch_id":branchId,
+      "branch_id":await sp.getStringValue(sp.DOCTOR_BRANCH),
     };
+    log("para$paremert");
     try {
       log("calendar list of date's parameter.....$paremert");
       final response = await apiService.postData(MyAPI.pCalenderDate, paremert);

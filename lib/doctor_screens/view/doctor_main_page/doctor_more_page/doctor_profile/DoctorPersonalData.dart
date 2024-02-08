@@ -11,6 +11,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 
 import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
@@ -32,6 +33,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
 
   CustomView customView = CustomView();
   LocalString text = LocalString();
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController name = TextEditingController();
@@ -1330,6 +1332,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                   selectedDaysList,
                   imagename,
                   baseimage, () {
+                sp.setStringValue(sp.DOCTOR_BRANCH, selectedBranch.toString());
+
                 AwesomeDialog(
                   context: context,
                   animType: AnimType.leftSlide,

@@ -76,9 +76,13 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
           child: customView.MyButton(
             context,
             text.addNewCard.tr,
-                () {
-             //  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
-              Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                () async {
+                  var result =
+                      await  Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+
+                  if(result ==true){
+                    cardCtr.cardFetch();
+                  }
             },
             MyColor.red,
             const TextStyle(fontFamily: "Poppins", color: Colors.white),

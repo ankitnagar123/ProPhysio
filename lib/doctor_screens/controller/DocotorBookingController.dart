@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,10 +19,17 @@ class BookingController extends GetxController {
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
 
-  var booking = <bookingList>[].obs;
+  var booking = <BookingList>[].obs;
+
+
   var cancelReason = <DoctorBookingCancelModel>[].obs;
 
   var loading = false.obs;
+  var loadingPending = false.obs;
+  var loadingConfirmed = false.obs;
+  var loadingComplete = false.obs;
+  var loadingCancellist = false.obs;
+
   var loadingd = false.obs;
   var loadingAccept = false.obs;
   var loadingReject = false.obs;
@@ -54,29 +59,21 @@ class BookingController extends GetxController {
 
   /*---------booking Appointment List with Status type--------*/
   Future<void> bookingAppointment(
-      BuildContext context, String statusType, String dateFilter) async {
-    bool connection = await checkInternetConnection();
+      BuildContext context, String dateFilter) async {
     final Map<String, dynamic> perameter = {
        "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "status": statusType,
       "type": dateFilter,
     };
-    if (connection) {
+    log("perameter$perameter");
       try {
         loading.value = true;
-        final response =
-            await apiService.postData(MyAPI.dBookingAppointmentList, perameter);
-        print(" doctor booking Appointment =============${response.body}");
+        final response = await apiService.postData(MyAPI.dBookingAppointmentList, perameter);
+        print("doctor booking Appointment =============${response.body}");
         if (response.statusCode == 200) {
           loading.value = false;
-          List<bookingList> listbooking = jsonDecode(response.body)
-              .map((item) => bookingList.fromJson(item))
-              .toList()
-              .cast<bookingList>();
-          booking.clear();
-          booking.addAll(listbooking);
-          print(listbooking);
+          booking.value = bookingListFromJson(response.body);
+
           print(booking);
         } else {
           loading.value = false;
@@ -86,25 +83,116 @@ class BookingController extends GetxController {
         loading.value = false;
         print("exception$e");
       }
-    } else {
+
+  }
+
+
+  /*---------Pending booking Appointment List--------*/
+  Future<void> bookingAppointmentPending(
+      BuildContext context, String dateFilter) async {
+    final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue("it")??"",
+      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "type": dateFilter,
+    };
+    log("pending parameter$perameter");
+      try {
+        loading.value = true;
+        final response =
+        await apiService.postData(MyAPI.dBookingPendingList, perameter);
+        print(" doctor Pending booking Appointment =============${response.body}");
+        if (response.statusCode == 200) {
+          loading.value = false;
+          booking.value = bookingListFromJson(response.body);
+        } else {
+          loading.value = false;
+          print("error");
+        }
+      } catch (e) {
+        loading.value = false;
+        print("exception$e");
+    }
+  }
+
+  /*---------Confirm booking Appointment List--------*/
+  Future<void> bookingAppointmentConfirmed(
+      BuildContext context, String dateFilter) async {
+    final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue("it")??"",
+      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "type": dateFilter,
+    };
+    log("confirmed parameter$perameter");
+      try {
+        loading.value = true;
+        final response =
+        await apiService.postData(MyAPI.dBookingConfirmedList, perameter);
+        print(" doctor Pending booking Appointment =============${response.body}");
+        if (response.statusCode == 200) {
+          loading.value = false;
+          booking.value = bookingListFromJson(response.body);
+        } else {
+          loading.value = false;
+          print("error");
+        }
+      } catch (e) {
+        loading.value = false;
+        print("exception$e");
+      }
+  }
+
+  /*---------Confirm booking Appointment List--------*/
+  Future<void> bookingAppointmentComplete(
+      BuildContext context, String dateFilter) async {
+    final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue("it")??"",
+      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "type": dateFilter,
+    };
+    log("pending parameter$perameter");
+    try {
+      loading.value = true;
+      final response =
+      await apiService.postData(MyAPI.dBookingCompleteList, perameter);
+      print(" doctor Pending booking Appointment =============${response.body}");
+      if (response.statusCode == 200) {
+        loading.value = false;
+        booking.value = bookingListFromJson(response.body);
+      } else {
+        loading.value = false;
+        print("error");
+      }
+    } catch (e) {
       loading.value = false;
-      AwesomeDialog(
-        context: context,
-        animType: AnimType.bottomSlide,
-        headerAnimationLoop: false,
-        dialogType: DialogType.warning,
-        showCloseIcon: true,
-        title: 'NO INTERNET',
-        desc: 'Check your internet connection and try again.',
-        btnOkOnPress: () {
-          debugPrint('OnClcik');
-        },
-        btnOkIcon: Icons.check_circle,
-        onDismissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        },
-      ).show();
-      print("no internet");
+      print("exception$e");
+    }
+  }
+
+
+  /*---------Cancel booking Appointment List--------*/
+  Future<void> bookingAppointmentCancelList(
+      BuildContext context, String dateFilter) async {
+    final Map<String, dynamic> perameter = {
+      "language": await sp.getStringValue("it")??"",
+      "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
+      "type": dateFilter,
+    };
+    log("pending parameter$perameter");
+    try {
+      loading.value = true;
+      final response =
+      await apiService.postData(MyAPI.dBookingCompleteList, perameter);
+      print(" doctor Pending booking Appointment =============${response.body}");
+      if (response.statusCode == 200) {
+        loading.value = false;
+        booking.value = bookingListFromJson(response.body);
+      } else {
+        loading.value = false;
+        print("error");
+      }
+    } catch (e) {
+      loading.value = false;
+      print("exception$e");
     }
   }
 
@@ -183,7 +271,7 @@ class BookingController extends GetxController {
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context, "pending", "");
+        // bookingAppointment(context, "pending",);
         loadingAccept.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -216,7 +304,7 @@ class BookingController extends GetxController {
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context, "pending", "");
+        // bookingAppointment(context, "pending", "");
         loadingReject.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -249,7 +337,7 @@ class BookingController extends GetxController {
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context, "pending", "");
+        // bookingAppointment(context, "pending", "");
         loadingDone.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());
@@ -308,7 +396,7 @@ class BookingController extends GetxController {
       log("my id $Perameter");
       if (response.statusCode == 200) {
         callback();
-        bookingAppointment(context, "pending", "");
+        // bookingAppointment(context, "pending", "");
         loadingCancel.value = false;
         var jsonResponse = jsonDecode(response.body);
         print(jsonResponse.toString());

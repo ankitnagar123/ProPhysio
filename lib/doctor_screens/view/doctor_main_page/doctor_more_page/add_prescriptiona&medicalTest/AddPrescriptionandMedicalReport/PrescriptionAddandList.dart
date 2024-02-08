@@ -10,6 +10,8 @@ import '../../../../../../language_translator/LanguageTranslate.dart';
 import '../../../../../controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 
+import 'ReportPdfView.dart';
+
 class PrescriptionAddAndList extends StatefulWidget {
   String patientId;
 
@@ -381,9 +383,11 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                             trailing: isPDF(list.image)
                                 ? InkWell(
                                   onTap: () {
-                                      doctorPrescriptionCtr.downLoadFileRepost(
-                                          context,list.image,
-                                          "${details.name} ${details.surname}");
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url: list.image),));
+
+                                    // doctorPrescriptionCtr.downLoadFileRepost(
+                                      //     context,list.image,
+                                      //     "${details.name} ${details.surname}");
                                   },
                                   child:  const Icon(
                                     Icons.download_for_offline,
@@ -419,9 +423,10 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                                 right: 2,
                                 child: InkWell(
                                     onTap: () {
-                                      doctorPrescriptionCtr.downLoadFileRepost(
-                                          context,list.image,
-                                          "${details.name} ${details.surname}");
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url: list.image),));
+                                      // doctorPrescriptionCtr.downLoadFileRepost(
+                                      //     context,list.image,
+                                      //     "${details.name} ${details.surname}");
                                     },
                                     child:  const Icon(
                                       Icons.download_for_offline,

@@ -49,7 +49,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
         context, bookingController.userId.value);*/
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getValue();
-      bookingController.bookingAppointment(context, "", "");
+      bookingController.bookingAppointment(context, "",);
       bookingController.appointmentCancelReason();
     });
   }
@@ -148,7 +148,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 log("booking id$id");
 
                 var list = bookingController.booking[index];
-                var status = bookingController.booking[index].status!;
+                var status = bookingController.booking[index].status;
                 return InkWell(
                   onTap: () {
                     bookingController.bookingAppointmentDetails(
@@ -176,8 +176,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   decoration: BoxDecoration(
                                     color: list.status == "Pending"
                                         ? MyColor.statusYellow
-                                        : list.status == "Cancel"
-                                            ? Colors.red
                                             : Colors.green,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
@@ -193,8 +191,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                     /*list.status.toString()*/
                                     list.status == "Pending"
                                         ? text.Pending.tr
-                                        : list.status == "Cancel"
-                                            ? text.Cancel.tr
                                             : text.Upcoming.tr,
                                     11.0,
                                     FontWeight.w400,
@@ -287,7 +283,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                      list.bookID.toString(),
+                                      list.bookId.toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
@@ -457,8 +453,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             decoration: BoxDecoration(
                               color: status == "Pending"
                                   ? MyColor.statusYellow
-                                  : status == "Cancel"
-                                      ? Colors.red
                                       : Colors.green,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -472,9 +466,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             child: custom.text(
                                 bookingController.status.value == "Pending"
                                     ? text.Pending.tr
-                                    : bookingController.status.value == "Cancel"
-                                        ? text.Cancel.tr
-                                        : text.Upcoming.tr,
+                                    :  text.Upcoming.tr,
                                 11.0,
                                 FontWeight.w400,
                                 Colors.black),
@@ -492,62 +484,62 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              text.paymentInformation.tr,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(bookingController.paymentTyp.value,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              text.fees.tr,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(
-                              bookingController.price.value,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                   Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30.0,
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       flex: 1,
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             text.paymentInformation.tr,
+                  //             style: const TextStyle(
+                  //                 color: Colors.grey,
+                  //                 fontSize: 11.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 2.0,
+                  //           ),
+                  //           Text(bookingController.paymentTyp.value,
+                  //               style: const TextStyle(
+                  //                   color: Colors.black,
+                  //                   fontSize: 14.0,
+                  //                   fontFamily: "Poppins")),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       flex: 1,
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             text.fees.tr,
+                  //             style: const TextStyle(
+                  //                 color: Colors.grey,
+                  //                 fontSize: 11.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 2.0,
+                  //           ),
+                  //           Text(
+                  //             bookingController.price.value,
+                  //             style: const TextStyle(
+                  //                 color: Colors.black,
+                  //                 fontSize: 14.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  //  Divider(
+                  //   color: MyColor.grey.withOpacity(0.5),
+                  //   height: 30.0,
+                  // ),
                   Row(
                     children: [
                       Expanded(
@@ -591,7 +583,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 bookingController
                                     .bookingAppointmentReject(context, id, () {
                                   bookingController.bookingAppointment(
-                                      context, "", "");
+                                      context, "", );
                                   Get.back();
                                 });
                               }, MyColor.midgray,
@@ -604,8 +596,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             ],
                           ),
                         )
-                      : status == "Confirmed"
-                          ? Column(
+                      :
+                           Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -686,7 +678,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                       bookingController.bookingAppointmentDone(
                                           context, id, () {
                                         bookingController.bookingAppointment(
-                                            context, "", "");
+                                            context, "", );
                                         Get.back();
                                       });
                                     },
@@ -720,34 +712,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 ),
                               ],
                             )
-                          : Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        text.cancelReason.tr,
-                                        style: const TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 11.0,
-                                            fontFamily: "Poppins"),
-                                      ),
-                                      const SizedBox(
-                                        height: 2.0,
-                                      ),
-                                      Text(bookingController.reasonCancel.value,
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14.0,
-                                              fontFamily: "Poppins")),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
                 ],
               );
             }),
@@ -951,7 +915,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                                     bookingId.toString(), () {
                                               bookingController
                                                   .bookingAppointment(
-                                                      context, "", "");
+                                                      context, "", );
                                               Get.back();
                                               Get.back();
                                             });

@@ -66,7 +66,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
               height: height * 0.01,
             ),
             custom.myField(
-                context, titleCtr, text.enterTitle.tr, TextInputType.emailAddress),
+                context, titleCtr, text.enterTitle.tr, TextInputType.text),
             SizedBox(
               height: height * 0.03,
             ),
@@ -279,7 +279,7 @@ class _PatientPrescriptionState extends State<PatientPrescription> {
         .toString()
         .isEmpty) {
       custom.MySnackBar(context, text.enterTitle.tr);
-    } else if (degreefilePath == null) {
+    } else if (baseImage.isEmpty) {
       custom.MySnackBar(context, text.uploadPrescription.tr);
     } else if (discCtr.text
         .toString()

@@ -35,7 +35,7 @@ class ForgotPassCtr extends GetxController {
        "email": email,
       // "user_type":userType
     };
-    print("Forgot Perameter$pforgot");
+    print("Forgot Parameter$pforgot");
 
     final response = await apiService.postData(MyAPI.forgotPassword, pforgot);
     try {

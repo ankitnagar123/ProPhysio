@@ -68,7 +68,7 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
               height: height * 0.01,
             ),
             custom.myField(
-                context, titleCtr,text.enterTitle.tr, TextInputType.emailAddress),
+                context, titleCtr,text.enterTitle.tr, TextInputType.text),
             SizedBox(
               height: height * 0.03,
             ),

@@ -25,7 +25,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   @override
   void initState() {
     super.initState();
-    bookingController.bookingAppointment(context, "Pending", "");
+    bookingController.bookingAppointmentPending(context, "",);
   }
 
   @override
@@ -74,7 +74,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                         selectedCard = 0;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, text.pending.tr, text.linear.tr);
+                                          context, text.linear.tr);
                                       Get.back();
                                     },
                                     leading: custom.text("${text.date}: ${text.linear.tr}", 15,
@@ -94,7 +94,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                         selectedCard = 1;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, text.pending, text.reverse.tr);
+                                          context, text.reverse.tr);
                                       Get.back();
                                     },
                                     leading: custom.text("${text.date.tr}: ${text.reverse.tr}", 15,
@@ -276,7 +276,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                      pendingList.bookID.toString(),
+                                      pendingList.bookId.toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
@@ -474,62 +474,62 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                             Text(
-                              text.paymentInformation.tr,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(bookingController.paymentTyp.value,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14.0,
-                                    fontFamily: "Poppins")),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                             Text(
-                              text.fees.tr,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 11.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                            const SizedBox(
-                              height: 2.0,
-                            ),
-                            Text(
-                              bookingController.price.value,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontFamily: "Poppins"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                   Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30.0,
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       flex: 1,
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //            Text(
+                  //             text.paymentInformation.tr,
+                  //             style: const TextStyle(
+                  //                 color: Colors.grey,
+                  //                 fontSize: 11.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 2.0,
+                  //           ),
+                  //           Text(bookingController.paymentTyp.value,
+                  //               style: const TextStyle(
+                  //                   color: Colors.black,
+                  //                   fontSize: 14.0,
+                  //                   fontFamily: "Poppins")),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       flex: 1,
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //            Text(
+                  //             text.fees.tr,
+                  //             style: const TextStyle(
+                  //                 color: Colors.grey,
+                  //                 fontSize: 11.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //           const SizedBox(
+                  //             height: 2.0,
+                  //           ),
+                  //           Text(
+                  //             bookingController.price.value,
+                  //             style: const TextStyle(
+                  //                 color: Colors.black,
+                  //                 fontSize: 14.0,
+                  //                 fontFamily: "Poppins"),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  //  Divider(
+                  //   color: MyColor.grey.withOpacity(0.5),
+                  //   height: 30.0,
+                  // ),
                   Row(
                     children: [
                       Expanded(
@@ -575,7 +575,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 bookingController
                                     .bookingAppointmentReject(context, id, () {
                                   bookingController.bookingAppointment(
-                                      context, "Pending", "");
+                                      context, "");
                                   Get.back();
                                 });
                               }, MyColor.midgray,
@@ -673,7 +673,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                                     context, bookingId, () {
                                               bookingController
                                                   .bookingAppointment(
-                                                      context, "Pending", "");
+                                                      context, "");
                                               Get.back();
                                               Get.back();
                                             });

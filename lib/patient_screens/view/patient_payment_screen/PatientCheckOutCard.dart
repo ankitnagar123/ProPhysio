@@ -125,8 +125,13 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                       height: height * 0.03,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                      onTap: () async {
+                        var result =
+                            await   Get.toNamed(RouteHelper.getPatientAddNewCardScreen());
+                        if(result == true){
+                          cardCtr.cardFetch();
+
+                        }
                       },
                       child: Container(
                           height: 50.0,

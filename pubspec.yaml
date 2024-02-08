@@ -39,7 +39,7 @@ dependencies:
   firebase_core: ^2.10.0
   firebase_messaging: ^14.4.1
   flutter_local_notifications: ^16.2.0
-#  flutter_pdfview: ^1.2.2
+  syncfusion_flutter_pdfviewer:
   path_provider: ^2.0.10
 #  pdf: ^3.1.0
   #  path: ^1.8.0
@@ -77,7 +77,7 @@ dev_dependencies:
   url_launcher: ^6.1.10
   flutter_google_places: ^0.3.0
   geocoding: ^2.0.5
-  uuid: ^3.0.7
+#  uuid: ^3.0.7
   flutter_map: ^4.0.0
   flutter_calendar_carousel: 2.4.2
   webview_flutter: ^4.4.2

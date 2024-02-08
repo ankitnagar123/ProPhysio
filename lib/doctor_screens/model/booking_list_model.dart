@@ -1,47 +1,53 @@
+// To parse this JSON data, do
+//
+//     final bookingList = bookingListFromJson(jsonString);
 
-class bookingList {
+import 'dart:convert';
 
-  String? bookingId;
-  String? id;
-  String? bookID;
-  String? name;
-  String? bookingDate;
-  String? status;
-  String? bookingTime;
-  String? time;
+List<BookingList> bookingListFromJson(String str) => List<BookingList>.from(json.decode(str).map((x) => BookingList.fromJson(x)));
 
-  bookingList(
-      {
-        this.bookingId,
-        this.id,
-        this.bookID,
-        this.name,
-        this.bookingDate,
-        this.status,
-        this.bookingTime,
-        this.time});
+String bookingListToJson(List<BookingList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  bookingList.fromJson(Map<String, dynamic> json) {
-    bookingId = json['booking_id'];
-    id = json['user_id'];
-    bookID = json['book_ID'];
-    name = json['name'];
-    bookingDate = json['booking_date'];
-    status = json['status'];
-    bookingTime = json['booking_time'];
-    time = json['Time'];
-  }
+class BookingList {
+  String id;
+  String bookingId;
+  String userId;
+  String bookId;
+  String name;
+  String bookingDate;
+  String status;
+  String time;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data["booking_id"] = bookingId;
-    data['user_id'] = id;
-    data['book_ID'] = bookID;
-    data['name'] = name;
-    data['booking_date'] = bookingDate;
-    data['status'] = status;
-    data['booking_time'] = bookingTime;
-    data['Time'] = time;
-    return data;
-  }
+  BookingList({
+    required this.id,
+    required this.bookingId,
+    required this.userId,
+    required this.bookId,
+    required this.name,
+    required this.bookingDate,
+    required this.status,
+    required this.time,
+  });
+
+  factory BookingList.fromJson(Map<String, dynamic> json) => BookingList(
+    id: json["Id"].toString(),
+    bookingId: json["booking_id"].toString(),
+    userId: json["user_id"].toString(),
+    bookId: json["book_ID"].toString(),
+    name: json["name"].toString(),
+    bookingDate: json["booking_date"].toString(),
+    status: json["status"].toString(),
+    time: json["Time"].toString(),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Id": id,
+    "booking_id": bookingId,
+    "user_id": userId,
+    "book_ID": bookId,
+    "name":name,
+    "booking_date": bookingDate,
+    "status": status,
+    "Time": time,
+  };
 }

@@ -26,7 +26,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      bookingController.bookingAppointment(context,"Complete","");
+      bookingController.bookingAppointmentComplete(context, "");
     });
   }
 
@@ -209,7 +209,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
                                   height: 2.0,
                                 ),
                                 Text(
-                                  list.bookID
+                                  list.bookId
                                       .toString(),
                                   style: const TextStyle(
                                       color: Colors.black,

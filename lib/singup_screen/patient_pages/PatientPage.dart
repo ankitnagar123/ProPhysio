@@ -116,6 +116,19 @@ class _PatientSignUpState extends State<PatientSignUp> {
   String code = '+1876';
   String flag = 'JM';
 
+  String homeCode = '+1876';
+  String homeFlag = 'JM';
+
+  String officeCode = '+1876';
+  String officeFlag = 'JM';
+
+  String medicalCode = '+1876';
+  String medicalFlag = 'JM';
+
+  String kinCode = '+1876';
+  String kinFlag = 'JM';
+
+
   @override
   void initState() {
     super.initState();
@@ -537,7 +550,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.Height.tr, 13.0, FontWeight.w500,
+                          customView.text("Height cm/feet", 13.0, FontWeight.w500,
                               MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -853,12 +866,12 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 child: customView.text(
                     "ID Type", 13.0, FontWeight.w500, MyColor.primary1),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               customView.myField(
                   context, idTypeCtr, "Enter ID Type", TextInputType.text),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Align(
@@ -909,8 +922,42 @@ class _PatientSignUpState extends State<PatientSignUp> {
               SizedBox(
                 height: 5,
               ),
-              customView.myField(
-                  context, kinContactCtr, "Enter Phone", TextInputType.number),
+              SizedBox(
+                height: 50,
+                width: widht * 1,
+                child: IntlPhoneField(
+
+                  controller: kinContactCtr,
+                  decoration: InputDecoration(
+                    // focusedErrorBorder: InputBorder.none,
+                    counterText: '',
+                    filled: true,
+                    fillColor: Colors.white,
+                    constraints: const BoxConstraints.expand(),
+                    labelText: text.Phone_Number.tr,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                  initialCountryCode: kinFlag,
+                  onChanged: (phone) {
+                    // var flag = phone.countryISOCode;
+                    kinFlag = phone.countryISOCode;
+                    log(kinFlag);
+                    kinCode = phone.countryCode;
+                    log(phone.completeNumber);
+                  },
+                  onCountryChanged: (cod) {
+                    kinFlag = cod.code;
+                    log(kinFlag);
+                    kinCode = cod.code;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -1074,8 +1121,41 @@ class _PatientSignUpState extends State<PatientSignUp> {
               SizedBox(
                 height: 5,
               ),
-              customView.myField(
-                  context, homePhoneCtr, "Enter phone", TextInputType.number),
+              SizedBox(
+                height: 50,
+                width: widht * 1,
+                child: IntlPhoneField(
+                  controller: homePhoneCtr,
+                  decoration: InputDecoration(
+                    // focusedErrorBorder: InputBorder.none,
+                    counterText: '',
+                    filled: true,
+                    fillColor: Colors.white,
+                    constraints: const BoxConstraints.expand(),
+                    labelText: text.Phone_Number.tr,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                  initialCountryCode: homeFlag,
+                  onChanged: (phone) {
+                    // var flag = phone.countryISOCode;
+                    homeFlag = phone.countryISOCode;
+                    log(homeFlag);
+                    homeCode = phone.countryCode;
+                    log(phone.completeNumber);
+                  },
+                  onCountryChanged: (cod) {
+                    homeFlag = cod.code;
+                    log(homeFlag);
+                    homeCode = cod.code;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -1256,7 +1336,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                             height: 5,
                           ),
                           customView.myField(context, officePostalCtr,
-                              "Enter Postal Code", TextInputType.text),
+                              "Enter Postal Code", TextInputType.number),
                         ],
                       )),
                   SizedBox(
@@ -1291,8 +1371,41 @@ class _PatientSignUpState extends State<PatientSignUp> {
               SizedBox(
                 height: 5,
               ),
-              customView.myField(
-                  context, officePhoneCtr, "Enter phone", TextInputType.number),
+              SizedBox(
+                height: 50,
+                width: widht * 1,
+                child: IntlPhoneField(
+                  controller: officePhoneCtr,
+                  decoration: InputDecoration(
+                    // focusedErrorBorder: InputBorder.none,
+                    counterText: '',
+                    filled: true,
+                    fillColor: Colors.white,
+                    constraints: const BoxConstraints.expand(),
+                    labelText: text.Phone_Number.tr,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                  initialCountryCode: officeFlag,
+                  onChanged: (phone) {
+                    // var flag = phone.countryISOCode;
+                    officeFlag = phone.countryISOCode;
+                    log(officeFlag);
+                    officeCode = phone.countryCode;
+                    log(phone.completeNumber);
+                  },
+                  onCountryChanged: (cod) {
+                    officeFlag = cod.code;
+                    log(homeFlag);
+                    officeCode = cod.code;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -1305,6 +1418,8 @@ class _PatientSignUpState extends State<PatientSignUp> {
 
   /*------------------sign-Up 6----------------*/
   Widget signUp6() {
+    final widht = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13.0),
       child: SingleChildScrollView(
@@ -1462,7 +1577,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                             height: 5,
                           ),
                           customView.myField(context, medicalPostalCtr,
-                              "Enter Postal Code", TextInputType.text),
+                              "Enter Postal Code", TextInputType.number),
                         ],
                       )),
                   SizedBox(
@@ -1497,8 +1612,42 @@ class _PatientSignUpState extends State<PatientSignUp> {
               SizedBox(
                 height: 5,
               ),
-              customView.myField(context, medicalPhoneCtr, "Enter phone",
-                  TextInputType.number),
+              SizedBox(
+                height: 50,
+                width: widht * 1,
+                child: IntlPhoneField(
+
+                  controller: medicalPhoneCtr,
+                  decoration: InputDecoration(
+                    // focusedErrorBorder: InputBorder.none,
+                    counterText: '',
+                    filled: true,
+                    fillColor: Colors.white,
+                    constraints: const BoxConstraints.expand(),
+                    labelText: text.Phone_Number.tr,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                  initialCountryCode: medicalFlag,
+                  onChanged: (phone) {
+                    // var flag = phone.countryISOCode;
+                    medicalFlag = phone.countryISOCode;
+                    log(medicalFlag);
+                    medicalCode = phone.countryCode;
+                    log(phone.completeNumber);
+                  },
+                  onCountryChanged: (cod) {
+                    medicalFlag = cod.code;
+                    log(medicalFlag);
+                    medicalCode = cod.code;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
+              ),
               SizedBox(
                 height: 15,
               ),

@@ -124,6 +124,11 @@ class MyAPI {
   /*---Booking List--------{Past,Pending,Upcoming,Cancel,All Details}------*/
 
   static const String dBookingAppointmentList = "booking_history";
+  static const String dBookingPendingList = "booking_history_pending";
+  static const String dBookingConfirmedList = "booking_history_confirm";
+  static const String dBookingCompleteList = "booking_history_complete";
+  static const String dBookingCancelList = "booking_history_cancel";
+
   static const String dBookingAppointmentDetial = "userbooking_history";
 
   static const String dBookingAppointmentReject = "booking_reject";

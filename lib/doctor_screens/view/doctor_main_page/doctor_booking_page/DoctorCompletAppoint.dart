@@ -24,9 +24,9 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
 
   @override
   void initState() {
-    bookingController.bookingAppointment(context, "Complete", "");
-    // TODO: implement initState
     super.initState();
+
+    bookingController.bookingAppointmentComplete(context, "");
   }
 
   @override
@@ -78,7 +78,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                         selectedCard = 0;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, "Complete", "linear");
+                                          context, "linear");
                                       Get.back();
                                     },
                                     leading: customView.text(
@@ -101,7 +101,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                         selectedCard = 1;
                                       });
                                       bookingController.bookingAppointment(
-                                          context, "Complete", "reverse");
+                                          context,  "reverse");
                                       Get.back();
                                     },
                                     leading: customView.text(
@@ -247,7 +247,7 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                                       height: 2.0,
                                     ),
                                     Text(
-                                      completeList.bookID.toString(),
+                                      completeList.bookId.toString(),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12.0,
@@ -382,62 +382,62 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30,
                   ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            text.paymentInformation.tr,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(bookingController.paymentTyp.value,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontFamily: "Poppins")),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            text.fees.tr,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            bookingController.price.value,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-               Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
+               //  Row(
+               //    children: [
+               //      Expanded(
+               //        flex: 1,
+               //        child: Column(
+               //          crossAxisAlignment: CrossAxisAlignment.start,
+               //          children: [
+               //            Text(
+               //              text.paymentInformation.tr,
+               //              style: const TextStyle(
+               //                  color: Colors.grey,
+               //                  fontSize: 11.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //            const SizedBox(
+               //              height: 2.0,
+               //            ),
+               //            Text(bookingController.paymentTyp.value,
+               //                style: const TextStyle(
+               //                    color: Colors.black,
+               //                    fontSize: 14.0,
+               //                    fontFamily: "Poppins")),
+               //          ],
+               //        ),
+               //      ),
+               //      Expanded(
+               //        flex: 1,
+               //        child: Column(
+               //          crossAxisAlignment: CrossAxisAlignment.start,
+               //          children: [
+               //            Text(
+               //              text.fees.tr,
+               //              style: const TextStyle(
+               //                  color: Colors.grey,
+               //                  fontSize: 11.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //            const SizedBox(
+               //              height: 2.0,
+               //            ),
+               //            Text(
+               //              bookingController.price.value,
+               //              style: const TextStyle(
+               //                  color: Colors.black,
+               //                  fontSize: 14.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //          ],
+               //        ),
+               //      ),
+               //    ],
+               //  ),
+               // Divider(
+               //      color: MyColor.grey.withOpacity(0.5),
+               //      height: 30,
+               //    ),
                 Row(
                   children: [
                     Expanded(

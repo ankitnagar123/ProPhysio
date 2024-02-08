@@ -60,6 +60,9 @@ class LoginCtr extends GetxController {
             sp.setStringValue(sp.DOCTOR_ID_KEY, id);
             sp.setStringValue(sp.DOCTOR_BRANCH_ID_KEY, branchId);
             sp.setStringValue(sp.DOCTOR_SURE_NAME_KEY, surname);
+            sp.setStringValue(sp.DOCTOR_BRANCH, userBranch);
+
+
             log("Doctor details..............${sp.DOCTOR_NAME_KEY}-----$surname");
             // sp.setStringValue(keyString, valueString)
             sp.setBoolValue(sp.DOCTOR_LOGIN_KEY, true);

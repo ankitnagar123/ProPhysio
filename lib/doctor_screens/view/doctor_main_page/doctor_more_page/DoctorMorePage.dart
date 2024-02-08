@@ -36,17 +36,13 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
   void initState() {
     doctorProfileCtr.doctorProfile(context);
     centerRequest.CenterRequestListApi(context);
+    doctorProfileCtr.resultVar.value = 0;
+    branchId = doctorProfileCtr.branchId.value;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (doctorProfileCtr.resultVar.value == 1) {
-        doctorProfileCtr.resultVar.value = 0;
-        branchId = doctorProfileCtr.branchId.value;
-
-      }
     return Obx(() {
       return Scaffold(
         body: SingleChildScrollView(
@@ -90,10 +86,10 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                             width: 35,
                             height: 35,
                             decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.circular(20),
-                                border: Border.all(color: Colors.white)
-                            ),
-                            child: const Icon(Icons.person_outline_sharp,color: Colors.white)),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.white)),
+                            child: const Icon(Icons.person_outline_sharp,
+                                color: Colors.white)),
                       ),
                       Align(
                           alignment: Alignment.bottomCenter,
@@ -108,11 +104,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                               ),
                             ),
                             child: Center(
-                                child: customView.text(
-                                    text.ProfileSettings.tr,
-                                    12.0,
-                                    FontWeight.w400,
-                                    Colors.black)),
+                                child: customView.text(text.ProfileSettings.tr,
+                                    12.0, FontWeight.w400, Colors.black)),
                           )),
                     ],
                   ),
@@ -132,7 +125,9 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  DoctorViewCalender(branchId: branchId.toString()),));
+                        builder: (context) =>
+                            DoctorViewCalender(branchId: branchId.toString()),
+                      ));
                   // Get.toNamed(RouteHelper.DSettingScreen());
                 },
                 leading: const Icon(
@@ -159,8 +154,8 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   Icons.check_box,
                   color: Colors.black,
                 ),
-                title: customView.text(text.LMS.tr, 14.0,
-                    FontWeight.w500, Colors.black),
+                title: customView.text(
+                    text.LMS.tr, 14.0, FontWeight.w500, Colors.black),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
@@ -217,7 +212,6 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
 
               ListTile(
                 onTap: () {
-
                   Get.toNamed(RouteHelper.DMyTask());
                 },
                 leading: const Icon(
@@ -252,7 +246,7 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                 ),
               ),
 
-             /* ListTile(
+              /* ListTile(
                 onTap: () {
                   Get.toNamed(RouteHelper.DTandCScreen());
                 },
@@ -319,7 +313,6 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
         ),
       );
     });
-      });
   }
 
   void deletePopUp(BuildContext context) {
