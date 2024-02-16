@@ -516,7 +516,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /*PATIENT SIDE FILTER SCREEN*/
   /*Filter Screen's*/
-  String Filters = "Filters";
+  String Filters = "Filter";
   String Location_and_distance = "Location and distance";
   String km = "km";
   String select_Km = "Select Km";
@@ -949,7 +949,7 @@ String NoWardAddedCenter = "No ward added by center";
           MapView: "View on map",
 
           /*Filter Screen's*/
-          Filters: "Filters",
+          Filters: "Filter",
           Location_and_distance: "Location and distance",
           km: "km",
           select_Km: "Select Km",

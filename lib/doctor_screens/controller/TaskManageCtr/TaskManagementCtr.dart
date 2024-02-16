@@ -9,6 +9,7 @@ import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
 import '../../../helper/CustomView/CustomView.dart';
 
 import '../../../language_translator/LanguageTranslate.dart';
+import '../../model/TaskCancelListModel.dart';
 import '../../model/TaskManageModel.dart';
 
 class TaskManageCtr extends GetxController {
@@ -16,9 +17,11 @@ class TaskManageCtr extends GetxController {
   var loadingstatusAccept = false.obs;
   var loadingstatusReject = false.obs;
   var loadingTaskList = false.obs;
+  var loadingTaskCancel = false.obs;
   LocalString text = LocalString();
 
   var taskList = <TaskManageListModel>[].obs;
+  var taskCancelList = <TaskCancelListModel>[].obs;
 
   SharedPreferenceProvider sp = SharedPreferenceProvider();
   CustomView custom = CustomView();
@@ -51,11 +54,33 @@ class TaskManageCtr extends GetxController {
   }
 
 
+
+  Future<void> taskCancelListApi(BuildContext context,
+      ) async {
+
+    try {
+      loadingTaskCancel.value = true;
+      final response = await apiService.getData(MyAPI.dTaskManageCancel,);
+      log("Task Cancel=============${response.body}");
+      if (response.statusCode == 200) {
+        loadingTaskCancel.value = false;
+        taskCancelList.value = taskCancelListModelFromJson(response.body);
+      } else {
+        loadingTaskCancel.value = false;
+        log("error");
+      }
+    }catch (e) {
+      loadingTaskList.value = false;
+      log("exception$e");
+    }
+  }
+
   /*----------booking Appointment Accept API-----------*/
   void taskStatusChange(
       BuildContext context,
       String taskId,
       String status,
+      String cancelReason,
       VoidCallback callback,
       ) async {
     if(status =="Confirmed"){
@@ -66,7 +91,8 @@ class TaskManageCtr extends GetxController {
     }
     final Map<String, dynamic> Perameter = {
       "task_id":taskId,
-      "status":status
+      "status":status,
+      "cancel_reason":cancelReason
     };
     print("task Status Change Parameter$Perameter");
     final response =

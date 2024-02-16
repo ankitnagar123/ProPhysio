@@ -174,6 +174,7 @@ class MyAPI {
 
   /*-------------Task Management*/
   static const String dTaskManageList = "fetch_doctor_task";
+  static const String dTaskManageCancel = "task_cancle_reason";
   static const String dTaskStatusChange = "update_doctor_task_status";
 
 }

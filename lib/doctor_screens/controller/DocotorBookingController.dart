@@ -59,11 +59,12 @@ class BookingController extends GetxController {
 
   /*---------booking Appointment List with Status type--------*/
   Future<void> bookingAppointment(
-      BuildContext context, String dateFilter) async {
+      BuildContext context, String dateFilter,String filter) async {
     final Map<String, dynamic> perameter = {
        "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type": dateFilter,
+      "filter": filter,
     };
     log("perameter$perameter");
       try {
@@ -89,11 +90,13 @@ class BookingController extends GetxController {
 
   /*---------Pending booking Appointment List--------*/
   Future<void> bookingAppointmentPending(
-      BuildContext context, String dateFilter) async {
+      BuildContext context, String dateFilter,String filter) async {
     final Map<String, dynamic> perameter = {
       "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type": dateFilter,
+      "filter": filter,
+
     };
     log("pending parameter$perameter");
       try {
@@ -116,11 +119,13 @@ class BookingController extends GetxController {
 
   /*---------Confirm booking Appointment List--------*/
   Future<void> bookingAppointmentConfirmed(
-      BuildContext context, String dateFilter) async {
+      BuildContext context, String dateFilter,String filter) async {
     final Map<String, dynamic> perameter = {
       "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type": dateFilter,
+      "filter": filter,
+
     };
     log("confirmed parameter$perameter");
       try {
@@ -143,11 +148,12 @@ class BookingController extends GetxController {
 
   /*---------Confirm booking Appointment List--------*/
   Future<void> bookingAppointmentComplete(
-      BuildContext context, String dateFilter) async {
+      BuildContext context, String dateFilter,String filter) async {
     final Map<String, dynamic> perameter = {
       "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type": dateFilter,
+      "filter": filter,
     };
     log("pending parameter$perameter");
     try {

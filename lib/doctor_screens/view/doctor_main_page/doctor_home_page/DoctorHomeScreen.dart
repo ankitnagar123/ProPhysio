@@ -38,6 +38,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   String? userTyp;
   String? deviceId;
   String? deviceTyp;
+  int selectedCard = -1;
 
   @override
   void initState() {
@@ -49,11 +50,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
         context, bookingController.userId.value);*/
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getValue();
-      bookingController.bookingAppointment(context, "",);
+      bookingController.bookingAppointment(
+        context,
+        "",""
+      );
       bookingController.appointmentCancelReason();
     });
   }
-
 
   String? cancelId = '';
   String? cancelReason = '';
@@ -69,7 +72,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
             SizedBox(
               height: height * 0.010,
             ),
-            Image(
+            const Image(
               image: AssetImage("assets/images/runlogo.png"),
               height: 45,
               width: 45,
@@ -94,12 +97,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 child: custom.text(cdate1, 19, FontWeight.w500, MyColor.black),
               ),
             ),
-             const Divider(color: Colors.grey),
+            const Divider(color: Colors.grey),
             SizedBox(
               height: height * 0.015,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: custom.searchField(
                   context,
                   searchCtr,
@@ -113,12 +116,143 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                 Get.toNamed(RouteHelper.DSearchAppointment());
               }, () {}),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 15.0,
+                                ),
+                                Align(
+                                  alignment: Alignment.topCenter,
+                                  child: custom.text("${text.Filters.tr} :", 17,
+                                      FontWeight.w500, MyColor.black),
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Today",
+                                        () {
+                                          setState(() {
+                                            selectedCard = 0;
+                                          });
+                                          bookingController.bookingAppointment(
+                                            context,
+                                            "","Today"
+                                          );
+                                          Get.back();
+                                        },
+                                        selectedCard == 0
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 0
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Weekly",
+                                        () {
+                                          setState(() {
+                                            selectedCard = 1;
+                                          });
+                                          bookingController.bookingAppointment(
+                                            context,
+                                            "","Weekly"
+                                          );
+                                          Get.back();
+                                        },
+                                        selectedCard == 1
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 1
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Monthly",
+                                        () {
+                                          setState(() {
+                                            selectedCard = 2;
+                                          });
+                                          bookingController.bookingAppointment(
+                                            context,
+                                            "","Monthly"
+                                          );
+                                          Get.back();
+                                        },
+                                        selectedCard == 2
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 2
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Wrap(
+                    children: [
+                      custom.text(
+                          text.Filters.tr, 14, FontWeight.w500, MyColor.black),
+                      const Icon(
+                        Icons.filter_list_alt,
+                        color: MyColor.primary1,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Obx(() {
               if (bookingController.loading.value) {
                 return categorysubShimmerEffect(context);
               }
+
               return Padding(
-                padding: const EdgeInsets.only(left: 4.0,right: 4.0),
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
                 child: showList(),
               );
             }),
@@ -176,7 +310,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                   decoration: BoxDecoration(
                                     color: list.status == "Pending"
                                         ? MyColor.statusYellow
-                                            : Colors.green,
+                                        : Colors.green,
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
@@ -184,14 +318,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               const SizedBox(
                                 width: 7.0,
                               ),
-
                               Expanded(
                                 flex: 1,
                                 child: custom.text(
                                     /*list.status.toString()*/
                                     list.status == "Pending"
                                         ? text.Pending.tr
-                                            : text.Upcoming.tr,
+                                        : text.Upcoming.tr,
                                     11.0,
                                     FontWeight.w400,
                                     Colors.black),
@@ -307,7 +440,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   showBottomSheet(String id, String userid, String status) {
     log("object$userid");
     showModalBottomSheet(
-      isScrollControlled: true,
+        isScrollControlled: true,
         isDismissible: true,
         backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
@@ -379,7 +512,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -411,7 +544,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -453,7 +586,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             decoration: BoxDecoration(
                               color: status == "Pending"
                                   ? MyColor.statusYellow
-                                      : Colors.green,
+                                  : Colors.green,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
@@ -466,7 +599,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             child: custom.text(
                                 bookingController.status.value == "Pending"
                                     ? text.Pending.tr
-                                    :  text.Upcoming.tr,
+                                    : text.Upcoming.tr,
                                 11.0,
                                 FontWeight.w400,
                                 Colors.black),
@@ -480,7 +613,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -567,7 +700,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       ),
                     ],
                   ),
-                Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 25,
                   ),
@@ -583,7 +716,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                 bookingController
                                     .bookingAppointmentReject(context, id, () {
                                   bookingController.bookingAppointment(
-                                      context, "", );
+                                    context,
+                                    "",""
+                                  );
                                   Get.back();
                                 });
                               }, MyColor.midgray,
@@ -596,122 +731,119 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                             ],
                           ),
                         )
-                      :
-                           Column(
+                      : Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  custom.callButton(context, text.call.tr, () {
+                                    UrlLauncher.launchUrl(Uri.parse(
+                                        'tel:${bookingController.contact.value}'));
+                                  },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                        color: MyColor.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                      Icons.call),
+                                  custom.callButton(context, text.chat.tr, () {
+                                    var patientId = {
+                                      "ID": bookingController.userId.value,
+                                      "userName":
+                                          bookingController.username.value,
+                                      "userProfile":
+                                          bookingController.userPic.value,
+                                      "userLocation":
+                                          bookingController.location.value,
+                                      "userContact":
+                                          bookingController.contact.value,
+                                      "surName":
+                                          bookingController.surname.value,
+                                      "name": bookingController.name.value,
+                                      "bookingSide": "booking",
+                                    };
+                                    Get.toNamed(RouteHelper.DChatScreen(),
+                                        arguments: patientId);
+                                    chatController.doctorReceivedMsgListFetch(
+                                        context,
+                                        bookingController.userId.value);
+                                  },
+                                      MyColor.primary,
+                                      const TextStyle(
+                                        color: MyColor.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                      Icons.chat_bubble_outline_outlined)
+                                ],
+                              ),
+                            ),
+                            Row(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, right: 8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      custom.callButton(context, text.call.tr,
-                                          () {
-                                        UrlLauncher.launchUrl(Uri.parse(
-                                            'tel:${bookingController.contact.value}'));
-                                      },
-                                          MyColor.primary,
-                                          const TextStyle(
-                                            color: MyColor.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                          ),
-                                          Icons.call),
-                                      custom.callButton(context, text.chat.tr,
-                                          () {
-                                        var patientId = {
-                                          "ID": bookingController.userId.value,
-                                          "userName":
-                                              bookingController.username.value,
-                                          "userProfile":
-                                              bookingController.userPic.value,
-                                          "userLocation":
-                                              bookingController.location.value,
-                                          "userContact":
-                                              bookingController.contact.value,
-                                          "surName":
-                                              bookingController.surname.value,
-                                          "name": bookingController.name.value,
-                                          "bookingSide": "booking",
-                                        };
-                                        Get.toNamed(RouteHelper.DChatScreen(),
-                                            arguments: patientId);
-                                        chatController
-                                            .doctorReceivedMsgListFetch(context,
-                                                bookingController.userId.value);
-                                      },
-                                          MyColor.primary,
-                                          const TextStyle(
-                                            color: MyColor.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                          ),
-                                          Icons.chat_bubble_outline_outlined)
-                                    ],
+                                custom.callButton(context, text.prescription.tr,
+                                    () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PrescriptionMedicalTab(
+                                                patientId: userid,
+                                                patientName: bookingController
+                                                    .name.value,
+                                              )));
+                                },
+                                    MyColor.primary,
+                                    const TextStyle(
+                                      color: MyColor.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                    ),
+                                    Icons.medical_information_outlined),
+                                custom.callButton(context, text.Complete.tr,
+                                    () {
+                                  bookingController
+                                      .bookingAppointmentDone(context, id, () {
+                                    bookingController.bookingAppointment(
+                                      context,
+                                      "",""
+                                    );
+                                    Get.back();
+                                  });
+                                },
+                                    MyColor.primary,
+                                    const TextStyle(
+                                      color: MyColor.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                    Icons.done),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    cancelPopUp(context, id, userid);
+                                  },
+                                  child: Text(
+                                    text.cancelAppointment.tr,
+                                    style: const TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.red,
+                                        fontSize: 13.0,
+                                        fontFamily: "Poppins"),
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    custom.callButton(
-                                        context, text.prescription.tr, () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PrescriptionMedicalTab(
-                                                    patientId: userid,
-                                                    patientName:
-                                                        bookingController
-                                                            .name.value,
-                                                  )));
-                                    },
-                                        MyColor.primary,
-                                        const TextStyle(
-                                          color: MyColor.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                        ),
-                                        Icons.medical_information_outlined),
-                                    custom.callButton(context, text.Complete.tr,
-                                        () {
-                                      bookingController.bookingAppointmentDone(
-                                          context, id, () {
-                                        bookingController.bookingAppointment(
-                                            context, "", );
-                                        Get.back();
-                                      });
-                                    },
-                                        MyColor.primary,
-                                        const TextStyle(
-                                          color: MyColor.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                        ),
-                                        Icons.done),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        cancelPopUp(context, id, userid);
-                                      },
-                                      child: Text(
-                                        text.cancelAppointment.tr,
-                                        style: const TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: Colors.red,
-                                            fontSize: 13.0,
-                                            fontFamily: "Poppins"),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
-                            )
+                            ),
+                          ],
+                        )
                 ],
               );
             }),
@@ -915,7 +1047,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                                     bookingId.toString(), () {
                                               bookingController
                                                   .bookingAppointment(
-                                                      context, "", );
+                                                context,
+                                                "",""
+                                              );
                                               Get.back();
                                               Get.back();
                                             });

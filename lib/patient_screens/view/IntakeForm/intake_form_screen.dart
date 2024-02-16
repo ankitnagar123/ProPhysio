@@ -13,7 +13,8 @@ import '../../../helper/mycolor/mycolor.dart';
 import '../../../language_translator/LanguageTranslate.dart';
 
 class IntakeFormScreen extends StatefulWidget {
-  const IntakeFormScreen({super.key});
+  final bookingId;
+  const IntakeFormScreen({super.key, this.bookingId});
 
   @override
   State<IntakeFormScreen> createState() => _IntakeFormScreenState();
@@ -32,6 +33,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
 
   @override
   void initState() {
+    log("message*****${widget.bookingId}");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<IntakeController>().fetchintakeFormQue("pain_rating");
       Get.find<IntakeController>().fetchintakeFormQue("medical_history");
@@ -338,7 +340,7 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
                               customView.MySnackBar(
                                   context, "please answer all the questions");
                             } else {
-                              cartController.intakeFormInsertiondata(_file,context);
+                              cartController.intakeFormInsertiondata(_file,widget.bookingId.toString(),context);
 
                             }
                           }

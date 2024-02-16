@@ -21,12 +21,17 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
   TextEditingController searchCtr = TextEditingController();
   BookingController bookingController = Get.put(BookingController());
   int selectedCard = -1;
+  int selectedCard1 = -1;
+
+  String today = "Today";
+  String weekly = "Weekly";
+  String monthly = "Monthly";
 
   @override
   void initState() {
     super.initState();
 
-    bookingController.bookingAppointmentComplete(context, "");
+    bookingController.bookingAppointmentComplete(context, "","");
   }
 
   @override
@@ -53,66 +58,183 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       context: context,
                       builder: (context) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: 7.0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(
-                                  height: 25.0,
+                                  height: 15.0,
                                 ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: customView.text("${text.Sort_by.tr}:",
-                                      17, FontWeight.w500, MyColor.black),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(""),
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                      child: customView.text("${text.Filters.tr} :",
+                                          17, FontWeight.w500, MyColor.black),
+                                    ),
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 15.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          bookingController.bookingAppointmentComplete(context, "","");
+                                          Get.back();
+                                          setState(() {
+                                            selectedCard1 = -1;
+                                            selectedCard = -1;
+
+                                          });
+                                        },
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: customView.text("Clear ✖", 15,
+                                              FontWeight.w500, MyColor.red),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
-                                  height: 20.0,
+                                  height: 10.0,
                                 ),
-                                ListTile(
-                                    visualDensity: const VisualDensity(
-                                        horizontal: -4, vertical: -4),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedCard = 0;
-                                      });
-                                      bookingController.bookingAppointment(
-                                          context, "linear");
-                                      Get.back();
-                                    },
-                                    leading: customView.text(
-                                        "${text.date}: ${text.linear.tr}",
-                                        15,
-                                        FontWeight.normal,
-                                        MyColor.black),
-                                    trailing: selectedCard == 0
-                                        ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
-                                        : const Text("")),
-                                const Divider(
-                                  thickness: 1.5,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: customView.mysButton(
+                                        context,
+                                        "Today",
+                                            () {
+                                          setState(() {
+                                            selectedCard1 = 0;
+                                          });
+                                          bookingController.bookingAppointmentComplete(context,"",today);
+
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 0
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 0
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: customView.mysButton(
+                                        context,
+                                        "Weekly",
+                                            () {
+                                          setState(() {
+                                            selectedCard1 = 1;
+                                          });
+                                          bookingController.bookingAppointmentComplete(context,"",weekly);
+
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 1
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 1
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: customView.mysButton(
+                                        context,
+                                        "Monthly",
+                                            () {
+                                          setState(() {
+                                            selectedCard1 = 2;
+                                          });
+                                          bookingController.bookingAppointmentComplete(context,"",monthly);
+
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 2
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 2
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                ListTile(
-                                    visualDensity: const VisualDensity(
-                                        horizontal: -4, vertical: -4),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedCard = 1;
-                                      });
-                                      bookingController.bookingAppointment(
-                                          context,  "reverse");
-                                      Get.back();
-                                    },
-                                    leading: customView.text(
-                                        "${text.date.tr}: ${text.reverse.tr}",
-                                        15,
-                                        FontWeight.normal,
-                                        MyColor.black),
-                                    trailing: selectedCard == 1
-                                        ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
-                                        : const Text("")),
+                                Divider(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: customView.mysButton(
+                                        context,
+                                        "Linear",
+                                            () {
+                                          setState(() {
+                                            selectedCard = 0;
+                                          });
+                                          bookingController.bookingAppointmentComplete(context,text.linear.tr,'');
+                                          Get.back();
+                                        },
+                                        selectedCard == 0
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 0
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: customView.mysButton(
+                                        context,
+                                        "Reverse",
+                                            () {
+                                          setState(() {
+                                            selectedCard = 1;
+                                          });
+                                          bookingController.bookingAppointmentComplete(context,text.reverse.tr,'');
+
+                                          Get.back();
+                                        },
+                                        selectedCard == 1
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 1
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -122,12 +244,12 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                   },
                   child: Wrap(
                     children: [
-                      customView.text(text.Sort_by.tr, 14, FontWeight.normal,
-                          MyColor.grey.withOpacity(0.70)),
                       customView.text(
-                          text.date.tr, 14, FontWeight.w500, MyColor.black),
+                          text.Filters.tr, 14, FontWeight.w500, MyColor.black),
                       const Icon(
-                        Icons.keyboard_arrow_down,
+                        Icons.filter_list_alt,
+                        color: MyColor.primary1,
+                        size: 20,
                       ),
                     ],
                   ),

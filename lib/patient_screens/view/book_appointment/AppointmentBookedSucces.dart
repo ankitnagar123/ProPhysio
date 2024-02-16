@@ -22,7 +22,13 @@ class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
   CustomView custom = CustomView();
   LocalString text = LocalString();
   MyRoute myRoute = Get.put(MyRoute());
+String bookingId = "";
+  @override
+  void initState() {
+    super.initState();
 
+    bookingId = Get.parameters["id"].toString();
+  }
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -123,7 +129,7 @@ class _AppointmentBookedSuccesState extends State<AppointmentBookedSucces> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const IntakeFormScreen()));
+                                       IntakeFormScreen(bookingId: bookingId.toString(),)));
                           // Navigator.pushReplacement(
                           //     context,
                           //     MaterialPageRoute(

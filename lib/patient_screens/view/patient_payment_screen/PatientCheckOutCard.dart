@@ -87,7 +87,7 @@ class _PatientCheckOutCardState extends State<PatientCheckOutCard> {
                         date.toString(),
                         centerId,
                         "Paid", () {
-                      Get.offNamed(RouteHelper.getBookingSuccess());
+
                     });
                   }
                 }, MyColor.primary,

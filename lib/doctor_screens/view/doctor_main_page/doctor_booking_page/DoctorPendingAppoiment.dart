@@ -21,11 +21,16 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   CustomView custom = CustomView();
   BookingController bookingController = Get.put(BookingController());
   int selectedCard = -1;
+  int selectedCard1 = -1;
+
+  String today = "Today";
+  String weekly = "Weekly";
+  String monthly = "Monthly";
 
   @override
   void initState() {
     super.initState();
-    bookingController.bookingAppointmentPending(context, "",);
+    bookingController.bookingAppointmentPending(context, "", "");
   }
 
   @override
@@ -41,68 +46,202 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                custom.text("${bookingController.booking.length} ${text.results.tr}", 14,
-                    FontWeight.normal, MyColor.grey.withOpacity(0.70)),
+                custom.text(
+                    "${bookingController.booking.length} ${text.results.tr}",
+                    14,
+                    FontWeight.normal,
+                    MyColor.grey.withOpacity(0.70)),
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: 7.0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(
-                                  height: 25.0,
+                                  height: 15.0,
                                 ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: custom.text("${text.Sort_by.tr} :", 17,
-                                      FontWeight.w500, MyColor.black),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(""),
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                      child: custom.text("${text.Filters.tr} :",
+                                          17, FontWeight.w500, MyColor.black),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 15.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, "", "");
+                                          Get.back();
+                                          setState(() {
+                                            selectedCard1 = -1;
+                                            selectedCard = -1;
+
+                                          });
+                                        },
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: custom.text("Clear ✖", 15,
+                                              FontWeight.w500, MyColor.red),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
-                                  height: 20.0,
+                                  height: 10.0,
                                 ),
-                                ListTile(
-                                    visualDensity: const VisualDensity(
-                                        horizontal: -4, vertical: -4),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedCard = 0;
-                                      });
-                                      bookingController.bookingAppointment(
-                                          context, text.linear.tr);
-                                      Get.back();
-                                    },
-                                    leading: custom.text("${text.date}: ${text.linear.tr}", 15,
-                                        FontWeight.normal, MyColor.black),
-                                    trailing: selectedCard == 0
-                                        ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
-                                        : const Text("")),
-                                const Divider(
-                                  thickness: 1.5,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Today",
+                                        () {
+                                          setState(() {
+                                            selectedCard1 = 0;
+                                          });
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, "", today);
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 0
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 0
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Weekly",
+                                        () {
+                                          setState(() {
+                                            selectedCard1 = 1;
+                                          });
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, "", weekly);
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 1
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 1
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Monthly",
+                                        () {
+                                          setState(() {
+                                            selectedCard1 = 2;
+                                          });
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, "", monthly);
+
+                                          Get.back();
+                                        },
+                                        selectedCard1 == 2
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard1 == 2
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                ListTile(
-                                    visualDensity: const VisualDensity(
-                                        horizontal: -4, vertical: -4),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedCard = 1;
-                                      });
-                                      bookingController.bookingAppointment(
-                                          context, text.reverse.tr);
-                                      Get.back();
-                                    },
-                                    leading: custom.text("${text.date.tr}: ${text.reverse.tr}", 15,
-                                        FontWeight.normal, MyColor.black),
-                                    trailing: selectedCard == 1
-                                        ? const Icon(Icons.check_outlined,
-                                            color: MyColor.lightblue)
-                                        : const Text("")),
+                                Divider(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Linear",
+                                        () {
+                                          setState(() {
+                                            selectedCard = 0;
+                                          });
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, text.linear.tr, "");
+                                          Get.back();
+                                        },
+                                        selectedCard == 0
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 0
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: custom.mysButton(
+                                        context,
+                                        "Reverse",
+                                        () {
+                                          setState(() {
+                                            selectedCard = 1;
+                                          });
+                                          bookingController
+                                              .bookingAppointmentPending(
+                                                  context, text.reverse.tr, '');
+                                          Get.back();
+                                        },
+                                        selectedCard == 1
+                                            ? MyColor.primary
+                                            : MyColor.white,
+                                        TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: "Poppins",
+                                            color: selectedCard == 1
+                                                ? MyColor.white
+                                                : MyColor.primary1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -112,11 +251,12 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                   },
                   child: Wrap(
                     children: [
-                      custom.text(text.Sort_by.tr, 14, FontWeight.normal,
-                          MyColor.grey.withOpacity(0.70)),
-                      custom.text(text.date.tr, 14, FontWeight.w500, MyColor.black),
+                      custom.text(
+                          text.Filters.tr, 14, FontWeight.w500, MyColor.black),
                       const Icon(
-                        Icons.keyboard_arrow_down,
+                        Icons.filter_list_alt,
+                        color: MyColor.primary1,
+                        size: 20,
                       ),
                     ],
                   ),
@@ -137,7 +277,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
   Widget showList() {
     return SingleChildScrollView(
       child: bookingController.booking.isEmpty
-          ?  Center(
+          ? Center(
               heightFactor: 15,
               child: Text(text.NoPendingAppoint.tr),
             )
@@ -183,11 +323,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                               ),
                               Expanded(
                                 flex: 1,
-                                child: custom.text(
-                                    text.Pending.tr,
-                                    11.0,
-                                    FontWeight.w400,
-                                    Colors.black),
+                                child: custom.text(text.Pending.tr, 11.0,
+                                    FontWeight.w400, Colors.black),
                               ),
                               const Expanded(
                                 flex: 1,
@@ -205,8 +342,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           const SizedBox(
                             height: 8.0,
                           ),
-                          custom.text(pendingList.name.toString().toUpperCase(), 14.0,
-                              FontWeight.w400, Colors.black),
+                          custom.text(pendingList.name.toString().toUpperCase(),
+                              14.0, FontWeight.w400, Colors.black),
                           const SizedBox(
                             height: 10.0,
                           ),
@@ -217,7 +354,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                     Text(
+                                    Text(
                                       text.date.tr,
                                       style: const TextStyle(
                                           color: Colors.grey,
@@ -240,7 +377,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                     Text(
+                                    Text(
                                       text.slot.tr,
                                       style: const TextStyle(
                                           color: Colors.grey,
@@ -265,7 +402,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                     Text(
+                                    Text(
                                       text.bookingID.tr,
                                       style: const TextStyle(
                                           color: Colors.grey,
@@ -320,7 +457,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  custom.text(text.details.tr, 17.0, FontWeight.w500, Colors.black),
+                  custom.text(
+                      text.details.tr, 17.0, FontWeight.w500, Colors.black),
                   const SizedBox(
                     height: 7.0,
                   ),
@@ -331,7 +469,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.patient.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
@@ -354,7 +492,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.PatientId.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
@@ -376,7 +514,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -387,8 +525,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
-                             text.bookingInformation.tr,
+                            Text(
+                              text.bookingInformation.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -408,7 +546,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -427,10 +565,10 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                   fontFamily: "Poppins"),
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 1,
                             child: Text(
-                             text.bookingID.tr,
+                              text.bookingID.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 11.0,
@@ -458,8 +596,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           /*-----------*/
                           Expanded(
                             flex: 1,
-                            child: custom.text(text.Pending.tr,
-                                11.0, FontWeight.w400, Colors.black),
+                            child: custom.text(text.Pending.tr, 11.0,
+                                FontWeight.w400, Colors.black),
                           ),
                           Expanded(
                             flex: 1,
@@ -470,7 +608,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                   Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30.0,
                   ),
@@ -537,7 +675,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
+                            Text(
                               text.address.tr,
                               style: const TextStyle(
                                   color: Colors.grey,
@@ -557,7 +695,7 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       ),
                     ],
                   ),
-                Divider(
+                  Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 25,
                   ),
@@ -568,14 +706,15 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                       children: [
                         bookingController.loadingReject.value
                             ? Center(
-                          widthFactor: 10,
+                                widthFactor: 10,
                                 child: custom.MyIndicator(),
                               )
-                            : custom.acceptRejectButton(context, text.reject.tr, () {
+                            : custom.acceptRejectButton(context, text.reject.tr,
+                                () {
                                 bookingController
                                     .bookingAppointmentReject(context, id, () {
-                                  bookingController.bookingAppointment(
-                                      context, "");
+                                  bookingController.bookingAppointmentPending(
+                                      context, "", '');
                                   Get.back();
                                 });
                               }, MyColor.midgray,
@@ -638,11 +777,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text(
-                               text.AcceptVisitLine.tr,
-                                12,
-                                FontWeight.w400,
-                                Colors.black),
+                            child: custom.text(text.AcceptVisitLine.tr, 12,
+                                FontWeight.w400, Colors.black),
                           ),
                           const SizedBox(
                             height: 13.0,
@@ -655,8 +791,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                     flex: 1,
                                     child: TextButton(
                                       onPressed: () {
-                                         Get.back();
-                                         Get.back();
+                                        Get.back();
+                                        Get.back();
                                       },
                                       child: custom.text(text.Dismiss.tr, 14.0,
                                           FontWeight.w400, MyColor.grey),
@@ -672,8 +808,8 @@ class _DoctorPendingAppointmentState extends State<DoctorPendingAppointment> {
                                                 .bookingAppointmentAccept(
                                                     context, bookingId, () {
                                               bookingController
-                                                  .bookingAppointment(
-                                                      context, "");
+                                                  .bookingAppointmentPending(
+                                                      context, "", '');
                                               Get.back();
                                               Get.back();
                                             });

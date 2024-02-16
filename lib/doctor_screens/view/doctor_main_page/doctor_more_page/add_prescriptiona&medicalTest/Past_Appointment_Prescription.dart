@@ -26,7 +26,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      bookingController.bookingAppointmentComplete(context, "");
+      bookingController.bookingAppointmentComplete(context, "","");
     });
   }
 

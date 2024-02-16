@@ -41,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
 
   String? id;
   String? userTyp;
-  String? deviceId;
+  String deviceId ='';
   String? deviceTyp;
 
   @override
@@ -603,7 +603,7 @@ class _HomeViewState extends State<HomeView> {
   void getValuee() async {
     id = await sp.getStringValue(sp.PATIENT_ID_KEY);
     deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-    deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
+    deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY).toString();
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
     loginCtr.updateToken(context, id!, "User", deviceId!, deviceTyp!);
   }

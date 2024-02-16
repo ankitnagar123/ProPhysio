@@ -59,7 +59,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   TextEditingController ageController = TextEditingController();
   TextEditingController experienceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  String location = '';
+  String location = ''; 
   String latitude = '';
   String longitude = '';
 

@@ -44,7 +44,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
 
   @override
   void initState() {
-     bookingController.bookingAppointment(context, "",);
+     bookingController.bookingAppointment(context, "",'');
     super.initState();
   }
 
@@ -124,7 +124,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                         setState(() {
                           selectedCard = 0;
                         });
-                        bookingController.bookingAppointmentConfirmed(context,"");
+                        bookingController.bookingAppointmentConfirmed(context,"","");
 
                           },
                       selectedCard == 0 ? MyColor.primary : MyColor.white,
@@ -144,7 +144,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                         setState(() {
                           selectedCard = 1;
                         });
-                        bookingController.bookingAppointmentPending(context, "",);
+                        bookingController.bookingAppointmentPending(context, "",'');
 
 
                           },
@@ -165,7 +165,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                         setState(() {
                           selectedCard = 2;
                         });
-                        bookingController.bookingAppointmentComplete(context, "");
+                        bookingController.bookingAppointmentComplete(context, "","");
 
                           },
                       selectedCard == 2 ? MyColor.primary : MyColor.white,
@@ -178,6 +178,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                   ),
                 ],
               ),
+
               SizedBox(height: 5,),
               Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -663,7 +664,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                 () {
                               bookingController
                                   .bookingAppointmentReject(context, id, () {
-                                bookingController.bookingAppointmentPending(context, "");
+                                bookingController.bookingAppointmentPending(context, "",'');
                                 Get.back();
                               });
                             }, MyColor.midgray,

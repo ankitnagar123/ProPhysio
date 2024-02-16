@@ -44,6 +44,7 @@ class _DoctorTaskState extends State<DoctorTask> {
       context,
       "",
     );
+    taskManageCtr.taskCancelListApi(context);
   }
 
   @override
@@ -505,23 +506,16 @@ class _DoctorTaskState extends State<DoctorTask> {
                               taskManageCtr.loadingstatusReject.value
                                   ? custom.MyIndicator()
                                   : custom.acceptRejectButton(
-                                      context, text.reject.tr, () {
-                                      taskManageCtr.taskStatusChange(
-                                          context, taskId, "Cancel", () {
-                                        taskManageCtr.taskManageList(
-                                          context,
-                                          "Cancel",
-                                        );
-                                        Get.back();
-                                      });
+                                      context, text.cancel.tr, () {
+                                     cancelPopUp(context ,taskId);
                                     }, MyColor.midgray,
-                                      const TextStyle(color: MyColor.primary)),
+                                      const TextStyle(color: MyColor.red)),
                               taskManageCtr.loadingstatusAccept.value
                                   ? custom.MyIndicator()
                                   : custom.acceptRejectButton(
                                       context, text.accept.tr, () {
                                       taskManageCtr.taskStatusChange(
-                                          context, taskId, "Confirmed", () {
+                                          context, taskId, "Confirmed","", () {
                                         taskManageCtr.taskManageList(
                                           context,
                                           "Confirmed",
@@ -539,7 +533,7 @@ class _DoctorTaskState extends State<DoctorTask> {
                               : custom.callButton(context, text.Complete.tr,
                                   () {
                                   taskManageCtr.taskStatusChange(
-                                      context, taskId, "Complete", () {
+                                      context, taskId, "Complete","",() {
                                     taskManageCtr.taskManageList(
                                       context,
                                       "Complete",
@@ -564,103 +558,134 @@ class _DoctorTaskState extends State<DoctorTask> {
         });
   }
 
-/*------------Task Accept PopUp--------------*/
-// void acceptPopUp(BuildContext context, String bookingId) {
-//   showGeneralDialog(
-//       context: context,
-//       barrierDismissible: true,
-//       barrierLabel:
-//           MaterialLocalizations.of(context).modalBarrierDismissLabel,
-//       barrierColor: Colors.black54,
-//       pageBuilder: (context, anim1, anim2) {
-//         return Center(
-//           child: SizedBox(
-//             width: MediaQuery.of(context).size.width / 1,
-//             child: StatefulBuilder(
-//               builder: (context, StateSetter setState) {
-//                 return Card(
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(7.0),
-//                   ),
-//                   margin: const EdgeInsets.symmetric(horizontal: 15.0),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(
-//                         horizontal: 10.0, vertical: 20.0),
-//                     child: Column(
-//                       mainAxisSize: MainAxisSize.min,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         const SizedBox(
-//                           height: 10.0,
-//                         ),
-//                         Padding(
-//                           padding:
-//                               const EdgeInsets.symmetric(horizontal: 5.0),
-//                           child: custom.text(text.accept.tr, 17,
-//                               FontWeight.w500, Colors.black),
-//                         ),
-//                         const SizedBox(
-//                           height: 13.0,
-//                         ),
-//                         Padding(
-//                           padding:
-//                               const EdgeInsets.symmetric(horizontal: 5.0),
-//                           child: custom.text(text.AcceptVisitLine.tr, 12,
-//                               FontWeight.w400, Colors.black),
-//                         ),
-//                         const SizedBox(
-//                           height: 13.0,
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Expanded(
-//                                 flex: 1,
-//                                 child: TextButton(
-//                                   onPressed: () {
-//                                     Get.back();
-//                                     Get.back();
-//                                   },
-//                                   child: custom.text(text.Dismiss.tr, 14.0,
-//                                       FontWeight.w400, MyColor.grey),
-//                                 )),
-//                             Expanded(
-//                               child: bookingController.loadingAccept.value
-//                                   ? custom.MyIndicator()
-//                                   : custom.mysButton(
-//                                       context,
-//                                       text.Yes_accept.tr,
-//                                       () {
-//                                         bookingController
-//                                             .bookingAppointmentAccept(
-//                                                 context, bookingId, () {
-//                                           Get.back();
-//                                           Get.back();
-//                                         });
-//
-//                                         // Navigator.push(
-//                                         //     context,
-//                                         //     MaterialPageRoute(
-//                                         //         builder: (context) =>
-//                                         //         const CancelAppointmentSuccess()));
-//                                       },
-//                                       MyColor.primary,
-//                                       const TextStyle(
-//                                         fontSize: 13.0,
-//                                         color: MyColor.white,
-//                                       ),
-//                                     ),
-//                             ),
-//                           ],
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),
-//           ),
-//         );
-//       });
-// }
+  void cancelPopUp(BuildContext context, String taskId,) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black54,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 1,
+              child: StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text("Cancel Task", 17,
+                                FontWeight.w500, Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: custom.text(
+                                "Are You Sure You Want Cancel Task",
+                                12,
+                                FontWeight.w400,
+                                Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: taskManageCtr.taskCancelList.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  visualDensity: const VisualDensity(
+                                      horizontal: 0, vertical: -2),
+                                  leading: Text(taskManageCtr
+                                      .taskCancelList[index].reason),
+                                  trailing: Radio<String>(
+                                    activeColor: MyColor.primary1,
+                                    value: index.toString(),
+                                    groupValue: cancelReason,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        cancelReason = value!;
+                                        print("....$cancelReason");
+                                        cancelId = taskManageCtr.taskCancelList[index].reason;
+                                        print('cardId----------$cancelId');
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: custom.text(text.Dismiss.tr, 14.0,
+                                        FontWeight.w400, MyColor.grey),
+                                  )),
+                              Expanded(
+                                child: taskManageCtr.loadingstatusReject.value
+                                    ? custom.MyIndicator()
+                                    : custom.mysButton(
+                                  context,
+                                  "Cancel Task",
+                                      () {
+                                    if (cancelReason == "") {
+                                      custom.MySnackBar(context, "");
+                                    } else {
+                                      taskManageCtr.taskStatusChange(
+                                          context, taskId, "Cancel",cancelId.toString(), () {
+                                        taskManageCtr.taskManageList(
+                                          context,
+                                          "Cancel",
+                                        );
+                                        Get.back();
+                                        Get.back();
+
+                                      });
+                                    }
+                                  },
+                                  Colors.red,
+                                  const TextStyle(
+                                    fontSize: 13.0,
+                                    color: MyColor.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        });
+  }
+
 }

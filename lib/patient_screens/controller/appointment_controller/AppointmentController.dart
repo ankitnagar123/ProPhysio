@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../../../Network/ApiService.dart';
 import '../../../../../Network/Apis.dart';
 import '../../../../../helper/sharedpreference/SharedPrefrenc.dart';
+import '../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../doctor_screens/model/DoctorbookedSlotListModel.dart';
 import '../../../helper/CustomView/CustomView.dart';
 import '../../../language_translator/LanguageTranslate.dart';
@@ -252,19 +253,15 @@ Future paymentAppointment(BuildContext context, String bookingId,String recivedI
       var jsonResponse = jsonDecode(response.body);
       var result = jsonResponse['result'].toString();
       if (result == "success") {
-        callback();
         loadingAdd.value = false;
         String id = jsonResponse["bookID"].toString();
         // String reciverid = jsonResponse["reciver_id"].toString();
         log("id----------------->:$id");
         log("my Appointment $result");
-   /*     if(type == "Paid"){
-          paymentAppointment(context,id,reciver,() {
-            callback();
-          });
-        }else{
-          callback();
-        }*/
+        var data ={
+          "id":id
+        };
+        Get.offNamed(RouteHelper.getBookingSuccess(),parameters: data);
         custom.massenger(context, text.appointmentPayment.tr);
       } else {
         loadingAdd.value = false;

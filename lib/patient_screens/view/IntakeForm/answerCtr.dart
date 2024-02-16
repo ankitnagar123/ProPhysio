@@ -208,7 +208,7 @@ CustomView view = CustomView();
 
   /*..........................................Pro-physio  app send data of form ....................................................*/
 
-  Future<String> intakeFormInsertiondata(file, context,) async {
+  Future<String> intakeFormInsertiondata(file,String bookingId, context,) async {
 
     loadingListAdd.value = true;
     update();
@@ -218,6 +218,7 @@ CustomView view = CustomView();
     Map<String, String> map = {
       "patient_id": await sp.getStringValue(sp.PATIENT_ID_KEY)??'',
       "answers":jsondata,
+      "booking_id":bookingId,
     };
 
     print("this map before response===$map");
