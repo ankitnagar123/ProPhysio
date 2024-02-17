@@ -49,8 +49,6 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
 
   String? doctorId;
 
-  final appId = '94a17beb94774769a4372f873bc053ee';
-  final appCertificate = '79717ca6faa94fb5acc061beb699ed93';
 
   FilePickerResult? result;
 
@@ -246,7 +244,7 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                                 .toList();
                             return Row(
                               mainAxisAlignment:
-                                  patientId == reversedList[index].id
+                                  "User" == reversedList[index].type
                                       ? MainAxisAlignment.start
                                       : MainAxisAlignment.end,
                               children: [

@@ -12,8 +12,8 @@ void onUserLogin(String id ,String name,String type) async {
 
   /// 4/5. initialized ZegoUIKitPrebuiltCallInvitationService when account is logged in or re-logged in
   ZegoUIKitPrebuiltCallInvitationService().init(
-    appID: 875917085,
-    appSign: "c744b2792333aa2e88768f7c20afd139441fa7890513e090c7d82e3557311aab",
+    appID: 1913349555,
+    appSign: "020acd528334f44c77ed61c20e137d7c051739331aea9c2419a1474971e8478e",
     userID:  id,
     userName: name,
     notifyWhenAppRunningInBackgroundOrQuit: false,

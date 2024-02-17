@@ -39,16 +39,16 @@ class _HomeViewState extends State<HomeView> {
   TabController? tabController;
   String? categoryId;
 
-  String? id;
-  String? userTyp;
+  String id ="";
+  String userTyp ="";
   String deviceId ='';
-  String? deviceTyp;
+  String deviceTyp="";
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getValuee();
+      getValue();
       doctorSignUpCtr.patientCategory();
     });
   }
@@ -600,12 +600,12 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  void getValuee() async {
-    id = await sp.getStringValue(sp.PATIENT_ID_KEY);
-    deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
+  void getValue() async {
+    id = await sp.getStringValue(sp.PATIENT_ID_KEY).toString();
+    deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY).toString();
     deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY).toString();
     // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-    loginCtr.updateToken(context, id!, "User", deviceId!, deviceTyp!);
+    loginCtr.updateToken(context, id, "User", deviceId, deviceTyp);
   }
 
 /*  Widget pageView() {

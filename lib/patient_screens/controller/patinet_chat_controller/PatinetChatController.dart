@@ -25,7 +25,7 @@ class ChatController extends GetxController {
 
   var loadingFetchListD = false.obs;
 
-  var receivedMsgList = <ChatingViewListModel>[].obs;
+  var receivedMsgList = <PChatingViewListModel>[].obs;
 
   var drReceivedMsgList = <DoctorViewMsgList>[].obs;
 
@@ -106,6 +106,7 @@ class ChatController extends GetxController {
     final Map<String, dynamic> parameter = {
       "sender_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
       "receiver_id":receiverId,
+      "type":"User",
     };
     bool connection = await  checkInternetConnection();
     if(connection){
@@ -121,13 +122,7 @@ class ChatController extends GetxController {
           loadingFetch.value = false;
           var jsonString = response.body;
           print(jsonString);
-          List<ChatingViewListModel> list = jsonDecode(response.body)
-              .map((item) => ChatingViewListModel.fromJson(item))
-              .toList()
-              .cast<ChatingViewListModel>();
-          receivedMsgList.clear();
-          receivedMsgList.addAll(list);
-          print(list);
+receivedMsgList.value = pChatingViewListModelFromJson(response.body);
           print(receivedMsgList);
         } else {
           loadingFetch.value = false;
@@ -165,6 +160,7 @@ class ChatController extends GetxController {
     final Map<String, dynamic> Peramert = {
       "sender_id":await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "receiver_id":receiverId,
+      "type":"Doctor",
       // "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
@@ -179,15 +175,7 @@ class ChatController extends GetxController {
 
         if (response.statusCode == 200) {
           loadingFetch.value = false;
-          var jsonString = response.body;
-          print(jsonString);
-          List<DoctorViewMsgList> list = jsonDecode(response.body)
-              .map((item) => DoctorViewMsgList.fromJson(item))
-              .toList()
-              .cast<DoctorViewMsgList>();
-          drReceivedMsgList.clear();
-          drReceivedMsgList.addAll(list);
-          print(list);
+          drReceivedMsgList.value = doctorViewMsgListFromJson(response.body);
           print(drReceivedMsgList);
         } else {
           loadingFetch.value = false;

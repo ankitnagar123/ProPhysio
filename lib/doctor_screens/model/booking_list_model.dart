@@ -17,6 +17,7 @@ class BookingList {
   String bookingDate;
   String status;
   String time;
+  String cancelReason;
 
   BookingList({
     required this.id,
@@ -27,6 +28,7 @@ class BookingList {
     required this.bookingDate,
     required this.status,
     required this.time,
+    required this.cancelReason,
   });
 
   factory BookingList.fromJson(Map<String, dynamic> json) => BookingList(
@@ -38,6 +40,7 @@ class BookingList {
     bookingDate: json["booking_date"].toString(),
     status: json["status"].toString(),
     time: json["Time"].toString(),
+    cancelReason: json["cancel_reason"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class BookingList {
     "booking_date": bookingDate,
     "status": status,
     "Time": time,
+    "cancel_reason": cancelReason,
   };
 }

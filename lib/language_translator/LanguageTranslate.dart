@@ -333,7 +333,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String whoops = "Whoops!";
   String ward = "Ward";
   String accept = "Accept";
-  String reject = "Reject";
+  String reject = "Cancel";
   String confirm = "Confirm";
 
 /*Doctor Home Page */
@@ -910,7 +910,7 @@ String NoWardAddedCenter = "No ward added by center";
           whoops: "Whoops!",
           ward: "Ward",
           accept: "Accept",
-          reject: "Reject",
+          reject: "Cancel",
           confirm: "Confirm",
 
 /*Doctor Home Page */
@@ -1472,7 +1472,7 @@ String NoWardAddedCenter = "No ward added by center";
           whoops: "Ops!",
           ward: "Reparto",
           accept: "Accettare",
-          reject: "Rifiutare",
+          reject: "Annulla",
           confirm: "Confermare",
 
           /*Doctor Home Page */

@@ -1,59 +1,45 @@
-class ChatingViewListModel {
-  String? id;
-  String? message;
-  String? upstatus;
-  String? sentat;
-  String? date;
-  List<Image>? image;
+// To parse this JSON data, do
+//
+//     final pChatingViewListModel = pChatingViewListModelFromJson(jsonString);
 
-  ChatingViewListModel(
-      {this.id,
-        this.message,
-        this.upstatus,
-        this.sentat,
-        this.date,
-        this.image});
+import 'dart:convert';
 
-  ChatingViewListModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    message = json['message'];
-    upstatus = json['upstatus'];
-    sentat = json['sentat'];
-    date = json['date'];
-    if (json['image'] != null) {
-      image = <Image>[];
-      json['image'].forEach((v) {
-        image!.add(Image.fromJson(v));
-      });
-    }
-  }
+List<PChatingViewListModel> pChatingViewListModelFromJson(String str) => List<PChatingViewListModel>.from(json.decode(str).map((x) => PChatingViewListModel.fromJson(x)));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['message'] = message;
-    data['upstatus'] = upstatus;
-    data['sentat'] = sentat;
-    data['date'] = date;
-    if (image != null) {
-      data['image'] = image!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+String pChatingViewListModelToJson(List<PChatingViewListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Image {
-  String? image;
+class PChatingViewListModel {
+  String id;
+  String type;
+  String message;
+  String upstatus;
+  String sentat;
+  String date;
 
-  Image({this.image});
+  PChatingViewListModel({
+    required this.id,
+    required this.type,
+    required this.message,
+    required this.upstatus,
+    required this.sentat,
+    required this.date,
+  });
 
-  Image.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
-  }
+  factory PChatingViewListModel.fromJson(Map<String, dynamic> json) => PChatingViewListModel(
+    id: json["id"],
+    type: json["type"],
+    message: json["message"],
+    upstatus: json["upstatus"],
+    sentat: json["sentat"],
+    date: json["date"],
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['image'] = image;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "type": type,
+    "message": message,
+    "upstatus": upstatus,
+    "sentat": sentat,
+    "date": date,
+  };
 }

@@ -231,11 +231,13 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
                             var reversedList = chatController
                                 .receivedMsgList.reversed
                                 .toList();
+
                             return Row(
                               mainAxisAlignment:
-                                  doctorId == reversedList[index].id
-                                      ? MainAxisAlignment.start
-                                      : MainAxisAlignment.end,
+                               "Doctor"==chatController
+                                .receivedMsgList[index].type
+                                      ? MainAxisAlignment.start:MainAxisAlignment.end,
+
                               children: [
                                 ConstrainedBox(
                                   constraints: BoxConstraints(

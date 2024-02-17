@@ -151,7 +151,7 @@ class PatientBookingController extends GetxController {
         location.value = jsonResponse["location"].toString();
         name.value = jsonResponse["name"].toString();
         surname.value = jsonResponse["surname"].toString();
-        reasonCancel.value = jsonResponse["cancle_reason"].toString();
+        reasonCancel.value = jsonResponse["cancel_reason"].toString();
 
         drImg.value = jsonResponse["doctor_profile"].toString();
         log("doctor_profile${drImg.value}");

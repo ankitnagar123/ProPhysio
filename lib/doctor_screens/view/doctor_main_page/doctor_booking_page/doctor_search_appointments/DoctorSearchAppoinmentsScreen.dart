@@ -31,6 +31,8 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   String _keyword = '';
   int selectedCard = -1;
 
+  String navType = "";
+
   /*----For SEARCH BOOKING LIST-------*/
   List<BookingList> _getFilteredList() {
     if (_keyword.isEmpty) {
@@ -44,147 +46,184 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
 
   @override
   void initState() {
-     bookingController.bookingAppointment(context, "",'');
+    navType = Get.parameters["data"].toString();
+    bookingController.bookingAppointment(context, "", '');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final widht = MediaQuery.of(context).size.width;
-    return  Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon:
-                    const Icon(Icons.arrow_back_ios, color: MyColor.black,size: 20),
-                  ),
-                  custom.text(text.searchAppointment.tr, 17, FontWeight.w500,
-                      MyColor.black),
-                  Text(""),
-                ],
-              ),
-              Divider(color: Colors.black54),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: widht,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      setState(() {
-                        _keyword = value;
-                      });
-                      print(value);
-                    },
-                    cursorWidth: 0.0,
-                    cursorHeight: 0.0,
-                    onTap: () {},
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.name,
-                    cursorColor: Colors.black,
-                    controller: searchCtr,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      prefixIconColor: MyColor.white,
-                      suffixIconColor: MyColor.white,
-                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                      hintText: text.searchYourAppointments.tr,
-                      hintStyle:
-                      const TextStyle(fontSize: 12, color: MyColor.white),
-                      labelStyle:
-                      const TextStyle(fontSize: 12, color: MyColor.white),
-                      fillColor: MyColor.lightcolor,
-                      filled: true,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        navType == "home" ? Get.back(result: true) : Get.back(result: true);
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        navType == "home"
+                            ? Get.back(result: true)
+                            : Get.back(result: true);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios,
+                          color: MyColor.black, size: 20),
+                    ),
+                    custom.text(text.searchAppointment.tr, 17, FontWeight.w500,
+                        MyColor.black),
+                    Text(""),
+                  ],
+                ),
+                Divider(color: Colors.black54),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: widht,
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          _keyword = value;
+                        });
+                        print(value);
+                      },
+                      cursorWidth: 0.0,
+                      cursorHeight: 0.0,
+                      onTap: () {},
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.name,
+                      cursorColor: Colors.black,
+                      controller: searchCtr,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        prefixIconColor: MyColor.white,
+                        suffixIconColor: MyColor.white,
+                        contentPadding: const EdgeInsets.only(top: 3, left: 20),
+                        hintText: text.searchYourAppointments.tr,
+                        hintStyle:
+                            const TextStyle(fontSize: 12, color: MyColor.white),
+                        labelStyle:
+                            const TextStyle(fontSize: 12, color: MyColor.white),
+                        fillColor: MyColor.lightcolor,
+                        filled: true,
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.upcoming.tr,
-                          () {
-                        setState(() {
-                          selectedCard = 0;
-                        });
-                        bookingController.bookingAppointmentConfirmed(context,"","");
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: custom.mysButton(
+                        context,
+                        text.upcoming.tr,
+                        () {
+                          setState(() {
+                            selectedCard = 0;
+                          });
+                          bookingController.bookingAppointmentConfirmed(
+                              context, "", "");
+                        },
+                        selectedCard == 0 ? MyColor.primary : MyColor.white,
+                        TextStyle(
+                            fontSize: 13,
 
-                          },
-                      selectedCard == 0 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontFamily: "Poppins",
-                          color: selectedCard == 0
-                              ? MyColor.white
-                              : MyColor.primary1),
+                            fontFamily: "Poppins",
+                            color: selectedCard == 0
+                                ? MyColor.white
+                                : MyColor.primary1),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.pending.tr,
-                          () {
-                        setState(() {
-                          selectedCard = 1;
-                        });
-                        bookingController.bookingAppointmentPending(context, "",'');
+                    Expanded(
+                      flex: 1,
+                      child: custom.mysButton(
+                        context,
+                        text.pending.tr,
+                        () {
+                          setState(() {
+                            selectedCard = 1;
+                          });
+                          bookingController.bookingAppointmentPending(
+                              context, "", '');
+                        },
+                        selectedCard == 1 ? MyColor.primary : MyColor.white,
+                        TextStyle(
+                            fontSize: 13,
 
-
-                          },
-                      selectedCard == 1 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontFamily: "Poppins",
-                          color: selectedCard == 1
-                              ? MyColor.white
-                              : MyColor.primary1),
+                            fontFamily: "Poppins",
+                            color: selectedCard == 1
+                                ? MyColor.white
+                                : MyColor.primary1),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: custom.mysButton(
-                      context,
-                      text.pastVisits.tr,
-                          () {
-                        setState(() {
-                          selectedCard = 2;
-                        });
-                        bookingController.bookingAppointmentComplete(context, "","");
-
-                          },
-                      selectedCard == 2 ? MyColor.primary : MyColor.white,
-                      TextStyle(
-                          fontFamily: "Poppins",
-                          color: selectedCard == 2
-                              ? MyColor.white
-                              : MyColor.primary1),
+                    Expanded(
+                      flex: 1,
+                      child: custom.mysButton(
+                        context,
+                        text.pastVisits.tr,
+                        () {
+                          setState(() {
+                            selectedCard = 2;
+                          });
+                          bookingController.bookingAppointmentComplete(
+                              context, "", "");
+                        },
+                        selectedCard == 2 ? MyColor.primary : MyColor.white,
+                        TextStyle(
+                            fontSize: 13,
+                            fontFamily: "Poppins",
+                            color: selectedCard == 2
+                                ? MyColor.white
+                                : MyColor.primary1),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 5,),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: showList(),
-              ),
-            ],
+                    Expanded(
+                      flex: 1,
+                      child: custom.mysButton(
+                        context,
+                        text.Cancel.tr,
+                            () {
+                          setState(() {
+                            selectedCard = 3;
+                          });
+                          bookingController.bookingAppointmentCancelList(
+                              context, "", "");
+                        },
+                        selectedCard == 3 ? MyColor.primary : MyColor.white,
+                        TextStyle(
+                          fontSize: 13,
+                            fontFamily: "Poppins",
+                            color: selectedCard == 3
+                                ? MyColor.white
+                                : MyColor.primary1),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: showList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -206,7 +245,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
       }
       return SingleChildScrollView(
         child: ListView.builder(
-          padding: EdgeInsets.all(0),
+            padding: EdgeInsets.all(0),
             shrinkWrap: true,
             itemCount: list.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -214,11 +253,12 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
               var bookingId = list[index].bookingId.toString();
               var userid = list[index].id.toString();
               var status = list[index].status.toString();
+              var cancelReason = list[index].cancelReason.toString();
               return InkWell(
                 onTap: () {
                   bookingController.bookingAppointmentDetails(
                       context, bookingId, list[index].status!, () {
-                    showBottomSheet(bookingId, userid, status);
+                    showBottomSheet(bookingId, userid, status,cancelReason);
                   });
                 },
                 child: Card(
@@ -375,11 +415,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
   }
 
   /*------------Booking List Details--------------*/
-  showBottomSheet(
-      String id,
-      String userid,
-      String status
-      ) {
+  showBottomSheet(String id, String userid, String status,String cancelReason) {
     print("object$userid");
     showModalBottomSheet(
         isScrollControlled: true,
@@ -453,10 +489,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-               Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -485,10 +521,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-               Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -563,66 +599,10 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                     ),
                   ],
                 ),
-               Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
-               //  Row(
-               //    children: [
-               //      Expanded(
-               //        flex: 1,
-               //        child: Column(
-               //          crossAxisAlignment: CrossAxisAlignment.start,
-               //          children: [
-               //            Text(
-               //              text.paymentInformation.tr,
-               //              style: const TextStyle(
-               //                  color: Colors.grey,
-               //                  fontSize: 11.0,
-               //                  fontFamily: "Poppins"),
-               //            ),
-               //            const SizedBox(
-               //              height: 2.0,
-               //            ),
-               //            Text(bookingController.paymentTyp.value,
-               //                style: const TextStyle(
-               //                    color: Colors.black,
-               //                    fontSize: 14.0,
-               //                    fontFamily: "Poppins")),
-               //          ],
-               //        ),
-               //      ),
-               //      Expanded(
-               //        flex: 1,
-               //        child: Column(
-               //          crossAxisAlignment: CrossAxisAlignment.start,
-               //          children: [
-               //            Text(
-               //              text.fees.tr,
-               //              style: const TextStyle(
-               //                  color: Colors.grey,
-               //                  fontSize: 11.0,
-               //                  fontFamily: "Poppins"),
-               //            ),
-               //            const SizedBox(
-               //              height: 2.0,
-               //            ),
-               //            Text(
-               //              bookingController.price.value,
-               //              style: const TextStyle(
-               //                  color: Colors.black,
-               //                  fontSize: 14.0,
-               //                  fontFamily: "Poppins"),
-               //            ),
-               //          ],
-               //        ),
-               //      ),
-               //    ],
-               //  ),
-               // Divider(
-               //      color: MyColor.grey.withOpacity(0.5),
-               //      height: 30,
-               //    ),
+                Divider(
+                  color: MyColor.grey.withOpacity(0.5),
+                  height: 30,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -662,11 +642,7 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                           children: [
                             custom.acceptRejectButton(context, text.reject.tr,
                                 () {
-                              bookingController
-                                  .bookingAppointmentReject(context, id, () {
-                                bookingController.bookingAppointmentPending(context, "",'');
-                                Get.back();
-                              });
+                                  cancelPopUp(context, id, userid);
                             }, MyColor.midgray,
                                 const TextStyle(color: MyColor.primary)),
                             custom.acceptRejectButton(context, text.accept.tr,
@@ -755,7 +731,13 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                       () {
                                     bookingController.bookingAppointmentDone(
                                         context, id, () {
+                                      setState(() {
+                                        selectedCard = -1;
+                                      });
                                       Get.back();
+                                      bookingController
+                                          .bookingAppointment(
+                                          context, "", '');
                                     });
                                   },
                                       MyColor.primary,
@@ -767,53 +749,39 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                       Icons.done),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            ],
+                          )
+                        : status == "Complete"
+                            ? const Text("")
+                            : Row(
                                 children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      cancelPopUp(context, id, userid);
-                                    },
-                                    child: Text(
-                                      text.cancelAppointment.tr,
-                                      style: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.red,
-                                          fontSize: 13.0,
-                                          fontFamily: "Poppins"),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          text.cancelReason.tr,
+                                          style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 11.0,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                            cancelReason,
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14.0,
+                                                fontFamily: "Poppins")),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ) : status == "Complete"?const Text(""):
-                         Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      text.cancelReason.tr,
-                                      style: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 11.0,
-                                          fontFamily: "Poppins"),
-                                    ),
-                                    const SizedBox(
-                                      height: 2.0,
-                                    ),
-                                    Text(bookingController.reasonCancel.value,
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 14.0,
-                                            fontFamily: "Poppins")),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
               ],
             ),
           );
@@ -1019,8 +987,15 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                           bookingController
                                               .bookingAppointmentAccept(
                                                   context, bookingId, () {
+                                            setState(() {
+                                              selectedCard = -1;
+                                            });
                                             Get.back();
                                             Get.back();
+                                            bookingController
+                                                .bookingAppointment(
+                                                    context, "", '');
+
                                           });
 
                                           // Navigator.push(

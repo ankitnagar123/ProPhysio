@@ -26,8 +26,7 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
   LocalString text = LocalString();
 
   BookingController bookingController = Get.put(BookingController());
-  String? cancelId = '';
-  String? cancelReason = '';
+
   int selectedCard = -1;
   int selectedCard1 = -1;
 
@@ -38,7 +37,6 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
   @override
   void initState() {
     bookingController.bookingAppointmentConfirmed(context,"","");
-    bookingController.appointmentCancelReason();
     super.initState();
   }
 
@@ -775,154 +773,11 @@ class _DoctorUpcomingAppointmentState extends State<DoctorUpcomingAppointment> {
                         Icons.done),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        cancelPopUp(context, id, userid);
-                      },
-                      child:  Text(
-                       text.cancelAppointment.tr,
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.red,
-                            fontSize: 13.0,
-                            fontFamily: "Poppins"),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           );
         });
   }
 
-  /*------------Booking UPCOMING CANCEL POPUP List--------------*/
-  void cancelPopUp(BuildContext context, String id, String userId) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: Colors.black54,
-        pageBuilder: (context, anim1, anim2) {
-          return Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 1,
-              child: StatefulBuilder(
-                builder: (context, StateSetter setState) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.0),
-                    ),
-                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text(text.cancelAppointment.tr, 17,
-                                FontWeight.w500, Colors.black),
-                          ),
-                          const SizedBox(
-                            height: 13.0,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: custom.text(
-                                text.areYouSureYouWantCancelAppointment.tr,
-                                12,
-                                FontWeight.w400,
-                                Colors.black),
-                          ),
-                          const SizedBox(
-                            height: 13.0,
-                          ),
-                          SingleChildScrollView(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: bookingController.cancelReason.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  visualDensity: const VisualDensity(
-                                      horizontal: 0, vertical: -2),
-                                  leading: Text(bookingController
-                                      .cancelReason[index].reason),
-                                  trailing: Radio<String>(
-                                    value: index.toString(),
-                                    groupValue: cancelReason,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        cancelReason = value!;
-                                        print("....$cancelReason");
-                                        cancelId = bookingController
-                                            .cancelReason[index].id;
-                                        print('cardId----------$cancelId');
-                                      });
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  flex: 1,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: custom.text(text.Dismiss.tr, 14.0,
-                                        FontWeight.w400, MyColor.grey),
-                                  )),
-                              Expanded(
-                                child: bookingController.loadingCancel.value
-                                    ? custom.MyIndicator()
-                                    : custom.mysButton(
-                                        context,
-                                       text.cancelAppointment.tr,
-                                        () {
-                                          if (cancelReason == "") {
-                                            custom.MySnackBar(context, "");
-                                          } else {
-                                            bookingController
-                                                .bookingAppointmentCancel(
-                                                    context, id, cancelId!, () {
-                                              Get.offNamed(RouteHelper
-                                                  .DCancelAppointSucces());
-                                            });
-                                          }
-                                        },
-                                        Colors.red,
-                                        const TextStyle(
-                                          fontSize: 13.0,
-                                          color: MyColor.white,
-                                        ),
-                                      ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        });
-  }
+
 }

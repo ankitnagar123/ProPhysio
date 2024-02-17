@@ -21,7 +21,6 @@ class BookingController extends GetxController {
 
   var booking = <BookingList>[].obs;
 
-
   var cancelReason = <DoctorBookingCancelModel>[].obs;
 
   var loading = false.obs;
@@ -177,17 +176,19 @@ class BookingController extends GetxController {
 
   /*---------Cancel booking Appointment List--------*/
   Future<void> bookingAppointmentCancelList(
-      BuildContext context, String dateFilter) async {
+      BuildContext context, String dateFilter,String filter) async {
     final Map<String, dynamic> perameter = {
       "language": await sp.getStringValue("it")??"",
       "id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
       "type": dateFilter,
+      "filter": filter,
+
     };
     log("pending parameter$perameter");
     try {
       loading.value = true;
       final response =
-      await apiService.postData(MyAPI.dBookingCompleteList, perameter);
+      await apiService.postData(MyAPI.dBookingCancelList, perameter);
       print(" doctor Pending booking Appointment =============${response.body}");
       if (response.statusCode == 200) {
         loading.value = false;

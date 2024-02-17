@@ -425,7 +425,8 @@ class CustomView {
     return SizedBox(
       height: 40,
       width: 40,
-      child: Image.asset("assets/images/iphoneIndicator.gif")/*CircularProgressIndicator(
+      child: Image.asset("assets/images/iphoneIndicator.gif")
+      /*CircularProgressIndicator(
         strokeWidth: 2.8,
         backgroundColor: MyColor.primary.withOpacity(0.3),
         color: MyColor.primary,

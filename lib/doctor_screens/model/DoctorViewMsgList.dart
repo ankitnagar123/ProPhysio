@@ -10,6 +10,7 @@ String doctorViewMsgListToJson(List<DoctorViewMsgList> data) => json.encode(List
 
 class DoctorViewMsgList {
   String id;
+  String type;
   String message;
   String upstatus;
   String sentat;
@@ -17,6 +18,7 @@ class DoctorViewMsgList {
 
   DoctorViewMsgList({
     required this.id,
+    required this.type,
     required this.message,
     required this.upstatus,
     required this.sentat,
@@ -24,15 +26,17 @@ class DoctorViewMsgList {
   });
 
   factory DoctorViewMsgList.fromJson(Map<String, dynamic> json) => DoctorViewMsgList(
-    id: json["id"],
-    message: json["message"],
-    upstatus: json["upstatus"],
-    sentat: json["sentat"],
-    date: json["date"],
+    id: json["id"].toString(),
+    type: json["type"].toString(),
+    message: json["message"].toString(),
+    upstatus: json["upstatus"].toString(),
+    sentat: json["sentat"].toString(),
+    date: json["date"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "type": type,
     "message": message,
     "upstatus": upstatus,
     "sentat": sentat,
