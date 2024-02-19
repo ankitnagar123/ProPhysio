@@ -14,11 +14,11 @@ class LocalString extends Translations {
   String Select_doctor = "Select doctor";
 
   String SIGN_IN = "Sign in";
-  String ENTER_USER_EMAIL = "Enter your email";
+  String ENTER_USER_EMAIL = "Enter your Email";
   String HINT_ENTER_USER_EMAIL = "Enter Email-Id";
   String Enter_Password = "Enter your Password";
   String HINT_ENTER_Password = "Enter Password";
-  String Forgot_Password = "Forgot password?";
+  String Forgot_Password = "Forgot Password?";
   String Create_New_One = "Create a new one";
   String Dont_have_an_account = "Don’t have an account?";
   String have_an_account = "Have an account?";
@@ -29,54 +29,54 @@ class LocalString extends Translations {
   String Required_Password = "Required Password";
 
   /*Create an Account Screen*/
-  String I_Patinet = "I'm a patient";
+  String I_Patinet = "I'm a Patient";
 
-  String I_Doctor = "I'm a doctor";
+  String I_Doctor = "I'm a Doctor";
 
   String I_Center = "I'm a center";
 
-  String Create_An_Account = "Create an account";
+  String Create_An_Account = "Create an Account";
 
-  String Enter_Name = "Enter your name";
-  String H_Enter_Name = "your name";
+  String Enter_Name = "Enter Your Name";
+  String H_Enter_Name = "Your Name";
 
-  String Enter_Surname = "Enter your surname";
-  String H_Enter_Surname = " your surname";
+  String Enter_Surname = "Enter your Surname";
+  String H_Enter_Surname = " Your Surname";
 
   String Enter_Username = "Create a username";
   String H_Enter_Username = "your username";
 
-  String Enter_Email = "Enter a valid email";
-  String H_Enter_Email = "Enter email address";
+  String Enter_Email = "Enter a valid Email";
+  String H_Enter_Email = "Enter Email Address";
 
-  String Phone_Number = "Phone number";
-  String Create_Passsword = "Create a password";
+  String Phone_Number = "Phone Number";
+  String Create_Passsword = "Create a Password";
   String H_Create_Passsword = "Enter at least 6 characters";
 
-  String Heath_Card_Code = "Enter Your health code";
+  String Heath_Card_Code = "Enter Your Health Code";
   String Age = "Enter Age";
   String Weight = "Enter Weight";
   String Height = "Height";
   String TRM = "TRM";
-  String Birth_Place = "Birth place";
+  String Birth_Place = "Birth Place";
   String Gender = "Gender";
   String Male = "Male";
   String Female = "Female";
 
   String Go_On = "Go on";
-  String Date_of_Birth = "Date of birth";
-  String Select_Date = "Select date";
-  String Place_of_Birth = "Place of birth";
+  String Date_of_Birth = "Date of Birth";
+  String Select_Date = "Select Date";
+  String Place_of_Birth = "Place of Birth";
   String University_Attended = "University attended";
   String Date_of_Enrollment = "Date of enrollment";
   String Date_of_Qualification = "Date of qualification";
   String Register_of_Belonging = "Register of belonging";
-  String Select_Category = "Select your specializations";
+  String Select_Category = "Select your Specializations";
   String Select_Branch = "Select your Branch";
   String Select_Sub_Category = "Select your sub-specializations";
   String Select_Services = "Select Services";
-  String Upload_your_Degree = "Upload your degree";
-  String Select_Address = "Select your address";
+  String Upload_your_Degree = "Upload your Degree";
+  String Select_Address = "Select your Address";
   String SearchAddress = "Search City";
   String  firstConsultation = "Provide first consultation fees";
 
@@ -91,28 +91,28 @@ class LocalString extends Translations {
   String HMedicalName = "Your Medical center name";
 
   /*Forgot password screen*/
-  String forgot_Password = "Forgot password";
+  String forgot_Password = "Forgot Password";
   String forgot_line =
-      "Forgot your password? Create a new one by entering your email address. We will send you a security OTP code to certify your identity. Then you can set a new one";
+      "Forgot your password? Create a new one by entering your phone number. We will send you a security OTP code to certify your identity. Then you can set a new one";
   String forgot_line_otp =
-      "Forgot your password? Please enter OTP number, we sent it on your email account.  Then you can set a new one.";
+      "Forgot your password? Please enter OTP number, we sent it on your register phone number.  Then you can set a new one.";
   String Enter_otp = "Enter OTP number";
-  String Not_recived = "Not received??";
+  String Not_recived = "Not received?";
   String SendNewOtp = "Send a new OTP number";
   String SetPassword = "Set a new password";
   String invalid_otp = "invalid otp";
   String CreatePassLine =
       "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.";
 String PasswordChangedSuccess = "Password changed successfully!";
-  String easilylogback = "You can easily log back into your account by entering your username and\n new password.";
+  String easilylogback = "You can easily log back into your account by entering your phone number and new password.";
 
   /// ***************** MEDICA CENTER SIDE*****************///
   /* CENTER MORE PAGE*/
   String hii = "Hi";
-  String ProfileSettings = "Profile settings";
+  String ProfileSettings = "Profile Settings";
   String Earnings = "Earnings";
   String Settings = "Settings";
-  String TermCondition = "Terms & conditions";
+  String TermCondition = "Terms & Conditions";
   String About = "About";
   String Support = "Support";
   String Logout = "Logout";
@@ -127,19 +127,19 @@ String PasswordChangedSuccess = "Password changed successfully!";
 
   /*CENTER SETTING PAGE****************/
   String ChangePassword = "Change Password";
-  String Deleteaccount = "Delete account";
+  String Deleteaccount = "Delete Account";
   String AreyouSureDeleteAccount =
       "Are you sure you want to delete the account? Please enter your current password to confirm your decision.";
   String EnterYourPassword = "Enter your Password";
-  String Deleteprofile = "Delete profile";
+  String Deleteprofile = "Delete Profile";
 
   /*CENTER CHANGE PASSWORD PAGE*/
   String savePassword = "Save Password";
   String enterYourOldPassword = "Enter your old password";
-  String oldPassword = "Old password";
+  String oldPassword = "Old Password";
   String enterYourNewPassword = "Enter your new password";
   String newPassword = "New password";
-  String confirmPassword = "Confirm password";
+  String confirmPassword = "Confirm Password";
   String newPasswordAtList6digit = "New Password is must be of 6 digit";
   String confirmPasswordAtList6digit = "confirm is must be of 6 digit";
   String passwordNotMatch = "Password is doesn't match";
@@ -150,15 +150,15 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String success = "Success";
   String ProfileUpdateSuccessfully = "Profile update successfully";
   String Profile = "Profile";
-  String imageFromgallary = "Image from gallery";
-  String imageFromCamra = "Image from camera";
+  String imageFromgallary = "Image from Gallery";
+  String imageFromCamra = "Image from Camera";
   String Yourmedicalcentername = "Your medical center name";
   String Entermedicalcentername = "Enter medical center name";
-  String yourbio = "Your bio";
-  String yourUsernameEmail = "Your email";
+  String yourbio = "Your Bio";
+  String yourUsernameEmail = "Your Email";
   String enterEmail = "Enter Email";
-  String enteAddress = "Enter address";
-  String yourAddres = "Your address";
+  String enteAddress = "Enter Address";
+  String yourAddres = "Your Address";
   String invalidAddress = "invalid address";
 
   /*Center Home Page Doctor View PAge*/
@@ -263,8 +263,8 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String totalEarning = "Total earning";
   String calculateYourEarningSelectedPeriod =
       "Calculate your earning in a selected period.";
-  String startDate = "Start date";
-  String endDate = "End date";
+  String startDate = "Start Date";
+  String endDate = "End Date";
   String calculate = "Calculate";
   String resetRangeDate = "Reset range date";
 
@@ -284,10 +284,10 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String yourTimeSlotAccordingSelectDate =
       "Your Time Slot's according select date";
   String selfAvailabilityAddSuccessfully = "Self Availability Add Successfully";
-  String selectSlot = "Select slot's";
+  String selectSlot = "Select Slot's";
   String selectMedicalCenter = "Select medical center";
-  String selectSDate = "select start date";
-  String selectEDate = "select end date";
+  String selectSDate = "select Start Date";
+  String selectEDate = "select End Date";
   String To = "To";
   String fillAllData = "Fill all data";
   String centerAvailabilityAddSuccessfully =
@@ -298,7 +298,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String pastAppointment = "Past Appointment";
   String scanAndCheckReports = "Scan and check reports";
   String noPastAppointmentAtTheMoment = "No Past Appointments at the moment!";
-  String bookingID = "Booking ID";
+  String bookingID = "Booking Id";
 
   /*15jul*/
 
@@ -321,7 +321,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String Afternoon = 'Afternoon';
   String Evening = 'Evening';
 
-  String Yourtimeslots = "Your time slots";
+  String Yourtimeslots = "Your Time Slots";
   String ActiveTimeSlots = "Active Time Slots";
   String YouhaventTimeSlot = "You haven't Time Slot's on this date";
   String BookedTimeSlots = "Booked Time Slots";
@@ -337,7 +337,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String confirm = "Confirm";
 
 /*Doctor Home Page */
-  String SearchAppointment = "Search appointments";
+  String SearchAppointment = "Search Appointments";
   String meetings = "meetings";
   String PatientId = "Patient ID";
   String No_Appointments_moment = "No Appointments at the moment!";
@@ -394,7 +394,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String enterCardNumber = "Enter card number";
   String expireDate = "Expire date";
   String saveCard = "Save Card";
-  String pleaseEnterYourName = "Please enter your name";
+  String pleaseEnterYourName = "Please Enter Your Name";
   String enterValidCardDetails = "Enter valid card details";
   String pleaseEnterExpiryDate = "Please enter expiry date";
   String pleaseEnterValidCVC = "Please enter valid CVC";
@@ -616,7 +616,7 @@ String NoWardAddedCenter = "No ward added by center";
           Upcoming : "Confirmed",
           Select_doctor : "Select doctor",
           SIGN_IN: "Sign in",
-          ENTER_USER_EMAIL: "Enter your email",
+          ENTER_USER_EMAIL: "Enter your Email",
           HINT_ENTER_USER_EMAIL: "Enter Email-Id",
           Enter_Password: "Enter your Password",
           HINT_ENTER_Password: "Enter Password",
@@ -630,39 +630,39 @@ String NoWardAddedCenter = "No ward added by center";
           Required_Password: "Required Password",
 
           /*Create an Account Screen*/
-          I_Patinet: "I'm a patient",
-          I_Doctor: "I'm a doctor",
+          I_Patinet: "I'm a Patient",
+          I_Doctor: "I'm a Doctor",
           I_Center: "I'm a center",
-          Create_An_Account: "Create an account",
-          Enter_Name: "Enter your name",
-          H_Enter_Name: "your name",
-          Enter_Surname: "Enter your surname",
-          H_Enter_Surname: " your surname",
+          Create_An_Account: "Create an Account",
+          Enter_Name: "Enter your Name",
+          H_Enter_Name: "Your Name",
+          Enter_Surname: "Enter your Surname",
+          H_Enter_Surname: " Your Surname",
           Enter_Username: "Create a username",
           H_Enter_Username: "your username",
-          Enter_Email: "Enter a valid email",
-          H_Enter_Email: "Enter email address",
-          Phone_Number: "Phone number",
+          Enter_Email: "Enter a valid Email",
+          H_Enter_Email: "Enter Email Address",
+          Phone_Number: "Phone Number",
           Create_Passsword: "Create a password",
           H_Create_Passsword: "Enter at least 6 characters",
-          Heath_Card_Code: "Enter Your health code",
+          Heath_Card_Code: "Enter Your Health Code",
           Age: "Enter Age",
           Weight: "Enter Weight",
           Height: "Height",
           TRM: "TRM",
-          Birth_Place: "Birth place",
+          Birth_Place: "Birth Place",
           Gender: "Gender",
           Male: "Male",
           Female: "Female",
           Go_On: "Go on",
-          Date_of_Birth: "Date of birth",
-          Select_Date: "Select date",
+          Date_of_Birth: "Date of Birth",
+          Select_Date: "Select Date",
           Place_of_Birth: "Place of birth",
           University_Attended: "University attended",
           Date_of_Qualification: "Date of qualification",
           Date_of_Enrollment: "Date of enrollment",
           Register_of_Belonging: "Register of belonging",
-          Select_Category: "Select your specializations",
+          Select_Category: "Select your Specializations",
           Select_Branch: "Select your Branch",
           Select_Sub_Category: "Select your sub-specializations",
   Select_Services : "Select Services",
@@ -684,20 +684,20 @@ String NoWardAddedCenter = "No ward added by center";
           forgot_line_otp:
               "Forgot your password? Please enter OTP number, we sent it on your email account.  Then you can set a new one.",
           Enter_otp: "Enter OTP number",
-          Not_recived: "Not received??",
+          Not_recived: "Not received?",
           SendNewOtp: "Send a new OTP number",
           SetPassword: "Set a new password",
           invalid_otp: "invalid otp",
           CreatePassLine:
               "Create a new password with at least six characters. If you want to make it more secure add a capital letter, a special letter and a number.",
   PasswordChangedSuccess : "Password changed successfully!",
-  easilylogback : "You can easily log back into your account by entering your username and\n new password.",
+  easilylogback : "You can easily log back into your account by entering your phone number and new password.",
           //********************CENTER SIDE MORE PAGE*******************/
           hii: "Hi",
-          ProfileSettings: "Profile settings",
+          ProfileSettings: "Profile Settings",
           Earnings: "Earnings",
           Settings: "Settings",
-          TermCondition: "Terms & conditions",
+          TermCondition: "Terms & Conditions",
           About: "About",
           Support: "Support",
           Logout: "Logout",
@@ -711,19 +711,19 @@ String NoWardAddedCenter = "No ward added by center";
           /* CENTER SETTING PAGE*/
 
           ChangePassword: "Change Password",
-          Deleteaccount: "Delete account",
+          Deleteaccount: "Delete Account",
           AreyouSureDeleteAccount:
               "Are you sure you want to delete the account? Please enter your current password to confirm your decision.",
           EnterYourPassword: "Enter your Password",
-          Deleteprofile: "Delete profile",
+          Deleteprofile: "Delete Profile",
 
           /*CENTER CHANGE PASSWORD PAGE*/
           savePassword: "Save Password",
           enterYourOldPassword: "Enter your old password",
           oldPassword: "Old password",
           enterYourNewPassword: "Enter your new password",
-          newPassword: "New password",
-          confirmPassword: "Confirm password",
+          newPassword: "New Password",
+          confirmPassword: "Confirm Password",
           newPasswordAtList6digit: "New Password is must be of 6 digit",
           confirmPasswordAtList6digit: "confirm is must be of 6 digit",
           passwordNotMatch: "Password is doesn't match",
@@ -733,15 +733,15 @@ String NoWardAddedCenter = "No ward added by center";
           success: "Success",
           ProfileUpdateSuccessfully: "Profile update successfully",
           Profile: "Profile",
-          imageFromgallary: "Image from gallery",
-          imageFromCamra: "Image from camera",
+          imageFromgallary: "Image from Gallery",
+          imageFromCamra: "Image from Camera",
           Yourmedicalcentername: "Your medical center name",
           Entermedicalcentername: "Enter medical center name",
           yourbio: "Your bio",
           yourUsernameEmail: "Your email",
           enterEmail: "Enter Email",
-          enteAddress: "Enter address",
-          yourAddres: "Your address",
+          enteAddress: "Enter Address",
+          yourAddres: "Your Address",
           invalidAddress: "invalid address",
 
           /*On boarding texts*/
@@ -846,8 +846,8 @@ String NoWardAddedCenter = "No ward added by center";
           totalEarning: "Total earning",
           calculateYourEarningSelectedPeriod:
               "Calculate your earning in a selected period.",
-          startDate: "Start date",
-          endDate: "End date",
+          startDate: "Start Date",
+          endDate: "End Date",
           calculate: "Calculate",
           resetRangeDate: "Reset range date",
           /* DOCTOR SIDE DOCTOR EARNING PAGE */
@@ -865,10 +865,10 @@ String NoWardAddedCenter = "No ward added by center";
           yourTimeSlotAccordingSelectDate:
               "Your Time Slot's according select date",
           selfAvailabilityAddSuccessfully: "Self Availability Add Successfully",
-          selectSlot: "Select slot's",
+          selectSlot: "Select Slot's",
           selectMedicalCenter: "Select medical center",
-          selectSDate: "select start date",
-          selectEDate: "select end date",
+          selectSDate: "select Start Date",
+          selectEDate: "select End Date",
           To: "To",
           fillAllData: "Fill all data",
           centerAvailabilityAddSuccessfully:
@@ -878,7 +878,7 @@ String NoWardAddedCenter = "No ward added by center";
           pastAppointment: "Past Appointment",
           scanAndCheckReports: "Scan and check reports",
           noPastAppointmentAtTheMoment: "No Past Appointments at the moment!",
-          bookingID: "Booking ID",
+          bookingID: "Booking Id",
 
           Patient_Information: "Patient Information",
           Contact: "Contact",
@@ -899,7 +899,7 @@ String NoWardAddedCenter = "No ward added by center";
           Afternoon: 'Afternoon',
           Evening: 'Evening',
 
-          Yourtimeslots: "Your time slots",
+          Yourtimeslots: "Your Time Slots",
           ActiveTimeSlots: "Active Time Slots",
           YouhaventTimeSlot: "You haven't Time Slot's on this date",
           BookedTimeSlots: "Booked Time Slots",
@@ -914,7 +914,7 @@ String NoWardAddedCenter = "No ward added by center";
           confirm: "Confirm",
 
 /*Doctor Home Page */
-          SearchAppointment: "Search appointments",
+          SearchAppointment: "Search Appointments",
           meetings: "meetings",
           PatientId: "Patient ID",
           No_Appointments_moment: "No Appointments at the moment!",
@@ -980,7 +980,7 @@ String NoWardAddedCenter = "No ward added by center";
           enterCardNumber: "Enter card number",
           expireDate: "Expire date",
           saveCard: "Save Card",
-          pleaseEnterYourName: "Please enter your name",
+          pleaseEnterYourName: "Please Enter your Name",
           enterValidCardDetails: "Enter valid card details",
           pleaseEnterExpiryDate: "Please enter expiry date",
           pleaseEnterValidCVC: "Please enter valid CVC",
@@ -1243,7 +1243,7 @@ String NoWardAddedCenter = "No ward added by center";
           forgot_line_otp:
               "Hai dimenticato la password? Inserisci il numero OTP, lo abbiamo inviato sul tuo account e-mail. Quindi puoi impostarne uno nuovo.",
           Enter_otp: "Inserisci numero OTP",
-          Not_recived: "Non ricevuto??",
+          Not_recived: "Non ricevuto?",
           SendNewOtp: "Invia un nuovo numero OTP",
           SetPassword: "Imposta una nuova password",
           invalid_otp: "invalido otp",

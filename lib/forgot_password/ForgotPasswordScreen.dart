@@ -34,12 +34,31 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         .width;
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton:    Padding(
+          padding: const EdgeInsets.all(11.0),
+          child: Obx(() {
+            if (forgotPassCtr.loadingotp.value) {
+              return custom.MyIndicator();
+            }
+            return custom.MyButton(context, text.Submit.tr, () {
+              if (validation()) {
+                forgotPassCtr.forgotPasswordVerification(context, code,phoneCtr.text,"",() {},);
+              }
+            },
+                MyColor.red,
+                const TextStyle(
+                    fontSize: 18,
+                    color: MyColor.white,
+                    fontFamily: "Poppins"));
+          }),
+        ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25),
+          padding: const EdgeInsets.only(left: 12.0, right: 12),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: height * 0.09),
+                SizedBox(height: height * 0.02),
                  Align(
                   alignment: Alignment.topLeft,
                   child: InkWell(
@@ -106,33 +125,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 SizedBox(
                   height: height * 0.30,
                 ),
-                Obx(() {
-                  if (forgotPassCtr.loadingotp.value) {
-                    return custom.MyIndicator();
-                  }
-                  return custom.MyButton(context, text.Submit.tr, () {
-                    if (validation()) {
-                      forgotPassCtr.forgotPasswordVerification(context, code,phoneCtr.text,"",() {},);
-                    }
 
-                    /*   if (validation()) {
-
-                      forgotPassCtr.forgotPassword(context, emailCtr.text,)
-                          .then((value) {
-                        if (value != "") {
-                          var id = {"id": forgotPassCtr.id.value,"email":emailCtr.text};
-                          Get.toNamed(RouteHelper.getVerification(),
-                              arguments: value, parameters: id);
-                        }
-                      });
-                    }*/
-                  },
-                      MyColor.red,
-                      const TextStyle(
-                          fontSize: 18,
-                          color: MyColor.white,
-                          fontFamily: "Poppins"));
-                }),
               ],
             ),
           ),

@@ -1724,7 +1724,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                 height: 5,
               ),
               customView.myFieldExpand(
-                  context, aboutUsCtr, "Enter about", TextInputType.text),
+                  context, aboutUsCtr, "Enter About", TextInputType.text),
               SizedBox(
                 height: 15,
               ),

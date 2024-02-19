@@ -22,19 +22,12 @@ class DoctorPrescriptionCtr extends GetxController {
   CustomView customView = CustomView();
 
   var loadingAdd = false.obs;
-  var loadingAddMedicne = false.obs;
 
   var loadingAddP = false.obs;
 
   var loadingFetch = false.obs;
   var loadingPFetch = false.obs;
 
-  var loadingFetchQR = false.obs;
-
-  var loadingMedicine = false.obs;
-
-  var loadingMedicineFetch = false.obs;
-  var pLoadingMedicineFetch = false.obs;
   var downloadingList = false.obs;
 
 /*---------for doctor*---------*/
@@ -76,21 +69,9 @@ class DoctorPrescriptionCtr extends GetxController {
 
 
 
-
-  /*---------for doctor QR scanning*---------*/
-  var prescriptionReportQrList = Rxn<PrescriptionReportQrModel>();
-
   /*------for patient---------*/
   var patientPrescriptionList = <PatinetPrescriptionModel>[].obs;
 
-  /*For Medicine all List*/
-  var allMedicineList = <MedicineAllListModel>[].obs;
-
-  /*For Medicine add wali List*/
-  var fetchMedicineList = Rxn<AddFetchMedicineListModel>();
-
-  /*For Patient show Medicine  List*/
-  var patientFetchMedicineList = <PatinetMedicineListModel>[].obs;
 
 /*---------for doctor*---------*/
   void addPrescription(
@@ -207,30 +188,6 @@ class DoctorPrescriptionCtr extends GetxController {
     }
   }
 
-  /*---------for doctor qr*---------*/
-  Future<void> fetchQrPrescription(String patientId, String type) async {
-    loadingFetchQR.value = true;
-    Map<String, dynamic> data = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "patient_id": patientId,
-      "type": type,
-    };
-    final response = await apiService.postData(MyAPI.fetchQrPrescription, data);
-    log("Qr scanner parameter ${response.body}");
-    try {
-      if (response.statusCode == 200) {
-        loadingFetchQR.value = false;
-        prescriptionReportQrList.value =
-            prescriptionReportQrModelFromJson(response.body);
-        log(prescriptionReportQrList.toString());
-      } else {
-        loadingFetchQR.value = false;
-      }
-    } catch (e) {
-      loadingFetchQR.value = false;
-      log('Kuch to dikkat hai?$e');
-    }
-  }
 
   /*---------for patient*---------*/
   Future<void> fetchPatientPrescription(String type) async {
@@ -257,145 +214,5 @@ class DoctorPrescriptionCtr extends GetxController {
     }
   }
 
-  /*---------for Doctor add Medicine List All*---------*/
-  Future<void> medicineListAllApi() async {
-    loadingMedicine.value = true;
 
-    final response = await apiService.getData(MyAPI.allMedicineList);
-    log("parameter medicine all list ${response.body}");
-    try {
-      if (response.statusCode == 200) {
-        loadingMedicine.value = false;
-        allMedicineList.value = medicineAllListModelFromJson(response.body);
-        log(patientPrescriptionList.toString());
-      } else {
-        loadingMedicine.value = false;
-      }
-    } catch (e) {
-      loadingMedicine.value = false;
-      log('Kuch to dikkat hai?$e');
-    }
-  }
-
-  /*---------for medicins add*---------*/
-/*---------for doctor*---------*/
-  void medicinesAdd(
-      BuildContext context,
-      String patientId,
-      String medicineName,
-      String medicineId,
-      String description,
-      String timing,
-      String slot,
-      VoidCallback callback) async {
-    loadingAddMedicne.value = true;
-    Map<String, dynamic> data = {
-      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "user_id": patientId,
-      "medicine_name": medicineName,
-      "mad_id": medicineId,
-      "description": description,
-      "medicine_timing": timing,
-      "medicine_slot": slot,
-    };
-    print("add=Medicines parameter $data");
-    final response = await apiService.postData(MyAPI.addMedicineList, data);
-    try {
-      log("My add Medicines api response$response");
-      var result = jsonDecode(response.body);
-      var myData = result["result"];
-      if (myData == "Success") {
-        callback();
-        customView.MySnackBar(context, text.success.tr);
-        loadingAddMedicne.value = false;
-        log("result........$result");
-      } else {
-        customView.MySnackBar(context, text.SomthingWentWrong.tr);
-      loadingAddMedicne.value = false;
-        print("Backend Error");
-      }
-    } catch (e) {
-      customView.MySnackBar(context, text.SomthingWentWrong.tr);
-      loadingAddMedicne.value = false;
-      log("Exception$e");
-    }
-  }
-
-  /*---------for Doctor add Medicine add Wali List *---------*/
-  Future<void> AddFetchmedicineListAll(String userId) async {
-    loadingMedicineFetch.value = true;
-    Map<String, dynamic> data = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "doctor_id": await sp.getStringValue(sp.DOCTOR_ID_KEY),
-      "user_id": userId,
-    };
-    final response =
-        await apiService.postData(MyAPI.addFetchMedicineList, data);
-    log("parameter medicine all list ${response.body}");
-    try {
-      if (response.statusCode == 200) {
-        loadingMedicineFetch.value = false;
-        fetchMedicineList.value =
-            addFetchMedicineListModelFromJson(response.body);
-        log(fetchMedicineList.toString());
-      } else {
-        loadingMedicineFetch.value = false;
-      }
-    } catch (e) {
-      loadingMedicineFetch.value = false;
-      log('Kuch to dikkat hai?$e');
-    }
-  }
-
-
-  /*---------for Patient add Medicine add Wali List *---------*/
-  Future<void> AddFetchmedicinePatinet(String doctorId) async {
-    loadingMedicineFetch.value = true;
-    Map<String, dynamic> data = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
-      "doctor_id": doctorId,
-    };
-    final response =
-    await apiService.postData(MyAPI.addFetchMedicineList, data);
-    log("parameter medicine all list ${response.body}");
-    try {
-      if (response.statusCode == 200) {
-        loadingMedicineFetch.value = false;
-        fetchMedicineList.value =
-            addFetchMedicineListModelFromJson(response.body);
-        log(fetchMedicineList.toString());
-      } else {
-        loadingMedicineFetch.value = false;
-      }
-    } catch (e) {
-      loadingMedicineFetch.value = false;
-      log('Kuch to dikkat hai?$e');
-    }
-  }
-
-
-  Future<void> patientFetchmedicineList() async {
-    pLoadingMedicineFetch.value = true;
-    Map<String, dynamic> data = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "user_id": await sp.getStringValue(sp.PATIENT_ID_KEY),
-    };
-    final response =
-    await apiService.postData(MyAPI.addFetchMedicineList, data);
-    log("Patient side parameter medicine all list ${response.body}");
-    try {
-      if (response.statusCode == 200) {
-        pLoadingMedicineFetch.value = false;
-        patientFetchMedicineList.value =
-            patinetMedicineListModelFromJson(response.body);
-        log(patientFetchMedicineList.toString());
-      } else {
-        pLoadingMedicineFetch.value = false;
-      }
-    } catch (e) {
-      pLoadingMedicineFetch.value = false;
-      log('Kuch to dikkat hai?$e');
-    }
-  }
 }

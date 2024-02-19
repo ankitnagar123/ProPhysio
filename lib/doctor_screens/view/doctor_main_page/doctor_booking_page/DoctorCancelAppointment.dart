@@ -288,7 +288,7 @@ class _DoctorCancelAppointState extends State<DoctorCancelAppoint> {
               },
               child: Card(
 shadowColor: MyColor.red,
-                elevation: 2.5,
+                elevation: 1.8,
                 surfaceTintColor: Colors.grey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -620,7 +620,7 @@ shadowColor: MyColor.red,
                   ],
                 ),
                 const SizedBox(
-                  height: 10.0,
+                  height: 15.0,
                 )
               ],
             ),

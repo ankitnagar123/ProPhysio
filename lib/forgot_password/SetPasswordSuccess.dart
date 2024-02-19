@@ -22,6 +22,15 @@ class _SetPasswordSuccessState extends State<SetPasswordSuccess> {
     return WillPopScope(
       onWillPop:  () async => false,
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: EdgeInsets.all(12),
+          child: custom.MyButton(context, text.letGo.tr, () {
+            Get.offAllNamed(RouteHelper.getLoginScreen());
+          }, MyColor.white,
+              const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
+            ,
+        ),
         body: Container(
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height,
@@ -31,7 +40,7 @@ class _SetPasswordSuccessState extends State<SetPasswordSuccess> {
                 end: Alignment.bottomLeft,
                 colors: [
                   MyColor.primary,
-                  MyColor.secondary
+                  MyColor.primary1
                 ]
             ),
           ),
@@ -41,22 +50,24 @@ class _SetPasswordSuccessState extends State<SetPasswordSuccess> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: const AssetImage('assets/images/logo.png'),
+                  image: const AssetImage('assets/images/prologo.png'),
                   height: height*0.2,
-                  width: widht*0.4,
+                  width: widht*0.6,
                 ),
                 SizedBox(height: height*0.04,),
-                Align(
-                    alignment: Alignment.center,
-                    child: custom.text(text.PasswordChangedSuccess.tr, 20, FontWeight.w500, MyColor.white)),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: custom.text(text.PasswordChangedSuccess.tr, 17, FontWeight.w500, MyColor.white)),
+                ),
                 SizedBox(height: height*0.02,),
-            Align(
-              alignment: Alignment.center,
-                child: custom.text(text.easilylogback.tr, 13, FontWeight.normal, MyColor.white)),
-                custom.MyButton(context, text.letGo.tr, () {
-                  Get.offAllNamed(RouteHelper.getLoginScreen());
-                }, MyColor.white,
-                    const TextStyle(color: MyColor.primary,fontSize: 16,fontFamily: "Poppins",letterSpacing: 0.8))
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.center,
+                  child: custom.text(text.easilylogback.tr, 13, FontWeight.normal, MyColor.white)),
+            ),
 
               ],
             ),

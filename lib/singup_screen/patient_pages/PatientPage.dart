@@ -883,7 +883,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 height: 5,
               ),
               customView.myField(
-                  context, idNumberCtr, "Enter ID Number", TextInputType.text),
+                  context, idNumberCtr, "Enter ID Number", TextInputType.number),
               SizedBox(
                 height: 15,
               ),
@@ -1660,7 +1660,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 height: 5,
               ),
               customView.myFieldExpand(
-                  context, aboutUsCtr, "Enter about", TextInputType.text),
+                  context, aboutUsCtr, "Enter About", TextInputType.text),
               SizedBox(
                 height: 15,
               ),
@@ -1827,7 +1827,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
     } else if (employerCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Enter employer");
     } else if (officeAddressCtr.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter office address");
+      customView.MySnackBar(context, "Enter office city");
     } else if (officeStateCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Enter office state");
     } else if (officePostalCtr.text.toString().isEmpty) {
@@ -1852,7 +1852,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
     } else if (medicalPracticeNameCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Enter practice name");
     } else if (medicalAddressCtr.text.toString().isEmpty) {
-      customView.MySnackBar(context, "Enter medical Address");
+      customView.MySnackBar(context, "Enter medical city");
     } else if (medicalStateCtr.text.toString().isEmpty) {
       customView.MySnackBar(context, "Enter medical state");
     } else if (medicalPostalCtr.text.toString().isEmpty) {

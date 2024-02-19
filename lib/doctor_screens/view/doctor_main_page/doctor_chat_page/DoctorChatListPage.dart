@@ -98,164 +98,166 @@ class _DoctorChatListScreenState extends State<DoctorChatListScreen> {
         if (chatController.loadingFetchListD.value) {
           return loadingShimmer();
         }
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              SizedBox(
-                width: widht,
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      _keyword = value;
-                    });
-                    print(value);
-                  },
-                  cursorWidth: 0.0,
-                  cursorHeight: 0.0,
-                  onTap: () {},
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.name,
-                  cursorColor: Colors.black,
-                  controller: searchCtr,
-                  decoration:  InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    prefixIconColor: MyColor.white,
-                    contentPadding: const EdgeInsets.only(top: 3, left: 20),
-                    hintText: text.searchBetweenYourChats.tr,
-                    hintStyle:
-                        const TextStyle(fontSize: 12, color: MyColor.white),
-                    fillColor: MyColor.lightcolor,
-                    filled: true,
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: widht,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        _keyword = value;
+                      });
+                      print(value);
+                    },
+                    cursorWidth: 0.0,
+                    cursorHeight: 0.0,
+                    onTap: () {},
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    cursorColor: Colors.black,
+                    controller: searchCtr,
+                    decoration:  InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      prefixIconColor: MyColor.white,
+                      contentPadding: const EdgeInsets.only(top: 3, left: 20),
+                      hintText: text.searchBetweenYourChats.tr,
+                      hintStyle:
+                          const TextStyle(fontSize: 12, color: MyColor.white),
+                      fillColor: MyColor.lightcolor,
+                      filled: true,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-            chatController.doctorMsgList.isEmpty?
-           Center(heightFactor: 13.0,child:  custom.text(
-            text.youDonHaveAnyChat.tr,
-              14,
-              FontWeight.normal,
-              MyColor.black),):Expanded(
-                child: ListView.builder(
-                  itemCount: list.length,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Card(
-                        borderOnForeground: false,
-                        elevation: 2,
-                        margin: const EdgeInsets.only(
-                            left: 3, right: 3, top: 3, bottom: 3),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: 4, right: 4, top: 4, bottom: 4),
-                          child: InkWell(
-                              onTap: () {
-                                var patientId = {
-                                  "ID": list[index].userId,
-                                  "name":  list[index].name,
-                                  "surname":list[index].surname,
-                                  "username":list[index].username,
-                                  "pic":list[index].userProfile,
-                                  "address":list[index].address,
-                                  // "contact":list[index].
-                                };
-                                Get.toNamed(RouteHelper.DChatScreen(),
-                                    arguments: patientId);
-                              },
-                              onLongPress: () {
-                                  isMultiSelectionEnabled = true;
-                                  doMultiSelection(list[index]);
-                              },
-                              child: Stack(
-                                  alignment: Alignment.centerRight,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                          child: FadeInImage.assetNetwork(
-                                            imageErrorBuilder: (context, error,
-                                                    stackTrace) =>
-                                                const Image(
-                                                    image: AssetImage(
-                                                        "assets/images/dummyprofile.png"),
-                                                    height: 60.0,
-                                                    width: 60.0),
-                                            width: 60.0,
-                                            height: 60.0,
-                                            fit: BoxFit.cover,
-                                            placeholder:
-                                                "assets/images/loading.gif",
-                                            image: list[index].userProfile,
-                                            placeholderFit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              const SizedBox(
-                                                height: 25,
-                                              ),
-                                              custom.text(
-                                                  "${list[index].name} ${list[index].surname}",
-                                                  14,
-                                                  FontWeight.normal,
-                                                  MyColor.black)
-                                            ],
-                                          ),
-                                        ),
-                                        custom.text(list[index].time, 11,
-                                            FontWeight.normal, MyColor.grey)
-                                      ],
-                                    ),
-                                    Visibility(
-                                      visible: isMultiSelectionEnabled,
-                                      child: CheckboxListTile(
-                                        checkColor: Colors.white,
-                                        activeColor: MyColor.primary1,
-                                        dense: true,
-                                        value: selectedItem.contains(index),
-                                        onChanged: (vale) {
-                                          setState(() {
-                                            if (selectedItem.contains(index)) {
-                                              selectedItem.remove(index);
-                                              userIDs.remove(list[index].userId);
-                                              // unselect
-                                            } else {
-                                              selectedItem.add(index);// select
-                                              userIDs.add(list[index].userId);
-                                            }
-                                          });
-                                          print(selectedItem);
-                                          print(userIDs);
-                                        },
-                                        controlAffinity: ListTileControlAffinity.trailing,
-                                      ),)
-                                  ])),
-                        ));
-                  },
+                const SizedBox(
+                  height: 10.0,
                 ),
-              ),
-            ],
+              chatController.doctorMsgList.isEmpty?
+             Center(heightFactor: 13.0,child:  custom.text(
+              text.youDonHaveAnyChat.tr,
+                14,
+                FontWeight.normal,
+                MyColor.black),):Expanded(
+                  child: ListView.builder(
+                    itemCount: list.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Card(
+                          borderOnForeground: false,
+                          elevation: 2,
+                          margin: const EdgeInsets.only(
+                              left: 3, right: 3, top: 3, bottom: 3),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                left: 4, right: 4, top: 4, bottom: 4),
+                            child: InkWell(
+                                onTap: () {
+                                  var patientId = {
+                                    "ID": list[index].userId,
+                                    "name":  list[index].name,
+                                    "surname":list[index].surname,
+                                    "username":list[index].username,
+                                    "pic":list[index].userProfile,
+                                    "address":list[index].address,
+                                    // "contact":list[index].
+                                  };
+                                  Get.toNamed(RouteHelper.DChatScreen(),
+                                      arguments: patientId);
+                                },
+                                onLongPress: () {
+                                    isMultiSelectionEnabled = true;
+                                    doMultiSelection(list[index]);
+                                },
+                                child: Stack(
+                                    alignment: Alignment.centerRight,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            child: FadeInImage.assetNetwork(
+                                              imageErrorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  const Image(
+                                                      image: AssetImage(
+                                                          "assets/images/dummyprofile.png"),
+                                                      height: 60.0,
+                                                      width: 60.0),
+                                              width: 60.0,
+                                              height: 60.0,
+                                              fit: BoxFit.cover,
+                                              placeholder:
+                                                  "assets/images/loading.gif",
+                                              image: list[index].userProfile,
+                                              placeholderFit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                const SizedBox(
+                                                  height: 25,
+                                                ),
+                                                custom.text(
+                                                    "${list[index].name} ${list[index].surname}",
+                                                    14,
+                                                    FontWeight.normal,
+                                                    MyColor.black)
+                                              ],
+                                            ),
+                                          ),
+                                          custom.text(list[index].time, 11,
+                                              FontWeight.normal, MyColor.grey)
+                                        ],
+                                      ),
+                                      Visibility(
+                                        visible: isMultiSelectionEnabled,
+                                        child: CheckboxListTile(
+                                          checkColor: Colors.white,
+                                          activeColor: MyColor.primary1,
+                                          dense: true,
+                                          value: selectedItem.contains(index),
+                                          onChanged: (vale) {
+                                            setState(() {
+                                              if (selectedItem.contains(index)) {
+                                                selectedItem.remove(index);
+                                                userIDs.remove(list[index].userId);
+                                                // unselect
+                                              } else {
+                                                selectedItem.add(index);// select
+                                                userIDs.add(list[index].userId);
+                                              }
+                                            });
+                                            print(selectedItem);
+                                            print(userIDs);
+                                          },
+                                          controlAffinity: ListTileControlAffinity.trailing,
+                                        ),)
+                                    ])),
+                          ));
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }),

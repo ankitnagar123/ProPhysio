@@ -13,7 +13,6 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:prophysio/helper/sharedpreference/SharedPrefrenc.dart';
 
-import '../../../../../Helper/RoutHelper/RoutHelper.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
@@ -210,7 +209,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
           checkboxValues[day] = backendDays.contains(day);
         }
 
-        print("date of birth======${doctorProfileCtr.dateOfBirth.value}");
+        print("Date of Birth======${doctorProfileCtr.dateOfBirth.value}");
   }
 
   @override
@@ -1289,8 +1288,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7),
-          child: AnimatedButton(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          child: Obx(() => doctorProfileCtr.loadingU.value?customView.MyIndicator():AnimatedButton(
             // width: MediaQuery.of(context).size.width * 0.8,
             text: text.saveProfile.tr,
             color: MyColor.primary,
@@ -1351,87 +1350,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                   },
                 ).show();
               });
-              // doctorProfileCtr.doctorProfileUpdate(
-              //   context,
-              //   name.text,
-              //   surename.text,
-              //   userNameCtrl.text,
-              //   bioCtrl.text,
-              //   location,
-              //   latitude,
-              //   longitude,
-              //   code,
-              //   emailCtrl.text,
-              //   phoneNumberCtrl.text,
-              //   imagename,
-              //   baseimage,
-              //   _selectedGender,
-              //   birthDateController.text,
-              //   birthplaceController.text,
-              //   "",
-              //   "",
-              //   "",
-              //   "",
-              //   "",
-              //   age.text,
-              //   experience.text,
-              //   descriptionCtr.text,
-              //   _selectedService.toString(),
-              //   flag,
-              //   selectedBranch.toString(),
-              //   slectedCategory.toString(),
-              //       "doc","docstr",
-              //       () {
-              //
-              //   },
-              // );
-              /* doctorProfileCtr.doctorProfileUpdate(
-                  context,
-                  name.text,
-                  surename.text,
-                  userNameCtrl.text,
-                  bioCtrl.text,
-                  addressCtrl.text,
-                  latitude,
-                  longitude,
-                  code,
-                  emailCtrl.text,
-                  phoneNumberCtrl.text,
-                  imagename,
-                  baseimage,
-                  _selectedGender,
-                  birthDateController.text,
-                  birthplaceController.text,
-                  universityAttendedCtr.text,
-                  dateOfEnrollmentCtr.text,
-                  registerOfBelongingCtr.text,
-                  dateOfQualification.text,
-                  dateOfGraduation.text,
-                  flag,
-                  age.text,
-                  experience.text,
-                  descriptionCtr.text,
-                  _selectedService.toString(),
-                  () {
-                    AwesomeDialog(
-                      context: context,
-                      animType: AnimType.leftSlide,
-                      headerAnimationLoop: false,
-                      dialogType: DialogType.success,
-                      showCloseIcon: true,
-                      title: text.success.tr,
-                      desc: text.ProfileUpdateSuccessfully.tr,
-                      btnOkOnPress: () {
-                        debugPrint('OnClick');
-                      },
-                      btnOkIcon: Icons.check_circle,
-                      onDismissCallback: (type) {
-                        debugPrint('Dialog Dismiss from callback $type');
-                      },
-                    ).show();
-                  },
-                );*/
             },
+          ),
           ),
         ),
       );

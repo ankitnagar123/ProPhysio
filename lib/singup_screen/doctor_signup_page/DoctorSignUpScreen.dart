@@ -98,7 +98,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   String? catid;
   double? lat;
 
-  //select date's
+  //Select Date's
   // var selectedIndexes = [];
   // var selectedIndexes1 = [];
 
@@ -370,19 +370,19 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                 ),
                 custom.myField(context, surnameCtr, text.H_Enter_Surname.tr,
                     TextInputType.text),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(text.Enter_Username.tr, 13.0,
-                      FontWeight.w500, MyColor.primary1),
-                ),
-                const SizedBox(
-                  height: 3.0,
-                ),
-                custom.myField(context, usernameCtr, text.H_Enter_Username.tr,
-                    TextInputType.text),
+                // const SizedBox(
+                //   height: 16.0,
+                // ),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: custom.text(text.Enter_Username.tr, 13.0,
+                //       FontWeight.w500, MyColor.primary1),
+                // ),
+                // const SizedBox(
+                //   height: 3.0,
+                // ),
+                // custom.myField(context, usernameCtr, text.H_Enter_Username.tr,
+                //     TextInputType.text),
                 const SizedBox(
                   height: 16.0,
                 ),

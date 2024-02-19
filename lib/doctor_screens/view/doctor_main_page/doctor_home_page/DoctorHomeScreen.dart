@@ -62,198 +62,200 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * 0.010,
-            ),
-            const Image(
-              image: AssetImage("assets/images/runlogo.png"),
-              height: 45,
-              width: 45,
-            ),
-            Obx(() {
-              return Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: custom.text(
-                      "${bookingController.booking.length} ${text.meetings.tr}",
-                      12,
-                      FontWeight.normal,
-                      MyColor.grey.withOpacity(0.70)),
-                ),
-              );
-            }),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: custom.text(cdate1, 19, FontWeight.w500, MyColor.black),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: height * 0.010,
               ),
-            ),
-            const Divider(color: Colors.grey),
-            SizedBox(
-              height: height * 0.015,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: custom.searchField(
-                  context,
-                  searchCtr,
-                  text.SearchAppointment.tr,
-                  TextInputType.text,
-                  const Text(""),
-                  const Icon(
-                    Icons.search_rounded,
-                    color: Colors.black,
-                  ), () async {
-                var data = {"data": "home"};
-                var result = await Get.toNamed(RouteHelper.DSearchAppointment(),
-                    parameters: data);
-
-                if (result == true) {
-                  bookingController.bookingAppointment(context, "", "");
-                }
-              }, () {}),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 15.0,
-                                ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: custom.text("${text.Filters.tr} :", 17,
-                                      FontWeight.w500, MyColor.black),
-                                ),
-                                const SizedBox(
-                                  height: 10.0,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: custom.mysButton(
-                                        context,
-                                        "Today",
-                                        () {
-                                          setState(() {
-                                            selectedCard = 0;
-                                          });
-                                          bookingController.bookingAppointment(
-                                              context, "", "Today");
-                                          Get.back();
-                                        },
-                                        selectedCard == 0
-                                            ? MyColor.primary
-                                            : MyColor.white,
-                                        TextStyle(
-                                            fontSize: 11,
-                                            fontFamily: "Poppins",
-                                            color: selectedCard == 0
-                                                ? MyColor.white
-                                                : MyColor.primary1),
+              const Image(
+                image: AssetImage("assets/images/runlogo.png"),
+                height: 45,
+                width: 45,
+              ),
+              // Obx(() {
+              //   return Padding(
+              //     padding: const EdgeInsets.only(left: 8.0),
+              //     child: Align(
+              //       alignment: Alignment.topLeft,
+              //       child: custom.text(
+              //           "${bookingController.booking.length} ${text.meetings.tr}",
+              //           12,
+              //           FontWeight.normal,
+              //           MyColor.grey.withOpacity(0.70)),
+              //     ),
+              //   );
+              // }),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: custom.text(cdate1, 19, FontWeight.w500, MyColor.black),
+                ),
+              ),
+              const Divider(color: Colors.grey),
+              SizedBox(
+                height: height * 0.015,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: custom.searchField(
+                    context,
+                    searchCtr,
+                    text.SearchAppointment.tr,
+                    TextInputType.text,
+                    const Text(""),
+                    const Icon(
+                      Icons.search_rounded,
+                      color: Colors.black,
+                    ), () async {
+                  var data = {"data": "home"};
+                  var result = await Get.toNamed(RouteHelper.DSearchAppointment(),
+                      parameters: data);
+        
+                  if (result == true) {
+                    bookingController.bookingAppointment(context, "", "");
+                  }
+                }, () {}),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: custom.text("${text.Filters.tr} :", 17,
+                                        FontWeight.w500, MyColor.black),
+                                  ),
+                                  const SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: custom.mysButton(
+                                          context,
+                                          "Today",
+                                          () {
+                                            setState(() {
+                                              selectedCard = 0;
+                                            });
+                                            bookingController.bookingAppointment(
+                                                context, "", "Today");
+                                            Get.back();
+                                          },
+                                          selectedCard == 0
+                                              ? MyColor.primary
+                                              : MyColor.white,
+                                          TextStyle(
+                                              fontSize: 11,
+                                              fontFamily: "Poppins",
+                                              color: selectedCard == 0
+                                                  ? MyColor.white
+                                                  : MyColor.primary1),
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: custom.mysButton(
-                                        context,
-                                        "Weekly",
-                                        () {
-                                          setState(() {
-                                            selectedCard = 1;
-                                          });
-                                          bookingController.bookingAppointment(
-                                              context, "", "Weekly");
-                                          Get.back();
-                                        },
-                                        selectedCard == 1
-                                            ? MyColor.primary
-                                            : MyColor.white,
-                                        TextStyle(
-                                            fontSize: 11,
-                                            fontFamily: "Poppins",
-                                            color: selectedCard == 1
-                                                ? MyColor.white
-                                                : MyColor.primary1),
+                                      Expanded(
+                                        flex: 1,
+                                        child: custom.mysButton(
+                                          context,
+                                          "Weekly",
+                                          () {
+                                            setState(() {
+                                              selectedCard = 1;
+                                            });
+                                            bookingController.bookingAppointment(
+                                                context, "", "Weekly");
+                                            Get.back();
+                                          },
+                                          selectedCard == 1
+                                              ? MyColor.primary
+                                              : MyColor.white,
+                                          TextStyle(
+                                              fontSize: 11,
+                                              fontFamily: "Poppins",
+                                              color: selectedCard == 1
+                                                  ? MyColor.white
+                                                  : MyColor.primary1),
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: custom.mysButton(
-                                        context,
-                                        "Monthly",
-                                        () {
-                                          setState(() {
-                                            selectedCard = 2;
-                                          });
-                                          bookingController.bookingAppointment(
-                                              context, "", "Monthly");
-                                          Get.back();
-                                        },
-                                        selectedCard == 2
-                                            ? MyColor.primary
-                                            : MyColor.white,
-                                        TextStyle(
-                                            fontSize: 11,
-                                            fontFamily: "Poppins",
-                                            color: selectedCard == 2
-                                                ? MyColor.white
-                                                : MyColor.primary1),
+                                      Expanded(
+                                        flex: 1,
+                                        child: custom.mysButton(
+                                          context,
+                                          "Monthly",
+                                          () {
+                                            setState(() {
+                                              selectedCard = 2;
+                                            });
+                                            bookingController.bookingAppointment(
+                                                context, "", "Monthly");
+                                            Get.back();
+                                          },
+                                          selectedCard == 2
+                                              ? MyColor.primary
+                                              : MyColor.white,
+                                          TextStyle(
+                                              fontSize: 11,
+                                              fontFamily: "Poppins",
+                                              color: selectedCard == 2
+                                                  ? MyColor.white
+                                                  : MyColor.primary1),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: Wrap(
-                    children: [
-                      custom.text(
-                          text.Filters.tr, 14, FontWeight.w500, MyColor.black),
-                      const Icon(
-                        Icons.filter_list_alt,
-                        color: MyColor.primary1,
-                        size: 20,
-                      ),
-                    ],
+                          );
+                        },
+                      );
+                    },
+                    child: Wrap(
+                      children: [
+                        custom.text(
+                            text.Filters.tr, 14, FontWeight.w500, MyColor.black),
+                        const Icon(
+                          Icons.filter_list_alt,
+                          color: MyColor.primary1,
+                          size: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Obx(() {
-              if (bookingController.loading.value) {
-                return categorysubShimmerEffect(context);
-              }
-
-              return Padding(
-                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                child: showList(),
-              );
-            }),
-          ],
+              Obx(() {
+                if (bookingController.loading.value) {
+                  return categorysubShimmerEffect(context);
+                }
+        
+                return Padding(
+                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                  child: showList(),
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );

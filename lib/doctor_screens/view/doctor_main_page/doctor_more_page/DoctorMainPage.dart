@@ -79,9 +79,7 @@ class _DoctorMainScreenState extends State<DoctorMainScreen> {
         child: Scaffold(
           bottomNavigationBar: myBottomNavigationBar(),
           backgroundColor: Colors.white,
-          body:SafeArea(
-            child:screens[myRoute.pageIndex.value] ,
-          )
+          body:screens[myRoute.pageIndex.value]
         ),
       );
     });

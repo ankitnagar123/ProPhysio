@@ -55,7 +55,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
                     heightFactor: 12,child: customView.MyIndicator());
               }
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -125,7 +125,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PrescriptionMedic
               },
               child: Card(
                 elevation: 2,
-                surfaceTintColor: MyColor.white,
+                surfaceTintColor: MyColor.grey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 7.0, vertical: 10.0),

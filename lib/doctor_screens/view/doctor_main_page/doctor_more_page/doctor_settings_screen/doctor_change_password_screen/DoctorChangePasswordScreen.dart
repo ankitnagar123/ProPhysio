@@ -21,6 +21,8 @@ class _DoctorChangePasswordScreenState
   CustomView customView = CustomView();
   LocalString text = LocalString();
   bool _isHidden = true;
+  bool _isHidden1 = true;
+  bool _isHidden2 = true;
 
   TextEditingController oldPasswordCtrl = TextEditingController();
   TextEditingController newPasswordCtrl = TextEditingController();
@@ -103,10 +105,10 @@ class _DoctorChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden1 = !_isHidden1;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden1
                           ? const Icon(
                               Icons.visibility_off,
                               color: MyColor.primary,
@@ -117,7 +119,7 @@ class _DoctorChangePasswordScreenState
                               color: MyColor.primary,
                               size: 20.0,
                             )),
-                  _isHidden),
+                  _isHidden1),
               SizedBox(
                 height: width * 0.1,
               ),
@@ -134,10 +136,10 @@ class _DoctorChangePasswordScreenState
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          _isHidden = !_isHidden;
+                          _isHidden2 = !_isHidden2;
                         });
                       },
-                      child: _isHidden
+                      child: _isHidden2
                           ? const Icon(
                               Icons.visibility_off,
                               color: MyColor.primary,
@@ -148,7 +150,7 @@ class _DoctorChangePasswordScreenState
                               color: MyColor.primary,
                               size: 20.0,
                             )),
-                  _isHidden),
+                  _isHidden2),
               SizedBox(
                 height: height*0.2,
               ),

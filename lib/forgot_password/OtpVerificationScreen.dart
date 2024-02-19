@@ -1,5 +1,6 @@
+import 'dart:async';
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,36 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   var userType = "";
   LocalString text = LocalString();
 
+
+  Timer? _timer; // Initialize with null
+  int _resendOtpTimer = 60; // Initial timer value in seconds
+  bool _canResendOtp = true;
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer to avoid memory leaks
+    super.dispose();
+  }
+
+  void _startResendOtpTimer() {
+    setState(() {
+      _canResendOtp = false; // Disable the button
+      _resendOtpTimer = 60; // Reset timer
+    });
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_resendOtpTimer > 0) {
+          _resendOtpTimer--; // Decrease timer value
+        } else {
+          _canResendOtp = true; // Enable the button when timer reaches 0
+          _timer?.cancel(); // Cancel the timer
+        }
+      });
+    });
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -53,10 +84,11 @@ log(userType);
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: custom.MyButton(context, text.Submit.tr, () {
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.all(11),
+        child: custom.MyButton(context, text.Submit.tr, () {
           if (validationotp()) {
             var id = {
               "id": iD,
@@ -68,12 +100,14 @@ log(userType);
             MyColor.red,
             const TextStyle(
                 fontSize: 18, color: MyColor.white, fontFamily: "Poppins")),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12.0, right: 12),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: height * 0.09),
+                SizedBox(height: height * 0.02),
                  Align(
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
@@ -85,7 +119,7 @@ log(userType);
                   height: height * 0.01,
                 ),
                 custom.text(
-                    text.forgot_Password.tr, 23, FontWeight.w700, MyColor.black),
+                    text.forgot_Password.tr, 22, FontWeight.w500, MyColor.black),
                 SizedBox(height: height * 0.02),
                 custom.text(
                     text.forgot_line_otp.tr,
@@ -102,9 +136,9 @@ log(userType);
                   height: height * 0.01,
                 ),
                 custom.myField(
-                    context, optctr, text.Enter_otp.tr, TextInputType.emailAddress),
+                    context, optctr, text.Enter_otp.tr, TextInputType.number),
                 SizedBox(
-                  height: height * 0.03,
+                  height: height * 0.01,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -112,24 +146,23 @@ log(userType);
                     custom.text(text.Not_recived.tr, 11, FontWeight.w500,
                         MyColor.primary1),
                     GestureDetector(
-                        onTap: () {
-           /*               forgotPassCtr
-                              .forgotPassword(
-                            context,
-                            email,
-                          )
-                              .then((value) {
-                            if (value != "") {
-                              print("object$value");
-                              apiotp = value;
-                              // var id = {"id": forgotPassCtr.id.value,"email":emailCtr.text};
-                              // Get.toNamed(RouteHelper.getVerification(),
-                              //     arguments: value, parameters: id);
-                            }
-                          });*/
-                        },
-                        child:  Text(
-                          text.SendNewOtp.tr,
+                        onTap: _canResendOtp
+                            ? () {
+                          // Call your function to send OTP
+                          forgotPassCtr.forgotPassOtp(context, countryCode, phoneNo, "", userType);
+                          // Start the resend OTP timer
+                          _startResendOtpTimer();
+                        }
+                            : null, // Disable button if timer is active
+                        child: _canResendOtp?  Text(
+                          '${text.SendNewOtp.tr}',
+                          style: TextStyle(
+                            color: MyColor.primary1,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ): Text(
+                          ' Resend OTP in $_resendOtpTimer',
                           style: TextStyle(
                             color: MyColor.primary1,
                             fontWeight: FontWeight.w600,

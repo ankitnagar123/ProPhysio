@@ -84,8 +84,9 @@ class _DoctorBookingScreenState extends State<DoctorBookingScreen>
         ),
         // centerTitle: true,
         bottom: TabBar(
+          tabAlignment: TabAlignment.start  ,
 isScrollable: true,
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           indicatorSize: TabBarIndicatorSize.tab,
           onTap: (value) {
             log("number${tabController?.index}");

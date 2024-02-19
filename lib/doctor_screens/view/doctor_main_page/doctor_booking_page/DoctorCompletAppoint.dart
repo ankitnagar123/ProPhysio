@@ -298,6 +298,40 @@ class _DoctorCompleteAppointState extends State<DoctorCompleteAppoint> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 0,
+                                child: Container(
+                                  height: 10.0,
+                                  width: 10.0,
+                                  decoration: BoxDecoration(
+                                    color: MyColor.primary1,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 7.0,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: customView.text(text.Complete.tr, 11.0,
+                                    FontWeight.w400, Colors.black),
+                              ),
+                              const Expanded(
+                                flex: 1,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 18.0,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                           customView.text(completeList.name.toString().toUpperCase(), 14.0,
                               FontWeight.w400, Colors.black),
                           const SizedBox(

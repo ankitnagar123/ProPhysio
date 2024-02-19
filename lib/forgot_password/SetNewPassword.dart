@@ -43,28 +43,34 @@ var userType = "";
         .size
         .height;
 
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Obx(() {
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(11.0),
+        child: Obx(() {
               if(forgotPassCtr.loadingset.value){
                 return custom.MyIndicator();
               }
             return custom.MyButton(context, text.Submit, () {
-              forgotPassCtr.setPassword(context, id, newpasswordctr.text, confirmpasswordctr.text,userType,() {
-                Get.offAndToNamed(RouteHelper.getSetPassSuccess());
+              if(Validation()){
+                forgotPassCtr.setPassword(context, id, newpasswordctr.text, confirmpasswordctr.text,userType,() {
+                  Get.offAndToNamed(RouteHelper.getSetPassSuccess());
 
-              });
+                });
+              }
+
             }, MyColor.red, const TextStyle(
                 fontSize: 18, color: MyColor.white, fontFamily: "Poppins"));
         }),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12.0, right: 12),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                    height: height * 0.09
+                    height: height * 0.02
                 ),
                 Align(
                   alignment: Alignment.topLeft,
@@ -75,9 +81,9 @@ var userType = "";
                       child: const Icon(Icons.arrow_back_ios)),
                 ),
                 SizedBox(
-                  height: height * 0.02,
+                  height: height * 0.01,
                 ),
-                custom.text(text.Create_New_One.tr, 23, FontWeight.w700,
+                custom.text(text.Create_New_One.tr, 23, FontWeight.w500,
                     MyColor.black),
                  const Divider(color: Colors.grey),
                 SizedBox(
@@ -86,11 +92,11 @@ var userType = "";
                 custom.text(
                     text.CreatePassLine.tr,
                     12, FontWeight.normal, MyColor.primary1),
-
+            
                 SizedBox(
                     height: height * 0.06
                 ),
-
+            
                 Align(
                   alignment: Alignment.topLeft,
                   child: custom.text(
@@ -118,7 +124,7 @@ var userType = "";
                       Icons.visibility,
                       color: MyColor.primary1,
                       size: 18.0,
-
+            
                     )),
                     _isHidden),
                 SizedBox(
@@ -150,13 +156,13 @@ var userType = "";
                       Icons.visibility,
                       color: MyColor.primary1,
                       size: 18.0,
-
+            
                     )),
                     _isHidden1),
                 SizedBox(
                   height: height * 0.25,
                 ),
-
+            
                 SizedBox(height: height * 0.03,),
               ],
             ),
@@ -173,7 +179,7 @@ var userType = "";
       custom.MySnackBar(context, text.SetPassword.tr);
     } else if (newpasswordctr.text
         .toString()
-        .length < 8) {
+        .length < 6) {
       custom.MySnackBar(context, text.newPasswordAtList6digit.tr);
     } else if (confirmpasswordctr.text
         .toString()
@@ -181,7 +187,7 @@ var userType = "";
       custom.MySnackBar(context, text.confirmPassword.tr);
     } else if (confirmpasswordctr.text
         .toString()
-        .length < 8) {
+        .length < 6) {
       custom.MySnackBar(context, text.confirmPasswordAtList6digit.tr);
     } else
     if (newpasswordctr.text.toString() != confirmpasswordctr.text.toString()) {

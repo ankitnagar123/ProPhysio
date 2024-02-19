@@ -782,6 +782,9 @@ class _DoctorSearchAppointmentsState extends State<DoctorSearchAppointments> {
                                   ),
                                 ],
                               ),
+                SizedBox(
+                  height: 16,
+                )
               ],
             ),
           );
