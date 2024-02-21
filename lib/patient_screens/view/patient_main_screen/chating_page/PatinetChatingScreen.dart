@@ -217,79 +217,84 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
           children: [
             Expanded(
                 child: SizedBox(
-              height: 300,
-              child: chatController.receivedMsgList.isEmpty
-                  ? const SizedBox()
-                  : ilaod == true
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : ListView.builder(
-                          reverse: true,
-                          itemCount: chatController.receivedMsgList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var reversedList = chatController
-                                .receivedMsgList.reversed
-                                .toList();
+                    height: 300,
+                    child: chatController.receivedMsgList.isEmpty
+                        ? const SizedBox()
+                        : ilaod == true
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView.builder(
+                                reverse: true,
+                                itemCount:
+                                    chatController.receivedMsgList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  var reversedList = chatController
+                                      .receivedMsgList.reversed
+                                      .toList();
+                                  var message = reversedList[index];
+                                  var isUserMessage = message.type == 'User';
 
-                            return Row(
-                              mainAxisAlignment:
-                               "Doctor"==chatController
-                                .receivedMsgList[index].type
-                                      ? MainAxisAlignment.start:MainAxisAlignment.end,
-
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxWidth:
-                                        MediaQuery.of(context).size.width - 45,
-                                  ),
-                                  child: Card(
-                                    elevation: 1,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    color: patientId == reversedList[index].id
-                                        ? MyColor.chatColor
-                                        : MyColor.white,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 5),
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 10,
-                                            right: 30,
-                                            top: 5,
-                                            bottom: 20,
+                                  return Row(
+                                    mainAxisAlignment: isUserMessage
+                                        ? MainAxisAlignment.end
+                                        : MainAxisAlignment.start,
+                                    children: [
+                                      ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              45,
+                                        ),
+                                        child: Card(
+                                          elevation: 1,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
-                                          child: view.text(
-                                              reversedList[index]
-                                                  .message
-                                                  .toString(),
-                                              15,
-                                              FontWeight.w400,
-                                              MyColor.black),
+                                          color: isUserMessage
+                                              ? MyColor.chatColor
+                                              : MyColor.white,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 5),
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10,
+                                                    right: 30,
+                                                    top: 5,
+                                                    bottom: 20),
+                                                child: Text(
+                                                  message.message,
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: MyColor.black),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                bottom: 2,
+                                                right: 3,
+                                                child: Text(
+                                                  message.sentat,
+                                                  style: TextStyle(
+                                                      fontSize: 8,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: MyColor.grey),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        Positioned(
-                                          bottom: 2,
-                                          right: 3,
-                                          child: view.text(
-                                              reversedList[index]
-                                                  .sentat
-                                                  .toString(),
-                                              8,
-                                              FontWeight.w400,
-                                              MyColor.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-            )),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ))),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

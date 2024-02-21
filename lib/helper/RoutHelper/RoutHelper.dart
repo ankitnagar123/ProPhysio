@@ -27,7 +27,6 @@ import '../../onboarding_screen/onBoardingScreen.dart';
 import '../../patient_screens/view/book_appointment/AppointmentBookedSucces.dart';
 import '../../patient_screens/view/doctor_detail_screen/PNavigateDrScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ReviewsScreen.dart';
-import '../../patient_screens/view/doctor_detail_screen/SpecializationDetailScreen.dart';
 import '../../patient_screens/view/doctor_detail_screen/ViewCertificateScreen.dart';
 import '../../patient_screens/view/patient_filters_sceen/FilterScreen.dart';
 import '../../patient_screens/view/patient_filters_sceen/Location&DistanceFilter.dart';
@@ -82,7 +81,6 @@ class RouteHelper {
 
 
   static const String specializationScreen = '/specializationScreen';
-  static const String specializationDetailsScreen = '/specializationDetailsScreen';
 
   static const String ratingFilterScreen = '/ratingFilterScreen';
   static const String morePage = '/morePage';
@@ -208,7 +206,6 @@ class RouteHelper {
 
   static String getSpecializationScreen() => specializationScreen;
 
-  static String getSpecializationDetailsScreen() => specializationDetailsScreen;
 
 
   static String getRatingFilterScreen() => ratingFilterScreen;
@@ -314,7 +311,6 @@ class RouteHelper {
     GetPage(name: patientSettingsScreen, page: () => const PatientSettingsScreen()),
     GetPage(name: patientChangePasswordScreen, page: () => const PatientChangePasswordScreen(),),
     GetPage(name: patientSupportScreen, page: () => const SupportTab()),
-    GetPage(name: specializationDetailsScreen, page: () => const SpecializationScreen()),
     GetPage(name: pBookingReqSuccess, page: () => const AppointmentBookedSucces()),
     GetPage(name: pCancelAppointSucces, page: () => const PatientBookingCancelSuccess()),
     GetPage(name: pTandC, page: () => const PatientTermCondition()),

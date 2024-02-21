@@ -216,21 +216,21 @@ receivedMsgList.value = pChatingViewListModelFromJson(response.body);
   Future<void> msgListFetch(BuildContext context) async {
     loadingFetchList.value = true;
     final Map<String, dynamic> Peramert = {
-      "user_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
+        "user_id":await sp.getStringValue(sp.PATIENT_ID_KEY),
     };
     bool connection = await  checkInternetConnection();
     if(connection){
-      print("my parameter$Peramert");
+      log("my parameter$Peramert");
       try {
-        print("my parameter$Peramert");
+        log("my parameter$Peramert");
 
         final response = await apiService.postData(MyAPI.pChatListFetch,Peramert);
-        print("Chat list=============${response.body}");
+        log("Chat list=============${response.body}");
 
         if (response.statusCode == 200) {
           loadingFetchList.value = false;
           var jsonString = response.body;
-          print(jsonString);
+          log(jsonString);
           List<PatinetChatModel> list = jsonDecode(response.body)
               .map((item) => PatinetChatModel.fromJson(item))
               .toList()
@@ -241,11 +241,11 @@ receivedMsgList.value = pChatingViewListModelFromJson(response.body);
           print(msgList);
         } else {
           loadingFetchList.value = false;
-          print("error");
+          log("error");
         }
       }catch (e) {
         loadingFetchList.value = false;
-        print("exception$e");
+        log("exception$e");
       }
     }else{
       loadingFetchList.value = false;
@@ -265,7 +265,7 @@ receivedMsgList.value = pChatingViewListModelFromJson(response.body);
           debugPrint('Dialog Dissmiss from callback $type');
         },
       ).show();
-      print("no internet");
+      log("no internet");
     }
 
   }

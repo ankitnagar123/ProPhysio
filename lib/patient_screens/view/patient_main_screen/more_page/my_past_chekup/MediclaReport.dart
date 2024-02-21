@@ -10,6 +10,7 @@ import 'dart:developer';
 import 'package:file_picker/file_picker.dart';
 
 import '../../../../../doctor_screens/controller/prescriptionAddFetchCtr/DoctorPrescriptionCtr.dart';
+import '../../../../../doctor_screens/view/doctor_main_page/doctor_more_page/add_prescriptiona&medicalTest/AddPrescriptionandMedicalReport/ReportPdfView.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/Shimmer/ChatShimmer.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
@@ -225,10 +226,9 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
                           .patientPrescriptionList[index].image)
                         ? InkWell(
                         onTap: () {
-                          doctorPrescriptionCtr.downLoadFileRepost(
-                              context,doctorPrescriptionCtr
-                              .patientPrescriptionList[index].image,
-                              "medical");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url:doctorPrescriptionCtr
+                              .patientPrescriptionList[index].image, name:"",),));
+
                         },
                         child:  const Icon(
                           Icons.download_for_offline,
@@ -416,30 +416,5 @@ class _PatientMedicalReportState extends State<PatientMedicalReport> {
     } else {
       print('No file selected.');
     }
-  }
-
-
-  void downLoadFile(String fileurl, String patientName) async {
-    FileDownloader.downloadFile(
-        url: fileurl,
-        name: "$patientName Prescription Report.pdf",
-        //THE FILE NAME AFTER DOWNLOADING,
-        onProgress: (String? fileName, double? progress) {
-          log('FILE fileName HAS PROGRESS $progress');
-        },
-        onDownloadCompleted: (String path) {
-          log('FILE DOWNLOADED TO PATH: $path');
-          // startDate.value = "Select";
-          // endDate.value = "Select";
-          // customSnackBar("file downloaded check download folder");
-          // receiptLoader.value = false;
-        },
-        onDownloadError: (String error) {
-          // startDate.value = "Select";
-          // endDate.value = "Select";
-          log('DOWNLOAD ERROR: $error');
-          // receiptLoader.value = false;
-        },
-        notificationType: NotificationType.all);
   }
 }

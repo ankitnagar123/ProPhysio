@@ -691,7 +691,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.Enter_Name.tr, 13.0,
+                child: customView.text(text.Enter_Name.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
@@ -715,7 +715,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.Enter_Surname.tr, 13.0,
+                child: customView.text(text.Enter_Surname.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
@@ -733,7 +733,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.Age.tr, 13.0, FontWeight.w500,
+                          customView.text(text.Age.tr, 12.0, FontWeight.w500,
                               MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -754,7 +754,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.Weight.tr, 13.0, FontWeight.w500,
+                          customView.text(text.Weight.tr, 12.0, FontWeight.w500,
                               MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -771,7 +771,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.Height.tr, 13.0, FontWeight.w500,
+                          customView.text(text.Height.tr, 12.0, FontWeight.w500,
                               MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -792,7 +792,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.TRM.tr, 13.0, FontWeight.w500,
+                          customView.text(text.TRM.tr, 12.0, FontWeight.w500,
                               MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -809,7 +809,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          customView.text(text.Birth_Place.tr, 13.0,
+                          customView.text(text.Birth_Place.tr, 12.0,
                               FontWeight.w500, MyColor.primary1),
                           const SizedBox(
                             height: 3.0,
@@ -826,7 +826,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    text.Gender.tr, 13.0, FontWeight.w500, MyColor.primary1),
+                    text.Gender.tr, 12.0, FontWeight.w500, MyColor.primary1),
               ),
               Row(
                 children: [
@@ -875,7 +875,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.Date_of_Birth.tr, 13.0,
+                child: customView.text(text.Date_of_Birth.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               Container(
@@ -942,7 +942,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.yourUsernameEmail.tr, 13.0,
+                child: customView.text(text.yourUsernameEmail.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
@@ -970,7 +970,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.Phone_Number.tr, 13.0,
+                child: customView.text(text.Phone_Number.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
@@ -1016,7 +1016,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text(text.Select_Branch.tr, 13.0,
+                child: customView.text(text.Select_Branch.tr, 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
@@ -1066,7 +1066,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "ID Type", 13.0, FontWeight.w500, MyColor.primary1),
+                    "ID Type", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1079,7 +1079,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "ID Number", 13.0, FontWeight.w500, MyColor.primary1),
+                    "ID Number", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1106,7 +1106,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Name", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Name", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1119,7 +1119,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Phone", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Phone", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1168,7 +1168,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 1", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 1", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1181,7 +1181,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 2", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 2", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
                 height: 5,
@@ -1200,7 +1200,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("City", 13.0,
+                            child: customView.text("City", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1219,7 +1219,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           customView.text(
-                              "State", 13.0, FontWeight.w500, MyColor.primary1),
+                              "State", 12.0, FontWeight.w500, MyColor.primary1),
                           SizedBox(
                             height: 5,
                           ),
@@ -1245,7 +1245,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Postal Code", 13.0,
+                            child: customView.text("Postal Code", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1265,7 +1265,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Country", 13.0,
+                            child: customView.text("Country", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1283,7 +1283,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Home Phone", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Home Phone", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1328,7 +1328,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 1", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 1", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1341,7 +1341,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 2", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 2", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
                 height: 5,
@@ -1353,7 +1353,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: customView.text("Employment Status", 13.0,
+                child: customView.text("Employment Status", 12.0,
                     FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
@@ -1373,7 +1373,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Occupation", 13.0,
+                            child: customView.text("Occupation", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1392,7 +1392,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Employer", 13.0,
+                            child: customView.text("Employer", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1416,7 +1416,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("City", 13.0,
+                            child: customView.text("City", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1435,7 +1435,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("State", 13.0,
+                            child: customView.text("State", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1462,7 +1462,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Postal Code", 13.0,
+                            child: customView.text("Postal Code", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1481,7 +1481,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Country", 13.0,
+                            child: customView.text("Country", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1499,7 +1499,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Office Phone", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Office Phone", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1547,7 +1547,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 1", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 1", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1560,7 +1560,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Title 2", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Title 2", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               const SizedBox(
                 height: 5,
@@ -1579,7 +1579,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Name", 13.0,
+                            child: customView.text("Name", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1598,7 +1598,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Practice Name", 13.0,
+                            child: customView.text("Practice Name", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1622,7 +1622,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("City", 13.0,
+                            child: customView.text("City", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1641,7 +1641,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("State", 13.0,
+                            child: customView.text("State", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1668,7 +1668,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Postal Code", 13.0,
+                            child: customView.text("Postal Code", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1687,7 +1687,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: customView.text("Country", 13.0,
+                            child: customView.text("Country", 12.0,
                                 FontWeight.w500, MyColor.primary1),
                           ),
                           SizedBox(
@@ -1705,7 +1705,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "Medical Phone", 13.0, FontWeight.w500, MyColor.primary1),
+                    "Medical Phone", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,
@@ -1718,7 +1718,7 @@ SharedPreferenceProvider sp = SharedPreferenceProvider();
               Align(
                 alignment: Alignment.topLeft,
                 child: customView.text(
-                    "About", 13.0, FontWeight.w500, MyColor.primary1),
+                    "About", 12.0, FontWeight.w500, MyColor.primary1),
               ),
               SizedBox(
                 height: 5,

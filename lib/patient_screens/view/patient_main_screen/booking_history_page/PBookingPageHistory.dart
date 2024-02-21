@@ -727,62 +727,62 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                   ],
                 ),
-               Divider(
-                    color: MyColor.grey.withOpacity(0.5),
-                    height: 30,
-                  ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            text.paymentInformation.tr,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(patientBookingController.paymentTyp.value,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                  fontFamily: "Poppins")),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            text.totalCost.tr,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 11.0,
-                                fontFamily: "Poppins"),
-                          ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            patientBookingController.price.value,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+               // Divider(
+               //      color: MyColor.grey.withOpacity(0.5),
+               //      height: 30,
+               //    ),
+               //  Row(
+               //    children: [
+               //      Expanded(
+               //        flex: 1,
+               //        child: Column(
+               //          crossAxisAlignment: CrossAxisAlignment.start,
+               //          children: [
+               //            Text(
+               //              text.paymentInformation.tr,
+               //              style: const TextStyle(
+               //                  color: Colors.grey,
+               //                  fontSize: 11.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //            const SizedBox(
+               //              height: 2.0,
+               //            ),
+               //            Text(patientBookingController.paymentTyp.value,
+               //                style: const TextStyle(
+               //                    color: Colors.black,
+               //                    fontSize: 14.0,
+               //                    fontFamily: "Poppins")),
+               //          ],
+               //        ),
+               //      ),
+               //      Expanded(
+               //        flex: 1,
+               //        child: Column(
+               //          crossAxisAlignment: CrossAxisAlignment.start,
+               //          children: [
+               //            Text(
+               //              text.totalCost.tr,
+               //              style: const TextStyle(
+               //                  color: Colors.grey,
+               //                  fontSize: 11.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //            const SizedBox(
+               //              height: 2.0,
+               //            ),
+               //            Text(
+               //              patientBookingController.price.value,
+               //              style: const TextStyle(
+               //                  color: Colors.black,
+               //                  fontSize: 14.0,
+               //                  fontFamily: "Poppins"),
+               //            ),
+               //          ],
+               //        ),
+               //      ),
+               //    ],
+               //  ),
                Divider(
                     color: MyColor.grey.withOpacity(0.5),
                     height: 30,
@@ -835,7 +835,7 @@ class _BookingPageState extends State<BookingPage> {
                             ),
                           )
                         : status == "Confirmed"
-                            ? TextButton(
+                            ? Text("")/*TextButton(
                                 onPressed: () {
                                   cancelPopUp(context, id, idDr);
                                 },
@@ -846,7 +846,7 @@ class _BookingPageState extends State<BookingPage> {
                                       fontSize: 14.0,
                                       fontFamily: "Poppins"),
                                 ),
-                              )
+                              )*/
                             :
                    /* Row(
                       children: [

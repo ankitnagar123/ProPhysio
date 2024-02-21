@@ -115,7 +115,7 @@ class _CompleteAppointPrescriptionState extends State<CompleteAppointPrescriptio
           itemCount: bookingController.booking.length,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            var id = bookingController.booking[index].id.toString();
+            var id = bookingController.booking[index].userId.toString();
             var list = bookingController.booking[index];
             var patientName = list.name;
             return InkWell(

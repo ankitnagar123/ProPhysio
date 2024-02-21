@@ -242,10 +242,11 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                             var reversedList = chatController
                                 .drReceivedMsgList.reversed
                                 .toList();
+                            var message = reversedList[index];
+                            var isUserMessage = message.type == 'User';
                             return Row(
                               mainAxisAlignment:
-                                  "User" == reversedList[index].type
-                                      ? MainAxisAlignment.start
+                              isUserMessage ? MainAxisAlignment.start
                                       : MainAxisAlignment.end,
                               children: [
                                 ConstrainedBox(
@@ -257,9 +258,9 @@ class _DoctorChatScreenState extends State<DoctorChatScreen> {
                                     elevation: 1,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8)),
-                                    color: doctorId == reversedList[index].id
-                                        ? MyColor.chatColor
-                                        : MyColor.white,
+                                    color: isUserMessage
+                                        ? MyColor.white
+                                        : MyColor.chatColor,
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 5),
                                     child: Stack(

@@ -183,7 +183,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
         longitude = doctorProfileCtr.lang.value;
         slectedCategory = doctorProfileCtr.slectedCategory.value;
         /*API*/
-        doctorSignUpCtr.doctorServices(slectedCategory.toString());
+        doctorSignUpCtr.doctorServices(slectedCategory.toString(),selectedBranch.toString());
 
         _StartTime = doctorProfileCtr.sTime.value;
         _endTime = doctorProfileCtr.eTime.value;
@@ -430,16 +430,16 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.03,
                       ),
-                      customView.text(text.H_Enter_Username.tr, 10.0,
-                          FontWeight.w600, MyColor.black),
-                      SizedBox(
-                        height: height * 0.01,
-                      ),
-                      customView.myField(context, userNameCtrl,
-                          text.H_Enter_Username.tr, TextInputType.text),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
+                      // customView.text(text.H_Enter_Username.tr, 10.0,
+                      //     FontWeight.w600, MyColor.black),
+                      // SizedBox(
+                      //   height: height * 0.01,
+                      // ),
+                      // customView.myField(context, userNameCtrl,
+                      //     text.H_Enter_Username.tr, TextInputType.text),
+                      // SizedBox(
+                      //   height: height * 0.02,
+                      // ),
                       Row(
                         children: [
                           Expanded(
@@ -447,10 +447,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.H_Enter_Name.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
-                                SizedBox(
-                                  height: height * 0.01,
+                                customView.text(text.H_Enter_Name.tr, 12.0,
+                                    FontWeight.w500, MyColor.primary1),
+                                const SizedBox(
+                                  height: 3.0,
                                 ),
                                 customView.myField(context, name,
                                     text.H_Enter_Name.tr, TextInputType.text),
@@ -465,10 +465,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.H_Enter_Surname.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
-                                SizedBox(
-                                  height: height * 0.01,
+                                customView.text(text.H_Enter_Surname.tr,12.0,
+                                    FontWeight.w500, MyColor.primary1),
+                                const SizedBox(
+                                  height: 3.0,
                                 ),
                                 customView.myField(
                                     context,
@@ -483,10 +483,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      customView.text(text.yourUsernameEmail.tr, 10.0,
-                          FontWeight.w600, MyColor.black),
-                      SizedBox(
-                        height: height * 0.01,
+                      customView.text(text.yourUsernameEmail.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
+                      const SizedBox(
+                        height: 3.0,
                       ),
                       SizedBox(
                         width: widht,
@@ -510,8 +510,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      customView.text(text.yourContact.tr, 10.0,
-                          FontWeight.w600, MyColor.black),
+                      customView.text(text.yourContact.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       SizedBox(
                         height: height * 0.012,
                       ),
@@ -551,10 +551,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      customView.text(text.yourAddres.tr, 10.0, FontWeight.w600,
-                          MyColor.black),
+                      customView.text(text.yourAddres.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       SizedBox(
-                        height: height * 0.01,
+                        height: 3,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0, right: 4.0),
@@ -564,7 +564,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             "Enter address",
                             TextInputType.text,
                             const Text(""),
-                            const Icon(Icons.search_rounded), () async {
+                            const Icon(Icons.search_rounded,color: MyColor.primary1), () async {
                           var place = await PlacesAutocomplete.show(
                               context: context,
                               apiKey: kGoogleApiKey,
@@ -618,10 +618,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.Date_of_Birth.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
-                                SizedBox(
-                                  height: height * 0.005,
+                                customView.text(text.Date_of_Birth.tr, 12.0,
+                                    FontWeight.w500, MyColor.primary1),
+                                const SizedBox(
+                                  height: 3,
                                 ),
                                 Container(
                                     height: 48.0,
@@ -668,10 +668,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.yourBirthplace.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
-                                SizedBox(
-                                  height: height * 0.01,
+                                customView.text(text.yourBirthplace.tr,12.0,
+                                    FontWeight.w500, MyColor.primary1),
+                                const SizedBox(
+                                  height: 3,
                                 ),
                                 customView.myField(
                                     context,
@@ -694,10 +694,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.yourAge.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
+                                customView.text(text.yourAge.tr,12.0,
+                                    FontWeight.w500, MyColor.primary1),
                                 SizedBox(
-                                  height: height * 0.01,
+                                  height: 3
                                 ),
                                 customView.myField(context, age, text.Age.tr,
                                     TextInputType.number),
@@ -712,10 +712,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customView.text(text.experience.tr, 10.0,
-                                    FontWeight.w600, MyColor.black),
+                                customView.text(text.experience.tr, 12.0,
+                                    FontWeight.w500, MyColor.primary1),
                                 SizedBox(
-                                  height: height * 0.01,
+                                  height: 3,
                                 ),
                                 customView.myField(context, experience,
                                     text.experience.tr, TextInputType.number),
@@ -727,126 +727,22 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      /* Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          customView.text(text.yourGraduationDate.tr,
-                                              10.0, FontWeight.w600, MyColor.black),
-                                          SizedBox(
-                                            height: height * 0.01,
-                                          ),
-                                          Container(
-                                              height: 48.0,
-                                              width:
-                                                  MediaQuery.of(context).size.width / 2.3,
-                                              padding: const EdgeInsets.only(
-                                                  left: 10.0, bottom: 5),
-                                              margin: const EdgeInsets.fromLTRB(
-                                                  0.0, 5.0, 0.0, 0.0),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  border: Border.all(color: Colors.grey),
-                                                  borderRadius: BorderRadius.circular(7)),
-                                              child: TextFormField(
-                                                onTap: () async {
-                                                  startDate = await pickDate();
-                                                  dateOfGraduation.text =
-                                                      _displayText(startDate);
-                                                  print(dateOfGraduation.text);
-                                                },
-                                                readOnly: true,
-                                                controller: dateOfGraduation,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.only(top: 7),
-                                                  hintText: text.Select_Date.tr,
-                                                  hintStyle:
-                                                      const TextStyle(fontSize: 14),
-                                                  suffixIcon: Icon(Icons.calendar_month,
-                                                      color: MyColor.primary),
-                                                  border: InputBorder.none,
-                                                  focusedBorder: InputBorder.none,
-                                                  enabledBorder: InputBorder.none,
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          customView.text(text.Date_of_Qualification.tr,
-                                              10.0, FontWeight.w600, MyColor.black),
-                                          SizedBox(
-                                            height: height * 0.01,
-                                          ),
-                                          Container(
-                                              height: 48.0,
-                                              width:
-                                                  MediaQuery.of(context).size.width / 2.3,
-                                              padding: const EdgeInsets.only(
-                                                  left: 10.0, bottom: 5),
-                                              margin: const EdgeInsets.fromLTRB(
-                                                  0.0, 5.0, 0.0, 0.0),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  border: Border.all(color: Colors.grey),
-                                                  borderRadius: BorderRadius.circular(7)),
-                                              child: TextFormField(
-                                                onTap: () async {
-                                                  startDate = await pickDate();
-                                                  dateOfQualification.text =
-                                                      _displayText(startDate);
-                                                  print(dateOfQualification.text);
-                                                },
-                                                readOnly: true,
-                                                controller: dateOfQualification,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.only(top: 7),
-                                                  hintText: text.Select_Date.tr,
-                                                  hintStyle:
-                                                      const TextStyle(fontSize: 14),
-                                                  suffixIcon: Icon(Icons.calendar_month,
-                                                      color: MyColor.primary),
-                                                  border: InputBorder.none,
-                                                  focusedBorder: InputBorder.none,
-                                                  enabledBorder: InputBorder.none,
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: height * 0.03,
-                                ),*/
-                      customView.text(text.Select_Branch.tr, 10.0,
-                          FontWeight.w600, MyColor.black),
+                      customView.text(text.Select_Branch.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       branch(),
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      customView.text(text.category.tr, 10.0, FontWeight.w600,
-                          MyColor.black),
+                      customView.text(text.category.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       category(),
                       SizedBox(
                         height: height * 0.02,
                       ),
                       Align(
                         alignment: Alignment.topLeft,
-                        child: customView.text(text.Select_Services.tr, 10.0,
-                            FontWeight.w600, MyColor.black),
+                        child: customView.text(text.Select_Services.tr,12.0,
+                            FontWeight.w500, MyColor.primary1),
                       ),
                       selectServiceList(),
                       if (isDropdownOpen)
@@ -984,8 +880,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       ),
                       Align(
                           alignment: Alignment.topLeft,
-                          child: customView.text("Working days:", 10,
-                              FontWeight.w600, MyColor.black)),
+                          child: customView.text("Working days:", 12.0,
+                              FontWeight.w500, MyColor.primary1)),
                       Column(
                         children: allDays.map((day) {
                           return Card(
@@ -1022,7 +918,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: customView.text(
-                            "Timing", 10.0, FontWeight.w600, MyColor.black),
+                            "Timing",12.0,
+                            FontWeight.w500, MyColor.primary1),
                       ),
                       const SizedBox(
                         height: 5,
@@ -1116,8 +1013,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                         height: height * 0.02,
                       ),
                       /*-new-*/
-                      customView.text(text.yourGender.tr, 10.0, FontWeight.w600,
-                          MyColor.black),
+                      customView.text(text.yourGender.tr, 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       Row(
                         children: [
                           Expanded(
@@ -1167,8 +1064,8 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       ),
                       Align(
                         alignment: Alignment.topLeft,
-                        child: customView.text(text.certificates.tr, 13.0,
-                            FontWeight.w500, Colors.black),
+                        child: customView.text(text.certificates.tr, 12.0,
+                            FontWeight.w500, MyColor.primary1),
                       ),
                       Stack(children: [
                         InkWell(
@@ -1273,10 +1170,10 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      customView.text("Your description", 10.0, FontWeight.w600,
-                          MyColor.black),
+                      customView.text("Your description", 12.0,
+                          FontWeight.w500, MyColor.primary1),
                       SizedBox(
-                        height: height * 0.01,
+                        height: 3,
                       ),
                       customView.myFieldExpand(context, descriptionCtr,
                           text.yourbio.tr, TextInputType.text),
@@ -1302,54 +1199,57 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                   log("days1---$selectedDaysList");
                 }
               });
-              doctorProfileCtr.doctorProfileUpdate(
-                  context,
-                  selectedBranch.toString(),
-                  name.text,
-                  surename.text,
-                  userNameCtrl.text,
-                  emailCtrl.text,
-                  slectedCategory.toString(),
-                  serviceIdArray.join(','),
-                  flag,
-                  code,
-                  phoneNumberCtrl.text,
-                  "",
-                  _selectedGender.toString(),
-                  location,
-                  latitude,
-                  longitude,
-                  birthDateController.text,
-                  birthplaceController.text,
-                  age.text,
-                  descriptionCtr.text,
-                  experience.text,
-                  _StartTime.toString(),
-                  _endTime.toString(),
-                  dImageName,
-                  dBaseImage,
-                  selectedDaysList,
-                  imagename,
-                  baseimage, () {
-                sp.setStringValue(sp.DOCTOR_BRANCH, selectedBranch.toString());
+              if(validation(context)){
+                doctorProfileCtr.doctorProfileUpdate(
+                    context,
+                    selectedBranch.toString(),
+                    name.text,
+                    surename.text,
+                    userNameCtrl.text,
+                    emailCtrl.text,
+                    slectedCategory.toString(),
+                    serviceIdArray.join(','),
+                    flag,
+                    code,
+                    phoneNumberCtrl.text,
+                    "",
+                    _selectedGender.toString(),
+                    location,
+                    latitude,
+                    longitude,
+                    birthDateController.text,
+                    birthplaceController.text,
+                    age.text,
+                    descriptionCtr.text,
+                    experience.text,
+                    _StartTime.toString(),
+                    _endTime.toString(),
+                    dImageName,
+                    dBaseImage,
+                    selectedDaysList,
+                    imagename,
+                    baseimage, () {
+                  sp.setStringValue(sp.DOCTOR_BRANCH, selectedBranch.toString());
 
-                AwesomeDialog(
-                  context: context,
-                  animType: AnimType.leftSlide,
-                  headerAnimationLoop: false,
-                  dialogType: DialogType.success,
-                  showCloseIcon: true,
-                  title: text.success.tr,
-                  desc: text.ProfileUpdateSuccessfully.tr,
-                  btnOkOnPress: () {
-                    debugPrint('OnClick');
-                  },
-                  btnOkIcon: Icons.check_circle,
-                  onDismissCallback: (type) {
-                    debugPrint('Dialog Dismiss from callback $type');
-                  },
-                ).show();
-              });
+                  AwesomeDialog(
+                    context: context,
+                    animType: AnimType.leftSlide,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.success,
+                    showCloseIcon: true,
+                    title: text.success.tr,
+                    desc: text.ProfileUpdateSuccessfully.tr,
+                    btnOkOnPress: () {
+                      debugPrint('OnClick');
+                    },
+                    btnOkIcon: Icons.check_circle,
+                    onDismissCallback: (type) {
+                      debugPrint('Dialog Dismiss from callback $type');
+                    },
+                  ).show();
+                });
+              }
+
             },
           ),
           ),
@@ -1522,7 +1422,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
                     slectedCategory = newValue;
                     log('MY CATEGORY>>>$slectedCategory');
                   });
-                  doctorSignUpCtr.doctorServices(slectedCategory.toString());
+                  doctorSignUpCtr.doctorServices(slectedCategory.toString(),selectedBranch.toString());
                   serviceNameArray.clear();
                   serviceIdArray.clear();
                   log("this for clear service Id Array---${serviceIdArray.join(",")}");
@@ -1600,7 +1500,7 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
       initialTime: TimeOfDay.now(),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
           child: Theme(
             data: Theme.of(context).copyWith(
               colorScheme: const ColorScheme.light(
@@ -1619,36 +1519,97 @@ class _DoctorPersonalDataState extends State<DoctorPersonalData> {
     );
     if (result != null) {
       setState(() {
-        _StartTime = result.format(context);
-        log("$_StartTime");
+        _StartTime = _formatTime(result.hour, result.minute);
+        print("Start Time--$_StartTime");
       });
     }
   }
+
 
   Future<void> _endtime() async {
     final TimeOfDay? result = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
         builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: const ColorScheme.light(
-                primary: MyColor.primary1,
-                onPrimary: Colors.white, // header text color
-                onSurface: Colors.brown, // body text color
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false,),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: const ColorScheme.light(
+                  primary: MyColor.primary1,
+                  onPrimary: Colors.white, // header text color
+                  onSurface: Colors.brown, // body text color
+                ),
+                textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(backgroundColor: Colors.white),
+                ),
               ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(backgroundColor: Colors.white),
-              ),
+              child: child!,
             ),
-            child: child!,
           );
         });
     if (result != null) {
       setState(() {
-        _endTime = result.format(context);
-        log("$_endTime");
+        _endTime = _formatTime(result.hour, result.minute);
+        print("Start Time--$_endTime");
       });
     }
   }
+
+  String _formatTime(int hour, int minute) {
+    String period = 'AM';
+    if (hour >= 12) {
+      period = 'PM';
+      if (hour != 12) hour -= 12;
+    }
+    if (hour == 0) hour = 12;
+    return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')} $period';
+  }
+
+  bool validation(
+      BuildContext context,
+      ) {
+    if (name.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Name is required");
+    } else if (surename.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Surname is required");
+    }else if (emailCtrl.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Email is required");
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtrl.text.toString())) {
+      customView.MySnackBar(context, "Enter valid email");
+    } else if (phoneNumberCtrl.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Phone no. is required");
+    }else if (birthDateController.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter birth date");
+    } else if (birthplaceController.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter birth place");
+    } else if (age.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter age");
+    } else if (experience.text.toString().isEmpty) {
+      customView.MySnackBar(context, "Enter year of experience");
+    } else if (_selectedGender.isEmpty) {
+      customView.MySnackBar(context, "Select gender");
+    } else if (addressCtrl.text.isEmpty) {
+      customView.MySnackBar(context, "Enter location");
+    }else if (selectedBranch == null) {
+      customView.MySnackBar(context, "Select your branch");
+    } else if (slectedCategory == null) {
+      customView.MySnackBar(context, "Select your specialization");
+    } else if (serviceIdArray.length == 0) {
+      customView.MySnackBar(context, "Select your services");
+    } else if (_StartTime == null) {
+      customView.MySnackBar(context, "Select your start timing");
+    } else if (_endTime == null) {
+      customView.MySnackBar(context, "Select your start timing");
+    } else if (dFiles.isEmpty) {
+      customView.MySnackBar(context, "Upload your degree");
+    } else if (descriptionCtr.text.isEmpty) {
+      customView.MySnackBar(context, "Enter description about specialization");
+    }
+    else {
+      return true;
+    }
+    return false;
+  }
+
 }

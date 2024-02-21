@@ -144,6 +144,9 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
                   discCtr.text,
                   filename,
                   baseImage, () {
+                titleCtr.clear();
+                discCtr.clear();
+                filename ="";
                 doctorPrescriptionCtr.fetchPrescription(
                     widget.patientId, "medical");
               });
@@ -371,13 +374,14 @@ class _MedicalAddAndListState extends State<MedicalAddAndList> {
   void downLoadFile(String fileurl, String patientName) async {
     FileDownloader.downloadFile(
         url: fileurl,
-        name: "$patientName Prescription Report.pdf",
+        name: "$patientName Prescription Report",
         //THE FILE NAME AFTER DOWNLOADING,
         onProgress: (String? fileName, double? progress) {
           log('FILE fileName HAS PROGRESS $progress');
         },
         onDownloadCompleted: (String path) {
           log('FILE DOWNLOADED TO PATH: $path');
+          custom.massenger(context, "Report download successfully");
           // startDate.value = "Select";
           // endDate.value = "Select";
           // customSnackBar("file downloaded check download folder");

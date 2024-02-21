@@ -87,9 +87,10 @@ class DoctorSignUpCtr extends GetxController {
     }
   }
   /*---------Doctor All Services behalf of category --------*/
-  Future<void> doctorServices(String category) async {
+  Future<void> doctorServices(String category,String branchId) async {
     final Map<String, dynamic> parameter = {
       "category_id":category,
+      "branch_id":branchId,
     };
     print("parameter$parameter");
     try {

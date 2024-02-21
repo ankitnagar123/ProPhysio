@@ -142,6 +142,9 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                           discCtr.text,
                           filename,
                           baseImage, () {
+                            titleCtr.clear();
+                            discCtr.clear();
+                            filename ="";
                         doctorPrescriptionCtr.fetchPrescription(
                             widget.patientId, "prescription");
                       });
@@ -383,15 +386,26 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                             trailing: isPDF(list.image)
                                 ? InkWell(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url: list.image),));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url: list.image, name:"${details.name} ${details.surname}",),));
 
                                     // doctorPrescriptionCtr.downLoadFileRepost(
                                       //     context,list.image,
                                       //     "${details.name} ${details.surname}");
                                   },
-                                  child:  const Icon(
-                                    Icons.download_for_offline,
-                                    color: MyColor.primary1,
+                                  child:  RichText(
+                                    text: const TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: "Click ",
+                                        ),
+                                        WidgetSpan(
+                                          child: Icon(Icons.download_rounded, size: 14),
+                                        ),
+                                        TextSpan(
+                                          text: " to add",
+                                        ),
+                                      ],
+                                    ),
                                   ))
 
                                 : Stack(children: [
@@ -423,10 +437,9 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
                                 right: 2,
                                 child: InkWell(
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ReportPdfView(url: list.image),));
-                                      // doctorPrescriptionCtr.downLoadFileRepost(
-                                      //     context,list.image,
-                                      //     "${details.name} ${details.surname}");
+                                      doctorPrescriptionCtr.downLoadFileRepost(
+                                          context,list.image,
+                                          "${details.name} ${details.surname}");
                                     },
                                     child:  const Icon(
                                       Icons.download_for_offline,
@@ -550,29 +563,5 @@ class _PrescriptionAddAndListState extends State<PrescriptionAddAndList> {
         );
       },
     );
-  }
-
-  void downLoadFile(String fileurl, String patientName) async {
-    FileDownloader.downloadFile(
-        url: fileurl,
-        name: "$patientName Prescription Report.pdf",
-        //THE FILE NAME AFTER DOWNLOADING,
-        onProgress: (String? fileName, double? progress) {
-          log('FILE fileName HAS PROGRESS $progress');
-        },
-        onDownloadCompleted: (String path) {
-          log('FILE DOWNLOADED TO PATH: $path');
-          // startDate.value = "Select";
-          // endDate.value = "Select";
-          // customSnackBar("file downloaded check download folder");
-          // receiptLoader.value = false;
-        },
-        onDownloadError: (String error) {
-          // startDate.value = "Select";
-          // endDate.value = "Select";
-          log('DOWNLOAD ERROR: $error');
-          // receiptLoader.value = false;
-        },
-        notificationType: NotificationType.all);
   }
 }

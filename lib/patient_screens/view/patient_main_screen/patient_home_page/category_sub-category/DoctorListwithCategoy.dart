@@ -19,9 +19,9 @@ import 'DoctorMapScreen.dart';
 
 
 class DoctorList extends StatefulWidget {
-  String cat, subcat;
+  String cat ;
 
-  DoctorList({Key? key, required this.cat, required this.subcat})
+  DoctorList({Key? key, required this.cat, })
       : super(key: key);
 
   @override
@@ -140,7 +140,7 @@ class _DoctorListState extends State<DoctorList> {
                                     doctorListCtr.doctorlistfetch(
                                         context,
                                         widget.cat.toString(),
-                                        widget.subcat.toString(),
+                                        "",
                                         "",
                                         "",
                                         ratings,
@@ -388,7 +388,7 @@ class _DoctorListState extends State<DoctorList> {
                 doctorListCtr.doctorlistfetch(
                     context,
                     widget.cat.toString(),
-                    widget.subcat.toString(),
+                    "",
                     "",
                     "",
                     "",

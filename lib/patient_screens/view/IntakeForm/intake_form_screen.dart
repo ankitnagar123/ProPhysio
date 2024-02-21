@@ -42,7 +42,6 @@ class _IntakeFormScreenState extends State<IntakeFormScreen> {
       Get.find<IntakeController>().fetchintakeFormQue("work_environment");
       Get.find<IntakeController>().fetchintakeFormQue("home_environment");
     });
-    // TODO: implement initState
     super.initState();
   }
 

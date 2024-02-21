@@ -818,6 +818,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                         () {
                                       bookingController.bookingAppointmentDone(
                                           context, id, () {
+                                        bookingController.bookingAppointment(context, "", "");
                                         Get.back();
                                       });
                                     },
@@ -1065,9 +1066,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                                                 .bookingAppointmentAccept(
                                                     context,
                                                     bookingId.toString(), () {
-                                              bookingController
-                                                  .bookingAppointment(
-                                                      context, "", "");
+                                              bookingController.bookingAppointment(context, "", "");
                                               Get.back();
                                               Get.back();
                                             });

@@ -382,7 +382,7 @@ String PasswordChangedSuccess = "Password changed successfully!";
   String rateAppointmentYouDid = "Rate appointment you did";
   String ratingsAndReviews = "Ratings and reviews";
   String viewYourPrescriptionMedicalTestMedicines =
-      "View your prescription,medical test & medicines";
+      "View your prescription & medical test";
   String qrCode = "QR code";
   String viewYourQrCode = "View your QR code";
 
@@ -599,7 +599,7 @@ String NoWardAddedCenter = "No ward added by center";
   String Verification = "Verification";
 
   String SignupOtpVerifiy =
-      "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.";
+      "We need to verification your phone number to create your account. Please enter OTP number, we sent it on your phone number account.";
   String Enter_6_characters = "Enter 6 characters";
   String Please_enter_OTP = "Please enter OTP";
   String Resend_OTP_in = "Resend OTP in";
@@ -678,11 +678,11 @@ String NoWardAddedCenter = "No ward added by center";
           /*Forgot password screen*/
           forgot_Password: "Forgot password",
           forgot_line:
-              "Forgot your password? Create a new one by entering your email address. We will send you a security OTP code to certify your identity. Then you can set a new one",
+              "Forgot your password? Create a new one by entering your phone number. We will send you a security OTP code to certify your identity. Then you can set a new one",
 
 //****Forgot password OTP******//
           forgot_line_otp:
-              "Forgot your password? Please enter OTP number, we sent it on your email account.  Then you can set a new one.",
+              "Forgot your password? Please enter OTP number, we sent it on your phone number.  Then you can set a new one.",
           Enter_otp: "Enter OTP number",
           Not_recived: "Not received?",
           SendNewOtp: "Send a new OTP number",
@@ -969,7 +969,7 @@ String NoWardAddedCenter = "No ward added by center";
           rateAppointmentYouDid: "Rate appointment you did",
           ratingsAndReviews: "Ratings and Reviews",
           viewYourPrescriptionMedicalTestMedicines:
-              "View your prescription,medical test & medicines",
+              "View your prescription & medical test",
           qrCode: "QR code",
           viewYourQrCode: "View your QR code",
           /* PATIENT SIDE ADD NEW CARD PAGE*/
@@ -1167,7 +1167,7 @@ String NoWardAddedCenter = "No ward added by center";
           Verification: "Verification",
 
           SignupOtpVerifiy:
-              "We need to verificate your email to create your account. Please enter OTP number, we sent it on your email account.",
+              "We need to verification your phone number to create your account. Please enter OTP number, we sent it on your phone number account.",
           Enter_6_characters: "Enter 6 characters",
           Please_enter_OTP: "Please enter OTP",
           Resend_OTP_in: "Resend OTP in",

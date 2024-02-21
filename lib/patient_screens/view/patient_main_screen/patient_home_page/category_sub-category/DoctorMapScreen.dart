@@ -309,9 +309,9 @@ import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import '../../../doctor_detail_screen/DoctorDetailScreen.dart';
 
 class MapViewScreen extends StatefulWidget {
-  final String catId, subCatID;
+  final String catId;
 
-  MapViewScreen({Key? key, required this.catId, required this.subCatID})
+  MapViewScreen({Key? key, required this.catId,})
       : super(key: key);
 
   @override

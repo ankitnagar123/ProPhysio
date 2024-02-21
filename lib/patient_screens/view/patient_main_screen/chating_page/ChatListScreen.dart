@@ -83,7 +83,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
           Visibility(
               visible: selectedItem.isNotEmpty,
               child: IconButton(
-                icon: const Icon(Icons.delete,color: Colors.black,),
+                icon: const Icon(Icons.delete,color:MyColor.primary1,),
                 onPressed: () {
                  /* selectedItem.forEach((nature) {
                     // list.remove(nature);
@@ -286,6 +286,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                           visible: isMultiSelectionEnabled,
                                           child: CheckboxListTile(
                                             activeColor: MyColor.primary1,
+                                            checkColor: Colors.white,
                                             dense: true,
                                             value: selectedItem.contains(index),
                                             onChanged: (vale) {

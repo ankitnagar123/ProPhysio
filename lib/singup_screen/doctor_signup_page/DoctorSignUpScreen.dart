@@ -14,7 +14,6 @@ import 'package:latlong2/latlong.dart' as latLng;
 
 import '../../Helper/RoutHelper/RoutHelper.dart';
 import '../../doctor_screens/controller/DoctorSignUpController.dart';
-import '../../helper/AppConst.dart';
 import '../../helper/CustomView/CustomView.dart';
 import '../../helper/mycolor/mycolor.dart';
 import '../../language_translator/LanguageTranslate.dart';
@@ -35,7 +34,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   /*---------TEXT-FIELD CONTROLLER'S----------*/
   TextEditingController nameCtr = TextEditingController();
   TextEditingController surnameCtr = TextEditingController();
-  TextEditingController usernameCtr = TextEditingController();
+  // TextEditingController usernameCtr = TextEditingController();
   TextEditingController emailCtr = TextEditingController();
   TextEditingController phoneCtr = TextEditingController();
   TextEditingController passwordCtr = TextEditingController();
@@ -98,7 +97,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
   String? catid;
   double? lat;
 
-  //Select Date's
+  //select date's
   // var selectedIndexes = [];
   // var selectedIndexes1 = [];
 
@@ -283,7 +282,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                           var data = {
                             "name": nameCtr.text,
                             "surname": surnameCtr.text,
-                            "username": usernameCtr.text,
+                            "username": "",
                             "email": emailCtr.text,
                             "phone": phoneCtr.text,
                             "code": code,
@@ -1022,7 +1021,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     _chooseDegree();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Align(
@@ -1030,7 +1029,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   child: custom.text(text.enterDescription.tr, 13.0,
                       FontWeight.w500, MyColor.primary1),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 const SizedBox(
@@ -1058,12 +1057,12 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
       custom.MySnackBar(context, "Name is required");
     } else if (surnameCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Surname is required");
-    } else if (usernameCtr.text.toString().isEmpty) {
+    }/* else if (usernameCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Username is required");
     } else if (!RegExp('.*[a-z].*').hasMatch(usernameCtr.text.toString())) {
       custom.MySnackBar(
           context, "username should contain a lowercase letter a-z or number.");
-    } else if (emailCtr.text.toString().isEmpty) {
+    } */else if (emailCtr.text.toString().isEmpty) {
       custom.MySnackBar(context, "Email is required");
     } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(emailCtr.text.toString())) {
       custom.MySnackBar(context, "Enter valid email");
@@ -1179,7 +1178,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                   });
                   serviceNameArray.clear();
                   serviceIdArray.clear();
-                  doctorSignUpCtr.doctorServices('');
+                   doctorSignUpCtr.doctorServices('',selectedBranch.toString());
                   setState(() {
 
                   });
@@ -1235,7 +1234,7 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
                     slectedCategory = newValue;
                     log('MY CATEGORY>>>$slectedCategory');
                   });
-                  doctorSignUpCtr.doctorServices(slectedCategory.toString());
+                  doctorSignUpCtr.doctorServices(slectedCategory.toString(),selectedBranch.toString());
                   serviceNameArray.clear();
                   serviceIdArray.clear();
                   log("this for clear service Id Array---${serviceIdArray.join(",")}");
@@ -1464,18 +1463,21 @@ class _DoctorSignUpScreenState extends State<DoctorSignUpScreen> {
         context: context,
         initialTime: TimeOfDay.now(),
         builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: const ColorScheme.light(
-                primary: MyColor.primary1,
-                onPrimary: Colors.white, // header text color
-                onSurface: Colors.brown, // body text color
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true,),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: const ColorScheme.light(
+                  primary: MyColor.primary1,
+                  onPrimary: Colors.white, // header text color
+                  onSurface: Colors.brown, // body text color
+                ),
+                textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(backgroundColor: Colors.white),
+                ),
               ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(backgroundColor: Colors.white),
-              ),
+              child: child!,
             ),
-            child: child!,
           );
         });
     if (result != null) {

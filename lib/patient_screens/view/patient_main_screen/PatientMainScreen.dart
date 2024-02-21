@@ -47,8 +47,6 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
     ),
     DoctorListTab(
       catId: '',
-      SubCatId: '',
-
     )
   ];
 

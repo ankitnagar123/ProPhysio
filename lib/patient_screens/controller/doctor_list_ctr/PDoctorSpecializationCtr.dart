@@ -50,29 +50,4 @@ var categoryDetails = SpecializationDetailsModel(doctorId: '', description: '', 
   }
 
 
-  /*----------specialization Fetch List Details Fetch Api-------------*/
-  Future specializationDetails(String doctorId,String catId) async {
-    final Map<String, dynamic> perameter = {
-      "language": await sp.getStringValue(sp.LANGUAGE)??"",
-      "doctor_id": doctorId,
-      "cat_id":catId,
-    };
-    try {
-      loadingFetchD.value = true;
-      final response = await apiService.postData(MyAPI.pFetchSpecializationDetials, perameter);
-      print(" specialization detail's Fetch =============${response.body}");
-      if (response.statusCode == 200) {
-        loadingFetchD.value = false;
-        categoryDetails(SpecializationDetailsModel.fromJson(jsonDecode(response.body)));
-        print(categoryDetails);
-      } else {
-        loadingFetchD.value = false;
-        print("Backed Error");
-      }
-    } catch (e) {
-      loadingFetchD.value = false;
-      print("exception$e");
-    }
-  }
-
 }

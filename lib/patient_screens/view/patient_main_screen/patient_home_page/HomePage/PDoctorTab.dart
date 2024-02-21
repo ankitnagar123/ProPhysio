@@ -39,10 +39,10 @@ class _HomeViewState extends State<HomeView> {
   TabController? tabController;
   String? categoryId;
 
-  String id ="";
-  String userTyp ="";
-  String deviceId ='';
-  String deviceTyp="";
+  String? id ;
+  String? userTyp;
+  String?deviceId;
+  String? deviceTyp;
 
   @override
   void initState() {
@@ -115,7 +115,7 @@ class _HomeViewState extends State<HomeView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            customView.text("Good $timeOfDay ☺", 13,
+                            customView.text("Good $timeOfDay ", 13,
                                 FontWeight.normal, MyColor.grey),
                             SizedBox(height: 3,),
                             customView.text(
@@ -176,7 +176,6 @@ class _HomeViewState extends State<HomeView> {
                     MaterialPageRoute(
                         builder: (context) => DoctorListTab(
                           catId: categoryId,
-                          SubCatId: "",
                         )));
               },
               child: Container(
@@ -601,11 +600,10 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void getValue() async {
-    id = await sp.getStringValue(sp.PATIENT_ID_KEY).toString();
-    deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY).toString();
-    deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY).toString();
-    // userTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
-    loginCtr.updateToken(context, id, "User", deviceId, deviceTyp);
+    id = await sp.getStringValue(sp.PATIENT_ID_KEY);
+    deviceTyp = await sp.getStringValue(sp.CURRENT_DEVICE_KEY);
+    deviceId = await sp.getStringValue(sp.FIREBASE_TOKEN_KEY);
+    loginCtr.updateToken(context, id.toString(), "User", deviceId.toString(), deviceTyp.toString());
   }
 
 /*  Widget pageView() {

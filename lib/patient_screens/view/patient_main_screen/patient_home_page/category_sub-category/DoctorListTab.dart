@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import '../../../../../helper/CustomView/CustomView.dart';
 import '../../../../../helper/mycolor/mycolor.dart';
 import '../../../../../language_translator/LanguageTranslate.dart';
+import '../../../../controller/doctor_list_ctr/DoctorListController.dart';
 import 'DoctorListwithCategoy.dart';
 import 'DoctorMapScreen.dart';
 class DoctorListTab extends StatefulWidget {
-  final catId,SubCatId;
-  const DoctorListTab({super.key, this.catId, this.SubCatId});
+  final catId;
+  const DoctorListTab({super.key, this.catId,});
 
   @override
   State<DoctorListTab> createState() => _DoctorListTabState();
@@ -15,10 +16,13 @@ class DoctorListTab extends StatefulWidget {
 
 class _DoctorListTabState extends State<DoctorListTab>with  SingleTickerProviderStateMixin {
   TabController? tabController;
+  DoctorListCtr doctorListCtr = Get.put(DoctorListCtr());
 
   @override
   void initState() {
     super.initState();
+    doctorListCtr.doctorlistfetch(context, widget.catId.toString(),'','','','','');
+
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
@@ -65,8 +69,8 @@ class _DoctorListTabState extends State<DoctorListTab>with  SingleTickerProvider
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children:  [
-                    DoctorList(cat: widget.catId, subcat: widget.SubCatId,),
-                    MapViewScreen(catId: widget.catId, subCatID: widget.SubCatId,)
+                    DoctorList(cat: widget.catId,),
+                    MapViewScreen(catId: widget.catId,)
                   ]),
             ),),
 

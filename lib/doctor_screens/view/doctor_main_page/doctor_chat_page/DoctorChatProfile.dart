@@ -25,6 +25,8 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
   String patientSurname = "";
   String patientAddress = "";
 
+  bool readMore = false;
+
   @override
   void initState() {
     super.initState();
@@ -139,7 +141,7 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: customView.text("$patientName $patientSurname", 18,
+                child: customView.text("$patientName $patientSurname".toUpperCase(), 18,
                     FontWeight.w500, MyColor.black)),
             const SizedBox(
               height: 16.0,
@@ -149,67 +151,79 @@ class _DoctorChatProfileState extends State<DoctorChatProfile> {
               children: [
                 const Icon(
                   Icons.location_on_outlined,
-                  size: 18,
-                  color: MyColor.grey,
+                  size: 22,
+                  color: MyColor.primary1,
                 ),
                 SizedBox(
-                  width: MediaQuery.sizeOf(context).width*0.9,
+                   width: readMore ?MediaQuery.sizeOf(context).width/1.2:MediaQuery.sizeOf(context).width/1.2,
                   child: Align(
                     alignment: Alignment.topRight,
-                    child: customView.text(
-                        patientAddress, 12, FontWeight.normal, MyColor.grey),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          readMore = !readMore;
+                        });
+                      },
+                      child: Text(patientAddress,overflow: TextOverflow.ellipsis,
+                        maxLines: readMore ? 3:1,
+                      ),
+                    ),
+
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
+
   void imagePopUp(BuildContext context, String image) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: Colors.black54,
-        pageBuilder: (context, anim1, anim2) {
-          return Center(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width / 1,
-              child: StatefulBuilder(
-                builder: (context, StateSetter setState) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: InteractiveViewer(
-                      panEnabled: false,
-                      // Set it to false
-                      boundaryMargin: const EdgeInsets.all(100),
-                      minScale: 0.5,
-                      maxScale: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: FadeInImage.assetNetwork(
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return const Image(
-                                image: AssetImage("assets/images/noimage.png"));
-                          },
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/loading.gif",
-                          image: image,
-                          placeholderFit: BoxFit.cover,
-                        ),
-                      ),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: FadeInImage.assetNetwork(
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return const Image(
+                            image: AssetImage("assets/images/noimage.png"));
+                      },
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      fit: BoxFit.contain,
+                      placeholder: "assets/images/loading.gif",
+                      image: image,
+                      placeholderFit: BoxFit.cover,
                     ),
-                  );
-                },
-              ),
-            ),
-          );
-        });
+                  ),
+                ),
+                Positioned(
+                    right:1,
+                    child: InkWell(
+                        onTap:() {
+                          Get.back();
+                        },
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: MyColor.primary1,
+                                borderRadius: BorderRadius.all(Radius.circular(20))
+                            ),
+                            child: const Icon(Icons.close,color: Colors.white,))))
+              ]
+          ),
+        );
+      },
+    );
   }
+
 }
