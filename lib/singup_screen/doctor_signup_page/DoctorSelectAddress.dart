@@ -15,8 +15,8 @@ import '../../helper/mycolor/mycolor.dart';
 
 class DoctorSelectAddress extends StatefulWidget {
   const DoctorSelectAddress({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DoctorSelectAddress> createState() => _DoctorSelectAddressState();

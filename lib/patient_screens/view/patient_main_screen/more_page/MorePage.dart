@@ -12,6 +12,8 @@ import '../../../../language_translator/LanguageTranslate.dart';
 import '../../../controller/auth_controllers/PatientProfileController.dart';
 import "../../../controller/auth_controllers/card_controller's/PatientCardController.dart";
 import '../../IntakeForm/intake_form_screen.dart';
+import 'IntakeForm/Intake.dart';
+import 'IntakeForm/IntakeDisablity.dart';
 import 'Ratings_and_reviews/Rating&ReviewPage.dart';
 import 'my_past_chekup/PatientPastChekups.dart';
 
@@ -25,14 +27,17 @@ class MorePage extends StatefulWidget {
 class _MorePageState extends State<MorePage> {
   PatientProfileCtr patientProfileCtr = Get.put(PatientProfileCtr());
    CardCtr cardCtr = Get.put(CardCtr());
+  String? id ;
+  SharedPreferenceProvider sp = SharedPreferenceProvider();
 
   CustomView customView = CustomView();
-  SharedPreferenceProvider sp = SharedPreferenceProvider();
   LocalString text = LocalString();
 
   @override
   void initState() {
     // cardCtr.cardFetch();
+    getValue();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       patientProfileCtr.patientProfile(context);
     });
@@ -240,7 +245,7 @@ class _MorePageState extends State<MorePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const PastAppointmentsRating()));
+                                 PastAppointmentsRating()));
                     // Get.toNamed(RouteHelper.getPatientSupportScreen());
                   },
                   leading: const Icon(
@@ -290,7 +295,7 @@ class _MorePageState extends State<MorePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            const IntakeFormScreen()));
+                             IntakeTypeScreen(id: id.toString(),)));
                     // Get.toNamed(RouteHelper.getPatientSupportScreen());
                   },
                   leading: const Icon(
@@ -524,5 +529,8 @@ class _MorePageState extends State<MorePage> {
             ),
           );
         });
+  }
+  void getValue() async {
+    id = await sp.getStringValue(sp.PATIENT_ID_KEY);
   }
 }
