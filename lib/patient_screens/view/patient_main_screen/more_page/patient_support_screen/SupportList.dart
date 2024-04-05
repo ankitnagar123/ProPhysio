@@ -34,10 +34,14 @@ class _SupportListState extends State<SupportList> {
       context,
       "User",
     );
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var listData =patientSupportCtr.supportLists;
     final widht = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
@@ -49,7 +53,76 @@ class _SupportListState extends State<SupportList> {
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
-              child: showList(),
+              child: Obx(() {
+                if (patientSupportCtr.supportLoading.value) {
+                  return Center(
+                    heightFactor: 10,
+                    child: custom.MyIndicator(),
+                  );
+                }
+                return SingleChildScrollView(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      shrinkWrap: true,
+                      itemCount: listData.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        var list = listData[index];
+                        var task = list.message;
+                        var taskDisc = list.subject;
+                        var status = list.supportStatus;
+                        var staffName = list.staffName;
+
+                        return InkWell(
+                          onTap: () {
+                            showBottomSheets(status, task, taskDisc,staffName);
+                          },
+                          child: Card(
+                            elevation: 1.5,
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              "Report",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 10.0,
+                                                  fontFamily: "Poppins"),
+                                            ),
+                                            const SizedBox(
+                                              height: 2.0,
+                                            ),
+                                            custom.text(list.message.toString(), 13.0,
+                                                FontWeight.w500, Colors.black),
+                                          ],
+                                        ),
+                                      ),
+                                      Icon(Icons.more_vert,color: MyColor.primary1,size: 18,),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                );
+              }),
             ),
           ],
         ),
@@ -58,79 +131,6 @@ class _SupportListState extends State<SupportList> {
   }
 
   /*------------Booking All List--------------*/
-  Widget showList() {
-    var listData =patientSupportCtr.supportLists.value;
-    return Obx(() {
-      if (patientSupportCtr.supportLoading.value) {
-        return Center(
-          heightFactor: 10,
-          child: custom.MyIndicator(),
-        );
-      }
-      return SingleChildScrollView(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(0),
-            shrinkWrap: true,
-            itemCount: listData.length,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              var list = listData[index];
-              var task = list.message;
-              var taskDisc = list.subject;
-              var status = list.supportStatus;
-              var staffName = list.staffName;
-
-              return InkWell(
-                onTap: () {
-                  showBottomSheets(status, task, taskDisc,staffName);
-                },
-                child: Card(
-                  elevation: 1.5,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Report",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 10.0,
-                                        fontFamily: "Poppins"),
-                                  ),
-                                  const SizedBox(
-                                    height: 2.0,
-                                  ),
-                                  custom.text(list.message.toString(), 13.0,
-                                      FontWeight.w500, Colors.black),
-                                ],
-                              ),
-                            ),
-                            Icon(Icons.more_vert,color: MyColor.primary1,size: 18,),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }),
-      );
-    });
-  }
 
   /*------------Task Details--------------*/
   showBottomSheets(String status, String task, String taskDisc,String staffName,) {

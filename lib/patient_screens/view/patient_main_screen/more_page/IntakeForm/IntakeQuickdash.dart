@@ -100,7 +100,7 @@ Page resource error:
         },
       )
       ..loadRequest(Uri.parse(
-          "https://cisswork.com/Android/emrIntegrateDoctor/api/intake_quickdash.php?patient_id=${widget.id}"));
+          "${MyAPI.BaseUrl1}intake_quickdash.php?patient_id=${widget.id}"));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

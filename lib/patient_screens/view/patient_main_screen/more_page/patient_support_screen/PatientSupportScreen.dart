@@ -92,7 +92,7 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                     child: customView.text(text.Select_Branch.tr, 13.0,
                         FontWeight.w500, MyColor.black),
                   ),
-                Obx(() => doctorSignUpCtr.branchLoading.value?customView.MyIndicator():  branch(),),
+                Obx(() => doctorSignUpCtr.branchLoading.value?Center(child: customView.MyIndicator()):  branch(),),
                   SizedBox(
                     height: width * 0.02,
                   ),
@@ -128,7 +128,9 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
                   ),
                 ],
               ),
-            )));
+            )
+        )
+    );
   }
 
 
@@ -186,7 +188,9 @@ class _PatientSupportScreenState extends State<PatientSupportScreen> {
   }
 
   bool validation() {
-    if (subjectCtrl.text.isEmpty) {
+    if (selectedBranch ==null) {
+      customView.MySnackBar(context, "Select Branch");
+    }else if (subjectCtrl.text.isEmpty) {
       customView.MySnackBar(context, text.enterSubject.tr);
     } else if (emailCtrl.text.isEmpty) {
       customView.MySnackBar(context, text.enterEmail.tr);

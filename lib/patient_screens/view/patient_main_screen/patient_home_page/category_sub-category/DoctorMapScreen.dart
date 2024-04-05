@@ -397,6 +397,7 @@ class _MapViewScreenState extends State<MapViewScreen> {
               rotateGesturesEnabled: true,
               tiltGesturesEnabled: true,
               trafficEnabled: false,
+
               onTap: (position) {
                 customInfoWindowController.hideInfoWindow!();
               },

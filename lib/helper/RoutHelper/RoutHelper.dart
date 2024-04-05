@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 
 
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/ComplaintsScreen/ComplaintsScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/DoctorMainPage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_booking_page/doctor_search_appointments/DoctorSearchAppoinmentsScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatProfile.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_chat_page/DoctorChatingScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_home_page/CancelAppoiemntSucces.dart';
+import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LeadSheet/LeadSheetScreen.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/LearningWeb.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/LerningManagement/learningManage.dart';
 import '../../doctor_screens/view/doctor_main_page/doctor_more_page/MyTask/MyTask.dart';
@@ -131,6 +133,8 @@ class RouteHelper {
 
   static const String myTask = '/myTask';
   static const String learningManage = '/learningManage';
+  static const String leadSheet = '/leadSheet';
+  static const String complaints = '/complaints';
   static const String learningManageWebView = '/learningManageWebView';
 
    static const String PTermsCondition = '/TermsCondition';
@@ -269,6 +273,8 @@ class RouteHelper {
   static String DSupportScreen() => dSupport;
   static String DMyTask() => myTask;
   static String DLearningManage() => learningManage;
+  static String DleadSheet() => leadSheet;
+  static String Dcomplaints() => complaints;
   static String DLearningManageWebView() => learningManageWebView;
 
 
@@ -344,6 +350,8 @@ class RouteHelper {
     GetPage(name: dSupport, page: () => const DoctorSupportTab()),
     GetPage(name: myTask, page: () => const DoctorTask()),
     GetPage(name: learningManage, page: () => const LearningManage()),
+    GetPage(name: leadSheet, page: () => const LeadSheet()),
+    GetPage(name: complaints, page: () => const ComplaintsScreen()),
     GetPage(name: learningManageWebView, page: () => const LearningWeb()),
 
 

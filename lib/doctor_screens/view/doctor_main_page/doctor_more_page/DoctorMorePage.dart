@@ -141,6 +141,48 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                   ),
                 ),
                 ListTile(
+                  subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
+                      11.0, FontWeight.w400, Colors.black),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const CompleteAppointPrescription()));
+                    // Get.toNamed(RouteHelper.DSettingScreen());
+                  },
+                  leading: const Icon(
+                    Icons.medical_information,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      text.reports.tr, 13.0, FontWeight.w500, Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.DMyTask());
+                  },
+                  leading: const Icon(
+                    Icons.task_alt,
+                    color: Colors.black,
+                  ),
+                  title: customView.text(
+                      text.MYTASK.tr, 14.0, FontWeight.w500, Colors.black),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                    size: 20.0,
+                  ),
+                  subtitle: customView.text(
+                      text.TASKVIEW.tr, 10.0, FontWeight.normal, Colors.black),
+                ),
+
+                ListTile(
                   // subtitle: customView.text(text.LMS.tr,
                   //     11.0, FontWeight.w400, Colors.black),
                   onTap: () {
@@ -160,72 +202,42 @@ class _DoctorMorePageState extends State<DoctorMorePage> {
                     size: 20.0,
                   ),
                 ),
-                /*----------------prescription----------------*/
+
+
                 ListTile(
-                  subtitle: customView.text(text.prescriptionAndMedicalReports.tr,
-                      11.0, FontWeight.w400, Colors.black),
+
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const CompleteAppointPrescription()));
-                    // Get.toNamed(RouteHelper.DSettingScreen());
-                  },
+                    Get.toNamed(RouteHelper.DleadSheet());
+                    },
                   leading: const Icon(
-                    Icons.medical_information,
+                    Icons.leaderboard,
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      text.reports.tr, 13.0, FontWeight.w500, Colors.black),
+                      "Lead Sheet", 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
                     size: 20.0,
                   ),
                 ),
-          
-                // ListTile(
-                //   subtitle: customView.text(text.viewYourMedicalRequest.tr, 11.0,
-                //       FontWeight.w400, Colors.black),
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.DCenterRequest());
-                //   },
-                //   leading: Badge(
-                //     backgroundColor: centerRequest.centerRequestList.isEmpty?Colors.transparent:Colors.red,
-                //     label:centerRequest.centerRequestList.isEmpty?const Text(""): Text("${centerRequest.centerRequestList.length}"),
-                //     child: const Icon(
-                //       Icons.medical_services_outlined,
-                //       color: Colors.black,
-                //     ),
-                //   ),
-                //   title: customView.text(
-                //       text.centerRequest.tr, 14.0, FontWeight.w500, Colors.black),
-                //   trailing: const Icon(
-                //     Icons.arrow_forward_ios,
-                //     color: Colors.black,
-                //     size: 20.0,
-                //   ),
-                // ),
-          
                 ListTile(
                   onTap: () {
-                    Get.toNamed(RouteHelper.DMyTask());
+                    Get.toNamed(RouteHelper.Dcomplaints());
                   },
                   leading: const Icon(
-                    Icons.task_alt,
+                    Icons.report_outlined,
                     color: Colors.black,
                   ),
                   title: customView.text(
-                      text.MYTASK.tr, 14.0, FontWeight.w500, Colors.black),
+                      "Complaints", 14.0, FontWeight.w500, Colors.black),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black,
                     size: 20.0,
                   ),
-                  subtitle: customView.text(
-                      text.TASKVIEW.tr, 10.0, FontWeight.normal, Colors.black),
                 ),
+
           
                 ListTile(
                   onTap: () {

@@ -5,9 +5,13 @@ class MyAPI {
   static const String BaseUrl =
       "https://cisswork.com/Android/emrIntegrateDoctor/api/process.php?action=";
 
+  // static const String BaseUrl =
+  //       "https://dev-emr.pocweburl.com/api/process.php?action=";
 
+  static const String BaseUrl1 =
+      "https://dev-emr.pocweburl.com/api/";
   static  String urls =
-      "https://cisswork.com/Android/emrIntegrateDoctor/api/";
+      "https://dev-emr.pocweburl.com/api/";
   static const String About = "about.php";
   static const String PFAQ = "patient_faq.php";
   static const String PTandC = "patient_tandc.php";
@@ -31,12 +35,14 @@ class MyAPI {
   static const String send_otp_twiliosms =
       "https://cisswork.com/Android/emrIntegrateDoctor/api/twiliosms/send_otp.php";
 
-  static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_signup.php";
+  // static const String PSignUp = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_signup.php";
+  static const String PSignUp = "https://dev-emr.pocweburl.com/api/patient_signup.php";
   static const String PSignUpOtp = "signup_email_otp";
 
   static const String PFetchProfile = "fetch_patient_profile";
   /*changes*/
-  static const String PUpdateProfile = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_update_profile.php";
+  // static const String PUpdateProfile = "https://cisswork.com/Android/emrIntegrateDoctor/api/patient_update_profile.php";
+  static const String PUpdateProfile = "https://dev-emr.pocweburl.com/api/patient_update_profile.php";
   static const String PChangePassword = "user_change_pass";
   static const String PDeleteAccount = "delete_user_account";
   static const String pSupport = "user_support";
@@ -163,5 +169,14 @@ class MyAPI {
   static const String dTaskManageList = "fetch_doctor_task";
   static const String dTaskManageCancel = "task_cancle_reason";
   static const String dTaskStatusChange = "update_doctor_task_status";
+
+
+  /*------------LeadSheet-----------------*/
+  static const String fetchLeadsheetData = "fetch_leadsheet_data";
+  static const String updateLeadsheetData = "update_leadsheet_data";
+
+/*------------Complaints-----------------*/
+  static const String fetchComplaintsData = "fetch_complaints_data";
+  static const String updateComplaints = "update_complaints_data";
 
 }

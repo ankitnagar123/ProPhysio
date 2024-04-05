@@ -100,8 +100,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse(
-          "https://cisswork.com/Android/emrIntegrateDoctor/api/intake_disability.php?patient_id=${widget.id}"));
+      ..loadRequest(Uri.parse('${MyAPI.BaseUrl1}intake_disability.php?patient_id=${widget.id}'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
